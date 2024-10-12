@@ -1,3 +1,4 @@
+import 'package:care_nest/features/sign_up/ui/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,7 +19,7 @@ class CareNest extends StatelessWidget {
       useInheritedMediaQuery: true,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Scaffold(),
+        home: SignUp(),
       ),
     );
   }
