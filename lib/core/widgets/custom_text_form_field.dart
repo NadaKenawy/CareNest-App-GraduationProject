@@ -35,6 +35,9 @@ class AppTextFormField extends StatelessWidget {
       child: SizedBox(
         height: 48.h,
         child: TextFormField(
+          style: inputTextStyle ??
+              hintStyle ??
+              const TextStyle(color: ColorsData.primaryBlueColor),
           decoration: InputDecoration(
             isDense: true,
             contentPadding: contentPadding ??
