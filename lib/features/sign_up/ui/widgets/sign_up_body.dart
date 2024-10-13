@@ -1,9 +1,9 @@
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
+import 'package:care_nest/features/sign_up/ui/widgets/first_and_last_name_fields.dart';
+import 'package:care_nest/features/sign_up/ui/widgets/password_field.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/sign_up_image.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/sign_up_title.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../core/utils/colors.dart';
 
 class SignUpBody extends StatefulWidget {
   const SignUpBody({super.key});
@@ -43,64 +43,33 @@ class _SignUpBodyState extends State<SignUpBody> {
                   children: [
                     const SignUpTitle(),
                     const SizedBox(height: 24),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: AppTextFormField(
-                            hintText: "First Name",
-                            width: MediaQuery.of(context).size.width * 0.4,
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: AppTextFormField(
-                            hintText: "Last Name",
-                            width: MediaQuery.of(context).size.width * 0.4,
-                          ),
-                        ),
-                      ],
-                    ),
+                    const FirstAndLastNameFields(),
                     const SizedBox(height: 16),
                     const AppTextFormField(
                       hintText: "Email",
                     ),
                     const SizedBox(height: 16),
-                    AppTextFormField(
+                    PasswordField(
                       hintText: "Password",
                       obscureText: !_isPasswordVisible,
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _isPasswordVisible
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: ColorsData.primaryBlueColor,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _isPasswordVisible = !_isPasswordVisible;
-                          });
-                        },
-                      ),
+                      onVisibilityToggle: () {
+                        setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        });
+                      },
+                      isVisible: _isPasswordVisible,
                     ),
                     const SizedBox(height: 16),
-                    AppTextFormField(
+                    PasswordField(
                       hintText: "Confirm Password",
                       obscureText: !_isConfirmPasswordVisible,
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _isConfirmPasswordVisible
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: ColorsData.primaryBlueColor,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _isConfirmPasswordVisible =
-                                !_isConfirmPasswordVisible;
-                          });
-                        },
-                      ),
+                      onVisibilityToggle: () {
+                        setState(() {
+                          _isConfirmPasswordVisible =
+                              !_isConfirmPasswordVisible;
+                        });
+                      },
+                      isVisible: _isConfirmPasswordVisible,
                     ),
                   ],
                 ),
