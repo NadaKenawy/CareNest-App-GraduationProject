@@ -2,7 +2,7 @@ import 'package:care_nest/core/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 class FirstAndLastNameFields extends StatelessWidget{
-  const FirstAndLastNameFields({Key? key}) : super(key: key);
+  const FirstAndLastNameFields({super.key});
 
   @override
   Widget build(BuildContext context) {

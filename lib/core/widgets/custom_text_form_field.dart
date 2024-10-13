@@ -32,39 +32,42 @@ class AppTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: width ?? double.infinity,
-      child: TextFormField(
-        decoration: InputDecoration(
-          isDense: true,
-          contentPadding: contentPadding ??
-              EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
-          focusedBorder: focusedBorder ??
-              OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.r),
-                borderSide: BorderSide(
-                  color: Colors.blue,
-                  width: 1.3.w,
+      child: SizedBox(
+        height: 48.h,
+        child: TextFormField(
+          decoration: InputDecoration(
+            isDense: true,
+            contentPadding: contentPadding ??
+                EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
+            focusedBorder: focusedBorder ??
+                OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20.r),
+                  borderSide: BorderSide(
+                    color: Colors.blue,
+                    width: 2.w,
+                  ),
                 ),
-              ),
-          enabledBorder: enabledBorder ??
-              OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.r),
-                borderSide: BorderSide(
-                  color: ColorsData.primaryBlueColor,
-                  width: 2.w,
+            enabledBorder: enabledBorder ??
+                OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20.r),
+                  borderSide: BorderSide(
+                    color: ColorsData.primaryBlueColor,
+                    width: 2.w,
+                  ),
                 ),
-              ),
-          hintText: hintText,
-          hintStyle:
-              hintStyle ?? const TextStyle(color: ColorsData.primaryBlueColor),
-          suffixIcon: SizedBox(
-            width: 24.w,
-            height: 24.h,
-            child: suffixIcon,
+            hintText: hintText,
+            hintStyle: hintStyle ??
+                const TextStyle(color: ColorsData.primaryBlueColor),
+            suffixIcon: SizedBox(
+              width: 24.w,
+              height: 24.h,
+              child: suffixIcon,
+            ),
+            filled: true,
+            fillColor: Colors.transparent,
           ),
-          filled: true,
-          fillColor: Colors.transparent,
+          obscureText: obscureText ?? false,
         ),
-        obscureText: obscureText ?? false,
       ),
     );
   }

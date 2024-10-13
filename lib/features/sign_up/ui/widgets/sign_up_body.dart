@@ -1,9 +1,10 @@
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
+import 'package:care_nest/features/sign_up/ui/widgets/date_of_birth_field%20.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/first_and_last_name_fields.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/password_field.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/sign_up_image.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/sign_up_title.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; // تأكد من استيراد الودجت الجديد
 
 class SignUpBody extends StatefulWidget {
   const SignUpBody({super.key});
@@ -15,6 +16,19 @@ class SignUpBody extends StatefulWidget {
 class _SignUpBodyState extends State<SignUpBody> {
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
+
+  // Handler functions for date of birth
+  void _onDaySelected(int? value) {
+    // يمكنك إضافة المنطق الخاص بك هنا عند اختيار يوم
+  }
+
+  void _onMonthSelected(int? value) {
+    // يمكنك إضافة المنطق الخاص بك هنا عند اختيار شهر
+  }
+
+  void _onYearSelected(int? value) {
+    // يمكنك إضافة المنطق الخاص بك هنا عند اختيار سنة
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +84,14 @@ class _SignUpBodyState extends State<SignUpBody> {
                         });
                       },
                       isVisible: _isConfirmPasswordVisible,
+                    ),
+                    const SizedBox(height: 16),
+
+                    // Use the new DateOfBirthDropdowns widget
+                    DateOfBirthDropdowns(
+                      onDaySelected: _onDaySelected,
+                      onMonthSelected: _onMonthSelected,
+                      onYearSelected: _onYearSelected,
                     ),
                   ],
                 ),
