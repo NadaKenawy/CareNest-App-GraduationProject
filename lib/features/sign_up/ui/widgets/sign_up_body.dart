@@ -1,4 +1,5 @@
 import 'package:care_nest/core/utils/colors.dart';
+import 'package:care_nest/core/utils/font_weight_helper.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/alternativeaction_whenhaveaccount.dart';
@@ -30,89 +31,93 @@ class _SignUpBodyState extends State<SignUpBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              const SignUpImage(),
-              Container(
-                margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.46),
-                width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(70),
-                    topRight: Radius.circular(70),
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    const SignUpTitle(),
-                    const SizedBox(height: 24),
-                    const FirstAndLastNameFields(),
-                    const SizedBox(height: 16),
-                    const AppTextFormField(
-                      hintText: "Email",
-                    ),
-                    const SizedBox(height: 16),
-                    PasswordField(
-                      hintText: "Password",
-                      obscureText: !_isPasswordVisible,
-                      onVisibilityToggle: () {
-                        setState(() {
-                          _isPasswordVisible = !_isPasswordVisible;
-                        });
-                      },
-                      isVisible: _isPasswordVisible,
-                    ),
-                    const SizedBox(height: 16),
-                    PasswordField(
-                      hintText: "Confirm Password",
-                      obscureText: !_isConfirmPasswordVisible,
-                      onVisibilityToggle: () {
-                        setState(() {
-                          _isConfirmPasswordVisible =
-                              !_isConfirmPasswordVisible;
-                        });
-                      },
-                      isVisible: _isConfirmPasswordVisible,
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Use the new DateOfBirthDropdowns widget
-                    DateOfBirthDropdowns(
-                      onDaySelected: _onDaySelected,
-                      onMonthSelected: _onMonthSelected,
-                      onYearSelected: _onYearSelected,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    AppTextButton(
-                      buttonText: "Sign Up",
-                      onPressed: () {},
-                      textStyle: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 14),
-                      backgroundColor: ColorsData.primaryPinkColor,
-                      buttonHeight: 48,
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    AlternativeActionWhenHaveAccount(
-                      onTap: () {},
-                      textLabel: "Aleardy have an account?",
-                      textButtonLabel: "Log In",
-                    ),
-                  ],
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            const SignUpImage(),
+            Container(
+              margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.46),
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(70),
+                  topRight: Radius.circular(70),
                 ),
               ),
-            ],
-          ),
+              child: Column(
+                children: [
+                  const SignUpTitle(),
+                  const SizedBox(height: 24),
+                  const FirstAndLastNameFields(),
+                  const SizedBox(height: 16),
+                  const AppTextFormField(
+                    hintText: "Email",
+                  ),
+                  const SizedBox(height: 16),
+                  PasswordField(
+                    hintText: "Password",
+                    obscureText: !_isPasswordVisible,
+                    onVisibilityToggle: () {
+                      setState(() {
+                        _isPasswordVisible = !_isPasswordVisible;
+                      });
+                    },
+                    isVisible: _isPasswordVisible,
+                  ),
+                  const SizedBox(height: 16),
+                  PasswordField(
+                    hintText: "Confirm Password",
+                    obscureText: !_isConfirmPasswordVisible,
+                    onVisibilityToggle: () {
+                      setState(() {
+                        _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
+                      });
+                    },
+                    isVisible: _isConfirmPasswordVisible,
+                  ),
+                  const SizedBox(height: 16),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Date Of Birth",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: ColorsData.primaryBlueColor,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  DateOfBirthDropdowns(
+                    onDaySelected: _onDaySelected,
+                    onMonthSelected: _onMonthSelected,
+                    onYearSelected: _onYearSelected,
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  AppTextButton(
+                    buttonText: "Sign Up",
+                    onPressed: () {},
+                    textStyle: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 14),
+                    backgroundColor: ColorsData.primaryPinkColor,
+                    buttonHeight: 48,
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  AlternativeActionWhenHaveAccount(
+                    onTap: () {},
+                    textLabel: "Aleardy have an account?",
+                    textButtonLabel: "Log In",
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
