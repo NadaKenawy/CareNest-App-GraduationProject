@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:care_nest/core/utils/colors.dart';
@@ -8,11 +10,11 @@ class DateOfBirthDropdowns extends StatefulWidget {
   final Function(int?) onYearSelected;
 
   const DateOfBirthDropdowns({
-    Key? key,
+    super.key,
     required this.onDaySelected,
     required this.onMonthSelected,
     required this.onYearSelected,
-  }) : super(key: key);
+  });
 
   @override
   State<DateOfBirthDropdowns> createState() => _DateOfBirthDropdownsState();
@@ -70,7 +72,7 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
                 value: month,
                 child: Text(
                   month.toString(),
-                  style: TextStyle(color: ColorsData.primaryBlueColor),
+                  style: const TextStyle(color: ColorsData.primaryBlueColor),
                 ),
               );
             }).toList(),
@@ -112,7 +114,7 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
               return DropdownMenuItem<int>(
                 value: day,
                 child: Text(day.toString(),
-                    style: TextStyle(color: ColorsData.primaryBlueColor)),
+                    style: const TextStyle(color: ColorsData.primaryBlueColor)),
               );
             }).toList(),
             iconEnabledColor: ColorsData.primaryBlueColor,
@@ -155,7 +157,7 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
                 return DropdownMenuItem<int>(
                   value: year,
                   child: Text(year.toString(),
-                      style: TextStyle(color: ColorsData.primaryBlueColor)),
+                      style: const TextStyle(color: ColorsData.primaryBlueColor)),
                 );
               }).toList(),
               iconEnabledColor: ColorsData.primaryBlueColor,

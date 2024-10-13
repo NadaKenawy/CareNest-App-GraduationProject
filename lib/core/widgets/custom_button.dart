@@ -3,53 +3,51 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTextButton extends StatelessWidget {
   final double? borderRadius;
-  final Color? backgroundColor;
+  final Color backgroundColor; // اجعلها مطلوبة
   final double? horizontalPadding;
   final double? verticalPadding;
-  final double? buttonWidth;
-  final double? buttonHeight;
+  final double buttonHeight; // اجعلها مطلوبة
   final String buttonText;
   final TextStyle textStyle;
   final VoidCallback onPressed;
+
   const AppTextButton({
     super.key,
     this.borderRadius,
-    this.backgroundColor,
     this.horizontalPadding,
     this.verticalPadding,
-    this.buttonHeight,
-    this.buttonWidth,
+    this.buttonHeight = 48, // تعيين قيمة افتراضية للطول
     required this.buttonText,
     required this.textStyle,
     required this.onPressed,
-  });
+    Color? backgroundColor, // اجعلها مطلوبة
+  }) : backgroundColor = backgroundColor ?? Colors.pink; // تعيين لون افتراضي للزر
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      style: ButtonStyle(
-        shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius ?? 16.0),
+    return SizedBox(
+      width: double.infinity, // جعل العرض يمتد لعرض الشاشة بالكامل
+      child: TextButton(
+        style: ButtonStyle(
+          shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 16.0),
+            ),
           ),
-        ),
-        // backgroundColor: WidgetStatePropertyAll(
-        //   backgroundColor ?? ColorsManager.mainBlue,
-        // ),
-        padding: WidgetStatePropertyAll<EdgeInsets>(
-          EdgeInsets.symmetric(
+          backgroundColor: WidgetStatePropertyAll<Color>(backgroundColor), // تعيين لون الخلفية
+          padding: WidgetStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(
             horizontal: horizontalPadding?.w ?? 12.w,
             vertical: verticalPadding?.h ?? 14.h,
+          )),
+          fixedSize: WidgetStatePropertyAll(
+            Size(double.infinity, buttonHeight), // جعل العرض يمتد لعرض الشاشة بالكامل
           ),
         ),
-        fixedSize: WidgetStatePropertyAll(
-          Size(buttonWidth?.w ?? double.maxFinite, buttonHeight ?? 50.h),
+        onPressed: onPressed,
+        child: Text(
+          buttonText,
+          style: textStyle.copyWith(color: Colors.white), // تعيين لون النص إلى الأبيض
         ),
-      ),
-      onPressed: onPressed,
-      child: Text(
-        buttonText,
-        style: textStyle,
       ),
     );
   }

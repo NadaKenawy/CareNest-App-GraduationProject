@@ -1,3 +1,5 @@
+import 'package:care_nest/core/utils/colors.dart';
+import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/date_of_birth_field%20.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/first_and_last_name_fields.dart';
@@ -17,18 +19,11 @@ class _SignUpBodyState extends State<SignUpBody> {
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
 
-  // Handler functions for date of birth
-  void _onDaySelected(int? value) {
-    // يمكنك إضافة المنطق الخاص بك هنا عند اختيار يوم
-  }
+  void _onDaySelected(int? value) {}
 
-  void _onMonthSelected(int? value) {
-    // يمكنك إضافة المنطق الخاص بك هنا عند اختيار شهر
-  }
+  void _onMonthSelected(int? value) {}
 
-  void _onYearSelected(int? value) {
-    // يمكنك إضافة المنطق الخاص بك هنا عند اختيار سنة
-  }
+  void _onYearSelected(int? value) {}
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +88,17 @@ class _SignUpBodyState extends State<SignUpBody> {
                       onMonthSelected: _onMonthSelected,
                       onYearSelected: _onYearSelected,
                     ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    AppTextButton(
+                      buttonText: "Sign Up",
+                      onPressed: () {},
+                      textStyle:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                      backgroundColor: ColorsData.primaryPinkColor,
+                      buttonHeight: 48,
+                    )
                   ],
                 ),
               ),
