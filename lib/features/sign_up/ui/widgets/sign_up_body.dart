@@ -1,6 +1,7 @@
 import 'package:care_nest/core/utils/colors.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
+import 'package:care_nest/features/sign_up/ui/widgets/alternativeaction_whenhaveaccount.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/date_of_birth_field%20.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/first_and_last_name_fields.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/password_field.dart';
@@ -94,11 +95,19 @@ class _SignUpBodyState extends State<SignUpBody> {
                     AppTextButton(
                       buttonText: "Sign Up",
                       onPressed: () {},
-                      textStyle:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                      textStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 14),
                       backgroundColor: ColorsData.primaryPinkColor,
                       buttonHeight: 48,
-                    )
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    AlternativeActionWhenHaveAccount(
+                      onTap: () {},
+                      textLabel: "Aleardy have an account?",
+                      textButtonLabel: "Log In",
+                    ),
                   ],
                 ),
               ),
