@@ -1,3 +1,4 @@
+import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
@@ -8,16 +9,17 @@ import 'package:care_nest/features/sign_up/ui/widgets/password_field.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/sign_up_image.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/sign_up_title.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart'; // تأكد من استيراد الودجت الجديد
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
-class SignUpBody extends StatefulWidget {
-  const SignUpBody({super.key});
+class SignUpScreenBody extends StatefulWidget {
+  const SignUpScreenBody({super.key});
 
   @override
-  State<SignUpBody> createState() => _SignUpBodyState();
+  State<SignUpScreenBody> createState() => _SignUpScreenBodyState();
 }
 
-class _SignUpBodyState extends State<SignUpBody> {
+class _SignUpScreenBodyState extends State<SignUpScreenBody> {
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
 
@@ -113,7 +115,9 @@ class _SignUpBodyState extends State<SignUpBody> {
                       height: 12.h,
                     ),
                     AlternativeActionWhenHaveAccount(
-                      onTap: () {},
+                      onTap: () {
+                        GoRouter.of(context).push(AppRouter.kloginScreen);
+                      },
                       textLabel: "Aleardy have an account?",
                       textButtonLabel: "Log In",
                     ),

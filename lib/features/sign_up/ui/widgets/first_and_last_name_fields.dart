@@ -12,14 +12,14 @@ class FirstAndLastNameFields extends StatelessWidget {
       children: [
         AppTextFormField(
           hintText: "First Name",
-          width: 175.w,
+          width: 170.w,
         ),
         SizedBox(
           width: 16.w,
         ),
         AppTextFormField(
           hintText: "Last Name",
-          width: 175.w,
+          width: 170.w,
         ),
       ],
     );
