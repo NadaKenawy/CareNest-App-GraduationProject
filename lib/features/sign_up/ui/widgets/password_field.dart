@@ -1,6 +1,6 @@
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/utils/colors.dart';
+import '../../../../core/theme/colors_manager.dart';
 
 class PasswordField extends StatelessWidget {
   final String hintText;
@@ -23,8 +23,8 @@ class PasswordField extends StatelessWidget {
       obscureText: obscureText,
       suffixIcon: IconButton(
         icon: Icon(
-          isVisible ? Icons.visibility_off : Icons.visibility,
-          color: ColorsData.primaryBlueColor,
+          isVisible ? Icons.visibility : Icons.visibility_off,
+          color: ColorsManager.primaryBlueColor,
         ),
         onPressed: onVisibilityToggle,
       ),

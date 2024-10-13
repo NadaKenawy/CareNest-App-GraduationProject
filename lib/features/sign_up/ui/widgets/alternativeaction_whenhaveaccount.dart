@@ -1,5 +1,6 @@
-import 'package:care_nest/core/utils/colors.dart';
-import 'package:care_nest/core/utils/font_weight_helper.dart';
+import 'package:care_nest/core/theme/colors_manager.dart';
+import 'package:care_nest/core/theme/font_weight_helper.dart';
+import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,11 +20,10 @@ class AlternativeActionWhenHaveAccount extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(textLabel,
-            style: TextStyle(
-              color: ColorsData.primaryBlueColor,
-              fontSize: 16.sp,
-            )),
+        Text(
+          textLabel,
+          style: TextStyles.font16BlueRegular,
+        ),
         SizedBox(
           width: 5.w,
         ),
@@ -32,9 +32,10 @@ class AlternativeActionWhenHaveAccount extends StatelessWidget {
           child: Text(
             textButtonLabel,
             style: TextStyle(
-                color: ColorsData.primaryPinkColor,
-                fontSize: 16.sp,
-                fontWeight: FontWeightHelper.semiBold),
+              color: ColorsManager.primaryPinkColor,
+              fontSize: 16.sp,
+              fontWeight: FontWeightHelper.semiBold,
+            ),
           ),
         )
       ],

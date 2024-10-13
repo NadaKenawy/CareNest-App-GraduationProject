@@ -1,7 +1,8 @@
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class FirstAndLastNameFields extends StatelessWidget{
+class FirstAndLastNameFields extends StatelessWidget {
   const FirstAndLastNameFields({super.key});
 
   @override
@@ -9,18 +10,16 @@ class FirstAndLastNameFields extends StatelessWidget{
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
-          child: AppTextFormField(
-            hintText: "First Name",
-            width: MediaQuery.of(context).size.width * 0.4,
-          ),
+        AppTextFormField(
+          hintText: "First Name",
+          width: 175.w,
         ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: AppTextFormField(
-            hintText: "Last Name",
-            width: MediaQuery.of(context).size.width * 0.4,
-          ),
+        SizedBox(
+          width: 16.w,
+        ),
+        AppTextFormField(
+          hintText: "Last Name",
+          width: 175.w,
         ),
       ],
     );

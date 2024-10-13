@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:care_nest/core/utils/colors.dart';
+import 'package:care_nest/core/theme/colors_manager.dart';
 
 class DateOfBirthDropdowns extends StatefulWidget {
   final Function(int?) onDaySelected;
@@ -43,19 +43,19 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
               isDense: true,
               hintText: "MM",
               hintStyle: const TextStyle(
-                color: ColorsData.primaryBlueColor,
+                color: ColorsManager.primaryBlueColor,
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
                 borderSide: const BorderSide(
-                  color: ColorsData.primaryBlueColor,
+                  color: ColorsManager.primaryBlueColor,
                   width: 2,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
                 borderSide: const BorderSide(
-                  color: ColorsData.primaryBlueColor,
+                  color: ColorsManager.primaryBlueColor,
                   width: 2,
                 ),
               ),
@@ -72,11 +72,11 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
                 value: month,
                 child: Text(
                   month.toString(),
-                  style: const TextStyle(color: ColorsData.primaryBlueColor),
+                  style: const TextStyle(color: ColorsManager.primaryBlueColor),
                 ),
               );
             }).toList(),
-            iconEnabledColor: ColorsData.primaryBlueColor,
+            iconEnabledColor: ColorsManager.primaryBlueColor,
           ),
         ),
         const SizedBox(width: 8),
@@ -86,41 +86,48 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
               isDense: true,
               hintText: "DD",
               hintStyle: const TextStyle(
-                color: ColorsData.primaryBlueColor,
+                color: ColorsManager.primaryBlueColor,
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
-                borderSide: const BorderSide(
-                  color: ColorsData.primaryBlueColor,
-                  width: 2,
+                borderSide: BorderSide(
+                  color: ColorsManager.primaryBlueColor,
+                  width: 2.w,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
-                borderSide: const BorderSide(
-                  color: ColorsData.primaryBlueColor,
-                  width: 2,
+                borderSide: BorderSide(
+                  color: ColorsManager.primaryBlueColor,
+                  width: 2.w,
                 ),
               ),
             ),
             value: _selectedDay,
             onChanged: (value) {
-              setState(() {
-                _selectedDay = value;
-                widget.onDaySelected(value);
-              });
-            },
-            items: days.map((day) {
-              return DropdownMenuItem<int>(
-                value: day,
-                child: Text(day.toString(),
-                    style: const TextStyle(color: ColorsData.primaryBlueColor)),
+              setState(
+                () {
+                  _selectedDay = value;
+                  widget.onDaySelected(value);
+                },
               );
-            }).toList(),
-            iconEnabledColor: ColorsData.primaryBlueColor,
+            },
+            items: days.map(
+              (day) {
+                return DropdownMenuItem<int>(
+                  value: day,
+                  child: Text(
+                    day.toString(),
+                    style:
+                        const TextStyle(color: ColorsManager.primaryBlueColor),
+                  ),
+                );
+              },
+            ).toList(),
+            iconEnabledColor: ColorsManager.primaryBlueColor,
           ),
         ),
-        const SizedBox(width: 8),
+        SizedBox(width: 8.w),
         Expanded(
           child: SizedBox(
             height: 48.h,
@@ -129,20 +136,20 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
                 isDense: true,
                 hintText: "YYYY",
                 hintStyle: const TextStyle(
-                  color: ColorsData.primaryBlueColor,
+                  color: ColorsManager.primaryBlueColor,
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
-                  borderSide: const BorderSide(
-                    color: ColorsData.primaryBlueColor,
-                    width: 2,
+                  borderSide: BorderSide(
+                    color: ColorsManager.primaryBlueColor,
+                    width: 2.w,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
-                  borderSide: const BorderSide(
-                    color: ColorsData.primaryBlueColor,
-                    width: 2,
+                  borderSide: BorderSide(
+                    color: ColorsManager.primaryBlueColor,
+                    width: 2.w,
                   ),
                 ),
               ),
@@ -153,14 +160,19 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
                   widget.onYearSelected(value);
                 });
               },
-              items: years.map((year) {
-                return DropdownMenuItem<int>(
-                  value: year,
-                  child: Text(year.toString(),
-                      style: const TextStyle(color: ColorsData.primaryBlueColor)),
-                );
-              }).toList(),
-              iconEnabledColor: ColorsData.primaryBlueColor,
+              items: years.map(
+                (year) {
+                  return DropdownMenuItem<int>(
+                    value: year,
+                    child: Text(
+                      year.toString(),
+                      style: const TextStyle(
+                          color: ColorsManager.primaryBlueColor),
+                    ),
+                  );
+                },
+              ).toList(),
+              iconEnabledColor: ColorsManager.primaryBlueColor,
             ),
           ),
         ),

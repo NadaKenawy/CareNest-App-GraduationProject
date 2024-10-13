@@ -1,5 +1,5 @@
-import 'package:care_nest/core/utils/colors.dart';
-import 'package:care_nest/core/utils/font_weight_helper.dart';
+import 'package:care_nest/core/theme/colors_manager.dart';
+import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:flutter/material.dart';
 
 class SignUpTitle extends StatelessWidget {
@@ -17,7 +17,7 @@ class SignUpTitle extends StatelessWidget {
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeightHelper.bold,
-              color: ColorsData.primaryBlueColor,
+              color: ColorsManager.primaryBlueColor,
             ),
           ),
           TextSpan(
@@ -25,7 +25,7 @@ class SignUpTitle extends StatelessWidget {
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeightHelper.bold,
-              color: ColorsData.primaryPinkColor,
+              color: ColorsManager.primaryPinkColor,
             ),
           ),
         ],

@@ -1,4 +1,4 @@
-import 'package:care_nest/core/utils/colors.dart';
+import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -37,7 +37,7 @@ class AppTextFormField extends StatelessWidget {
         child: TextFormField(
           style: inputTextStyle ??
               hintStyle ??
-              const TextStyle(color: ColorsData.primaryBlueColor),
+              const TextStyle(color: ColorsManager.primaryBlueColor),
           decoration: InputDecoration(
             isDense: true,
             contentPadding: contentPadding ??
@@ -54,13 +54,13 @@ class AppTextFormField extends StatelessWidget {
                 OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.r),
                   borderSide: BorderSide(
-                    color: ColorsData.primaryBlueColor,
+                    color: ColorsManager.primaryBlueColor,
                     width: 2.w,
                   ),
                 ),
             hintText: hintText,
             hintStyle: hintStyle ??
-                const TextStyle(color: ColorsData.primaryBlueColor),
+                const TextStyle(color: ColorsManager.primaryBlueColor),
             suffixIcon: SizedBox(
               width: 24.w,
               height: 24.h,
