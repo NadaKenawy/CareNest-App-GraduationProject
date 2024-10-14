@@ -30,7 +30,7 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
               padding: EdgeInsets.only(top: 350.h),
               child: Container(
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 16.w),
+                padding: EdgeInsets.only(top: 24.h, left: 16.w, right: 16.w),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
