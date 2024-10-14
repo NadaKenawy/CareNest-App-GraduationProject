@@ -37,7 +37,7 @@ class AppTextFormField extends StatelessWidget {
         child: TextFormField(
           style: inputTextStyle ??
               hintStyle ??
-              const TextStyle(color: ColorsManager.primaryBlueColor),
+              const TextStyle(color: Colors.black),
           decoration: InputDecoration(
             isDense: true,
             contentPadding: contentPadding ??
@@ -46,7 +46,7 @@ class AppTextFormField extends StatelessWidget {
                 OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.r),
                   borderSide: BorderSide(
-                    color: Colors.blue,
+                    color: ColorsManager.primaryPinkColor,
                     width: 2.w,
                   ),
                 ),
@@ -60,7 +60,7 @@ class AppTextFormField extends StatelessWidget {
                 ),
             hintText: hintText,
             hintStyle: hintStyle ??
-                const TextStyle(color: ColorsManager.primaryBlueColor),
+                const TextStyle(color: ColorsManager.primaryPinkColor),
             suffixIcon: SizedBox(
               width: 24.w,
               height: 24.h,
