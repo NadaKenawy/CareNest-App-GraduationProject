@@ -14,74 +14,70 @@ class EmailAndPassword extends StatefulWidget {
 
 class _EmailAndPasswordState extends State<EmailAndPassword> {
   bool isObscure = true;
+  bool emailHasError = false;
+  bool passwordHasError = false;
 
   @override
-  @override
   Widget build(BuildContext context) {
-    final loginCubit = context.read<LoginCubit>();
     return Form(
-      key: loginCubit.formKey,
+      key: context.read<LoginCubit>().formKey,
       child: Column(
         children: [
           AppTextFormField(
             hintText: 'Email',
             validator: (value) {
               if (value == null || value.isEmpty) {
+                emailHasError = true; // Set error state
+                setState(() {}); // Trigger UI update
                 return 'Please enter your email';
-              }
-              if (!AppRegex.isEmailValid(value)) {
+              } else if (!AppRegex.isEmailValid(value)) {
+                emailHasError = true; // Set error state
+                setState(() {}); // Trigger UI update
                 return 'Please enter a valid email';
               }
-              return null;
+              emailHasError = false; // Clear error state
+              setState(() {}); // Trigger UI update
+              return null; // Return null if valid
             },
-            hasError: loginCubit.formKey.currentState != null &&
-                !loginCubit.formKey.currentState!
-                    .validate(), // تأكد من عكس النتيجة
-            controller: loginCubit.emailController,
+            controller: context.read<LoginCubit>().emailController,
+            hasError: emailHasError,
           ),
-          const SizedBox(height: 18),
-          FormField<String>(
+          const SizedBox(height: 12),
+          AppTextFormField(
+            controller: context.read<LoginCubit>().passwordController,
+            hintText: 'Password',
+            isObscureText: isObscure,
+            suffixIcon: IconButton(
+              onPressed: () {
+                setState(() {
+                  isObscure = !isObscure;
+                });
+              },
+              icon: Icon(
+                isObscure
+                    ? Icons.visibility_off_outlined
+                    : Icons.visibility_outlined,
+                color: passwordHasError
+                    ? Colors.red
+                    : ColorsManager
+                        .primaryBlueColor, // Change icon color on error
+              ),
+            ),
             validator: (value) {
-              if (loginCubit.passwordController.text.isEmpty) {
+              if (value == null || value.isEmpty) {
+                passwordHasError = true; // Set error state
+                setState(() {}); // Trigger UI update
                 return 'Please enter your password';
-              }
-              if (loginCubit.passwordController.text.length < 8) {
+              } else if (value.length < 8) {
+                passwordHasError = true; // Set error state
+                setState(() {}); // Trigger UI update
                 return 'Password must be at least 8 characters';
               }
-              return null;
+              passwordHasError = false; // Clear error state
+              setState(() {}); // Trigger UI update
+              return null; // Return null if valid
             },
-            builder: (state) {
-              return AppTextFormField(
-                controller: loginCubit.passwordController,
-                hintText: 'Password',
-                isObscureText: isObscure,
-                hasError: state.hasError, // استخدم حالة الخطأ هنا
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      isObscure = !isObscure;
-                    });
-                  },
-                  icon: Icon(
-                    isObscure
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
-                    color: state.hasError
-                        ? Colors.red
-                        : ColorsManager.primaryBlueColor,
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  if (value.length < 8) {
-                    return 'Password must be at least 8 characters';
-                  }
-                  return null;
-                },
-              );
-            },
+            hasError: passwordHasError,
           ),
         ],
       ),

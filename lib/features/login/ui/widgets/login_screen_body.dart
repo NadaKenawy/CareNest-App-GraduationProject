@@ -61,9 +61,6 @@ class LoginScreenBody extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
                     AppTextButton(
                       buttonText: "Log In",
                       onPressed: () {

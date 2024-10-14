@@ -37,7 +37,6 @@ class AppTextButton extends StatelessWidget {
           ),
           backgroundColor: WidgetStatePropertyAll<Color>(
               backgroundColor), // تعيين لون الخلفية
-
           fixedSize: WidgetStatePropertyAll(
             Size(double.infinity,
                 buttonHeight), // جعل العرض يمتد لعرض الشاشة بالكامل

@@ -15,9 +15,9 @@ class AppTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.backgroundColor,
     this.width,
-    this.validator,
+    required this.validator,
     this.controller,
-    this.hasError = false, // إضافة متغير للتحقق من وجود خطأ
+    this.hasError = false,
   });
 
   final EdgeInsetsGeometry? contentPadding;
@@ -30,61 +30,57 @@ class AppTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final Color? backgroundColor;
   final double? width;
-  final Function(String?)? validator;
+  final Function(String?) validator;
   final TextEditingController? controller;
-  final bool hasError; // تحديد إذا كان هناك خطأ
+  final bool hasError;
 
   @override
   Widget build(BuildContext context) {
+    Color textColor = hasError ? Colors.red : ColorsManager.primaryBlueColor;
+    Color hintColor = hasError ? Colors.red : ColorsManager.primaryBlueColor;
+
     return SizedBox(
       width: width ?? double.infinity,
-      child: SizedBox(
-        height: 70.h, // تثبيت الارتفاع لتجنب تغير الحجم مع الخطأ
-        child: TextFormField(
-          controller: controller,
-          style: inputTextStyle ??
-              hintStyle ??
-              const TextStyle(color: ColorsManager.primaryBlueColor),
-          decoration: InputDecoration(
-            isDense: true,
-            contentPadding: contentPadding ??
-                EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
-            focusedBorder: focusedBorder ??
-                OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.r),
-                  borderSide: BorderSide(color: Colors.blue, width: 2.w),
-                ),
-            enabledBorder: enabledBorder ??
-                OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.r),
-                  borderSide: BorderSide(
-                      color: ColorsManager.primaryBlueColor, width: 2.w),
-                ),
-            errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red, width: 1.3.w),
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.red, width: 1.3.w),
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-            ),
-            hintText: hintText,
-            hintStyle: TextStyle(
-              color: hasError
-                  ? Colors.red
-                  : ColorsManager
-                      .primaryBlueColor, // استخدام اللون الأحمر عند وجود خطأ
-            ),
-            suffixIcon: suffixIcon,
-            filled: true,
-            fillColor: Colors.transparent,
-            errorMaxLines: 2,
+      child: TextFormField(
+        controller: controller,
+        style: inputTextStyle ?? TextStyle(color: textColor),
+        decoration: InputDecoration(
+          isDense: true,
+          contentPadding: contentPadding ??
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
+          focusedBorder: focusedBorder ??
+              OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20.r),
+                borderSide: BorderSide(
+                    color: hasError ? Colors.red : Colors.blue, width: 2.w),
+              ),
+          enabledBorder: enabledBorder ??
+              OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20.r),
+                borderSide: BorderSide(
+                    color:
+                        hasError ? Colors.red : ColorsManager.primaryBlueColor,
+                    width: 2.w),
+              ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red, width: 1.3.w),
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
           ),
-          obscureText: isObscureText ?? false,
-          validator: (value) {
-            return validator!(value);
-          },
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.red, width: 1.3.w),
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
+          ),
+          hintText: hintText,
+          hintStyle: TextStyle(color: hintColor),
+          suffixIcon: suffixIcon,
+          filled: true,
+          fillColor: Colors.transparent,
+          errorMaxLines: 2,
         ),
+        obscureText: isObscureText ?? false,
+        validator: (value) {
+          return validator(value);
+        },
       ),
     );
   }

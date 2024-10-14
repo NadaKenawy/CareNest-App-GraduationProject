@@ -19,6 +19,11 @@ class PasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppTextFormField(
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter a valid email';
+        }
+      },
       hintText: hintText,
       isObscureText: obscureText,
       suffixIcon: IconButton(
