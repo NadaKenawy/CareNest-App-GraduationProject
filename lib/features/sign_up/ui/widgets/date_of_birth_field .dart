@@ -43,7 +43,7 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
               isDense: true,
               hintText: "MM",
               hintStyle: const TextStyle(
-                color: ColorsManager.primaryBlueColor,
+                color: ColorsManager.primaryPinkColor,
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
@@ -67,15 +67,19 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
                 widget.onMonthSelected(value);
               });
             },
-            items: months.map((month) {
-              return DropdownMenuItem<int>(
-                value: month,
-                child: Text(
-                  month.toString(),
-                  style: const TextStyle(color: ColorsManager.primaryBlueColor),
-                ),
-              );
-            }).toList(),
+            items: months.map(
+              (month) {
+                return DropdownMenuItem<int>(
+                  value: month,
+                  child: Text(
+                    month.toString(),
+                    style: const TextStyle(
+                      color: ColorsManager.primaryBlueColor,
+                    ),
+                  ),
+                );
+              },
+            ).toList(),
             iconEnabledColor: ColorsManager.primaryBlueColor,
           ),
         ),
@@ -86,7 +90,7 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
               isDense: true,
               hintText: "DD",
               hintStyle: const TextStyle(
-                color: ColorsManager.primaryBlueColor,
+                color: ColorsManager.primaryPinkColor,
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
@@ -136,7 +140,7 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
                 isDense: true,
                 hintText: "YYYY",
                 hintStyle: const TextStyle(
-                  color: ColorsManager.primaryBlueColor,
+                  color: ColorsManager.primaryPinkColor,
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
