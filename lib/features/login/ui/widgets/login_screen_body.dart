@@ -1,11 +1,13 @@
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
-import 'package:care_nest/core/widgets/custom_text_form_field.dart';
-import 'package:care_nest/features/login/ui/login_image.dart';
+import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
+import 'package:care_nest/features/login/ui/widgets/email_and_password.dart';
+import 'package:care_nest/features/login/ui/widgets/login_bloc_listener.dart';
+import 'package:care_nest/features/login/ui/widgets/login_image.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/alternativeaction_whenhaveaccount.dart';
-import 'package:care_nest/features/sign_up/ui/widgets/password_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,7 +19,6 @@ class LoginScreenBody extends StatefulWidget {
 }
 
 class _LoginScreenBodyState extends State<LoginScreenBody> {
-  bool _isPasswordVisible = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,21 +50,7 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
                       ),
                     ),
                     SizedBox(height: 24.h),
-                    const AppTextFormField(
-                      hintText: "Email",
-                    ),
-                    SizedBox(height: 16.h),
-                    PasswordField(
-                      hintText: "Password",
-                      obscureText: !_isPasswordVisible,
-                      onVisibilityToggle: () {
-                        setState(() {
-                          _isPasswordVisible = !_isPasswordVisible;
-                        });
-                      },
-                      isVisible: _isPasswordVisible,
-                    ),
-                    SizedBox(height: 13.h),
+                    const EmailAndPassword(),
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
@@ -83,7 +70,9 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
                     ),
                     AppTextButton(
                       buttonText: "Log In",
-                      onPressed: () {},
+                      onPressed: () {
+                        validateThenDoLogin(context);
+                      },
                       textStyle: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
@@ -101,6 +90,7 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
                       textLabel: "Don't have an account?",
                       textButtonLabel: "Sign Up",
                     ),
+                    const LoginBlocListener(),
                   ],
                 ),
               ),
@@ -109,5 +99,12 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
         ),
       ),
     );
+  }
+
+  void validateThenDoLogin(BuildContext context) {
+    final form = context.read<LoginCubit>().formKey.currentState;
+    if (form!.validate()) {
+      context.read<LoginCubit>().emitLoginStates();
+    }
   }
 }
