@@ -10,17 +10,17 @@ class FirstAndLastNameFields extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // AppTextFormField(
-        //   hintText: "First Name",
-        //   width: 170.w,
-        // ),
-        // SizedBox(
-        //   width: 16.w,
-        // ),
-        // AppTextFormField(
-        //   hintText: "Last Name",
-        //   width: 170.w,
-        // ),
+        AppTextFormField(
+          hintText: "First Name",
+          width: 170.w,
+        ),
+        SizedBox(
+          width: 16.w,
+        ),
+        AppTextFormField(
+          hintText: "Last Name",
+          width: 170.w,
+        ),
       ],
     );
   }
