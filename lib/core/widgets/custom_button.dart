@@ -21,7 +21,8 @@ class AppTextButton extends StatelessWidget {
     required this.textStyle,
     required this.onPressed,
     Color? backgroundColor, // اجعلها مطلوبة
-  }) : backgroundColor = backgroundColor ?? Colors.pink; // تعيين لون افتراضي للزر
+  }) : backgroundColor =
+            backgroundColor ?? Colors.pink; // تعيين لون افتراضي للزر
 
   @override
   Widget build(BuildContext context) {
@@ -34,19 +35,22 @@ class AppTextButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(borderRadius ?? 16.0),
             ),
           ),
-          backgroundColor: WidgetStatePropertyAll<Color>(backgroundColor), // تعيين لون الخلفية
+          backgroundColor: WidgetStatePropertyAll<Color>(
+              backgroundColor), // تعيين لون الخلفية
           padding: WidgetStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(
             horizontal: horizontalPadding?.w ?? 12.w,
             vertical: verticalPadding?.h ?? 14.h,
           )),
           fixedSize: WidgetStatePropertyAll(
-            Size(double.infinity, buttonHeight), // جعل العرض يمتد لعرض الشاشة بالكامل
+            Size(double.infinity,
+                buttonHeight), // جعل العرض يمتد لعرض الشاشة بالكامل
           ),
         ),
         onPressed: onPressed,
         child: Text(
           buttonText,
-          style: textStyle.copyWith(color: Colors.white), // تعيين لون النص إلى الأبيض
+          style: textStyle.copyWith(
+              color: Colors.white), // تعيين لون النص إلى الأبيض
         ),
       ),
     );
