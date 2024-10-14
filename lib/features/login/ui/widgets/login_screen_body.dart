@@ -11,14 +11,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginScreenBody extends StatefulWidget {
+class LoginScreenBody extends StatelessWidget {
   const LoginScreenBody({super.key});
 
-  @override
-  State<LoginScreenBody> createState() => _LoginScreenBodyState();
-}
-
-class _LoginScreenBodyState extends State<LoginScreenBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
