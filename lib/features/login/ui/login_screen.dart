@@ -1,4 +1,4 @@
-import 'package:care_nest/features/login/ui/login_screen_body.dart';
+import 'package:care_nest/features/login/ui/widgets/login_screen_body.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {

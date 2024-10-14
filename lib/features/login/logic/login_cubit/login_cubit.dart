@@ -27,7 +27,7 @@ class LoginCubit extends Cubit<LoginState> {
       failure: (error) {
         final errorMessage = error.apiErrorModel.errors?.isNotEmpty == true
             ? error.apiErrorModel.errors![0].msg
-            : 'Unknown error';
+            : 'Invalid email or password';
 
         emit(LoginState.error(error: errorMessage ?? 'Unknown error'));
       },
