@@ -17,6 +17,7 @@ class AppTextFormField extends StatelessWidget {
     this.width,
     required this.validator,
     this.controller,
+    this.hasError = false, // إضافة متغير للتحقق من وجود خطأ
   });
 
   final EdgeInsetsGeometry? contentPadding;
@@ -31,13 +32,14 @@ class AppTextFormField extends StatelessWidget {
   final double? width;
   final Function(String?) validator;
   final TextEditingController? controller;
+  final bool hasError; // تحديد إذا كان هناك خطأ
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: width ?? double.infinity,
       child: SizedBox(
-        height: 48.h,
+        height: 70.h, // تثبيت الارتفاع لتجنب تغير الحجم مع الخطأ
         child: TextFormField(
           controller: controller,
           style: inputTextStyle ??
@@ -50,47 +52,33 @@ class AppTextFormField extends StatelessWidget {
             focusedBorder: focusedBorder ??
                 OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.r),
-                  borderSide: BorderSide(
-                    color: Colors.blue,
-                    width: 2.w,
-                  ),
+                  borderSide: BorderSide(color: Colors.blue, width: 2.w),
                 ),
             enabledBorder: enabledBorder ??
                 OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20.r),
                   borderSide: BorderSide(
-                    color: ColorsManager.primaryBlueColor,
-                    width: 2.w,
-                  ),
+                      color: ColorsManager.primaryBlueColor, width: 2.w),
                 ),
             errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.red,
-                width: 1.3.w,
-              ),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(16),
-              ),
+              borderSide: BorderSide(color: Colors.red, width: 1.3.w),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.red,
-                width: 1.3.w,
-              ),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(16),
-              ),
+              borderSide: BorderSide(color: Colors.red, width: 1.3.w),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
             ),
             hintText: hintText,
-            hintStyle: hintStyle ??
-                const TextStyle(color: ColorsManager.primaryBlueColor),
-            suffixIcon: SizedBox(
-              width: 24.w,
-              height: 24.h,
-              child: suffixIcon,
+            hintStyle: TextStyle(
+              color: hasError
+                  ? Colors.red
+                  : ColorsManager
+                      .primaryBlueColor, // استخدام اللون الأحمر عند وجود خطأ
             ),
+            suffixIcon: suffixIcon,
             filled: true,
             fillColor: Colors.transparent,
+            errorMaxLines: 2,
           ),
           obscureText: isObscureText ?? false,
           validator: (value) {

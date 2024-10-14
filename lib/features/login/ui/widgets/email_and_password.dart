@@ -1,4 +1,5 @@
 import 'package:care_nest/core/helpers/app_regex.dart';
+import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
@@ -13,50 +14,73 @@ class EmailAndPassword extends StatefulWidget {
 
 class _EmailAndPasswordState extends State<EmailAndPassword> {
   bool isObscure = true;
-  late TextEditingController passwordController;
+
+  @override
   @override
   Widget build(BuildContext context) {
+    final loginCubit = context.read<LoginCubit>();
     return Form(
-      key: context.read<LoginCubit>().formKey,
+      key: loginCubit.formKey,
       child: Column(
         children: [
           AppTextFormField(
             hintText: 'Email',
             validator: (value) {
-              if (value == null ||
-                  value.isEmpty ||
-                  !AppRegex.isEmailValid(value)) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your email';
+              }
+              if (!AppRegex.isEmailValid(value)) {
                 return 'Please enter a valid email';
               }
+              return null;
             },
-            controller: context.read<LoginCubit>().emailController,
+            hasError: loginCubit.formKey.currentState != null &&
+                !loginCubit.formKey.currentState!
+                    .validate(), // تأكد من عكس النتيجة
+            controller: loginCubit.emailController,
           ),
-          const SizedBox(
-            height: 18,
-          ),
-          AppTextFormField(
-            controller: context.read<LoginCubit>().passwordController,
-            hintText: 'Password',
-            isObscureText: isObscure,
-            suffixIcon: IconButton(
-              onPressed: () {
-                setState(() {
-                  isObscure = !isObscure;
-                });
-              },
-              icon: Icon(
-                isObscure
-                    ? Icons.visibility_off_outlined
-                    : Icons.visibility_outlined,
-                color: Colors.grey,
-              ),
-            ),
+          const SizedBox(height: 18),
+          FormField<String>(
             validator: (value) {
-              if (value == null ||
-                  value.isEmpty ||
-                  !AppRegex.isPasswordValid(value)) {
-                return 'Please enter a valid password';
+              if (loginCubit.passwordController.text.isEmpty) {
+                return 'Please enter your password';
               }
+              if (loginCubit.passwordController.text.length < 8) {
+                return 'Password must be at least 8 characters';
+              }
+              return null;
+            },
+            builder: (state) {
+              return AppTextFormField(
+                controller: loginCubit.passwordController,
+                hintText: 'Password',
+                isObscureText: isObscure,
+                hasError: state.hasError, // استخدم حالة الخطأ هنا
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      isObscure = !isObscure;
+                    });
+                  },
+                  icon: Icon(
+                    isObscure
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
+                    color: state.hasError
+                        ? Colors.red
+                        : ColorsManager.primaryBlueColor,
+                  ),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your password';
+                  }
+                  if (value.length < 8) {
+                    return 'Password must be at least 8 characters';
+                  }
+                  return null;
+                },
+              );
             },
           ),
         ],

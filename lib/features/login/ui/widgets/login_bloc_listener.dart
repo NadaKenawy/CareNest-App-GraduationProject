@@ -1,6 +1,7 @@
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
+import 'package:care_nest/core/utils/snackbar.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_state.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,8 @@ class LoginBlocListener extends StatelessWidget {
             GoRouter.of(context).push(AppRouter.khomeScreen);
           },
           error: (error) {
-            setupErrorState(context, error);
+            Navigator.of(context).pop();
+            customSnackBar(context, error, Colors.red);
           },
         );
       },
@@ -40,32 +42,32 @@ class LoginBlocListener extends StatelessWidget {
     );
   }
 
-  void setupErrorState(BuildContext context, String error) {
-    Navigator.of(context).pop();
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        icon: const Icon(
-          Icons.error,
-          color: Colors.red,
-          size: 32,
-        ),
-        content: Text(
-          error,
-          style: TextStyles.font15DarkBlueMedium,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              context.pop();
-            },
-            child: Text(
-              'Got it',
-              style: TextStyles.font14DarkBlueMedium,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // void setupErrorState(BuildContext context, String error) {
+  //   Navigator.of(context).pop();
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) => AlertDialog(
+  //       icon: const Icon(
+  //         Icons.error,
+  //         color: Colors.red,
+  //         size: 32,
+  //       ),
+  //       content: Text(
+  //         error,
+  //         style: TextStyles.font15DarkBlueMedium,
+  //       ),
+  //       actions: [
+  //         TextButton(
+  //           onPressed: () {
+  //             context.pop();
+  //           },
+  //           child: Text(
+  //             'Got it',
+  //             style: TextStyles.font14DarkBlueMedium,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }
