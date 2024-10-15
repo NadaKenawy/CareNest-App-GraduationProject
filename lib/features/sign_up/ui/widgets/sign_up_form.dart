@@ -46,10 +46,10 @@ class _SignupFormState extends State<SignupForm> {
                     setState(() {});
                     return 'at least 3 characters';
                   }
-                  if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+                  if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(value)) {
                     firstNameHasError = true;
                     setState(() {});
-                    return 'firstname should only contain English letters';
+                    return 'only English letters';
                   }
                   firstNameHasError = false;
                   setState(() {});
@@ -73,7 +73,7 @@ class _SignupFormState extends State<SignupForm> {
                     setState(() {});
                     return 'at least 3 characters';
                   }
-                  if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+                  if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(value)) {
                     lastNameHasError = true;
                     setState(() {});
                     return 'only English letters';
