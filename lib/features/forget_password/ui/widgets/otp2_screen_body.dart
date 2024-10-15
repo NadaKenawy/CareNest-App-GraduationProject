@@ -94,6 +94,9 @@ class Otp2ScreenBody extends StatelessWidget {
     return AppTextFormField(
       hintText: '',
       width: 56.w,
+      maxLength: 1,
+      keyboardType: TextInputType.number,
+      textAlign: TextAlign.center,
     );
   }
 }
