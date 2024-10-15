@@ -2,7 +2,7 @@ import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
-import 'package:care_nest/features/sign_up/ui/widgets/alternativeaction_whenhaveaccount.dart';
+import 'package:care_nest/core/widgets/alternativeaction_whenhaveaccount.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/date_of_birth_field%20.dart';
 
 import 'package:care_nest/features/sign_up/ui/widgets/sign_up_bloc_listener.dart';
@@ -98,10 +98,8 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                       },
                       textStyle: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 17,
+                        fontSize: 16,
                       ),
-                      backgroundColor: ColorsManager.primaryPinkColor,
-                      buttonHeight: 50.h,
                     ),
                     SizedBox(height: 12.h),
                     AlternativeActionWhenHaveAccount(

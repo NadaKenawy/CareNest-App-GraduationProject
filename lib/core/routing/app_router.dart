@@ -1,4 +1,7 @@
 import 'package:care_nest/core/di/service_locator.dart';
+import 'package:care_nest/features/forget_password/ui/otp1_screen.dart';
+import 'package:care_nest/features/forget_password/ui/otp2_screen.dart';
+import 'package:care_nest/features/forget_password/ui/otp3_screen.dart';
 import 'package:care_nest/features/home/ui/home_screen.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:care_nest/features/login/ui/login_screen.dart';
@@ -13,6 +16,9 @@ abstract class AppRouter {
   static const kloginScreen = '/loginScreen';
   static const konBoardingScreen = '/';
   static const khomeScreen = '/homeScreen';
+  static const kOtp1Screen = '/Otp1Screen';
+  static const kOtp2Screen = '/Otp2Screen';
+  static const kOtp3Screen = '/Otp3Screen';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -36,6 +42,18 @@ abstract class AppRouter {
       GoRoute(
         path: khomeScreen,
         builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: kOtp1Screen,
+        builder: (context, state) => const Otp1Screen(),
+      ),
+      GoRoute(
+        path: kOtp2Screen,
+        builder: (context, state) => const Otp2Screen(),
+      ),
+      GoRoute(
+        path: kOtp3Screen,
+        builder: (context, state) => const Otp3Screen(),
       ),
     ],
   );

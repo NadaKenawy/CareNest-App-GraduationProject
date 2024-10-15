@@ -5,7 +5,7 @@ import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:care_nest/features/login/ui/widgets/email_and_password.dart';
 import 'package:care_nest/features/login/ui/widgets/login_bloc_listener.dart';
 import 'package:care_nest/features/login/ui/widgets/login_image.dart';
-import 'package:care_nest/features/sign_up/ui/widgets/alternativeaction_whenhaveaccount.dart';
+import 'package:care_nest/core/widgets/alternativeaction_whenhaveaccount.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,7 +50,9 @@ class LoginScreenBody extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          GoRouter.of(context).push(AppRouter.kOtp1Screen);
+                        },
                         child: Text(
                           "Forgot Password?",
                           style: TextStyle(
@@ -68,10 +70,8 @@ class LoginScreenBody extends StatelessWidget {
                       },
                       textStyle: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 17,
+                        fontSize: 16,
                       ),
-                      backgroundColor: ColorsManager.primaryPinkColor,
-                      buttonHeight: 50.h,
                     ),
                     SizedBox(
                       height: 12.h,

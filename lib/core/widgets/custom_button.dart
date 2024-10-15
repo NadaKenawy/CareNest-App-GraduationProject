@@ -1,3 +1,4 @@
+import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:flutter/material.dart';
 
 class AppTextButton extends StatelessWidget {
@@ -21,7 +22,7 @@ class AppTextButton extends StatelessWidget {
     required this.onPressed,
     Color? backgroundColor, // اجعلها مطلوبة
   }) : backgroundColor =
-            backgroundColor ?? Colors.pink; // تعيين لون افتراضي للزر
+            backgroundColor ?? ColorsManager.primaryPinkColor; // تعيين لون افتراضي للزر
 
   @override
   Widget build(BuildContext context) {
