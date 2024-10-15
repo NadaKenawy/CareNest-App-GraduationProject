@@ -1,3 +1,6 @@
+// ignore_for_file: file_names
+
+import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,12 +9,14 @@ class DateOfBirthDropdowns extends StatefulWidget {
   final Function(int?) onDaySelected;
   final Function(int?) onMonthSelected;
   final Function(int?) onYearSelected;
+  final String? errorMessage; // Add this to receive error message
 
   const DateOfBirthDropdowns({
     super.key,
     required this.onDaySelected,
     required this.onMonthSelected,
     required this.onYearSelected,
+    this.errorMessage,
   });
 
   @override
@@ -23,91 +28,168 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
   int? _selectedMonth;
   int? _selectedYear;
 
-  // List of days, months, and years as before
   List<int> days = List.generate(31, (index) => index + 1);
   List<int> months = List.generate(12, (index) => index + 1);
   List<int> years = List.generate(101, (index) => DateTime.now().year - index);
 
   void _updateDate() {
-    // Call the Cubit function to update the date of birth
-    context
-        .read<SignupCubit>()
-        .updateDateOfBirth(_selectedDay, _selectedMonth, _selectedYear);
+    context.read<SignupCubit>().updateDateOfBirth(
+          _selectedDay,
+          _selectedMonth,
+          _selectedYear,
+        );
   }
-
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+    // Define error color
+    Color errorColor = widget.errorMessage != null ? Colors.red : ColorsManager.primaryBlueColor;
+
+    return Column(
       children: [
-        Expanded(
-          child: DropdownButtonFormField<int>(
-            decoration: const InputDecoration(
-              hintText: "MM",
-              // Other decoration settings...
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // Month Dropdown
+            Expanded(
+              child: DropdownButtonFormField<int>(
+                decoration: InputDecoration(
+                  hintText: "MM",
+                  hintStyle: TextStyle(
+                    color: errorColor, // Change hint color
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide(color: errorColor), // Change border color
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide(color: errorColor), // Change border color
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide(
+                      color: errorColor, // Change border color
+                    ),
+                  ),
+                ),
+                value: _selectedMonth,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedMonth = value;
+                    widget.onMonthSelected(value);
+                    _updateDate();
+                  });
+                },
+                style: TextStyle(
+                  color: errorColor, // Change dropdown text color
+                ),
+                dropdownColor: Colors.white,
+                iconEnabledColor: errorColor, // Change icon color
+                items: months.map((month) {
+                  return DropdownMenuItem<int>(
+                    value: month,
+                    child: Text(month.toString()),
+                  );
+                }).toList(),
+              ),
             ),
-            value: _selectedMonth,
-            onChanged: (value) {
-              setState(() {
-                _selectedMonth = value;
-                widget.onMonthSelected(value);
-                _updateDate();
-              });
-            },
-            items: months.map((month) {
-              return DropdownMenuItem<int>(
-                value: month,
-                child: Text(month.toString()),
-              );
-            }).toList(),
-          ),
-        ),
-        const SizedBox(width: 8),
-        Expanded(
-          child: DropdownButtonFormField<int>(
-            decoration: const InputDecoration(
-              hintText: "DD",
-              // Other decoration settings...
+            const SizedBox(width: 16),
+            // Day Dropdown
+            Expanded(
+              child: DropdownButtonFormField<int>(
+                decoration: InputDecoration(
+                  hintText: "DD",
+                  hintStyle: TextStyle(
+                    color: errorColor, // Change hint color
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide(color: errorColor), // Change border color
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide(color: errorColor), // Change border color
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide(color: errorColor), // Change border color
+                  ),
+                ),
+                value: _selectedDay,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedDay = value;
+                    widget.onDaySelected(value);
+                    _updateDate();
+                  });
+                },
+                style: TextStyle(
+                  color: errorColor, // Change dropdown text color
+                ),
+                dropdownColor: Colors.white,
+                iconEnabledColor: errorColor, // Change icon color
+                items: days.map((day) {
+                  return DropdownMenuItem<int>(
+                    value: day,
+                    child: Text(day.toString()),
+                  );
+                }).toList(),
+              ),
             ),
-            value: _selectedDay,
-            onChanged: (value) {
-              setState(() {
-                _selectedDay = value;
-                widget.onDaySelected(value);
-                _updateDate();
-              });
-            },
-            items: days.map((day) {
-              return DropdownMenuItem<int>(
-                value: day,
-                child: Text(day.toString()),
-              );
-            }).toList(),
-          ),
-        ),
-        const SizedBox(width: 8),
-        Expanded(
-          child: DropdownButtonFormField<int>(
-            decoration: const InputDecoration(
-              hintText: "YYYY",
-              // Other decoration settings...
+            const SizedBox(width: 16),
+            // Year Dropdown
+            Expanded(
+              child: DropdownButtonFormField<int>(
+                decoration: InputDecoration(
+                  hintText: "YYYY",
+                  hintStyle: TextStyle(
+                    color: errorColor, // Change hint color
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide(color: errorColor), // Change border color
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide(color: errorColor), // Change border color
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide(color: errorColor), // Change border color
+                  ),
+                ),
+                value: _selectedYear,
+                onChanged: (value) {
+                  setState(() {
+                    _selectedYear = value;
+                    widget.onYearSelected(value);
+                    _updateDate();
+                  });
+                },
+                style: TextStyle(
+                  color: errorColor, // Change dropdown text color
+                ),
+                dropdownColor: Colors.white,
+                iconEnabledColor: errorColor, // Change icon color
+                items: years.map((year) {
+                  return DropdownMenuItem<int>(
+                    value: year,
+                    child: Text(year.toString()),
+                  );
+                }).toList(),
+              ),
             ),
-            value: _selectedYear,
-            onChanged: (value) {
-              setState(() {
-                _selectedYear = value;
-                widget.onYearSelected(value);
-                _updateDate();
-              });
-            },
-            items: years.map((year) {
-              return DropdownMenuItem<int>(
-                value: year,
-                child: Text(year.toString()),
-              );
-            }).toList(),
-          ),
+          ],
         ),
+        // Display error message if exists
+        if (widget.errorMessage != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text(
+              widget.errorMessage!,
+              style: const TextStyle(color: Colors.red),
+            ),
+          ),
       ],
     );
   }

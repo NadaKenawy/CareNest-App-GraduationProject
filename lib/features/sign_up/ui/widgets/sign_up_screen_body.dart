@@ -4,6 +4,7 @@ import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/alternativeaction_whenhaveaccount.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/date_of_birth_field%20.dart';
+
 import 'package:care_nest/features/sign_up/ui/widgets/sign_up_bloc_listener.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/sign_up_form.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/sign_up_image.dart';
@@ -21,11 +22,31 @@ class SignUpScreenBody extends StatefulWidget {
 }
 
 class _SignUpScreenBodyState extends State<SignUpScreenBody> {
-  void _onDaySelected(int? value) {}
+  int? _selectedDay;
+  int? _selectedMonth;
+  int? _selectedYear;
+  String? _dobErrorMessage; // Add this variable for the error message
 
-  void _onMonthSelected(int? value) {}
+  void _onDaySelected(int? value) {
+    setState(() {
+      _selectedDay = value;
+      _dobErrorMessage = null; // Reset error message when day is selected
+    });
+  }
 
-  void _onYearSelected(int? value) {}
+  void _onMonthSelected(int? value) {
+    setState(() {
+      _selectedMonth = value;
+      _dobErrorMessage = null; // Reset error message when month is selected
+    });
+  }
+
+  void _onYearSelected(int? value) {
+    setState(() {
+      _selectedYear = value;
+      _dobErrorMessage = null; // Reset error message when year is selected
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +79,8 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                       child: Text(
                         "Date Of Birth",
                         style: TextStyle(
-                          fontSize: 14,
-                          color: ColorsManager.primaryBlueColor,
-                        ),
+                            fontSize: 14,
+                            color: ColorsManager.primaryBlueColor),
                       ),
                     ),
                     SizedBox(height: 8.h),
@@ -68,10 +88,9 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                       onDaySelected: _onDaySelected,
                       onMonthSelected: _onMonthSelected,
                       onYearSelected: _onYearSelected,
+                      errorMessage: _dobErrorMessage, // Pass the error message
                     ),
-                    SizedBox(
-                      height: 16.h,
-                    ),
+                    SizedBox(height: 16.h),
                     AppTextButton(
                       buttonText: "Sign Up",
                       onPressed: () {
@@ -84,14 +103,12 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                       backgroundColor: ColorsManager.primaryPinkColor,
                       buttonHeight: 50.h,
                     ),
-                    SizedBox(
-                      height: 12.h,
-                    ),
+                    SizedBox(height: 12.h),
                     AlternativeActionWhenHaveAccount(
                       onTap: () {
                         GoRouter.of(context).push(AppRouter.kloginScreen);
                       },
-                      textLabel: "Aleardy have an account?",
+                      textLabel: "Already have an account?",
                       textButtonLabel: "Log In",
                     ),
                     const SignupBlocListener(),
@@ -106,7 +123,26 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
   }
 
   void validateThenDoSignup(BuildContext context) {
+    // Check if the form is valid
     if (context.read<SignupCubit>().formKey.currentState!.validate()) {
+      // Check if all Date of Birth fields are selected
+      if (_selectedDay == null ||
+          _selectedMonth == null ||
+          _selectedYear == null) {
+        setState(() {
+          _dobErrorMessage = 'Please select your full date of birth';
+        });
+        return;
+      }
+
+      // Update Date of Birth in SignupCubit
+      context.read<SignupCubit>().updateDateOfBirth(
+            _selectedDay,
+            _selectedMonth,
+            _selectedYear,
+          );
+
+      // Emit the signup state
       context.read<SignupCubit>().emitSignupStates();
     }
   }

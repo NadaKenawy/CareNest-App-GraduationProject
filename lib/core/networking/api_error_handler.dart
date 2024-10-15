@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
 import 'package:care_nest/core/networking/api_constants.dart';
 import 'package:care_nest/core/networking/api_error_model.dart';

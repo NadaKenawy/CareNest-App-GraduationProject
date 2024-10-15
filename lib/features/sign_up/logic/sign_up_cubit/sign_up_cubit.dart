@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:bloc/bloc.dart';
 import 'package:care_nest/features/sign_up/data/models/sign_up_request_body.dart';
 import 'package:care_nest/features/sign_up/data/repos/sign_up_repo.dart';

@@ -1,6 +1,5 @@
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
-import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/utils/snackbar.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_state.dart';
