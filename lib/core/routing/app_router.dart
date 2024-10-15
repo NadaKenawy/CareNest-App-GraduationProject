@@ -8,6 +8,7 @@ import 'package:care_nest/features/login/ui/login_screen.dart';
 import 'package:care_nest/features/on_boarding_screen.dart/on_boarding_screen.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:care_nest/features/sign_up/ui/sign_up_screen.dart';
+import 'package:care_nest/features/sign_up/ui/verfiy_account_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,6 +20,7 @@ abstract class AppRouter {
   static const kOtp1Screen = '/Otp1Screen';
   static const kOtp2Screen = '/Otp2Screen';
   static const kOtp3Screen = '/Otp3Screen';
+  static const kVerfiyAccountScreen = '/VerfiyAccountScreen';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -54,6 +56,10 @@ abstract class AppRouter {
       GoRoute(
         path: kOtp3Screen,
         builder: (context, state) => const Otp3Screen(),
+      ),
+      GoRoute(
+        path: kVerfiyAccountScreen,
+        builder: (context, state) => const VerfiyAccountScreen(),
       ),
     ],
   );

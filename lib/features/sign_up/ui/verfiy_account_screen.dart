@@ -1,14 +1,14 @@
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/widgets/app_bar_title.dart';
-import 'package:care_nest/features/forget_password/ui/widgets/otp2_screen_body.dart';
+import 'package:care_nest/features/sign_up/ui/widgets/verfiy_account_screen_body.dart';
 import 'package:flutter/material.dart';
 
-class Otp2Screen extends StatelessWidget {
-  const Otp2Screen({super.key});
+class VerfiyAccountScreen extends StatelessWidget {
+  const VerfiyAccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
             color: ColorsManager.primaryBlueColor,
@@ -16,7 +16,7 @@ class Otp2Screen extends StatelessWidget {
             ),
         title: const AppBarTittle(),
       ),
-      body: const Otp2ScreenBody(),
+      body: const VerifyAccountScreenBody(),
     );
   }
 }

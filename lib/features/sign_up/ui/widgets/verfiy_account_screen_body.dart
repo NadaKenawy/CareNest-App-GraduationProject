@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class Otp2ScreenBody extends StatelessWidget {
-  const Otp2ScreenBody({super.key});
+class VerifyAccountScreenBody extends StatelessWidget {
+  const VerifyAccountScreenBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class Otp2ScreenBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "OTP Verification",
+            "Verify Your Account",
             style: TextStyle(
               fontSize: 36,
               fontWeight: FontWeightHelper.bold,
@@ -30,7 +30,7 @@ class Otp2ScreenBody extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(right: 40.w),
             child: const Text(
-              "Enter the verification code we just sent on your email address.",
+              "Enter the 6-digit verification code we sent to your email address.",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeightHelper.bold,
@@ -41,46 +41,37 @@ class Otp2ScreenBody extends StatelessWidget {
           SizedBox(height: 36.h),
           Row(
             children: [
-              Flexible(
-                child: _buildOtpField(),
-              ),
+              Flexible(child: _buildOtpField()),
               SizedBox(width: 16.w),
-              Flexible(
-                child: _buildOtpField(),
-              ),
+              Flexible(child: _buildOtpField()),
               SizedBox(width: 16.w),
-              Flexible(
-                child: _buildOtpField(),
-              ),
+              Flexible(child: _buildOtpField()),
               SizedBox(width: 16.w),
-              Flexible(
-                child: _buildOtpField(),
-              ),
+              Flexible(child: _buildOtpField()),
               SizedBox(width: 16.w),
-              Flexible(
-                child: _buildOtpField(),
-              ),
+              Flexible(child: _buildOtpField()),
               SizedBox(width: 16.w),
-              Flexible(
-                child: _buildOtpField(),
-              ),
+              Flexible(child: _buildOtpField()),
             ],
           ),
           SizedBox(height: 36.h),
           AppTextButton(
-            buttonText: 'Send Code',
+            buttonText: 'Verify Account',
             textStyle: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
             ),
-            onPressed: () {},
+            onPressed: () {
+              // Navigate to the next screen after successful verification
+              GoRouter.of(context).push(AppRouter.khomeScreen); // Replace with actual screen
+            },
           ),
           SizedBox(height: 48.h),
           AlternativeActionWhenHaveAccount(
             onTap: () {
               GoRouter.of(context).push(AppRouter.kloginScreen);
             },
-            textLabel: "Don’t receive code?",
+            textLabel: "Didn’t receive the code?",
             textButtonLabel: "Resend code",
           ),
         ],
