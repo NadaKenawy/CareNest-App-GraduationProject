@@ -23,7 +23,7 @@ class LoginScreenBody extends StatelessWidget {
           children: [
             const LoginImage(),
             Padding(
-              padding: EdgeInsets.only(top: 350.h),
+              padding: EdgeInsets.only(top: 370.h),
               child: Container(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height - 350.h,

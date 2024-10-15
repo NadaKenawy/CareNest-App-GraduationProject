@@ -57,7 +57,7 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
           children: [
             const SignUpImage(),
             Padding(
-              padding: EdgeInsets.only(top: 350.h),
+              padding: EdgeInsets.only(top: 370.h),
               child: Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 16.w),

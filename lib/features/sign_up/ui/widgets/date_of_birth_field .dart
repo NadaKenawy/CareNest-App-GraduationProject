@@ -39,10 +39,13 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
           _selectedYear,
         );
   }
+
   @override
   Widget build(BuildContext context) {
     // Define error color
-    Color errorColor = widget.errorMessage != null ? Colors.red : ColorsManager.primaryBlueColor;
+    Color errorColor = widget.errorMessage != null
+        ? Colors.red
+        : ColorsManager.primaryBlueColor;
 
     return Column(
       children: [
@@ -55,20 +58,21 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
                 decoration: InputDecoration(
                   hintText: "MM",
                   hintStyle: TextStyle(
-                    color: errorColor, // Change hint color
+                    color: errorColor,
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(color: errorColor), // Change border color
+                    borderSide: BorderSide(color: errorColor, width: 2),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(color: errorColor), // Change border color
+                    borderSide: BorderSide(color: errorColor, width: 2),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: BorderSide(
-                      color: errorColor, // Change border color
+                      color: errorColor,
+                      width: 2,
                     ),
                   ),
                 ),
@@ -81,10 +85,10 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
                   });
                 },
                 style: TextStyle(
-                  color: errorColor, // Change dropdown text color
+                  color: errorColor,
                 ),
                 dropdownColor: Colors.white,
-                iconEnabledColor: errorColor, // Change icon color
+                iconEnabledColor: errorColor,
                 items: months.map((month) {
                   return DropdownMenuItem<int>(
                     value: month,
@@ -100,19 +104,19 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
                 decoration: InputDecoration(
                   hintText: "DD",
                   hintStyle: TextStyle(
-                    color: errorColor, // Change hint color
+                    color: errorColor,
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(color: errorColor), // Change border color
+                    borderSide: BorderSide(color: errorColor, width: 2),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(color: errorColor), // Change border color
+                    borderSide: BorderSide(color: errorColor, width: 2),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(color: errorColor), // Change border color
+                    borderSide: BorderSide(color: errorColor, width: 2),
                   ),
                 ),
                 value: _selectedDay,
@@ -124,10 +128,10 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
                   });
                 },
                 style: TextStyle(
-                  color: errorColor, // Change dropdown text color
+                  color: errorColor,
                 ),
                 dropdownColor: Colors.white,
-                iconEnabledColor: errorColor, // Change icon color
+                iconEnabledColor: errorColor,
                 items: days.map((day) {
                   return DropdownMenuItem<int>(
                     value: day,
@@ -143,19 +147,19 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
                 decoration: InputDecoration(
                   hintText: "YYYY",
                   hintStyle: TextStyle(
-                    color: errorColor, // Change hint color
+                    color: errorColor,
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(color: errorColor), // Change border color
+                    borderSide: BorderSide(color: errorColor, width: 2),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(color: errorColor), // Change border color
+                    borderSide: BorderSide(color: errorColor, width: 2),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(color: errorColor), // Change border color
+                    borderSide: BorderSide(color: errorColor, width: 2),
                   ),
                 ),
                 value: _selectedYear,
@@ -167,10 +171,10 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
                   });
                 },
                 style: TextStyle(
-                  color: errorColor, // Change dropdown text color
+                  color: errorColor,
                 ),
                 dropdownColor: Colors.white,
-                iconEnabledColor: errorColor, // Change icon color
+                iconEnabledColor: errorColor,
                 items: years.map((year) {
                   return DropdownMenuItem<int>(
                     value: year,
@@ -181,7 +185,6 @@ class _DateOfBirthDropdownsState extends State<DateOfBirthDropdowns> {
             ),
           ],
         ),
-        // Display error message if exists
         if (widget.errorMessage != null)
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
