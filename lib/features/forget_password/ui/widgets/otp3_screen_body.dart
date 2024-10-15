@@ -61,7 +61,7 @@ class Otp3ScreenBody extends StatelessWidget {
               fontSize: 16,
             ),
             onPressed: () {
-              GoRouter.of(context).push(AppRouter.kOtp2Screen);
+              GoRouter.of(context).push(AppRouter.kloginScreen);
             },
           ),
         ],

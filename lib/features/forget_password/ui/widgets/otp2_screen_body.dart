@@ -44,23 +44,23 @@ class Otp2ScreenBody extends StatelessWidget {
               Flexible(
                 child: _buildOtpField(),
               ),
-              SizedBox(width: 16.w),
+              SizedBox(width: 8.w),
               Flexible(
                 child: _buildOtpField(),
               ),
-              SizedBox(width: 16.w),
+              SizedBox(width: 8.w),
               Flexible(
                 child: _buildOtpField(),
               ),
-              SizedBox(width: 16.w),
+              SizedBox(width: 8.w),
               Flexible(
                 child: _buildOtpField(),
               ),
-              SizedBox(width: 16.w),
+              SizedBox(width: 8.w),
               Flexible(
                 child: _buildOtpField(),
               ),
-              SizedBox(width: 16.w),
+              SizedBox(width: 8.w),
               Flexible(
                 child: _buildOtpField(),
               ),
@@ -73,7 +73,9 @@ class Otp2ScreenBody extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 16,
             ),
-            onPressed: () {},
+            onPressed: () {
+              GoRouter.of(context).push(AppRouter.kOtp3Screen);
+            },
           ),
           SizedBox(height: 48.h),
           AlternativeActionWhenHaveAccount(
@@ -91,7 +93,7 @@ class Otp2ScreenBody extends StatelessWidget {
   Widget _buildOtpField() {
     return AppTextFormField(
       hintText: '',
-      width: 48.w,
+      width: 56.w,
     );
   }
 }
