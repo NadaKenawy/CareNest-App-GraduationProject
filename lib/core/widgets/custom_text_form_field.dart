@@ -18,6 +18,9 @@ class AppTextFormField extends StatelessWidget {
     this.validator,
     this.controller,
     this.hasError = false,
+    this.maxLength,
+    this.keyboardType,
+    this.textAlign, // إضافة textAlign كخاصية اختيارية
   });
 
   final EdgeInsetsGeometry? contentPadding;
@@ -33,6 +36,9 @@ class AppTextFormField extends StatelessWidget {
   final Function(String?)? validator;
   final TextEditingController? controller;
   final bool hasError;
+  final int? maxLength;
+  final TextInputType? keyboardType;
+  final TextAlign? textAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +50,8 @@ class AppTextFormField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         style: inputTextStyle ?? TextStyle(color: textColor),
+        maxLength: maxLength,
+        keyboardType: keyboardType,
         decoration: InputDecoration(
           isDense: true,
           contentPadding: contentPadding ??
@@ -77,6 +85,7 @@ class AppTextFormField extends StatelessWidget {
           filled: true,
           fillColor: Colors.transparent,
           errorMaxLines: 2,
+          counterText: '',
         ),
         obscureText: isObscureText ?? false,
         validator: (value) {

@@ -12,7 +12,7 @@ class Otp2Screen extends StatelessWidget {
       appBar: AppBar(
         iconTheme: const IconThemeData(
             color: ColorsManager.primaryBlueColor,
-            size: 28 // استبدل هذا اللون باللون الذي تريده
+            size: 28 
             ),
         title: const AppBarTittle(),
       ),

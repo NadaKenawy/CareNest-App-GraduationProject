@@ -44,23 +44,23 @@ class Otp2ScreenBody extends StatelessWidget {
               Flexible(
                 child: _buildOtpField(),
               ),
-              SizedBox(width: 16.w),
+              SizedBox(width: 8.w),
               Flexible(
                 child: _buildOtpField(),
               ),
-              SizedBox(width: 16.w),
+              SizedBox(width: 8.w),
               Flexible(
                 child: _buildOtpField(),
               ),
-              SizedBox(width: 16.w),
+              SizedBox(width: 8.w),
               Flexible(
                 child: _buildOtpField(),
               ),
-              SizedBox(width: 16.w),
+              SizedBox(width: 8.w),
               Flexible(
                 child: _buildOtpField(),
               ),
-              SizedBox(width: 16.w),
+              SizedBox(width: 8.w),
               Flexible(
                 child: _buildOtpField(),
               ),
@@ -93,7 +93,10 @@ class Otp2ScreenBody extends StatelessWidget {
   Widget _buildOtpField() {
     return AppTextFormField(
       hintText: '',
-      width: 48.w,
+      width: 56.w,
+      maxLength: 1,
+      keyboardType: TextInputType.number,
+      textAlign: TextAlign.center,
     );
   }
 }
