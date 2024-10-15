@@ -31,7 +31,7 @@ class Otp1ScreenBody extends StatelessWidget {
             height: 12.h,
           ),
           Padding(
-            padding: EdgeInsets.only(right: 32.w),
+            padding: EdgeInsets.only(right: 40.w),
             child: const Text(
                 "Don't worry!. Please enter the email address linked with your account.",
                 style: TextStyle(
@@ -55,9 +55,11 @@ class Otp1ScreenBody extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 16,
             ),
-            onPressed: () {},
+            onPressed: () {
+              GoRouter.of(context).push(AppRouter.kOtp2Screen);
+            },
           ),
-          SizedBox(height: 12.h),
+          SizedBox(height: 48.h),
           AlternativeActionWhenHaveAccount(
             onTap: () {
               GoRouter.of(context).push(AppRouter.kloginScreen);
