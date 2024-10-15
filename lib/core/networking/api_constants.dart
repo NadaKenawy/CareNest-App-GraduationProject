@@ -2,6 +2,7 @@ class ApiConstants {
   static const String apiBaseUrl = "https://carenest-serverside.vercel.app/";
   static const String login = "auth/login";
   static const String signup = "auth/signup";
+  static const String forgetpassword = "auth/forgetpass";
 }
 
 class ApiErrors {

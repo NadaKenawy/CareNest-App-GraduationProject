@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_request_body.dart';
+part of 'forget_pass_email_request_body.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-LoginRequestBody _$LoginRequestBodyFromJson(Map<String, dynamic> json) =>
-    LoginRequestBody(
+ForgetPassEmailRequestBody _$ForgetPassEmailRequestBodyFromJson(
+        Map<String, dynamic> json) =>
+    ForgetPassEmailRequestBody(
       email: json['Email'] as String,
-      password: json['password'] as String,
     );
 
-Map<String, dynamic> _$LoginRequestBodyToJson(LoginRequestBody instance) =>
+Map<String, dynamic> _$ForgetPassEmailRequestBodyToJson(
+        ForgetPassEmailRequestBody instance) =>
     <String, dynamic>{
       'Email': instance.email,
-      'password': instance.password,
     };

@@ -1,4 +1,6 @@
 import 'package:care_nest/core/networking/api_constants.dart';
+import 'package:care_nest/features/forget_password/data/models/forget_pass_email_request_body.dart';
+import 'package:care_nest/features/forget_password/data/models/forget_pass_response.dart';
 import 'package:care_nest/features/login/data/models/login_request_body.dart';
 import 'package:care_nest/features/login/data/models/login_response.dart';
 import 'package:care_nest/features/sign_up/data/models/sign_up_request_body.dart';
@@ -20,5 +22,10 @@ abstract class ApiService {
   @POST(ApiConstants.signup)
   Future<SignupResponse> signup(
     @Body() SignupRequestBody signupRequestBody,
+  );
+
+  @POST(ApiConstants.forgetpassword)
+  Future<ForgetPassResponse> forgetPassword(
+    @Body() ForgetPassEmailRequestBody forgetPassEmailRequestBody,
   );
 }

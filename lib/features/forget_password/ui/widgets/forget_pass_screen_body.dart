@@ -1,15 +1,19 @@
+import 'package:care_nest/core/helpers/app_regex.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/widgets/alternativeaction_whenhaveaccount.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
+import 'package:care_nest/features/forget_password/logic/cubit/forget_password_cubit.dart';
+import 'package:care_nest/features/forget_password/ui/widgets/forget_pass_bloc_listner.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class Otp1ScreenBody extends StatelessWidget {
-  const Otp1ScreenBody({super.key});
+class ForgetPassScreenBody extends StatelessWidget {
+  const ForgetPassScreenBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +47,19 @@ class Otp1ScreenBody extends StatelessWidget {
           SizedBox(
             height: 36.h,
           ),
-          const AppTextFormField(
-            hintText: 'Email',
+          Form(
+            key: context.read<ForgetPasswordCubit>().formKey,
+            child: AppTextFormField(
+              hintText: 'Email',
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your email';
+                } else if (!AppRegex.isEmailValid(value)) {
+                  return 'Please enter a valid email';
+                }
+              },
+              controller: context.read<ForgetPasswordCubit>().emailController,
+            ),
           ),
           SizedBox(
             height: 36.h,
@@ -56,7 +71,8 @@ class Otp1ScreenBody extends StatelessWidget {
               fontSize: 16,
             ),
             onPressed: () {
-              GoRouter.of(context).push(AppRouter.kOtp2Screen);
+              validateThenSendCode(context);
+              //  GoRouter.of(context).push(AppRouter.kOtp2Screen);
             },
           ),
           SizedBox(height: 48.h),
@@ -66,9 +82,17 @@ class Otp1ScreenBody extends StatelessWidget {
             },
             textLabel: "Remember Password?",
             textButtonLabel: "Log in",
-          )
+          ),
+          const ForgetPassBlocListner(),
         ],
       ),
     );
+  }
+
+  void validateThenSendCode(BuildContext context) {
+    final form = context.read<ForgetPasswordCubit>().formKey.currentState;
+    if (form!.validate()) {
+      context.read<ForgetPasswordCubit>().emitForgetPasswordStates();
+    }
   }
 }
