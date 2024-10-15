@@ -73,7 +73,9 @@ class Otp2ScreenBody extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 16,
             ),
-            onPressed: () {},
+            onPressed: () {
+              GoRouter.of(context).push(AppRouter.kOtp3Screen);
+            },
           ),
           SizedBox(height: 48.h),
           AlternativeActionWhenHaveAccount(

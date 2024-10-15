@@ -51,7 +51,8 @@ class LoginScreenBody extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: () {
-                          GoRouter.of(context).push(AppRouter.kOtp1Screen);
+                          GoRouter.of(context)
+                              .push(AppRouter.kForgetPassScreen);
                         },
                         child: Text(
                           "Forgot Password?",
