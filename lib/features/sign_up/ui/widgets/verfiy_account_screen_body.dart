@@ -62,14 +62,13 @@ class VerifyAccountScreenBody extends StatelessWidget {
               fontSize: 16,
             ),
             onPressed: () {
-              // Navigate to the next screen after successful verification
-              GoRouter.of(context).push(AppRouter.khomeScreen); // Replace with actual screen
+              GoRouter.of(context).push(AppRouter.kHomeScreen);
             },
           ),
           SizedBox(height: 48.h),
           AlternativeActionWhenHaveAccount(
             onTap: () {
-              GoRouter.of(context).push(AppRouter.kloginScreen);
+              GoRouter.of(context).push(AppRouter.kLoginScreen);
             },
             textLabel: "Didn’t receive the code?",
             textButtonLabel: "Resend code",

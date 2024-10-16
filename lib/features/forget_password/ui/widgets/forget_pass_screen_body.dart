@@ -12,9 +12,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class ForgetPassScreenBody extends StatelessWidget {
+class ForgetPassScreenBody extends StatefulWidget {
   const ForgetPassScreenBody({super.key});
 
+  @override
+  State<ForgetPassScreenBody> createState() => _ForgetPassScreenBodyState();
+}
+
+class _ForgetPassScreenBodyState extends State<ForgetPassScreenBody> {
+  bool emailHasError = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -51,12 +57,27 @@ class ForgetPassScreenBody extends StatelessWidget {
             key: context.read<ForgetPasswordCubit>().formKey,
             child: AppTextFormField(
               hintText: 'Email',
+              hasError: emailHasError, // Pass the error state here
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter your email';
-                } else if (!AppRegex.isEmailValid(value)) {
-                  return 'Please enter a valid email';
+                  emailHasError = true;
+                  setState(() {});
+                  return 'Email required';
                 }
+                if (!AppRegex.isEmailValid(value)) {
+                  emailHasError = true;
+                  setState(() {});
+                  return 'Invalid email';
+                }
+                if (!value.startsWith(RegExp(r'^[a-zA-Z]')) ||
+                    !value.endsWith('@gmail.com')) {
+                  emailHasError = true;
+                  setState(() {});
+                  return 'Email must start with a character and end with \'gmail.com\'';
+                }
+                emailHasError = false;
+                setState(() {});
+                return null;
               },
               controller: context.read<ForgetPasswordCubit>().emailController,
             ),
@@ -78,7 +99,7 @@ class ForgetPassScreenBody extends StatelessWidget {
           SizedBox(height: 48.h),
           AlternativeActionWhenHaveAccount(
             onTap: () {
-              GoRouter.of(context).push(AppRouter.kloginScreen);
+              GoRouter.of(context).push(AppRouter.kLoginScreen);
             },
             textLabel: "Remember Password?",
             textButtonLabel: "Log in",

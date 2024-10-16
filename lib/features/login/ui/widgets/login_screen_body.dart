@@ -79,7 +79,7 @@ class LoginScreenBody extends StatelessWidget {
                     ),
                     AlternativeActionWhenHaveAccount(
                       onTap: () {
-                        GoRouter.of(context).push(AppRouter.ksignUpScreen);
+                        GoRouter.of(context).push(AppRouter.kSignUpScreen);
                       },
                       textLabel: "Don't have an account?",
                       textButtonLabel: "Sign Up",

@@ -29,7 +29,7 @@ class LoginBlocListener extends StatelessWidget {
           },
           success: (loginResponse) {
             Navigator.of(context).pop();
-            GoRouter.of(context).push(AppRouter.khomeScreen);
+            GoRouter.of(context).push(AppRouter.kHomeScreen);
           },
           error: (error) {
             Navigator.of(context).pop();

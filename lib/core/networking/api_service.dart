@@ -1,4 +1,5 @@
 import 'package:care_nest/core/networking/api_constants.dart';
+import 'package:care_nest/features/forget_password/data/models/create_new_password_model/create_new_password_request_body.dart';
 import 'package:care_nest/features/forget_password/data/models/forget_password_model/forget_pass_email_request_body.dart';
 import 'package:care_nest/features/forget_password/data/models/forget_password_model/forget_pass_response.dart';
 import 'package:care_nest/features/forget_password/data/models/verify_password_model/verify_password_request_body.dart';
@@ -35,5 +36,10 @@ abstract class ApiService {
   Future<VerifyPasswordResponse> verifyPassword(
     @Body() VerifyPasswordRequestBody verifyPasswordRequestBody,
     @Header('Authorization') String token,
+  );
+  @PUT('auth/resetpassword')
+  Future<void> createNewPassword(
+    @Header('Authorization') String token,
+    @Body() CreateNewPasswordRequestBody createNewPasswordRequestBody,
   );
 }

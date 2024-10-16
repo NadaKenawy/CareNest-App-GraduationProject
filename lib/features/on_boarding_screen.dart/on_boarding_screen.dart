@@ -14,7 +14,7 @@ class OnBoardingScreen extends StatelessWidget {
       body: Center(
         child: TextButton(
           onPressed: () {
-            GoRouter.of(context).push(AppRouter.kloginScreen);
+            GoRouter.of(context).push(AppRouter.kLoginScreen);
           },
           child: const Text('Go to Login Screen'),
         ),

@@ -94,13 +94,13 @@ class VerifyPasswordScreenBody extends StatelessWidget {
                 if (!validateThenVerify(context)) {
                   return;
                 }
-                GoRouter.of(context).push(AppRouter.kOtp3Screen);
+                GoRouter.of(context).push(AppRouter.kCreateNewPasswordScreen);
               },
             ),
             SizedBox(height: 48.h),
             AlternativeActionWhenHaveAccount(
               onTap: () {
-                GoRouter.of(context).push(AppRouter.kloginScreen);
+                GoRouter.of(context).push(AppRouter.kLoginScreen);
               },
               textLabel: "Don’t receive code?",
               textButtonLabel: "Resend code",

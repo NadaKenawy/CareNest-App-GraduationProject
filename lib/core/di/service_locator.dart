@@ -1,7 +1,9 @@
 import 'package:care_nest/core/networking/api_service.dart';
 import 'package:care_nest/core/networking/dio_factory.dart';
+import 'package:care_nest/features/forget_password/data/repos/create_new_password.dart';
 import 'package:care_nest/features/forget_password/data/repos/forget_pass_repo.dart';
 import 'package:care_nest/features/forget_password/data/repos/verify_password_repo.dart';
+import 'package:care_nest/features/forget_password/logic/create_new_password_cubit/create_new_password_cubit.dart';
 import 'package:care_nest/features/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
 import 'package:care_nest/features/forget_password/logic/verify_password_cubit/verify_password_cubit.dart';
 import 'package:care_nest/features/login/data/repos/login_repo.dart';
@@ -36,4 +38,10 @@ Future<void> setupGetIt() async {
       () => VerifyPasswordRepo(getIt()));
   getIt
       .registerFactory<VerifyPasswordCubit>(() => VerifyPasswordCubit(getIt()));
+
+  // create new password
+  getIt.registerLazySingleton<CreateNewPasswordRepo>(
+      () => CreateNewPasswordRepo(getIt()));
+  getIt.registerFactory<CreateNewPasswordCubit>(
+      () => CreateNewPasswordCubit(getIt()));
 }

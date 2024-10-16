@@ -104,7 +104,7 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                     SizedBox(height: 12.h),
                     AlternativeActionWhenHaveAccount(
                       onTap: () {
-                        GoRouter.of(context).push(AppRouter.kloginScreen);
+                        GoRouter.of(context).push(AppRouter.kLoginScreen);
                       },
                       textLabel: "Already have an account?",
                       textButtonLabel: "Log In",

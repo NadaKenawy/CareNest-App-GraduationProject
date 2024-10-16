@@ -64,7 +64,7 @@ class SignupBlocListener extends StatelessWidget {
                 disabledForegroundColor: Colors.grey.withOpacity(0.38),
               ),
               onPressed: () {
-                GoRouter.of(context).push(AppRouter.kloginScreen);
+                GoRouter.of(context).push(AppRouter.kLoginScreen);
               },
               child: const Text('Continue'),
             ),

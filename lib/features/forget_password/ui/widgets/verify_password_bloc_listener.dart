@@ -29,7 +29,7 @@ class VerifyPassBlocListner extends StatelessWidget {
           },
           success: (forgetPassRepo) {
             Navigator.of(context).pop();
-            GoRouter.of(context).push(AppRouter.kOtp3Screen);
+            GoRouter.of(context).push(AppRouter.kCreateNewPasswordScreen);
           },
           error: (error) {
             setupErrorState(context, error);
