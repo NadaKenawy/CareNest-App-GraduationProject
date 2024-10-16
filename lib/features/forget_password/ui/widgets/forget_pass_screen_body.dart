@@ -5,7 +5,7 @@ import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/widgets/alternativeaction_whenhaveaccount.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
-import 'package:care_nest/features/forget_password/logic/cubit/forget_password_cubit.dart';
+import 'package:care_nest/features/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
 import 'package:care_nest/features/forget_password/ui/widgets/forget_pass_bloc_listner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

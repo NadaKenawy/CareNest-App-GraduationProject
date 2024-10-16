@@ -1,6 +1,8 @@
 import 'package:care_nest/core/networking/api_constants.dart';
-import 'package:care_nest/features/forget_password/data/models/forget_pass_email_request_body.dart';
-import 'package:care_nest/features/forget_password/data/models/forget_pass_response.dart';
+import 'package:care_nest/features/forget_password/data/models/forget_password_model/forget_pass_email_request_body.dart';
+import 'package:care_nest/features/forget_password/data/models/forget_password_model/forget_pass_response.dart';
+import 'package:care_nest/features/forget_password/data/models/verify_password_model/verify_password_request_body.dart';
+import 'package:care_nest/features/forget_password/data/models/verify_password_model/verify_password_response.dart';
 import 'package:care_nest/features/login/data/models/login_request_body.dart';
 import 'package:care_nest/features/login/data/models/login_response.dart';
 import 'package:care_nest/features/sign_up/data/models/sign_up_request_body.dart';
@@ -19,13 +21,19 @@ abstract class ApiService {
     @Body() LoginRequestBody loginRequestBody,
   );
 
-  @POST(ApiConstants.signup)
+  @POST(ApiConstants.signUp)
   Future<SignupResponse> signup(
     @Body() SignupRequestBody signupRequestBody,
   );
 
-  @POST(ApiConstants.forgetpassword)
+  @POST(ApiConstants.forgetPassword)
   Future<ForgetPassResponse> forgetPassword(
     @Body() ForgetPassEmailRequestBody forgetPassEmailRequestBody,
+  );
+
+  @POST(ApiConstants.verifyPassword)
+  Future<VerifyPasswordResponse> verifyPassword(
+    @Body() VerifyPasswordRequestBody verifyPasswordRequestBody,
+    @Header('Authorization') String token,
   );
 }

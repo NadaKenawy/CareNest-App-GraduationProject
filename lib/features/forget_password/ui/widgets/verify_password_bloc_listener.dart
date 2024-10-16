@@ -1,18 +1,18 @@
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
-import 'package:care_nest/features/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
-import 'package:care_nest/features/forget_password/logic/forget_password_cubit/forget_password_state.dart';
+import 'package:care_nest/features/forget_password/logic/verify_password_cubit/verify_password_cubit.dart';
+import 'package:care_nest/features/forget_password/logic/verify_password_cubit/verify_password_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class ForgetPassBlocListner extends StatelessWidget {
-  const ForgetPassBlocListner({super.key});
+class VerifyPassBlocListner extends StatelessWidget {
+  const VerifyPassBlocListner({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
+    return BlocListener<VerifyPasswordCubit, VerifyPasswordState>(
       listenWhen: (previous, current) =>
           current is Loading || current is Success || current is Error,
       listener: (context, state) {
@@ -29,7 +29,7 @@ class ForgetPassBlocListner extends StatelessWidget {
           },
           success: (forgetPassRepo) {
             Navigator.of(context).pop();
-            GoRouter.of(context).push(AppRouter.verifyPasswordScreen);
+            GoRouter.of(context).push(AppRouter.kOtp3Screen);
           },
           error: (error) {
             setupErrorState(context, error);

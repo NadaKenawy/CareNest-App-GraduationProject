@@ -1,3 +1,5 @@
+import 'package:care_nest/core/helpers/constants.dart';
+import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -20,6 +22,20 @@ class DioFactory {
     } else {
       return dio!;
     }
+  }
+
+  static void addDioHeaders() async {
+    dio?.options.headers = {
+      'Accept': 'application/json',
+      'Authorization':
+          'Bearer ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken)}',
+    };
+  }
+
+  static void setTokenIntoHeaderAfterSignUp(String token) {
+    dio?.options.headers = {
+      'Authorization': 'Bearer $token',
+    };
   }
 
   static void addDioInterceptor() {

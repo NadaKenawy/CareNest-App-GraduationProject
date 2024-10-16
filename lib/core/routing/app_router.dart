@@ -1,7 +1,8 @@
 import 'package:care_nest/core/di/service_locator.dart';
-import 'package:care_nest/features/forget_password/logic/cubit/forget_password_cubit.dart';
+import 'package:care_nest/features/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
+import 'package:care_nest/features/forget_password/logic/verify_password_cubit/verify_password_cubit.dart';
 import 'package:care_nest/features/forget_password/ui/forget_pass_screen.dart';
-import 'package:care_nest/features/forget_password/ui/otp2_screen.dart';
+import 'package:care_nest/features/forget_password/ui/verify_password_screen.dart';
 import 'package:care_nest/features/forget_password/ui/otp3_screen.dart';
 import 'package:care_nest/features/home/ui/home_screen.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
@@ -19,7 +20,7 @@ abstract class AppRouter {
   static const konBoardingScreen = '/';
   static const khomeScreen = '/homeScreen';
   static const kForgetPassScreen = '/Otp1Screen';
-  static const kOtp2Screen = '/Otp2Screen';
+  static const verifyPasswordScreen = '/Otp2Screen';
   static const kOtp3Screen = '/Otp3Screen';
   static const kVerfiyAccountScreen = '/VerfiyAccountScreen';
   static final router = GoRouter(
@@ -54,8 +55,11 @@ abstract class AppRouter {
         ),
       ),
       GoRoute(
-        path: kOtp2Screen,
-        builder: (context, state) => const Otp2Screen(),
+        path: verifyPasswordScreen,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<VerifyPasswordCubit>(),
+          child: const VerifyPassword(),
+        ),
       ),
       GoRoute(
         path: kOtp3Screen,

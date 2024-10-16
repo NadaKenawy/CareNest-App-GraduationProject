@@ -1,6 +1,11 @@
-import 'package:care_nest/features/forget_password/data/models/forget_pass_email_request_body.dart';
+import 'dart:developer';
+
+import 'package:care_nest/core/helpers/constants.dart';
+import 'package:care_nest/core/helpers/shared_pref_helper.dart';
+import 'package:care_nest/core/networking/dio_factory.dart';
+import 'package:care_nest/features/forget_password/data/models/forget_password_model/forget_pass_email_request_body.dart';
 import 'package:care_nest/features/forget_password/data/repos/forget_pass_repo.dart';
-import 'package:care_nest/features/forget_password/logic/cubit/forget_password_state.dart';
+import 'package:care_nest/features/forget_password/logic/forget_password_cubit/forget_password_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,6 +26,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     );
     response.when(
       success: (forgetPassResponse) async {
+        await saveUserToken(forgetPassResponse.token ?? '');
         emit(ForgetPasswordState.success(forgetPassResponse));
       },
       failure: (error) {
@@ -30,5 +36,11 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
         emit(ForgetPasswordState.error(error: errorMessage ?? 'Unknown error'));
       },
     );
+  }
+
+  Future<void> saveUserToken(String token) async {
+    await SharedPrefHelper.setSecuredString(SharedPrefKeys.userToken, token);
+    DioFactory.setTokenIntoHeaderAfterSignUp(token);
+    log("Saved Token: ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken)}");
   }
 }
