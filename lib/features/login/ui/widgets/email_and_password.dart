@@ -72,6 +72,10 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                 passwordHasError = true; // Set error state
                 setState(() {}); // Trigger UI update
                 return 'Password must be at least 8 characters';
+              } else if (!AppRegex.isPasswordValid(value)) {
+                passwordHasError = true; // Set error state
+                setState(() {}); // Trigger UI update
+                return 'Password must include an uppercase letter, lowercase letter, number, and special character';
               }
               passwordHasError = false; // Clear error state
               setState(() {}); // Trigger UI update

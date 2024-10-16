@@ -30,10 +30,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
         emit(ForgetPasswordState.success(forgetPassResponse));
       },
       failure: (error) {
-        final errorMessage = error.apiErrorModel.errors?.isNotEmpty == true
-            ? error.apiErrorModel.errors![0].msg
-            : 'Invalid email';
-        emit(ForgetPasswordState.error(error: errorMessage ?? 'Unknown error'));
+        emit(ForgetPasswordState.error(error: error.apiErrorModel.message));
       },
     );
   }

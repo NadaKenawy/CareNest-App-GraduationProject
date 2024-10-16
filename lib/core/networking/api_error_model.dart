@@ -1,13 +1,19 @@
 import 'package:json_annotation/json_annotation.dart';
-part 'api_error_model.g.dart';
 
+part 'api_error_model.g.dart';
 
 @JsonSerializable()
 class ApiErrorModel {
-  final List<ErrorDetail>? errors;
+  final String status;
+  final ErrorDetail error;
+  final String message;
+  final String stack;
 
   ApiErrorModel({
-    required this.errors,
+    required this.status,
+    required this.error,
+    required this.message,
+    required this.stack,
   });
 
   factory ApiErrorModel.fromJson(Map<String, dynamic> json) =>
@@ -18,18 +24,14 @@ class ApiErrorModel {
 
 @JsonSerializable()
 class ErrorDetail {
-  final String? type;
-  final String? value;
-  final String? msg;
-  final String? path;
-  final String? location;
+  final int statusCode;
+  final String status;
+  final bool isOperational;
 
   ErrorDetail({
-    required this.type,
-    required this.value,
-    required this.msg,
-    required this.path,
-    required this.location,
+    required this.statusCode,
+    required this.status,
+    required this.isOperational,
   });
 
   factory ErrorDetail.fromJson(Map<String, dynamic> json) =>

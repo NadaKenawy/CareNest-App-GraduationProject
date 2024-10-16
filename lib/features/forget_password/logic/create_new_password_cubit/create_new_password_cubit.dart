@@ -46,10 +46,7 @@ class CreateNewPasswordCubit extends Cubit<CreatePasswordState> {
             message: 'Password created successfully!'));
       },
       failure: (error) {
-        final errorMessage = error.apiErrorModel.errors?.isNotEmpty == true
-            ? error.apiErrorModel.errors![0].msg
-            : 'Invalid email or password format';
-        emit(CreatePasswordState.error(error: errorMessage ?? 'Unknown error'));
+        emit(CreatePasswordState.error(error: error.apiErrorModel.message));
       },
     );
   }

@@ -48,11 +48,7 @@ class SignupCubit extends Cubit<SignupState> {
       await saveUserToken(signupResponse.token ?? '');
       emit(SignupState.signupSuccess(signupResponse));
     }, failure: (error) {
-      final errorMessage = error.apiErrorModel.errors?.isNotEmpty == true
-          ? error.apiErrorModel.errors![0].msg
-          : 'Unexpected error';
-
-      emit(SignupState.signupError(error: errorMessage ?? 'Unknown error'));
+      emit(SignupState.signupError(error: error.apiErrorModel.message));
     });
   }
 

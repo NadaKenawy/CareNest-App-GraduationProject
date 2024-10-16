@@ -8,12 +8,12 @@ enum DataSource {
   NO_CONTENT,
   BAD_REQUEST,
   FORBIDDEN,
-  UNAUTORISED,
+  UNAUTHORISED,
   NOT_FOUND,
   INTERNAL_SERVER_ERROR,
   CONNECT_TIMEOUT,
   CANCEL,
-  RECIEVE_TIMEOUT,
+  RECEIVE_TIMEOUT,
   SEND_TIMEOUT,
   CACHE_ERROR,
   NO_INTERNET_CONNECTION,
@@ -21,19 +21,19 @@ enum DataSource {
 }
 
 class ResponseCode {
-  static const int SUCCESS = 200; // success with data
-  static const int NO_CONTENT = 201; // success with no data (no content)
-  static const int BAD_REQUEST = 400; // failure, API rejected request
-  static const int UNAUTORISED = 401; // failure, user is not authorised
-  static const int FORBIDDEN = 403; // failure, API rejected request
-  static const int INTERNAL_SERVER_ERROR = 500; // failure, crash in server side
-  static const int NOT_FOUND = 404; // failure, not found
-  static const int API_LOGIC_ERROR = 422; // API logic error
+  static const int SUCCESS = 200;
+  static const int NO_CONTENT = 201;
+  static const int BAD_REQUEST = 400;
+  static const int UNAUTHORISED = 401;
+  static const int FORBIDDEN = 403;
+  static const int INTERNAL_SERVER_ERROR = 500;
+  static const int NOT_FOUND = 404;
+  static const int API_LOGIC_ERROR = 422;
 
-  // local status code
+  // Local status codes
   static const int CONNECT_TIMEOUT = -1;
   static const int CANCEL = -2;
-  static const int RECIEVE_TIMEOUT = -3;
+  static const int RECEIVE_TIMEOUT = -3;
   static const int SEND_TIMEOUT = -4;
   static const int CACHE_ERROR = -5;
   static const int NO_INTERNET_CONNECTION = -6;
@@ -43,33 +43,32 @@ class ResponseCode {
 class ResponseMessage {
   static const String NO_CONTENT = ApiErrors.noContent;
   static const String BAD_REQUEST = ApiErrors.badRequestError;
-  static const String UNAUTORISED = ApiErrors.unauthorizedError;
+  static const String UNAUTHORISED = ApiErrors.unauthorizedError;
   static const String FORBIDDEN = ApiErrors.forbiddenError;
   static const String INTERNAL_SERVER_ERROR = ApiErrors.internalServerError;
   static const String NOT_FOUND = ApiErrors.notFoundError;
 
-  // local status code
-  static String CONNECT_TIMEOUT = ApiErrors.timeoutError;
-  static String CANCEL = ApiErrors.defaultError;
-  static String RECIEVE_TIMEOUT = ApiErrors.timeoutError;
-  static String SEND_TIMEOUT = ApiErrors.timeoutError;
-  static String CACHE_ERROR = ApiErrors.cacheError;
-  static String NO_INTERNET_CONNECTION = ApiErrors.noInternetError;
-  static String DEFAULT = ApiErrors.defaultError;
+  // Local status messages
+  static const String CONNECT_TIMEOUT = ApiErrors.timeoutError;
+  static const String CANCEL = ApiErrors.defaultError;
+  static const String RECEIVE_TIMEOUT = ApiErrors.timeoutError;
+  static const String SEND_TIMEOUT = ApiErrors.timeoutError;
+  static const String CACHE_ERROR = ApiErrors.cacheError;
+  static const String NO_INTERNET_CONNECTION = ApiErrors.noInternetError;
+  static const String DEFAULT = ApiErrors.defaultError;
 }
 
 extension DataSourceExtension on DataSource {
   ApiErrorModel getFailure() {
     return ApiErrorModel(
-      errors: [
-        ErrorDetail(
-          type: "General",
-          value: null,
-          msg: _getMessage(),
-          path: null,
-          location: null,
-        ),
-      ],
+      status: "error",
+      error: ErrorDetail(
+        statusCode: _getStatusCode(),
+        status: _getStatus(),
+        isOperational: true,
+      ),
+      message: _getMessage(),
+      stack: "",
     );
   }
 
@@ -81,8 +80,8 @@ extension DataSourceExtension on DataSource {
         return ResponseMessage.BAD_REQUEST;
       case DataSource.FORBIDDEN:
         return ResponseMessage.FORBIDDEN;
-      case DataSource.UNAUTORISED:
-        return ResponseMessage.UNAUTORISED;
+      case DataSource.UNAUTHORISED:
+        return ResponseMessage.UNAUTHORISED;
       case DataSource.NOT_FOUND:
         return ResponseMessage.NOT_FOUND;
       case DataSource.INTERNAL_SERVER_ERROR:
@@ -91,8 +90,8 @@ extension DataSourceExtension on DataSource {
         return ResponseMessage.CONNECT_TIMEOUT;
       case DataSource.CANCEL:
         return ResponseMessage.CANCEL;
-      case DataSource.RECIEVE_TIMEOUT:
-        return ResponseMessage.RECIEVE_TIMEOUT;
+      case DataSource.RECEIVE_TIMEOUT:
+        return ResponseMessage.RECEIVE_TIMEOUT;
       case DataSource.SEND_TIMEOUT:
         return ResponseMessage.SEND_TIMEOUT;
       case DataSource.CACHE_ERROR:
@@ -101,6 +100,74 @@ extension DataSourceExtension on DataSource {
         return ResponseMessage.NO_INTERNET_CONNECTION;
       case DataSource.DEFAULT:
         return ResponseMessage.DEFAULT;
+      default:
+        return ResponseMessage.DEFAULT;
+    }
+  }
+
+  String _getStatus() {
+    switch (this) {
+      case DataSource.NO_CONTENT:
+        return "No Content";
+      case DataSource.BAD_REQUEST:
+        return "Bad Request";
+      case DataSource.FORBIDDEN:
+        return "Forbidden";
+      case DataSource.UNAUTHORISED:
+        return "Unauthorized";
+      case DataSource.NOT_FOUND:
+        return "Not Found";
+      case DataSource.INTERNAL_SERVER_ERROR:
+        return "Internal Server Error";
+      case DataSource.CONNECT_TIMEOUT:
+        return "Connection Timeout";
+      case DataSource.CANCEL:
+        return "Request Cancelled";
+      case DataSource.RECEIVE_TIMEOUT:
+        return "Receive Timeout";
+      case DataSource.SEND_TIMEOUT:
+        return "Send Timeout";
+      case DataSource.CACHE_ERROR:
+        return "Cache Error";
+      case DataSource.NO_INTERNET_CONNECTION:
+        return "No Internet Connection";
+      case DataSource.DEFAULT:
+        return "Unknown Error";
+      default:
+        return "Unknown Error";
+    }
+  }
+
+  int _getStatusCode() {
+    switch (this) {
+      case DataSource.NO_CONTENT:
+        return ResponseCode.NO_CONTENT;
+      case DataSource.BAD_REQUEST:
+        return ResponseCode.BAD_REQUEST;
+      case DataSource.FORBIDDEN:
+        return ResponseCode.FORBIDDEN;
+      case DataSource.UNAUTHORISED:
+        return ResponseCode.UNAUTHORISED;
+      case DataSource.NOT_FOUND:
+        return ResponseCode.NOT_FOUND;
+      case DataSource.INTERNAL_SERVER_ERROR:
+        return ResponseCode.INTERNAL_SERVER_ERROR;
+      case DataSource.CONNECT_TIMEOUT:
+        return ResponseCode.CONNECT_TIMEOUT;
+      case DataSource.CANCEL:
+        return ResponseCode.CANCEL;
+      case DataSource.RECEIVE_TIMEOUT:
+        return ResponseCode.RECEIVE_TIMEOUT;
+      case DataSource.SEND_TIMEOUT:
+        return ResponseCode.SEND_TIMEOUT;
+      case DataSource.CACHE_ERROR:
+        return ResponseCode.CACHE_ERROR;
+      case DataSource.NO_INTERNET_CONNECTION:
+        return ResponseCode.NO_INTERNET_CONNECTION;
+      case DataSource.DEFAULT:
+        return ResponseCode.DEFAULT;
+      default:
+        return ResponseCode.DEFAULT;
     }
   }
 }
@@ -124,7 +191,7 @@ ApiErrorModel _handleError(DioException error) {
     case DioExceptionType.sendTimeout:
       return DataSource.SEND_TIMEOUT.getFailure();
     case DioExceptionType.receiveTimeout:
-      return DataSource.RECIEVE_TIMEOUT.getFailure();
+      return DataSource.RECEIVE_TIMEOUT.getFailure();
     case DioExceptionType.badResponse:
     case DioExceptionType.unknown:
       if (error.response != null &&

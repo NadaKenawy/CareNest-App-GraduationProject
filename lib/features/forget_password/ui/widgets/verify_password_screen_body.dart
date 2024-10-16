@@ -94,7 +94,6 @@ class VerifyPasswordScreenBody extends StatelessWidget {
                 if (!validateThenVerify(context)) {
                   return;
                 }
-                GoRouter.of(context).push(AppRouter.kCreateNewPasswordScreen);
               },
             ),
             SizedBox(height: 48.h),
@@ -132,6 +131,7 @@ class VerifyPasswordScreenBody extends StatelessWidget {
     final form = context.read<VerifyPasswordCubit>().formKey.currentState;
     if (form!.validate()) {
       context.read<VerifyPasswordCubit>().emitVerifyPasswordStates();
+
       return true;
     }
     return false;

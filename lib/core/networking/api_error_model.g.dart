@@ -8,29 +8,29 @@ part of 'api_error_model.dart';
 
 ApiErrorModel _$ApiErrorModelFromJson(Map<String, dynamic> json) =>
     ApiErrorModel(
-      errors: (json['errors'] as List<dynamic>?)
-          ?.map((e) => ErrorDetail.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      status: json['status'] as String,
+      error: ErrorDetail.fromJson(json['error'] as Map<String, dynamic>),
+      message: json['message'] as String,
+      stack: json['stack'] as String,
     );
 
 Map<String, dynamic> _$ApiErrorModelToJson(ApiErrorModel instance) =>
     <String, dynamic>{
-      'errors': instance.errors,
+      'status': instance.status,
+      'error': instance.error,
+      'message': instance.message,
+      'stack': instance.stack,
     };
 
 ErrorDetail _$ErrorDetailFromJson(Map<String, dynamic> json) => ErrorDetail(
-      type: json['type'] as String?,
-      value: json['value'] as String?,
-      msg: json['msg'] as String?,
-      path: json['path'] as String?,
-      location: json['location'] as String?,
+      statusCode: (json['statusCode'] as num).toInt(),
+      status: json['status'] as String,
+      isOperational: json['isOperational'] as bool,
     );
 
 Map<String, dynamic> _$ErrorDetailToJson(ErrorDetail instance) =>
     <String, dynamic>{
-      'type': instance.type,
-      'value': instance.value,
-      'msg': instance.msg,
-      'path': instance.path,
-      'location': instance.location,
+      'statusCode': instance.statusCode,
+      'status': instance.status,
+      'isOperational': instance.isOperational,
     };
