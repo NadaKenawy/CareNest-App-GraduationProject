@@ -17,24 +17,28 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   TextEditingController emailController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  void emitForgetPasswordStates() async {
+  Future<void> loadSavedEmail() async {
     String? savedEmail =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userEmail);
+    if (emailController.text.isEmpty && savedEmail != null) {
+      emailController.text = savedEmail; // تحميل الإيميل المحفوظ
+      log("Loaded Email: $savedEmail");
+    }
+  }
+
+  void emitForgetPasswordStates() async {
+    await loadSavedEmail();
     emit(const ForgetPasswordState.loading());
 
     final response = await _forgetPassRepo.forget(
-      ForgetPassEmailRequestBody(
-        email: savedEmail != null && savedEmail.isNotEmpty
-            ? savedEmail
-            : emailController.text,
-      ),
+      ForgetPassEmailRequestBody(email: emailController.text),
     );
     response.when(
       success: (forgetPassResponse) async {
         await saveUserToken(forgetPassResponse.token ?? '');
-        if (savedEmail == null || savedEmail.isEmpty) {
-          await saveEmail();
-        }
+
+        await saveEmail();
+
         emit(ForgetPasswordState.success(forgetPassResponse));
       },
       failure: (error) {
