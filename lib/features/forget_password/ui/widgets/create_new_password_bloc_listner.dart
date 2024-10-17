@@ -1,5 +1,4 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:care_nest/core/helpers/success_snack_bar.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/features/forget_password/logic/create_new_password_cubit/create_new_password_cubit.dart';
@@ -20,23 +19,30 @@ class CreateNewPasswordBlocListener extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            AwesomeDialog(
+            showDialog(
               context: context,
-              dialogType: DialogType.noHeader,
-              animType: AnimType.scale,
-              body: const Center(
+              barrierDismissible: false, 
+              builder: (context) => const Center(
                 child: CircularProgressIndicator(
                   color: ColorsManager.primaryBlueColor,
                 ),
               ),
-              dismissOnTouchOutside: false,
-              dismissOnBackKeyPress: false,
-            ).show();
+            );
           },
           success: (createNewPasswordRepo) {
-            Navigator.of(context).pop(); // Close the loading dialog
-            GoRouter.of(context).push(AppRouter.kLoginScreen); // Navigate to login screen
-            successSnackBar(context, 'Password updated successfully');
+            Navigator.of(context).pop(); 
+            GoRouter.of(context)
+                .push(AppRouter.kLoginScreen); 
+            AwesomeDialog(
+              context: context,
+              dialogType: DialogType.success,
+              animType: AnimType.scale,
+              title: 'Success',
+              desc: 'Password updated successfully',
+              btnOkText: 'OK',
+              btnOkOnPress: () {}, // Action on OK press
+              btnOkColor: ColorsManager.primaryBlueColor,
+            ).show();
           },
           error: (error) {
             setupErrorState(context, error);
@@ -48,8 +54,7 @@ class CreateNewPasswordBlocListener extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, String error) {
-    context.pop(); // Close any previous dialog if open
-
+    context.pop();
     AwesomeDialog(
       context: context,
       dialogType: DialogType.error,

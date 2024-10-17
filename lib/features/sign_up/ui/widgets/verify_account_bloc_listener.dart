@@ -18,25 +18,22 @@ class VerifyAccountBlocListner extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            AwesomeDialog(
+            showDialog(
               context: context,
-              dialogType: DialogType.noHeader,
-              animType: AnimType.scale,
-              body: const Center(
+              barrierDismissible: false,
+              builder: (context) => const Center(
                 child: CircularProgressIndicator(
                   color: ColorsManager.primaryBlueColor,
                 ),
               ),
-              dismissOnTouchOutside: false,
-              dismissOnBackKeyPress: false,
-            ).show();
+            );
           },
           success: (verifyAccountResponse) {
-            Navigator.of(context).pop(); // Close the loading dialog
-            GoRouter.of(context)
-                .push(AppRouter.kLoginScreen); // Navigate to login screen
+            Navigator.of(context).pop();
+            GoRouter.of(context).push(AppRouter.kLoginScreen);
           },
           error: (error) {
+            Navigator.of(context).pop();
             setupErrorState(context, error);
           },
         );
@@ -46,8 +43,7 @@ class VerifyAccountBlocListner extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, String error) {
-    context.pop(); // Close any previous dialog if open
-
+    context.pop();
     AwesomeDialog(
       context: context,
       dialogType: DialogType.error,
@@ -55,7 +51,7 @@ class VerifyAccountBlocListner extends StatelessWidget {
       title: 'Error',
       desc: error,
       btnOkText: 'Got it',
-      btnOkOnPress: () {}, // Action on button press
+      btnOkOnPress: () {},
       btnOkColor: ColorsManager.primaryBlueColor,
     ).show();
   }

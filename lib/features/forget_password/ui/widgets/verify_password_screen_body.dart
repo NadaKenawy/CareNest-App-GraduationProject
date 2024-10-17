@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/widgets/alternativeaction_whenhaveaccount.dart';
@@ -98,9 +99,19 @@ class VerifyPasswordScreenBody extends StatelessWidget {
             SizedBox(height: 48.h),
             AlternativeActionWhenHaveAccount(
               onTap: () {
+                AwesomeDialog(
+                  context: context,
+                  dialogType: DialogType.success, // Use success dialog type
+                  animType: AnimType.scale,
+                  title: 'Code Sent Successfully',
+                  desc:
+                      'The verification code has been successfully resent to your email.',
+                  btnOkOnPress: () {},
+                  btnOkColor: ColorsManager.primaryBlueColor,
+                ).show();
                 context.read<ForgetPasswordCubit>().emitForgetPasswordStates();
               },
-              textLabel: "Don’t receive code?",
+              textLabel: "Didn’t receive code?",
               textButtonLabel: "Resend code",
             ),
             const VerifyPassBlocListner(),

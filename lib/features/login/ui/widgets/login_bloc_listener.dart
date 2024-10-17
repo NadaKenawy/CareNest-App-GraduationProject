@@ -1,7 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
-import 'package:care_nest/core/utils/snackbar.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_state.dart';
 import 'package:flutter/material.dart';
@@ -19,32 +18,43 @@ class LoginBlocListener extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            AwesomeDialog(
+            // Show a simple loading dialog with CircularProgressIndicator
+            showDialog(
               context: context,
-              dialogType: DialogType.noHeader,
-              animType: AnimType.scale,
-              body: const Center(
+              barrierDismissible: false, // Prevent dismiss by tapping outside
+              builder: (context) => const Center(
                 child: CircularProgressIndicator(
                   color: ColorsManager.primaryBlueColor,
                 ),
               ),
-              dismissOnTouchOutside: false,
-              dismissOnBackKeyPress: false,
-            ).show();
+            );
           },
           success: (loginResponse) {
-            context.pop(); // Close the loading dialog
+            Navigator.of(context).pop(); // Close the loading dialog
             GoRouter.of(context)
                 .push(AppRouter.kHomeScreen); // Navigate to Home Screen
           },
           error: (error) {
-            context.pop(); // Close the loading dialog
-            customSnackBar(
-                context, error, Colors.red); // Show error as snack bar
+            Navigator.of(context).pop(); // Close the loading dialog
+            setupErrorState(context, error); // Show error using AwesomeDialog
           },
         );
       },
       child: const SizedBox.shrink(),
     );
+  }
+
+  void setupErrorState(BuildContext context, String error) {
+    // Show error dialog using AwesomeDialog
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.error,
+      animType: AnimType.scale,
+      title: 'Error',
+      desc: error,
+      btnOkText: 'Got it',
+      btnOkOnPress: () {}, // Action on OK press
+      btnOkColor: ColorsManager.primaryBlueColor,
+    ).show();
   }
 }

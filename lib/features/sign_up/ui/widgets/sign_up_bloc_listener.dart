@@ -18,22 +18,13 @@ class SignupBlocListener extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            AwesomeDialog(
-              context: context,
-              dialogType: DialogType.noHeader,
-              animType: AnimType.scale,
-              body: const Center(
-                child: CircularProgressIndicator(
-                  color: ColorsManager.primaryBlueColor,
-                ),
-              ),
-              dismissOnTouchOutside: false,
-              dismissOnBackKeyPress: false,
-            ).show();
+            // Show loading indicator separately
+            showLoadingIndicator(context);
           },
           success: (signupResponse) {
-            context.pop(); // Close the loading dialog
-            // showSuccessDialog(context);
+            // Close the loading dialog
+            Navigator.of(context).pop();
+            showSuccessDialog(context);
             GoRouter.of(context).push(AppRouter.kVerifyAccountScreen);
           },
           error: (error) {
@@ -45,6 +36,23 @@ class SignupBlocListener extends StatelessWidget {
     );
   }
 
+  void showLoadingIndicator(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false, 
+      builder: (BuildContext context) {
+        return const Dialog(
+          backgroundColor: Colors.transparent, 
+          child: Center(
+            child: CircularProgressIndicator(
+              color: ColorsManager.primaryBlueColor,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   void showSuccessDialog(BuildContext context) {
     AwesomeDialog(
       context: context,
@@ -52,7 +60,6 @@ class SignupBlocListener extends StatelessWidget {
       animType: AnimType.scale,
       title: 'Signup Successful',
       desc: 'Congratulations, you have signed up successfully!',
-      btnOkText: 'Continue',
       btnOkOnPress: () {
         GoRouter.of(context).push(AppRouter.kLoginScreen);
       },
@@ -61,16 +68,14 @@ class SignupBlocListener extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, String error) {
-    context.pop(); // Close any previous dialog if open
-
+    Navigator.of(context).pop(); 
     AwesomeDialog(
       context: context,
       dialogType: DialogType.error,
       animType: AnimType.scale,
       title: 'Error',
       desc: error,
-      btnOkText: 'Got it',
-      btnOkOnPress: () {}, // Close dialog on press
+      btnOkOnPress: () {},
       btnOkColor: ColorsManager.primaryBlueColor,
     ).show();
   }

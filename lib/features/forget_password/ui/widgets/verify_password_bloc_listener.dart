@@ -1,5 +1,4 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:care_nest/core/helpers/success_snack_bar.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/features/forget_password/logic/verify_password_cubit/verify_password_cubit.dart';
@@ -19,24 +18,31 @@ class VerifyPassBlocListner extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            AwesomeDialog(
+            showDialog(
               context: context,
-              dialogType: DialogType.noHeader,
-              animType: AnimType.scale,
-              body: const Center(
+              barrierDismissible: false, 
+              builder: (context) => const Center(
                 child: CircularProgressIndicator(
                   color: ColorsManager.primaryBlueColor,
                 ),
               ),
-              dismissOnTouchOutside: false,
-              dismissOnBackKeyPress: false,
-            ).show();
+            );
           },
           success: (verifyPasswordResponse) {
-            context.pop(); // Close the loading dialog
+            Navigator.of(context).pop(); 
             GoRouter.of(context).push(AppRouter
-                .kCreateNewPasswordScreen); // Navigate to create new password screen
-            successSnackBar(context, 'Success');
+                .kCreateNewPasswordScreen); 
+
+            AwesomeDialog(
+              context: context,
+              dialogType: DialogType.success,
+              animType: AnimType.scale,
+              title: 'Success',
+              desc: 'Verification successful',
+              btnOkText: 'OK',
+              btnOkOnPress: () {}, 
+              btnOkColor: ColorsManager.primaryBlueColor,
+            ).show();
           },
           error: (error) {
             setupErrorState(context, error);
@@ -48,7 +54,7 @@ class VerifyPassBlocListner extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, String error) {
-    context.pop(); // Close any previous dialog if open
+    Navigator.of(context).pop(); 
 
     AwesomeDialog(
       context: context,
@@ -57,7 +63,7 @@ class VerifyPassBlocListner extends StatelessWidget {
       title: 'Error',
       desc: error,
       btnOkText: 'Got it',
-      btnOkOnPress: () {}, // Action on OK press
+      btnOkOnPress: () {},
       btnOkColor: ColorsManager.primaryBlueColor,
     ).show();
   }

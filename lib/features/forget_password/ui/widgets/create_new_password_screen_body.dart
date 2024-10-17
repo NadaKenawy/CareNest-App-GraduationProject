@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:care_nest/core/helpers/app_regex.dart';
 import 'package:care_nest/core/routing/app_router.dart';
