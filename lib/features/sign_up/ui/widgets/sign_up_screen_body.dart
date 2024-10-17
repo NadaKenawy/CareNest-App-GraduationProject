@@ -122,16 +122,11 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
 
   void validateThenDoSignup(BuildContext context) {
     // Check if the form is valid
-    if (context.read<SignupCubit>().formKey.currentState!.validate()) {
+    if (context.read<SignupCubit>().formKey.currentState!.validate() &&
+        _selectedDay != null &&
+        _selectedMonth != null &&
+        _selectedYear != null) {
       // Check if all Date of Birth fields are selected
-      if (_selectedDay == null ||
-          _selectedMonth == null ||
-          _selectedYear == null) {
-        setState(() {
-          _dobErrorMessage = 'Please select your full date of birth';
-        });
-        return;
-      }
 
       // Update Date of Birth in SignupCubit
       context.read<SignupCubit>().updateDateOfBirth(
@@ -142,6 +137,16 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
 
       // Emit the signup state
       context.read<SignupCubit>().emitSignupStates();
+    } else {
+      setState(
+        () {
+          if (_selectedDay == null ||
+              _selectedMonth == null ||
+              _selectedYear == null) {
+            _dobErrorMessage = 'Please select your full date of birth';
+          }
+        },
+      );
     }
   }
 }
