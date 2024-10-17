@@ -76,10 +76,14 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kVerifyAccountScreen,
-        builder: (context, state) => BlocProvider(
-          create: (context) => getIt<VerifyAccountCubit>(),
-          child: const VerifyAccountScreen(),
-        ),
+        builder: (context, state) => MultiBlocProvider(providers: [
+          BlocProvider(
+            create: (context) => getIt<VerifyAccountCubit>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<SignupCubit>(),
+          ),
+        ], child: const VerifyAccountScreen()),
       ),
     ],
   );

@@ -1,5 +1,3 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
@@ -32,20 +30,69 @@ class SignupCubit extends Cubit<SignupState> {
   }
 
   void emitSignupStates() async {
+    String? savedFirstName =
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.userFirstName);
+    String? savedLastName =
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.userLastName);
+    String? savedEmail =
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.userEmail);
+    String? savedDateOfBirth =
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.userDateOfBirth);
+    String? savedPassword =
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.userPassword);
+    String? savedPasswordConfirm = await SharedPrefHelper.getSecuredString(
+        SharedPrefKeys.userPasswordConfirm);
     emit(const SignupState.loading());
 
     final response = await _signupRepo.signup(
       SignupRequestBody(
-        firstName: firstNameController.text,
-        lastName: lastNameController.text,
-        email: emailController.text,
-        password: passwordController.text,
-        passwordConfirm: passwordConfirmController.text,
-        dateOfBirthOfMam: dateOfBirthController.text,
+        firstName: savedFirstName != null && savedFirstName.isNotEmpty
+            ? savedFirstName
+            : firstNameController.text,
+        lastName: savedLastName != null && savedLastName.isNotEmpty
+            ? savedLastName
+            : lastNameController.text,
+        email: savedEmail != null && savedEmail.isNotEmpty
+            ? savedEmail
+            : emailController.text,
+        password: savedPassword != null && savedPassword.isNotEmpty
+            ? savedPassword
+            : passwordController.text,
+        passwordConfirm:
+            savedPasswordConfirm != null && savedPasswordConfirm.isNotEmpty
+                ? savedPasswordConfirm
+                : passwordConfirmController.text,
+        dateOfBirthOfMam:
+            savedDateOfBirth != null && savedDateOfBirth.isNotEmpty
+                ? savedDateOfBirth
+                : dateOfBirthController.text,
       ),
     );
+
     response.when(
       success: (signupResponse) async {
+        if (savedFirstName == null ||
+            savedFirstName.isEmpty ||
+            savedLastName == null ||
+            savedLastName.isEmpty ||
+            savedEmail == null ||
+            savedEmail.isEmpty ||
+            savedPassword == null ||
+            savedPassword.isEmpty ||
+            savedPasswordConfirm == null ||
+            savedPasswordConfirm.isEmpty ||
+            savedDateOfBirth == null ||
+            savedDateOfBirth.isEmpty) {
+          await saveUserData(
+            firstName: firstNameController.text,
+            lastName: lastNameController.text,
+            email: emailController.text,
+            password: passwordController.text,
+            passwordConfirm: passwordConfirmController.text,
+            dateOfBirth: dateOfBirthController.text,
+          );
+        }
+
         await saveUserToken(signupResponse.token ?? '');
         emit(SignupState.success(signupResponse));
       },
@@ -55,6 +102,29 @@ class SignupCubit extends Cubit<SignupState> {
             error: error.signUpErrorModel.errors!.first.msg ?? ''));
       },
     );
+  }
+
+  Future<void> saveUserData({
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String password,
+    required String passwordConfirm,
+    required String dateOfBirth,
+  }) async {
+    await SharedPrefHelper.setSecuredString(
+        SharedPrefKeys.userFirstName, firstName);
+    await SharedPrefHelper.setSecuredString(
+        SharedPrefKeys.userLastName, lastName);
+    await SharedPrefHelper.setSecuredString(SharedPrefKeys.userEmail, email);
+    await SharedPrefHelper.setSecuredString(
+        SharedPrefKeys.userPassword, password);
+    await SharedPrefHelper.setSecuredString(
+        SharedPrefKeys.userPasswordConfirm, passwordConfirm);
+    await SharedPrefHelper.setSecuredString(
+        SharedPrefKeys.userDateOfBirth, dateOfBirth);
+
+    log("Saved Data: FirstName: $firstName, LastName: $lastName, Email: $email, Password: $password, PasswordConfirm: $passwordConfirm, Date of Birth: $dateOfBirth");
   }
 
   Future<void> saveUserToken(String token) async {
