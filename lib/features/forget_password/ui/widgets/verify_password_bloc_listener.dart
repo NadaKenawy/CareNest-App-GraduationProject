@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:care_nest/core/helpers/success_snack_bar.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
@@ -19,18 +20,23 @@ class VerifyPassBlocListner extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            showDialog(
+            AwesomeDialog(
               context: context,
-              builder: (context) => const Center(
+              dialogType: DialogType.noHeader,
+              animType: AnimType.scale,
+              body: const Center(
                 child: CircularProgressIndicator(
                   color: ColorsManager.primaryBlueColor,
                 ),
               ),
-            );
+              dismissOnTouchOutside: false,
+              dismissOnBackKeyPress: false,
+            ).show();
           },
           success: (verifyPasswordResponse) {
-            Navigator.of(context).pop();
-            GoRouter.of(context).push(AppRouter.kCreateNewPasswordScreen);
+            context.pop(); // Close the loading dialog
+            GoRouter.of(context).push(AppRouter
+                .kCreateNewPasswordScreen); // Navigate to create new password screen
             successSnackBar(context, 'Success');
           },
           error: (error) {
@@ -43,31 +49,17 @@ class VerifyPassBlocListner extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, String error) {
-    context.pop();
-    showDialog(
+    context.pop(); // Close any previous dialog if open
+
+    AwesomeDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        icon: const Icon(
-          Icons.error,
-          color: Colors.red,
-          size: 32,
-        ),
-        content: Text(
-          error,
-          style: TextStyles.font15DarkBlueMedium,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              context.pop();
-            },
-            child: Text(
-              'Got it',
-              style: TextStyles.font14DarkBlueMedium,
-            ),
-          ),
-        ],
-      ),
-    );
+      dialogType: DialogType.error,
+      animType: AnimType.scale,
+      title: 'Error',
+      desc: error,
+      btnOkText: 'Got it',
+      btnOkOnPress: () {}, // Action on OK press
+      btnOkColor: ColorsManager.primaryBlueColor,
+    ).show();
   }
 }

@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/utils/snackbar.dart';
@@ -18,55 +19,32 @@ class LoginBlocListener extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            showDialog(
+            AwesomeDialog(
               context: context,
-              builder: (context) => const Center(
+              dialogType: DialogType.noHeader,
+              animType: AnimType.scale,
+              body: const Center(
                 child: CircularProgressIndicator(
                   color: ColorsManager.primaryBlueColor,
                 ),
               ),
-            );
+              dismissOnTouchOutside: false,
+              dismissOnBackKeyPress: false,
+            ).show();
           },
           success: (loginResponse) {
-            Navigator.of(context).pop();
-            GoRouter.of(context).push(AppRouter.kHomeScreen);
+            context.pop(); // Close the loading dialog
+            GoRouter.of(context)
+                .push(AppRouter.kHomeScreen); // Navigate to Home Screen
           },
           error: (error) {
-            Navigator.of(context).pop();
-            customSnackBar(context, error, Colors.red);
+            context.pop(); // Close the loading dialog
+            customSnackBar(
+                context, error, Colors.red); // Show error as snack bar
           },
         );
       },
       child: const SizedBox.shrink(),
     );
   }
-
-  // void setupErrorState(BuildContext context, String error) {
-  //   Navigator.of(context).pop();
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) => AlertDialog(
-  //       icon: const Icon(
-  //         Icons.error,
-  //         color: Colors.red,
-  //         size: 32,
-  //       ),
-  //       content: Text(
-  //         error,
-  //         style: TextStyles.font15DarkBlueMedium,
-  //       ),
-  //       actions: [
-  //         TextButton(
-  //           onPressed: () {
-  //             context.pop();
-  //           },
-  //           child: Text(
-  //             'Got it',
-  //             style: TextStyles.font14DarkBlueMedium,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 }

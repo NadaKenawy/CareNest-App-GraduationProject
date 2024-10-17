@@ -1,6 +1,6 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
-import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_state.dart';
 import 'package:flutter/material.dart';
@@ -18,17 +18,21 @@ class SignupBlocListener extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            showDialog(
+            AwesomeDialog(
               context: context,
-              builder: (context) => const Center(
+              dialogType: DialogType.noHeader,
+              animType: AnimType.scale,
+              body: const Center(
                 child: CircularProgressIndicator(
                   color: ColorsManager.primaryBlueColor,
                 ),
               ),
-            );
+              dismissOnTouchOutside: false,
+              dismissOnBackKeyPress: false,
+            ).show();
           },
           success: (signupResponse) {
-            context.pop();
+            context.pop(); // Close the loading dialog
             // showSuccessDialog(context);
             GoRouter.of(context).push(AppRouter.kVerifyAccountScreen);
           },
@@ -42,62 +46,32 @@ class SignupBlocListener extends StatelessWidget {
   }
 
   void showSuccessDialog(BuildContext context) {
-    showDialog(
+    AwesomeDialog(
       context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Signup Successful'),
-          content: const SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('Congratulations, you have signed up successfully!'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.blue,
-                disabledForegroundColor: Colors.grey.withOpacity(0.38),
-              ),
-              onPressed: () {
-                GoRouter.of(context).push(AppRouter.kLoginScreen);
-              },
-              child: const Text('Continue'),
-            ),
-          ],
-        );
+      dialogType: DialogType.success,
+      animType: AnimType.scale,
+      title: 'Signup Successful',
+      desc: 'Congratulations, you have signed up successfully!',
+      btnOkText: 'Continue',
+      btnOkOnPress: () {
+        GoRouter.of(context).push(AppRouter.kLoginScreen);
       },
-    );
+      btnOkColor: ColorsManager.primaryBlueColor,
+    ).show();
   }
 
   void setupErrorState(BuildContext context, String error) {
-    Navigator.of(context).pop();
-    showDialog(
+    context.pop(); // Close any previous dialog if open
+
+    AwesomeDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        icon: const Icon(
-          Icons.error,
-          color: Colors.red,
-          size: 32,
-        ),
-        content: Text(
-          error,
-          style: TextStyles.font15DarkBlueMedium,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              context.pop();
-            },
-            child: Text(
-              'Got it',
-              style: TextStyles.font14DarkBlueMedium,
-            ),
-          ),
-        ],
-      ),
-    );
+      dialogType: DialogType.error,
+      animType: AnimType.scale,
+      title: 'Error',
+      desc: error,
+      btnOkText: 'Got it',
+      btnOkOnPress: () {}, // Close dialog on press
+      btnOkColor: ColorsManager.primaryBlueColor,
+    ).show();
   }
 }

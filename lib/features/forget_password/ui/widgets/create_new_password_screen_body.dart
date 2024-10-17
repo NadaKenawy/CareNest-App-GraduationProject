@@ -1,5 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api
-
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:care_nest/core/helpers/app_regex.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
@@ -89,7 +88,7 @@ class _CreateNewPasswordScreenBodyState
                   if (value.length < 8) {
                     passwordHasError = true;
                     setState(() {});
-                    return 'password must be at least 8 characters';
+                    return 'Password must be at least 8 characters';
                   }
                   if (!AppRegex.isPasswordValid(value)) {
                     passwordHasError = true;
@@ -176,18 +175,15 @@ class _CreateNewPasswordScreenBodyState
   }
 
   void showErrorDialog(BuildContext context, String message) {
-    showDialog(
+    AwesomeDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Error"),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text("OK"),
-          ),
-        ],
-      ),
-    );
+      dialogType: DialogType.error,
+      animType: AnimType.scale,
+      title: 'Error',
+      desc: message,
+      btnOkText: 'Got it',
+      btnOkOnPress: () {},
+      btnOkColor: ColorsManager.primaryBlueColor,
+    ).show();
   }
 }
