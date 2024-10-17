@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/widgets/alternativeaction_whenhaveaccount.dart';
@@ -10,7 +9,6 @@ import 'package:care_nest/features/sign_up/ui/widgets/verify_account_bloc_listen
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class VerifyAccountScreenBody extends StatelessWidget {
   const VerifyAccountScreenBody({super.key});
@@ -99,7 +97,7 @@ class VerifyAccountScreenBody extends StatelessWidget {
             SizedBox(height: 48.h),
             AlternativeActionWhenHaveAccount(
               onTap: () {
-                GoRouter.of(context).push(AppRouter.kLoginScreen);
+                Navigator.pop(context);
               },
               textLabel: "Didn’t receive the code?",
               textButtonLabel: "Resend code",

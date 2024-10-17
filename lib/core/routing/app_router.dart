@@ -58,10 +58,14 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kVerifyPasswordScreen,
-        builder: (context, state) => BlocProvider(
-          create: (context) => getIt<VerifyPasswordCubit>(),
-          child: const VerifyPassword(),
-        ),
+        builder: (context, state) => MultiBlocProvider(providers: [
+          BlocProvider(
+            create: (context) => getIt<VerifyPasswordCubit>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<ForgetPasswordCubit>(),
+          ),
+        ], child: const VerifyPassword()),
       ),
       GoRoute(
         path: kCreateNewPasswordScreen,
