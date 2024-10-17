@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:care_nest/core/helpers/app_regex.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
@@ -90,12 +91,10 @@ class _CreateNewPasswordScreenBodyState
                     setState(() {});
                     return 'password must be at least 8 characters';
                   }
-                  if (!RegExp(
-                          r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$')
-                      .hasMatch(value)) {
+                  if (!AppRegex.isPasswordValid(value)) {
                     passwordHasError = true;
                     setState(() {});
-                    return 'Password must be at least 8 characters, have at least one capital letter, one small letter, one digit, and one special character';
+                    return 'Password must include an uppercase letter, lowercase letter, number, and special character.';
                   }
                   passwordHasError = false;
                   setState(() {});

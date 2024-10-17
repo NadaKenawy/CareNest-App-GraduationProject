@@ -1,3 +1,4 @@
+import 'package:care_nest/core/helpers/success_snack_bar.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
@@ -31,6 +32,7 @@ class CreateNewPasswordBlocListener extends StatelessWidget {
           success: (createNewPasswordRepo) {
             Navigator.of(context).pop();
             GoRouter.of(context).push(AppRouter.kLoginScreen);
+            successSnackBar(context, 'Password updated successfully');
           },
           error: (error) {
             setupErrorState(context, error);

@@ -1,3 +1,4 @@
+import 'package:care_nest/core/helpers/success_snack_bar.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
@@ -30,6 +31,7 @@ class VerifyPassBlocListner extends StatelessWidget {
           success: (forgetPassRepo) {
             Navigator.of(context).pop();
             GoRouter.of(context).push(AppRouter.kCreateNewPasswordScreen);
+            successSnackBar(context, 'Success');
           },
           error: (error) {
             setupErrorState(context, error);

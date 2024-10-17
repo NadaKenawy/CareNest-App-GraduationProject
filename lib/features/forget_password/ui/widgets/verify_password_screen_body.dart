@@ -99,7 +99,7 @@ class VerifyPasswordScreenBody extends StatelessWidget {
             SizedBox(height: 48.h),
             AlternativeActionWhenHaveAccount(
               onTap: () {
-                GoRouter.of(context).push(AppRouter.kLoginScreen);
+                GoRouter.of(context).push(AppRouter.kForgetPassScreen);
               },
               textLabel: "Don’t receive code?",
               textButtonLabel: "Resend code",
