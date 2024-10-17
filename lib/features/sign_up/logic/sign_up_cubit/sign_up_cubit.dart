@@ -32,7 +32,7 @@ class SignupCubit extends Cubit<SignupState> {
   }
 
   void emitSignupStates() async {
-    emit(const SignupState.signupLoading());
+    emit(const SignupState.loading());
 
     final response = await _signupRepo.signup(
       SignupRequestBody(
@@ -44,12 +44,17 @@ class SignupCubit extends Cubit<SignupState> {
         dateOfBirthOfMam: dateOfBirthController.text,
       ),
     );
-    response.when(success: (signupResponse) async {
-      await saveUserToken(signupResponse.token ?? '');
-      emit(SignupState.signupSuccess(signupResponse));
-    }, failure: (error) {
-      emit(SignupState.signupError(error: error.apiErrorModel.message));
-    });
+    response.when(
+      success: (signupResponse) async {
+        await saveUserToken(signupResponse.token ?? '');
+        emit(SignupState.success(signupResponse));
+      },
+      failure: (error) {
+        log("Sign Error");
+        emit(SignupState.error(
+            error: error.signUpErrorModel.errors!.first.msg ?? ''));
+      },
+    );
   }
 
   Future<void> saveUserToken(String token) async {

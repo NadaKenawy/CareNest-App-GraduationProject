@@ -2,8 +2,6 @@ import 'package:care_nest/core/helpers/success_snack_bar.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
-import 'package:care_nest/features/forget_password/data/models/verify_password_model/verify_password_response.dart';
-import 'package:care_nest/features/forget_password/data/repos/verify_password_repo.dart';
 import 'package:care_nest/features/forget_password/logic/verify_password_cubit/verify_password_cubit.dart';
 import 'package:care_nest/features/forget_password/logic/verify_password_cubit/verify_password_state.dart';
 import 'package:flutter/material.dart';
