@@ -6,7 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/networking/dio_factory.dart';
-import 'package:care_nest/features/sign_up/data/models/sign_up_request_body.dart';
+import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_request_body.dart';
 import 'package:care_nest/features/sign_up/data/repos/sign_up_repo.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_state.dart';
 import 'package:flutter/material.dart';

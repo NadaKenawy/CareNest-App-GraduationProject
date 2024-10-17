@@ -3,8 +3,8 @@ import 'package:care_nest/core/widgets/app_bar_title.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/verfiy_account_screen_body.dart';
 import 'package:flutter/material.dart';
 
-class VerfiyAccountScreen extends StatelessWidget {
-  const VerfiyAccountScreen({super.key});
+class VerifyAccountScreen extends StatelessWidget {
+  const VerifyAccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

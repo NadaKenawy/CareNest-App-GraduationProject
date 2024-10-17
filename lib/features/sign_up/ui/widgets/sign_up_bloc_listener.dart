@@ -32,7 +32,7 @@ class SignupBlocListener extends StatelessWidget {
           signupSuccess: (signupResponse) {
             context.pop();
             // showSuccessDialog(context);
-            GoRouter.of(context).push(AppRouter.kVerfiyAccountScreen);
+            GoRouter.of(context).push(AppRouter.kVerifyAccountScreen);
           },
           signupError: (error) {
             setupErrorState(context, error);

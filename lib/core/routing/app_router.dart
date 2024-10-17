@@ -10,6 +10,7 @@ import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:care_nest/features/login/ui/login_screen.dart';
 import 'package:care_nest/features/on_boarding_screen.dart/on_boarding_screen.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
+import 'package:care_nest/features/sign_up/logic/verfiy_account_cubit/verify_account_cubit.dart';
 import 'package:care_nest/features/sign_up/ui/sign_up_screen.dart';
 import 'package:care_nest/features/sign_up/ui/verfiy_account_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +24,7 @@ abstract class AppRouter {
   static const kForgetPassScreen = '/forgetPassScreen';
   static const kVerifyPasswordScreen = '/verifyPasswordScreen';
   static const kCreateNewPasswordScreen = '/createNewPasswordScreen';
-  static const kVerfiyAccountScreen = '/verfiyAccountScreen';
+  static const kVerifyAccountScreen = '/verifyAccountScreen';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -70,8 +71,11 @@ abstract class AppRouter {
         ),
       ),
       GoRoute(
-        path: kVerfiyAccountScreen,
-        builder: (context, state) => const VerfiyAccountScreen(),
+        path: kVerifyAccountScreen,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<VerifyAccountCubit>(),
+          child: const VerifyAccountScreen(),
+        ),
       ),
     ],
   );

@@ -2,20 +2,20 @@
 
 // ignore_for_file: unused_element
 
-part of 'forget_pass_email_request_body.dart';
+part of 'verify_account_request_body.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ForgetPassEmailRequestBody _$ForgetPassEmailRequestBodyFromJson(
+VerifyAccountRequestBody _$VerifyAccountRequestBodyFromJson(
         Map<String, dynamic> json) =>
-    ForgetPassEmailRequestBody(
-      email: json['Email'] as String,
+    VerifyAccountRequestBody(
+      code: json['code'] as String,
     );
 
-Map<String, dynamic> _$ForgetPassEmailRequestBodyToJson(
-        ForgetPassEmailRequestBody instance) =>
+Map<String, dynamic> _$VerifyAccountRequestBodyToJson(
+        VerifyAccountRequestBody instance) =>
     <String, dynamic>{
-      'Email': instance.email,
+      'code': instance.code,
     };

@@ -1,8 +1,8 @@
 import 'package:care_nest/core/networking/api_error_handler.dart';
 import 'package:care_nest/core/networking/api_result.dart';
 import 'package:care_nest/core/networking/api_service.dart';
-import 'package:care_nest/features/sign_up/data/models/sign_up_request_body.dart';
-import 'package:care_nest/features/sign_up/data/models/sign_up_response.dart';
+import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_request_body.dart';
+import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_response.dart';
 
 class SignupRepo {
   final ApiService _apiService;

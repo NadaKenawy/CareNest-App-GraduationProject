@@ -9,7 +9,9 @@ import 'package:care_nest/features/forget_password/logic/verify_password_cubit/v
 import 'package:care_nest/features/login/data/repos/login_repo.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:care_nest/features/sign_up/data/repos/sign_up_repo.dart';
+import 'package:care_nest/features/sign_up/data/repos/verify_account_repo.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
+import 'package:care_nest/features/sign_up/logic/verfiy_account_cubit/verify_account_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -44,4 +46,9 @@ Future<void> setupGetIt() async {
       () => CreateNewPasswordRepo(getIt()));
   getIt.registerFactory<CreateNewPasswordCubit>(
       () => CreateNewPasswordCubit(getIt()));
+
+  // verify account
+  getIt.registerLazySingleton<VerifyAccountRepo>(
+      () => VerifyAccountRepo(getIt()));
+  getIt.registerFactory<VerifyAccountCubit>(() => VerifyAccountCubit(getIt()));
 }

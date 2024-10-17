@@ -6,8 +6,10 @@ import 'package:care_nest/features/forget_password/data/models/verify_password_m
 import 'package:care_nest/features/forget_password/data/models/verify_password_model/verify_password_response.dart';
 import 'package:care_nest/features/login/data/models/login_request_body.dart';
 import 'package:care_nest/features/login/data/models/login_response.dart';
-import 'package:care_nest/features/sign_up/data/models/sign_up_request_body.dart';
-import 'package:care_nest/features/sign_up/data/models/sign_up_response.dart';
+import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_request_body.dart';
+import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_response.dart';
+import 'package:care_nest/features/sign_up/data/models/verify_account_model/verify_account_request_body.dart';
+import 'package:care_nest/features/sign_up/data/models/verify_account_model/verify_account_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
@@ -41,5 +43,10 @@ abstract class ApiService {
   Future<void> createNewPassword(
     @Header('Authorization') String token,
     @Body() CreateNewPasswordRequestBody createNewPasswordRequestBody,
+  );
+    @POST(ApiConstants.verifyPassword)
+  Future<VerifyAccountResponse> verifyAccount(
+    @Body() VerifyAccountRequestBody verifyAccountRequestBody,
+    @Header('Authorization') String token,
   );
 }

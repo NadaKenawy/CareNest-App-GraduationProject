@@ -1,21 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sign_up_response.dart';
+// ignore_for_file: unused_element
+
+part of 'verify_account_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SignupResponse _$SignupResponseFromJson(Map<String, dynamic> json) =>
-    SignupResponse(
+VerifyAccountResponse _$VerifyAccountResponseFromJson(
+        Map<String, dynamic> json) =>
+    VerifyAccountResponse(
       status: json['status'] as String?,
-      message: json['message'] as String?,
       token: json['token'] as String?,
     );
 
-Map<String, dynamic> _$SignupResponseToJson(SignupResponse instance) =>
+Map<String, dynamic> _$VerifyAccountResponseToJson(
+        VerifyAccountResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
-      'message': instance.message,
       'token': instance.token,
     };
