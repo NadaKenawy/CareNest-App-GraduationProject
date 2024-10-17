@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/networking/dio_factory.dart';
@@ -8,6 +7,7 @@ import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_req
 import 'package:care_nest/features/sign_up/data/repos/sign_up_repo.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignupCubit extends Cubit<SignupState> {
   final SignupRepo _signupRepo;
@@ -29,7 +29,8 @@ class SignupCubit extends Cubit<SignupState> {
     }
   }
 
-  void emitSignupStates() async {
+  // تحميل البيانات المحفوظة من الـ SharedPreferences
+  Future<void> loadSavedUserData() async {
     String? savedFirstName =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userFirstName);
     String? savedLastName =
@@ -42,57 +43,58 @@ class SignupCubit extends Cubit<SignupState> {
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userPassword);
     String? savedPasswordConfirm = await SharedPrefHelper.getSecuredString(
         SharedPrefKeys.userPasswordConfirm);
+
+    // تحميل البيانات في الـ controllers
+    if (firstNameController.text.isEmpty && savedFirstName != null) {
+      firstNameController.text = savedFirstName;
+    }
+    if (lastNameController.text.isEmpty && savedLastName != null) {
+      lastNameController.text = savedLastName;
+    }
+    if (emailController.text.isEmpty && savedEmail != null) {
+      emailController.text = savedEmail;
+    }
+    if (dateOfBirthController.text.isEmpty && savedDateOfBirth != null) {
+      dateOfBirthController.text = savedDateOfBirth;
+    }
+    if (passwordController.text.isEmpty && savedPassword != null) {
+      passwordController.text = savedPassword;
+    }
+    if (passwordConfirmController.text.isEmpty &&
+        savedPasswordConfirm != null) {
+      passwordConfirmController.text = savedPasswordConfirm;
+    }
+
+    log("Loaded Data: FirstName: $savedFirstName, LastName: $savedLastName, Email: $savedEmail, Password: $savedPassword, PasswordConfirm: $savedPasswordConfirm, Date of Birth: $savedDateOfBirth");
+  }
+
+  // دالة لاستدعاء sign up مع تحميل البيانات المحفوظة قبل التنفيذ
+  void emitSignupStates() async {
+    await loadSavedUserData(); // تحميل البيانات المحفوظة قبل تنفيذ أي شيء
+
     emit(const SignupState.loading());
 
     final response = await _signupRepo.signup(
       SignupRequestBody(
-        firstName: savedFirstName != null && savedFirstName.isNotEmpty
-            ? savedFirstName
-            : firstNameController.text,
-        lastName: savedLastName != null && savedLastName.isNotEmpty
-            ? savedLastName
-            : lastNameController.text,
-        email: savedEmail != null && savedEmail.isNotEmpty
-            ? savedEmail
-            : emailController.text,
-        password: savedPassword != null && savedPassword.isNotEmpty
-            ? savedPassword
-            : passwordController.text,
-        passwordConfirm:
-            savedPasswordConfirm != null && savedPasswordConfirm.isNotEmpty
-                ? savedPasswordConfirm
-                : passwordConfirmController.text,
-        dateOfBirthOfMam:
-            savedDateOfBirth != null && savedDateOfBirth.isNotEmpty
-                ? savedDateOfBirth
-                : dateOfBirthController.text,
+        firstName: firstNameController.text,
+        lastName: lastNameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+        passwordConfirm: passwordConfirmController.text,
+        dateOfBirthOfMam: dateOfBirthController.text,
       ),
     );
 
     response.when(
       success: (signupResponse) async {
-        if (savedFirstName == null ||
-            savedFirstName.isEmpty ||
-            savedLastName == null ||
-            savedLastName.isEmpty ||
-            savedEmail == null ||
-            savedEmail.isEmpty ||
-            savedPassword == null ||
-            savedPassword.isEmpty ||
-            savedPasswordConfirm == null ||
-            savedPasswordConfirm.isEmpty ||
-            savedDateOfBirth == null ||
-            savedDateOfBirth.isEmpty) {
-          await saveUserData(
-            firstName: firstNameController.text,
-            lastName: lastNameController.text,
-            email: emailController.text,
-            password: passwordController.text,
-            passwordConfirm: passwordConfirmController.text,
-            dateOfBirth: dateOfBirthController.text,
-          );
-        }
-
+        await saveUserData(
+          firstName: firstNameController.text,
+          lastName: lastNameController.text,
+          email: emailController.text,
+          password: passwordController.text,
+          passwordConfirm: passwordConfirmController.text,
+          dateOfBirth: dateOfBirthController.text,
+        );
         await saveUserToken(signupResponse.token ?? '');
         emit(SignupState.success(signupResponse));
       },

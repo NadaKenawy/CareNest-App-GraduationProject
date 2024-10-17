@@ -20,7 +20,7 @@ class ForgetPassBlocListner extends StatelessWidget {
           loading: () {
             showDialog(
               context: context,
-              barrierDismissible: false, 
+              barrierDismissible: false,
               builder: (context) => const Center(
                 child: CircularProgressIndicator(
                   color: ColorsManager.primaryBlueColor,
@@ -29,19 +29,8 @@ class ForgetPassBlocListner extends StatelessWidget {
             );
           },
           success: (forgetPassRepo) {
-            Navigator.of(context).pop(); 
-            GoRouter.of(context).push(AppRouter
-                .kVerifyPasswordScreen); 
-            AwesomeDialog(
-              context: context,
-              dialogType: DialogType.success,
-              animType: AnimType.scale,
-              title: 'Success',
-              desc: 'Reset code sent to email',
-              btnOkText: 'OK',
-              btnOkOnPress: () {}, 
-              btnOkColor: ColorsManager.primaryBlueColor,
-            ).show();
+            Navigator.of(context).pop();
+            GoRouter.of(context).push(AppRouter.kVerifyPasswordScreen);
           },
           error: (error) {
             setupErrorState(context, error);
@@ -53,7 +42,7 @@ class ForgetPassBlocListner extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, String error) {
-    Navigator.of(context).pop(); 
+    Navigator.of(context).pop();
     AwesomeDialog(
       context: context,
       dialogType: DialogType.error,
@@ -61,7 +50,7 @@ class ForgetPassBlocListner extends StatelessWidget {
       title: 'Error',
       desc: error,
       btnOkText: 'Got it',
-      btnOkOnPress: () {}, 
+      btnOkOnPress: () {},
       btnOkColor: ColorsManager.primaryBlueColor,
     ).show();
   }

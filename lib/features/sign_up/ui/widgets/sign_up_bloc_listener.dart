@@ -24,7 +24,6 @@ class SignupBlocListener extends StatelessWidget {
           success: (signupResponse) {
             // Close the loading dialog
             Navigator.of(context).pop();
-            showSuccessDialog(context);
             GoRouter.of(context).push(AppRouter.kVerifyAccountScreen);
           },
           error: (error) {
@@ -39,10 +38,10 @@ class SignupBlocListener extends StatelessWidget {
   void showLoadingIndicator(BuildContext context) {
     showDialog(
       context: context,
-      barrierDismissible: false, 
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return const Dialog(
-          backgroundColor: Colors.transparent, 
+          backgroundColor: Colors.transparent,
           child: Center(
             child: CircularProgressIndicator(
               color: ColorsManager.primaryBlueColor,
@@ -68,7 +67,7 @@ class SignupBlocListener extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, String error) {
-    Navigator.of(context).pop(); 
+    Navigator.of(context).pop();
     AwesomeDialog(
       context: context,
       dialogType: DialogType.error,

@@ -105,7 +105,7 @@ class VerifyAccountScreenBody extends StatelessWidget {
                   animType: AnimType.scale,
                   title: 'Code Sent Successfully',
                   desc:
-                      'The verification code has been successfully resent to your email.',
+                      'The verification code has been successfully resend to your email.',
                   btnOkOnPress: () {},
                   btnOkColor: ColorsManager.primaryBlueColor,
                 ).show();
