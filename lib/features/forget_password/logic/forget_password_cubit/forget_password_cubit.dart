@@ -18,15 +18,23 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   final formKey = GlobalKey<FormState>();
 
   void emitForgetPasswordStates() async {
+    String? savedEmail =
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.userEmail);
     emit(const ForgetPasswordState.loading());
+
     final response = await _forgetPassRepo.forget(
       ForgetPassEmailRequestBody(
-        email: emailController.text,
+        email: savedEmail != null && savedEmail.isNotEmpty
+            ? savedEmail
+            : emailController.text,
       ),
     );
     response.when(
       success: (forgetPassResponse) async {
         await saveUserToken(forgetPassResponse.token ?? '');
+        if (savedEmail == null || savedEmail.isEmpty) {
+          await saveEmail();
+        }
         emit(ForgetPasswordState.success(forgetPassResponse));
       },
       failure: (error) {
@@ -39,5 +47,11 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     await SharedPrefHelper.setSecuredString(SharedPrefKeys.userToken, token);
     DioFactory.setTokenIntoHeaderAfterSignUp(token);
     log("Saved Token: ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken)}");
+  }
+
+  Future<void> saveEmail() async {
+    await SharedPrefHelper.setSecuredString(
+        SharedPrefKeys.userEmail, emailController.text);
+    log("Saved Email: ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.userEmail)}");
   }
 }

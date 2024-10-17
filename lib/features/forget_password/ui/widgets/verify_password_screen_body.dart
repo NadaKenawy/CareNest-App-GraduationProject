@@ -1,16 +1,15 @@
 import 'dart:developer';
-import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/widgets/alternativeaction_whenhaveaccount.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
+import 'package:care_nest/features/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
 import 'package:care_nest/features/forget_password/logic/verify_password_cubit/verify_password_cubit.dart';
 import 'package:care_nest/features/forget_password/ui/widgets/verify_password_bloc_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class VerifyPasswordScreenBody extends StatelessWidget {
   const VerifyPasswordScreenBody({super.key});
@@ -99,7 +98,7 @@ class VerifyPasswordScreenBody extends StatelessWidget {
             SizedBox(height: 48.h),
             AlternativeActionWhenHaveAccount(
               onTap: () {
-                GoRouter.of(context).push(AppRouter.kForgetPassScreen);
+                context.read<ForgetPasswordCubit>().emitForgetPasswordStates();
               },
               textLabel: "Don’t receive code?",
               textButtonLabel: "Resend code",
