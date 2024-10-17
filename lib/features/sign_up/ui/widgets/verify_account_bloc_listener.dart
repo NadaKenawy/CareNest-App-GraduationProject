@@ -28,7 +28,7 @@ class VerifyAccountBlocListner extends StatelessWidget {
               ),
             );
           },
-          success: (signupResponse) {
+          success: (verifyAccountResponse) {
             Navigator.of(context).pop();
             GoRouter.of(context).push(AppRouter.kLoginScreen);
           },

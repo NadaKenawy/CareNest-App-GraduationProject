@@ -39,8 +39,8 @@ class VerifyPasswordCubit extends Cubit<VerifyPasswordState> {
       token,
     );
     response.when(
-      success: (forgetPassResponse) async {
-        emit(VerifyPasswordState.success(forgetPassResponse));
+      success: (verifyPasswordResponse) async {
+        emit(VerifyPasswordState.success(verifyPasswordResponse));
       },
       failure: (error) {
         emit(VerifyPasswordState.error(error: error.apiErrorModel.message));

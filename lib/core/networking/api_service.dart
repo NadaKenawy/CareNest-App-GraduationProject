@@ -39,12 +39,12 @@ abstract class ApiService {
     @Body() VerifyPasswordRequestBody verifyPasswordRequestBody,
     @Header('Authorization') String token,
   );
-  @PUT('auth/resetpassword')
+  @PUT(ApiConstants.resetPassword)
   Future<void> createNewPassword(
     @Header('Authorization') String token,
     @Body() CreateNewPasswordRequestBody createNewPasswordRequestBody,
   );
-    @POST(ApiConstants.verifyPassword)
+  @POST(ApiConstants.verifyAccount)
   Future<VerifyAccountResponse> verifyAccount(
     @Body() VerifyAccountRequestBody verifyAccountRequestBody,
     @Header('Authorization') String token,

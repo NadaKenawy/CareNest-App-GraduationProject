@@ -10,10 +10,12 @@ class VerifyPasswordRepo {
   VerifyPasswordRepo(this._apiService);
 
   Future<ApiResult<VerifyPasswordResponse>> forget(
-      VerifyPasswordRequestBody verifyPasswordRequestBody , String token) async {
+      VerifyPasswordRequestBody verifyPasswordRequestBody, String token) async {
     try {
-      final response =
-          await _apiService.verifyPassword(verifyPasswordRequestBody,  token,);
+      final response = await _apiService.verifyPassword(
+        verifyPasswordRequestBody,
+        token,
+      );
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));

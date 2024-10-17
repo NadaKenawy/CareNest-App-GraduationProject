@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/features/sign_up/data/models/verify_account_model/verify_account_request_body.dart';
@@ -7,9 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VerifyAccountCubit extends Cubit<VerifyAccountState> {
-  VerifyAccountCubit(this._verifyPasswordRepo)
+  VerifyAccountCubit(this._verifyAccountRepo)
       : super(const VerifyAccountState.initial());
-  final VerifyAccountRepo _verifyPasswordRepo;
+  final VerifyAccountRepo _verifyAccountRepo;
 
   TextEditingController otpField1Controller = TextEditingController();
   TextEditingController otpField2Controller = TextEditingController();
@@ -32,15 +34,16 @@ class VerifyAccountCubit extends Cubit<VerifyAccountState> {
 
     String token =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
-    final response = await _verifyPasswordRepo.forget(
+    log("JWT Token: $token");
+    final response = await _verifyAccountRepo.verify(
       VerifyAccountRequestBody(
         code: completeCode,
       ),
       token,
     );
     response.when(
-      success: (signupResponse) async {
-        emit(VerifyAccountState.success(signupResponse));
+      success: (verifyAccountResponse) async {
+        emit(VerifyAccountState.success(verifyAccountResponse));
       },
       failure: (error) {
         emit(VerifyAccountState.error(error: error.apiErrorModel.message));

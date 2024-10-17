@@ -6,6 +6,7 @@ import 'package:care_nest/core/widgets/alternativeaction_whenhaveaccount.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
 import 'package:care_nest/features/sign_up/logic/verfiy_account_cubit/verify_account_cubit.dart';
+import 'package:care_nest/features/sign_up/ui/widgets/verify_account_bloc_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -93,8 +94,6 @@ class VerifyAccountScreenBody extends StatelessWidget {
                 if (!validateThenVerify(context)) {
                   return;
                 }
-
-                GoRouter.of(context).push(AppRouter.kLoginScreen);
               },
             ),
             SizedBox(height: 48.h),
@@ -105,6 +104,7 @@ class VerifyAccountScreenBody extends StatelessWidget {
               textLabel: "Didn’t receive the code?",
               textButtonLabel: "Resend code",
             ),
+            const VerifyAccountBlocListner(),
           ],
         ),
       ),

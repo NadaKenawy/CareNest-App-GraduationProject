@@ -9,7 +9,7 @@ class VerifyAccountRepo {
 
   VerifyAccountRepo(this._apiService);
 
-  Future<ApiResult<VerifyAccountResponse>> forget(
+  Future<ApiResult<VerifyAccountResponse>> verify(
       VerifyAccountRequestBody verifyAccountRequestBody, String token) async {
     try {
       final response = await _apiService.verifyAccount(
