@@ -212,7 +212,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          'auth/verifycode',
+          'auth/verifyEmailUser',
           queryParameters: queryParameters,
           data: _data,
         )
