@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/widgets/alternativeaction_whenhaveaccount.dart';
@@ -12,7 +11,6 @@ import 'package:care_nest/features/forget_password/ui/widgets/verify_password_bl
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class VerifyPasswordScreenBody extends StatelessWidget {
   const VerifyPasswordScreenBody({super.key});
@@ -138,9 +136,7 @@ class VerifyPasswordScreenBody extends StatelessWidget {
                   title: 'Code Sent Successfully',
                   desc:
                       'The verification code has been successfully resent to your email.',
-                  btnOkOnPress: () {
-                    GoRouter.of(context).go(AppRouter.kVerifyPasswordScreen);
-                  },
+                  btnOkOnPress: () {},
                   btnOkColor: ColorsManager.primaryBlueColor,
                 ).show();
                 context.read<ForgetPasswordCubit>().emitForgetPasswordStates();
