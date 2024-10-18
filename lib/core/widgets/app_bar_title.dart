@@ -9,27 +9,21 @@ class AppBarTittle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      text: const TextSpan(
-        children: [
-          TextSpan(
-            text: "Care",
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeightHelper.bold,
-              color: ColorsManager.primaryBlueColor,
-            ),
-          ),
-          TextSpan(
-            text: "Nest",
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeightHelper.bold,
-              color: ColorsManager.primaryPinkColor,
-            ),
-          ),
-        ],
+    return const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Text(
+        "Welcome to Care",
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeightHelper.bold,
+          color: ColorsManager.primaryBlueColor,
+        ),
       ),
-    );
+      Text("Nest",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeightHelper.bold,
+            color: ColorsManager.primaryPinkColor,
+          ))
+    ]);
   }
 }
