@@ -9,7 +9,7 @@ class AppBarTittle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+    return const Row(children: [
       Text(
         "Welcome to Care",
         style: TextStyle(
