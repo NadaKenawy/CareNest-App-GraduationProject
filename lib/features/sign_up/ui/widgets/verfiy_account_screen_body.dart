@@ -125,6 +125,9 @@ class VerifyAccountScreenBody extends StatelessWidget {
                 if (!validateThenVerify(context)) {
                   return;
                 }
+
+                // استدعاء الدالة لمسح الحقول بعد الضغط على زر "Verify Account"
+                clearOtpFields(verifyAccountCubit);
               },
             ),
             SizedBox(height: 48.h),
@@ -137,7 +140,9 @@ class VerifyAccountScreenBody extends StatelessWidget {
                   title: 'Code Sent Successfully',
                   desc:
                       'The verification code has been successfully resend to your email.',
-                  btnOkOnPress: () {},
+                  btnOkOnPress: () {
+                    clearOtpFields(verifyAccountCubit);
+                  },
                   btnOkColor: ColorsManager.primaryBlueColor,
                 ).show();
                 context.read<SignupCubit>().emitSignupStates();
@@ -188,5 +193,14 @@ class VerifyAccountScreenBody extends StatelessWidget {
       return true;
     }
     return false;
+  }
+
+  void clearOtpFields(VerifyAccountCubit verifyAccountCubit) {
+    verifyAccountCubit.otpField1Controller.clear();
+    verifyAccountCubit.otpField2Controller.clear();
+    verifyAccountCubit.otpField3Controller.clear();
+    verifyAccountCubit.otpField4Controller.clear();
+    verifyAccountCubit.otpField5Controller.clear();
+    verifyAccountCubit.otpField6Controller.clear();
   }
 }

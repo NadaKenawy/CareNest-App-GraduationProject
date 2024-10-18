@@ -124,6 +124,9 @@ class VerifyPasswordScreenBody extends StatelessWidget {
                 if (!validateThenVerify(context)) {
                   return;
                 }
+
+                // Clear the OTP fields after sending the code
+                _clearOtpFields(verifyPasswordCubit);
               },
             ),
             SizedBox(height: 48.h),
@@ -136,7 +139,9 @@ class VerifyPasswordScreenBody extends StatelessWidget {
                   title: 'Code Sent Successfully',
                   desc:
                       'The verification code has been successfully resent to your email.',
-                  btnOkOnPress: () {},
+                  btnOkOnPress: () {
+                    _clearOtpFields(verifyPasswordCubit);
+                  },
                   btnOkColor: ColorsManager.primaryBlueColor,
                 ).show();
                 context.read<ForgetPasswordCubit>().emitForgetPasswordStates();
@@ -176,6 +181,15 @@ class VerifyPasswordScreenBody extends StatelessWidget {
         }
       },
     );
+  }
+
+  void _clearOtpFields(VerifyPasswordCubit cubit) {
+    cubit.otpField1Controller.clear();
+    cubit.otpField2Controller.clear();
+    cubit.otpField3Controller.clear();
+    cubit.otpField4Controller.clear();
+    cubit.otpField5Controller.clear();
+    cubit.otpField6Controller.clear();
   }
 
   bool validateThenVerify(BuildContext context) {
