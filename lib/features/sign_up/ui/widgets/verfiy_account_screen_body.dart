@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/widgets/alternativeaction_whenhaveaccount.dart';
@@ -11,6 +12,7 @@ import 'package:care_nest/features/sign_up/ui/widgets/verify_account_bloc_listen
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class VerifyAccountScreenBody extends StatelessWidget {
   const VerifyAccountScreenBody({super.key});
@@ -125,9 +127,6 @@ class VerifyAccountScreenBody extends StatelessWidget {
                 if (!validateThenVerify(context)) {
                   return;
                 }
-
-                // استدعاء الدالة لمسح الحقول بعد الضغط على زر "Verify Account"
-                clearOtpFields(verifyAccountCubit);
               },
             ),
             SizedBox(height: 48.h),
@@ -140,7 +139,9 @@ class VerifyAccountScreenBody extends StatelessWidget {
                   title: 'Code Sent Successfully',
                   desc:
                       'The verification code has been successfully resend to your email.',
-                  btnOkOnPress: () {},
+                  btnOkOnPress: () {
+                    GoRouter.of(context).push(AppRouter.kVerifyAccountScreen);
+                  },
                   btnOkColor: ColorsManager.primaryBlueColor,
                 ).show();
                 context.read<SignupCubit>().emitSignupStates();
@@ -191,14 +192,5 @@ class VerifyAccountScreenBody extends StatelessWidget {
       return true;
     }
     return false;
-  }
-
-  void clearOtpFields(VerifyAccountCubit verifyAccountCubit) {
-    verifyAccountCubit.otpField1Controller.clear();
-    verifyAccountCubit.otpField2Controller.clear();
-    verifyAccountCubit.otpField3Controller.clear();
-    verifyAccountCubit.otpField4Controller.clear();
-    verifyAccountCubit.otpField5Controller.clear();
-    verifyAccountCubit.otpField6Controller.clear();
   }
 }

@@ -51,7 +51,9 @@ class VerifyPassBlocListner extends StatelessWidget {
       title: 'Error',
       desc: error,
       btnOkText: 'Got it',
-      btnOkOnPress: () {},
+      btnOkOnPress: () {
+        GoRouter.of(context).push(AppRouter.kVerifyPasswordScreen);
+      },
       btnOkColor: ColorsManager.primaryBlueColor,
     ).show();
   }

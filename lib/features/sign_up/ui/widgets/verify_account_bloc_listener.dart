@@ -50,7 +50,9 @@ class VerifyAccountBlocListner extends StatelessWidget {
       title: 'Error',
       desc: error,
       btnOkText: 'Got it',
-      btnOkOnPress: () {},
+      btnOkOnPress: () {
+        GoRouter.of(context).push(AppRouter.kVerifyAccountScreen);
+      },
       btnOkColor: ColorsManager.primaryBlueColor,
     ).show();
   }
