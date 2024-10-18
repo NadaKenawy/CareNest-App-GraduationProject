@@ -19,6 +19,13 @@ class VerifyAccountScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final verifyAccountCubit = context.read<VerifyAccountCubit>();
 
+    final otpFocus1 = FocusNode();
+    final otpFocus2 = FocusNode();
+    final otpFocus3 = FocusNode();
+    final otpFocus4 = FocusNode();
+    final otpFocus5 = FocusNode();
+    final otpFocus6 = FocusNode();
+
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 44.h, horizontal: 16.w),
       child: Form(
@@ -50,28 +57,52 @@ class VerifyAccountScreenBody extends StatelessWidget {
             Row(
               children: [
                 Flexible(
-                    child:
-                        _buildOtpField(verifyAccountCubit.otpField1Controller)),
+                    child: _buildOtpField(
+                        context,
+                        verifyAccountCubit.otpField1Controller,
+                        otpFocus1,
+                        null,
+                        otpFocus2)),
                 SizedBox(width: 8.w),
                 Flexible(
-                    child:
-                        _buildOtpField(verifyAccountCubit.otpField2Controller)),
+                    child: _buildOtpField(
+                        context,
+                        verifyAccountCubit.otpField2Controller,
+                        otpFocus2,
+                        otpFocus1,
+                        otpFocus3)),
                 SizedBox(width: 8.w),
                 Flexible(
-                    child:
-                        _buildOtpField(verifyAccountCubit.otpField3Controller)),
+                    child: _buildOtpField(
+                        context,
+                        verifyAccountCubit.otpField3Controller,
+                        otpFocus3,
+                        otpFocus2,
+                        otpFocus4)),
                 SizedBox(width: 8.w),
                 Flexible(
-                    child:
-                        _buildOtpField(verifyAccountCubit.otpField4Controller)),
+                    child: _buildOtpField(
+                        context,
+                        verifyAccountCubit.otpField4Controller,
+                        otpFocus4,
+                        otpFocus3,
+                        otpFocus5)),
                 SizedBox(width: 8.w),
                 Flexible(
-                    child:
-                        _buildOtpField(verifyAccountCubit.otpField5Controller)),
+                    child: _buildOtpField(
+                        context,
+                        verifyAccountCubit.otpField5Controller,
+                        otpFocus5,
+                        otpFocus4,
+                        otpFocus6)),
                 SizedBox(width: 8.w),
                 Flexible(
-                    child:
-                        _buildOtpField(verifyAccountCubit.otpField6Controller)),
+                    child: _buildOtpField(
+                        context,
+                        verifyAccountCubit.otpField6Controller,
+                        otpFocus6,
+                        otpFocus5,
+                        null)), // آخر خانة
               ],
             ),
             SizedBox(height: 36.h),
@@ -121,7 +152,8 @@ class VerifyAccountScreenBody extends StatelessWidget {
     );
   }
 
-  Widget _buildOtpField(TextEditingController controller) {
+  Widget _buildOtpField(BuildContext context, TextEditingController controller,
+      FocusNode currentFocus, FocusNode? previousFocus, FocusNode? nextFocus) {
     return AppTextFormField(
       hintText: '',
       width: 56.w,
@@ -134,6 +166,18 @@ class VerifyAccountScreenBody extends StatelessWidget {
         }
       },
       controller: controller,
+      focusNode: currentFocus,
+      onChanged: (value) {
+        if (value.length == 1) {
+          // إذا أدخل المستخدم حرفًا، انقل التركيز إلى الحقل التالي
+          if (nextFocus != null) {
+            FocusScope.of(context).requestFocus(nextFocus);
+          }
+        } else if (value.isEmpty && previousFocus != null) {
+          // إذا كان الحقل فارغًا، انقل التركيز إلى الحقل السابق
+          FocusScope.of(context).requestFocus(previousFocus);
+        }
+      },
     );
   }
 

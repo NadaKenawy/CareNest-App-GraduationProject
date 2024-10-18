@@ -20,7 +20,9 @@ class AppTextFormField extends StatelessWidget {
     this.hasError = false,
     this.maxLength,
     this.keyboardType,
-    this.textAlign, // إضافة textAlign كخاصية اختيارية
+    this.textAlign,
+    this.focusNode,
+    this.onChanged, // إضافة textAlign كخاصية اختيارية
   });
 
   final EdgeInsetsGeometry? contentPadding;
@@ -39,7 +41,8 @@ class AppTextFormField extends StatelessWidget {
   final int? maxLength;
   final TextInputType? keyboardType;
   final TextAlign? textAlign;
-
+  final FocusNode? focusNode;
+  final Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     Color textColor = hasError ? Colors.red : ColorsManager.primaryBlueColor;
@@ -91,6 +94,8 @@ class AppTextFormField extends StatelessWidget {
         validator: (value) {
           return validator!(value);
         },
+        focusNode: focusNode,
+        onChanged: onChanged,
       ),
     );
   }

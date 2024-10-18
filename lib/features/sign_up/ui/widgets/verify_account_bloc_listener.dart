@@ -33,7 +33,6 @@ class VerifyAccountBlocListner extends StatelessWidget {
             GoRouter.of(context).push(AppRouter.kLoginScreen);
           },
           error: (error) {
-            Navigator.of(context).pop();
             setupErrorState(context, error);
           },
         );

@@ -20,7 +20,7 @@ class VerifyPassBlocListner extends StatelessWidget {
           loading: () {
             showDialog(
               context: context,
-              barrierDismissible: false, 
+              barrierDismissible: false,
               builder: (context) => const Center(
                 child: CircularProgressIndicator(
                   color: ColorsManager.primaryBlueColor,
@@ -29,20 +29,8 @@ class VerifyPassBlocListner extends StatelessWidget {
             );
           },
           success: (verifyPasswordResponse) {
-            Navigator.of(context).pop(); 
-            GoRouter.of(context).push(AppRouter
-                .kCreateNewPasswordScreen); 
-
-            AwesomeDialog(
-              context: context,
-              dialogType: DialogType.success,
-              animType: AnimType.scale,
-              title: 'Success',
-              desc: 'Verification successful',
-              btnOkText: 'OK',
-              btnOkOnPress: () {}, 
-              btnOkColor: ColorsManager.primaryBlueColor,
-            ).show();
+            Navigator.of(context).pop();
+            GoRouter.of(context).push(AppRouter.kCreateNewPasswordScreen);
           },
           error: (error) {
             setupErrorState(context, error);
@@ -54,7 +42,7 @@ class VerifyPassBlocListner extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, String error) {
-    Navigator.of(context).pop(); 
+    Navigator.of(context).pop();
 
     AwesomeDialog(
       context: context,
