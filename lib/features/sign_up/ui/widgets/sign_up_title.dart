@@ -9,27 +9,26 @@ class SignUpTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      text: const TextSpan(
-        children: [
-          TextSpan(
-            text: "Welcome to Care",
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeightHelper.bold,
-              color: ColorsManager.primaryBlueColor,
-            ),
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "Welcome to Care",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeightHelper.bold,
+            color: ColorsManager.primaryBlueColor,
           ),
-          TextSpan(
-            text: "Nest",
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeightHelper.bold,
-              color: ColorsManager.primaryPinkColor,
-            ),
+        ),
+        Text(
+          "Nest",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeightHelper.bold,
+            color: ColorsManager.primaryPinkColor,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
