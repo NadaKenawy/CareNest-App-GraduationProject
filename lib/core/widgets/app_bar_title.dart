@@ -11,7 +11,7 @@ class AppBarTittle extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Row(children: [
       Text(
-        "Welcome to Care",
+        "Care",
         style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeightHelper.bold,
