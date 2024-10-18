@@ -22,7 +22,7 @@ class AppTextFormField extends StatelessWidget {
     this.keyboardType,
     this.textAlign,
     this.focusNode,
-    this.onChanged, // إضافة textAlign كخاصية اختيارية
+    this.onChanged,
   });
 
   final EdgeInsetsGeometry? contentPadding;
@@ -43,6 +43,7 @@ class AppTextFormField extends StatelessWidget {
   final TextAlign? textAlign;
   final FocusNode? focusNode;
   final Function(String)? onChanged;
+
   @override
   Widget build(BuildContext context) {
     Color textColor = hasError ? Colors.red : ColorsManager.primaryBlueColor;

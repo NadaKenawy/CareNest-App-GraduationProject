@@ -17,10 +17,8 @@ class VerifyPasswordScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // الوصول إلى الـ VerifyPasswordCubit
     final verifyPasswordCubit = context.read<VerifyPasswordCubit>();
 
-    // إنشاء FocusNode لكل خانة OTP
     final otpFocus1 = FocusNode();
     final otpFocus2 = FocusNode();
     final otpFocus3 = FocusNode();
@@ -126,6 +124,9 @@ class VerifyPasswordScreenBody extends StatelessWidget {
                 if (!validateThenVerify(context)) {
                   return;
                 }
+
+                // Clear the OTP fields after sending the code
+                _clearOtpFields(verifyPasswordCubit);
               },
             ),
             SizedBox(height: 48.h),
@@ -137,7 +138,7 @@ class VerifyPasswordScreenBody extends StatelessWidget {
                   animType: AnimType.scale,
                   title: 'Code Sent Successfully',
                   desc:
-                      'The verification code has been successfully resend to your email.',
+                      'The verification code has been successfully resent to your email.',
                   btnOkOnPress: () {},
                   btnOkColor: ColorsManager.primaryBlueColor,
                 ).show();
@@ -170,16 +171,23 @@ class VerifyPasswordScreenBody extends StatelessWidget {
       focusNode: currentFocus,
       onChanged: (value) {
         if (value.length == 1) {
-          // إذا أدخل المستخدم حرفًا، انقل التركيز إلى الحقل التالي
           if (nextFocus != null) {
             FocusScope.of(context).requestFocus(nextFocus);
           }
         } else if (value.isEmpty && previousFocus != null) {
-          // إذا كان الحقل فارغًا، انقل التركيز إلى الحقل السابق
           FocusScope.of(context).requestFocus(previousFocus);
         }
       },
     );
+  }
+
+  void _clearOtpFields(VerifyPasswordCubit cubit) {
+    cubit.otpField1Controller.clear();
+    cubit.otpField2Controller.clear();
+    cubit.otpField3Controller.clear();
+    cubit.otpField4Controller.clear();
+    cubit.otpField5Controller.clear();
+    cubit.otpField6Controller.clear();
   }
 
   bool validateThenVerify(BuildContext context) {
