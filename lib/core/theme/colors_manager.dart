@@ -10,4 +10,5 @@ class ColorsManager {
   static const Color fourthryPinkColor = Color(0xffEFD7DD);
   static const Color fourthryBlueColor = Color(0xffC4DBE4);
   static const Color darkBlue = Color(0xff242424);
+  static const Color white = Color(0xffFFFFFF);
 }

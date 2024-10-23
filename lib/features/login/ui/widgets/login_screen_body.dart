@@ -1,11 +1,11 @@
 import 'package:care_nest/core/routing/app_router.dart';
-import 'package:care_nest/core/theme/colors_manager.dart';
+import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
+import 'package:care_nest/core/widgets/dont_have_an_account.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:care_nest/features/login/ui/widgets/email_and_password.dart';
 import 'package:care_nest/features/login/ui/widgets/login_bloc_listener.dart';
 import 'package:care_nest/features/login/ui/widgets/login_image.dart';
-import 'package:care_nest/core/widgets/alternativeaction_whenhaveaccount.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,7 +27,11 @@ class LoginScreenBody extends StatelessWidget {
               child: Container(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height - 350.h,
-                padding: EdgeInsets.only(top: 24.h, left: 16.w, right: 16.w),
+                padding: EdgeInsets.only(
+                  top: 24.h,
+                  left: 16.w,
+                  right: 16.w,
+                ),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -39,13 +43,11 @@ class LoginScreenBody extends StatelessWidget {
                   children: [
                     Text(
                       'Welcome Back!',
-                      style: TextStyle(
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.w600,
-                        color: ColorsManager.primaryBlueColor,
-                      ),
+                      style: TextStyles.font24PrimaryBlueSemiBold,
                     ),
-                    SizedBox(height: 24.h),
+                    SizedBox(
+                      height: 24.h,
+                    ),
                     const EmailAndPassword(),
                     Align(
                       alignment: Alignment.centerRight,
@@ -56,11 +58,7 @@ class LoginScreenBody extends StatelessWidget {
                         },
                         child: Text(
                           "Forgot Password?",
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w400,
-                            color: ColorsManager.primaryBlueColor,
-                          ),
+                          style: TextStyles.font16PrimaryBlueRegular,
                         ),
                       ),
                     ),
@@ -69,15 +67,12 @@ class LoginScreenBody extends StatelessWidget {
                       onPressed: () {
                         validateThenDoLogin(context);
                       },
-                      textStyle: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                      textStyle: TextStyles.font16WhiteBold,
                     ),
                     SizedBox(
                       height: 12.h,
                     ),
-                    AlternativeActionWhenHaveAccount(
+                    DontHaveAnAccount(
                       onTap: () {
                         GoRouter.of(context).push(AppRouter.kSignUpScreen);
                       },

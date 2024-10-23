@@ -4,7 +4,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:care_nest/core/helpers/app_regex.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
-import 'package:care_nest/core/theme/font_weight_helper.dart';
+import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
 import 'package:care_nest/features/forget_password/logic/create_new_password_cubit/create_new_password_cubit.dart';
@@ -33,7 +33,7 @@ class _CreateNewPasswordScreenBodyState
     final cubit = context.read<CreateNewPasswordCubit>();
 
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 44.h, horizontal: 16.w),
+      padding: EdgeInsets.symmetric(vertical: 30.h, horizontal: 16.w),
       child: SingleChildScrollView(
         child: Form(
           key: cubit.formKey,
@@ -41,36 +41,34 @@ class _CreateNewPasswordScreenBodyState
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 "Create New Password",
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeightHelper.bold,
-                  color: ColorsManager.primaryBlueColor,
-                ),
+                style: TextStyles.font36PrimaryBlueBold,
               ),
-              SizedBox(height: 12.h),
+              SizedBox(
+                height: 12.h,
+              ),
               Padding(
                 padding: EdgeInsets.only(right: 40.w),
-                child: const Text(
+                child: Text(
                   "Your new password must be unique from those previously used",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeightHelper.bold,
-                    color: ColorsManager.secondryBlueColor,
-                  ),
+                  style: TextStyles.font16SecondaryBlueBold,
                 ),
               ),
-              SizedBox(height: 36.h),
+              SizedBox(
+                height: 36.h,
+              ),
               AppTextFormField(
                 hintText: 'New Password',
                 isObscureText: isPasswordObscureText,
                 hasError: passwordHasError,
                 suffixIcon: GestureDetector(
                   onTap: () {
-                    setState(() {
-                      isPasswordObscureText = !isPasswordObscureText;
-                    });
+                    setState(
+                      () {
+                        isPasswordObscureText = !isPasswordObscureText;
+                      },
+                    );
                   },
                   child: Icon(
                     isPasswordObscureText
@@ -103,17 +101,21 @@ class _CreateNewPasswordScreenBodyState
                 },
                 controller: cubit.newPasswordController,
               ),
-              SizedBox(height: 24.h),
+              SizedBox(
+                height: 24.h,
+              ),
               AppTextFormField(
                 hintText: 'Password Confirmation',
                 isObscureText: isPasswordConfirmationObscureText,
                 hasError: confirmPasswordHasError,
                 suffixIcon: GestureDetector(
                   onTap: () {
-                    setState(() {
-                      isPasswordConfirmationObscureText =
-                          !isPasswordConfirmationObscureText;
-                    });
+                    setState(
+                      () {
+                        isPasswordConfirmationObscureText =
+                            !isPasswordConfirmationObscureText;
+                      },
+                    );
                   },
                   child: Icon(
                     isPasswordConfirmationObscureText
@@ -141,13 +143,12 @@ class _CreateNewPasswordScreenBodyState
                 },
                 controller: cubit.passwordConfirmController,
               ),
-              SizedBox(height: 36.h),
+              SizedBox(
+                height: 36.h,
+              ),
               AppTextButton(
                 buttonText: 'Reset Password',
-                textStyle: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
+                textStyle: TextStyles.font16WhiteBold,
                 onPressed: () {
                   validateThenSendCode(context);
                 },

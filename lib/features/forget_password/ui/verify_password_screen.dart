@@ -11,10 +11,12 @@ class VerifyPassword extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
-            color: ColorsManager.primaryBlueColor, size: 28),
+          color: ColorsManager.primaryBlueColor,
+          size: 28,
+        ),
         title: const AppBarTittle(),
       ),
-      body:const VerifyPasswordScreenBody(),
+      body: const VerifyPasswordScreenBody(),
     );
   }
 }

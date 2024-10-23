@@ -1,10 +1,9 @@
 import 'package:care_nest/core/helpers/app_regex.dart';
 import 'package:care_nest/core/routing/app_router.dart';
-import 'package:care_nest/core/theme/colors_manager.dart';
-import 'package:care_nest/core/theme/font_weight_helper.dart';
-import 'package:care_nest/core/widgets/alternativeaction_whenhaveaccount.dart';
+import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
+import 'package:care_nest/core/widgets/dont_have_an_account.dart';
 import 'package:care_nest/features/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
 import 'package:care_nest/features/forget_password/ui/widgets/forget_pass_bloc_listner.dart';
 import 'package:flutter/material.dart';
@@ -24,31 +23,27 @@ class _ForgetPassScreenBodyState extends State<ForgetPassScreenBody> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 44.h, horizontal: 16.w),
+      padding: EdgeInsets.symmetric(
+        vertical: 30.h,
+        horizontal: 16.w,
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             "Forget Password?",
-            style: TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeightHelper.bold,
-              color: ColorsManager.primaryBlueColor,
-            ),
+            style: TextStyles.font36PrimaryBlueBold,
           ),
           SizedBox(
             height: 12.h,
           ),
           Padding(
             padding: EdgeInsets.only(right: 40.w),
-            child: const Text(
-                "Don't worry!. Please enter the email address linked with your account.",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeightHelper.bold,
-                  color: ColorsManager.secondryBlueColor,
-                )),
+            child: Text(
+              "Don't worry!. Please enter the email address linked with your account.",
+              style: TextStyles.font16SecondaryBlueBold,
+            ),
           ),
           SizedBox(
             height: 36.h,
@@ -87,17 +82,13 @@ class _ForgetPassScreenBodyState extends State<ForgetPassScreenBody> {
           ),
           AppTextButton(
             buttonText: 'Send Code',
-            textStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            textStyle: TextStyles.font16WhiteBold,
             onPressed: () {
               validateThenSendCode(context);
-              //  GoRouter.of(context).push(AppRouter.kOtp2Screen);
             },
           ),
           SizedBox(height: 48.h),
-          AlternativeActionWhenHaveAccount(
+          DontHaveAnAccount(
             onTap: () {
               GoRouter.of(context).push(AppRouter.kLoginScreen);
             },
