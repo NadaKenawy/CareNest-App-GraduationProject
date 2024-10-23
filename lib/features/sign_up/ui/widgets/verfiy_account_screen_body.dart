@@ -1,10 +1,10 @@
 import 'dart:developer';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
-import 'package:care_nest/core/theme/font_weight_helper.dart';
-import 'package:care_nest/core/widgets/alternativeaction_whenhaveaccount.dart';
+import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
+import 'package:care_nest/core/widgets/dont_have_an_account.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:care_nest/features/sign_up/logic/verfiy_account_cubit/verify_account_cubit.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/verify_account_bloc_listener.dart';
@@ -27,91 +27,108 @@ class VerifyAccountScreenBody extends StatelessWidget {
     final otpFocus6 = FocusNode();
 
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 44.h, horizontal: 16.w),
+      padding: EdgeInsets.symmetric(vertical: 30.h, horizontal: 16.w),
       child: Form(
         key: verifyAccountCubit.formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "Verify Your Account",
-              style: TextStyle(
-                fontSize: 36,
-                fontWeight: FontWeightHelper.bold,
-                color: ColorsManager.primaryBlueColor,
-              ),
+              style: TextStyles.font36PrimaryBlueBold,
             ),
-            SizedBox(height: 12.h),
+            SizedBox(
+              height: 12.h,
+            ),
             Padding(
               padding: EdgeInsets.only(right: 40.w),
-              child: const Text(
+              child: Text(
                 "Enter the 6-digit verification code we sent to your email address.",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeightHelper.bold,
-                  color: ColorsManager.secondryBlueColor,
-                ),
+                style: TextStyles.font16SecondaryBlueBold,
               ),
             ),
-            SizedBox(height: 36.h),
+            SizedBox(
+              height: 36.h,
+            ),
             Row(
               children: [
                 Flexible(
-                    child: _buildOtpField(
-                        context,
-                        verifyAccountCubit.otpField1Controller,
-                        otpFocus1,
-                        null,
-                        otpFocus2)),
-                SizedBox(width: 8.w),
+                  child: _buildOtpField(
+                    context,
+                    verifyAccountCubit.otpField1Controller,
+                    otpFocus1,
+                    null,
+                    otpFocus2,
+                  ),
+                ),
+                SizedBox(
+                  width: 8.w,
+                ),
                 Flexible(
-                    child: _buildOtpField(
-                        context,
-                        verifyAccountCubit.otpField2Controller,
-                        otpFocus2,
-                        otpFocus1,
-                        otpFocus3)),
-                SizedBox(width: 8.w),
+                  child: _buildOtpField(
+                    context,
+                    verifyAccountCubit.otpField2Controller,
+                    otpFocus2,
+                    otpFocus1,
+                    otpFocus3,
+                  ),
+                ),
+                SizedBox(
+                  width: 8.w,
+                ),
                 Flexible(
-                    child: _buildOtpField(
-                        context,
-                        verifyAccountCubit.otpField3Controller,
-                        otpFocus3,
-                        otpFocus2,
-                        otpFocus4)),
-                SizedBox(width: 8.w),
+                  child: _buildOtpField(
+                    context,
+                    verifyAccountCubit.otpField3Controller,
+                    otpFocus3,
+                    otpFocus2,
+                    otpFocus4,
+                  ),
+                ),
+                SizedBox(
+                  width: 8.w,
+                ),
                 Flexible(
-                    child: _buildOtpField(
-                        context,
-                        verifyAccountCubit.otpField4Controller,
-                        otpFocus4,
-                        otpFocus3,
-                        otpFocus5)),
-                SizedBox(width: 8.w),
+                  child: _buildOtpField(
+                    context,
+                    verifyAccountCubit.otpField4Controller,
+                    otpFocus4,
+                    otpFocus3,
+                    otpFocus5,
+                  ),
+                ),
+                SizedBox(
+                  width: 8.w,
+                ),
                 Flexible(
-                    child: _buildOtpField(
-                        context,
-                        verifyAccountCubit.otpField5Controller,
-                        otpFocus5,
-                        otpFocus4,
-                        otpFocus6)),
-                SizedBox(width: 8.w),
+                  child: _buildOtpField(
+                    context,
+                    verifyAccountCubit.otpField5Controller,
+                    otpFocus5,
+                    otpFocus4,
+                    otpFocus6,
+                  ),
+                ),
+                SizedBox(
+                  width: 8.w,
+                ),
                 Flexible(
-                    child: _buildOtpField(
-                        context,
-                        verifyAccountCubit.otpField6Controller,
-                        otpFocus6,
-                        otpFocus5,
-                        null)), // آخر خانة
+                  child: _buildOtpField(
+                    context,
+                    verifyAccountCubit.otpField6Controller,
+                    otpFocus6,
+                    otpFocus5,
+                    null,
+                  ),
+                ), // آخر خانة
               ],
             ),
-            SizedBox(height: 36.h),
+            SizedBox(
+              height: 36.h,
+            ),
             AppTextButton(
               buttonText: 'Verify Account',
-              textStyle: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
+              textStyle: TextStyles.font16WhiteBold,
               onPressed: () {
                 String otpCode = verifyAccountCubit.otpField1Controller.text +
                     verifyAccountCubit.otpField2Controller.text +
@@ -130,8 +147,10 @@ class VerifyAccountScreenBody extends StatelessWidget {
                 clearOtpFields(verifyAccountCubit);
               },
             ),
-            SizedBox(height: 48.h),
-            AlternativeActionWhenHaveAccount(
+            SizedBox(
+              height: 48.h,
+            ),
+            DontHaveAnAccount(
               onTap: () {
                 AwesomeDialog(
                   context: context,

@@ -86,7 +86,9 @@ class _SignupFormState extends State<SignupForm> {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(
+            height: 16,
+          ),
           AppTextFormField(
             hintText: 'Email',
             hasError: emailHasError,
@@ -113,7 +115,9 @@ class _SignupFormState extends State<SignupForm> {
             },
             controller: context.read<SignupCubit>().emailController,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(
+            height: 16,
+          ),
           AppTextFormField(
             controller: context.read<SignupCubit>().passwordController,
             hintText: 'Password',
@@ -143,19 +147,19 @@ class _SignupFormState extends State<SignupForm> {
                 setState(() {});
                 return 'password must be at least 8 characters';
               }
-              if (!RegExp(
-                      r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$')
-                  .hasMatch(value)) {
+              if (!AppRegex.isPasswordValid(value)) {
                 passwordHasError = true;
                 setState(() {});
-                return 'Password must be at least 8 characters, have at least one capital letter, one small letter, one digit, and one special character';
+                return 'Password must include an uppercase letter, lowercase letter, number, and special character';
               }
               passwordHasError = false;
               setState(() {});
               return null;
             },
           ),
-          const SizedBox(height: 16),
+          const SizedBox(
+            height: 16,
+          ),
           AppTextFormField(
             controller: context.read<SignupCubit>().passwordConfirmController,
             hintText: 'Password Confirmation',

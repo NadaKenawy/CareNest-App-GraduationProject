@@ -9,7 +9,7 @@ class SignUpImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      AppImages.signUpImg,
+      AppImages.signUpImage,
       width: double.infinity,
       fit: BoxFit.fill,
     );

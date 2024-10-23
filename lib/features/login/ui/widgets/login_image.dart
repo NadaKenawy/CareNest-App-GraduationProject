@@ -7,7 +7,7 @@ class LoginImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      AppImages.loginImg,
+      AppImages.loginImage,
       width: double.infinity,
       fit: BoxFit.fill,
     );

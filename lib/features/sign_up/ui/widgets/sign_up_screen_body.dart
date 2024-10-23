@@ -1,10 +1,9 @@
 import 'package:care_nest/core/routing/app_router.dart';
-import 'package:care_nest/core/theme/colors_manager.dart';
+import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
+import 'package:care_nest/core/widgets/dont_have_an_account.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
-import 'package:care_nest/core/widgets/alternativeaction_whenhaveaccount.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/date_of_birth_field%20.dart';
-
 import 'package:care_nest/features/sign_up/ui/widgets/sign_up_bloc_listener.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/sign_up_form.dart';
 import 'package:care_nest/features/sign_up/ui/widgets/sign_up_image.dart';
@@ -60,7 +59,10 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
               padding: EdgeInsets.only(top: 370.h),
               child: Container(
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 16.w),
+                padding: EdgeInsets.symmetric(
+                  vertical: 24.h,
+                  horizontal: 16.w,
+                ),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -71,38 +73,43 @@ class _SignUpScreenBodyState extends State<SignUpScreenBody> {
                 child: Column(
                   children: [
                     const SignUpTitle(),
-                    SizedBox(height: 24.h),
+                    SizedBox(
+                      height: 24.h,
+                    ),
                     const SignupForm(),
-                    SizedBox(height: 16.h),
-                    const Align(
+                    SizedBox(
+                      height: 16.h,
+                    ),
+                    Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "Date Of Birth",
-                        style: TextStyle(
-                            fontSize: 14,
-                            color: ColorsManager.primaryBlueColor),
+                        style: TextStyles.font14PrimaryBlueRegular,
                       ),
                     ),
-                    SizedBox(height: 8.h),
+                    SizedBox(
+                      height: 8.h,
+                    ),
                     DateOfBirthDropdowns(
                       onDaySelected: _onDaySelected,
                       onMonthSelected: _onMonthSelected,
                       onYearSelected: _onYearSelected,
                       errorMessage: _dobErrorMessage, // Pass the error message
                     ),
-                    SizedBox(height: 16.h),
+                    SizedBox(
+                      height: 16.h,
+                    ),
                     AppTextButton(
                       buttonText: "Sign Up",
                       onPressed: () {
                         validateThenDoSignup(context);
                       },
-                      textStyle: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                      textStyle: TextStyles.font16WhiteBold,
                     ),
-                    SizedBox(height: 12.h),
-                    AlternativeActionWhenHaveAccount(
+                    SizedBox(
+                      height: 12.h,
+                    ),
+                    DontHaveAnAccount(
                       onTap: () {
                         GoRouter.of(context).push(AppRouter.kLoginScreen);
                       },
