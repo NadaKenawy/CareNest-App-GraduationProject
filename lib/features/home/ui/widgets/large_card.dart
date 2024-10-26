@@ -36,6 +36,9 @@ class LargeCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset(imagePath),
+              SizedBox(
+                width: 4.w,
+              ),
               Image.asset("assets/images/arrow.png"),
             ],
           ),
