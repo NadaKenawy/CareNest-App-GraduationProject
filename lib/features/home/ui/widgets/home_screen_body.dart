@@ -14,27 +14,29 @@ class HomeScreenBody extends StatelessWidget {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const HomeTittle(),
-            SizedBox(height: 32.h),
-            const BabyCryContainer(),
-            SizedBox(height: 56.h),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                LargeCard(
-                  imagePath: 'assets/images/baby-weighting.png',
-                  title: 'Baby Growth',
-                  description: "Track every stage of your baby's growth!",
-                  backgroundColor: ColorsManager.secondryBlueColor,
-                ),
-                RemindersCard()
-              ],
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const HomeTittle(),
+              SizedBox(height: 32.h),
+              const BabyCryContainer(),
+              SizedBox(height: 56.h),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  LargeCard(
+                    imagePath: 'assets/images/baby-weighting.png',
+                    title: 'Baby Growth',
+                    description: "Track every stage of your baby's growth!",
+                    backgroundColor: ColorsManager.secondryBlueColor,
+                  ),
+                  RemindersCard()
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
