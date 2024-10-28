@@ -74,13 +74,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           GoRouter.of(context).push(AppRouter.kHomeScreen);
         }
       },
-      child: Text(_currentIndex == 2 ? "Get Started" : "Next"),
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
       ),
+      child: Text(_currentIndex == 2 ? "Get Started" : "Next"),
     );
   }
 
