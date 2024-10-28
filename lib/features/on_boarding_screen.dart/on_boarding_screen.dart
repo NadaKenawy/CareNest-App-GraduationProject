@@ -1,11 +1,10 @@
-// ignore_for_file: sort_child_properties_last, library_private_types_in_public_api
-
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/features/on_boarding_screen.dart/screen1.dart';
 import 'package:care_nest/features/on_boarding_screen.dart/screen2.dart';
 import 'package:care_nest/features/on_boarding_screen.dart/screen3.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -18,9 +17,39 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
+  bool _isLoading = true; // متغير لتحميل الشاشة
+
+  @override
+  void initState() {
+    super.initState();
+    _checkFirstTimeOpen();
+  }
+
+  Future<void> _checkFirstTimeOpen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? hasOpenedBefore = prefs.getBool('hasOpenedBefore');
+
+    if (hasOpenedBefore != null && hasOpenedBefore) {
+      // إذا التطبيق تم فتحه من قبل، انتقل مباشرة إلى شاشة تسجيل الدخول
+      GoRouter.of(context).pushReplacement(AppRouter.kLoginScreen);
+    } else {
+      await prefs.setBool('hasOpenedBefore', true);
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       body: Stack(
         children: [
@@ -73,7 +102,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             curve: Curves.easeInOut,
           );
         } else {
-          GoRouter.of(context).push(AppRouter.kHomeScreen);
+          GoRouter.of(context).pushReplacement(AppRouter.kLoginScreen);
         }
       },
       style: ElevatedButton.styleFrom(

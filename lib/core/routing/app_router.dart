@@ -16,6 +16,8 @@ import 'package:care_nest/features/sign_up/ui/verfiy_account_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../helpers/constants.dart';
+
 abstract class AppRouter {
   static const kSignUpScreen = '/signUpScreen';
   static const kLoginScreen = '/loginScreen';
@@ -28,9 +30,10 @@ abstract class AppRouter {
   static final router = GoRouter(
     routes: [
       GoRoute(
-        path: kOnBoardingScreen,
-        builder: (context, state) => const OnBoardingScreen(),
-      ),
+          path: kOnBoardingScreen,
+          builder: (context, state) {
+            return const OnBoardingScreen();
+          }),
       GoRoute(
         path: kSignUpScreen,
         builder: (context, state) => BlocProvider(
@@ -42,7 +45,7 @@ abstract class AppRouter {
         path: kLoginScreen,
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<LoginCubit>(),
-          child: const LoginScreen(),
+          child: isLoggedInUser ? const HomeScreen() : const LoginScreen(),
         ),
       ),
       GoRoute(
