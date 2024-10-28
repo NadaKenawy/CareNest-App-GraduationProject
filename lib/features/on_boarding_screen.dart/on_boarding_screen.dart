@@ -1,3 +1,5 @@
+// ignore_for_file: sort_child_properties_last, library_private_types_in_public_api
+
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/features/on_boarding_screen.dart/screen1.dart';
 import 'package:care_nest/features/on_boarding_screen.dart/screen2.dart';
@@ -76,7 +78,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       },
       child: Text(_currentIndex == 2 ? "Get Started" : "Next"),
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
