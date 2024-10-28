@@ -42,9 +42,13 @@ class LargeCard extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(imagePath),
-              SizedBox(width: MediaQuery.of(context).size.width * .01),
-              Image.asset("assets/images/arrow.png"),
+              Image.asset(
+                imagePath,
+              ),
+              SizedBox(width: 8.w),
+              Image.asset(
+                "assets/images/arrow.png",
+              ),
             ],
           ),
           Text(
@@ -55,12 +59,17 @@ class LargeCard extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          Text(
-            description,
-            style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: FontWeightHelper.medium,
-              color: Colors.white,
+          SizedBox(width: 8.w),
+          Expanded(
+            child: Text(
+              description,
+              style: TextStyle(
+                fontSize: 12.sp,
+                fontWeight: FontWeightHelper.medium,
+                color: Colors.white,
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           ForwardArrowButton(

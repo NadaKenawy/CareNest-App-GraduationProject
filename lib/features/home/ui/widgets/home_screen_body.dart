@@ -32,7 +32,7 @@ class HomeScreenBody extends StatelessWidget {
                       LargeCard(
                         imagePath: 'assets/images/baby-weighting.png',
                         title: 'Baby Growth',
-                        description: "Track every stage of your baby's growth!",
+                        description: "Track every stage of your baby's growth",
                         backgroundColor: ColorsManager.secondryBlueColor,
                       ),
                       SizedBox(height: 20),
@@ -48,7 +48,7 @@ class HomeScreenBody extends StatelessWidget {
                         imagePath: 'assets/images/doctors.png',
                         title: 'Doctors',
                         description:
-                            "Expert care available for your little one!",
+                            "Expert care available for your little one",
                         backgroundColor: Color(0xffBB87E0),
                       ),
                     ],
@@ -64,14 +64,14 @@ class HomeScreenBody extends StatelessWidget {
                     imagePath: 'assets/images/entertainment.png',
                     title: 'Entertainment',
                     description:
-                        "Stories, videos, and music for a relaxed baby.",
+                        "Stories, videos, and music for a relaxed baby",
                     backgroundColor: ColorsManager.thirdryBlueColor,
                   ),
                   SizedBox(height: 20),
                   LargeCard(
                     imagePath: 'assets/images/shopping.png',
                     title: 'Shopping',
-                    description: "Seamless shopping for every baby moment.",
+                    description: "Seamless shopping for every baby moment",
                     backgroundColor: ColorsManager.thirdryPinkColor,
                   ),
                 ],

@@ -19,9 +19,10 @@ class RemindersCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: ColorsManager.secondryPinkColor,
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(32.r),
-                bottomRight: Radius.circular(32.r),
-                topRight: Radius.circular(32.r)),
+              topLeft: Radius.circular(32.r),
+              bottomRight: Radius.circular(32.r),
+              topRight: Radius.circular(32.r),
+            ),
             boxShadow: [
               BoxShadow(
                 color: ColorsManager.secondryPinkColor.withOpacity(0.5),
@@ -31,41 +32,47 @@ class RemindersCard extends StatelessWidget {
               ),
             ],
           ),
-          height: 120.h,
+          height: MediaQuery.of(context).size.height * 0.14,
           width: MediaQuery.of(context).size.width * 0.5 - 24,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Reminders',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeightHelper.semiBold,
-                      color: Colors.white,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Reminders',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeightHelper.semiBold,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 14.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Medicine & Vaccine\nReminders!',
+                    SizedBox(height: 12.h),
+                    Flexible(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown, 
+                        child: Text(
+                          'Medicine &\nVaccine Reminders',
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeightHelper.medium,
                             color: Colors.white,
-                          )),
-                      SizedBox(width: MediaQuery.of(context).size.width * .01),
-                      const ForwardArrowButton(
-                        iconColor: ColorsManager.secondryPinkColor,
+                          ),
+                          maxLines: 2,
+                          overflow:
+                              TextOverflow.visible, 
+                        ),
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: 8.w),
+              const ForwardArrowButton(
+                iconColor: ColorsManager.secondryPinkColor,
               ),
             ],
           ),

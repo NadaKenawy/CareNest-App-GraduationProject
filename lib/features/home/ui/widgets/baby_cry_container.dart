@@ -29,43 +29,46 @@ class BabyCryContainer extends StatelessWidget {
             ],
           ),
           child: Padding(
-            padding: EdgeInsets.all(16.w),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Crying? Let’s find \n out why',
-                      style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeightHelper.semiBold),
-                    ),
-                    SizedBox(
-                      height: 24.h,
-                    ),
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        width: 120.w,
-                        height: 32.h,
-                        decoration: BoxDecoration(
-                            color: ColorsManager.primaryPinkColor,
-                            borderRadius: BorderRadius.circular(16.r)),
-                        child: Center(
-                          child: Text(
-                            'Find out',
-                            style: TextStyle(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeightHelper.semiBold,
-                                color: Colors.white),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          'Crying? Let’s find \n out why',
+                          style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeightHelper.semiBold),
+                        ),
+                      ),
+                      SizedBox(height: 24.h),
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          width: 120.w,
+                          height: 32.h,
+                          decoration: BoxDecoration(
+                              color: ColorsManager.primaryPinkColor,
+                              borderRadius: BorderRadius.circular(16.r)),
+                          child: Center(
+                            child: Text(
+                              'Find out',
+                              style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeightHelper.semiBold,
+                                  color: Colors.white),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -74,7 +77,9 @@ class BabyCryContainer extends StatelessWidget {
         Positioned(
           top: -MediaQuery.of(context).size.height * 0.02,
           left: MediaQuery.of(context).size.width * 0.5,
-          child: Image.asset(AppImages.cryBabyImage),
+          child: Image.asset(
+            AppImages.cryBabyImage,
+          ),
         ),
       ],
     );

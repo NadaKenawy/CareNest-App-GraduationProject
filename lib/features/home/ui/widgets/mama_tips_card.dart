@@ -24,46 +24,46 @@ class MamaTipsCard extends StatelessWidget {
           ),
         ],
       ),
-      height: 120.h,
+      height: MediaQuery.of(context).size.height * 0.14,
       width: MediaQuery.of(context).size.width * 0.5 - 24,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Mama Tips',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeightHelper.semiBold,
-                  color: Colors.white,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Mama Tips',
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeightHelper.semiBold,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 14.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Parenting Tips,\nJust for You!',
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeightHelper.medium,
-                      color: Colors.white,
+                SizedBox(height: 12.h), 
+                Flexible(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      'Parenting Tips,\nJust for You',
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeightHelper.medium,
+                        color: Colors.white,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.visible,
                     ),
-                    maxLines: 2,
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * .067,
-                  ),
-                  const ForwardArrowButton(
-                    iconColor: Color(0xffFFBB5D),
-                  ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
+          ),
+          SizedBox(width: 8.w),
+          const ForwardArrowButton(
+            iconColor: Color(0xffFFBB5D),
           ),
         ],
       ),

@@ -24,44 +24,45 @@ class CommuntiyCard extends StatelessWidget {
           ),
         ],
       ),
-      height: 120.h,
+      height: MediaQuery.of(context).size.height * 0.14,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Community',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeightHelper.semiBold,
-                  color: Colors.white,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Community',
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeightHelper.semiBold,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 14.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Join fellow moms to share advice, support each\nother,andnavigate parenting together',
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeightHelper.medium,
-                      color: Colors.white,
+                SizedBox(height: 12.h),
+                Flexible(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      'Join fellow moms to share advice, support each \nother, and navigate parenting together',
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeightHelper.medium,
+                        color: Colors.white,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.visible,
                     ),
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * .085,
-                  ),
-                  const ForwardArrowButton(
-                    iconColor: Color(0xff8794C3),
-                  ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
+          ),
+          SizedBox(width: 8.w),
+          const ForwardArrowButton(
+            iconColor: Color(0xff8794C3),
           ),
         ],
       ),
