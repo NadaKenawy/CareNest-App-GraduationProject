@@ -22,6 +22,14 @@ class RemindersCard extends StatelessWidget {
                 topLeft: Radius.circular(32.r),
                 bottomRight: Radius.circular(32.r),
                 topRight: Radius.circular(32.r)),
+            boxShadow: [
+              BoxShadow(
+                color: ColorsManager.secondryPinkColor.withOpacity(0.5),
+                offset: const Offset(0, 5),
+                blurRadius: 10,
+                spreadRadius: 1,
+              ),
+            ],
           ),
           height: 120.h,
           width: MediaQuery.of(context).size.width * 0.5 - 24,
@@ -51,7 +59,7 @@ class RemindersCard extends StatelessWidget {
                             fontWeight: FontWeightHelper.medium,
                             color: Colors.white,
                           )),
-                      SizedBox(width: 4.w),
+                      SizedBox(width: MediaQuery.of(context).size.width * .01),
                       const ForwardArrowButton(
                         iconColor: ColorsManager.secondryPinkColor,
                       ),

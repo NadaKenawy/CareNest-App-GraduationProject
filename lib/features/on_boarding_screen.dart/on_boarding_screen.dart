@@ -1,3 +1,5 @@
+// ignore_for_file: sort_child_properties_last, library_private_types_in_public_api
+
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/features/on_boarding_screen.dart/screen1.dart';
 import 'package:care_nest/features/on_boarding_screen.dart/screen2.dart';

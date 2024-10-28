@@ -1,4 +1,3 @@
-import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/features/home/ui/widgets/forward_arrow_button.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +24,14 @@ class LargeCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(32.r),
+        boxShadow: [
+          BoxShadow(
+            color: backgroundColor.withOpacity(0.5),
+            offset: const Offset(0, 5),
+            blurRadius: 10,
+            spreadRadius: 1,
+          ),
+        ],
       ),
       height: 240.h,
       width: MediaQuery.of(context).size.width * 0.5 - 24,
@@ -36,9 +43,7 @@ class LargeCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset(imagePath),
-              SizedBox(
-                width: 4.w,
-              ),
+              SizedBox(width: MediaQuery.of(context).size.width * .01),
               Image.asset("assets/images/arrow.png"),
             ],
           ),
@@ -58,8 +63,8 @@ class LargeCard extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          const ForwardArrowButton(
-            iconColor: ColorsManager.secondryBlueColor,
+          ForwardArrowButton(
+            iconColor: backgroundColor,
           ),
         ],
       ),

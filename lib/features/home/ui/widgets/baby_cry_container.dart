@@ -17,11 +17,19 @@ class BabyCryContainer extends StatelessWidget {
         Container(
           height: 168.h,
           decoration: BoxDecoration(
-            color: const Color(0xffE9E7E7),
+            color: const Color(0xffEEEEEE),
             borderRadius: BorderRadius.circular(40.r),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                offset: const Offset(0, 5),
+                blurRadius: 10,
+                spreadRadius: 1,
+              ),
+            ],
           ),
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

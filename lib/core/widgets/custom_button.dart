@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 class AppTextButton extends StatelessWidget {
   final double? borderRadius;
-  final Color backgroundColor; // اجعلها مطلوبة
+  final Color backgroundColor;
   final double? horizontalPadding;
   final double? verticalPadding;
-  final double buttonHeight; // اجعلها مطلوبة
+  final double buttonHeight;
   final String buttonText;
   final TextStyle textStyle;
   final VoidCallback onPressed;
@@ -16,18 +16,17 @@ class AppTextButton extends StatelessWidget {
     this.borderRadius,
     this.horizontalPadding,
     this.verticalPadding,
-    this.buttonHeight = 48, // تعيين قيمة افتراضية للطول
+    this.buttonHeight = 48,
     required this.buttonText,
     required this.textStyle,
     required this.onPressed,
-    Color? backgroundColor, // اجعلها مطلوبة
-  }) : backgroundColor =
-            backgroundColor ?? ColorsManager.primaryPinkColor; // تعيين لون افتراضي للزر
+    Color? backgroundColor,
+  }) : backgroundColor = backgroundColor ?? ColorsManager.primaryPinkColor;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity, // جعل العرض يمتد لعرض الشاشة بالكامل
+      width: double.infinity,
       child: TextButton(
         style: ButtonStyle(
           shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
@@ -35,18 +34,15 @@ class AppTextButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(borderRadius ?? 16.0),
             ),
           ),
-          backgroundColor: WidgetStatePropertyAll<Color>(
-              backgroundColor), // تعيين لون الخلفية
+          backgroundColor: WidgetStatePropertyAll<Color>(backgroundColor),
           fixedSize: WidgetStatePropertyAll(
-            Size(double.infinity,
-                buttonHeight), // جعل العرض يمتد لعرض الشاشة بالكامل
+            Size(double.infinity, buttonHeight),
           ),
         ),
         onPressed: onPressed,
         child: Text(
           buttonText,
-          style: textStyle.copyWith(
-              color: Colors.white), // تعيين لون النص إلى الأبيض
+          style: textStyle.copyWith(color: Colors.white),
         ),
       ),
     );
