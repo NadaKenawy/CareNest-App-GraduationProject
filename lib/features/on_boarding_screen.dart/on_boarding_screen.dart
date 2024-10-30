@@ -58,11 +58,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     // }
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: EdgeInsets.symmetric(
+                horizontal: 10.w,
+                vertical: 10.h,
+              ),
               child: Align(
                 alignment: Alignment.topRight,
                 child: TextButton(
@@ -94,23 +98,23 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     ],
                   ),
                   Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
+                    bottom: 0.h,
+                    left: 0.w,
+                    right: 0.w,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SmoothPageIndicator(
                           controller: _pageController,
                           count: 3,
-                          effect: const WormEffect(
-                            dotHeight: 12.0,
-                            dotWidth: 12.0,
+                          effect: WormEffect(
+                            dotHeight: 12.r,
+                            dotWidth: 12.r,
                             activeDotColor: ColorsManager.primaryPinkColor,
                             dotColor: ColorsManager.secondryBlueColor,
                           ),
                         ),
-                        SizedBox(height: 20.h),
+                        SizedBox(height: 22.h),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.w),
                           child: Row(
