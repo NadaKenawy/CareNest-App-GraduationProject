@@ -9,32 +9,31 @@ class Screen3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 22.h),
-            SizedBox(
-              height: 400.h,
-              width: 400.w,
-              child: Image.asset(
-                'assets/images/onboarding_third_screen.png',
-              ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 32.h),
+          SizedBox(
+            height: 350.h,
+            width: 350.w,
+            child: Image.asset(
+              'assets/images/onboarding_third_screen.png',
             ),
-            SizedBox(height: 30.h),
-            Text(
-              'Entertainment and Shopping',
-              style: TextStyles.font20BlackSemiBold,
-            ),
-            SizedBox(height: 40.h),
-            Text(
-              'Enjoy fun moments with your baby! From\nstories and games to shopping for your\nneeds, we provide everything you need to\nmake your time together special',
-              style: TextStyles.font15PrimaryBlackMedium,
-            ),
-            SizedBox(height: 90.h),
-          ],
-        ),
+          ),
+          SizedBox(height: 20.h),
+          Text(
+            'Entertainment and Shopping',
+            style: TextStyles.font20BlackSemiBold,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 20.h),
+          Text(
+            'Make parenting fun and convenient with our\nentertainment and shopping features! Find\nproducts, activities, and tips to keep your\nbaby happy and healthy.',
+            style: TextStyles.font15PrimaryBlackMedium,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 20.h),
+        ],
       ),
     );
   }
