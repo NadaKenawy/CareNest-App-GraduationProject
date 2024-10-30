@@ -28,7 +28,6 @@ class TextStyles {
     color: ColorsManager.primaryBlueColor,
   );
 
-  
   static TextStyle font36PrimaryBlueBold = TextStyle(
     fontSize: 36.sp,
     fontWeight: FontWeightHelper.bold,
@@ -38,6 +37,12 @@ class TextStyles {
   static TextStyle font16SecondaryBlueBold = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeightHelper.bold,
+    color: ColorsManager.secondryBlueColor,
+  );
+
+  static TextStyle font20SecondaryBlueMedium = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeightHelper.medium,
     color: ColorsManager.secondryBlueColor,
   );
 
@@ -57,5 +62,17 @@ class TextStyles {
     fontSize: 24.sp,
     fontWeight: FontWeightHelper.bold,
     color: ColorsManager.primaryPinkColor,
+  );
+
+  static TextStyle font20BlackSemiBold = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeightHelper.semiBold,
+    color: Colors.black,
+  );
+
+  static TextStyle font15PrimaryBlackMedium = TextStyle(
+    fontSize: 15.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: Colors.black,
   );
 }
