@@ -156,7 +156,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return Align(
       alignment: Alignment.centerRight,
       child: Padding(
-        padding: const EdgeInsets.only(right: 5),
+        padding: EdgeInsets.only(right: 5.w),
         child: SizedBox(
           width: 150.w,
           height: 100.h,
@@ -164,10 +164,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             alignment: Alignment.center,
             children: [
               Positioned(
-                right: 0,
+                right: 0.w,
                 child: Container(
-                  width: 60,
-                  height: 60,
+                  width: 60.w,
+                  height: 60.h,
                   decoration: BoxDecoration(
                     color: ColorsManager.primaryPinkColor.withOpacity(0.25),
                     shape: BoxShape.circle,
@@ -175,10 +175,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 ),
               ),
               Positioned(
-                right: 15,
+                right: 15.w,
                 child: Container(
-                  width: 60,
-                  height: 60,
+                  width: 60.w,
+                  height: 60.h,
                   decoration: BoxDecoration(
                     color: ColorsManager.primaryPinkColor.withOpacity(0.50),
                     shape: BoxShape.circle,
@@ -186,10 +186,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 ),
               ),
               Positioned(
-                right: 30,
+                right: 30.w,
                 child: Container(
-                  width: 60,
-                  height: 60,
+                  width: 60.w,
+                  height: 60.h,
                   decoration: BoxDecoration(
                     color: ColorsManager.primaryPinkColor.withOpacity(0.75),
                     shape: BoxShape.circle,
@@ -197,10 +197,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 ),
               ),
               Positioned(
-                right: 45,
+                right: 45.w,
                 child: Container(
-                  width: 60,
-                  height: 60,
+                  width: 60.w,
+                  height: 60.h,
                   decoration: const BoxDecoration(
                     color: ColorsManager.primaryPinkColor,
                     shape: BoxShape.circle,
