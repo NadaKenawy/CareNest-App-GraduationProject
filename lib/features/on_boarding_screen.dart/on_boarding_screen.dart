@@ -97,51 +97,45 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       Screen3(),
                     ],
                   ),
-                  Positioned(
-                    bottom: 0.h,
-                    left: 0.w,
-                    right: 0.w,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SmoothPageIndicator(
-                          controller: _pageController,
-                          count: 3,
-                          effect: WormEffect(
-                            dotHeight: 12.r,
-                            dotWidth: 12.r,
-                            activeDotColor: ColorsManager.primaryPinkColor,
-                            dotColor: ColorsManager.secondryBlueColor,
-                          ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SmoothPageIndicator(
+                        controller: _pageController,
+                        count: 3,
+                        effect: WormEffect(
+                          dotHeight: 12.r,
+                          dotWidth: 12.r,
+                          activeDotColor: ColorsManager.primaryPinkColor,
+                          dotColor: ColorsManager.secondryBlueColor,
                         ),
-                        SizedBox(height: 22.h),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.w),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              if (_currentIndex > 0)
-                                TextButton(
-                                  onPressed: () {
-                                    _pageController.previousPage(
-                                      duration:
-                                          const Duration(milliseconds: 300),
-                                      curve: Curves.easeInOut,
-                                    );
-                                  },
-                                  child: Text(
-                                    'Back',
-                                    style: TextStyles.font20SecondaryBlueMedium,
-                                  ),
-                                )
-                              else
-                                const SizedBox(),
-                              _buildNextButton(),
-                            ],
-                          ),
+                      ),
+                      SizedBox(height: 22.h),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            if (_currentIndex > 0)
+                              TextButton(
+                                onPressed: () {
+                                  _pageController.previousPage(
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.easeInOut,
+                                  );
+                                },
+                                child: Text(
+                                  'Back',
+                                  style: TextStyles.font20SecondaryBlueMedium,
+                                ),
+                              )
+                            else
+                              const SizedBox(),
+                            _buildNextButton(),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),
