@@ -45,13 +45,15 @@ abstract class AppRouter {
         path: kLoginScreen,
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<LoginCubit>(),
-          child: isLoggedInUser ? const HomeScreen() : const LoginScreen(),
+          child: const LoginScreen(),
         ),
       ),
       GoRoute(
-        path: kHomeScreen,
-        builder: (context, state) => const HomeScreen(),
-      ),
+          path: kHomeScreen,
+          builder: (context, state) {
+            final userName = state.extra as String? ?? 'User';
+            return HomeScreen(userName: userName);
+          }),
       GoRoute(
         path: kForgetPassScreen,
         builder: (context, state) => BlocProvider(

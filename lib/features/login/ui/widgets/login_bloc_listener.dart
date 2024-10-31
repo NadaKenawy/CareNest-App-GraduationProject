@@ -31,8 +31,9 @@ class LoginBlocListener extends StatelessWidget {
           },
           success: (loginResponse) {
             Navigator.of(context).pop(); // Close the loading dialog
-            GoRouter.of(context)
-                .push(AppRouter.kHomeScreen); // Navigate to Home Screen
+            final userName = loginResponse.userData?.firstName ?? 'User';
+            GoRouter.of(context).push(AppRouter.kHomeScreen,
+                extra: userName); // Navigate to Home Screen
           },
           error: (error) {
             Navigator.of(context).pop(); // Close the loading dialog

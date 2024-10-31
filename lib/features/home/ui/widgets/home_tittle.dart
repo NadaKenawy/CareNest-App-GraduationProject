@@ -7,8 +7,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class HomeTittle extends StatelessWidget {
   const HomeTittle({
     super.key,
+    required this.userName,
   });
-
+  final String userName;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -18,7 +19,7 @@ class HomeTittle extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hi, Mamy!',
+              'Hi, $userName',
               style: TextStyle(
                 fontSize: 24.sp,
                 fontWeight: FontWeightHelper.semiBold,
