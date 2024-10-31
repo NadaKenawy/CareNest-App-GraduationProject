@@ -18,10 +18,9 @@ class LoginBlocListener extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            // Show a simple loading dialog with CircularProgressIndicator
             showDialog(
               context: context,
-              barrierDismissible: false, // Prevent dismiss by tapping outside
+              barrierDismissible: false,
               builder: (context) => const Center(
                 child: CircularProgressIndicator(
                   color: ColorsManager.primaryBlueColor,
@@ -30,13 +29,19 @@ class LoginBlocListener extends StatelessWidget {
             );
           },
           success: (loginResponse) {
-            Navigator.of(context).pop(); // Close the loading dialog
+            if (Navigator.canPop(context)) {
+              Navigator.of(context, rootNavigator: true)
+                  .pop(); // Close loading dialog
+            }
             final userName = loginResponse.userData?.firstName ?? 'User';
-            GoRouter.of(context).push(AppRouter.kHomeScreen,
+            GoRouter.of(context).go(AppRouter.kHomeScreen,
                 extra: userName); // Navigate to Home Screen
           },
           error: (error) {
-            Navigator.of(context).pop(); // Close the loading dialog
+            if (Navigator.canPop(context)) {
+              Navigator.of(context, rootNavigator: true)
+                  .pop(); // Close loading dialog
+            }
             setupErrorState(context, error); // Show error using AwesomeDialog
           },
         );
@@ -46,7 +51,6 @@ class LoginBlocListener extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, String error) {
-    // Show error dialog using AwesomeDialog
     AwesomeDialog(
       context: context,
       dialogType: DialogType.error,
@@ -54,7 +58,7 @@ class LoginBlocListener extends StatelessWidget {
       title: 'Error',
       desc: error,
       btnOkText: 'Got it',
-      btnOkOnPress: () {}, // Action on OK press
+      btnOkOnPress: () {},
       btnOkColor: ColorsManager.primaryBlueColor,
     ).show();
   }
