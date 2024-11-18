@@ -1,4 +1,5 @@
 import 'package:care_nest/core/theme/font_weight_helper.dart';
+import 'package:care_nest/core/utils/app_images.dart';
 import 'package:care_nest/features/home/ui/widgets/forward_arrow_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,7 +48,7 @@ class LargeCard extends StatelessWidget {
               ),
               SizedBox(width: 8.w),
               Image.asset(
-                "assets/images/arrow.png",
+                AppImages.arrowImage,
               ),
             ],
           ),

@@ -1,8 +1,10 @@
 // ignore_for_file: library_private_types_in_public_api
+import 'package:care_nest/core/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   final Function(int) onTap;
@@ -57,7 +59,11 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           setState(() {
             _pageIndex = index;
           });
-          widget.onTap(index);
+          if (index == 2) {
+            GoRouter.of(context).push(AppRouter.kMyBabiesScreen);
+          } else {
+            widget.onTap(index);
+          }
         },
       ),
     );

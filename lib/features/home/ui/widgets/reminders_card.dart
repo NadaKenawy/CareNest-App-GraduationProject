@@ -1,5 +1,6 @@
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
+import 'package:care_nest/core/utils/app_images.dart';
 import 'package:care_nest/features/home/ui/widgets/forward_arrow_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,7 +54,7 @@ class RemindersCard extends StatelessWidget {
                     SizedBox(height: 12.h),
                     Flexible(
                       child: FittedBox(
-                        fit: BoxFit.scaleDown, 
+                        fit: BoxFit.scaleDown,
                         child: Text(
                           'Medicine &\nVaccine Reminders',
                           style: TextStyle(
@@ -62,8 +63,7 @@ class RemindersCard extends StatelessWidget {
                             color: Colors.white,
                           ),
                           maxLines: 2,
-                          overflow:
-                              TextOverflow.visible, 
+                          overflow: TextOverflow.visible,
                         ),
                       ),
                     ),
@@ -80,7 +80,7 @@ class RemindersCard extends StatelessWidget {
         Positioned(
           top: -MediaQuery.of(context).size.height * 0.085,
           left: MediaQuery.of(context).size.width * 0.22,
-          child: Image.asset('assets/images/blue-alarm.png'),
+          child: Image.asset(AppImages.alarmImage),
         ),
       ],
     );

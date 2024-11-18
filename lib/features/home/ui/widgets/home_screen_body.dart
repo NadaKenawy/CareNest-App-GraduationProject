@@ -1,4 +1,5 @@
 import 'package:care_nest/core/theme/colors_manager.dart';
+import 'package:care_nest/core/utils/app_images.dart';
 import 'package:care_nest/features/home/ui/widgets/baby_cry_container.dart';
 import 'package:care_nest/features/home/ui/widgets/communtiy_card.dart';
 import 'package:care_nest/features/home/ui/widgets/large_card.dart';
@@ -10,7 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreenBody extends StatelessWidget {
   const HomeScreenBody({super.key, required this.userName});
- final String userName;
+  final String userName;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -20,7 +21,9 @@ class HomeScreenBody extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               HomeTittle(userName: userName,),
+              HomeTittle(
+                userName: userName,
+              ),
               SizedBox(height: 32.h),
               const BabyCryContainer(),
               SizedBox(height: 60.h),
@@ -30,7 +33,7 @@ class HomeScreenBody extends StatelessWidget {
                   const Column(
                     children: [
                       LargeCard(
-                        imagePath: 'assets/images/baby-weighting.png',
+                        imagePath: AppImages.babyWeightingImage,
                         title: 'Baby Growth',
                         description: "Track every stage of your baby's growth",
                         backgroundColor: ColorsManager.secondryBlueColor,
@@ -45,7 +48,7 @@ class HomeScreenBody extends StatelessWidget {
                       RemindersCard(),
                       SizedBox(height: 20),
                       LargeCard(
-                        imagePath: 'assets/images/doctors.png',
+                        imagePath: AppImages.doctorsImage,
                         title: 'Doctors',
                         description:
                             "Expert care available for your little one",
@@ -61,7 +64,7 @@ class HomeScreenBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   LargeCard(
-                    imagePath: 'assets/images/entertainment.png',
+                    imagePath: AppImages.entertainmentImage,
                     title: 'Entertainment',
                     description:
                         "Stories, videos, and music for a relaxed baby",
@@ -69,7 +72,7 @@ class HomeScreenBody extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   LargeCard(
-                    imagePath: 'assets/images/shopping.png',
+                    imagePath: AppImages.shoppingImage,
                     title: 'Shopping',
                     description: "Seamless shopping for every baby moment",
                     backgroundColor: ColorsManager.thirdryPinkColor,

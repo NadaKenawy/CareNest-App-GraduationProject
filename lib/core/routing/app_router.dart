@@ -1,4 +1,6 @@
 import 'package:care_nest/core/di/service_locator.dart';
+import 'package:care_nest/features/add_baby/ui/add_baby_screen.dart';
+import 'package:care_nest/features/add_baby/ui/my_babies_screen.dart';
 import 'package:care_nest/features/forget_password/logic/create_new_password_cubit/create_new_password_cubit.dart';
 import 'package:care_nest/features/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
 import 'package:care_nest/features/forget_password/logic/verify_password_cubit/verify_password_cubit.dart';
@@ -16,8 +18,6 @@ import 'package:care_nest/features/sign_up/ui/verfiy_account_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../helpers/constants.dart';
-
 abstract class AppRouter {
   static const kSignUpScreen = '/signUpScreen';
   static const kLoginScreen = '/loginScreen';
@@ -27,6 +27,8 @@ abstract class AppRouter {
   static const kVerifyPasswordScreen = '/verifyPasswordScreen';
   static const kCreateNewPasswordScreen = '/createNewPasswordScreen';
   static const kVerifyAccountScreen = '/verifyAccountScreen';
+  static const kAddBabyScreen = '/addBabyScreen';
+  static const kMyBabiesScreen = '/myBabiesScreen';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -90,6 +92,16 @@ abstract class AppRouter {
           ),
         ], child: const VerifyAccountScreen()),
       ),
+      GoRoute(
+          path: kAddBabyScreen,
+          builder: (context, state) {
+            return const AddBabyScreen();
+          }),
+      GoRoute(
+          path: kMyBabiesScreen,
+          builder: (context, state) {
+            return const MyBabiesScreen();
+          }),
     ],
   );
 }
