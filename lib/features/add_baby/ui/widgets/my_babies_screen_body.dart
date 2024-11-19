@@ -20,7 +20,7 @@ class MyBabiesScreenBody extends StatelessWidget {
         title: Text(
           'My Babies',
           style: TextStyle(
-            fontWeight: FontWeightHelper.medium,
+            fontWeight: FontWeightHelper.semiBold,
             fontSize: 24.sp,
           ),
         ),
@@ -34,8 +34,10 @@ class MyBabiesScreenBody extends StatelessWidget {
                   itemCount: 2,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: EdgeInsets.only(bottom: 32.h),
-                      child: const BabyContainer(),
+                      padding: EdgeInsets.only(bottom: 40.h),
+                      child: const BabyContainer(
+                        gender: 'Boy',
+                      ),
                     );
                   },
                 )),
