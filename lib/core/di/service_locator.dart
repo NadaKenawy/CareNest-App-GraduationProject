@@ -15,6 +15,9 @@ import 'package:care_nest/features/sign_up/logic/verfiy_account_cubit/verify_acc
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../features/add_baby/data/repos/add_baby_repo.dart';
+import '../../features/add_baby/logic/cubit/add_baby_cubit.dart';
+
 final getIt = GetIt.instance;
 
 Future<void> setupGetIt() async {
@@ -51,4 +54,8 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<VerifyAccountRepo>(
       () => VerifyAccountRepo(getIt()));
   getIt.registerFactory<VerifyAccountCubit>(() => VerifyAccountCubit(getIt()));
+
+  // add baby
+  getIt.registerLazySingleton<AddBabyRepo>(() => AddBabyRepo(getIt()));
+  getIt.registerFactory<AddBabyCubit>(() => AddBabyCubit(getIt()));
 }

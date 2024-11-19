@@ -1,10 +1,13 @@
+import 'package:care_nest/features/add_baby/ui/widgets/add_baby_bloc_listener.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/baby_data_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
+import '../../logic/cubit/add_baby_cubit.dart';
 import 'header_section.dart';
 import 'gender_selection.dart';
 
@@ -16,11 +19,8 @@ class AddBabyScreenBody extends StatefulWidget {
 }
 
 class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _dobController = TextEditingController();
-  final TextEditingController _weightController = TextEditingController();
-  final TextEditingController _heightController = TextEditingController();
-  final TextEditingController _babyNameController = TextEditingController();
+
   String gender = '';
 
   @override
@@ -47,7 +47,7 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Form(
-                  key: _formKey,
+                  key: context.read<AddBabyCubit>().formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -55,7 +55,7 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
                         hintText: 'Baby Name',
                         gradient: gradient,
                         prefixIcon: Icons.child_care,
-                        controller: _babyNameController,
+                        controller: context.read<AddBabyCubit>().nameController,
                       ),
                       SizedBox(height: 24.h),
                       BabyDataFields(
@@ -74,7 +74,8 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
                               hintText: 'Weight',
                               gradient: gradient,
                               prefixIcon: FontAwesomeIcons.weightScale,
-                              controller: _weightController,
+                              controller:
+                                  context.read<AddBabyCubit>().weightController,
                             ),
                           ),
                           SizedBox(width: 16.w),
@@ -83,7 +84,8 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
                               hintText: 'Height',
                               gradient: gradient,
                               prefixIcon: FontAwesomeIcons.rulerVertical,
-                              controller: _heightController,
+                              controller:
+                                  context.read<AddBabyCubit>().heightController,
                             ),
                           ),
                         ],
@@ -95,6 +97,8 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
                         onChanged: (value) {
                           setState(() {
                             gender = value;
+                            context.read<AddBabyCubit>().genderController.text =
+                                value;
                           });
                         },
                       ),
@@ -114,19 +118,11 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
                 ColorsManager.primaryPinkColor,
               ],
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  if (gender.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          backgroundColor: Colors.red,
-                          content: Text('Please select a gender')),
-                    );
-                    return;
-                  }
-                }
+                validateThenSave(context);
               },
             ),
           ),
+          const AddBabyBlocListener(),
         ],
       ),
     );
@@ -141,8 +137,17 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
     );
     if (pickedDate != null) {
       setState(() {
-        _dobController.text = "${pickedDate.toLocal()}".split(' ')[0];
+        String formattedDate = "${pickedDate.toLocal()}".split(' ')[0];
+        _dobController.text = formattedDate;
+        context.read<AddBabyCubit>().dateOfBirthOfBabyController.text =
+            formattedDate;
       });
+    }
+  }
+
+  void validateThenSave(BuildContext context) {
+    if (context.read<AddBabyCubit>().formKey.currentState!.validate()) {
+      context.read<AddBabyCubit>().emitAddBabyStates();
     }
   }
 }

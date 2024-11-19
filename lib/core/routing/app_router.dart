@@ -1,4 +1,5 @@
 import 'package:care_nest/core/di/service_locator.dart';
+import 'package:care_nest/features/add_baby/logic/cubit/add_baby_cubit.dart';
 import 'package:care_nest/features/add_baby/ui/add_baby_screen.dart';
 import 'package:care_nest/features/add_baby/ui/my_babies_screen.dart';
 import 'package:care_nest/features/forget_password/logic/create_new_password_cubit/create_new_password_cubit.dart';
@@ -95,7 +96,10 @@ abstract class AppRouter {
       GoRoute(
           path: kAddBabyScreen,
           builder: (context, state) {
-            return const AddBabyScreen();
+            return BlocProvider(
+              create: (context) => getIt<AddBabyCubit>(),
+              child: const AddBabyScreen(),
+            );
           }),
       GoRoute(
           path: kMyBabiesScreen,
