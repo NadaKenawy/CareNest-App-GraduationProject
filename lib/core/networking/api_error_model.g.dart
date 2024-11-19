@@ -8,14 +8,10 @@ part of 'api_error_model.dart';
 
 ApiErrorModel _$ApiErrorModelFromJson(Map<String, dynamic> json) =>
     ApiErrorModel(
-      status: json['status'] != null ? json['status'] as String : 'Unknown',
-      error: json['error'] != null
-          ? ErrorDetail.fromJson(json['error'] as Map<String, dynamic>)
-          : ErrorDetail(statusCode: 500, status: 'Error', isOperational: false),
-      message: json['message'] != null
-          ? json['message'] as String
-          : 'No message available',
-      stack: json['stack'] != null ? json['stack'] as String : 'No stack trace',
+      status: json['status'] as String,
+      error: ErrorDetail.fromJson(json['error'] as Map<String, dynamic>),
+      message: json['message'] as String,
+      stack: json['stack'] as String,
     );
 
 Map<String, dynamic> _$ApiErrorModelToJson(ApiErrorModel instance) =>
@@ -27,12 +23,9 @@ Map<String, dynamic> _$ApiErrorModelToJson(ApiErrorModel instance) =>
     };
 
 ErrorDetail _$ErrorDetailFromJson(Map<String, dynamic> json) => ErrorDetail(
-      statusCode: json['statusCode'] != null
-          ? (json['statusCode'] as num).toInt()
-          : 500,
-      status: json['status'] != null ? json['status'] as String : 'Error',
-      isOperational:
-          json['isOperational'] != null ? json['isOperational'] as bool : false,
+      statusCode: (json['statusCode'] as num).toInt(),
+      status: json['status'] as String,
+      isOperational: json['isOperational'] as bool,
     );
 
 Map<String, dynamic> _$ErrorDetailToJson(ErrorDetail instance) =>

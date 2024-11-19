@@ -1,4 +1,5 @@
 import 'package:care_nest/core/networking/api_constants.dart';
+import 'package:care_nest/features/add_baby/data/models/add_baby_response.dart';
 import 'package:care_nest/features/forget_password/data/models/create_new_password_model/create_new_password_request_body.dart';
 import 'package:care_nest/features/forget_password/data/models/forget_password_model/forget_pass_email_request_body.dart';
 import 'package:care_nest/features/forget_password/data/models/forget_password_model/forget_pass_response.dart';
@@ -13,6 +14,8 @@ import 'package:care_nest/features/sign_up/data/models/verify_account_model/veri
 import 'package:dio/dio.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
+
+import '../../features/add_baby/data/models/add_baby_request_body.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.apiBaseUrl)
@@ -47,6 +50,12 @@ abstract class ApiService {
   @POST(ApiConstants.verifyAccount)
   Future<VerifyAccountResponse> verifyAccount(
     @Body() VerifyAccountRequestBody verifyAccountRequestBody,
+    @Header('Authorization') String token,
+  );
+
+  @POST(ApiConstants.addNewBaby)
+  Future<AddBabyResponse> addNewBaby(
+    @Body() AddBabyRequestBody addBabyRequestBody,
     @Header('Authorization') String token,
   );
 }
