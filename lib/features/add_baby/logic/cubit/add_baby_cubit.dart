@@ -19,7 +19,7 @@ class AddBabyCubit extends Cubit<AddBabyState> {
   final formKey = GlobalKey<FormState>();
 
   void emitAddBabyStates() async {
-    emit(const AddBabyState.loading());
+    emit(const AddBabyState.addBabyloading());
 
     String token =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
@@ -36,10 +36,11 @@ class AddBabyCubit extends Cubit<AddBabyState> {
 
     response.when(
       success: (addBabyResponse) async {
-        emit(AddBabyState.success(addBabyResponse));
+        emit(AddBabyState.addBabysuccess(addBabyResponse));
       },
       failure: (error) {
-        emit(AddBabyState.error(error: error.apiErrorModel.message));
+        emit(AddBabyState.addBabyerror(
+            error: error.signUpErrorModel.errors!.first.msg ?? ''));
       },
     );
   }

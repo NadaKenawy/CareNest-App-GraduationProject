@@ -16,7 +16,7 @@ class ForgetPassRepo {
           await _apiService.forgetPassword(forgetPassEmailRequestBody);
       return ApiResult.success(response);
     } catch (error) {
-      return ApiResult.failure(ErrorHandler.handle(error));
+      return ApiResult.failure(ApiErrorHandler.handle(error));
     }
   }
 }

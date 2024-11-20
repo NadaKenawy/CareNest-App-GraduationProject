@@ -3,10 +3,11 @@ import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/features/forget_password/logic/create_new_password_cubit/create_new_password_cubit.dart';
 import 'package:care_nest/features/forget_password/logic/create_new_password_cubit/create_new_password_state.dart';
-import 'package:care_nest/features/forget_password/logic/forget_password_cubit/forget_password_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../core/networking/api_error_model.dart';
 
 class CreateNewPasswordBlocListener extends StatelessWidget {
   const CreateNewPasswordBlocListener({super.key});
@@ -15,13 +16,15 @@ class CreateNewPasswordBlocListener extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<CreateNewPasswordCubit, CreatePasswordState>(
       listenWhen: (previous, current) =>
-          current is Loading || current is Success || current is Error,
+          current is CreateNewPasswordLoading ||
+          current is CreateNewPasswordSuccess ||
+          current is CreateNewPasswordError,
       listener: (context, state) {
         state.whenOrNull(
-          loading: () {
+          createNewPasswordloading: () {
             showDialog(
               context: context,
-              barrierDismissible: false, 
+              barrierDismissible: false,
               builder: (context) => const Center(
                 child: CircularProgressIndicator(
                   color: ColorsManager.primaryBlueColor,
@@ -29,10 +32,9 @@ class CreateNewPasswordBlocListener extends StatelessWidget {
               ),
             );
           },
-          success: (createNewPasswordRepo) {
-            Navigator.of(context).pop(); 
-            GoRouter.of(context)
-                .push(AppRouter.kLoginScreen); 
+          createNewPasswordsuccess: (createNewPasswordRepo) {
+            Navigator.of(context).pop();
+            GoRouter.of(context).push(AppRouter.kLoginScreen);
             AwesomeDialog(
               context: context,
               dialogType: DialogType.success,
@@ -44,8 +46,8 @@ class CreateNewPasswordBlocListener extends StatelessWidget {
               btnOkColor: ColorsManager.primaryBlueColor,
             ).show();
           },
-          error: (error) {
-            setupErrorState(context, error);
+          createNewPassworderror: (apiErrorModel) {
+            setupErrorState(context, apiErrorModel);
           },
         );
       },
@@ -53,14 +55,14 @@ class CreateNewPasswordBlocListener extends StatelessWidget {
     );
   }
 
-  void setupErrorState(BuildContext context, String error) {
+  void setupErrorState(BuildContext context, ApiErrorModel apiErrorModel) {
     context.pop();
     AwesomeDialog(
       context: context,
       dialogType: DialogType.error,
       animType: AnimType.scale,
       title: 'Error',
-      desc: error,
+      desc: apiErrorModel.message,
       btnOkText: 'Got it',
       btnOkOnPress: () {}, // Action on OK press
       btnOkColor: ColorsManager.primaryBlueColor,

@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/networking/api_error_model.dart';
+
 class VerifyPassBlocListner extends StatelessWidget {
   const VerifyPassBlocListner({super.key});
 
@@ -32,8 +34,8 @@ class VerifyPassBlocListner extends StatelessWidget {
             Navigator.of(context).pop();
             GoRouter.of(context).push(AppRouter.kCreateNewPasswordScreen);
           },
-          error: (error) {
-            setupErrorState(context, error);
+          error: (apiErrorModel) {
+            setupErrorState(context, apiErrorModel);
           },
         );
       },
@@ -41,7 +43,7 @@ class VerifyPassBlocListner extends StatelessWidget {
     );
   }
 
-  void setupErrorState(BuildContext context, String error) {
+  void setupErrorState(BuildContext context, ApiErrorModel apiErrorModel) {
     Navigator.of(context).pop();
 
     AwesomeDialog(
@@ -49,7 +51,7 @@ class VerifyPassBlocListner extends StatelessWidget {
       dialogType: DialogType.error,
       animType: AnimType.scale,
       title: 'Error',
-      desc: error,
+      desc: apiErrorModel.message,
       btnOkText: 'Got it',
       btnOkOnPress: () {
         GoRouter.of(context).push(AppRouter.kVerifyPasswordScreen);

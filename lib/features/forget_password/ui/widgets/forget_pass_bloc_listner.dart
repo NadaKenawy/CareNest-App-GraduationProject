@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/networking/api_error_model.dart';
+
 class ForgetPassBlocListner extends StatelessWidget {
   const ForgetPassBlocListner({super.key});
 
@@ -32,8 +34,8 @@ class ForgetPassBlocListner extends StatelessWidget {
             Navigator.of(context).pop();
             GoRouter.of(context).push(AppRouter.kVerifyPasswordScreen);
           },
-          error: (error) {
-            setupErrorState(context, error);
+          error: (apiErrorModel) {
+            setupErrorState(context, apiErrorModel);
           },
         );
       },
@@ -41,14 +43,14 @@ class ForgetPassBlocListner extends StatelessWidget {
     );
   }
 
-  void setupErrorState(BuildContext context, String error) {
+  void setupErrorState(BuildContext context, ApiErrorModel apiErrorModel) {
     Navigator.of(context).pop();
     AwesomeDialog(
       context: context,
       dialogType: DialogType.error,
       animType: AnimType.scale,
       title: 'Error',
-      desc: error,
+      desc: apiErrorModel.message,
       btnOkText: 'Got it',
       btnOkOnPress: () {},
       btnOkColor: ColorsManager.primaryBlueColor,

@@ -1,7 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
@@ -32,8 +31,8 @@ class LoginCubit extends Cubit<LoginState> {
         await saveUserToken(loginResponse.token ?? '');
         emit(LoginState.success(loginResponse));
       },
-      failure: ( error) {
-        emit(LoginState.error(error: error.apiErrorModel.message));
+      failure: (apiErrorModel) {
+        emit(LoginState.error(apiErrorModel));
       },
     );
   }
