@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:care_nest/core/networking/api_constants.dart';
 import 'package:care_nest/features/add_baby/data/models/add_baby_response.dart';
 import 'package:care_nest/features/forget_password/data/models/create_new_password_model/create_new_password_request_body.dart';
@@ -12,10 +14,9 @@ import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_res
 import 'package:care_nest/features/sign_up/data/models/verify_account_model/verify_account_request_body.dart';
 import 'package:care_nest/features/sign_up/data/models/verify_account_model/verify_account_response.dart';
 import 'package:dio/dio.dart';
-import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
-
 import '../../features/add_baby/data/models/add_baby_request_body.dart';
+import '../../features/add_baby/data/models/get_all_babies_response.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.apiBaseUrl)
@@ -56,6 +57,11 @@ abstract class ApiService {
   @POST(ApiConstants.addNewBaby)
   Future<AddBabyResponse> addNewBaby(
     @Body() AddBabyRequestBody addBabyRequestBody,
+    @Header('Authorization') String token,
+  );
+
+  @GET(ApiConstants.getAllBabies)
+  Future<GetAllBabiesResponse> getAllBabies(
     @Header('Authorization') String token,
   );
 }

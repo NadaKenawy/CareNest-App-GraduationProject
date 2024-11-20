@@ -1,20 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'add_baby_response.dart';
+part of 'get_all_babies_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-AddBabyResponse _$AddBabyResponseFromJson(Map<String, dynamic> json) =>
-    AddBabyResponse(
-      babyData: json['data'] == null
-          ? null
-          : BabyData.fromJson(json['data'] as Map<String, dynamic>),
+GetAllBabiesResponse _$GetAllBabiesResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetAllBabiesResponse(
+      results: (json['results'] as num?)?.toInt(),
+      babiesData: (json['data'] as List<dynamic>?)
+          ?.map((e) => BabiesData.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 
-BabyData _$BabyDataFromJson(Map<String, dynamic> json) => BabyData(
+BabiesData _$BabiesDataFromJson(Map<String, dynamic> json) => BabiesData(
       id: json['_id'] as String?,
       name: json['name'] as String?,
       weight: json['weight'] as num?,

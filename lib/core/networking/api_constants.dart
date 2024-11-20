@@ -7,6 +7,7 @@ class ApiConstants {
   static const String resetPassword = "auth/resetpassword";
   static const String verifyAccount = "auth/verifyEmailUser";
   static const String addNewBaby = "babies";
+  static const String getAllBabies = "babies/allBabiesOfLoggedUser";
 }
 
 class ApiErrors {

@@ -6,10 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BabyContainer extends StatelessWidget {
   final String gender; // متغير يحدد الجنس (Boy أو Girl)
-
+  final String name;
   const BabyContainer({
     super.key,
-    required this.gender, // استقبال قيمة الجيندر
+    required this.gender, required this.name, // استقبال قيمة الجيندر
   });
 
   @override
@@ -47,7 +47,7 @@ class BabyContainer extends StatelessWidget {
           ),
           SizedBox(width: 32.w),
           Text(
-            'Baby Name',
+            name,
             style: TextStyle(
               fontWeight: FontWeightHelper.semiBold,
               fontSize: 28.sp,

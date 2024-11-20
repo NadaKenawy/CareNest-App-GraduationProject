@@ -1,5 +1,7 @@
 import 'package:care_nest/core/networking/api_service.dart';
 import 'package:care_nest/core/networking/dio_factory.dart';
+import 'package:care_nest/features/add_baby/data/repos/get_all_babies_repo.dart';
+import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 import 'package:care_nest/features/forget_password/data/repos/create_new_password.dart';
 import 'package:care_nest/features/forget_password/data/repos/forget_pass_repo.dart';
 import 'package:care_nest/features/forget_password/data/repos/verify_password_repo.dart';
@@ -16,7 +18,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../features/add_baby/data/repos/add_baby_repo.dart';
-import '../../features/add_baby/logic/cubit/add_baby_cubit.dart';
+import '../../features/add_baby/logic/add_baby_cubit/add_baby_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -58,4 +60,8 @@ Future<void> setupGetIt() async {
   // add baby
   getIt.registerLazySingleton<AddBabyRepo>(() => AddBabyRepo(getIt()));
   getIt.registerFactory<AddBabyCubit>(() => AddBabyCubit(getIt()));
+
+  //get all babies
+  getIt.registerLazySingleton<GetAllBabiesRepo>(() => GetAllBabiesRepo(getIt()));
+  getIt.registerFactory<GetAllBabiesCubit>(() => GetAllBabiesCubit(getIt()));
 }

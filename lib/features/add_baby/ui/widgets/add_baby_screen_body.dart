@@ -7,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
-import '../../logic/cubit/add_baby_cubit.dart';
+import '../../logic/add_baby_cubit/add_baby_cubit.dart';
 import 'header_section.dart';
 import 'gender_selection.dart';
 
@@ -95,11 +95,15 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
                         gradient: gradient,
                         gender: gender,
                         onChanged: (value) {
-                          setState(() {
-                            gender = value;
-                            context.read<AddBabyCubit>().genderController.text =
-                                value;
-                          });
+                          setState(
+                            () {
+                              gender = value;
+                              context
+                                  .read<AddBabyCubit>()
+                                  .genderController
+                                  .text = value;
+                            },
+                          );
                         },
                       ),
                     ],

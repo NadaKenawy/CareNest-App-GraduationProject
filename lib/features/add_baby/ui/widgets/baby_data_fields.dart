@@ -65,7 +65,7 @@ class _BabyDataFieldsState extends State<BabyDataFields> {
           hintStyle: TextStyle(
             foreground: Paint()
               ..shader = widget.gradient.createShader(
-                Rect.fromLTWH(0.0, 0.0, 200.0, 50.0),
+                const Rect.fromLTWH(0.0, 0.0, 200.0, 50.0),
               ),
           ),
           prefixIcon: ShaderMask(

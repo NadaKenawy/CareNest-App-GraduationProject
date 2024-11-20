@@ -10,6 +10,7 @@ import 'package:care_nest/features/on_boarding_screen.dart/screen3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../core/theme/text_styless.dart';
 
@@ -28,32 +29,32 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   void initState() {
     super.initState();
-    // _checkFirstTimeOpen();
+    _checkFirstTimeOpen();
   }
 
-  // Future<void> _checkFirstTimeOpen() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   bool? hasOpenedBefore = prefs.getBool('hasOpenedBefore');
+  Future<void> _checkFirstTimeOpen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? hasOpenedBefore = prefs.getBool('hasOpenedBefore');
 
-  //   if (hasOpenedBefore != null && hasOpenedBefore) {
-  //     GoRouter.of(context).pushReplacement(AppRouter.kLoginScreen);
-  //   } else {
-  //     await prefs.setBool('hasOpenedBefore', true);
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //   }
-  // }
+    if (hasOpenedBefore != null && hasOpenedBefore) {
+      GoRouter.of(context).pushReplacement(AppRouter.kLoginScreen);
+    } else {
+      await prefs.setBool('hasOpenedBefore', true);
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    // if (_isLoading) {
-    //   return const Scaffold(
-    //     body: Center(
-    //       child: CircularProgressIndicator(),
-    //     ),
-    //   );
-    // }
+    if (_isLoading) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
