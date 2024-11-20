@@ -1,3 +1,4 @@
+import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/add_baby_bloc_listener.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/baby_data_fields.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
+import 'package:go_router/go_router.dart';
 import '../../logic/add_baby_cubit/add_baby_cubit.dart';
 import 'header_section.dart';
 import 'gender_selection.dart';
@@ -123,6 +125,7 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
               ],
               onPressed: () {
                 validateThenSave(context);
+                GoRouter.of(context).push(AppRouter.kMyBabiesScreen);
               },
             ),
           ),

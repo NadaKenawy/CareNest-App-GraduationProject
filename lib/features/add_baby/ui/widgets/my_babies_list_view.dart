@@ -6,16 +6,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class MyBabiesListView extends StatelessWidget {
   const MyBabiesListView({super.key, required this.babiesList});
   final List<BabiesData>? babiesList;
+
   @override
   Widget build(BuildContext context) {
+    final reversedList = babiesList?.reversed.toList() ?? [];
+
     return ListView.builder(
-      itemCount: babiesList!.length,
+      itemCount: reversedList.length,
       itemBuilder: (context, index) {
         return Padding(
           padding: EdgeInsets.only(bottom: 40.h),
           child: BabyContainer(
             gender: "Boy",
-            name: babiesList?[index].name ?? "ali",
+            name: reversedList[index].name ?? "ali",
           ),
         );
       },

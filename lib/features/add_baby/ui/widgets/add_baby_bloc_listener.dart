@@ -3,8 +3,6 @@ import 'package:care_nest/features/add_baby/logic/add_baby_cubit/add_baby_cubit.
 import 'package:care_nest/features/add_baby/logic/add_baby_cubit/add_baby_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import '../../../../core/routing/app_router.dart';
 import '../../../../core/theme/colors_manager.dart';
 
 class AddBabyBlocListener extends StatelessWidget {
@@ -26,7 +24,6 @@ class AddBabyBlocListener extends StatelessWidget {
           addBabysuccess: (addBabyResponse) {
             // Close the loading dialog
             Navigator.of(context).pop();
-            //GoRouter.of(context).push(AppRouter.kVerifyAccountScreen);
           },
           addBabyerror: (error) {
             setupErrorState(context, error);
@@ -52,20 +49,6 @@ class AddBabyBlocListener extends StatelessWidget {
         );
       },
     );
-  }
-
-  void showSuccessDialog(BuildContext context) {
-    AwesomeDialog(
-      context: context,
-      dialogType: DialogType.success,
-      animType: AnimType.scale,
-      title: 'Signup Successful',
-      desc: 'Congratulations, you have signed up successfully!',
-      btnOkOnPress: () {
-        GoRouter.of(context).push(AppRouter.kLoginScreen);
-      },
-      btnOkColor: ColorsManager.primaryBlueColor,
-    ).show();
   }
 
   void setupErrorState(BuildContext context, String error) {
