@@ -1,5 +1,6 @@
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_state.dart';
+import 'package:care_nest/features/add_baby/ui/widgets/babies_list_view_skeletonizer.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/my_babies_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,16 +34,7 @@ class MyBabiesBlocBuilder extends StatelessWidget {
   }
 
   Widget setupLoading() {
-    // return const Expanded(
-    //   child: Column(
-    //       // children: [
-    //       //   const SpecialityShimmerLoading(),
-    //       //   verticalSpace(8),
-    //       //   const DoctorsShimmerLoading(),
-    //       //  ],
-    //       ),
-    // );
-    return const CircularProgressIndicator();
+    return const BabiesListViewSkeletonizer();
   }
 
   Widget setupSuccess(babiesList) {
