@@ -4,11 +4,8 @@ import 'package:care_nest/features/add_baby/logic/cubit/add_baby_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../../core/routing/app_router.dart';
 import '../../../../core/theme/colors_manager.dart';
-
-
 
 class AddBabyBlocListener extends StatelessWidget {
   const AddBabyBlocListener({super.key});
@@ -17,19 +14,21 @@ class AddBabyBlocListener extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AddBabyCubit, AddBabyState>(
       listenWhen: (previous, current) =>
-          current is Loading || current is Success || current is Error,
+          current is AddBabyLoading ||
+          current is AddBabySuccess ||
+          current is AddBabyError,
       listener: (context, state) {
         state.whenOrNull(
-          loading: () {
+          addBabyloading: () {
             // Show loading indicator separately
             showLoadingIndicator(context);
           },
-          success: (addBabyResponse) {
+          addBabysuccess: (addBabyResponse) {
             // Close the loading dialog
             Navigator.of(context).pop();
             //GoRouter.of(context).push(AppRouter.kVerifyAccountScreen);
           },
-          error: (error) {
+          addBabyerror: (error) {
             setupErrorState(context, error);
           },
         );

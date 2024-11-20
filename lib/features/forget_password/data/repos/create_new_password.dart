@@ -19,7 +19,7 @@ class CreateNewPasswordRepo {
       await _apiService.createNewPassword(token, createNewPasswordRequestBody);
       return const ApiResult.success(null); 
     } catch (error) {
-      return ApiResult.failure(ErrorHandler.handle(error));
+      return ApiResult.failure(ApiErrorHandler.handle(error));
     }
   }
 }

@@ -19,50 +19,58 @@ mixin _$CreatePasswordState<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) success,
-    required TResult Function(String error) error,
+    required TResult Function() createNewPasswordloading,
+    required TResult Function(String message) createNewPasswordsuccess,
+    required TResult Function(ApiErrorModel apiErrorModel)
+        createNewPassworderror,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? success,
-    TResult? Function(String error)? error,
+    TResult? Function()? createNewPasswordloading,
+    TResult? Function(String message)? createNewPasswordsuccess,
+    TResult? Function(ApiErrorModel apiErrorModel)? createNewPassworderror,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? success,
-    TResult Function(String error)? error,
+    TResult Function()? createNewPasswordloading,
+    TResult Function(String message)? createNewPasswordsuccess,
+    TResult Function(ApiErrorModel apiErrorModel)? createNewPassworderror,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
-    required TResult Function(_Loading<T> value) loading,
-    required TResult Function(_Success<T> value) success,
-    required TResult Function(_Error<T> value) error,
+    required TResult Function(CreateNewPasswordLoading<T> value)
+        createNewPasswordloading,
+    required TResult Function(CreateNewPasswordSuccess<T> value)
+        createNewPasswordsuccess,
+    required TResult Function(CreateNewPasswordError<T> value)
+        createNewPassworderror,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(_Loading<T> value)? loading,
-    TResult? Function(_Success<T> value)? success,
-    TResult? Function(_Error<T> value)? error,
+    TResult? Function(CreateNewPasswordLoading<T> value)?
+        createNewPasswordloading,
+    TResult? Function(CreateNewPasswordSuccess<T> value)?
+        createNewPasswordsuccess,
+    TResult? Function(CreateNewPasswordError<T> value)? createNewPassworderror,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Success<T> value)? success,
-    TResult Function(_Error<T> value)? error,
+    TResult Function(CreateNewPasswordLoading<T> value)?
+        createNewPasswordloading,
+    TResult Function(CreateNewPasswordSuccess<T> value)?
+        createNewPasswordsuccess,
+    TResult Function(CreateNewPasswordError<T> value)? createNewPassworderror,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -132,9 +140,10 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) success,
-    required TResult Function(String error) error,
+    required TResult Function() createNewPasswordloading,
+    required TResult Function(String message) createNewPasswordsuccess,
+    required TResult Function(ApiErrorModel apiErrorModel)
+        createNewPassworderror,
   }) {
     return initial();
   }
@@ -143,9 +152,9 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? success,
-    TResult? Function(String error)? error,
+    TResult? Function()? createNewPasswordloading,
+    TResult? Function(String message)? createNewPasswordsuccess,
+    TResult? Function(ApiErrorModel apiErrorModel)? createNewPassworderror,
   }) {
     return initial?.call();
   }
@@ -154,9 +163,9 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? success,
-    TResult Function(String error)? error,
+    TResult Function()? createNewPasswordloading,
+    TResult Function(String message)? createNewPasswordsuccess,
+    TResult Function(ApiErrorModel apiErrorModel)? createNewPassworderror,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -169,9 +178,12 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
-    required TResult Function(_Loading<T> value) loading,
-    required TResult Function(_Success<T> value) success,
-    required TResult Function(_Error<T> value) error,
+    required TResult Function(CreateNewPasswordLoading<T> value)
+        createNewPasswordloading,
+    required TResult Function(CreateNewPasswordSuccess<T> value)
+        createNewPasswordsuccess,
+    required TResult Function(CreateNewPasswordError<T> value)
+        createNewPassworderror,
   }) {
     return initial(this);
   }
@@ -180,9 +192,11 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(_Loading<T> value)? loading,
-    TResult? Function(_Success<T> value)? success,
-    TResult? Function(_Error<T> value)? error,
+    TResult? Function(CreateNewPasswordLoading<T> value)?
+        createNewPasswordloading,
+    TResult? Function(CreateNewPasswordSuccess<T> value)?
+        createNewPasswordsuccess,
+    TResult? Function(CreateNewPasswordError<T> value)? createNewPassworderror,
   }) {
     return initial?.call(this);
   }
@@ -191,9 +205,11 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Success<T> value)? success,
-    TResult Function(_Error<T> value)? error,
+    TResult Function(CreateNewPasswordLoading<T> value)?
+        createNewPasswordloading,
+    TResult Function(CreateNewPasswordSuccess<T> value)?
+        createNewPasswordsuccess,
+    TResult Function(CreateNewPasswordError<T> value)? createNewPassworderror,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -208,18 +224,21 @@ abstract class _Initial<T> implements CreatePasswordState<T> {
 }
 
 /// @nodoc
-abstract class _$$LoadingImplCopyWith<T, $Res> {
-  factory _$$LoadingImplCopyWith(
-          _$LoadingImpl<T> value, $Res Function(_$LoadingImpl<T>) then) =
-      __$$LoadingImplCopyWithImpl<T, $Res>;
+abstract class _$$CreateNewPasswordLoadingImplCopyWith<T, $Res> {
+  factory _$$CreateNewPasswordLoadingImplCopyWith(
+          _$CreateNewPasswordLoadingImpl<T> value,
+          $Res Function(_$CreateNewPasswordLoadingImpl<T>) then) =
+      __$$CreateNewPasswordLoadingImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$LoadingImplCopyWithImpl<T, $Res>
-    extends _$CreatePasswordStateCopyWithImpl<T, $Res, _$LoadingImpl<T>>
-    implements _$$LoadingImplCopyWith<T, $Res> {
-  __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl<T> _value, $Res Function(_$LoadingImpl<T>) _then)
+class __$$CreateNewPasswordLoadingImplCopyWithImpl<T, $Res>
+    extends _$CreatePasswordStateCopyWithImpl<T, $Res,
+        _$CreateNewPasswordLoadingImpl<T>>
+    implements _$$CreateNewPasswordLoadingImplCopyWith<T, $Res> {
+  __$$CreateNewPasswordLoadingImplCopyWithImpl(
+      _$CreateNewPasswordLoadingImpl<T> _value,
+      $Res Function(_$CreateNewPasswordLoadingImpl<T>) _then)
       : super(_value, _then);
 
   /// Create a copy of CreatePasswordState
@@ -228,18 +247,19 @@ class __$$LoadingImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$LoadingImpl<T> implements _Loading<T> {
-  const _$LoadingImpl();
+class _$CreateNewPasswordLoadingImpl<T> implements CreateNewPasswordLoading<T> {
+  const _$CreateNewPasswordLoadingImpl();
 
   @override
   String toString() {
-    return 'CreatePasswordState<$T>.loading()';
+    return 'CreatePasswordState<$T>.createNewPasswordloading()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl<T>);
+        (other.runtimeType == runtimeType &&
+            other is _$CreateNewPasswordLoadingImpl<T>);
   }
 
   @override
@@ -249,35 +269,36 @@ class _$LoadingImpl<T> implements _Loading<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) success,
-    required TResult Function(String error) error,
+    required TResult Function() createNewPasswordloading,
+    required TResult Function(String message) createNewPasswordsuccess,
+    required TResult Function(ApiErrorModel apiErrorModel)
+        createNewPassworderror,
   }) {
-    return loading();
+    return createNewPasswordloading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? success,
-    TResult? Function(String error)? error,
+    TResult? Function()? createNewPasswordloading,
+    TResult? Function(String message)? createNewPasswordsuccess,
+    TResult? Function(ApiErrorModel apiErrorModel)? createNewPassworderror,
   }) {
-    return loading?.call();
+    return createNewPasswordloading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? success,
-    TResult Function(String error)? error,
+    TResult Function()? createNewPasswordloading,
+    TResult Function(String message)? createNewPasswordsuccess,
+    TResult Function(ApiErrorModel apiErrorModel)? createNewPassworderror,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading();
+    if (createNewPasswordloading != null) {
+      return createNewPasswordloading();
     }
     return orElse();
   }
@@ -286,59 +307,69 @@ class _$LoadingImpl<T> implements _Loading<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
-    required TResult Function(_Loading<T> value) loading,
-    required TResult Function(_Success<T> value) success,
-    required TResult Function(_Error<T> value) error,
+    required TResult Function(CreateNewPasswordLoading<T> value)
+        createNewPasswordloading,
+    required TResult Function(CreateNewPasswordSuccess<T> value)
+        createNewPasswordsuccess,
+    required TResult Function(CreateNewPasswordError<T> value)
+        createNewPassworderror,
   }) {
-    return loading(this);
+    return createNewPasswordloading(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(_Loading<T> value)? loading,
-    TResult? Function(_Success<T> value)? success,
-    TResult? Function(_Error<T> value)? error,
+    TResult? Function(CreateNewPasswordLoading<T> value)?
+        createNewPasswordloading,
+    TResult? Function(CreateNewPasswordSuccess<T> value)?
+        createNewPasswordsuccess,
+    TResult? Function(CreateNewPasswordError<T> value)? createNewPassworderror,
   }) {
-    return loading?.call(this);
+    return createNewPasswordloading?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Success<T> value)? success,
-    TResult Function(_Error<T> value)? error,
+    TResult Function(CreateNewPasswordLoading<T> value)?
+        createNewPasswordloading,
+    TResult Function(CreateNewPasswordSuccess<T> value)?
+        createNewPasswordsuccess,
+    TResult Function(CreateNewPasswordError<T> value)? createNewPassworderror,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading(this);
+    if (createNewPasswordloading != null) {
+      return createNewPasswordloading(this);
     }
     return orElse();
   }
 }
 
-abstract class _Loading<T> implements CreatePasswordState<T> {
-  const factory _Loading() = _$LoadingImpl<T>;
+abstract class CreateNewPasswordLoading<T> implements CreatePasswordState<T> {
+  const factory CreateNewPasswordLoading() = _$CreateNewPasswordLoadingImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$SuccessImplCopyWith<T, $Res> {
-  factory _$$SuccessImplCopyWith(
-          _$SuccessImpl<T> value, $Res Function(_$SuccessImpl<T>) then) =
-      __$$SuccessImplCopyWithImpl<T, $Res>;
+abstract class _$$CreateNewPasswordSuccessImplCopyWith<T, $Res> {
+  factory _$$CreateNewPasswordSuccessImplCopyWith(
+          _$CreateNewPasswordSuccessImpl<T> value,
+          $Res Function(_$CreateNewPasswordSuccessImpl<T>) then) =
+      __$$CreateNewPasswordSuccessImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$SuccessImplCopyWithImpl<T, $Res>
-    extends _$CreatePasswordStateCopyWithImpl<T, $Res, _$SuccessImpl<T>>
-    implements _$$SuccessImplCopyWith<T, $Res> {
-  __$$SuccessImplCopyWithImpl(
-      _$SuccessImpl<T> _value, $Res Function(_$SuccessImpl<T>) _then)
+class __$$CreateNewPasswordSuccessImplCopyWithImpl<T, $Res>
+    extends _$CreatePasswordStateCopyWithImpl<T, $Res,
+        _$CreateNewPasswordSuccessImpl<T>>
+    implements _$$CreateNewPasswordSuccessImplCopyWith<T, $Res> {
+  __$$CreateNewPasswordSuccessImplCopyWithImpl(
+      _$CreateNewPasswordSuccessImpl<T> _value,
+      $Res Function(_$CreateNewPasswordSuccessImpl<T>) _then)
       : super(_value, _then);
 
   /// Create a copy of CreatePasswordState
@@ -348,7 +379,7 @@ class __$$SuccessImplCopyWithImpl<T, $Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$SuccessImpl<T>(
+    return _then(_$CreateNewPasswordSuccessImpl<T>(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -359,22 +390,22 @@ class __$$SuccessImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$SuccessImpl<T> implements _Success<T> {
-  const _$SuccessImpl({required this.message});
+class _$CreateNewPasswordSuccessImpl<T> implements CreateNewPasswordSuccess<T> {
+  const _$CreateNewPasswordSuccessImpl({required this.message});
 
   @override
   final String message;
 
   @override
   String toString() {
-    return 'CreatePasswordState<$T>.success(message: $message)';
+    return 'CreatePasswordState<$T>.createNewPasswordsuccess(message: $message)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SuccessImpl<T> &&
+            other is _$CreateNewPasswordSuccessImpl<T> &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -386,42 +417,44 @@ class _$SuccessImpl<T> implements _Success<T> {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SuccessImplCopyWith<T, _$SuccessImpl<T>> get copyWith =>
-      __$$SuccessImplCopyWithImpl<T, _$SuccessImpl<T>>(this, _$identity);
+  _$$CreateNewPasswordSuccessImplCopyWith<T, _$CreateNewPasswordSuccessImpl<T>>
+      get copyWith => __$$CreateNewPasswordSuccessImplCopyWithImpl<T,
+          _$CreateNewPasswordSuccessImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) success,
-    required TResult Function(String error) error,
+    required TResult Function() createNewPasswordloading,
+    required TResult Function(String message) createNewPasswordsuccess,
+    required TResult Function(ApiErrorModel apiErrorModel)
+        createNewPassworderror,
   }) {
-    return success(message);
+    return createNewPasswordsuccess(message);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? success,
-    TResult? Function(String error)? error,
+    TResult? Function()? createNewPasswordloading,
+    TResult? Function(String message)? createNewPasswordsuccess,
+    TResult? Function(ApiErrorModel apiErrorModel)? createNewPassworderror,
   }) {
-    return success?.call(message);
+    return createNewPasswordsuccess?.call(message);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? success,
-    TResult Function(String error)? error,
+    TResult Function()? createNewPasswordloading,
+    TResult Function(String message)? createNewPasswordsuccess,
+    TResult Function(ApiErrorModel apiErrorModel)? createNewPassworderror,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(message);
+    if (createNewPasswordsuccess != null) {
+      return createNewPasswordsuccess(message);
     }
     return orElse();
   }
@@ -430,67 +463,78 @@ class _$SuccessImpl<T> implements _Success<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
-    required TResult Function(_Loading<T> value) loading,
-    required TResult Function(_Success<T> value) success,
-    required TResult Function(_Error<T> value) error,
+    required TResult Function(CreateNewPasswordLoading<T> value)
+        createNewPasswordloading,
+    required TResult Function(CreateNewPasswordSuccess<T> value)
+        createNewPasswordsuccess,
+    required TResult Function(CreateNewPasswordError<T> value)
+        createNewPassworderror,
   }) {
-    return success(this);
+    return createNewPasswordsuccess(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(_Loading<T> value)? loading,
-    TResult? Function(_Success<T> value)? success,
-    TResult? Function(_Error<T> value)? error,
+    TResult? Function(CreateNewPasswordLoading<T> value)?
+        createNewPasswordloading,
+    TResult? Function(CreateNewPasswordSuccess<T> value)?
+        createNewPasswordsuccess,
+    TResult? Function(CreateNewPasswordError<T> value)? createNewPassworderror,
   }) {
-    return success?.call(this);
+    return createNewPasswordsuccess?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Success<T> value)? success,
-    TResult Function(_Error<T> value)? error,
+    TResult Function(CreateNewPasswordLoading<T> value)?
+        createNewPasswordloading,
+    TResult Function(CreateNewPasswordSuccess<T> value)?
+        createNewPasswordsuccess,
+    TResult Function(CreateNewPasswordError<T> value)? createNewPassworderror,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(this);
+    if (createNewPasswordsuccess != null) {
+      return createNewPasswordsuccess(this);
     }
     return orElse();
   }
 }
 
-abstract class _Success<T> implements CreatePasswordState<T> {
-  const factory _Success({required final String message}) = _$SuccessImpl<T>;
+abstract class CreateNewPasswordSuccess<T> implements CreatePasswordState<T> {
+  const factory CreateNewPasswordSuccess({required final String message}) =
+      _$CreateNewPasswordSuccessImpl<T>;
 
   String get message;
 
   /// Create a copy of CreatePasswordState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SuccessImplCopyWith<T, _$SuccessImpl<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CreateNewPasswordSuccessImplCopyWith<T, _$CreateNewPasswordSuccessImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ErrorImplCopyWith<T, $Res> {
-  factory _$$ErrorImplCopyWith(
-          _$ErrorImpl<T> value, $Res Function(_$ErrorImpl<T>) then) =
-      __$$ErrorImplCopyWithImpl<T, $Res>;
+abstract class _$$CreateNewPasswordErrorImplCopyWith<T, $Res> {
+  factory _$$CreateNewPasswordErrorImplCopyWith(
+          _$CreateNewPasswordErrorImpl<T> value,
+          $Res Function(_$CreateNewPasswordErrorImpl<T>) then) =
+      __$$CreateNewPasswordErrorImplCopyWithImpl<T, $Res>;
   @useResult
-  $Res call({String error});
+  $Res call({ApiErrorModel apiErrorModel});
 }
 
 /// @nodoc
-class __$$ErrorImplCopyWithImpl<T, $Res>
-    extends _$CreatePasswordStateCopyWithImpl<T, $Res, _$ErrorImpl<T>>
-    implements _$$ErrorImplCopyWith<T, $Res> {
-  __$$ErrorImplCopyWithImpl(
-      _$ErrorImpl<T> _value, $Res Function(_$ErrorImpl<T>) _then)
+class __$$CreateNewPasswordErrorImplCopyWithImpl<T, $Res>
+    extends _$CreatePasswordStateCopyWithImpl<T, $Res,
+        _$CreateNewPasswordErrorImpl<T>>
+    implements _$$CreateNewPasswordErrorImplCopyWith<T, $Res> {
+  __$$CreateNewPasswordErrorImplCopyWithImpl(
+      _$CreateNewPasswordErrorImpl<T> _value,
+      $Res Function(_$CreateNewPasswordErrorImpl<T>) _then)
       : super(_value, _then);
 
   /// Create a copy of CreatePasswordState
@@ -498,82 +542,85 @@ class __$$ErrorImplCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = null,
+    Object? apiErrorModel = null,
   }) {
-    return _then(_$ErrorImpl<T>(
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$CreateNewPasswordErrorImpl<T>(
+      null == apiErrorModel
+          ? _value.apiErrorModel
+          : apiErrorModel // ignore: cast_nullable_to_non_nullable
+              as ApiErrorModel,
     ));
   }
 }
 
 /// @nodoc
 
-class _$ErrorImpl<T> implements _Error<T> {
-  const _$ErrorImpl({required this.error});
+class _$CreateNewPasswordErrorImpl<T> implements CreateNewPasswordError<T> {
+  const _$CreateNewPasswordErrorImpl(this.apiErrorModel);
 
   @override
-  final String error;
+  final ApiErrorModel apiErrorModel;
 
   @override
   String toString() {
-    return 'CreatePasswordState<$T>.error(error: $error)';
+    return 'CreatePasswordState<$T>.createNewPassworderror(apiErrorModel: $apiErrorModel)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ErrorImpl<T> &&
-            (identical(other.error, error) || other.error == error));
+            other is _$CreateNewPasswordErrorImpl<T> &&
+            (identical(other.apiErrorModel, apiErrorModel) ||
+                other.apiErrorModel == apiErrorModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode => Object.hash(runtimeType, apiErrorModel);
 
   /// Create a copy of CreatePasswordState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ErrorImplCopyWith<T, _$ErrorImpl<T>> get copyWith =>
-      __$$ErrorImplCopyWithImpl<T, _$ErrorImpl<T>>(this, _$identity);
+  _$$CreateNewPasswordErrorImplCopyWith<T, _$CreateNewPasswordErrorImpl<T>>
+      get copyWith => __$$CreateNewPasswordErrorImplCopyWithImpl<T,
+          _$CreateNewPasswordErrorImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) success,
-    required TResult Function(String error) error,
+    required TResult Function() createNewPasswordloading,
+    required TResult Function(String message) createNewPasswordsuccess,
+    required TResult Function(ApiErrorModel apiErrorModel)
+        createNewPassworderror,
   }) {
-    return error(this.error);
+    return createNewPassworderror(apiErrorModel);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? success,
-    TResult? Function(String error)? error,
+    TResult? Function()? createNewPasswordloading,
+    TResult? Function(String message)? createNewPasswordsuccess,
+    TResult? Function(ApiErrorModel apiErrorModel)? createNewPassworderror,
   }) {
-    return error?.call(this.error);
+    return createNewPassworderror?.call(apiErrorModel);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? success,
-    TResult Function(String error)? error,
+    TResult Function()? createNewPasswordloading,
+    TResult Function(String message)? createNewPasswordsuccess,
+    TResult Function(ApiErrorModel apiErrorModel)? createNewPassworderror,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(this.error);
+    if (createNewPassworderror != null) {
+      return createNewPassworderror(apiErrorModel);
     }
     return orElse();
   }
@@ -582,48 +629,56 @@ class _$ErrorImpl<T> implements _Error<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
-    required TResult Function(_Loading<T> value) loading,
-    required TResult Function(_Success<T> value) success,
-    required TResult Function(_Error<T> value) error,
+    required TResult Function(CreateNewPasswordLoading<T> value)
+        createNewPasswordloading,
+    required TResult Function(CreateNewPasswordSuccess<T> value)
+        createNewPasswordsuccess,
+    required TResult Function(CreateNewPasswordError<T> value)
+        createNewPassworderror,
   }) {
-    return error(this);
+    return createNewPassworderror(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(_Loading<T> value)? loading,
-    TResult? Function(_Success<T> value)? success,
-    TResult? Function(_Error<T> value)? error,
+    TResult? Function(CreateNewPasswordLoading<T> value)?
+        createNewPasswordloading,
+    TResult? Function(CreateNewPasswordSuccess<T> value)?
+        createNewPasswordsuccess,
+    TResult? Function(CreateNewPasswordError<T> value)? createNewPassworderror,
   }) {
-    return error?.call(this);
+    return createNewPassworderror?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
-    TResult Function(_Loading<T> value)? loading,
-    TResult Function(_Success<T> value)? success,
-    TResult Function(_Error<T> value)? error,
+    TResult Function(CreateNewPasswordLoading<T> value)?
+        createNewPasswordloading,
+    TResult Function(CreateNewPasswordSuccess<T> value)?
+        createNewPasswordsuccess,
+    TResult Function(CreateNewPasswordError<T> value)? createNewPassworderror,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(this);
+    if (createNewPassworderror != null) {
+      return createNewPassworderror(this);
     }
     return orElse();
   }
 }
 
-abstract class _Error<T> implements CreatePasswordState<T> {
-  const factory _Error({required final String error}) = _$ErrorImpl<T>;
+abstract class CreateNewPasswordError<T> implements CreatePasswordState<T> {
+  const factory CreateNewPasswordError(final ApiErrorModel apiErrorModel) =
+      _$CreateNewPasswordErrorImpl<T>;
 
-  String get error;
+  ApiErrorModel get apiErrorModel;
 
   /// Create a copy of CreatePasswordState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ErrorImplCopyWith<T, _$ErrorImpl<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$CreateNewPasswordErrorImplCopyWith<T, _$CreateNewPasswordErrorImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
 }

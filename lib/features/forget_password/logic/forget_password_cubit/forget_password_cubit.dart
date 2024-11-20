@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/networking/dio_factory.dart';
@@ -41,8 +40,8 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
 
         emit(ForgetPasswordState.success(forgetPassResponse));
       },
-      failure: (error) {
-        emit(ForgetPasswordState.error(error: error.apiErrorModel.message));
+      failure: (apiErrorModel) {
+        emit(ForgetPasswordState.error(apiErrorModel));
       },
     );
   }

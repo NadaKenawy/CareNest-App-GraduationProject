@@ -19,17 +19,11 @@ class CreateNewPasswordCubit extends Cubit<CreatePasswordState> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   Future<void> emitCreateNewPasswordStates() async {
-    emit(const CreatePasswordState.loading());
+    emit(const CreatePasswordState.createNewPasswordloading());
 
     // Fetch the token from shared preferences
     String? token =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
-
-    if (token == null || token.isEmpty) {
-      emit(const CreatePasswordState.error(
-          error: 'User token is not available.'));
-      return;
-    }
 
     // Create password change request
     final response = await _createNewPasswordRepo.createNewPassword(
@@ -37,16 +31,16 @@ class CreateNewPasswordCubit extends Cubit<CreatePasswordState> {
         newPassword: newPasswordController.text,
         passwordConfirm: passwordConfirmController.text,
       ),
-      token,
+      token ?? '',
     );
 
     response.when(
       success: (_) {
-        emit(const CreatePasswordState.success(
+        emit(const CreatePasswordState.createNewPasswordsuccess(
             message: 'Password created successfully!'));
       },
-      failure: (error) {
-        emit(CreatePasswordState.error(error: error.apiErrorModel.message));
+      failure: (apiErrorModel) {
+        emit(CreatePasswordState.createNewPassworderror(apiErrorModel));
       },
     );
   }

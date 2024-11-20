@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/networking/api_error_model.dart';
+
 class LoginBlocListener extends StatelessWidget {
   const LoginBlocListener({super.key});
 
@@ -37,12 +39,13 @@ class LoginBlocListener extends StatelessWidget {
             GoRouter.of(context).go(AppRouter.kHomeScreen,
                 extra: userName); // Navigate to Home Screen
           },
-          error: (error) {
+          error: (apiErrorModel) {
             if (Navigator.canPop(context)) {
               Navigator.of(context, rootNavigator: true)
                   .pop(); // Close loading dialog
             }
-            setupErrorState(context, error); // Show error using AwesomeDialog
+            setupErrorState(
+                context, apiErrorModel); // Show error using AwesomeDialog
           },
         );
       },
@@ -50,13 +53,13 @@ class LoginBlocListener extends StatelessWidget {
     );
   }
 
-  void setupErrorState(BuildContext context, String error) {
+  void setupErrorState(BuildContext context, ApiErrorModel apiErrorModel) {
     AwesomeDialog(
       context: context,
       dialogType: DialogType.error,
       animType: AnimType.scale,
       title: 'Error',
-      desc: error,
+      desc: apiErrorModel.message,
       btnOkText: 'Got it',
       btnOkOnPress: () {},
       btnOkColor: ColorsManager.primaryBlueColor,

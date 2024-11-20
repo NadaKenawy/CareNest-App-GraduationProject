@@ -45,8 +45,8 @@ class VerifyAccountCubit extends Cubit<VerifyAccountState> {
       success: (verifyAccountResponse) async {
         emit(VerifyAccountState.success(verifyAccountResponse));
       },
-      failure: (error) {
-        emit(VerifyAccountState.error(error: error.apiErrorModel.message));
+      failure: (apiErrorModel) {
+        emit(VerifyAccountState.error(apiErrorModel));
       },
     );
   }

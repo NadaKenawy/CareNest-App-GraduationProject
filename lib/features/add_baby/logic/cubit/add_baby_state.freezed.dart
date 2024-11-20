@@ -19,50 +19,50 @@ mixin _$AddBabyState<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(T data) success,
-    required TResult Function(String error) error,
+    required TResult Function() addBabyloading,
+    required TResult Function(T data) addBabysuccess,
+    required TResult Function(String error) addBabyerror,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(T data)? success,
-    TResult? Function(String error)? error,
+    TResult? Function()? addBabyloading,
+    TResult? Function(T data)? addBabysuccess,
+    TResult? Function(String error)? addBabyerror,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(T data)? success,
-    TResult Function(String error)? error,
+    TResult Function()? addBabyloading,
+    TResult Function(T data)? addBabysuccess,
+    TResult Function(String error)? addBabyerror,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
-    required TResult Function(Loading<T> value) loading,
-    required TResult Function(Success<T> value) success,
-    required TResult Function(Error<T> value) error,
+    required TResult Function(AddBabyLoading<T> value) addBabyloading,
+    required TResult Function(AddBabySuccess<T> value) addBabysuccess,
+    required TResult Function(AddBabyError<T> value) addBabyerror,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(Loading<T> value)? loading,
-    TResult? Function(Success<T> value)? success,
-    TResult? Function(Error<T> value)? error,
+    TResult? Function(AddBabyLoading<T> value)? addBabyloading,
+    TResult? Function(AddBabySuccess<T> value)? addBabysuccess,
+    TResult? Function(AddBabyError<T> value)? addBabyerror,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
-    TResult Function(Loading<T> value)? loading,
-    TResult Function(Success<T> value)? success,
-    TResult Function(Error<T> value)? error,
+    TResult Function(AddBabyLoading<T> value)? addBabyloading,
+    TResult Function(AddBabySuccess<T> value)? addBabysuccess,
+    TResult Function(AddBabyError<T> value)? addBabyerror,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -131,9 +131,9 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(T data) success,
-    required TResult Function(String error) error,
+    required TResult Function() addBabyloading,
+    required TResult Function(T data) addBabysuccess,
+    required TResult Function(String error) addBabyerror,
   }) {
     return initial();
   }
@@ -142,9 +142,9 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(T data)? success,
-    TResult? Function(String error)? error,
+    TResult? Function()? addBabyloading,
+    TResult? Function(T data)? addBabysuccess,
+    TResult? Function(String error)? addBabyerror,
   }) {
     return initial?.call();
   }
@@ -153,9 +153,9 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(T data)? success,
-    TResult Function(String error)? error,
+    TResult Function()? addBabyloading,
+    TResult Function(T data)? addBabysuccess,
+    TResult Function(String error)? addBabyerror,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -168,9 +168,9 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
-    required TResult Function(Loading<T> value) loading,
-    required TResult Function(Success<T> value) success,
-    required TResult Function(Error<T> value) error,
+    required TResult Function(AddBabyLoading<T> value) addBabyloading,
+    required TResult Function(AddBabySuccess<T> value) addBabysuccess,
+    required TResult Function(AddBabyError<T> value) addBabyerror,
   }) {
     return initial(this);
   }
@@ -179,9 +179,9 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(Loading<T> value)? loading,
-    TResult? Function(Success<T> value)? success,
-    TResult? Function(Error<T> value)? error,
+    TResult? Function(AddBabyLoading<T> value)? addBabyloading,
+    TResult? Function(AddBabySuccess<T> value)? addBabysuccess,
+    TResult? Function(AddBabyError<T> value)? addBabyerror,
   }) {
     return initial?.call(this);
   }
@@ -190,9 +190,9 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
-    TResult Function(Loading<T> value)? loading,
-    TResult Function(Success<T> value)? success,
-    TResult Function(Error<T> value)? error,
+    TResult Function(AddBabyLoading<T> value)? addBabyloading,
+    TResult Function(AddBabySuccess<T> value)? addBabysuccess,
+    TResult Function(AddBabyError<T> value)? addBabyerror,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -207,18 +207,18 @@ abstract class _Initial<T> implements AddBabyState<T> {
 }
 
 /// @nodoc
-abstract class _$$LoadingImplCopyWith<T, $Res> {
-  factory _$$LoadingImplCopyWith(
-          _$LoadingImpl<T> value, $Res Function(_$LoadingImpl<T>) then) =
-      __$$LoadingImplCopyWithImpl<T, $Res>;
+abstract class _$$AddBabyLoadingImplCopyWith<T, $Res> {
+  factory _$$AddBabyLoadingImplCopyWith(_$AddBabyLoadingImpl<T> value,
+          $Res Function(_$AddBabyLoadingImpl<T>) then) =
+      __$$AddBabyLoadingImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$LoadingImplCopyWithImpl<T, $Res>
-    extends _$AddBabyStateCopyWithImpl<T, $Res, _$LoadingImpl<T>>
-    implements _$$LoadingImplCopyWith<T, $Res> {
-  __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl<T> _value, $Res Function(_$LoadingImpl<T>) _then)
+class __$$AddBabyLoadingImplCopyWithImpl<T, $Res>
+    extends _$AddBabyStateCopyWithImpl<T, $Res, _$AddBabyLoadingImpl<T>>
+    implements _$$AddBabyLoadingImplCopyWith<T, $Res> {
+  __$$AddBabyLoadingImplCopyWithImpl(_$AddBabyLoadingImpl<T> _value,
+      $Res Function(_$AddBabyLoadingImpl<T>) _then)
       : super(_value, _then);
 
   /// Create a copy of AddBabyState
@@ -227,18 +227,18 @@ class __$$LoadingImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$LoadingImpl<T> implements Loading<T> {
-  const _$LoadingImpl();
+class _$AddBabyLoadingImpl<T> implements AddBabyLoading<T> {
+  const _$AddBabyLoadingImpl();
 
   @override
   String toString() {
-    return 'AddBabyState<$T>.loading()';
+    return 'AddBabyState<$T>.addBabyloading()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl<T>);
+        (other.runtimeType == runtimeType && other is _$AddBabyLoadingImpl<T>);
   }
 
   @override
@@ -248,35 +248,35 @@ class _$LoadingImpl<T> implements Loading<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(T data) success,
-    required TResult Function(String error) error,
+    required TResult Function() addBabyloading,
+    required TResult Function(T data) addBabysuccess,
+    required TResult Function(String error) addBabyerror,
   }) {
-    return loading();
+    return addBabyloading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(T data)? success,
-    TResult? Function(String error)? error,
+    TResult? Function()? addBabyloading,
+    TResult? Function(T data)? addBabysuccess,
+    TResult? Function(String error)? addBabyerror,
   }) {
-    return loading?.call();
+    return addBabyloading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(T data)? success,
-    TResult Function(String error)? error,
+    TResult Function()? addBabyloading,
+    TResult Function(T data)? addBabysuccess,
+    TResult Function(String error)? addBabyerror,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading();
+    if (addBabyloading != null) {
+      return addBabyloading();
     }
     return orElse();
   }
@@ -285,59 +285,59 @@ class _$LoadingImpl<T> implements Loading<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
-    required TResult Function(Loading<T> value) loading,
-    required TResult Function(Success<T> value) success,
-    required TResult Function(Error<T> value) error,
+    required TResult Function(AddBabyLoading<T> value) addBabyloading,
+    required TResult Function(AddBabySuccess<T> value) addBabysuccess,
+    required TResult Function(AddBabyError<T> value) addBabyerror,
   }) {
-    return loading(this);
+    return addBabyloading(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(Loading<T> value)? loading,
-    TResult? Function(Success<T> value)? success,
-    TResult? Function(Error<T> value)? error,
+    TResult? Function(AddBabyLoading<T> value)? addBabyloading,
+    TResult? Function(AddBabySuccess<T> value)? addBabysuccess,
+    TResult? Function(AddBabyError<T> value)? addBabyerror,
   }) {
-    return loading?.call(this);
+    return addBabyloading?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
-    TResult Function(Loading<T> value)? loading,
-    TResult Function(Success<T> value)? success,
-    TResult Function(Error<T> value)? error,
+    TResult Function(AddBabyLoading<T> value)? addBabyloading,
+    TResult Function(AddBabySuccess<T> value)? addBabysuccess,
+    TResult Function(AddBabyError<T> value)? addBabyerror,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading(this);
+    if (addBabyloading != null) {
+      return addBabyloading(this);
     }
     return orElse();
   }
 }
 
-abstract class Loading<T> implements AddBabyState<T> {
-  const factory Loading() = _$LoadingImpl<T>;
+abstract class AddBabyLoading<T> implements AddBabyState<T> {
+  const factory AddBabyLoading() = _$AddBabyLoadingImpl<T>;
 }
 
 /// @nodoc
-abstract class _$$SuccessImplCopyWith<T, $Res> {
-  factory _$$SuccessImplCopyWith(
-          _$SuccessImpl<T> value, $Res Function(_$SuccessImpl<T>) then) =
-      __$$SuccessImplCopyWithImpl<T, $Res>;
+abstract class _$$AddBabySuccessImplCopyWith<T, $Res> {
+  factory _$$AddBabySuccessImplCopyWith(_$AddBabySuccessImpl<T> value,
+          $Res Function(_$AddBabySuccessImpl<T>) then) =
+      __$$AddBabySuccessImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({T data});
 }
 
 /// @nodoc
-class __$$SuccessImplCopyWithImpl<T, $Res>
-    extends _$AddBabyStateCopyWithImpl<T, $Res, _$SuccessImpl<T>>
-    implements _$$SuccessImplCopyWith<T, $Res> {
-  __$$SuccessImplCopyWithImpl(
-      _$SuccessImpl<T> _value, $Res Function(_$SuccessImpl<T>) _then)
+class __$$AddBabySuccessImplCopyWithImpl<T, $Res>
+    extends _$AddBabyStateCopyWithImpl<T, $Res, _$AddBabySuccessImpl<T>>
+    implements _$$AddBabySuccessImplCopyWith<T, $Res> {
+  __$$AddBabySuccessImplCopyWithImpl(_$AddBabySuccessImpl<T> _value,
+      $Res Function(_$AddBabySuccessImpl<T>) _then)
       : super(_value, _then);
 
   /// Create a copy of AddBabyState
@@ -347,7 +347,7 @@ class __$$SuccessImplCopyWithImpl<T, $Res>
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_$SuccessImpl<T>(
+    return _then(_$AddBabySuccessImpl<T>(
       freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -358,22 +358,22 @@ class __$$SuccessImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$SuccessImpl<T> implements Success<T> {
-  const _$SuccessImpl(this.data);
+class _$AddBabySuccessImpl<T> implements AddBabySuccess<T> {
+  const _$AddBabySuccessImpl(this.data);
 
   @override
   final T data;
 
   @override
   String toString() {
-    return 'AddBabyState<$T>.success(data: $data)';
+    return 'AddBabyState<$T>.addBabysuccess(data: $data)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SuccessImpl<T> &&
+            other is _$AddBabySuccessImpl<T> &&
             const DeepCollectionEquality().equals(other.data, data));
   }
 
@@ -386,42 +386,43 @@ class _$SuccessImpl<T> implements Success<T> {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SuccessImplCopyWith<T, _$SuccessImpl<T>> get copyWith =>
-      __$$SuccessImplCopyWithImpl<T, _$SuccessImpl<T>>(this, _$identity);
+  _$$AddBabySuccessImplCopyWith<T, _$AddBabySuccessImpl<T>> get copyWith =>
+      __$$AddBabySuccessImplCopyWithImpl<T, _$AddBabySuccessImpl<T>>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(T data) success,
-    required TResult Function(String error) error,
+    required TResult Function() addBabyloading,
+    required TResult Function(T data) addBabysuccess,
+    required TResult Function(String error) addBabyerror,
   }) {
-    return success(data);
+    return addBabysuccess(data);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(T data)? success,
-    TResult? Function(String error)? error,
+    TResult? Function()? addBabyloading,
+    TResult? Function(T data)? addBabysuccess,
+    TResult? Function(String error)? addBabyerror,
   }) {
-    return success?.call(data);
+    return addBabysuccess?.call(data);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(T data)? success,
-    TResult Function(String error)? error,
+    TResult Function()? addBabyloading,
+    TResult Function(T data)? addBabysuccess,
+    TResult Function(String error)? addBabyerror,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(data);
+    if (addBabysuccess != null) {
+      return addBabysuccess(data);
     }
     return orElse();
   }
@@ -430,67 +431,67 @@ class _$SuccessImpl<T> implements Success<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
-    required TResult Function(Loading<T> value) loading,
-    required TResult Function(Success<T> value) success,
-    required TResult Function(Error<T> value) error,
+    required TResult Function(AddBabyLoading<T> value) addBabyloading,
+    required TResult Function(AddBabySuccess<T> value) addBabysuccess,
+    required TResult Function(AddBabyError<T> value) addBabyerror,
   }) {
-    return success(this);
+    return addBabysuccess(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(Loading<T> value)? loading,
-    TResult? Function(Success<T> value)? success,
-    TResult? Function(Error<T> value)? error,
+    TResult? Function(AddBabyLoading<T> value)? addBabyloading,
+    TResult? Function(AddBabySuccess<T> value)? addBabysuccess,
+    TResult? Function(AddBabyError<T> value)? addBabyerror,
   }) {
-    return success?.call(this);
+    return addBabysuccess?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
-    TResult Function(Loading<T> value)? loading,
-    TResult Function(Success<T> value)? success,
-    TResult Function(Error<T> value)? error,
+    TResult Function(AddBabyLoading<T> value)? addBabyloading,
+    TResult Function(AddBabySuccess<T> value)? addBabysuccess,
+    TResult Function(AddBabyError<T> value)? addBabyerror,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(this);
+    if (addBabysuccess != null) {
+      return addBabysuccess(this);
     }
     return orElse();
   }
 }
 
-abstract class Success<T> implements AddBabyState<T> {
-  const factory Success(final T data) = _$SuccessImpl<T>;
+abstract class AddBabySuccess<T> implements AddBabyState<T> {
+  const factory AddBabySuccess(final T data) = _$AddBabySuccessImpl<T>;
 
   T get data;
 
   /// Create a copy of AddBabyState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SuccessImplCopyWith<T, _$SuccessImpl<T>> get copyWith =>
+  _$$AddBabySuccessImplCopyWith<T, _$AddBabySuccessImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ErrorImplCopyWith<T, $Res> {
-  factory _$$ErrorImplCopyWith(
-          _$ErrorImpl<T> value, $Res Function(_$ErrorImpl<T>) then) =
-      __$$ErrorImplCopyWithImpl<T, $Res>;
+abstract class _$$AddBabyErrorImplCopyWith<T, $Res> {
+  factory _$$AddBabyErrorImplCopyWith(_$AddBabyErrorImpl<T> value,
+          $Res Function(_$AddBabyErrorImpl<T>) then) =
+      __$$AddBabyErrorImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class __$$ErrorImplCopyWithImpl<T, $Res>
-    extends _$AddBabyStateCopyWithImpl<T, $Res, _$ErrorImpl<T>>
-    implements _$$ErrorImplCopyWith<T, $Res> {
-  __$$ErrorImplCopyWithImpl(
-      _$ErrorImpl<T> _value, $Res Function(_$ErrorImpl<T>) _then)
+class __$$AddBabyErrorImplCopyWithImpl<T, $Res>
+    extends _$AddBabyStateCopyWithImpl<T, $Res, _$AddBabyErrorImpl<T>>
+    implements _$$AddBabyErrorImplCopyWith<T, $Res> {
+  __$$AddBabyErrorImplCopyWithImpl(
+      _$AddBabyErrorImpl<T> _value, $Res Function(_$AddBabyErrorImpl<T>) _then)
       : super(_value, _then);
 
   /// Create a copy of AddBabyState
@@ -500,7 +501,7 @@ class __$$ErrorImplCopyWithImpl<T, $Res>
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$ErrorImpl<T>(
+    return _then(_$AddBabyErrorImpl<T>(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -511,22 +512,22 @@ class __$$ErrorImplCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$ErrorImpl<T> implements Error<T> {
-  const _$ErrorImpl({required this.error});
+class _$AddBabyErrorImpl<T> implements AddBabyError<T> {
+  const _$AddBabyErrorImpl({required this.error});
 
   @override
   final String error;
 
   @override
   String toString() {
-    return 'AddBabyState<$T>.error(error: $error)';
+    return 'AddBabyState<$T>.addBabyerror(error: $error)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ErrorImpl<T> &&
+            other is _$AddBabyErrorImpl<T> &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -538,42 +539,43 @@ class _$ErrorImpl<T> implements Error<T> {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ErrorImplCopyWith<T, _$ErrorImpl<T>> get copyWith =>
-      __$$ErrorImplCopyWithImpl<T, _$ErrorImpl<T>>(this, _$identity);
+  _$$AddBabyErrorImplCopyWith<T, _$AddBabyErrorImpl<T>> get copyWith =>
+      __$$AddBabyErrorImplCopyWithImpl<T, _$AddBabyErrorImpl<T>>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(T data) success,
-    required TResult Function(String error) error,
+    required TResult Function() addBabyloading,
+    required TResult Function(T data) addBabysuccess,
+    required TResult Function(String error) addBabyerror,
   }) {
-    return error(this.error);
+    return addBabyerror(error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(T data)? success,
-    TResult? Function(String error)? error,
+    TResult? Function()? addBabyloading,
+    TResult? Function(T data)? addBabysuccess,
+    TResult? Function(String error)? addBabyerror,
   }) {
-    return error?.call(this.error);
+    return addBabyerror?.call(error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(T data)? success,
-    TResult Function(String error)? error,
+    TResult Function()? addBabyloading,
+    TResult Function(T data)? addBabysuccess,
+    TResult Function(String error)? addBabyerror,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(this.error);
+    if (addBabyerror != null) {
+      return addBabyerror(error);
     }
     return orElse();
   }
@@ -582,48 +584,49 @@ class _$ErrorImpl<T> implements Error<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
-    required TResult Function(Loading<T> value) loading,
-    required TResult Function(Success<T> value) success,
-    required TResult Function(Error<T> value) error,
+    required TResult Function(AddBabyLoading<T> value) addBabyloading,
+    required TResult Function(AddBabySuccess<T> value) addBabysuccess,
+    required TResult Function(AddBabyError<T> value) addBabyerror,
   }) {
-    return error(this);
+    return addBabyerror(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(Loading<T> value)? loading,
-    TResult? Function(Success<T> value)? success,
-    TResult? Function(Error<T> value)? error,
+    TResult? Function(AddBabyLoading<T> value)? addBabyloading,
+    TResult? Function(AddBabySuccess<T> value)? addBabysuccess,
+    TResult? Function(AddBabyError<T> value)? addBabyerror,
   }) {
-    return error?.call(this);
+    return addBabyerror?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
-    TResult Function(Loading<T> value)? loading,
-    TResult Function(Success<T> value)? success,
-    TResult Function(Error<T> value)? error,
+    TResult Function(AddBabyLoading<T> value)? addBabyloading,
+    TResult Function(AddBabySuccess<T> value)? addBabysuccess,
+    TResult Function(AddBabyError<T> value)? addBabyerror,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error(this);
+    if (addBabyerror != null) {
+      return addBabyerror(this);
     }
     return orElse();
   }
 }
 
-abstract class Error<T> implements AddBabyState<T> {
-  const factory Error({required final String error}) = _$ErrorImpl<T>;
+abstract class AddBabyError<T> implements AddBabyState<T> {
+  const factory AddBabyError({required final String error}) =
+      _$AddBabyErrorImpl<T>;
 
   String get error;
 
   /// Create a copy of AddBabyState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ErrorImplCopyWith<T, _$ErrorImpl<T>> get copyWith =>
+  _$$AddBabyErrorImplCopyWith<T, _$AddBabyErrorImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
