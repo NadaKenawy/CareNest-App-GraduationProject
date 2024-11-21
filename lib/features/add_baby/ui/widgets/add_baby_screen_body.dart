@@ -1,4 +1,7 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:care_nest/core/routing/app_router.dart';
+import 'package:care_nest/core/theme/text_styless.dart';
+import 'package:care_nest/features/add_baby/logic/add_baby_cubit/add_baby_state.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/add_baby_bloc_listener.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/baby_data_fields.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
-import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:go_router/go_router.dart';
 import '../../logic/add_baby_cubit/add_baby_cubit.dart';
@@ -22,7 +24,6 @@ class AddBabyScreenBody extends StatefulWidget {
 
 class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
   final TextEditingController _dobController = TextEditingController();
-
   String gender = '';
 
   @override
@@ -41,9 +42,7 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
       body: Column(
         children: [
           const HeaderSection(),
-          SizedBox(
-            height: 40.h,
-          ),
+          SizedBox(height: 40.h),
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
@@ -125,7 +124,6 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
               ],
               onPressed: () {
                 validateThenSave(context);
-                GoRouter.of(context).push(AppRouter.kMyBabiesScreen);
               },
             ),
           ),
@@ -152,9 +150,69 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
     }
   }
 
-  void validateThenSave(BuildContext context) {
-    if (context.read<AddBabyCubit>().formKey.currentState!.validate()) {
-      context.read<AddBabyCubit>().emitAddBabyStates();
+  void validateThenSave(BuildContext context) async {
+    final addBabyCubit = context.read<AddBabyCubit>();
+
+    if (addBabyCubit.formKey.currentState!.validate()) {
+      if (_isAnyFieldEmpty(addBabyCubit)) {
+        _showErrorDialog(context, 'Please fill in all the fields.');
+        return;
+      }
+
+      try {
+        // Emit state and perform the operation
+        addBabyCubit.emitAddBabyStates();
+
+        final state = await addBabyCubit.stream
+            .firstWhere((state) => state is AddBabyState);
+
+        if (context.mounted) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (Navigator.canPop(context)) {
+              context.pop();
+            }
+
+            state.whenOrNull(
+              addBabysuccess: (addBabyResponse) {
+                if (context.mounted) {
+                  context.go(AppRouter.kMyBabiesScreen);
+                }
+              },
+              addBabyerror: (error) {
+                if (context.mounted) {
+                  _showErrorDialog(context, error);
+                }
+              },
+            );
+          });
+        }
+      } catch (e) {
+        if (context.mounted) {
+          _showErrorDialog(context, 'An unexpected error occurred.');
+        }
+      }
+    }
+  }
+
+  bool _isAnyFieldEmpty(AddBabyCubit cubit) {
+    return cubit.nameController.text.isEmpty ||
+        cubit.weightController.text.isEmpty ||
+        cubit.heightController.text.isEmpty ||
+        cubit.dateOfBirthOfBabyController.text.isEmpty ||
+        cubit.genderController.text.isEmpty;
+  }
+
+  void _showErrorDialog(BuildContext context, String message) {
+    if (context.mounted) {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        animType: AnimType.scale,
+        title: 'Error',
+        desc: message,
+        btnOkOnPress: () {},
+        btnOkColor: ColorsManager.primaryBlueColor,
+      ).show();
     }
   }
 }

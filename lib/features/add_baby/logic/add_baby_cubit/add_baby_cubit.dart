@@ -17,12 +17,31 @@ class AddBabyCubit extends Cubit<AddBabyState> {
   TextEditingController genderController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
-
   void emitAddBabyStates() async {
+    if (nameController.text.isEmpty ||
+        weightController.text.isEmpty ||
+        heightController.text.isEmpty ||
+        dateOfBirthOfBabyController.text.isEmpty ||
+        genderController.text.isEmpty) {
+      emit(const AddBabyState.addBabyerror(
+        error: "All fields are required",
+      ));
+      return;
+    }
+
+    final dateOfBirth = DateTime.tryParse(dateOfBirthOfBabyController.text);
+    if (dateOfBirth == null || dateOfBirth.isAfter(DateTime.now())) {
+      emit(const AddBabyState.addBabyerror(
+        error: "Date of birth must be in the past",
+      ));
+      return; 
+    }
+
     emit(const AddBabyState.addBabyloading());
 
     String token =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
+
     final response = await _addBabyRepo.addBaby(
       AddBabyRequestBody(
         name: nameController.text,
@@ -39,8 +58,9 @@ class AddBabyCubit extends Cubit<AddBabyState> {
         emit(AddBabyState.addBabysuccess(addBabyResponse));
       },
       failure: (error) {
-        emit(AddBabyState.addBabyerror(
-            error: error.signUpErrorModel.errors!.first.msg ?? ''));
+        final errorMessage = error.signUpErrorModel.errors?.first.msg ??
+            'Unknown error occurred.';
+        emit(AddBabyState.addBabyerror(error: errorMessage));
       },
     );
   }

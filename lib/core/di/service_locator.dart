@@ -62,6 +62,7 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<AddBabyCubit>(() => AddBabyCubit(getIt()));
 
   //get all babies
-  getIt.registerLazySingleton<GetAllBabiesRepo>(() => GetAllBabiesRepo(getIt()));
+  getIt
+      .registerLazySingleton<GetAllBabiesRepo>(() => GetAllBabiesRepo(getIt()));
   getIt.registerFactory<GetAllBabiesCubit>(() => GetAllBabiesCubit(getIt()));
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+// Class for Baby Data Fields
 class BabyDataFields extends StatefulWidget {
   final String hintText;
   final Gradient gradient;
@@ -25,8 +26,8 @@ class BabyDataFields extends StatefulWidget {
 }
 
 class _BabyDataFieldsState extends State<BabyDataFields> {
-  bool isFieldEmpty = true; 
-  bool hasError = false; 
+  bool isFieldEmpty = true;
+  bool hasError = false;
 
   @override
   void initState() {
@@ -43,11 +44,8 @@ class _BabyDataFieldsState extends State<BabyDataFields> {
           width: 2.0,
           color: Colors.transparent,
         ),
-        gradient: !hasError && isFieldEmpty
-            ? widget.gradient
-            : null, 
-        color:
-            hasError ? Colors.white : null, 
+        gradient: !hasError && isFieldEmpty ? widget.gradient : null,
+        color: hasError ? Colors.white : null,
       ),
       child: TextFormField(
         controller: widget.controller,

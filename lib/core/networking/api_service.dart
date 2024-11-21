@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:care_nest/core/networking/api_constants.dart';
 import 'package:care_nest/features/add_baby/data/models/add_baby_response.dart';
+import 'package:care_nest/features/add_baby/data/models/get_baby_data_response.dart';
 import 'package:care_nest/features/forget_password/data/models/create_new_password_model/create_new_password_request_body.dart';
 import 'package:care_nest/features/forget_password/data/models/forget_password_model/forget_pass_email_request_body.dart';
 import 'package:care_nest/features/forget_password/data/models/forget_password_model/forget_pass_response.dart';
@@ -62,6 +63,11 @@ abstract class ApiService {
 
   @GET(ApiConstants.getAllBabies)
   Future<GetAllBabiesResponse> getAllBabies(
+    @Header('Authorization') String token,
+  );
+  
+   @GET(ApiConstants.getBabyWithId)
+  Future<GetBabyDataResponse> getBabyData(
     @Header('Authorization') String token,
   );
 }

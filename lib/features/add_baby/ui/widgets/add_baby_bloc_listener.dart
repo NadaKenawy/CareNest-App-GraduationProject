@@ -17,15 +17,10 @@ class AddBabyBlocListener extends StatelessWidget {
           current is AddBabyError,
       listener: (context, state) {
         state.whenOrNull(
-          addBabyloading: () {
-            // Show loading indicator separately
-            showLoadingIndicator(context);
-          },
-          addBabysuccess: (addBabyResponse) {
-            // Close the loading dialog
-            Navigator.of(context).pop();
-          },
+          addBabyloading: () => showLoadingIndicator(context),
+          addBabysuccess: (addBabyResponse) {},
           addBabyerror: (error) {
+            Navigator.of(context).pop(); // Pop the loading indicator if active
             setupErrorState(context, error);
           },
         );
@@ -34,33 +29,38 @@ class AddBabyBlocListener extends StatelessWidget {
     );
   }
 
-  void showLoadingIndicator(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return const Dialog(
-          backgroundColor: Colors.transparent,
-          child: Center(
-            child: CircularProgressIndicator(
-              color: ColorsManager.primaryBlueColor,
-            ),
-          ),
-        );
-      },
-    );
+  void setupErrorState(BuildContext context, String error) {
+    // Ensure the error dialog is only shown when context is valid
+    if (context.mounted) {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        animType: AnimType.scale,
+        title: 'Error',
+        desc: error,
+        btnOkOnPress: () {},
+        btnOkColor: ColorsManager.primaryBlueColor,
+      ).show();
+    }
   }
 
-  void setupErrorState(BuildContext context, String error) {
-    Navigator.of(context).pop();
-    AwesomeDialog(
-      context: context,
-      dialogType: DialogType.error,
-      animType: AnimType.scale,
-      title: 'Error',
-      desc: error,
-      btnOkOnPress: () {},
-      btnOkColor: ColorsManager.primaryBlueColor,
-    ).show();
+  void showLoadingIndicator(BuildContext context) {
+    // Show loading indicator until the process is complete
+    if (context.mounted) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return const Dialog(
+            backgroundColor: Colors.transparent,
+            child: Center(
+              child: CircularProgressIndicator(
+                color: ColorsManager.primaryBlueColor,
+              ),
+            ),
+          );
+        },
+      );
+    }
   }
 }
