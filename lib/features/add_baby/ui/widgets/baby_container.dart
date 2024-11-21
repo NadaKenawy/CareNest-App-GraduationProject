@@ -1,16 +1,22 @@
+import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/utils/app_images.dart';
+import 'package:care_nest/features/add_baby/data/models/get_baby_data_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class BabyContainer extends StatelessWidget {
   final String gender;
   final String name;
+  final BabyData? babyData;
+
   const BabyContainer({
     super.key,
     required this.gender,
     required this.name,
+    this.babyData,
   });
 
   @override
@@ -22,12 +28,17 @@ class BabyContainer extends StatelessWidget {
         gender == 'Boy' ? AppImages.boyBabyImage : AppImages.girlBabyImage;
 
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        GoRouter.of(context).push(
+          AppRouter.kBabyDataScreen,
+          extra: babyData,
+        );
+      },
       child: Container(
         height: 120.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.r),
-          color: const Color(0xffF0F0F0),
+          color: Colors.white,
           border: Border.all(
             color: containerColor,
           ),

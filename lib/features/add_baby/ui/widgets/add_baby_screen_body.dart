@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_type_check
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
@@ -160,7 +162,6 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
       }
 
       try {
-        // Emit state and perform the operation
         addBabyCubit.emitAddBabyStates();
 
         final state = await addBabyCubit.stream

@@ -9,9 +9,9 @@ part of 'get_baby_data_response.dart';
 GetBabyDataResponse _$GetBabyDataResponseFromJson(Map<String, dynamic> json) =>
     GetBabyDataResponse(
       results: (json['results'] as num?)?.toInt(),
-      babyData: (json['data'] as List<dynamic>?)
-          ?.map((e) => BabyData.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      babyData: json['data'] == null
+          ? null
+          : BabyData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$GetBabyDataResponseToJson(
@@ -26,6 +26,7 @@ BabyData _$BabyDataFromJson(Map<String, dynamic> json) => BabyData(
       name: json['name'] as String?,
       weight: json['weight'] as num?,
       height: json['height'] as num?,
+      gender: json['gender'] as String?,
       dateOfBirth: json['birthDay'] == null
           ? null
           : DateTime.parse(json['birthDay'] as String),
@@ -37,6 +38,7 @@ Map<String, dynamic> _$BabyDataToJson(BabyData instance) => <String, dynamic>{
       'name': instance.name,
       'weight': instance.weight,
       'height': instance.height,
+      'gender': instance.gender,
       'birthDay': instance.dateOfBirth?.toIso8601String(),
       'motherOfBaby': instance.motherOfBaby,
     };

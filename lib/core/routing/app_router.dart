@@ -1,7 +1,10 @@
 import 'package:care_nest/core/di/service_locator.dart';
+import 'package:care_nest/features/add_baby/data/models/get_baby_data_response.dart';
 import 'package:care_nest/features/add_baby/logic/add_baby_cubit/add_baby_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
+import 'package:care_nest/features/add_baby/logic/get_baby_data_cubit/get_baby_data_cubit.dart';
 import 'package:care_nest/features/add_baby/ui/add_baby_screen.dart';
+import 'package:care_nest/features/add_baby/ui/baby_data_screen.dart';
 import 'package:care_nest/features/add_baby/ui/my_babies_screen.dart';
 import 'package:care_nest/features/forget_password/logic/create_new_password_cubit/create_new_password_cubit.dart';
 import 'package:care_nest/features/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
@@ -31,6 +34,7 @@ abstract class AppRouter {
   static const kVerifyAccountScreen = '/verifyAccountScreen';
   static const kAddBabyScreen = '/addBabyScreen';
   static const kMyBabiesScreen = '/myBabiesScreen';
+  static const kBabyDataScreen = '/babyDataScreen';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -110,6 +114,17 @@ abstract class AppRouter {
               child: const MyBabiesScreen(),
             );
           }),
+      GoRoute(
+        path: kBabyDataScreen,
+        builder: (context, state) {
+          final babyData = state.extra as BabyData? ??
+              BabyData(); // التأكد من وجود قيمة افتراضية
+          return BlocProvider(
+            create: (context) => getIt<GetBabyDataCubit>()..getBabyData(),
+            child: BabyDataScreen(babyData: babyData),
+          );
+        },
+      )
     ],
   );
 }

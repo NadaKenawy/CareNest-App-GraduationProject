@@ -27,6 +27,9 @@ class MyBabiesScreenBody extends StatelessWidget {
       ),
       body: Column(
         children: [
+          SizedBox(
+            height: 32.h,
+          ),
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(

@@ -5,7 +5,7 @@ part 'get_baby_data_response.g.dart';
 class GetBabyDataResponse {
   int? results;
   @JsonKey(name: 'data')
-  List<BabyData>? babyData;
+  BabyData? babyData; 
 
   GetBabyDataResponse({
     this.results,
@@ -23,6 +23,7 @@ class BabyData {
   String? name;
   num? weight;
   num? height;
+  String? gender; 
   @JsonKey(name: 'birthDay')
   DateTime? dateOfBirth;
   String? motherOfBaby;
@@ -32,6 +33,7 @@ class BabyData {
     this.name,
     this.weight,
     this.height,
+    this.gender, 
     this.dateOfBirth,
     this.motherOfBaby,
   });

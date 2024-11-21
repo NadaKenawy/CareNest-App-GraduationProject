@@ -8,7 +8,6 @@ part 'get_baby_data_state.freezed.dart';
 class GetBabyDataState<T> with _$GetBabyDataState<T> {
   const factory GetBabyDataState.initial() = _Initial;
   const factory GetBabyDataState.loading() = Loading;
-  const factory GetBabyDataState.success(List<BabyData>? babyData) =
-      Success;
+  const factory GetBabyDataState.success(BabyData babyData) = Success;
   const factory GetBabyDataState.error({required String error}) = Error;
 }

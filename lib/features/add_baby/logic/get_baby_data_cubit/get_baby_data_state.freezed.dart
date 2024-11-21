@@ -20,7 +20,7 @@ mixin _$GetBabyDataState<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BabyData>? babyData) success,
+    required TResult Function(BabyData babyData) success,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$GetBabyDataState<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<BabyData>? babyData)? success,
+    TResult? Function(BabyData babyData)? success,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$GetBabyDataState<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BabyData>? babyData)? success,
+    TResult Function(BabyData babyData)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -132,7 +132,7 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BabyData>? babyData) success,
+    required TResult Function(BabyData babyData) success,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -143,7 +143,7 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<BabyData>? babyData)? success,
+    TResult? Function(BabyData babyData)? success,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -154,7 +154,7 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BabyData>? babyData)? success,
+    TResult Function(BabyData babyData)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -249,7 +249,7 @@ class _$LoadingImpl<T> implements Loading<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BabyData>? babyData) success,
+    required TResult Function(BabyData babyData) success,
     required TResult Function(String error) error,
   }) {
     return loading();
@@ -260,7 +260,7 @@ class _$LoadingImpl<T> implements Loading<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<BabyData>? babyData)? success,
+    TResult? Function(BabyData babyData)? success,
     TResult? Function(String error)? error,
   }) {
     return loading?.call();
@@ -271,7 +271,7 @@ class _$LoadingImpl<T> implements Loading<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BabyData>? babyData)? success,
+    TResult Function(BabyData babyData)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -329,7 +329,7 @@ abstract class _$$SuccessImplCopyWith<T, $Res> {
           _$SuccessImpl<T> value, $Res Function(_$SuccessImpl<T>) then) =
       __$$SuccessImplCopyWithImpl<T, $Res>;
   @useResult
-  $Res call({List<BabyData>? babyData});
+  $Res call({BabyData babyData});
 }
 
 /// @nodoc
@@ -345,13 +345,13 @@ class __$$SuccessImplCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? babyData = freezed,
+    Object? babyData = null,
   }) {
     return _then(_$SuccessImpl<T>(
-      freezed == babyData
-          ? _value._babyData
+      null == babyData
+          ? _value.babyData
           : babyData // ignore: cast_nullable_to_non_nullable
-              as List<BabyData>?,
+              as BabyData,
     ));
   }
 }
@@ -359,17 +359,10 @@ class __$$SuccessImplCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$SuccessImpl<T> implements Success<T> {
-  const _$SuccessImpl(final List<BabyData>? babyData) : _babyData = babyData;
+  const _$SuccessImpl(this.babyData);
 
-  final List<BabyData>? _babyData;
   @override
-  List<BabyData>? get babyData {
-    final value = _babyData;
-    if (value == null) return null;
-    if (_babyData is EqualUnmodifiableListView) return _babyData;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final BabyData babyData;
 
   @override
   String toString() {
@@ -381,12 +374,12 @@ class _$SuccessImpl<T> implements Success<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl<T> &&
-            const DeepCollectionEquality().equals(other._babyData, _babyData));
+            (identical(other.babyData, babyData) ||
+                other.babyData == babyData));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_babyData));
+  int get hashCode => Object.hash(runtimeType, babyData);
 
   /// Create a copy of GetBabyDataState
   /// with the given fields replaced by the non-null parameter values.
@@ -401,7 +394,7 @@ class _$SuccessImpl<T> implements Success<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BabyData>? babyData) success,
+    required TResult Function(BabyData babyData) success,
     required TResult Function(String error) error,
   }) {
     return success(babyData);
@@ -412,7 +405,7 @@ class _$SuccessImpl<T> implements Success<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<BabyData>? babyData)? success,
+    TResult? Function(BabyData babyData)? success,
     TResult? Function(String error)? error,
   }) {
     return success?.call(babyData);
@@ -423,7 +416,7 @@ class _$SuccessImpl<T> implements Success<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BabyData>? babyData)? success,
+    TResult Function(BabyData babyData)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -472,9 +465,9 @@ class _$SuccessImpl<T> implements Success<T> {
 }
 
 abstract class Success<T> implements GetBabyDataState<T> {
-  const factory Success(final List<BabyData>? babyData) = _$SuccessImpl<T>;
+  const factory Success(final BabyData babyData) = _$SuccessImpl<T>;
 
-  List<BabyData>? get babyData;
+  BabyData get babyData;
 
   /// Create a copy of GetBabyDataState
   /// with the given fields replaced by the non-null parameter values.
@@ -553,7 +546,7 @@ class _$ErrorImpl<T> implements Error<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<BabyData>? babyData) success,
+    required TResult Function(BabyData babyData) success,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -564,7 +557,7 @@ class _$ErrorImpl<T> implements Error<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<BabyData>? babyData)? success,
+    TResult? Function(BabyData babyData)? success,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -575,7 +568,7 @@ class _$ErrorImpl<T> implements Error<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<BabyData>? babyData)? success,
+    TResult Function(BabyData babyData)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {

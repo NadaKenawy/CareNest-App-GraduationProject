@@ -18,7 +18,11 @@ class GetBabyDataCubit extends Cubit<GetBabyDataState> {
 
     response.when(
       success: (getBabyDataResponse) {
-        emit(GetBabyDataState.success(getBabyDataResponse.babyData));
+        if (getBabyDataResponse.babyData != null) {
+          emit(GetBabyDataState.success(getBabyDataResponse.babyData!));
+        } else {
+          emit(const GetBabyDataState.error(error: 'No baby data available.'));
+        }
       },
       failure: (error) {
         emit(GetBabyDataState.error(
