@@ -305,9 +305,12 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<GetBabyDataResponse> getBabyData(String token) async {
+  Future<GetBabyDataResponse> getBabyData(
+    String token,
+    dynamic babyId,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'id': babyId.toJson()};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
@@ -366,12 +369,5 @@ class _ApiService implements ApiService {
     }
 
     return Uri.parse(dioBaseUrl).resolveUri(url).toString();
-  }
-}
-
-class ParseErrorLogger {
-  void logError(
-      Object error, StackTrace stackTrace, RequestOptions requestOptions) {
-    log('Error: $error\nStacktrace: $stackTrace\nRequestOptions: $requestOptions');
   }
 }

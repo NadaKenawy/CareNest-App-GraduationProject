@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:care_nest/core/networking/api_constants.dart';
 import 'package:care_nest/features/add_baby/data/models/add_baby_response.dart';
 import 'package:care_nest/features/add_baby/data/models/get_baby_data_response.dart';
@@ -15,6 +13,7 @@ import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_res
 import 'package:care_nest/features/sign_up/data/models/verify_account_model/verify_account_request_body.dart';
 import 'package:care_nest/features/sign_up/data/models/verify_account_model/verify_account_response.dart';
 import 'package:dio/dio.dart';
+import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import '../../features/add_baby/data/models/add_baby_request_body.dart';
 import '../../features/add_baby/data/models/get_all_babies_response.dart';
@@ -65,9 +64,10 @@ abstract class ApiService {
   Future<GetAllBabiesResponse> getAllBabies(
     @Header('Authorization') String token,
   );
-  
-   @GET(ApiConstants.getBabyWithId)
+
+  @GET(ApiConstants.getBabyWithId)
   Future<GetBabyDataResponse> getBabyData(
     @Header('Authorization') String token,
+    @Query('id') dynamic babyId,
   );
 }

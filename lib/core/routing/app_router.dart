@@ -1,5 +1,4 @@
 import 'package:care_nest/core/di/service_locator.dart';
-import 'package:care_nest/features/add_baby/data/models/get_baby_data_response.dart';
 import 'package:care_nest/features/add_baby/logic/add_baby_cubit/add_baby_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/get_baby_data_cubit/get_baby_data_cubit.dart';
@@ -109,19 +108,24 @@ abstract class AppRouter {
       GoRoute(
           path: kMyBabiesScreen,
           builder: (context, state) {
-            return BlocProvider(
-              create: (context) => getIt<GetAllBabiesCubit>()..getAllBabies(),
-              child: const MyBabiesScreen(),
-            );
+            return MultiBlocProvider(providers: [
+              BlocProvider(
+                create: (context) => getIt<GetAllBabiesCubit>()..getAllBabies(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<GetBabyDataCubit>(),
+              ),
+            ], child: const MyBabiesScreen());
           }),
       GoRoute(
         path: kBabyDataScreen,
         builder: (context, state) {
-          final babyData = state.extra as BabyData? ??
-              BabyData(); // التأكد من وجود قيمة افتراضية
+          final babyId = state.extra as String;
           return BlocProvider(
-            create: (context) => getIt<GetBabyDataCubit>()..getBabyData(),
-            child: BabyDataScreen(babyData: babyData),
+            create: (context) => getIt<GetBabyDataCubit>(),
+            child: BabyDataScreen(
+              babyId: babyId,
+            ),
           );
         },
       )

@@ -10,10 +10,11 @@ class GetBabyDataRepo {
 
   GetBabyDataRepo(this._apiService);
 
-  Future<ServerResult<GetBabyDataResponse>> getBabyData(String token) async {
+  Future<ServerResult<GetBabyDataResponse>> getBabyData(String token,String id) async {
     try {
       final response = await _apiService.getBabyData(
         token,
+        id ,
       );
       return ServerResult.success(response);
     } catch (error) {

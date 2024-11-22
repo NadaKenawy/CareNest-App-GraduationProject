@@ -10,26 +10,15 @@ import 'gender_selection.dart';
 import 'header_section.dart';
 
 class BabyDataScreenBody extends StatefulWidget {
-  final BabyData babyData;
-
   const BabyDataScreenBody({super.key, required this.babyData});
-
+  final BabyData babyData;
   @override
-  _babyDataScreenBodyState createState() => _babyDataScreenBodyState();
+  _BabyDataScreenBodyState createState() => _BabyDataScreenBodyState();
 }
 
-class _babyDataScreenBodyState extends State<BabyDataScreenBody> {
-  late BabyData babyData;
+class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
   String gender = '';
   String selectedDate = '';
-
-  @override
-  void initState() {
-    super.initState();
-    babyData = widget.babyData;
-    print(
-        'Baby Data: ${babyData.name}, ${babyData.dateOfBirth}, ${babyData.weight}, ${babyData.height}, ${babyData.gender}');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,14 +45,14 @@ class _babyDataScreenBodyState extends State<BabyDataScreenBody> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     BabyDataFields(
-                      hintText: babyData.name ?? 'Baby Name',
+                      hintText: widget.babyData.name ?? 'Baby Name',
                       gradient: gradient,
                       prefixIcon: Icons.child_care,
                     ),
                     SizedBox(height: 24.h),
                     BabyDataFields(
-                      hintText: babyData.dateOfBirth != null
-                          ? babyData.dateOfBirth.toString().split(' ')[0]
+                      hintText: widget.babyData.dateOfBirth != null
+                          ? widget.babyData.dateOfBirth.toString().split(' ')[0]
                           : 'Date of Birth',
                       gradient: gradient,
                       prefixIcon: FontAwesomeIcons.calendarDay,
@@ -76,8 +65,8 @@ class _babyDataScreenBodyState extends State<BabyDataScreenBody> {
                       children: [
                         Expanded(
                           child: BabyDataFields(
-                            hintText: babyData.weight != null
-                                ? babyData.weight.toString()
+                            hintText: widget.babyData.weight != null
+                                ? widget.babyData.weight.toString()
                                 : 'Weight',
                             gradient: gradient,
                             prefixIcon: FontAwesomeIcons.weightScale,
@@ -86,8 +75,8 @@ class _babyDataScreenBodyState extends State<BabyDataScreenBody> {
                         SizedBox(width: 16.w),
                         Expanded(
                           child: BabyDataFields(
-                            hintText: babyData.height != null
-                                ? babyData.height.toString()
+                            hintText: widget.babyData.height != null
+                                ? widget.babyData.height.toString()
                                 : 'Height',
                             gradient: gradient,
                             prefixIcon: FontAwesomeIcons.rulerVertical,
@@ -98,7 +87,7 @@ class _babyDataScreenBodyState extends State<BabyDataScreenBody> {
                     SizedBox(height: 24.h),
                     GenderSelection(
                       gradient: gradient,
-                      gender: babyData.gender ?? 'Gender',
+                      gender: widget.babyData.gender ?? 'Gender',
                       onChanged: (value) {
                         setState(() {
                           gender = value;

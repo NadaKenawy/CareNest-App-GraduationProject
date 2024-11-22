@@ -9,12 +9,12 @@ class GetBabyDataCubit extends Cubit<GetBabyDataState> {
       : super(const GetBabyDataState.initial());
   final GetBabyDataRepo _getBabyDataRepo;
 
-  void getBabyData() async {
+  void getBabyData(String id) async {
     emit(const GetBabyDataState.loading());
 
     String token =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
-    final response = await _getBabyDataRepo.getBabyData(token);
+    final response = await _getBabyDataRepo.getBabyData(token, id);
 
     response.when(
       success: (getBabyDataResponse) {
