@@ -15,12 +15,6 @@ GetAllBabiesResponse _$GetAllBabiesResponseFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$GetAllBabiesResponseToJson(
-        GetAllBabiesResponse instance) =>
-    <String, dynamic>{
-      'results': instance.results,
-      'data': instance.babiesData,
-    };
 
 BabiesData _$BabiesDataFromJson(Map<String, dynamic> json) => BabiesData(
       id: json['_id'] as String?,
@@ -31,14 +25,6 @@ BabiesData _$BabiesDataFromJson(Map<String, dynamic> json) => BabiesData(
           ? null
           : DateTime.parse(json['birthDay'] as String),
       motherOfBaby: json['motherOfBaby'] as String?,
+      gender: json['gender'] as String?,
     );
 
-Map<String, dynamic> _$BabiesDataToJson(BabiesData instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'name': instance.name,
-      'weight': instance.weight,
-      'height': instance.height,
-      'birthDay': instance.dateOfBirth?.toIso8601String(),
-      'motherOfBaby': instance.motherOfBaby,
-    };

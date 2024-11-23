@@ -21,9 +21,7 @@ class MyBabiesBlocBuilder extends StatelessWidget {
             success: (babiesData) {
               var babiesList = babiesData;
 
-              return setupSuccess(
-                babiesList,
-              );
+              return setupSuccess(babiesList);
             },
             error: (error) {
               return setupError();

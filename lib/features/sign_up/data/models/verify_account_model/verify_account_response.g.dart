@@ -16,13 +16,6 @@ VerifyAccountResponse _$VerifyAccountResponseFromJson(
       token: json['token'] as String?,
     );
 
-Map<String, dynamic> _$VerifyAccountResponseToJson(
-        VerifyAccountResponse instance) =>
-    <String, dynamic>{
-      'status': instance.status,
-      'data': instance.data,
-      'token': instance.token,
-    };
 
 UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       email: json['Email'] as String?,
@@ -39,17 +32,3 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       version: (json['__v'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
-      'Email': instance.email,
-      'password': instance.password,
-      'firstName': instance.firstName,
-      'lastName': instance.lastName,
-      'role': instance.role,
-      'active': instance.active,
-      'dateOfBirthOfMam': instance.dateOfBirthOfMam,
-      '_id': instance.id,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
-      'ageMam': instance.ageMam,
-      '__v': instance.version,
-    };

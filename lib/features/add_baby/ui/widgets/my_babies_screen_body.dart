@@ -5,8 +5,11 @@ import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/my_babies_bloc_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 
 class MyBabiesScreenBody extends StatelessWidget {
   const MyBabiesScreenBody({super.key});
@@ -49,7 +52,8 @@ class MyBabiesScreenBody extends StatelessWidget {
                 ColorsManager.primaryPinkColor,
               ],
               onPressed: () {
-                GoRouter.of(context).push(AppRouter.kAddBabyScreen);
+                GoRouter.of(context).push(AppRouter.kAddBabyScreen,
+                    extra: context.read<GetAllBabiesCubit>());
               },
             ),
           ),
@@ -79,4 +83,6 @@ class NoBabyText extends StatelessWidget {
       ),
     );
   }
+
+  
 }
