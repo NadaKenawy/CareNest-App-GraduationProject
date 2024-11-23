@@ -11,15 +11,14 @@ class BabyContainer extends StatelessWidget {
   final String name;
 
   final BabyData? babyData;
-  final VoidCallback onDelete;
+  //final VoidCallback onDelete;
 
   const BabyContainer({
     super.key,
     required this.gender,
     required this.name,
-   
     this.babyData,
-    required this.onDelete,
+    // required this.onDelete,
   });
 
   @override
@@ -63,22 +62,22 @@ class BabyContainer extends StatelessWidget {
             ),
           ),
           SizedBox(width: 32.w),
-         IconButton(
-  onPressed: () {
-    AwesomeDialog(
-      context: context,
-      dialogType: DialogType.warning,
-      animType: AnimType.bottomSlide,
-      title: 'Delete Baby',
-      desc: 'Are you sure you want to delete this child?',
-      btnCancelOnPress: () {},
-      btnOkOnPress: () {
-        onDelete();
-      },
-    ).show();
-  },
-  icon: const Icon(Icons.remove_circle_outline_outlined),
-)
+          IconButton(
+            onPressed: () {
+              AwesomeDialog(
+                context: context,
+                dialogType: DialogType.warning,
+                animType: AnimType.bottomSlide,
+                title: 'Delete Baby',
+                desc: 'Are you sure you want to delete this child?',
+                btnCancelOnPress: () {},
+                btnOkOnPress: () {
+                  // onDelete();
+                },
+              ).show();
+            },
+            icon: const Icon(Icons.remove_circle_outline_outlined),
+          )
         ],
       ),
     );

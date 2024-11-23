@@ -18,24 +18,24 @@ class AddBabyCubit extends Cubit<AddBabyState> {
 
   final formKey = GlobalKey<FormState>();
   void emitAddBabyStates() async {
-    if (nameController.text.isEmpty ||
-        weightController.text.isEmpty ||
-        heightController.text.isEmpty ||
-        dateOfBirthOfBabyController.text.isEmpty ||
-        genderController.text.isEmpty) {
-      emit(const AddBabyState.addBabyerror(
-        error: "All fields are required",
-      ));
-      return;
-    }
+    // if (nameController.text.isEmpty ||
+    //     weightController.text.isEmpty ||
+    //     heightController.text.isEmpty ||
+    //     dateOfBirthOfBabyController.text.isEmpty ||
+    //     genderController.text.isEmpty) {
+    //   emit(const AddBabyState.addBabyerror(
+    //     error: "All fields are required",
+    //   ));
+    //   return;
+    // }
 
-    final dateOfBirth = DateTime.tryParse(dateOfBirthOfBabyController.text);
-    if (dateOfBirth == null || dateOfBirth.isAfter(DateTime.now())) {
-      emit(const AddBabyState.addBabyerror(
-        error: "Date of birth must be in the past",
-      ));
-      return;
-    }
+    // final dateOfBirth = DateTime.tryParse(dateOfBirthOfBabyController.text);
+    // if (dateOfBirth == null || dateOfBirth.isAfter(DateTime.now())) {
+    //   emit(const AddBabyState.addBabyerror(
+    //     error: "Date of birth must be in the past",
+    //   ));
+    //   return;
+    // }
 
     emit(const AddBabyState.addBabyloading());
 
