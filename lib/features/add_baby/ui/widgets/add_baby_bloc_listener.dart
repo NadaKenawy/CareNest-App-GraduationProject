@@ -4,7 +4,6 @@ import 'package:care_nest/features/add_baby/logic/add_baby_cubit/add_baby_state.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/theme/colors_manager.dart';
-import '../../logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 
 class AddBabyBlocListener extends StatelessWidget {
   const AddBabyBlocListener({super.key});
@@ -20,12 +19,7 @@ class AddBabyBlocListener extends StatelessWidget {
         state.whenOrNull(
           addBabyloading: () => showLoadingIndicator(context),
           addBabysuccess: (addBabyResponse) {
-            if (context.mounted) {
-              Navigator.of(context).pop(); // يرجع للشاشة السابقة
-              context
-                  .read<GetAllBabiesCubit>()
-                  .getAllBabies(); // تحديث البيانات
-            }
+            Navigator.of(context).pop();
           },
           addBabyerror: (error) {
             Navigator.of(context).pop();
