@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/features/add_baby/data/models/get_all_babies_response.dart';
@@ -6,7 +5,6 @@ import 'package:care_nest/features/add_baby/ui/widgets/baby_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-
 
 class MyBabiesListView extends StatelessWidget {
   const MyBabiesListView({super.key, required this.babiesList});
@@ -19,13 +17,12 @@ class MyBabiesListView extends StatelessWidget {
     return ListView.builder(
       itemCount: reversedList.length,
       itemBuilder: (context, index) {
-        final id = reversedList[index].id;
         return Padding(
           padding: EdgeInsets.only(bottom: 40.h),
           child: GestureDetector(
             onTap: () {
-              log('my id =$id');
-              GoRouter.of(context).push(AppRouter.kBabyDataScreen, extra: id);
+              GoRouter.of(context)
+                  .push(AppRouter.kBabyDataScreen, extra: reversedList[index]);
             },
             child: BabyContainer(
               gender: "Boy",

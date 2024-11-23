@@ -34,7 +34,7 @@ class AddBabyCubit extends Cubit<AddBabyState> {
       emit(const AddBabyState.addBabyerror(
         error: "Date of birth must be in the past",
       ));
-      return; 
+      return;
     }
 
     emit(const AddBabyState.addBabyloading());
@@ -55,7 +55,9 @@ class AddBabyCubit extends Cubit<AddBabyState> {
 
     response.when(
       success: (addBabyResponse) async {
-        emit(AddBabyState.addBabysuccess(addBabyResponse));
+        if (!isClosed) {
+          emit(AddBabyState.addBabysuccess(addBabyResponse));
+        }
       },
       failure: (error) {
         final errorMessage = error.signUpErrorModel.errors?.first.msg ??

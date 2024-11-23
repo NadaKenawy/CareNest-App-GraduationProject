@@ -1,20 +1,18 @@
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/utils/app_images.dart';
-import 'package:care_nest/features/add_baby/data/models/get_baby_data_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BabyContainer extends StatelessWidget {
   final String gender;
   final String name;
-  final BabyData? babyData;
-
+  
   const BabyContainer({
     super.key,
     required this.gender,
     required this.name,
-    this.babyData,
+   
   });
 
   @override

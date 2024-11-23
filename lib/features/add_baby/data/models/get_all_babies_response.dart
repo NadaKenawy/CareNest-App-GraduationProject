@@ -27,6 +27,7 @@ class BabiesData {
   @JsonKey(name: 'birthDay')
   DateTime? dateOfBirth;
   String? motherOfBaby;
+  String? gender;
 
   BabiesData({
     this.id,
@@ -35,6 +36,7 @@ class BabiesData {
     this.height,
     this.dateOfBirth,
     this.motherOfBaby,
+    this.gender
   });
 
   factory BabiesData.fromJson(Map<String, dynamic> json) =>
