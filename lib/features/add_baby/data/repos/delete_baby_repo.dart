@@ -12,7 +12,6 @@ class DeleteBabyRepo {
       String token, String id) async {
     try {
       final deleteBabyResponse = await _apiService.deleteBabyData(token, id);
-
       return ServerResult.success(deleteBabyResponse);
     } catch (error) {
       return ServerResult.failure(ServerErrorHandler.handle(error));

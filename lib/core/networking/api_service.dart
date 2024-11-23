@@ -70,6 +70,6 @@ abstract class ApiService {
   @DELETE(ApiConstants.deleteBaby)
   Future<DeleteBabyResponse> deleteBabyData(
     @Header('Authorization') String token,
-    @Path('id') String babyId,
+    @Path('id') String id,
   );
 }

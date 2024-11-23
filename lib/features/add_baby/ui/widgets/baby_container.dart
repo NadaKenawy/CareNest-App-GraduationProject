@@ -1,24 +1,22 @@
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/utils/app_images.dart';
-import 'package:care_nest/features/add_baby/data/models/add_baby_response.dart';
+import 'package:care_nest/features/add_baby/logic/delete_baby_cubit/delete_baby_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 
 class BabyContainer extends StatelessWidget {
   final String gender;
   final String name;
-
-  final BabyData? babyData;
-  //final VoidCallback onDelete;
+  final String babyId;
 
   const BabyContainer({
     super.key,
     required this.gender,
     required this.name,
-    this.babyData,
-    // required this.onDelete,
+    required this.babyId,
   });
 
   @override
@@ -72,12 +70,12 @@ class BabyContainer extends StatelessWidget {
                 desc: 'Are you sure you want to delete this child?',
                 btnCancelOnPress: () {},
                 btnOkOnPress: () {
-                  // onDelete();
+                  context.read<DeleteBabyCubit>().deleteBaby(babyId, context);
                 },
               ).show();
             },
             icon: const Icon(Icons.remove_circle_outline_outlined),
-          )
+          ),
         ],
       ),
     );

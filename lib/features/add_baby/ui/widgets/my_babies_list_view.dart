@@ -24,19 +24,11 @@ class MyBabiesListView extends StatelessWidget {
             onTap: () {
               GoRouter.of(context)
                   .push(AppRouter.kBabyDataScreen, extra: reversedList[index]);
-              // log('my id =${babyData.id}');
-              // GoRouter.of(context)
-              //     .push(AppRouter.kBabyDataScreen, extra: babyData.id);
             },
             child: BabyContainer(
-              gender: "Boy", // قم بتعديل حسب الجنس الفعلي إذا لزم الأمر
+              gender: "Boy",
               name: babyData.name ?? "ali",
-              // onDelete: () {
-              //   // استدعاء الـ Cubit لحذف الطفل مع تمرير المعرف بشكل صحيح
-              //   context
-              //       .read<DeleteBabyCubit>()
-              //       .deleteBaby(babyData.id!, context);
-              // },
+              babyId: babyData.id!,
             ),
           ),
         );

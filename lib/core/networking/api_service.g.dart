@@ -304,16 +304,13 @@ class _ApiService implements ApiService {
     return _value;
   }
 
-
-
-
   @override
   Future<DeleteBabyResponse> deleteBabyData(
     String token,
-    dynamic babyId,
+    String id,
   ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'id': babyId.toJson()};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
