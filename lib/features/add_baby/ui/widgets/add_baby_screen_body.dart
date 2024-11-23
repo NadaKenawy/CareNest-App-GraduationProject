@@ -1,5 +1,4 @@
 // ignore_for_file: unnecessary_type_check
-import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/add_baby_bloc_listener.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/baby_data_fields.dart';
@@ -9,9 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
-import 'package:go_router/go_router.dart';
 import '../../logic/add_baby_cubit/add_baby_cubit.dart';
-import '../../logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 import 'header_section.dart';
 import 'gender_selection.dart';
 
@@ -154,7 +151,6 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
     final addBabyCubit = context.read<AddBabyCubit>();
     if (addBabyCubit.formKey.currentState!.validate()) {
       context.read<AddBabyCubit>().emitAddBabyStates();
-      Navigator.of(context).pop();
     }
   }
 }
