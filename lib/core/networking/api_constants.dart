@@ -8,7 +8,7 @@ class ApiConstants {
   static const String verifyAccount = "auth/verifyEmailUser";
   static const String addNewBaby = "babies";
   static const String getAllBabies = "babies/allBabiesOfLoggedUser";
- 
+  static const String deleteBaby = "babies/:id";
 }
 
 class ApiErrors {

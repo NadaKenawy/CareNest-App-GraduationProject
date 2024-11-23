@@ -1,5 +1,8 @@
 import 'package:care_nest/core/networking/api_constants.dart';
 import 'package:care_nest/features/add_baby/data/models/add_baby_response.dart';
+
+import 'package:care_nest/features/add_baby/data/models/delete_baby_response.dart';
+
 import 'package:care_nest/features/forget_password/data/models/create_new_password_model/create_new_password_request_body.dart';
 import 'package:care_nest/features/forget_password/data/models/forget_password_model/forget_pass_email_request_body.dart';
 import 'package:care_nest/features/forget_password/data/models/forget_password_model/forget_pass_response.dart';
@@ -64,4 +67,9 @@ abstract class ApiService {
     @Header('Authorization') String token,
   );
 
+  @DELETE(ApiConstants.deleteBaby)
+  Future<DeleteBabyResponse> deleteBabyData(
+    @Header('Authorization') String token,
+    @Path('id') String babyId,
+  );
 }
