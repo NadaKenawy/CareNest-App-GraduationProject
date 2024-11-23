@@ -1,18 +1,25 @@
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/utils/app_images.dart';
+import 'package:care_nest/features/add_baby/data/models/add_baby_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 class BabyContainer extends StatelessWidget {
   final String gender;
   final String name;
-  
+
+  final BabyData? babyData;
+  final VoidCallback onDelete;
+
   const BabyContainer({
     super.key,
     required this.gender,
     required this.name,
    
+    this.babyData,
+    required this.onDelete,
   });
 
   @override
@@ -41,8 +48,8 @@ class BabyContainer extends StatelessWidget {
         ],
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SizedBox(width: 16.w),
           Image.asset(
             babyImage,
             fit: BoxFit.cover,
@@ -55,6 +62,23 @@ class BabyContainer extends StatelessWidget {
               fontSize: 28.sp,
             ),
           ),
+          SizedBox(width: 32.w),
+         IconButton(
+  onPressed: () {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.warning,
+      animType: AnimType.bottomSlide,
+      title: 'Delete Baby',
+      desc: 'Are you sure you want to delete this child?',
+      btnCancelOnPress: () {},
+      btnOkOnPress: () {
+        onDelete();
+      },
+    ).show();
+  },
+  icon: const Icon(Icons.remove_circle_outline_outlined),
+)
         ],
       ),
     );

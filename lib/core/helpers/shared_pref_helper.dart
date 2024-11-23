@@ -1,5 +1,3 @@
-// ignore_for_file: type_literal_in_constant_pattern
-
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,14 +8,16 @@ class SharedPrefHelper {
 
   /// Removes a value from SharedPreferences with given [key].
   static removeData(String key) async {
-    debugPrint('SharedPrefHelper : data with key : $key has been removed');
+    debugPrint(
+        'SharedPrefHelper : data with key : $key has been removed from SharedPreferences');
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.remove(key);
   }
 
   /// Removes all keys and values in the SharedPreferences
   static clearAllData() async {
-    debugPrint('SharedPrefHelper : all data has been cleared');
+    debugPrint(
+        'SharedPrefHelper : all data has been cleared from SharedPreferences');
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.clear();
   }
@@ -40,6 +40,7 @@ class SharedPrefHelper {
         await sharedPreferences.setDouble(key, value);
         break;
       default:
+        debugPrint("SharedPrefHelper : Unsupported value type");
         return null;
     }
   }
@@ -65,7 +66,7 @@ class SharedPrefHelper {
     return sharedPreferences.getInt(key) ?? 0;
   }
 
-  /// Gets an String value from SharedPreferences with given [key].
+  /// Gets a String value from SharedPreferences with given [key].
   static getString(String key) async {
     debugPrint('SharedPrefHelper : getString with key : $key');
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -80,11 +81,18 @@ class SharedPrefHelper {
     await flutterSecureStorage.write(key: key, value: value);
   }
 
-  /// Gets an String value from FlutterSecureStorage with given [key].
+  /// Gets a String value from FlutterSecureStorage with given [key].
   static getSecuredString(String key) async {
     const flutterSecureStorage = FlutterSecureStorage();
-    debugPrint('FlutterSecureStorage : getSecuredString with key :');
+    debugPrint('FlutterSecureStorage : getSecuredString with key : $key');
     return await flutterSecureStorage.read(key: key) ?? '';
+  }
+
+  /// Removes a specific key from FlutterSecureStorage
+  static removeSecuredData(String key) async {
+    const flutterSecureStorage = FlutterSecureStorage();
+    debugPrint('FlutterSecureStorage : data with key : $key has been removed');
+    await flutterSecureStorage.delete(key: key);
   }
 
   /// Removes all keys and values in the FlutterSecureStorage

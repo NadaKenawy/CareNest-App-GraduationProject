@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, avoid_print
+
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/baby_data_fields.dart';
 import 'package:flutter/material.dart';
