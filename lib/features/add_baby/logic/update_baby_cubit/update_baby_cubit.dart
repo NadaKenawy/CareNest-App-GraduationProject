@@ -53,7 +53,7 @@ class UpdateBabyCubit extends Cubit<UpdateBabyState> {
           emit(UpdateBabyState.updateBabySuccess(updateBabyResponse));
         },
         failure: (error) {
-          String errorMessage = error.signUpErrorModel?.errors?.first.msg ??
+          String errorMessage = error.signUpErrorModel.errors?.first.msg ??
               'Unknown error occurred';
           emit(UpdateBabyState.updateBabyError(error: errorMessage));
           log('Error Occurred: $errorMessage');
