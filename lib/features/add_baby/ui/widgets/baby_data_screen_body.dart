@@ -1,5 +1,3 @@
-// ignore_for_file: camel_case_types, avoid_print
-
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/baby_data_fields.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +38,10 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          const HeaderSection(),
+          HeaderSection(
+            gender: widget.babiesData.gender,
+            babyName: widget.babiesData.name,
+          ),
           SizedBox(height: 40.h),
           Expanded(
             child: SingleChildScrollView(
@@ -50,12 +51,14 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     BabyDataFields(
+                      gender: widget.babiesData.gender,
                       hintText: widget.babiesData.name ?? 'Baby Name',
                       gradient: gradient,
                       prefixIcon: Icons.child_care,
                     ),
                     SizedBox(height: 24.h),
                     BabyDataFields(
+                      gender: widget.babiesData.gender,
                       hintText: widget.babiesData.dateOfBirth != null
                           ? widget.babiesData.dateOfBirth
                               .toString()
@@ -72,6 +75,7 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
                       children: [
                         Expanded(
                           child: BabyDataFields(
+                            gender: widget.babiesData.gender,
                             hintText: widget.babiesData.weight != null
                                 ? widget.babiesData.weight.toString()
                                 : 'Weight',
@@ -82,6 +86,7 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
                         SizedBox(width: 16.w),
                         Expanded(
                           child: BabyDataFields(
+                            gender: widget.babiesData.gender,
                             hintText: widget.babiesData.height != null
                                 ? widget.babiesData.height.toString()
                                 : 'Height',
@@ -111,10 +116,20 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
             child: AppTextButton(
               buttonText: 'Save',
               textStyle: TextStyles.font16WhiteBold,
-              gradientColors: const [
-                ColorsManager.secondryBlueColor,
-                ColorsManager.primaryPinkColor,
-              ],
+              gradientColors: widget.babiesData.gender == 'Male'
+                  ? [
+                      ColorsManager.secondryBlueColor,
+                      ColorsManager.secondryBlueColor
+                    ]
+                  : widget.babiesData.gender == 'Female'
+                      ? [
+                          ColorsManager.primaryPinkColor,
+                          ColorsManager.primaryPinkColor
+                        ]
+                      : [
+                          ColorsManager.secondryBlueColor,
+                          ColorsManager.primaryPinkColor
+                        ],
               onPressed: () {},
             ),
           ),

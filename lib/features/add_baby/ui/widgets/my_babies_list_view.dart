@@ -17,7 +17,6 @@ class MyBabiesListView extends StatelessWidget {
       itemCount: reversedList.length,
       itemBuilder: (context, index) {
         final babyData = reversedList[index];
-
         return Padding(
           padding: EdgeInsets.only(bottom: 40.h),
           child: GestureDetector(
@@ -26,8 +25,8 @@ class MyBabiesListView extends StatelessWidget {
                   .push(AppRouter.kBabyDataScreen, extra: reversedList[index]);
             },
             child: BabyContainer(
-              gender: "Boy",
-              name: babyData.name ?? "ali",
+              gender: babyData.gender ?? "Unknown",
+              name: babyData.name ?? "Ali",
               babyId: babyData.id!,
             ),
           ),

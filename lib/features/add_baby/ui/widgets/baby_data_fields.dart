@@ -1,3 +1,4 @@
+import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +11,7 @@ class BabyDataFields extends StatefulWidget {
   final TextEditingController? controller;
   final VoidCallback? onTap;
   final bool readOnly;
+  final String? gender; // New parameter to track gender
 
   const BabyDataFields({
     super.key,
@@ -19,6 +21,7 @@ class BabyDataFields extends StatefulWidget {
     this.controller,
     this.onTap,
     this.readOnly = false,
+    this.gender, // Initialize gender
   });
 
   @override
@@ -35,14 +38,52 @@ class _BabyDataFieldsState extends State<BabyDataFields> {
     isFieldEmpty = widget.controller?.text.isEmpty ?? true;
   }
 
+  Color _getBorderColor() {
+    switch (widget.gender?.toLowerCase()) {
+      case 'male':
+        return ColorsManager.secondryBlueColor;
+      case 'female':
+        return ColorsManager.primaryPinkColor;
+      default:
+        return Colors.transparent;
+    }
+  }
+
+  Color _getTextColor() {
+    if (widget.gender == null || widget.gender!.isEmpty) {
+      return Colors.black;
+    }
+    switch (widget.gender!.toLowerCase()) {
+      case 'male':
+        return ColorsManager.secondryBlueColor;
+      case 'female':
+        return ColorsManager.primaryPinkColor;
+      default:
+        return Colors.black;
+    }
+  }
+
+  Color _getIconColor() {
+    if (widget.gender == null || widget.gender!.isEmpty) {
+      return Colors.white;
+    }
+    switch (widget.gender!.toLowerCase()) {
+      case 'male':
+        return ColorsManager.secondryBlueColor;
+      case 'female':
+        return ColorsManager.primaryPinkColor;
+      default:
+        return Colors.white;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),
         border: Border.all(
-          width: 2.0,
-          color: Colors.transparent,
+          color: _getBorderColor(),
         ),
         gradient: !hasError && isFieldEmpty ? widget.gradient : null,
         color: hasError ? Colors.white : null,
@@ -60,44 +101,46 @@ class _BabyDataFieldsState extends State<BabyDataFields> {
                 : null,
         decoration: InputDecoration(
           hintText: widget.hintText,
-          hintStyle: TextStyle(
-            foreground: Paint()
-              ..shader = widget.gradient.createShader(
-                const Rect.fromLTWH(0.0, 0.0, 200.0, 50.0),
-              ),
-          ),
-          prefixIcon: ShaderMask(
-            shaderCallback: (bounds) {
-              return widget.gradient.createShader(bounds);
-            },
-            child: Icon(
-              widget.prefixIcon,
-              color: Colors.white,
-              size: 18.sp,
-            ),
-          ),
+          hintStyle: widget.gender == null || widget.gender!.isEmpty
+              ? TextStyle(
+                  foreground: Paint()
+                    ..shader = widget.gradient.createShader(
+                      const Rect.fromLTWH(0.0, 0.0, 200.0, 50.0),
+                    ),
+                )
+              : TextStyle(color: _getTextColor()),
+          prefixIcon: widget.gender == null || widget.gender!.isEmpty
+              ? ShaderMask(
+                  shaderCallback: (bounds) {
+                    return widget.gradient.createShader(bounds);
+                  },
+                  child: Icon(
+                    widget.prefixIcon,
+                    color: Colors.white,
+                    size: 18.sp,
+                  ),
+                )
+              : Icon(
+                  widget.prefixIcon,
+                  color: _getIconColor(),
+                  size: 18.sp,
+                ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20.0),
-            borderSide: const BorderSide(
-              width: 2.0,
-              style: BorderStyle.solid,
-              color: Colors.transparent,
+            borderSide: BorderSide(
+              color: _getBorderColor(),
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20.0),
-            borderSide: const BorderSide(
-              width: 2.0,
-              style: BorderStyle.solid,
-              color: Colors.transparent,
+            borderSide: BorderSide(
+              color: _getBorderColor(),
             ),
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20.0),
-            borderSide: const BorderSide(
-              width: 2.0,
-              style: BorderStyle.solid,
-              color: Colors.transparent,
+            borderSide: BorderSide(
+              color: _getBorderColor(),
             ),
           ),
           fillColor: Colors.white,
@@ -113,10 +156,7 @@ class _BabyDataFieldsState extends State<BabyDataFields> {
           return null;
         },
         style: TextStyle(
-          foreground: Paint()
-            ..shader = widget.gradient.createShader(
-              const Rect.fromLTWH(0.0, 0.0, 200.0, 50.0),
-            ),
+          color: _getTextColor(),
           fontSize: 14.sp,
         ),
       ),

@@ -22,11 +22,11 @@ class BabyContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color containerColor = gender == 'Boy'
+    final Color containerColor = gender == 'Male'
         ? ColorsManager.secondryBlueColor
         : ColorsManager.primaryPinkColor;
     final String babyImage =
-        gender == 'Boy' ? AppImages.boyBabyImage : AppImages.girlBabyImage;
+        gender == 'Male' ? AppImages.boyBabyImage : AppImages.girlBabyImage;
 
     return Container(
       height: 120.h,
@@ -64,6 +64,7 @@ class BabyContainer extends StatelessWidget {
           BlocBuilder<DeleteBabyCubit, DeleteBabyState>(
             builder: (context, state) {
               return IconButton(
+                color: containerColor,
                 onPressed: () {
                   AwesomeDialog(
                     context: context,
