@@ -63,26 +63,4 @@ class MyBabiesScreenBody extends StatelessWidget {
   }
 }
 
-class NoBabyText extends StatelessWidget {
-  const NoBabyText({
-    super.key,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Center(
-        child: Text(
-          'Add Your Little\n One Now!',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeightHelper.semiBold,
-            fontSize: 32.sp,
-          ),
-        ),
-      ),
-    );
-  }
-
-  
-}

@@ -1,4 +1,5 @@
 import 'package:care_nest/core/routing/app_router.dart';
+import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/features/add_baby/data/models/get_all_babies_response.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/baby_container.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +13,14 @@ class MyBabiesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final reversedList = babiesList?.reversed.toList() ?? [];
+    if (reversedList.isEmpty) {
+      return const NoBabyText();
+    }
 
     return ListView.builder(
       itemCount: reversedList.length,
       itemBuilder: (context, index) {
         final babyData = reversedList[index];
-
         return Padding(
           padding: EdgeInsets.only(bottom: 40.h),
           child: GestureDetector(
@@ -26,8 +29,8 @@ class MyBabiesListView extends StatelessWidget {
                   .push(AppRouter.kBabyDataScreen, extra: reversedList[index]);
             },
             child: BabyContainer(
-              gender: "Boy",
-              name: babyData.name ?? "ali",
+              gender: babyData.gender ?? "Unknown",
+              name: babyData.name ?? "Ali",
               babyId: babyData.id!,
             ),
           ),
@@ -35,4 +38,28 @@ class MyBabiesListView extends StatelessWidget {
       },
     );
   }
+  
+}
+class NoBabyText extends StatelessWidget {
+  const NoBabyText({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Center(
+        child: Text(
+          'Add Your Little\n One Now!',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontWeight: FontWeightHelper.semiBold,
+            fontSize: 32.sp,
+          ),
+        ),
+      ),
+    );
+  }
+
+  
 }
