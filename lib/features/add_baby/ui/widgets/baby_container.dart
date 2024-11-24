@@ -2,6 +2,7 @@ import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/utils/app_images.dart';
 import 'package:care_nest/features/add_baby/logic/delete_baby_cubit/delete_baby_cubit.dart';
+import 'package:care_nest/features/add_baby/logic/delete_baby_cubit/delete_baby_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,21 +61,27 @@ class BabyContainer extends StatelessWidget {
             ),
           ),
           SizedBox(width: 32.w),
-          IconButton(
-            onPressed: () {
-              AwesomeDialog(
-                context: context,
-                dialogType: DialogType.warning,
-                animType: AnimType.bottomSlide,
-                title: 'Delete Baby',
-                desc: 'Are you sure you want to delete this child?',
-                btnCancelOnPress: () {},
-                btnOkOnPress: () {
-                  context.read<DeleteBabyCubit>().deleteBaby(babyId, context);
+          BlocBuilder<DeleteBabyCubit, DeleteBabyState>(
+            builder: (context, state) {
+              return IconButton(
+                onPressed: () {
+                  AwesomeDialog(
+                    context: context,
+                    dialogType: DialogType.warning,
+                    animType: AnimType.bottomSlide,
+                    title: 'Delete Baby',
+                    desc: 'Are you sure you want to delete this child?',
+                    btnCancelOnPress: () {},
+                    btnOkOnPress: () {
+                      context
+                          .read<DeleteBabyCubit>()
+                          .deleteBaby(babyId, context);
+                    },
+                  ).show();
                 },
-              ).show();
+                icon: const Icon(Icons.remove_circle_outline_outlined),
+              );
             },
-            icon: const Icon(Icons.remove_circle_outline_outlined),
           ),
         ],
       ),
