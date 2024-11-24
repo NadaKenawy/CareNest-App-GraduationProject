@@ -30,7 +30,7 @@ class MyBabiesListView extends StatelessWidget {
             },
             child: BabyContainer(
               gender: babyData.gender ?? "Unknown",
-              name: babyData.name ?? "Ali",
+              name: babyData.name ?? "ali",
               babyId: babyData.id!,
             ),
           ),
