@@ -49,10 +49,10 @@ class HeaderSection extends StatelessWidget {
               fit: BoxFit.contain,
             ),
             Text(
-              babyName?.replaceAll(" ", "\n") ?? 'Your\nBaby Data',
+              babyName != null ? '$babyName\'s\nProfile' : 'Baby\'s\nProfile',
               textAlign: TextAlign.left,
               style: TextStyle(
-                fontSize: 40.sp,
+                fontSize: 36.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),

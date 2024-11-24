@@ -305,7 +305,6 @@ class _ApiService implements ApiService {
   }
 
   @override
-  @override
   Future<DeleteBabyResponse> deleteBabyData(
     String token,
     String id,
@@ -314,11 +313,7 @@ class _ApiService implements ApiService {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-
     const Map<String, dynamic>? _data = null;
-
-    final url = 'babies/$id';
-
     final _options = _setStreamType<DeleteBabyResponse>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -326,7 +321,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          url,
+          'babies/${id}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -335,17 +330,53 @@ class _ApiService implements ApiService {
           _dio.options.baseUrl,
           baseUrl,
         )));
-
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late DeleteBabyResponse _value;
-
     try {
       _value = DeleteBabyResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
     }
+    return _value;
+  }
 
+  @override
+  Future<UpdateBabyResponse> updateBabyData(
+    UpdateBabyRequest updateBabyRequest,
+    String token,
+    String id,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(updateBabyRequest.toJson());
+    final _options = _setStreamType<UpdateBabyResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'babies/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late UpdateBabyResponse _value;
+    try {
+      _value = UpdateBabyResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
     return _value;
   }
 

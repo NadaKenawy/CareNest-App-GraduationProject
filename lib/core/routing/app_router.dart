@@ -3,6 +3,7 @@ import 'package:care_nest/features/add_baby/data/models/get_all_babies_response.
 import 'package:care_nest/features/add_baby/logic/add_baby_cubit/add_baby_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/delete_baby_cubit/delete_baby_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
+import 'package:care_nest/features/add_baby/logic/update_baby_cubit/update_baby_cubit.dart';
 import 'package:care_nest/features/add_baby/ui/add_baby_screen.dart';
 import 'package:care_nest/features/add_baby/ui/baby_data_screen.dart';
 import 'package:care_nest/features/add_baby/ui/my_babies_screen.dart';
@@ -115,8 +116,8 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-          path: kMyBabiesScreen,
-          builder: (context, state) {
+        path: kMyBabiesScreen,
+        builder: (context, state) {
           return MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -125,12 +126,14 @@ abstract class AppRouter {
               BlocProvider(
                 create: (context) => getIt<DeleteBabyCubit>(),
               ),
+              BlocProvider(
+                create: (context) => getIt<UpdateBabyCubit>(),
+              ),
             ],
             child: const MyBabiesScreen(),
           );
         },
       ),
-
       GoRoute(
         path: kBabyDataScreen,
         builder: (context, state) {

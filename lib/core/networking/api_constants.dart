@@ -9,6 +9,7 @@ class ApiConstants {
   static const String addNewBaby = "babies";
   static const String getAllBabies = "babies/allBabiesOfLoggedUser";
   static const String deleteBaby = "babies/{id}";
+  static const String updateBaby = "babies/{id}";
 }
 
 class ApiErrors {

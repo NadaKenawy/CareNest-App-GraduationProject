@@ -11,7 +11,7 @@ class BabyDataFields extends StatefulWidget {
   final TextEditingController? controller;
   final VoidCallback? onTap;
   final bool readOnly;
-  final String? gender; // New parameter to track gender
+  final String? gender;
 
   const BabyDataFields({
     super.key,
@@ -21,7 +21,7 @@ class BabyDataFields extends StatefulWidget {
     this.controller,
     this.onTap,
     this.readOnly = false,
-    this.gender, // Initialize gender
+    this.gender,
   });
 
   @override
@@ -155,10 +155,16 @@ class _BabyDataFieldsState extends State<BabyDataFields> {
           }
           return null;
         },
-        style: TextStyle(
-          color: _getTextColor(),
-          fontSize: 14.sp,
-        ),
+        style: widget.gender == null || widget.gender!.isEmpty
+            ? TextStyle(
+                foreground: Paint()
+                  ..shader = widget.gradient.createShader(
+                    const Rect.fromLTWH(0.0, 0.0, 200.0, 50.0),
+                  ),
+              )
+            : TextStyle(
+                color: _getBorderColor(),
+              ),
       ),
     );
   }
