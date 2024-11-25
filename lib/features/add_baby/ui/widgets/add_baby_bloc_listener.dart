@@ -43,9 +43,7 @@ class AddBabyBlocListener extends StatelessWidget {
         animType: AnimType.scale,
         title: 'Error',
         desc: error,
-        btnOkOnPress: () {
-          Navigator.of(context).pop();
-        },
+        btnOkOnPress: () {},
         btnOkColor: ColorsManager.primaryBlueColor,
       ).show();
     }
