@@ -139,7 +139,7 @@ abstract class AppRouter {
         builder: (context, state) {
           final babyData = state.extra as BabiesData;
           return BlocProvider(
-            create: (context) => getIt<GetAllBabiesCubit>(),
+            create: (context) => UpdateBabyCubit(getIt(), babyData),
             child: BabyDataScreen(
               babiesData: babyData,
             ),

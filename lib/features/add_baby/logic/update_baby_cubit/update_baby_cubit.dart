@@ -7,11 +7,13 @@ import 'package:care_nest/features/add_baby/logic/update_baby_cubit/update_baby_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/models/get_all_babies_response.dart';
+
 class UpdateBabyCubit extends Cubit<UpdateBabyState> {
-  UpdateBabyCubit(this._updateBabyRepo)
+  UpdateBabyCubit(this._updateBabyRepo, this.babiesData)
       : super(const UpdateBabyState.initial());
   final UpdateBabyRepo _updateBabyRepo;
-
+  final BabiesData babiesData;
   TextEditingController nameController = TextEditingController();
   TextEditingController weightController = TextEditingController();
   TextEditingController heightController = TextEditingController();
@@ -31,21 +33,25 @@ class UpdateBabyCubit extends Cubit<UpdateBabyState> {
       log('Authorization Token Retrieved: $token');
 
       final request = UpdateBabyRequest(
-        id: id,
-        name: nameController.text.isNotEmpty ? nameController.text : null,
+        name: nameController.text.isNotEmpty
+            ? nameController.text
+            : babiesData.name,
         weight: weightController.text.isNotEmpty
             ? num.tryParse(weightController.text)
-            : null,
+            : babiesData.weight,
         height: heightController.text.isNotEmpty
             ? num.tryParse(heightController.text)
-            : null,
+            : babiesData.height,
         dateOfBirthOfBaby: dateOfBirthOfBabyController.text.isNotEmpty
             ? dateOfBirthOfBabyController.text
-            : null,
-        gender: genderController.text.isNotEmpty ? genderController.text : null,
+            : babiesData.dateOfBirth.toString(),
       );
 
-      final response = await _updateBabyRepo.updateBaby(request, token);
+      final response = await _updateBabyRepo.updateBaby(
+        request,
+        token,
+        id,
+      );
 
       response.when(
         success: (updateBabyResponse) async {

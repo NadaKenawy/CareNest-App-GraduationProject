@@ -1,5 +1,6 @@
 import 'package:care_nest/core/networking/api_service.dart';
 import 'package:care_nest/core/networking/dio_factory.dart';
+import 'package:care_nest/features/add_baby/data/models/get_all_babies_response.dart';
 import 'package:care_nest/features/add_baby/data/repos/delete_baby_repo.dart';
 import 'package:care_nest/features/add_baby/data/repos/get_all_babies_repo.dart';
 import 'package:care_nest/features/add_baby/data/repos/update_baby_repo.dart';
@@ -77,5 +78,6 @@ Future<void> setupGetIt() async {
 
   // update baby
   getIt.registerLazySingleton<UpdateBabyRepo>(() => UpdateBabyRepo(getIt()));
-  getIt.registerFactory<UpdateBabyCubit>(() => UpdateBabyCubit(getIt()));
+  getIt.registerFactory<UpdateBabyCubit>(
+      () => UpdateBabyCubit(getIt(), BabiesData()));
 }

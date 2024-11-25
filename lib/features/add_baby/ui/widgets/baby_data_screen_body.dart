@@ -1,11 +1,13 @@
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/baby_data_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import '../../data/models/get_all_babies_response.dart';
+import '../../logic/update_baby_cubit/update_baby_cubit.dart';
 import 'gender_selection.dart';
 import 'header_section.dart';
 
@@ -15,8 +17,9 @@ class BabyDataScreenBody extends StatefulWidget {
     required this.babiesData,
   });
   final BabiesData babiesData;
+
   @override
-  _BabyDataScreenBodyState createState() => _BabyDataScreenBodyState();
+  State<BabyDataScreenBody> createState() => _BabyDataScreenBodyState();
 }
 
 class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
@@ -53,6 +56,8 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
                     BabyDataFields(
                       gender: widget.babiesData.gender,
                       hintText: widget.babiesData.name ?? 'Baby Name',
+                      controller:
+                          context.read<UpdateBabyCubit>().nameController,
                       gradient: gradient,
                       prefixIcon: Icons.child_care,
                     ),
@@ -79,6 +84,9 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
                             hintText: widget.babiesData.weight != null
                                 ? widget.babiesData.weight.toString()
                                 : 'Weight',
+                            controller: context
+                                .read<UpdateBabyCubit>()
+                                .weightController,
                             gradient: gradient,
                             prefixIcon: FontAwesomeIcons.weightScale,
                           ),
@@ -90,6 +98,9 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
                             hintText: widget.babiesData.height != null
                                 ? widget.babiesData.height.toString()
                                 : 'Height',
+                            controller: context
+                                .read<UpdateBabyCubit>()
+                                .heightController,
                             gradient: gradient,
                             prefixIcon: FontAwesomeIcons.rulerVertical,
                           ),
@@ -99,7 +110,9 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
                     SizedBox(height: 24.h),
                     GenderSelection(
                       gradient: gradient,
-                      gender: widget.babiesData.gender ?? 'Gender',
+                      gender: gender.isNotEmpty
+                          ? gender
+                          : widget.babiesData.gender ?? 'Gender',
                       onChanged: (value) {
                         setState(() {
                           gender = value;
@@ -130,7 +143,11 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
                           ColorsManager.secondryBlueColor,
                           ColorsManager.primaryPinkColor
                         ],
-              onPressed: () {},
+              onPressed: () {
+                context
+                    .read<UpdateBabyCubit>()
+                    .emitUpdateBabyState(widget.babiesData.id ?? '');
+              },
             ),
           ),
         ],
@@ -146,9 +163,13 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
       lastDate: DateTime.now(),
     );
     if (pickedDate != null) {
-      setState(() {
-        selectedDate = "${pickedDate.toLocal()}".split(' ')[0];
-      });
+      setState(
+        () {
+          selectedDate = "${pickedDate.toLocal()}".split(' ')[0];
+          context.read<UpdateBabyCubit>().dateOfBirthOfBabyController.text =
+              selectedDate;
+        },
+      );
     }
   }
 }

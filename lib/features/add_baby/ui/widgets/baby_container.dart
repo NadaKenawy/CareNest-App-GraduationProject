@@ -55,6 +55,9 @@ class BabyContainer extends StatelessWidget {
           SizedBox(width: 32.w),
           Text(
             name,
+            softWrap: true,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
             style: TextStyle(
               fontWeight: FontWeightHelper.semiBold,
               fontSize: 28.sp,

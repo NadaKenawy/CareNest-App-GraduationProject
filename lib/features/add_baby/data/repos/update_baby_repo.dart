@@ -13,12 +13,13 @@ class UpdateBabyRepo {
   Future<ServerResult<UpdateBabyResponse>> updateBaby(
     UpdateBabyRequest updateBabyRequest,
     String token,
+    String id,
   ) async {
     try {
       final response = await _apiService.updateBabyData(
         updateBabyRequest, 
         token, 
-        updateBabyRequest.id,
+        id,
       );
       return ServerResult.success(response);
     } catch (error) {
