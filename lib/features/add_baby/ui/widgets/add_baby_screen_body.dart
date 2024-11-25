@@ -153,7 +153,7 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
     final addBabyCubit = context.read<AddBabyCubit>();
     if (addBabyCubit.formKey.currentState!.validate()) {
       context.read<AddBabyCubit>().emitAddBabyStates();
-      Navigator.of(context).pop();
+      
     }
   }
 }

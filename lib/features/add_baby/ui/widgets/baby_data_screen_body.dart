@@ -1,5 +1,6 @@
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/baby_data_fields.dart';
+import 'package:care_nest/features/add_baby/ui/widgets/update_baby_bloc_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -150,6 +151,7 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
               },
             ),
           ),
+          const UpdateBabyBlocListener(),
         ],
       ),
     );

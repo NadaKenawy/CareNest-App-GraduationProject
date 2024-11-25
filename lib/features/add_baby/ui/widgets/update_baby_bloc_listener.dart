@@ -1,30 +1,30 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:care_nest/features/add_baby/logic/add_baby_cubit/add_baby_cubit.dart';
-import 'package:care_nest/features/add_baby/logic/add_baby_cubit/add_baby_state.dart';
+import 'package:care_nest/features/add_baby/logic/update_baby_cubit/update_baby_cubit.dart';
+import 'package:care_nest/features/add_baby/logic/update_baby_cubit/update_baby_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/theme/colors_manager.dart';
 import '../../logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 
-class AddBabyBlocListener extends StatelessWidget {
-  const AddBabyBlocListener({super.key});
+class UpdateBabyBlocListener extends StatelessWidget {
+  const UpdateBabyBlocListener({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AddBabyCubit, AddBabyState>(
+    return BlocListener<UpdateBabyCubit, UpdateBabyState>(
       listenWhen: (previous, current) =>
-          current is AddBabyLoading ||
-          current is AddBabySuccess ||
-          current is AddBabyError,
+          current is UpdateBabyLoading ||
+          current is UpdateBabySuccess ||
+          current is UpdateBabyError,
       listener: (context, state) {
         state.whenOrNull(
-          addBabyloading: () => showLoadingIndicator(context),
-          addBabysuccess: (addBabyResponse) {
+          updateBabyLoading: () => showLoadingIndicator(context),
+          updateBabySuccess: (updateBabyResponse) {
             Navigator.of(context).pop();
             context.read<GetAllBabiesCubit>().getAllBabies();
             Navigator.of(context).pop(true);
           },
-          addBabyerror: (error) {
+          updateBabyError: (error) {
             Navigator.of(context).pop();
             setupErrorState(context, error);
           },

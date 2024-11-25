@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
@@ -52,8 +54,16 @@ class MyBabiesScreenBody extends StatelessWidget {
                 ColorsManager.primaryPinkColor,
               ],
               onPressed: () {
-                GoRouter.of(context).push(AppRouter.kAddBabyScreen,
-                    extra: context.read<GetAllBabiesCubit>());
+                GoRouter.of(context)
+                    .push(AppRouter.kAddBabyScreen)
+                    .then((value) {
+                  if (value == true) {
+                    log('update baby done');
+                    context.read<GetAllBabiesCubit>().getAllBabies();
+                  } else {
+                    log('update baby not done');
+                  }
+                });
               },
             ),
           ),
@@ -62,5 +72,3 @@ class MyBabiesScreenBody extends StatelessWidget {
     );
   }
 }
-
-

@@ -3,8 +3,11 @@ import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/features/add_baby/data/models/get_all_babies_response.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/baby_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 
 class MyBabiesListView extends StatelessWidget {
   const MyBabiesListView({super.key, required this.babiesList});
@@ -26,7 +29,15 @@ class MyBabiesListView extends StatelessWidget {
           child: GestureDetector(
             onTap: () {
               GoRouter.of(context)
-                  .push(AppRouter.kBabyDataScreen, extra: reversedList[index]);
+                  .push(
+                AppRouter.kBabyDataScreen,
+                extra: reversedList[index],
+              )
+                  .then((value) {
+                if (value == true) {
+                  context.read<GetAllBabiesCubit>().getAllBabies();
+                }
+              });
             },
             child: BabyContainer(
               gender: babyData.gender ?? "Unknown",

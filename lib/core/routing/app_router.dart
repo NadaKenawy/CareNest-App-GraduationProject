@@ -107,9 +107,9 @@ abstract class AppRouter {
               BlocProvider(
                 create: (context) => getIt<AddBabyCubit>(),
               ),
-              BlocProvider.value(
-                value: state.extra as GetAllBabiesCubit,
-              ),
+              // BlocProvider.value(
+              //   value: state.extra as GetAllBabiesCubit,
+              // ),
             ],
             child: const AddBabyScreen(),
           );
