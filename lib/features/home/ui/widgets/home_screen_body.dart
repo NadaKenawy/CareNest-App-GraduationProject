@@ -30,36 +30,38 @@ class HomeScreenBody extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Column(
+                  Column(
                     children: [
                       LargeCard(
                         imagePath: AppImages.babyWeightingImage,
                         title: 'Baby Growth',
                         description: "Track every stage of your baby's growth",
                         backgroundColor: ColorsManager.secondryBlueColor,
+                        onPressed: () {},
                       ),
-                      SizedBox(height: 20),
-                      MamaTipsCard(),
+                      const SizedBox(height: 20),
+                      const MamaTipsCard(),
                     ],
                   ),
                   SizedBox(width: 14.w),
-                  const Column(
+                  Column(
                     children: [
-                      RemindersCard(),
-                      SizedBox(height: 20),
+                      const RemindersCard(),
+                      const SizedBox(height: 20),
                       LargeCard(
                         imagePath: AppImages.doctorsImage,
                         title: 'Doctors',
                         description:
                             "Expert care available for your little one",
-                        backgroundColor: Color(0xffBB87E0),
+                        backgroundColor: const Color(0xffBB87E0),
+                        onPressed: () {},
                       ),
                     ],
                   ),
                 ],
               ),
               const SizedBox(height: 20),
-              const Row(
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -69,13 +71,15 @@ class HomeScreenBody extends StatelessWidget {
                     description:
                         "Stories, videos, and music for a relaxed baby",
                     backgroundColor: ColorsManager.thirdryBlueColor,
+                    onPressed: () {},
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   LargeCard(
                     imagePath: AppImages.shoppingImage,
                     title: 'Shopping',
                     description: "Seamless shopping for every baby moment",
                     backgroundColor: ColorsManager.thirdryPinkColor,
+                    onPressed: () {},
                   ),
                 ],
               ),

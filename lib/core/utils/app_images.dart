@@ -17,4 +17,5 @@ class AppImages {
   static const String boyAndGirlImage = 'assets/images/BoyAndGirl.png';
     static const String boyProfileImage = 'assets/images/boy.png';
   static const String girlProfileImage = 'assets/images/girl.png';
+  static const String medicineIcon = 'assets/images/medicine_icon.png';
 }

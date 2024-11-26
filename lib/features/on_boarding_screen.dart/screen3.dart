@@ -29,7 +29,7 @@ class Screen3 extends StatelessWidget {
           SizedBox(height: 20.h),
           Text(
             'Make parenting fun and convenient with our\nentertainment and shopping features! Find\nproducts, activities, and tips to keep your\nbaby happy and healthy.',
-            style: TextStyles.font15PrimaryBlackMedium,
+            style: TextStyles.font16PrimaryBlackMedium,
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 20.h),

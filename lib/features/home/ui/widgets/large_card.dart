@@ -9,13 +9,14 @@ class LargeCard extends StatelessWidget {
   final String title;
   final String description;
   final Color backgroundColor;
+    final VoidCallback onPressed; 
 
   const LargeCard({
     super.key,
     required this.imagePath,
     required this.title,
     required this.description,
-    required this.backgroundColor,
+    required this.backgroundColor, required this.onPressed,
   });
 
   @override
@@ -74,7 +75,7 @@ class LargeCard extends StatelessWidget {
             ),
           ),
           ForwardArrowButton(
-            iconColor: backgroundColor,
+            iconColor: backgroundColor, onPressed: () {  },
           ),
         ],
       ),

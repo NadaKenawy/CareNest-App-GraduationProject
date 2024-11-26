@@ -70,8 +70,8 @@ class TextStyles {
     color: Colors.black,
   );
 
-  static TextStyle font15PrimaryBlackMedium = TextStyle(
-    fontSize: 15.sp,
+  static TextStyle font16PrimaryBlackMedium = TextStyle(
+    fontSize: 16.sp,
     fontWeight: FontWeightHelper.medium,
     color: Colors.black,
   );

@@ -4,6 +4,9 @@ import 'package:care_nest/core/utils/app_images.dart';
 import 'package:care_nest/features/home/ui/widgets/forward_arrow_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../core/routing/app_router.dart';
 
 class RemindersCard extends StatelessWidget {
   const RemindersCard({
@@ -71,8 +74,11 @@ class RemindersCard extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 8.w),
-              const ForwardArrowButton(
+              ForwardArrowButton(
                 iconColor: ColorsManager.secondryPinkColor,
+                onPressed: () {
+                  GoRouter.of(context).push(AppRouter.kRemindersScreen);
+                },
               ),
             ],
           ),

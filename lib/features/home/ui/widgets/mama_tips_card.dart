@@ -62,8 +62,8 @@ class MamaTipsCard extends StatelessWidget {
             ),
           ),
           SizedBox(width: 8.w),
-          const ForwardArrowButton(
-            iconColor: Color(0xffFFBB5D),
+           ForwardArrowButton(
+            iconColor: const Color(0xffFFBB5D), onPressed: () {  },
           ),
         ],
       ),

@@ -31,7 +31,7 @@ class Screen2 extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Text(
               'Track your baby\'s health and development\nwith ease! From vaccination reminders\nto health tips, we\'re here to support you',
-              style: TextStyles.font15PrimaryBlackMedium,
+              style: TextStyles.font16PrimaryBlackMedium,
               textAlign: TextAlign.center,
             ),
           ),

@@ -61,8 +61,8 @@ class CommuntiyCard extends StatelessWidget {
             ),
           ),
           SizedBox(width: 8.w),
-          const ForwardArrowButton(
-            iconColor: Color(0xff8794C3),
+           ForwardArrowButton(
+            iconColor: const Color(0xff8794C3), onPressed: () {  },
           ),
         ],
       ),

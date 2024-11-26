@@ -4,10 +4,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ForwardArrowButton extends StatelessWidget {
   final Color iconColor;
+  final VoidCallback onPressed; 
 
   const ForwardArrowButton({
     super.key,
     required this.iconColor,
+    required this.onPressed, 
   });
 
   @override
@@ -27,7 +29,7 @@ class ForwardArrowButton extends StatelessWidget {
             Icons.arrow_forward,
             color: iconColor,
           ),
-          onPressed: () {},
+          onPressed: onPressed, 
           padding: EdgeInsets.zero,
           iconSize: 25.sp,
         ),
