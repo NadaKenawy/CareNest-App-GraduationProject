@@ -1,7 +1,7 @@
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
-import 'package:care_nest/features/reminders/widgets/medicines_list_view.dart';
-import 'package:care_nest/features/reminders/widgets/week_days_widget.dart';
+import 'package:care_nest/features/reminders/ui/widgets/medicines_list_view.dart';
+import 'package:care_nest/features/reminders/ui/widgets/week_days_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

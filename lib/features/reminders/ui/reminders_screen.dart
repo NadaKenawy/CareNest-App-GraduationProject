@@ -1,4 +1,4 @@
-import 'package:care_nest/features/reminders/widgets/reminders_screen_body.dart';
+import 'package:care_nest/features/reminders/ui/widgets/reminders_screen_body.dart';
 import 'package:flutter/material.dart';
 
 class RemindersScreen extends StatelessWidget {
