@@ -5,24 +5,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class GenderSelection extends StatelessWidget {
   final Gradient gradient;
   final String gender;
-  final ValueChanged<String> onChanged;
+  final ValueChanged<String>? onChanged;
 
   const GenderSelection({
     super.key,
     required this.gradient,
     required this.gender,
-    required this.onChanged,
+    this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Row(
-        // Using Row to align all elements horizontally
-        mainAxisAlignment: MainAxisAlignment.center, // Center the row content
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // النص "Gender"
           gender == 'Male' || gender == 'Female'
               ? Text(
                   'Gender:',
@@ -50,50 +48,50 @@ class GenderSelection extends StatelessWidget {
                     ),
                   ),
                 ),
-          SizedBox(
-              width: 16.w), // Add space between the label and radio buttons
-          // اختيار الجندر
-          Expanded(
-            child: Row(
-              // Using another Row to layout the radio buttons horizontally
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: RadioListTile(
+          SizedBox(width: 16.w),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                children: [
+                  Radio(
                     value: 'Female',
                     groupValue: gender,
-                    title: Text(
-                      'Girl',
-                      style: TextStyle(
-                        color: gender == 'Female'
-                            ? ColorsManager.primaryPinkColor
-                            : Colors.black,
-                        fontSize: 16.sp,
-                      ),
-                    ),
                     activeColor: ColorsManager.primaryPinkColor,
-                    onChanged: (value) => onChanged(value.toString()),
+                    onChanged: (value) => onChanged!(value.toString()),
                   ),
-                ),
-                Expanded(
-                  child: RadioListTile(
+                  Text(
+                    'Girl',
+                    style: TextStyle(
+                      color: gender == 'Female'
+                          ? ColorsManager.primaryPinkColor
+                          : Colors.black,
+                      fontSize: 16.sp,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(width: 24.w),
+              Row(
+                children: [
+                  Radio(
                     value: 'Male',
                     groupValue: gender,
-                    title: Text(
-                      'Boy',
-                      style: TextStyle(
-                        color: gender == 'Male'
-                            ? ColorsManager.secondryBlueColor
-                            : Colors.black,
-                        fontSize: 16.sp,
-                      ),
-                    ),
                     activeColor: ColorsManager.secondryBlueColor,
-                    onChanged: (value) => onChanged(value.toString()),
+                    onChanged: (value) => onChanged!(value.toString()),
                   ),
-                ),
-              ],
-            ),
+                  Text(
+                    'Boy',
+                    style: TextStyle(
+                      color: gender == 'Male'
+                          ? ColorsManager.secondryBlueColor
+                          : Colors.black,
+                      fontSize: 16.sp,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),

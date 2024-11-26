@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-// Class for Baby Data Fields
 class BabyDataFields extends StatefulWidget {
   final String hintText;
   final Gradient gradient;
@@ -92,13 +91,16 @@ class _BabyDataFieldsState extends State<BabyDataFields> {
         controller: widget.controller,
         readOnly: widget.readOnly,
         onTap: widget.onTap,
-        keyboardType: widget.hintText == 'Weight' || widget.hintText == 'Height'
+        keyboardType: widget.hintText == 'Weight' ||
+                widget.hintText == 'Height' ||
+                RegExp(r'\d').hasMatch(widget.hintText)
             ? TextInputType.number
             : TextInputType.text,
-        inputFormatters:
-            widget.hintText == 'Weight' || widget.hintText == 'Height'
-                ? [FilteringTextInputFormatter.digitsOnly]
-                : null,
+        inputFormatters: widget.hintText == 'Weight' ||
+                widget.hintText == 'Height' ||
+                RegExp(r'\d').hasMatch(widget.hintText)
+            ? [FilteringTextInputFormatter.digitsOnly]
+            : null,
         decoration: InputDecoration(
           hintText: widget.hintText,
           hintStyle: widget.gender == null || widget.gender!.isEmpty

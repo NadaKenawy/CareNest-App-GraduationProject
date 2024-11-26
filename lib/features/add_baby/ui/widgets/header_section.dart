@@ -18,10 +18,10 @@ class HeaderSection extends StatelessWidget {
     String boyAndGirlImage;
     if (gender == 'Male') {
       backgroundImage = AppImages.gradientBoyImage;
-      boyAndGirlImage = AppImages.boyBabyImage;
+      boyAndGirlImage = AppImages.boyProfileImage;
     } else if (gender == 'Female') {
       backgroundImage = AppImages.gradientGirlImage;
-      boyAndGirlImage = AppImages.girlBabyImage;
+      boyAndGirlImage = AppImages.girlProfileImage;
     } else {
       backgroundImage = AppImages.gradientBoyAndGirlImage;
       boyAndGirlImage = AppImages.boyAndGirlImage;
@@ -40,24 +40,34 @@ class HeaderSection extends StatelessWidget {
             ),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Image.asset(
-              boyAndGirlImage,
-              height: 150.h,
-              fit: BoxFit.contain,
-            ),
-            Text(
-              babyName != null ? '$babyName\'s\nProfile' : 'Baby\'s\nProfile',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                fontSize: 36.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Row(
+            children: [
+              Image.asset(
+                boyAndGirlImage,
+                height: 150.h,
+                fit: BoxFit.contain,
               ),
-            ),
-          ],
+              SizedBox(width: 40.w),
+              Expanded(
+                child: Text(
+                  babyName != null
+                      ? '$babyName\'s\nProfile'
+                      : 'Baby\'s\nProfile',
+                  textAlign: TextAlign.left,
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: TextStyle(
+                    fontSize: 36.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );

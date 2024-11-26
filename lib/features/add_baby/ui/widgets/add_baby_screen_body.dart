@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_type_check
-
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/add_baby_bloc_listener.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/baby_data_fields.dart';
@@ -25,22 +23,46 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
   final TextEditingController _dobController = TextEditingController();
   String gender = '';
 
+  Gradient getGradient() {
+    if (gender == 'Male') {
+      return const LinearGradient(
+        colors: [
+          ColorsManager.secondryBlueColor,
+          ColorsManager.secondryBlueColor,
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      );
+    } else if (gender == 'Female') {
+      return const LinearGradient(
+        colors: [
+          ColorsManager.primaryPinkColor,
+          ColorsManager.primaryPinkColor,
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      );
+    } else {
+      return const LinearGradient(
+        colors: [
+          ColorsManager.secondryBlueColor,
+          ColorsManager.primaryPinkColor,
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    const Gradient gradient = LinearGradient(
-      colors: [
-        ColorsManager.secondryBlueColor,
-        ColorsManager.primaryPinkColor,
-      ],
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-    );
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          const HeaderSection(),
+          HeaderSection(
+            gender: gender,
+          ),
           SizedBox(height: 40.h),
           Expanded(
             child: SingleChildScrollView(
@@ -53,14 +75,14 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
                     children: [
                       BabyDataFields(
                         hintText: 'Baby Name',
-                        gradient: gradient,
+                        gradient: getGradient(),
                         prefixIcon: Icons.child_care,
                         controller: context.read<AddBabyCubit>().nameController,
                       ),
                       SizedBox(height: 24.h),
                       BabyDataFields(
                         hintText: 'Date of Birth',
-                        gradient: gradient,
+                        gradient: getGradient(),
                         prefixIcon: FontAwesomeIcons.calendarDay,
                         controller: _dobController,
                         onTap: _selectDate,
@@ -72,7 +94,7 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
                           Expanded(
                             child: BabyDataFields(
                               hintText: 'Weight',
-                              gradient: gradient,
+                              gradient: getGradient(),
                               prefixIcon: FontAwesomeIcons.weightScale,
                               controller:
                                   context.read<AddBabyCubit>().weightController,
@@ -82,7 +104,7 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
                           Expanded(
                             child: BabyDataFields(
                               hintText: 'Height',
-                              gradient: gradient,
+                              gradient: getGradient(),
                               prefixIcon: FontAwesomeIcons.rulerVertical,
                               controller:
                                   context.read<AddBabyCubit>().heightController,
@@ -90,20 +112,16 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 24.h),
+                      SizedBox(height: 16.h),
                       GenderSelection(
-                        gradient: gradient,
+                        gradient: getGradient(),
                         gender: gender,
                         onChanged: (value) {
-                          setState(
-                            () {
-                              gender = value;
-                              context
-                                  .read<AddBabyCubit>()
-                                  .genderController
-                                  .text = value;
-                            },
-                          );
+                          setState(() {
+                            gender = value;
+                            context.read<AddBabyCubit>().genderController.text =
+                                value;
+                          });
                         },
                       ),
                     ],
@@ -117,10 +135,20 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
             child: AppTextButton(
               buttonText: 'Save',
               textStyle: TextStyles.font16WhiteBold,
-              gradientColors: const [
-                ColorsManager.secondryBlueColor,
-                ColorsManager.primaryPinkColor,
-              ],
+              gradientColors: gender == 'Male'
+                  ? [
+                      ColorsManager.secondryBlueColor,
+                      ColorsManager.secondryBlueColor,
+                    ]
+                  : gender == 'Female'
+                      ? [
+                          ColorsManager.primaryPinkColor,
+                          ColorsManager.primaryPinkColor,
+                        ]
+                      : [
+                          ColorsManager.secondryBlueColor,
+                          ColorsManager.primaryPinkColor,
+                        ],
               onPressed: () {
                 validateThenSave(context);
               },
@@ -153,7 +181,6 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
     final addBabyCubit = context.read<AddBabyCubit>();
     if (addBabyCubit.formKey.currentState!.validate()) {
       context.read<AddBabyCubit>().emitAddBabyStates();
-      
     }
   }
 }

@@ -114,11 +114,6 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
                       gender: gender.isNotEmpty
                           ? gender
                           : widget.babiesData.gender ?? 'Gender',
-                      onChanged: (value) {
-                        setState(() {
-                          gender = value;
-                        });
-                      },
                     ),
                   ],
                 ),

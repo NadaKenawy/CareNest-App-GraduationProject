@@ -45,49 +45,53 @@ class BabyContainer extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Image.asset(
-            babyImage,
-            fit: BoxFit.cover,
-          ),
-          SizedBox(width: 32.w),
-          Text(
-            name,
-            softWrap: true,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: TextStyle(
-              fontWeight: FontWeightHelper.semiBold,
-              fontSize: 28.sp,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Row(
+          children: [
+            Image.asset(
+              babyImage,
+              fit: BoxFit.cover,
             ),
-          ),
-          SizedBox(width: 32.w),
-          BlocBuilder<DeleteBabyCubit, DeleteBabyState>(
-            builder: (context, state) {
-              return IconButton(
-                color: containerColor,
-                onPressed: () {
-                  AwesomeDialog(
-                    context: context,
-                    dialogType: DialogType.warning,
-                    animType: AnimType.bottomSlide,
-                    title: 'Delete Baby',
-                    desc: 'Are you sure you want to delete this child?',
-                    btnCancelOnPress: () {},
-                    btnOkOnPress: () {
-                      context
-                          .read<DeleteBabyCubit>()
-                          .deleteBaby(babyId, context);
-                    },
-                  ).show();
-                },
-                icon: const Icon(Icons.remove_circle_outline_outlined),
-              );
-            },
-          ),
-        ],
+            SizedBox(width: 20.w),
+            Expanded(
+              child: Text(
+                name,
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                style: TextStyle(
+                  fontWeight: FontWeightHelper.semiBold,
+                  fontSize: 28.sp,
+                ),
+              ),
+            ),
+            SizedBox(width: 24.w),
+            BlocBuilder<DeleteBabyCubit, DeleteBabyState>(
+              builder: (context, state) {
+                return IconButton(
+                  color: containerColor,
+                  onPressed: () {
+                    AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.warning,
+                      animType: AnimType.bottomSlide,
+                      title: 'Delete Baby',
+                      desc: 'Are you sure you want to delete this child?',
+                      btnCancelOnPress: () {},
+                      btnOkOnPress: () {
+                        context
+                            .read<DeleteBabyCubit>()
+                            .deleteBaby(babyId, context);
+                      },
+                    ).show();
+                  },
+                  icon: const Icon(Icons.remove_circle_outline_outlined),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
