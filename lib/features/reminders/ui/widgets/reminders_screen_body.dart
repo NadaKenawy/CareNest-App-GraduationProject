@@ -1,9 +1,11 @@
+import 'package:care_nest/core/routing/app_router.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/features/reminders/ui/widgets/medicines_list_view.dart';
 import 'package:care_nest/features/reminders/ui/widgets/week_days_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class RemindersScreenBody extends StatefulWidget {
   const RemindersScreenBody({super.key});
@@ -41,7 +43,9 @@ class _RemindersScreenBodyState extends State<RemindersScreenBody> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          GoRouter.of(context).push(AppRouter.kAddMedicineScreen);
+        },
         backgroundColor: Colors.white,
         shape: const CircleBorder(
           side: BorderSide(

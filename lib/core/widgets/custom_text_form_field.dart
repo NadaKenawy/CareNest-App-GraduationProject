@@ -13,6 +13,7 @@ class AppTextFormField extends StatelessWidget {
     required this.hintText,
     this.isObscureText,
     this.suffixIcon,
+    this.prefixIcon,
     this.backgroundColor,
     this.width,
     this.validator,
@@ -23,6 +24,8 @@ class AppTextFormField extends StatelessWidget {
     this.textAlign,
     this.focusNode,
     this.onChanged,
+    this.onTap,
+    this.readOnly = false,
   });
 
   final EdgeInsetsGeometry? contentPadding;
@@ -33,6 +36,7 @@ class AppTextFormField extends StatelessWidget {
   final String hintText;
   final bool? isObscureText;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final Color? backgroundColor;
   final double? width;
   final Function(String?)? validator;
@@ -43,11 +47,13 @@ class AppTextFormField extends StatelessWidget {
   final TextAlign? textAlign;
   final FocusNode? focusNode;
   final Function(String)? onChanged;
+  final VoidCallback? onTap;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
-    Color textColor = hasError ? Colors.red : ColorsManager.primaryBlueColor;
-    Color hintColor = hasError ? Colors.red : ColorsManager.primaryBlueColor;
+    Color textColor = hasError ? Colors.red : ColorsManager.secondryBlueColor;
+    Color hintColor = hasError ? Colors.red : ColorsManager.secondryBlueColor;
 
     return SizedBox(
       width: width ?? double.infinity,
@@ -65,14 +71,16 @@ class AppTextFormField extends StatelessWidget {
               OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.r),
                 borderSide: BorderSide(
-                    color: hasError ? Colors.red : Colors.blue, width: 2.w),
+                    color:
+                        hasError ? Colors.red : ColorsManager.secondryBlueColor,
+                    width: 2.w),
               ),
           enabledBorder: enabledBorder ??
               OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.r),
                 borderSide: BorderSide(
                     color:
-                        hasError ? Colors.red : ColorsManager.primaryBlueColor,
+                        hasError ? Colors.red : ColorsManager.secondryBlueColor,
                     width: 2.w),
               ),
           errorBorder: OutlineInputBorder(
@@ -86,6 +94,7 @@ class AppTextFormField extends StatelessWidget {
           hintText: hintText,
           hintStyle: TextStyle(color: hintColor),
           suffixIcon: suffixIcon,
+          prefixIcon: prefixIcon,
           filled: true,
           fillColor: Colors.transparent,
           errorMaxLines: 2,
@@ -93,10 +102,12 @@ class AppTextFormField extends StatelessWidget {
         ),
         obscureText: isObscureText ?? false,
         validator: (value) {
-          return validator!(value);
+          return validator != null ? validator!(value) : null;
         },
         focusNode: focusNode,
         onChanged: onChanged,
+        onTap: onTap,
+        readOnly: readOnly,
       ),
     );
   }

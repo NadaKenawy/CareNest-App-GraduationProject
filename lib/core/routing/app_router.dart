@@ -17,6 +17,7 @@ import 'package:care_nest/features/home/ui/home_screen.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:care_nest/features/login/ui/login_screen.dart';
 import 'package:care_nest/features/on_boarding_screen.dart/on_boarding_screen.dart';
+import 'package:care_nest/features/reminders/ui/add_medicine_screen.dart';
 import 'package:care_nest/features/reminders/ui/reminders_screen.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:care_nest/features/sign_up/logic/verfiy_account_cubit/verify_account_cubit.dart';
@@ -38,6 +39,7 @@ abstract class AppRouter {
   static const kMyBabiesScreen = '/myBabiesScreen';
   static const kBabyDataScreen = '/babyDataScreen';
   static const kRemindersScreen = '/remindersScreen';
+  static const kAddMedicineScreen = '/addMedicineScreen';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -152,6 +154,11 @@ abstract class AppRouter {
           path: kRemindersScreen,
           builder: (context, state) {
             return const RemindersScreen();
+          }),
+      GoRoute(
+          path: kAddMedicineScreen,
+          builder: (context, state) {
+            return const AddMedicineScreen();
           }),
     ],
   );
