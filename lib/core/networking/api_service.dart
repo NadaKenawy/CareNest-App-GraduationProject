@@ -1,9 +1,9 @@
 import 'package:care_nest/core/networking/api_constants.dart';
-import 'package:care_nest/features/add_baby/data/models/add_baby_response.dart';
+import 'package:care_nest/features/add_baby/data/models/add_baby/add_baby_response.dart';
 
-import 'package:care_nest/features/add_baby/data/models/delete_baby_response.dart';
-import 'package:care_nest/features/add_baby/data/models/update_baby_request.dart';
-import 'package:care_nest/features/add_baby/data/models/update_baby_response.dart';
+import 'package:care_nest/features/add_baby/data/models/delete_baby/delete_baby_response.dart';
+import 'package:care_nest/features/add_baby/data/models/update_baby/update_baby_request.dart';
+import 'package:care_nest/features/add_baby/data/models/update_baby/update_baby_response.dart';
 
 import 'package:care_nest/features/forget_password/data/models/create_new_password_model/create_new_password_request_body.dart';
 import 'package:care_nest/features/forget_password/data/models/forget_password_model/forget_pass_email_request_body.dart';
@@ -12,6 +12,7 @@ import 'package:care_nest/features/forget_password/data/models/verify_password_m
 import 'package:care_nest/features/forget_password/data/models/verify_password_model/verify_password_response.dart';
 import 'package:care_nest/features/login/data/models/login_request_body.dart';
 import 'package:care_nest/features/login/data/models/login_response.dart';
+import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule_response.dart';
 import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_request_body.dart';
 import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_response.dart';
 import 'package:care_nest/features/sign_up/data/models/verify_account_model/verify_account_request_body.dart';
@@ -19,8 +20,8 @@ import 'package:care_nest/features/sign_up/data/models/verify_account_model/veri
 import 'package:dio/dio.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
-import '../../features/add_baby/data/models/add_baby_request_body.dart';
-import '../../features/add_baby/data/models/get_all_babies_response.dart';
+import '../../features/add_baby/data/models/add_baby/add_baby_request_body.dart';
+import '../../features/add_baby/data/models/get_all_babies/get_all_babies_response.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.apiBaseUrl)
@@ -77,6 +78,11 @@ abstract class ApiService {
   @PUT(ApiConstants.updateBaby)
   Future<UpdateBabyResponse> updateBabyData(
     @Body() UpdateBabyRequest updateBabyRequest,
+    @Header('Authorization') String token,
+    @Path('id') String id,
+  );
+  @GET(ApiConstants.getAllMedicationSchedule)
+  Future<GetAllMedicationScheduleResponse> getAllMedicationSchedule(
     @Header('Authorization') String token,
     @Path('id') String id,
   );

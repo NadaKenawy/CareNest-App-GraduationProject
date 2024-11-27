@@ -1,5 +1,5 @@
 import 'package:care_nest/core/di/service_locator.dart';
-import 'package:care_nest/features/add_baby/data/models/get_all_babies_response.dart';
+import 'package:care_nest/features/add_baby/data/models/get_all_babies/get_all_babies_response.dart';
 import 'package:care_nest/features/add_baby/logic/add_baby_cubit/add_baby_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/delete_baby_cubit/delete_baby_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';

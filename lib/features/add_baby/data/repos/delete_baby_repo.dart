@@ -1,7 +1,7 @@
 import '../../../../core/networking/api_service.dart';
 import '../../../../core/networking/server_error_handler.dart';
 import '../../../../core/networking/server_result.dart';
-import '../models/delete_baby_response.dart';
+import '../models/delete_baby/delete_baby_response.dart';
 
 class DeleteBabyRepo {
   final ApiService _apiService;

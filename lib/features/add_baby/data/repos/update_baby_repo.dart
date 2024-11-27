@@ -1,8 +1,8 @@
 import 'package:care_nest/core/networking/api_service.dart';
 import 'package:care_nest/core/networking/server_error_handler.dart';
 import 'package:care_nest/core/networking/server_result.dart';
-import 'package:care_nest/features/add_baby/data/models/update_baby_request.dart';
-import 'package:care_nest/features/add_baby/data/models/update_baby_response.dart';
+import 'package:care_nest/features/add_baby/data/models/update_baby/update_baby_request.dart';
+import 'package:care_nest/features/add_baby/data/models/update_baby/update_baby_response.dart';
 
 
 class UpdateBabyRepo {
