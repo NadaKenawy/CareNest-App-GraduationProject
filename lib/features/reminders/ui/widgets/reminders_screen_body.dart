@@ -1,4 +1,5 @@
 import 'package:care_nest/core/routing/app_router.dart';
+import 'package:care_nest/features/reminders/ui/widgets/sidebar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
@@ -6,6 +7,7 @@ import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/features/reminders/ui/widgets/medicines_list_view.dart';
 import 'package:care_nest/features/reminders/ui/widgets/week_days_widget.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sidebarx/sidebarx.dart';
 
 class RemindersScreenBody extends StatefulWidget {
   const RemindersScreenBody({super.key});
@@ -16,6 +18,7 @@ class RemindersScreenBody extends StatefulWidget {
 
 class _RemindersScreenBodyState extends State<RemindersScreenBody> {
   final DateTime _currentDate = DateTime.now();
+  final SidebarXController _controller = SidebarXController(selectedIndex: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +39,19 @@ class _RemindersScreenBodyState extends State<RemindersScreenBody> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.menu, size: 24.sp, color: Colors.black),
-            onPressed: () {},
+          Builder(
+            builder: (context) {
+              return IconButton(
+                icon: Icon(Icons.menu, size: 24.sp, color: Colors.black),
+                onPressed: () {
+                  Scaffold.of(context).openEndDrawer();
+                },
+              );
+            },
           ),
         ],
       ),
+      endDrawer: ExampleSidebarX(controller: _controller),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           GoRouter.of(context).push(AppRouter.kAddMedicineScreen);

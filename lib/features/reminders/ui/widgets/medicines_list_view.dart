@@ -22,17 +22,16 @@ class MedicinesListView extends StatelessWidget {
               height: 96.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16.r),
-                color: ColorsManager.secondryBlueColor.withOpacity(.15),
+                color: ColorsManager.secondryBlueColor.withOpacity(.1),
               ),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32.w),
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Image.asset(
                       AppImages.medicineIcon,
-                      width: 36.w,
-                      height: 36.h,
+                      height: 56.h,
                     ),
                     SizedBox(
                       width: 12.w,
@@ -66,7 +65,7 @@ class MedicinesListView extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      width: 100.w,
+                      width: 52.w,
                     ),
                     InkWell(
                       onTap: () {},
