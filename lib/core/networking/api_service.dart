@@ -74,9 +74,9 @@ abstract class ApiService {
     @Header('Authorization') String token,
     @Path('id') String id,
   );
-    @PUT(ApiConstants.updateBaby)
+  @PUT(ApiConstants.updateBaby)
   Future<UpdateBabyResponse> updateBabyData(
-      @Body() UpdateBabyRequest updateBabyRequest,
+    @Body() UpdateBabyRequest updateBabyRequest,
     @Header('Authorization') String token,
     @Path('id') String id,
   );
