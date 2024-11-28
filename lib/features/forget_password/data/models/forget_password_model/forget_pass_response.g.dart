@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: unused_element
+
 part of 'forget_pass_response.dart';
 
 // **************************************************************************
@@ -13,3 +15,9 @@ ForgetPassResponse _$ForgetPassResponseFromJson(Map<String, dynamic> json) =>
       token: json['token'] as String?,
     );
 
+Map<String, dynamic> _$ForgetPassResponseToJson(ForgetPassResponse instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
+      'token': instance.token,
+    };

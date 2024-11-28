@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: unused_element
+
 part of 'verify_password_response.dart';
 
 // **************************************************************************
@@ -13,3 +15,9 @@ VerifyPasswordResponse _$VerifyPasswordResponseFromJson(
       token: json['token'] as String?,
     );
 
+Map<String, dynamic> _$VerifyPasswordResponseToJson(
+        VerifyPasswordResponse instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'token': instance.token,
+    };

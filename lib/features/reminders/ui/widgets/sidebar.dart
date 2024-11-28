@@ -20,22 +20,19 @@ class ExampleSidebarX extends StatelessWidget {
       theme: SidebarXTheme(
         margin: EdgeInsets.all(10.sp),
         decoration: BoxDecoration(
-          color: ColorsManager.fourthryBlueColor,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(20.sp),
         ),
-        hoverColor: ColorsManager.fourthryBlueColor.withOpacity(0.8),
+        hoverColor: Colors.white.withOpacity(0.8),
         textStyle: TextStyle(color: Colors.black.withOpacity(0.7)),
         selectedTextStyle: const TextStyle(color: Colors.white),
         itemTextPadding: EdgeInsets.only(left: 30.w),
         selectedItemTextPadding: EdgeInsets.only(left: 30.w),
         itemDecoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.sp),
-          border: Border.all(color: ColorsManager.fourthryBlueColor),
         ),
         selectedItemDecoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.sp),
-          border: Border.all(
-              color: ColorsManager.fourthryBlueColor.withOpacity(0.5)),
           gradient: const LinearGradient(
             colors: [
               ColorsManager.thirdryBlueColor,
@@ -63,9 +60,7 @@ class ExampleSidebarX extends StatelessWidget {
       ),
       extendedTheme: SidebarXTheme(
         width: 200.w,
-        decoration: const BoxDecoration(
-          color: ColorsManager.fourthryBlueColor,
-        ),
+        decoration: const BoxDecoration(color: Colors.white),
       ),
       items: items ??
           [

@@ -12,6 +12,8 @@ import 'package:care_nest/features/forget_password/data/models/verify_password_m
 import 'package:care_nest/features/forget_password/data/models/verify_password_model/verify_password_response.dart';
 import 'package:care_nest/features/login/data/models/login_request_body.dart';
 import 'package:care_nest/features/login/data/models/login_response.dart';
+import 'package:care_nest/features/reminders/data/models/add_medication_schedule_request_body.dart';
+import 'package:care_nest/features/reminders/data/models/add_medication_schedule_response.dart';
 import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_request_body.dart';
 import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_response.dart';
 import 'package:care_nest/features/sign_up/data/models/verify_account_model/verify_account_request_body.dart';
@@ -79,5 +81,12 @@ abstract class ApiService {
     @Body() UpdateBabyRequest updateBabyRequest,
     @Header('Authorization') String token,
     @Path('id') String id,
+  );
+
+  @POST(ApiConstants.addMedicationSchedule)
+  Future<AddMedicationScheduleResponse> addMedicationSchedule(
+    @Path('babyId') String babyId,
+    @Body() AddMedicationScheduleRequestBody medicationScheduleRequestBody,
+    @Header('Authorization') String token,
   );
 }
