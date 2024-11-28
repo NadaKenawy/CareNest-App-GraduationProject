@@ -37,10 +37,10 @@ class ExampleSidebarX extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.sp),
               ),
               hoverColor: Colors.white.withOpacity(0.8),
-              textStyle: TextStyle(color: Colors.black, fontSize: 14.sp),
+              textStyle: TextStyle(color: Colors.black, fontSize: 16.sp),
               selectedTextStyle: TextStyle(
                   color: Colors.white,
-                  fontSize: 16.sp,
+                  fontSize: 20.sp,
                   fontWeight: FontWeightHelper.semiBold),
               itemTextPadding: EdgeInsets.only(left: 16.w),
               selectedItemTextPadding: EdgeInsets.only(left: 16.w),
@@ -51,8 +51,8 @@ class ExampleSidebarX extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.sp),
                 gradient: const LinearGradient(
                   colors: [
-                    ColorsManager.thirdryBlueColor,
-                    ColorsManager.secondryBlueColor,
+                    ColorsManager.fourthryBlueColor,
+                    ColorsManager.fourthryPinkColor,
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
