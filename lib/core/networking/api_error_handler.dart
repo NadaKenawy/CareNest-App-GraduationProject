@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-
 import 'api_error_model.dart';
 
 class ApiErrorHandler {
@@ -30,14 +29,21 @@ class ApiErrorHandler {
           return ApiErrorModel(message: "Something went wrong");
       }
     } else {
-      // default error
       return ApiErrorModel(message: "Unknown error occurred");
     }
   }
 }
 
 ApiErrorModel _handleError(dynamic data) {
-  return ApiErrorModel(
-    message: data['message'] ?? "Unknown error occurred",
-  );
+  if (data is Map<String, dynamic>) {
+    return ApiErrorModel(
+      message: data['message'] ?? "Unknown error occurred",
+    );
+  } else if (data is String) {
+    return ApiErrorModel(
+      message: data,
+    );
+  } else {
+    return ApiErrorModel(message: "Unknown error occurred");
+  }
 }
