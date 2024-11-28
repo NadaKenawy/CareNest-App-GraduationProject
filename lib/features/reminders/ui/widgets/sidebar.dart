@@ -1,9 +1,7 @@
 // ignore_for_file: deprecated_member_use
-
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/utils/app_images.dart';
-import 'package:care_nest/features/add_baby/data/models/get_all_babies/get_all_babies_response.dart';
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,18 +14,19 @@ class ExampleSidebarX extends StatelessWidget {
     super.key,
     required this.controller,
   });
-
   final SidebarXController controller;
-
   @override
   Widget build(BuildContext context) {
+    context.read<GetAllBabiesCubit>().getAllBabies();
     return BlocBuilder<GetAllBabiesCubit, GetAllBabiesState>(
       builder: (context, state) {
         if (state is Loading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state is Success && state.babiesData != null) {
-          final List<BabiesData> babiesList = state.babiesData!;
-
+        } else if (state is Success) {
+          final babiesList = state.babiesData;
+          if (babiesList == null || babiesList.isEmpty) {
+            return const Center(child: Text('No babies available.'));
+          }
           return SidebarX(
             controller: controller,
             theme: SidebarXTheme(
@@ -39,9 +38,10 @@ class ExampleSidebarX extends StatelessWidget {
               hoverColor: Colors.white.withOpacity(0.8),
               textStyle: TextStyle(color: Colors.black, fontSize: 16.sp),
               selectedTextStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.sp,
-                  fontWeight: FontWeightHelper.semiBold),
+                color: Colors.white,
+                fontSize: 20.sp,
+                fontWeight: FontWeightHelper.semiBold,
+              ),
               itemTextPadding: EdgeInsets.only(left: 16.w),
               selectedItemTextPadding: EdgeInsets.only(left: 16.w),
               itemDecoration: BoxDecoration(
@@ -101,9 +101,9 @@ class ExampleSidebarX extends StatelessWidget {
             ],
           );
         } else if (state is Error) {
-          return const Center(child: Text('Error loading babies.'));
+          return Center(child: Text('Error: ${state.error}'));
         } else {
-          return const Center(child: Text('No data.'));
+          return const Center(child: Text('No data available.'));
         }
       },
     );
