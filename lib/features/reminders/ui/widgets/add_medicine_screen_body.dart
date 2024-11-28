@@ -28,28 +28,38 @@ class _AddMedicineScreenBodyState extends State<AddMedicineScreenBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: Center(
-          child: Column(
-            children: [
-              SizedBox(height: 68.h),
-              const MedicineHeader(),
-              SizedBox(height: 68.h),
-              MedicineFormFields(
-                timeController: _timeController,
-                startDayController: _startDayController,
-                finishDayController: _finishDayController,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Center(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 68.h),
+                      const MedicineHeader(),
+                      SizedBox(height: 52.h),
+                      MedicineFormFields(
+                        timeController: _timeController,
+                        startDayController: _startDayController,
+                        finishDayController: _finishDayController,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              const Spacer(),
-              AppTextButton(
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 32.h),
+              child: AppTextButton(
                 buttonText: 'Make Reminder',
                 onPressed: () {},
                 textStyle: TextStyles.font16WhiteBold,
               ),
-              SizedBox(height: 32.h),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
