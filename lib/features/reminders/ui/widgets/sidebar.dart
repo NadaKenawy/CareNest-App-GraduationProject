@@ -65,13 +65,12 @@ class ExampleSidebarX extends StatelessWidget {
                   ),
                 ],
               ),
-              iconTheme: IconThemeData(
-                color: Colors.black.withOpacity(0.7),
+              iconTheme: const IconThemeData(
+                color: Colors.black,
                 size: 20,
               ),
               selectedIconTheme: const IconThemeData(
                 color: Colors.white,
-                size: 20,
               ),
             ),
             extendedTheme: SidebarXTheme(
