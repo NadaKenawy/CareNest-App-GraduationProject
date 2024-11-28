@@ -1,13 +1,13 @@
 import 'dart:developer';
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
-import 'package:care_nest/features/add_baby/data/models/update_baby_request.dart';
+import 'package:care_nest/features/add_baby/data/models/update_baby/update_baby_request.dart';
 import 'package:care_nest/features/add_baby/data/repos/update_baby_repo.dart';
 import 'package:care_nest/features/add_baby/logic/update_baby_cubit/update_baby_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/models/get_all_babies_response.dart';
+import '../../data/models/get_all_babies/get_all_babies_response.dart';
 
 class UpdateBabyCubit extends Cubit<UpdateBabyState> {
   UpdateBabyCubit(this._updateBabyRepo, this.babiesData)

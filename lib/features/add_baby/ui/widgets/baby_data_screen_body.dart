@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
-import '../../data/models/get_all_babies_response.dart';
+import '../../data/models/get_all_babies/get_all_babies_response.dart';
 import '../../logic/update_baby_cubit/update_baby_cubit.dart';
 import 'gender_selection.dart';
 import 'header_section.dart';

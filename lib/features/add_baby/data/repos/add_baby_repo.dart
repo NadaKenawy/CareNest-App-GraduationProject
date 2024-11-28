@@ -1,6 +1,6 @@
 import 'package:care_nest/core/networking/server_result.dart';
-import 'package:care_nest/features/add_baby/data/models/add_baby_request_body.dart';
-import 'package:care_nest/features/add_baby/data/models/add_baby_response.dart';
+import 'package:care_nest/features/add_baby/data/models/add_baby/add_baby_request_body.dart';
+import 'package:care_nest/features/add_baby/data/models/add_baby/add_baby_response.dart';
 import '../../../../core/networking/api_service.dart';
 import '../../../../core/networking/server_error_handler.dart';
 
