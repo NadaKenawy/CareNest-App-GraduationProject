@@ -11,6 +11,8 @@ class ApiConstants {
   static const String deleteBaby = "babies/{id}";
   static const String updateBaby = "babies/{id}";
   static const String getAllMedicationSchedule = "babies/medicationSchedule/all/{id}";
+  static const String addMedicationSchedule = '/babies/medicationSchedule/{babyId}';
+
 }
 
 class ApiErrors {

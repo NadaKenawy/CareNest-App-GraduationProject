@@ -381,23 +381,41 @@ class _ApiService implements ApiService {
   }
 
   @override
+
   Future<GetAllMedicationScheduleResponse> getAllMedicationSchedule(
     String token,
     String id,
+
+  Future<AddMedicationScheduleResponse> addMedicationSchedule(
+    String babyId,
+    AddMedicationScheduleRequestBody medicationScheduleRequestBody,
+    String token,
+
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
+
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<GetAllMedicationScheduleResponse>(Options(
       method: 'GET',
+
+    final _data = <String, dynamic>{};
+    _data.addAll(medicationScheduleRequestBody.toJson());
+    final _options = _setStreamType<AddMedicationScheduleResponse>(Options(
+      method: 'POST',
+
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
+
           'babies/medicationSchedule/all/${id}',
+
+          '/babies/medicationSchedule/${babyId}',
+
           queryParameters: queryParameters,
           data: _data,
         )
@@ -407,9 +425,15 @@ class _ApiService implements ApiService {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+
     late GetAllMedicationScheduleResponse _value;
     try {
       _value = GetAllMedicationScheduleResponse.fromJson(_result.data!);
+
+    late AddMedicationScheduleResponse _value;
+    try {
+      _value = AddMedicationScheduleResponse.fromJson(_result.data!);
+
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

@@ -16,10 +16,10 @@ class MedicineHeader extends StatelessWidget {
           height: 132.h,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: ColorsManager.secondryBlueColor.withOpacity(.15),
+            color: ColorsManager.secondryBlueColor.withOpacity(.1),
           ),
           child: Padding(
-            padding: EdgeInsets.all(32.sp),
+            padding: EdgeInsets.all(16.sp),
             child: Image.asset(
               AppImages.medicineIcon,
             ),

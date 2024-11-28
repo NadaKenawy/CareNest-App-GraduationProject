@@ -55,6 +55,7 @@ dependencies:
   retrofit: ^4.4.1
   retrofit_generator: ^9.1.2
   shared_preferences: ^2.3.2
+  sidebarx: ^0.17.1
   skeletonizer: ^1.4.2
   smooth_page_indicator: ^1.2.0+3
   table_calendar: ^3.1.2
