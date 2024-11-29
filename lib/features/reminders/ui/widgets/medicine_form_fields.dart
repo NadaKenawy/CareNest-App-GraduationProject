@@ -8,12 +8,14 @@ class MedicineFormFields extends StatelessWidget {
   final TextEditingController timeController;
   final TextEditingController startDayController;
   final TextEditingController finishDayController;
+  final TextEditingController controller;
 
   const MedicineFormFields({
     required this.timeController,
     required this.startDayController,
     required this.finishDayController,
     super.key,
+    required this.controller,
   });
 
   Future<void> _pickTime(BuildContext context) async {
@@ -23,7 +25,9 @@ class MedicineFormFields extends StatelessWidget {
     );
 
     if (pickedTime != null) {
-      timeController.text = pickedTime.format(context);
+      final hours = pickedTime.hour.toString().padLeft(2, '0');
+      final minutes = pickedTime.minute.toString().padLeft(2, '0');
+      timeController.text = '$hours:$minutes';
     }
   }
 
@@ -45,7 +49,8 @@ class MedicineFormFields extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const AppTextFormField(
+        AppTextFormField(
+          controller: controller,
           hintText: "Medicine Name",
           prefixIcon: Icon(
             Icons.medical_services_outlined,
