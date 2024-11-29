@@ -88,13 +88,12 @@ abstract class ApiService {
   Future<GetAllMedicationScheduleResponse> getAllMedicationSchedule(
     @Header('Authorization') String token,
     @Path('id') String id,
-
+  );
 
   @POST(ApiConstants.addMedicationSchedule)
   Future<AddMedicationScheduleResponse> addMedicationSchedule(
     @Path('babyId') String babyId,
     @Body() AddMedicationScheduleRequestBody medicationScheduleRequestBody,
     @Header('Authorization') String token,
-
   );
 }
