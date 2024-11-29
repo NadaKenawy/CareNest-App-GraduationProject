@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sidebarx/sidebarx.dart';
+import '../../../../core/helpers/constants.dart';
+import '../../../../core/helpers/shared_pref_helper.dart';
 import '../../../../features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 
 class ExampleSidebarX extends StatelessWidget {
@@ -90,11 +92,12 @@ class ExampleSidebarX extends StatelessWidget {
                     width: 48.r,
                   ),
                   label: baby.name ?? 'Unknown',
-                  onTap: () {
+                  onTap: () async {
                     context
                         .read<GetAllMedicationScheduleCubit>()
                         .getAllMedicationSchedule(baby.id!);
                     log('baby id: ${baby.id}');
+                    await saveBabyId(baby.id ?? '');
                   },
                 ),
               ),
@@ -115,5 +118,11 @@ class ExampleSidebarX extends StatelessWidget {
         }
       },
     );
+  }
+
+  Future<void> saveBabyId(String id) async {
+    await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyId, id);
+
+    log("Saved id: ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyId)}");
   }
 }

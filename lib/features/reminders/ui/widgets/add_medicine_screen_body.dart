@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/features/reminders/logic/add_medication_schedule_cubit/add_medication_schedule_cubit.dart';
@@ -5,6 +8,7 @@ import 'package:care_nest/features/reminders/ui/widgets/add_medicine_bloc_listne
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/helpers/shared_pref_helper.dart';
 import 'medicine_form_fields.dart';
 import 'medicine_header.dart';
 
@@ -69,10 +73,14 @@ class _AddMedicineScreenBodyState extends State<AddMedicineScreenBody> {
               padding: EdgeInsets.symmetric(vertical: 32.h),
               child: AppTextButton(
                 buttonText: 'Make Reminder',
-                onPressed: () {
+                onPressed: () async {
+                  final babyId = await SharedPrefHelper.getSecuredString(
+                      SharedPrefKeys.babyId);
+                  log("Retrieved baby id: $babyId");
+
                   context
                       .read<AddMedicationScheduleCubit>()
-                      .addMedicationSchedule("6749aea82a6810896bc57833");
+                      .addMedicationSchedule(babyId);
                 },
                 textStyle: TextStyles.font16WhiteBold,
               ),
