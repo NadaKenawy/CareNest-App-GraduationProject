@@ -27,6 +27,8 @@ import 'package:get_it/get_it.dart';
 
 import '../../features/add_baby/data/repos/add_baby_repo.dart';
 import '../../features/add_baby/logic/add_baby_cubit/add_baby_cubit.dart';
+import '../../features/reminders/data/repos/get_all_medication_schedule_repo.dart';
+import '../../features/reminders/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -82,6 +84,12 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<UpdateBabyRepo>(() => UpdateBabyRepo(getIt()));
   getIt.registerFactory<UpdateBabyCubit>(
       () => UpdateBabyCubit(getIt(), BabiesData()));
+
+  //get all medication schedule
+  getIt.registerLazySingleton<GetAllMedicationScheduleRepo>(
+      () => GetAllMedicationScheduleRepo(getIt()));
+  getIt.registerFactory<GetAllMedicationScheduleCubit>(
+      () => GetAllMedicationScheduleCubit(getIt()));
 
   // add medication schedule
   getIt.registerLazySingleton<AddMedicationScheduleRepo>(

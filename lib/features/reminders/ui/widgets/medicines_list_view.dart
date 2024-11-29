@@ -4,17 +4,20 @@ import 'package:care_nest/core/utils/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../data/models/get_all_medication_schedule_response.dart';
+
 class MedicinesListView extends StatelessWidget {
   const MedicinesListView({
     super.key,
+    required this.medicinesList,
   });
-
+  final List<MedicationData> medicinesList;
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: 5,
+        itemCount: medicinesList.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 16.h),
@@ -41,7 +44,8 @@ class MedicinesListView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Medicine name',
+                          medicinesList[index].medicationName ??
+                              'Medicine Name',
                           style: TextStyles.font16PrimaryBlackMedium,
                         ),
                         SizedBox(
@@ -56,7 +60,7 @@ class MedicinesListView extends StatelessWidget {
                             ),
                             SizedBox(width: 8.w),
                             Text(
-                              '9:41 AM',
+                              medicinesList[index].time ?? 'Time',
                               style: TextStyle(
                                   color: Colors.black.withOpacity(.5)),
                             ),

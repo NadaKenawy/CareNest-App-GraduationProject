@@ -18,6 +18,7 @@ import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:care_nest/features/login/ui/login_screen.dart';
 import 'package:care_nest/features/on_boarding_screen.dart/on_boarding_screen.dart';
 import 'package:care_nest/features/reminders/logic/add_medication_schedule_cubit/add_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/ui/add_medicine_screen.dart';
 import 'package:care_nest/features/reminders/ui/reminders_screen.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
@@ -154,17 +155,21 @@ abstract class AppRouter {
       GoRoute(
           path: kRemindersScreen,
           builder: (context, state) {
-            return const RemindersScreen();
+            return BlocProvider(
+              create: (context) => getIt<GetAllMedicationScheduleCubit>(),
+              child: const RemindersScreen(),
+            );
           }),
       GoRoute(
-  path: kAddMedicineScreen,
-  builder: (context, state) {
-    return BlocProvider(
-      create: (context) => AddMedicationScheduleCubit(getIt()), // استخدم الكيوبت المناسب هنا
-      child: const AddMedicineScreen(),
-    );
-  },
-),
+        path: kAddMedicineScreen,
+        builder: (context, state) {
+          return BlocProvider(
+            create: (context) => AddMedicationScheduleCubit(
+                getIt()), // استخدم الكيوبت المناسب هنا
+            child: const AddMedicineScreen(),
+          );
+        },
+      ),
     ],
   );
 }
