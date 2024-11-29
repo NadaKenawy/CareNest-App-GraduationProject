@@ -25,9 +25,8 @@ class GetAllMedicationScheduleCubit
               getAllMedicationScheduleResponse.data),
         );
       },
-      failure: (error) {
-        emit(GetAllMedicationScheduleState.error(
-            error: error.signUpErrorModel.errors!.first.msg ?? ''));
+      failure: (apiErrorModel) {
+        emit(GetAllMedicationScheduleState.error(apiErrorModel));
       },
     );
   }

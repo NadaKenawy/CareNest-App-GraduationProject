@@ -1,8 +1,11 @@
 // ignore_for_file: deprecated_member_use
+import 'dart:developer';
+
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/utils/app_images.dart';
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_state.dart';
+import 'package:care_nest/features/reminders/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -87,7 +90,12 @@ class ExampleSidebarX extends StatelessWidget {
                     width: 48.r,
                   ),
                   label: baby.name ?? 'Unknown',
-                  onTap: () {},
+                  onTap: () {
+                    context
+                        .read<GetAllMedicationScheduleCubit>()
+                        .getAllMedicationSchedule(baby.id!);
+                    log('baby id: ${baby.id}');
+                  },
                 ),
               ),
               SidebarXItem(
