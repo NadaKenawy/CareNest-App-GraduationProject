@@ -164,8 +164,7 @@ abstract class AppRouter {
         path: kAddMedicineScreen,
         builder: (context, state) {
           return BlocProvider(
-            create: (context) => AddMedicationScheduleCubit(
-                getIt()), // استخدم الكيوبت المناسب هنا
+            create: (context) => getIt<AddMedicationScheduleCubit>(),
             child: const AddMedicineScreen(),
           );
         },

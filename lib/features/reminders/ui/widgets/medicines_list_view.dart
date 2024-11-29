@@ -3,7 +3,7 @@ import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/utils/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import '../../../add_baby/ui/widgets/my_babies_list_view.dart';
 import '../../data/models/get_all_medication_schedule_response.dart';
 
 class MedicinesListView extends StatelessWidget {
@@ -12,12 +12,17 @@ class MedicinesListView extends StatelessWidget {
     required this.medicinesList,
   });
   final List<MedicationData> medicinesList;
+
   @override
   Widget build(BuildContext context) {
+    final reversedList = medicinesList.reversed.toList() ;
+    if (reversedList.isEmpty) {
+      return const NoBabyText();
+    }
     return Expanded(
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: medicinesList.length,
+        itemCount: reversedList.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 16.h),

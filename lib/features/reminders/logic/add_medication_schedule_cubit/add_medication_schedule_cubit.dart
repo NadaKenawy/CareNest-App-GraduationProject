@@ -28,15 +28,13 @@ class AddMedicationScheduleCubit extends Cubit<AddMedicationScheduleState> {
           await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
       log('Authorization Token Retrieved: $token');
 
-      final request = AddMedicationScheduleRequestBody(
-        medicationName: medicationNameController.text,
-        time: timeController.text,
-        begin: beginController.text,
-        end: endController.text,
-      );
-
       final response = await _medicationScheduleRepo.addMedicationSchedule(
-        request,
+        AddMedicationScheduleRequestBody(
+          medicationName: medicationNameController.text,
+          time: timeController.text,
+          begin: beginController.text,
+          end: endController.text,
+        ),
         babyId,
         token,
       );

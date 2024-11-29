@@ -1,7 +1,9 @@
 import 'package:care_nest/core/routing/app_router.dart';
+import 'package:care_nest/features/reminders/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/ui/widgets/get_all_medicines_bloc_builder.dart';
 import 'package:care_nest/features/reminders/ui/widgets/sidebar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
@@ -54,7 +56,14 @@ class _RemindersScreenBodyState extends State<RemindersScreenBody> {
       endDrawer: ExampleSidebarX(controller: _controller),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          GoRouter.of(context).push(AppRouter.kAddMedicineScreen);
+          GoRouter.of(context).push(AppRouter.kAddMedicineScreen).then((value) {
+            if (value == true) {
+              context
+                  .read<GetAllMedicationScheduleCubit>()
+                  .getAllMedicationSchedule('6749aea82a6810896bc57833');
+            }
+          });
+          ;
         },
         backgroundColor: Colors.white,
         shape: const CircleBorder(
