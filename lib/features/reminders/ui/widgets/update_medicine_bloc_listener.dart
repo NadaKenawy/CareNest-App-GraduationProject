@@ -1,32 +1,32 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:care_nest/core/networking/api_error_model.dart';
-import 'package:care_nest/core/theme/colors_manager.dart';
-import 'package:care_nest/features/reminders/logic/add_medication_schedule_cubit/add_medication_schedule_cubit.dart';
-import 'package:care_nest/features/reminders/logic/add_medication_schedule_cubit/add_medication_schedule_state.dart';
+import 'package:care_nest/features/reminders/logic/update_medication_schedule_cubit/update_medication_schedule_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/theme/colors_manager.dart';
+import '../../logic/update_medication_schedule_cubit/update_medication_schedule_state.dart';
 
-class AddMedicineBlocListner extends StatelessWidget {
-  const AddMedicineBlocListner({super.key});
-
+class UpdateMedicineBlocListener extends StatelessWidget {
+  const UpdateMedicineBlocListener({super.key, required this.id});
+  final String id;
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AddMedicationScheduleCubit, AddMedicationScheduleState>(
+    return BlocListener<UpdateMedicationScheduleCubit,
+        UpdateMedicationScheduleState>(
       listenWhen: (previous, current) =>
-          current is AddMedicationScheduleLoading ||
-          current is AddMedicationScheduleSuccess ||
-          current is AddMedicationScheduleError,
+          current is UpdateMedicationLoading ||
+          current is UpdateMedicationSuccess ||
+          current is UpdateMedicationError,
       listener: (context, state) {
         state.whenOrNull(
-          addMedicationScheduleLoading: () => showLoadingIndicator(context),
-          addMedicationScheduleSuccess: (addMedicationScheduleResponse) {
+          updateMedicationLoading: () => showLoadingIndicator(context),
+          updateMedicationSuccess: (updateMedicineResponse) {
             Navigator.of(context).pop();
 
             Navigator.of(context).pop(true);
           },
-          addMedicationScheduleError: (apiErrorModel) {
+          updateMedicationError: (error) {
             Navigator.of(context).pop();
-            setupErrorState(context, apiErrorModel);
+            setupErrorState(context, error);
           },
         );
       },
@@ -34,7 +34,7 @@ class AddMedicineBlocListner extends StatelessWidget {
     );
   }
 
-  void setupErrorState(BuildContext context, ApiErrorModel apiErrorModel) {
+  void setupErrorState(BuildContext context, String error) {
     // Ensure the error dialog is only shown when context is valid
     if (context.mounted) {
       AwesomeDialog(
@@ -42,7 +42,7 @@ class AddMedicineBlocListner extends StatelessWidget {
         dialogType: DialogType.error,
         animType: AnimType.scale,
         title: 'Error',
-        desc: apiErrorModel.message,
+        desc: error,
         btnOkOnPress: () {},
         btnOkColor: ColorsManager.primaryBlueColor,
       ).show();

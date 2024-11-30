@@ -9,13 +9,20 @@ class MedicineFormFields extends StatelessWidget {
   final TextEditingController startDayController;
   final TextEditingController finishDayController;
   final TextEditingController controller;
-
+  final String? medicineName;
+  final String? selectTime;
+  final String? startDay;
+  final String? finishDay;
   const MedicineFormFields({
     required this.timeController,
     required this.startDayController,
     required this.finishDayController,
     super.key,
     required this.controller,
+    this.medicineName,
+    this.selectTime,
+    this.startDay,
+    this.finishDay,
   });
 
   Future<void> _pickTime(BuildContext context) async {
@@ -51,7 +58,7 @@ class MedicineFormFields extends StatelessWidget {
       children: [
         AppTextFormField(
           controller: controller,
-          hintText: "Medicine Name",
+          hintText: medicineName ?? "Medicine Name",
           prefixIcon: const Icon(
             Icons.medical_services_outlined,
             color: ColorsManager.secondryBlueColor,
@@ -60,7 +67,7 @@ class MedicineFormFields extends StatelessWidget {
         SizedBox(height: 24.h),
         AppTextFormField(
           controller: timeController,
-          hintText: "Select Time",
+          hintText: selectTime ?? "Select Time",
           readOnly: true,
           onTap: () => _pickTime(context),
           prefixIcon: Icon(
@@ -75,7 +82,7 @@ class MedicineFormFields extends StatelessWidget {
           children: [
             AppTextFormField(
               controller: startDayController,
-              hintText: "Start Day",
+              hintText: startDay ?? "Start Day",
               readOnly: true,
               onTap: () => _pickDate(context, startDayController),
               width: 170.w,
@@ -87,7 +94,7 @@ class MedicineFormFields extends StatelessWidget {
             ),
             AppTextFormField(
               controller: finishDayController,
-              hintText: "Finish Day",
+              hintText: finishDay ?? "Finish Day",
               readOnly: true,
               onTap: () => _pickDate(context, finishDayController),
               width: 170.w,

@@ -17,10 +17,13 @@ import 'package:care_nest/features/home/ui/home_screen.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:care_nest/features/login/ui/login_screen.dart';
 import 'package:care_nest/features/on_boarding_screen.dart/on_boarding_screen.dart';
+import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule_response.dart';
 import 'package:care_nest/features/reminders/logic/add_medication_schedule_cubit/add_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/logic/update_medication_schedule_cubit/update_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/ui/add_medicine_screen.dart';
 import 'package:care_nest/features/reminders/ui/reminders_screen.dart';
+import 'package:care_nest/features/reminders/ui/widgets/update_medicines_screen_body.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:care_nest/features/sign_up/logic/verfiy_account_cubit/verify_account_cubit.dart';
 import 'package:care_nest/features/sign_up/ui/sign_up_screen.dart';
@@ -42,6 +45,7 @@ abstract class AppRouter {
   static const kBabyDataScreen = '/babyDataScreen';
   static const kRemindersScreen = '/remindersScreen';
   static const kAddMedicineScreen = '/addMedicineScreen';
+  static const kUpdateMedicineScreen = '/updateMedicineScreen';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -153,19 +157,37 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-          path: kRemindersScreen,
-          builder: (context, state) {
-            return BlocProvider(
+        path: kRemindersScreen,
+        builder: (context, state) {
+          return MultiBlocProvider(providers: [
+            BlocProvider(
               create: (context) => getIt<GetAllMedicationScheduleCubit>(),
-              child: const RemindersScreen(),
-            );
-          }),
+            ),
+            BlocProvider(
+              create: (context) => getIt<UpdateMedicationScheduleCubit>(),
+            ),
+          ], child: const RemindersScreen());
+        },
+      ),
       GoRoute(
         path: kAddMedicineScreen,
         builder: (context, state) {
           return BlocProvider(
             create: (context) => getIt<AddMedicationScheduleCubit>(),
             child: const AddMedicineScreen(),
+          );
+        },
+      ),
+      GoRoute(
+        path: kUpdateMedicineScreen,
+        builder: (context, state) {
+          final MedicationData medicineDataList = state.extra as MedicationData;
+          return BlocProvider(
+            create: (context) =>
+                UpdateMedicationScheduleCubit(getIt(), medicineDataList),
+            child: UpdateMedicinesScreenBody(
+              medicinesList: medicineDataList,
+            ),
           );
         },
       ),

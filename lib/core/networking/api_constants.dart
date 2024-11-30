@@ -10,10 +10,12 @@ class ApiConstants {
   static const String getAllBabies = "babies/allBabiesOfLoggedUser";
   static const String deleteBaby = "babies/{id}";
   static const String updateBaby = "babies/{id}";
-  static const String getAllMedicationSchedule = "babies/medicationSchedule/all/{id}";
-  static const String addMedicationSchedule = '/babies/medicationSchedule/{babyId}';
-  static const String updateMedicationSchedule = '/babies/medicationSchedule/{babyId}/{medicationId}';
-
+  static const String getAllMedicationSchedule =
+      "babies/medicationSchedule/all/{id}";
+  static const String addMedicationSchedule =
+      '/babies/medicationSchedule/{babyId}';
+  static const String updateMedicationSchedule =
+      'babies/medicationSchedule/{id}/{scheduleId}';
 }
 
 class ApiErrors {
