@@ -18,15 +18,18 @@ class ExampleSidebarX extends StatelessWidget {
   const ExampleSidebarX({
     super.key,
     required this.controller,
+    required this.onItemSelected,
   });
   final SidebarXController controller;
+  final Function(int) onItemSelected;
+
   @override
   Widget build(BuildContext context) {
     context.read<GetAllBabiesCubit>().getAllBabies();
     return BlocBuilder<GetAllBabiesCubit, GetAllBabiesState>(
       builder: (context, state) {
         if (state is Loading) {
-          return const Center(child: CircularProgressIndicator());
+          return Container();
         } else if (state is Success) {
           final babiesList = state.babiesData;
           if (babiesList == null || babiesList.isEmpty) {
@@ -98,6 +101,7 @@ class ExampleSidebarX extends StatelessWidget {
                         .getAllMedicationSchedule(baby.id!);
                     log('baby id: ${baby.id}');
                     await saveBabyId(baby.id ?? '');
+                    onItemSelected(0);
                   },
                 ),
               ),
@@ -107,7 +111,9 @@ class ExampleSidebarX extends StatelessWidget {
                   width: 48.r,
                 ),
                 label: 'All Reminders',
-                onTap: () {},
+                onTap: () {
+                  onItemSelected(1);
+                },
               ),
             ],
           );

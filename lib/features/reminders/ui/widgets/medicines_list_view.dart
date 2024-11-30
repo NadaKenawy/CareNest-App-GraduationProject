@@ -21,7 +21,7 @@ class MedicinesListView extends StatelessWidget {
         itemCount: reversedList.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.h),
+            padding: EdgeInsets.symmetric(vertical: 12.h),
             child: Container(
               height: 96.h,
               decoration: BoxDecoration(

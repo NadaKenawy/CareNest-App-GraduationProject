@@ -26,6 +26,7 @@ class _RemindersScreenBodyState extends State<RemindersScreenBody> {
   final DateTime _currentDate = DateTime.now();
   final SidebarXController _controller = SidebarXController(selectedIndex: -1);
   String? babyId;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -77,34 +78,43 @@ class _RemindersScreenBodyState extends State<RemindersScreenBody> {
           ),
         ],
       ),
-      endDrawer: ExampleSidebarX(controller: _controller),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          GoRouter.of(context)
-              .push(AppRouter.kAddMedicineScreen)
-              .then((value) async {
-            if (value == true) {
-              final babyId = await SharedPrefHelper.getSecuredString(
-                  SharedPrefKeys.babyId);
-              context
-                  .read<GetAllMedicationScheduleCubit>()
-                  .getAllMedicationSchedule(babyId);
-            }
+      endDrawer: ExampleSidebarX(
+        controller: _controller,
+        onItemSelected: (index) {
+          setState(() {
+            _selectedIndex = index;
           });
         },
-        backgroundColor: Colors.white,
-        shape: const CircleBorder(
-          side: BorderSide(
-            color: ColorsManager.primaryPinkColor,
-            width: 3,
-          ),
-        ),
-        child: Icon(
-          Icons.add,
-          size: 32.sp,
-          color: ColorsManager.primaryPinkColor,
-        ),
       ),
+      floatingActionButton: _selectedIndex == 1
+          ? null
+          : FloatingActionButton(
+              onPressed: () {
+                GoRouter.of(context)
+                    .push(AppRouter.kAddMedicineScreen)
+                    .then((value) async {
+                  if (value == true) {
+                    final babyId = await SharedPrefHelper.getSecuredString(
+                        SharedPrefKeys.babyId);
+                    context
+                        .read<GetAllMedicationScheduleCubit>()
+                        .getAllMedicationSchedule(babyId);
+                  }
+                });
+              },
+              backgroundColor: Colors.white,
+              shape: const CircleBorder(
+                side: BorderSide(
+                  color: ColorsManager.primaryPinkColor,
+                  width: 3,
+                ),
+              ),
+              child: Icon(
+                Icons.add,
+                size: 32.sp,
+                color: ColorsManager.primaryPinkColor,
+              ),
+            ),
       backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -122,9 +132,8 @@ class _RemindersScreenBodyState extends State<RemindersScreenBody> {
                 color: Colors.black,
               ),
             ),
-            // const NoMedicinesText(),
             const GetAllMedicinesBlocBuilder(),
-            SizedBox(height: 100.h),
+            SizedBox(height: _selectedIndex == 1 ? 24.h : 100.h),
           ],
         ),
       ),

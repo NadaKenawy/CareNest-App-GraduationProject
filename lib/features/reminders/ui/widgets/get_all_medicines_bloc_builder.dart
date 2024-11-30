@@ -24,7 +24,8 @@ class GetAllMedicinesBlocBuilder extends StatelessWidget {
               return setupSuccess(medicinesList);
             },
             error: (error) {
-              if (error.message == "No medication schedule found") {
+              if (error.message == "No medication schedule found" ||
+                  error.message == "Invalid id format") {
                 return const NoMedicinesText();
               }
               return setupError();

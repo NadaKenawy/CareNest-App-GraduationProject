@@ -15,6 +15,8 @@ import 'package:care_nest/features/login/data/models/login_response.dart';
 import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule_response.dart';
 import 'package:care_nest/features/reminders/data/models/add_medication_schedule_request_body.dart';
 import 'package:care_nest/features/reminders/data/models/add_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/data/models/update_medication_schedule_request.dart';
+import 'package:care_nest/features/reminders/data/models/update_medication_schedule_response.dart';
 import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_request_body.dart';
 import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_response.dart';
 import 'package:care_nest/features/sign_up/data/models/verify_account_model/verify_account_request_body.dart';
@@ -95,5 +97,12 @@ abstract class ApiService {
     @Path('babyId') String babyId,
     @Body() AddMedicationScheduleRequestBody medicationScheduleRequestBody,
     @Header('Authorization') String token,
+  );
+  @PUT(ApiConstants.updateMedicationSchedule)
+  Future<UpdateMedicationScheduleResponse> updateMedicationSchedule(
+    @Path("id") String id,
+    @Path("scheduleId") String scheduleId,
+    @Header("Authorization") String token,
+    @Body() UpdateMedicationScheduleRequest updateMedicationScheduleRequest,
   );
 }
