@@ -1,5 +1,6 @@
+import 'dart:developer';
+
 import 'package:care_nest/core/di/service_locator.dart';
-import 'package:care_nest/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +21,8 @@ void main() async {
 checkIfLoggedInUser() async {
   String? userToken =
       await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
-  if (!userToken.isNullOrEmpty()) {
+  log("Your Token is $userToken");
+  if (userToken != null && userToken.isNotEmpty) {
     isLoggedInUser = true;
   } else {
     isLoggedInUser = false;

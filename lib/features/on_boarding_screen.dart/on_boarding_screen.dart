@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 
+import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/features/on_boarding_screen.dart/screen1.dart';
@@ -37,7 +38,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     bool? hasOpenedBefore = prefs.getBool('hasOpenedBefore');
 
     if (hasOpenedBefore != null && hasOpenedBefore) {
-      GoRouter.of(context).pushReplacement(AppRouter.kLoginScreen);
+      if (isLoggedInUser) {
+        GoRouter.of(context).pushReplacement(AppRouter.kHomeScreen);
+      } else {
+        GoRouter.of(context).pushReplacement(AppRouter.kLoginScreen);
+      }
     } else {
       await prefs.setBool('hasOpenedBefore', true);
       setState(() {
