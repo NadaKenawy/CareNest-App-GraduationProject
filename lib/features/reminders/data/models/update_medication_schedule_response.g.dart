@@ -9,34 +9,63 @@ part of 'update_medication_schedule_response.dart';
 UpdateMedicationScheduleResponse _$UpdateMedicationScheduleResponseFromJson(
         Map<String, dynamic> json) =>
     UpdateMedicationScheduleResponse(
-      medicationScheduleData: json['data'] == null
+      message: json['msg'] as String?,
+      babyData: json['data'] == null
           ? null
-          : MedicationScheduleData.fromJson(
-              json['data'] as Map<String, dynamic>),
+          : BabyData.fromJson(json['data'] as Map<String, dynamic>),
+      medicationSchedule: (json['medicationSchedule'] as List<dynamic>?)
+          ?.map((e) => MedicationData.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$UpdateMedicationScheduleResponseToJson(
         UpdateMedicationScheduleResponse instance) =>
     <String, dynamic>{
-      'data': instance.medicationScheduleData,
+      'msg': instance.message,
+      'data': instance.babyData,
+      'medicationSchedule': instance.medicationSchedule,
     };
 
-MedicationScheduleData _$MedicationScheduleDataFromJson(
-        Map<String, dynamic> json) =>
-    MedicationScheduleData(
+BabyData _$BabyDataFromJson(Map<String, dynamic> json) => BabyData(
       id: json['_id'] as String?,
-      medicationName: json['medicationName'] as String?,
-      time: json['time'] as String?,
-      begin: json['begin'] as String?,
-      end: json['end'] as String?,
+      name: json['name'] as String?,
+      weight: json['weight'] as num?,
+      height: json['height'] as num?,
+      gender: json['gender'] as String?,
+      birthDay: json['birthDay'] == null
+          ? null
+          : DateTime.parse(json['birthDay'] as String),
+      motherOfBaby: json['motherOfBaby'] as String?,
     );
 
-Map<String, dynamic> _$MedicationScheduleDataToJson(
-        MedicationScheduleData instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$BabyDataToJson(BabyData instance) => <String, dynamic>{
       '_id': instance.id,
+      'name': instance.name,
+      'weight': instance.weight,
+      'height': instance.height,
+      'gender': instance.gender,
+      'birthDay': instance.birthDay?.toIso8601String(),
+      'motherOfBaby': instance.motherOfBaby,
+    };
+
+MedicationData _$MedicationDataFromJson(Map<String, dynamic> json) =>
+    MedicationData(
+      medicationName: json['medicationName'] as String?,
+      time: json['time'] as String?,
+      begin: json['begin'] == null
+          ? null
+          : DateTime.parse(json['begin'] as String),
+      end: json['end'] == null ? null : DateTime.parse(json['end'] as String),
+      notificationSent: json['notificationSent'] as bool?,
+      id: json['_id'] as String?,
+    );
+
+Map<String, dynamic> _$MedicationDataToJson(MedicationData instance) =>
+    <String, dynamic>{
       'medicationName': instance.medicationName,
       'time': instance.time,
-      'begin': instance.begin,
-      'end': instance.end,
+      'begin': instance.begin?.toIso8601String(),
+      'end': instance.end?.toIso8601String(),
+      'notificationSent': instance.notificationSent,
+      '_id': instance.id,
     };

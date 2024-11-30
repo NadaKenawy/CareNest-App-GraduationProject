@@ -5,9 +5,9 @@ part 'update_medication_schedule_request.g.dart';
 @JsonSerializable()
 class UpdateMedicationScheduleRequest {
   final String? medicationName;
-  final String? time; // in HH:mm format
-  final String? begin; // ISO 8601 format
-  final String? end; // ISO 8601 format
+  final String? time; 
+  final String? begin; 
+  final String? end; 
 
   UpdateMedicationScheduleRequest({
     this.medicationName,

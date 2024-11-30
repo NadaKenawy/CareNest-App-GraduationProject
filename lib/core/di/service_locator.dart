@@ -16,8 +16,11 @@ import 'package:care_nest/features/forget_password/logic/forget_password_cubit/f
 import 'package:care_nest/features/forget_password/logic/verify_password_cubit/verify_password_cubit.dart';
 import 'package:care_nest/features/login/data/repos/login_repo.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
+import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule_response.dart';
 import 'package:care_nest/features/reminders/data/repos/add_medication_schedule_repo.dart';
+import 'package:care_nest/features/reminders/data/repos/update_medication_schedule_repo.dart';
 import 'package:care_nest/features/reminders/logic/add_medication_schedule_cubit/add_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/logic/update_medication_schedule_cubit/update_medication_schedule_cubit.dart';
 import 'package:care_nest/features/sign_up/data/repos/sign_up_repo.dart';
 import 'package:care_nest/features/sign_up/data/repos/verify_account_repo.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
@@ -96,4 +99,10 @@ Future<void> setupGetIt() async {
       () => AddMedicationScheduleRepo(getIt()));
   getIt.registerFactory<AddMedicationScheduleCubit>(
       () => AddMedicationScheduleCubit(getIt()));
+
+  // update medication schedule
+  getIt.registerLazySingleton<UpdateMedicationScheduleRepo>(
+      () => UpdateMedicationScheduleRepo(getIt()));
+  getIt.registerFactory<UpdateMedicationScheduleCubit>(
+      () => UpdateMedicationScheduleCubit(getIt(), MedicationData()));
 }

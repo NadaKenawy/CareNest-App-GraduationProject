@@ -4,34 +4,90 @@ part 'update_medication_schedule_response.g.dart';
 
 @JsonSerializable()
 class UpdateMedicationScheduleResponse {
+  @JsonKey(name: 'msg')
+  String? message;
+
   @JsonKey(name: 'data')
-  MedicationScheduleData? medicationScheduleData;
+  BabyData? babyData;
+
+  @JsonKey(name: 'medicationSchedule')
+  List<MedicationData>? medicationSchedule;
 
   UpdateMedicationScheduleResponse({
-    this.medicationScheduleData,
+    this.message,
+    this.babyData,
+    this.medicationSchedule,
   });
 
-  factory UpdateMedicationScheduleResponse.fromJson(Map<String, dynamic> json) =>
+  factory UpdateMedicationScheduleResponse.fromJson(
+          Map<String, dynamic> json) =>
       _$UpdateMedicationScheduleResponseFromJson(json);
+
+  Map<String, dynamic> toJson() =>
+      _$UpdateMedicationScheduleResponseToJson(this);
 }
 
 @JsonSerializable()
-class MedicationScheduleData {
+class BabyData {
   @JsonKey(name: '_id')
   String? id;
-  String? medicationName;
-  String? time; // HH:mm format
-  String? begin; // ISO 8601 format
-  String? end; // ISO 8601 format
+  String? name;
+  num? weight;
+  num? height;
+  String? gender;
 
-  MedicationScheduleData({
+  @JsonKey(name: 'birthDay')
+  DateTime? birthDay;
+
+  @JsonKey(name: 'motherOfBaby')
+  String? motherOfBaby;
+
+  BabyData({
     this.id,
+    this.name,
+    this.weight,
+    this.height,
+    this.gender,
+    this.birthDay,
+    this.motherOfBaby,
+  });
+
+  factory BabyData.fromJson(Map<String, dynamic> json) =>
+      _$BabyDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BabyDataToJson(this);
+}
+
+@JsonSerializable()
+class MedicationData {
+  @JsonKey(name: 'medicationName')
+  String? medicationName;
+
+  String? time;
+
+  @JsonKey(name: 'begin')
+  DateTime? begin;
+
+  @JsonKey(name: 'end')
+  DateTime? end;
+
+  @JsonKey(name: 'notificationSent')
+  bool? notificationSent;
+
+  @JsonKey(name: '_id')
+  String? id;
+
+  MedicationData({
     this.medicationName,
     this.time,
     this.begin,
     this.end,
+    this.notificationSent,
+    this.id,
   });
 
-  factory MedicationScheduleData.fromJson(Map<String, dynamic> json) =>
-      _$MedicationScheduleDataFromJson(json);
+  factory MedicationData.fromJson(Map<String, dynamic> json) =>
+      _$MedicationDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MedicationDataToJson(this);
 }
