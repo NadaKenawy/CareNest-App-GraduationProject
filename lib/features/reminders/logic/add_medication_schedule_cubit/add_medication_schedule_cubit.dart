@@ -22,7 +22,7 @@ class AddMedicationScheduleCubit extends Cubit<AddMedicationScheduleState> {
   void addMedicationSchedule(String babyId) async {
     log('Starting medication schedule operation for baby with id: $babyId');
     emit(const AddMedicationScheduleState.addMedicationScheduleLoading());
-    try {
+   
       String token =
           await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
       log('Authorization Token Retrieved: $token');
@@ -44,17 +44,12 @@ class AddMedicationScheduleCubit extends Cubit<AddMedicationScheduleState> {
           emit(AddMedicationScheduleState.addMedicationScheduleSuccess(
               medicationScheduleResponse));
         },
-        failure: (error) {
-          String errorMessage = error.signUpErrorModel.errors!.first.msg ?? '';
+        failure: (apiErrorModel) {
           emit(AddMedicationScheduleState.addMedicationScheduleError(
-              error: errorMessage));
-          log('Error Occurred: $errorMessage');
+              apiErrorModel));
+          log('Error Occurred: $apiErrorModel');
         },
       );
-    } catch (e) {
-      log('Unexpected Error: $e');
-      emit(AddMedicationScheduleState.addMedicationScheduleError(
-          error: e.toString()));
-    }
+    } 
   }
-}
+

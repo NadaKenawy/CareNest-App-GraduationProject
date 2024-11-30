@@ -476,7 +476,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          '/babies/medicationSchedule/{babyId}/{medicationId}',
+          'babies/medicationSchedule/${id}/${scheduleId}',
           queryParameters: queryParameters,
           data: _data,
         )

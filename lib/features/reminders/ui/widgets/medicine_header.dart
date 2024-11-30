@@ -5,8 +5,8 @@ import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/utils/app_images.dart';
 
 class MedicineHeader extends StatelessWidget {
-  const MedicineHeader({super.key});
-
+  const MedicineHeader({super.key, this.text});
+  final String? text;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -27,7 +27,7 @@ class MedicineHeader extends StatelessWidget {
         ),
         SizedBox(height: 24.h),
         Text(
-          'Add Medicine',
+          text ?? 'Add Medicine',
           style: TextStyle(
             fontWeight: FontWeightHelper.semiBold,
             fontSize: 28.sp,

@@ -21,7 +21,8 @@ mixin _$AddMedicationScheduleState<T> {
     required TResult Function() initial,
     required TResult Function() addMedicationScheduleLoading,
     required TResult Function(T data) addMedicationScheduleSuccess,
-    required TResult Function(String error) addMedicationScheduleError,
+    required TResult Function(ApiErrorModel apiErrorModel)
+        addMedicationScheduleError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +30,7 @@ mixin _$AddMedicationScheduleState<T> {
     TResult? Function()? initial,
     TResult? Function()? addMedicationScheduleLoading,
     TResult? Function(T data)? addMedicationScheduleSuccess,
-    TResult? Function(String error)? addMedicationScheduleError,
+    TResult? Function(ApiErrorModel apiErrorModel)? addMedicationScheduleError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +38,7 @@ mixin _$AddMedicationScheduleState<T> {
     TResult Function()? initial,
     TResult Function()? addMedicationScheduleLoading,
     TResult Function(T data)? addMedicationScheduleSuccess,
-    TResult Function(String error)? addMedicationScheduleError,
+    TResult Function(ApiErrorModel apiErrorModel)? addMedicationScheduleError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -145,7 +146,8 @@ class _$InitialImpl<T> implements _Initial<T> {
     required TResult Function() initial,
     required TResult Function() addMedicationScheduleLoading,
     required TResult Function(T data) addMedicationScheduleSuccess,
-    required TResult Function(String error) addMedicationScheduleError,
+    required TResult Function(ApiErrorModel apiErrorModel)
+        addMedicationScheduleError,
   }) {
     return initial();
   }
@@ -156,7 +158,7 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult? Function()? initial,
     TResult? Function()? addMedicationScheduleLoading,
     TResult? Function(T data)? addMedicationScheduleSuccess,
-    TResult? Function(String error)? addMedicationScheduleError,
+    TResult? Function(ApiErrorModel apiErrorModel)? addMedicationScheduleError,
   }) {
     return initial?.call();
   }
@@ -167,7 +169,7 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult Function()? initial,
     TResult Function()? addMedicationScheduleLoading,
     TResult Function(T data)? addMedicationScheduleSuccess,
-    TResult Function(String error)? addMedicationScheduleError,
+    TResult Function(ApiErrorModel apiErrorModel)? addMedicationScheduleError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -276,7 +278,8 @@ class _$AddMedicationScheduleLoadingImpl<T>
     required TResult Function() initial,
     required TResult Function() addMedicationScheduleLoading,
     required TResult Function(T data) addMedicationScheduleSuccess,
-    required TResult Function(String error) addMedicationScheduleError,
+    required TResult Function(ApiErrorModel apiErrorModel)
+        addMedicationScheduleError,
   }) {
     return addMedicationScheduleLoading();
   }
@@ -287,7 +290,7 @@ class _$AddMedicationScheduleLoadingImpl<T>
     TResult? Function()? initial,
     TResult? Function()? addMedicationScheduleLoading,
     TResult? Function(T data)? addMedicationScheduleSuccess,
-    TResult? Function(String error)? addMedicationScheduleError,
+    TResult? Function(ApiErrorModel apiErrorModel)? addMedicationScheduleError,
   }) {
     return addMedicationScheduleLoading?.call();
   }
@@ -298,7 +301,7 @@ class _$AddMedicationScheduleLoadingImpl<T>
     TResult Function()? initial,
     TResult Function()? addMedicationScheduleLoading,
     TResult Function(T data)? addMedicationScheduleSuccess,
-    TResult Function(String error)? addMedicationScheduleError,
+    TResult Function(ApiErrorModel apiErrorModel)? addMedicationScheduleError,
     required TResult orElse(),
   }) {
     if (addMedicationScheduleLoading != null) {
@@ -438,7 +441,8 @@ class _$AddMedicationScheduleSuccessImpl<T>
     required TResult Function() initial,
     required TResult Function() addMedicationScheduleLoading,
     required TResult Function(T data) addMedicationScheduleSuccess,
-    required TResult Function(String error) addMedicationScheduleError,
+    required TResult Function(ApiErrorModel apiErrorModel)
+        addMedicationScheduleError,
   }) {
     return addMedicationScheduleSuccess(data);
   }
@@ -449,7 +453,7 @@ class _$AddMedicationScheduleSuccessImpl<T>
     TResult? Function()? initial,
     TResult? Function()? addMedicationScheduleLoading,
     TResult? Function(T data)? addMedicationScheduleSuccess,
-    TResult? Function(String error)? addMedicationScheduleError,
+    TResult? Function(ApiErrorModel apiErrorModel)? addMedicationScheduleError,
   }) {
     return addMedicationScheduleSuccess?.call(data);
   }
@@ -460,7 +464,7 @@ class _$AddMedicationScheduleSuccessImpl<T>
     TResult Function()? initial,
     TResult Function()? addMedicationScheduleLoading,
     TResult Function(T data)? addMedicationScheduleSuccess,
-    TResult Function(String error)? addMedicationScheduleError,
+    TResult Function(ApiErrorModel apiErrorModel)? addMedicationScheduleError,
     required TResult orElse(),
   }) {
     if (addMedicationScheduleSuccess != null) {
@@ -538,7 +542,7 @@ abstract class _$$AddMedicationScheduleErrorImplCopyWith<T, $Res> {
           $Res Function(_$AddMedicationScheduleErrorImpl<T>) then) =
       __$$AddMedicationScheduleErrorImplCopyWithImpl<T, $Res>;
   @useResult
-  $Res call({String error});
+  $Res call({ApiErrorModel apiErrorModel});
 }
 
 /// @nodoc
@@ -556,13 +560,13 @@ class __$$AddMedicationScheduleErrorImplCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = null,
+    Object? apiErrorModel = null,
   }) {
     return _then(_$AddMedicationScheduleErrorImpl<T>(
-      error: null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String,
+      null == apiErrorModel
+          ? _value.apiErrorModel
+          : apiErrorModel // ignore: cast_nullable_to_non_nullable
+              as ApiErrorModel,
     ));
   }
 }
@@ -571,14 +575,14 @@ class __$$AddMedicationScheduleErrorImplCopyWithImpl<T, $Res>
 
 class _$AddMedicationScheduleErrorImpl<T>
     implements AddMedicationScheduleError<T> {
-  const _$AddMedicationScheduleErrorImpl({required this.error});
+  const _$AddMedicationScheduleErrorImpl(this.apiErrorModel);
 
   @override
-  final String error;
+  final ApiErrorModel apiErrorModel;
 
   @override
   String toString() {
-    return 'AddMedicationScheduleState<$T>.addMedicationScheduleError(error: $error)';
+    return 'AddMedicationScheduleState<$T>.addMedicationScheduleError(apiErrorModel: $apiErrorModel)';
   }
 
   @override
@@ -586,11 +590,12 @@ class _$AddMedicationScheduleErrorImpl<T>
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddMedicationScheduleErrorImpl<T> &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.apiErrorModel, apiErrorModel) ||
+                other.apiErrorModel == apiErrorModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode => Object.hash(runtimeType, apiErrorModel);
 
   /// Create a copy of AddMedicationScheduleState
   /// with the given fields replaced by the non-null parameter values.
@@ -608,9 +613,10 @@ class _$AddMedicationScheduleErrorImpl<T>
     required TResult Function() initial,
     required TResult Function() addMedicationScheduleLoading,
     required TResult Function(T data) addMedicationScheduleSuccess,
-    required TResult Function(String error) addMedicationScheduleError,
+    required TResult Function(ApiErrorModel apiErrorModel)
+        addMedicationScheduleError,
   }) {
-    return addMedicationScheduleError(error);
+    return addMedicationScheduleError(apiErrorModel);
   }
 
   @override
@@ -619,9 +625,9 @@ class _$AddMedicationScheduleErrorImpl<T>
     TResult? Function()? initial,
     TResult? Function()? addMedicationScheduleLoading,
     TResult? Function(T data)? addMedicationScheduleSuccess,
-    TResult? Function(String error)? addMedicationScheduleError,
+    TResult? Function(ApiErrorModel apiErrorModel)? addMedicationScheduleError,
   }) {
-    return addMedicationScheduleError?.call(error);
+    return addMedicationScheduleError?.call(apiErrorModel);
   }
 
   @override
@@ -630,11 +636,11 @@ class _$AddMedicationScheduleErrorImpl<T>
     TResult Function()? initial,
     TResult Function()? addMedicationScheduleLoading,
     TResult Function(T data)? addMedicationScheduleSuccess,
-    TResult Function(String error)? addMedicationScheduleError,
+    TResult Function(ApiErrorModel apiErrorModel)? addMedicationScheduleError,
     required TResult orElse(),
   }) {
     if (addMedicationScheduleError != null) {
-      return addMedicationScheduleError(error);
+      return addMedicationScheduleError(apiErrorModel);
     }
     return orElse();
   }
@@ -688,10 +694,10 @@ class _$AddMedicationScheduleErrorImpl<T>
 
 abstract class AddMedicationScheduleError<T>
     implements AddMedicationScheduleState<T> {
-  const factory AddMedicationScheduleError({required final String error}) =
+  const factory AddMedicationScheduleError(final ApiErrorModel apiErrorModel) =
       _$AddMedicationScheduleErrorImpl<T>;
 
-  String get error;
+  ApiErrorModel get apiErrorModel;
 
   /// Create a copy of AddMedicationScheduleState
   /// with the given fields replaced by the non-null parameter values.
