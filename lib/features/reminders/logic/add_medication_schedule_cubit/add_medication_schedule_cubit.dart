@@ -18,11 +18,10 @@ class AddMedicationScheduleCubit extends Cubit<AddMedicationScheduleState> {
   TextEditingController endController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
+
   void addMedicationSchedule(String babyId) async {
     log('Starting medication schedule operation for baby with id: $babyId');
-
     emit(const AddMedicationScheduleState.addMedicationScheduleLoading());
-
     try {
       String token =
           await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
@@ -46,7 +45,7 @@ class AddMedicationScheduleCubit extends Cubit<AddMedicationScheduleState> {
               medicationScheduleResponse));
         },
         failure: (error) {
-          String errorMessage = error.toString();
+          String errorMessage = error.signUpErrorModel.errors!.first.msg ?? '';
           emit(AddMedicationScheduleState.addMedicationScheduleError(
               error: errorMessage));
           log('Error Occurred: $errorMessage');

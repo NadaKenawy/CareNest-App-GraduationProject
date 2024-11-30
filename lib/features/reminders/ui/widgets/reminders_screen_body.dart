@@ -1,13 +1,17 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:care_nest/core/helpers/constants.dart';
+import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/routing/app_router.dart';
+import 'package:care_nest/core/theme/colors_manager.dart';
+import 'package:care_nest/core/theme/font_weight_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:care_nest/features/reminders/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/ui/widgets/get_all_medicines_bloc_builder.dart';
 import 'package:care_nest/features/reminders/ui/widgets/sidebar.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:care_nest/core/theme/colors_manager.dart';
-import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/features/reminders/ui/widgets/week_days_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sidebarx/sidebarx.dart';
 
@@ -20,7 +24,27 @@ class RemindersScreenBody extends StatefulWidget {
 
 class _RemindersScreenBodyState extends State<RemindersScreenBody> {
   final DateTime _currentDate = DateTime.now();
-  final SidebarXController _controller = SidebarXController(selectedIndex: 0);
+  final SidebarXController _controller = SidebarXController(selectedIndex: -1);
+  String? babyId;
+
+  @override
+  void initState() {
+    super.initState();
+    loadBabyId();
+  }
+
+  Future<void> loadBabyId() async {
+    final babyIdFromStorage =
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyId);
+    setState(() {
+      babyId = babyIdFromStorage;
+    });
+    if (babyId != null) {
+      context
+          .read<GetAllMedicationScheduleCubit>()
+          .getAllMedicationSchedule(babyId!);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,14 +80,17 @@ class _RemindersScreenBodyState extends State<RemindersScreenBody> {
       endDrawer: ExampleSidebarX(controller: _controller),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          GoRouter.of(context).push(AppRouter.kAddMedicineScreen).then((value) {
+          GoRouter.of(context)
+              .push(AppRouter.kAddMedicineScreen)
+              .then((value) async {
             if (value == true) {
+              final babyId = await SharedPrefHelper.getSecuredString(
+                  SharedPrefKeys.babyId);
               context
                   .read<GetAllMedicationScheduleCubit>()
-                  .getAllMedicationSchedule('6749aea82a6810896bc57833');
+                  .getAllMedicationSchedule(babyId);
             }
           });
-          ;
         },
         backgroundColor: Colors.white,
         shape: const CircleBorder(

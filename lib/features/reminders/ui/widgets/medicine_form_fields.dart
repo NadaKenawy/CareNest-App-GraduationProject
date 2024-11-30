@@ -52,7 +52,7 @@ class MedicineFormFields extends StatelessWidget {
         AppTextFormField(
           controller: controller,
           hintText: "Medicine Name",
-          prefixIcon: Icon(
+          prefixIcon: const Icon(
             Icons.medical_services_outlined,
             color: ColorsManager.secondryBlueColor,
           ),
