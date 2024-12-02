@@ -8,6 +8,8 @@ import 'package:care_nest/features/add_baby/data/repos/update_baby_repo.dart';
 import 'package:care_nest/features/add_baby/logic/delete_baby_cubit/delete_baby_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/update_baby_cubit/update_baby_cubit.dart';
+import 'package:care_nest/features/fcm/data/repos/update_fcm_repo.dart';
+import 'package:care_nest/features/fcm/logic/cubit/update_fcm_cubit.dart';
 import 'package:care_nest/features/forget_password/data/repos/create_new_password.dart';
 import 'package:care_nest/features/forget_password/data/repos/forget_pass_repo.dart';
 import 'package:care_nest/features/forget_password/data/repos/verify_password_repo.dart';
@@ -105,4 +107,8 @@ Future<void> setupGetIt() async {
       () => UpdateMedicationScheduleRepo(getIt()));
   getIt.registerFactory<UpdateMedicationScheduleCubit>(
       () => UpdateMedicationScheduleCubit(getIt(), MedicationData()));
+
+  // update fcm
+  getIt.registerLazySingleton<UpdateFcmRepo>(() => UpdateFcmRepo(getIt()));
+  getIt.registerFactory<UpdateFcmCubit>(() => UpdateFcmCubit(getIt()));
 }

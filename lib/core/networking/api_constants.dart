@@ -16,6 +16,8 @@ class ApiConstants {
       '/babies/medicationSchedule/{babyId}';
   static const String updateMedicationSchedule =
       'babies/medicationSchedule/{id}/{scheduleId}';
+
+  static const String updateFcmToken = "users/updateFcmToken";
 }
 
 class ApiErrors {

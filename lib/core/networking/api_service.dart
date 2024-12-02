@@ -4,6 +4,7 @@ import 'package:care_nest/features/add_baby/data/models/add_baby/add_baby_respon
 import 'package:care_nest/features/add_baby/data/models/delete_baby/delete_baby_response.dart';
 import 'package:care_nest/features/add_baby/data/models/update_baby/update_baby_request.dart';
 import 'package:care_nest/features/add_baby/data/models/update_baby/update_baby_response.dart';
+import 'package:care_nest/features/fcm/data/models/update_fcm_response.dart';
 
 import 'package:care_nest/features/forget_password/data/models/create_new_password_model/create_new_password_request_body.dart';
 import 'package:care_nest/features/forget_password/data/models/forget_password_model/forget_pass_email_request_body.dart';
@@ -26,6 +27,7 @@ import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import '../../features/add_baby/data/models/add_baby/add_baby_request_body.dart';
 import '../../features/add_baby/data/models/get_all_babies/get_all_babies_response.dart';
+import '../../features/fcm/data/models/update_fcm_token_request_body.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.apiBaseUrl)
@@ -104,5 +106,11 @@ abstract class ApiService {
     @Path("scheduleId") String scheduleId,
     @Header("Authorization") String token,
     @Body() UpdateMedicationScheduleRequest updateMedicationScheduleRequest,
+  );
+
+  @PUT(ApiConstants.updateFcmToken)
+  Future<UpdateFcmResponse> updateFcmToken(
+    @Header('Authorization') String token,
+    @Body() UpdateFcmTokenRequestBody updateFcmTokenRequestBody,
   );
 }
