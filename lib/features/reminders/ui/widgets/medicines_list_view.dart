@@ -7,6 +7,7 @@ import 'package:care_nest/features/reminders/logic/get_all_medication_schedule_c
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../../../add_baby/ui/widgets/my_babies_list_view.dart';
 import 'medicines_list_view_item.dart';
 
 class MedicinesListView extends StatelessWidget {
@@ -19,7 +20,10 @@ class MedicinesListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final reversedList = medicinesList.toList();
+    final reversedList = medicinesList.reversed.toList();
+    if (reversedList.isEmpty) {
+      return const NoBabyText();
+    }
     return Expanded(
       child: ListView.builder(
         shrinkWrap: true,
