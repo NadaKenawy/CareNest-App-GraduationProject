@@ -3,6 +3,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
+import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
 import 'package:care_nest/features/reminders/logic/delete_medication_schedule_cubit/delete_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/logic/delete_medication_schedule_cubit/delete_medication_schedule_state.dart';
 import 'package:flutter/material.dart';
@@ -122,34 +123,37 @@ class _MedicinesListViewItemState extends State<MedicinesListViewItem> {
                 width: 52.w,
               ),
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  BlocBuilder<DeleteMedicationScheduleCubit,
-                      DeleteMedicationScheduleState>(builder: (context, state) {
-                    return IconButton(
-                      color: ColorsManager.secondryBlueColor,
-                      onPressed: () {
-                        AwesomeDialog(
-                          context: context,
-                          dialogType: DialogType.warning,
-                          animType: AnimType.bottomSlide,
-                          title: 'Delete Medicine',
-                          desc:
-                              'Are you sure you want to delete this medicine?',
-                          btnCancelOnPress: () {},
-                          btnOkOnPress: () async {
-                            final babyId =
-                                await SharedPrefHelper.getSecuredString(
-                                    SharedPrefKeys.babyId);
-                            context
-                                .read<DeleteMedicationScheduleCubit>()
-                                .deleteMedicationSchedule(
-                                    babyId, widget.scheduleId, context);
-                          },
-                        ).show();
-                      },
-                      icon: const Icon(Icons.remove_circle_outline_outlined),
-                    );
-                  }),
+                  if (widget.medicinesList is MedicationData)
+                    BlocBuilder<DeleteMedicationScheduleCubit,
+                            DeleteMedicationScheduleState>(
+                        builder: (context, state) {
+                      return IconButton(
+                        color: ColorsManager.secondryBlueColor,
+                        onPressed: () {
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.warning,
+                            animType: AnimType.bottomSlide,
+                            title: 'Delete Medicine',
+                            desc:
+                                'Are you sure you want to delete this medicine?',
+                            btnCancelOnPress: () {},
+                            btnOkOnPress: () async {
+                              final babyId =
+                                  await SharedPrefHelper.getSecuredString(
+                                      SharedPrefKeys.babyId);
+                              context
+                                  .read<DeleteMedicationScheduleCubit>()
+                                  .deleteMedicationSchedule(
+                                      babyId, widget.scheduleId, context);
+                            },
+                          ).show();
+                        },
+                        icon: const Icon(Icons.remove_circle_outline_outlined),
+                      );
+                    }),
                   InkWell(
                     onTap: _updateColor,
                     child: Container(
