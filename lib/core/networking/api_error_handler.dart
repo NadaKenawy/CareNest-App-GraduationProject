@@ -36,6 +36,10 @@ class ApiErrorHandler {
 
 ApiErrorModel _handleError(dynamic data) {
   if (data is Map<String, dynamic>) {
+    if (data['errors'] is List && (data['errors'] as List).isNotEmpty) {
+      String firstError = data['errors'][0]['msg'] ?? "Unknown error occurred";
+      return ApiErrorModel(message: firstError);
+    }
     return ApiErrorModel(
       message: data['message'] ?? "Unknown error occurred",
     );
