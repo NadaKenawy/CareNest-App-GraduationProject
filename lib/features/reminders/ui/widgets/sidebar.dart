@@ -104,7 +104,7 @@ class ExampleSidebarX extends StatelessWidget {
                     context
                         .read<GetAllMedicationScheduleCubit>()
                         .getAllMedicationSchedule(baby.id!);
-                    await saveBabyId(baby.id ?? '');
+                    await saveBabyData(baby.id ?? '', baby.name ?? '');
                     selectedBabyName(baby.name ?? '');
                     onItemSelected(0);
                   },
@@ -134,9 +134,9 @@ class ExampleSidebarX extends StatelessWidget {
     );
   }
 
-  Future<void> saveBabyId(String id) async {
+  Future<void> saveBabyData(String id, String name) async {
     await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyId, id);
-
-    log("Saved id: ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyId)}");
+    await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyName, name);
+    log("Saved id: $id and name: $name");
   }
 }

@@ -30,23 +30,27 @@ class _RemindersScreenBodyState extends State<RemindersScreenBody> {
   final SidebarXController _controller = SidebarXController(selectedIndex: -1);
   String? babyId;
   int _selectedIndex = 0;
-  String selectedBabyName = ''; 
+  String? selectedBabyName = '';
   List<MedicationData> medicinesList = [];
   List<BabiesMedicationData> babiesMedicinesList = [];
 
   @override
   void initState() {
     super.initState();
-    loadBabyId();
+    loadBabyData();
   }
 
-  Future<void> loadBabyId() async {
+  Future<void> loadBabyData() async {
     final babyIdFromStorage =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyId);
+    final babyNameFromStorage =
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyName);
     setState(() {
       babyId = babyIdFromStorage;
+      selectedBabyName = babyNameFromStorage;
     });
-    if (babyId != null) {
+
+    if (babyId != null && babyId!.isNotEmpty) {
       context
           .read<GetAllMedicationScheduleCubit>()
           .getAllMedicationSchedule(babyId!);
@@ -66,8 +70,8 @@ class _RemindersScreenBodyState extends State<RemindersScreenBody> {
         title: Text(
           _selectedIndex == 1
               ? 'All Reminders'
-              : selectedBabyName.isNotEmpty
-                  ? "${selectedBabyName[0].toUpperCase()}${selectedBabyName.substring(1)}'s Reminders"
+              : selectedBabyName != null && selectedBabyName!.isNotEmpty
+                  ? "${selectedBabyName![0].toUpperCase()}${selectedBabyName!.substring(1)}'s Reminders"
                   : 'My Reminders',
           style: TextStyle(
             color: Colors.black,
