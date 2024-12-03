@@ -17,8 +17,10 @@ import 'package:care_nest/features/home/ui/home_screen.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:care_nest/features/login/ui/login_screen.dart';
 import 'package:care_nest/features/on_boarding_screen.dart/on_boarding_screen.dart';
-import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
 import 'package:care_nest/features/reminders/logic/add_medication_schedule_cubit/add_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/logic/delete_medication_schedule_cubit/delete_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/logic/get_all_babies_medication_schedule_cubit/get_all_babies_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/logic/update_medication_schedule_cubit/update_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/ui/add_medicine_screen.dart';
@@ -165,6 +167,12 @@ abstract class AppRouter {
             ),
             BlocProvider(
               create: (context) => getIt<UpdateMedicationScheduleCubit>(),
+            ),
+            BlocProvider(
+              create: (context) => getIt<DeleteMedicationScheduleCubit>(),
+            ),
+            BlocProvider(
+              create: (context) => getIt<GetAllBabiesMedicationScheduleCubit>(),
             ),
           ], child: const RemindersScreen());
         },

@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
-import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
 import 'package:care_nest/features/reminders/logic/update_medication_schedule_cubit/update_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/ui/widgets/update_medicine_bloc_listener.dart';
 import 'package:flutter/material.dart';

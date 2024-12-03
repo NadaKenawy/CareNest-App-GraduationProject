@@ -5,6 +5,7 @@ import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/utils/app_images.dart';
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_state.dart';
+import 'package:care_nest/features/reminders/logic/get_all_babies_medication_schedule_cubit/get_all_babies_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -112,6 +113,9 @@ class ExampleSidebarX extends StatelessWidget {
                 ),
                 label: 'All Reminders',
                 onTap: () {
+                  context
+                      .read<GetAllBabiesMedicationScheduleCubit>()
+                      .getAllBabiesMedicationSchedule();
                   onItemSelected(1);
                 },
               ),

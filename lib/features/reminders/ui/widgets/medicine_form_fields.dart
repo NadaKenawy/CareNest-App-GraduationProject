@@ -1,4 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
@@ -25,7 +24,7 @@ class MedicineFormFields extends StatelessWidget {
     this.finishDay,
   });
 
-  Future<void> _pickTime(BuildContext context) async {
+  Future<void> pickTime(BuildContext context) async {
     TimeOfDay? pickedTime = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
@@ -38,7 +37,7 @@ class MedicineFormFields extends StatelessWidget {
     }
   }
 
-  Future<void> _pickDate(
+  Future<void> pickDate(
       BuildContext context, TextEditingController controller) async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -69,7 +68,7 @@ class MedicineFormFields extends StatelessWidget {
           controller: timeController,
           hintText: selectTime ?? "Select Time",
           readOnly: true,
-          onTap: () => _pickTime(context),
+          onTap: () => pickTime(context),
           prefixIcon: Icon(
             Icons.alarm,
             size: 20.sp,
@@ -84,7 +83,7 @@ class MedicineFormFields extends StatelessWidget {
               controller: startDayController,
               hintText: startDay ?? "Start Day",
               readOnly: true,
-              onTap: () => _pickDate(context, startDayController),
+              onTap: () => pickDate(context, startDayController),
               width: 170.w,
               prefixIcon: Icon(
                 Icons.calendar_today,
@@ -96,7 +95,7 @@ class MedicineFormFields extends StatelessWidget {
               controller: finishDayController,
               hintText: finishDay ?? "Finish Day",
               readOnly: true,
-              onTap: () => _pickDate(context, finishDayController),
+              onTap: () => pickDate(context, finishDayController),
               width: 170.w,
               prefixIcon: Icon(
                 Icons.calendar_today_outlined,

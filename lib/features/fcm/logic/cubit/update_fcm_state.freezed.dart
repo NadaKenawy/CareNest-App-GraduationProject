@@ -19,50 +19,50 @@ mixin _$UpdateFcmState<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() updateBabyLoading,
-    required TResult Function(T data) updateBabySuccess,
-    required TResult Function(ApiErrorModel apiErrorModel) updateBabyError,
+    required TResult Function() updateFcmLoading,
+    required TResult Function(T data) updateFcmSuccess,
+    required TResult Function(ApiErrorModel apiErrorModel) updateFcmError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? updateBabyLoading,
-    TResult? Function(T data)? updateBabySuccess,
-    TResult? Function(ApiErrorModel apiErrorModel)? updateBabyError,
+    TResult? Function()? updateFcmLoading,
+    TResult? Function(T data)? updateFcmSuccess,
+    TResult? Function(ApiErrorModel apiErrorModel)? updateFcmError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? updateBabyLoading,
-    TResult Function(T data)? updateBabySuccess,
-    TResult Function(ApiErrorModel apiErrorModel)? updateBabyError,
+    TResult Function()? updateFcmLoading,
+    TResult Function(T data)? updateFcmSuccess,
+    TResult Function(ApiErrorModel apiErrorModel)? updateFcmError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
-    required TResult Function(UpdateFcmLoading<T> value) updateBabyLoading,
-    required TResult Function(UpdateFcmSuccess<T> value) updateBabySuccess,
-    required TResult Function(UpdateFcmError<T> value) updateBabyError,
+    required TResult Function(UpdateFcmLoading<T> value) updateFcmLoading,
+    required TResult Function(UpdateFcmSuccess<T> value) updateFcmSuccess,
+    required TResult Function(UpdateFcmError<T> value) updateFcmError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(UpdateFcmLoading<T> value)? updateBabyLoading,
-    TResult? Function(UpdateFcmSuccess<T> value)? updateBabySuccess,
-    TResult? Function(UpdateFcmError<T> value)? updateBabyError,
+    TResult? Function(UpdateFcmLoading<T> value)? updateFcmLoading,
+    TResult? Function(UpdateFcmSuccess<T> value)? updateFcmSuccess,
+    TResult? Function(UpdateFcmError<T> value)? updateFcmError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
-    TResult Function(UpdateFcmLoading<T> value)? updateBabyLoading,
-    TResult Function(UpdateFcmSuccess<T> value)? updateBabySuccess,
-    TResult Function(UpdateFcmError<T> value)? updateBabyError,
+    TResult Function(UpdateFcmLoading<T> value)? updateFcmLoading,
+    TResult Function(UpdateFcmSuccess<T> value)? updateFcmSuccess,
+    TResult Function(UpdateFcmError<T> value)? updateFcmError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -131,9 +131,9 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() updateBabyLoading,
-    required TResult Function(T data) updateBabySuccess,
-    required TResult Function(ApiErrorModel apiErrorModel) updateBabyError,
+    required TResult Function() updateFcmLoading,
+    required TResult Function(T data) updateFcmSuccess,
+    required TResult Function(ApiErrorModel apiErrorModel) updateFcmError,
   }) {
     return initial();
   }
@@ -142,9 +142,9 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? updateBabyLoading,
-    TResult? Function(T data)? updateBabySuccess,
-    TResult? Function(ApiErrorModel apiErrorModel)? updateBabyError,
+    TResult? Function()? updateFcmLoading,
+    TResult? Function(T data)? updateFcmSuccess,
+    TResult? Function(ApiErrorModel apiErrorModel)? updateFcmError,
   }) {
     return initial?.call();
   }
@@ -153,9 +153,9 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? updateBabyLoading,
-    TResult Function(T data)? updateBabySuccess,
-    TResult Function(ApiErrorModel apiErrorModel)? updateBabyError,
+    TResult Function()? updateFcmLoading,
+    TResult Function(T data)? updateFcmSuccess,
+    TResult Function(ApiErrorModel apiErrorModel)? updateFcmError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -168,9 +168,9 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
-    required TResult Function(UpdateFcmLoading<T> value) updateBabyLoading,
-    required TResult Function(UpdateFcmSuccess<T> value) updateBabySuccess,
-    required TResult Function(UpdateFcmError<T> value) updateBabyError,
+    required TResult Function(UpdateFcmLoading<T> value) updateFcmLoading,
+    required TResult Function(UpdateFcmSuccess<T> value) updateFcmSuccess,
+    required TResult Function(UpdateFcmError<T> value) updateFcmError,
   }) {
     return initial(this);
   }
@@ -179,9 +179,9 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(UpdateFcmLoading<T> value)? updateBabyLoading,
-    TResult? Function(UpdateFcmSuccess<T> value)? updateBabySuccess,
-    TResult? Function(UpdateFcmError<T> value)? updateBabyError,
+    TResult? Function(UpdateFcmLoading<T> value)? updateFcmLoading,
+    TResult? Function(UpdateFcmSuccess<T> value)? updateFcmSuccess,
+    TResult? Function(UpdateFcmError<T> value)? updateFcmError,
   }) {
     return initial?.call(this);
   }
@@ -190,9 +190,9 @@ class _$InitialImpl<T> implements _Initial<T> {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
-    TResult Function(UpdateFcmLoading<T> value)? updateBabyLoading,
-    TResult Function(UpdateFcmSuccess<T> value)? updateBabySuccess,
-    TResult Function(UpdateFcmError<T> value)? updateBabyError,
+    TResult Function(UpdateFcmLoading<T> value)? updateFcmLoading,
+    TResult Function(UpdateFcmSuccess<T> value)? updateFcmSuccess,
+    TResult Function(UpdateFcmError<T> value)? updateFcmError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -232,7 +232,7 @@ class _$UpdateFcmLoadingImpl<T> implements UpdateFcmLoading<T> {
 
   @override
   String toString() {
-    return 'UpdateFcmState<$T>.updateBabyLoading()';
+    return 'UpdateFcmState<$T>.updateFcmLoading()';
   }
 
   @override
@@ -249,35 +249,35 @@ class _$UpdateFcmLoadingImpl<T> implements UpdateFcmLoading<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() updateBabyLoading,
-    required TResult Function(T data) updateBabySuccess,
-    required TResult Function(ApiErrorModel apiErrorModel) updateBabyError,
+    required TResult Function() updateFcmLoading,
+    required TResult Function(T data) updateFcmSuccess,
+    required TResult Function(ApiErrorModel apiErrorModel) updateFcmError,
   }) {
-    return updateBabyLoading();
+    return updateFcmLoading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? updateBabyLoading,
-    TResult? Function(T data)? updateBabySuccess,
-    TResult? Function(ApiErrorModel apiErrorModel)? updateBabyError,
+    TResult? Function()? updateFcmLoading,
+    TResult? Function(T data)? updateFcmSuccess,
+    TResult? Function(ApiErrorModel apiErrorModel)? updateFcmError,
   }) {
-    return updateBabyLoading?.call();
+    return updateFcmLoading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? updateBabyLoading,
-    TResult Function(T data)? updateBabySuccess,
-    TResult Function(ApiErrorModel apiErrorModel)? updateBabyError,
+    TResult Function()? updateFcmLoading,
+    TResult Function(T data)? updateFcmSuccess,
+    TResult Function(ApiErrorModel apiErrorModel)? updateFcmError,
     required TResult orElse(),
   }) {
-    if (updateBabyLoading != null) {
-      return updateBabyLoading();
+    if (updateFcmLoading != null) {
+      return updateFcmLoading();
     }
     return orElse();
   }
@@ -286,35 +286,35 @@ class _$UpdateFcmLoadingImpl<T> implements UpdateFcmLoading<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
-    required TResult Function(UpdateFcmLoading<T> value) updateBabyLoading,
-    required TResult Function(UpdateFcmSuccess<T> value) updateBabySuccess,
-    required TResult Function(UpdateFcmError<T> value) updateBabyError,
+    required TResult Function(UpdateFcmLoading<T> value) updateFcmLoading,
+    required TResult Function(UpdateFcmSuccess<T> value) updateFcmSuccess,
+    required TResult Function(UpdateFcmError<T> value) updateFcmError,
   }) {
-    return updateBabyLoading(this);
+    return updateFcmLoading(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(UpdateFcmLoading<T> value)? updateBabyLoading,
-    TResult? Function(UpdateFcmSuccess<T> value)? updateBabySuccess,
-    TResult? Function(UpdateFcmError<T> value)? updateBabyError,
+    TResult? Function(UpdateFcmLoading<T> value)? updateFcmLoading,
+    TResult? Function(UpdateFcmSuccess<T> value)? updateFcmSuccess,
+    TResult? Function(UpdateFcmError<T> value)? updateFcmError,
   }) {
-    return updateBabyLoading?.call(this);
+    return updateFcmLoading?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
-    TResult Function(UpdateFcmLoading<T> value)? updateBabyLoading,
-    TResult Function(UpdateFcmSuccess<T> value)? updateBabySuccess,
-    TResult Function(UpdateFcmError<T> value)? updateBabyError,
+    TResult Function(UpdateFcmLoading<T> value)? updateFcmLoading,
+    TResult Function(UpdateFcmSuccess<T> value)? updateFcmSuccess,
+    TResult Function(UpdateFcmError<T> value)? updateFcmError,
     required TResult orElse(),
   }) {
-    if (updateBabyLoading != null) {
-      return updateBabyLoading(this);
+    if (updateFcmLoading != null) {
+      return updateFcmLoading(this);
     }
     return orElse();
   }
@@ -367,7 +367,7 @@ class _$UpdateFcmSuccessImpl<T> implements UpdateFcmSuccess<T> {
 
   @override
   String toString() {
-    return 'UpdateFcmState<$T>.updateBabySuccess(data: $data)';
+    return 'UpdateFcmState<$T>.updateFcmSuccess(data: $data)';
   }
 
   @override
@@ -395,35 +395,35 @@ class _$UpdateFcmSuccessImpl<T> implements UpdateFcmSuccess<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() updateBabyLoading,
-    required TResult Function(T data) updateBabySuccess,
-    required TResult Function(ApiErrorModel apiErrorModel) updateBabyError,
+    required TResult Function() updateFcmLoading,
+    required TResult Function(T data) updateFcmSuccess,
+    required TResult Function(ApiErrorModel apiErrorModel) updateFcmError,
   }) {
-    return updateBabySuccess(data);
+    return updateFcmSuccess(data);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? updateBabyLoading,
-    TResult? Function(T data)? updateBabySuccess,
-    TResult? Function(ApiErrorModel apiErrorModel)? updateBabyError,
+    TResult? Function()? updateFcmLoading,
+    TResult? Function(T data)? updateFcmSuccess,
+    TResult? Function(ApiErrorModel apiErrorModel)? updateFcmError,
   }) {
-    return updateBabySuccess?.call(data);
+    return updateFcmSuccess?.call(data);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? updateBabyLoading,
-    TResult Function(T data)? updateBabySuccess,
-    TResult Function(ApiErrorModel apiErrorModel)? updateBabyError,
+    TResult Function()? updateFcmLoading,
+    TResult Function(T data)? updateFcmSuccess,
+    TResult Function(ApiErrorModel apiErrorModel)? updateFcmError,
     required TResult orElse(),
   }) {
-    if (updateBabySuccess != null) {
-      return updateBabySuccess(data);
+    if (updateFcmSuccess != null) {
+      return updateFcmSuccess(data);
     }
     return orElse();
   }
@@ -432,35 +432,35 @@ class _$UpdateFcmSuccessImpl<T> implements UpdateFcmSuccess<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
-    required TResult Function(UpdateFcmLoading<T> value) updateBabyLoading,
-    required TResult Function(UpdateFcmSuccess<T> value) updateBabySuccess,
-    required TResult Function(UpdateFcmError<T> value) updateBabyError,
+    required TResult Function(UpdateFcmLoading<T> value) updateFcmLoading,
+    required TResult Function(UpdateFcmSuccess<T> value) updateFcmSuccess,
+    required TResult Function(UpdateFcmError<T> value) updateFcmError,
   }) {
-    return updateBabySuccess(this);
+    return updateFcmSuccess(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(UpdateFcmLoading<T> value)? updateBabyLoading,
-    TResult? Function(UpdateFcmSuccess<T> value)? updateBabySuccess,
-    TResult? Function(UpdateFcmError<T> value)? updateBabyError,
+    TResult? Function(UpdateFcmLoading<T> value)? updateFcmLoading,
+    TResult? Function(UpdateFcmSuccess<T> value)? updateFcmSuccess,
+    TResult? Function(UpdateFcmError<T> value)? updateFcmError,
   }) {
-    return updateBabySuccess?.call(this);
+    return updateFcmSuccess?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
-    TResult Function(UpdateFcmLoading<T> value)? updateBabyLoading,
-    TResult Function(UpdateFcmSuccess<T> value)? updateBabySuccess,
-    TResult Function(UpdateFcmError<T> value)? updateBabyError,
+    TResult Function(UpdateFcmLoading<T> value)? updateFcmLoading,
+    TResult Function(UpdateFcmSuccess<T> value)? updateFcmSuccess,
+    TResult Function(UpdateFcmError<T> value)? updateFcmError,
     required TResult orElse(),
   }) {
-    if (updateBabySuccess != null) {
-      return updateBabySuccess(this);
+    if (updateFcmSuccess != null) {
+      return updateFcmSuccess(this);
     }
     return orElse();
   }
@@ -521,7 +521,7 @@ class _$UpdateFcmErrorImpl<T> implements UpdateFcmError<T> {
 
   @override
   String toString() {
-    return 'UpdateFcmState<$T>.updateBabyError(apiErrorModel: $apiErrorModel)';
+    return 'UpdateFcmState<$T>.updateFcmError(apiErrorModel: $apiErrorModel)';
   }
 
   @override
@@ -549,35 +549,35 @@ class _$UpdateFcmErrorImpl<T> implements UpdateFcmError<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() updateBabyLoading,
-    required TResult Function(T data) updateBabySuccess,
-    required TResult Function(ApiErrorModel apiErrorModel) updateBabyError,
+    required TResult Function() updateFcmLoading,
+    required TResult Function(T data) updateFcmSuccess,
+    required TResult Function(ApiErrorModel apiErrorModel) updateFcmError,
   }) {
-    return updateBabyError(apiErrorModel);
+    return updateFcmError(apiErrorModel);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? updateBabyLoading,
-    TResult? Function(T data)? updateBabySuccess,
-    TResult? Function(ApiErrorModel apiErrorModel)? updateBabyError,
+    TResult? Function()? updateFcmLoading,
+    TResult? Function(T data)? updateFcmSuccess,
+    TResult? Function(ApiErrorModel apiErrorModel)? updateFcmError,
   }) {
-    return updateBabyError?.call(apiErrorModel);
+    return updateFcmError?.call(apiErrorModel);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? updateBabyLoading,
-    TResult Function(T data)? updateBabySuccess,
-    TResult Function(ApiErrorModel apiErrorModel)? updateBabyError,
+    TResult Function()? updateFcmLoading,
+    TResult Function(T data)? updateFcmSuccess,
+    TResult Function(ApiErrorModel apiErrorModel)? updateFcmError,
     required TResult orElse(),
   }) {
-    if (updateBabyError != null) {
-      return updateBabyError(apiErrorModel);
+    if (updateFcmError != null) {
+      return updateFcmError(apiErrorModel);
     }
     return orElse();
   }
@@ -586,35 +586,35 @@ class _$UpdateFcmErrorImpl<T> implements UpdateFcmError<T> {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial<T> value) initial,
-    required TResult Function(UpdateFcmLoading<T> value) updateBabyLoading,
-    required TResult Function(UpdateFcmSuccess<T> value) updateBabySuccess,
-    required TResult Function(UpdateFcmError<T> value) updateBabyError,
+    required TResult Function(UpdateFcmLoading<T> value) updateFcmLoading,
+    required TResult Function(UpdateFcmSuccess<T> value) updateFcmSuccess,
+    required TResult Function(UpdateFcmError<T> value) updateFcmError,
   }) {
-    return updateBabyError(this);
+    return updateFcmError(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(UpdateFcmLoading<T> value)? updateBabyLoading,
-    TResult? Function(UpdateFcmSuccess<T> value)? updateBabySuccess,
-    TResult? Function(UpdateFcmError<T> value)? updateBabyError,
+    TResult? Function(UpdateFcmLoading<T> value)? updateFcmLoading,
+    TResult? Function(UpdateFcmSuccess<T> value)? updateFcmSuccess,
+    TResult? Function(UpdateFcmError<T> value)? updateFcmError,
   }) {
-    return updateBabyError?.call(this);
+    return updateFcmError?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial<T> value)? initial,
-    TResult Function(UpdateFcmLoading<T> value)? updateBabyLoading,
-    TResult Function(UpdateFcmSuccess<T> value)? updateBabySuccess,
-    TResult Function(UpdateFcmError<T> value)? updateBabyError,
+    TResult Function(UpdateFcmLoading<T> value)? updateFcmLoading,
+    TResult Function(UpdateFcmSuccess<T> value)? updateFcmSuccess,
+    TResult Function(UpdateFcmError<T> value)? updateFcmError,
     required TResult orElse(),
   }) {
-    if (updateBabyError != null) {
-      return updateBabyError(this);
+    if (updateFcmError != null) {
+      return updateFcmError(this);
     }
     return orElse();
   }

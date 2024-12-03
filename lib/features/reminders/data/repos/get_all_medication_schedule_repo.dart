@@ -1,5 +1,5 @@
 import 'package:care_nest/core/networking/api_result.dart';
-import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
 import '../../../../core/networking/api_error_handler.dart';
 import '../../../../core/networking/api_service.dart';
 

@@ -1,11 +1,9 @@
 import 'package:care_nest/core/networking/api_constants.dart';
 import 'package:care_nest/features/add_baby/data/models/add_baby/add_baby_response.dart';
-
 import 'package:care_nest/features/add_baby/data/models/delete_baby/delete_baby_response.dart';
 import 'package:care_nest/features/add_baby/data/models/update_baby/update_baby_request.dart';
 import 'package:care_nest/features/add_baby/data/models/update_baby/update_baby_response.dart';
 import 'package:care_nest/features/fcm/data/models/update_fcm_response.dart';
-
 import 'package:care_nest/features/forget_password/data/models/create_new_password_model/create_new_password_request_body.dart';
 import 'package:care_nest/features/forget_password/data/models/forget_password_model/forget_pass_email_request_body.dart';
 import 'package:care_nest/features/forget_password/data/models/forget_password_model/forget_pass_response.dart';
@@ -13,11 +11,13 @@ import 'package:care_nest/features/forget_password/data/models/verify_password_m
 import 'package:care_nest/features/forget_password/data/models/verify_password_model/verify_password_response.dart';
 import 'package:care_nest/features/login/data/models/login_request_body.dart';
 import 'package:care_nest/features/login/data/models/login_response.dart';
-import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule_response.dart';
-import 'package:care_nest/features/reminders/data/models/add_medication_schedule_request_body.dart';
-import 'package:care_nest/features/reminders/data/models/add_medication_schedule_response.dart';
-import 'package:care_nest/features/reminders/data/models/update_medication_schedule_request.dart';
-import 'package:care_nest/features/reminders/data/models/update_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/data/models/delete_medication_schedule/delete_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/data/models/get_all_babies_medication_schedule/get_all_babies_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/data/models/add_medication_schedule/add_medication_schedule_request_body.dart';
+import 'package:care_nest/features/reminders/data/models/add_medication_schedule/add_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/data/models/update_medication_schedule/update_medication_schedule_request.dart';
+import 'package:care_nest/features/reminders/data/models/update_medication_schedule/update_medication_schedule_response.dart';
 import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_request_body.dart';
 import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_response.dart';
 import 'package:care_nest/features/sign_up/data/models/verify_account_model/verify_account_request_body.dart';
@@ -108,9 +108,23 @@ abstract class ApiService {
     @Body() UpdateMedicationScheduleRequest updateMedicationScheduleRequest,
   );
 
+
   @PUT(ApiConstants.updateFcmToken)
   Future<UpdateFcmResponse> updateFcmToken(
     @Header('Authorization') String token,
     @Body() UpdateFcmTokenRequestBody updateFcmTokenRequestBody,
+  );
+
+  @DELETE(ApiConstants.deleteMedicationSchedule)
+  Future<DeleteMedicationScheduleResponse> deleteMedicationSchedule(
+    @Header("Authorization") String token,
+    @Path("id") String id,
+    @Path("scheduleId") String scheduleId,
+  );
+
+  @GET(ApiConstants.getAllBabiesMedicationSchedule)
+  Future<GetAllBabieslMedicationScheduleResponse>
+      getAllBabiesMedicationSchedule(
+    @Header('Authorization') String token,
   );
 }

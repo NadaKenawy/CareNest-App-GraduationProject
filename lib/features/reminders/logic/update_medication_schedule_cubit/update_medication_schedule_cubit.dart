@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
-import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule_response.dart';
-import 'package:care_nest/features/reminders/data/models/update_medication_schedule_request.dart';
+import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/data/models/update_medication_schedule/update_medication_schedule_request.dart';
 import 'package:care_nest/features/reminders/data/repos/update_medication_schedule_repo.dart';
 import 'package:care_nest/features/reminders/logic/update_medication_schedule_cubit/update_medication_schedule_state.dart';
 import 'package:flutter/material.dart';

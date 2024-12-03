@@ -77,7 +77,7 @@ class BabyContainer extends StatelessWidget {
                       dialogType: DialogType.warning,
                       animType: AnimType.bottomSlide,
                       title: 'Delete Baby',
-                      desc: 'Are you sure you want to delete this child?',
+                      desc: 'Are you sure you want to delete this baby?',
                       btnCancelOnPress: () {},
                       btnOkOnPress: () {
                         context

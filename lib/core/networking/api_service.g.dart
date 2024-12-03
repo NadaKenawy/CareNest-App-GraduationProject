@@ -436,7 +436,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          '/babies/medicationSchedule/${babyId}',
+          'babies/medicationSchedule/${babyId}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -527,6 +527,80 @@ class _ApiService implements ApiService {
     late UpdateFcmResponse _value;
     try {
       _value = UpdateFcmResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<DeleteMedicationScheduleResponse> deleteMedicationSchedule(
+    String token,
+    String id,
+    String scheduleId,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<DeleteMedicationScheduleResponse>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'babies/medicationSchedule/${id}/${scheduleId}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late DeleteMedicationScheduleResponse _value;
+    try {
+      _value = DeleteMedicationScheduleResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<GetAllBabieslMedicationScheduleResponse>
+      getAllBabiesMedicationSchedule(String token) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options =
+        _setStreamType<GetAllBabieslMedicationScheduleResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'babies/medicationSchedule/allBabiesMedications',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetAllBabieslMedicationScheduleResponse _value;
+    try {
+      _value = GetAllBabieslMedicationScheduleResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

@@ -1,7 +1,7 @@
 import 'package:care_nest/core/networking/api_error_handler.dart';
 import 'package:care_nest/core/networking/api_result.dart';
-import 'package:care_nest/features/reminders/data/models/add_medication_schedule_request_body.dart';
-import 'package:care_nest/features/reminders/data/models/add_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/data/models/add_medication_schedule/add_medication_schedule_request_body.dart';
+import 'package:care_nest/features/reminders/data/models/add_medication_schedule/add_medication_schedule_response.dart';
 import '../../../../core/networking/api_service.dart';
 
 class AddMedicationScheduleRepo {
