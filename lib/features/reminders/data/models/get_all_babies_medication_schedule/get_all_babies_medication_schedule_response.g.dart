@@ -6,25 +6,27 @@ part of 'get_all_babies_medication_schedule_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetAllBabieslMedicationScheduleResponse
-    _$GetAllBabieslMedicationScheduleResponseFromJson(
+GetAllBabiesMedicationScheduleResponse
+    _$GetAllBabiesMedicationScheduleResponseFromJson(
             Map<String, dynamic> json) =>
-        GetAllBabieslMedicationScheduleResponse(
+        GetAllBabiesMedicationScheduleResponse(
           results: (json['results'] as num?)?.toInt(),
           data: (json['data'] as List<dynamic>?)
-              ?.map((e) => MedicationData.fromJson(e as Map<String, dynamic>))
+              ?.map((e) =>
+                  BabiesMedicationData.fromJson(e as Map<String, dynamic>))
               .toList(),
         );
 
-Map<String, dynamic> _$GetAllBabieslMedicationScheduleResponseToJson(
-        GetAllBabieslMedicationScheduleResponse instance) =>
+Map<String, dynamic> _$GetAllBabiesMedicationScheduleResponseToJson(
+        GetAllBabiesMedicationScheduleResponse instance) =>
     <String, dynamic>{
       'results': instance.results,
       'data': instance.data,
     };
 
-MedicationData _$MedicationDataFromJson(Map<String, dynamic> json) =>
-    MedicationData(
+BabiesMedicationData _$BabiesMedicationDataFromJson(
+        Map<String, dynamic> json) =>
+    BabiesMedicationData(
       medicationName: json['medicationName'] as String?,
       time: json['time'] as String?,
       begin: json['begin'] == null
@@ -35,7 +37,8 @@ MedicationData _$MedicationDataFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String?,
     );
 
-Map<String, dynamic> _$MedicationDataToJson(MedicationData instance) =>
+Map<String, dynamic> _$BabiesMedicationDataToJson(
+        BabiesMedicationData instance) =>
     <String, dynamic>{
       'medicationName': instance.medicationName,
       'time': instance.time,

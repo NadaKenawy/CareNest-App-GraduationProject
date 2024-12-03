@@ -20,7 +20,8 @@ mixin _$GetAllBabiesMedicationScheduleState<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<MedicationData>? medicationData) success,
+    required TResult Function(List<BabiesMedicationData>? babiesMedicationData)
+        success,
     required TResult Function(ApiErrorModel apiErrorModel) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +29,8 @@ mixin _$GetAllBabiesMedicationScheduleState<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<MedicationData>? medicationData)? success,
+    TResult? Function(List<BabiesMedicationData>? babiesMedicationData)?
+        success,
     TResult? Function(ApiErrorModel apiErrorModel)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +38,7 @@ mixin _$GetAllBabiesMedicationScheduleState<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<MedicationData>? medicationData)? success,
+    TResult Function(List<BabiesMedicationData>? babiesMedicationData)? success,
     TResult Function(ApiErrorModel apiErrorModel)? error,
     required TResult orElse(),
   }) =>
@@ -135,7 +137,8 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<MedicationData>? medicationData) success,
+    required TResult Function(List<BabiesMedicationData>? babiesMedicationData)
+        success,
     required TResult Function(ApiErrorModel apiErrorModel) error,
   }) {
     return initial();
@@ -146,7 +149,8 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<MedicationData>? medicationData)? success,
+    TResult? Function(List<BabiesMedicationData>? babiesMedicationData)?
+        success,
     TResult? Function(ApiErrorModel apiErrorModel)? error,
   }) {
     return initial?.call();
@@ -157,7 +161,7 @@ class _$InitialImpl<T> implements _Initial<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<MedicationData>? medicationData)? success,
+    TResult Function(List<BabiesMedicationData>? babiesMedicationData)? success,
     TResult Function(ApiErrorModel apiErrorModel)? error,
     required TResult orElse(),
   }) {
@@ -252,7 +256,8 @@ class _$LoadingImpl<T> implements Loading<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<MedicationData>? medicationData) success,
+    required TResult Function(List<BabiesMedicationData>? babiesMedicationData)
+        success,
     required TResult Function(ApiErrorModel apiErrorModel) error,
   }) {
     return loading();
@@ -263,7 +268,8 @@ class _$LoadingImpl<T> implements Loading<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<MedicationData>? medicationData)? success,
+    TResult? Function(List<BabiesMedicationData>? babiesMedicationData)?
+        success,
     TResult? Function(ApiErrorModel apiErrorModel)? error,
   }) {
     return loading?.call();
@@ -274,7 +280,7 @@ class _$LoadingImpl<T> implements Loading<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<MedicationData>? medicationData)? success,
+    TResult Function(List<BabiesMedicationData>? babiesMedicationData)? success,
     TResult Function(ApiErrorModel apiErrorModel)? error,
     required TResult orElse(),
   }) {
@@ -332,7 +338,7 @@ abstract class _$$SuccessImplCopyWith<T, $Res> {
           _$SuccessImpl<T> value, $Res Function(_$SuccessImpl<T>) then) =
       __$$SuccessImplCopyWithImpl<T, $Res>;
   @useResult
-  $Res call({List<MedicationData>? medicationData});
+  $Res call({List<BabiesMedicationData>? babiesMedicationData});
 }
 
 /// @nodoc
@@ -348,13 +354,13 @@ class __$$SuccessImplCopyWithImpl<T, $Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? medicationData = freezed,
+    Object? babiesMedicationData = freezed,
   }) {
     return _then(_$SuccessImpl<T>(
-      freezed == medicationData
-          ? _value._medicationData
-          : medicationData // ignore: cast_nullable_to_non_nullable
-              as List<MedicationData>?,
+      freezed == babiesMedicationData
+          ? _value._babiesMedicationData
+          : babiesMedicationData // ignore: cast_nullable_to_non_nullable
+              as List<BabiesMedicationData>?,
     ));
   }
 }
@@ -362,22 +368,23 @@ class __$$SuccessImplCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$SuccessImpl<T> implements Success<T> {
-  const _$SuccessImpl(final List<MedicationData>? medicationData)
-      : _medicationData = medicationData;
+  const _$SuccessImpl(final List<BabiesMedicationData>? babiesMedicationData)
+      : _babiesMedicationData = babiesMedicationData;
 
-  final List<MedicationData>? _medicationData;
+  final List<BabiesMedicationData>? _babiesMedicationData;
   @override
-  List<MedicationData>? get medicationData {
-    final value = _medicationData;
+  List<BabiesMedicationData>? get babiesMedicationData {
+    final value = _babiesMedicationData;
     if (value == null) return null;
-    if (_medicationData is EqualUnmodifiableListView) return _medicationData;
+    if (_babiesMedicationData is EqualUnmodifiableListView)
+      return _babiesMedicationData;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString() {
-    return 'GetAllBabiesMedicationScheduleState<$T>.success(medicationData: $medicationData)';
+    return 'GetAllBabiesMedicationScheduleState<$T>.success(babiesMedicationData: $babiesMedicationData)';
   }
 
   @override
@@ -386,12 +393,12 @@ class _$SuccessImpl<T> implements Success<T> {
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl<T> &&
             const DeepCollectionEquality()
-                .equals(other._medicationData, _medicationData));
+                .equals(other._babiesMedicationData, _babiesMedicationData));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_medicationData));
+      runtimeType, const DeepCollectionEquality().hash(_babiesMedicationData));
 
   /// Create a copy of GetAllBabiesMedicationScheduleState
   /// with the given fields replaced by the non-null parameter values.
@@ -406,10 +413,11 @@ class _$SuccessImpl<T> implements Success<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<MedicationData>? medicationData) success,
+    required TResult Function(List<BabiesMedicationData>? babiesMedicationData)
+        success,
     required TResult Function(ApiErrorModel apiErrorModel) error,
   }) {
-    return success(medicationData);
+    return success(babiesMedicationData);
   }
 
   @override
@@ -417,10 +425,11 @@ class _$SuccessImpl<T> implements Success<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<MedicationData>? medicationData)? success,
+    TResult? Function(List<BabiesMedicationData>? babiesMedicationData)?
+        success,
     TResult? Function(ApiErrorModel apiErrorModel)? error,
   }) {
-    return success?.call(medicationData);
+    return success?.call(babiesMedicationData);
   }
 
   @override
@@ -428,12 +437,12 @@ class _$SuccessImpl<T> implements Success<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<MedicationData>? medicationData)? success,
+    TResult Function(List<BabiesMedicationData>? babiesMedicationData)? success,
     TResult Function(ApiErrorModel apiErrorModel)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(medicationData);
+      return success(babiesMedicationData);
     }
     return orElse();
   }
@@ -477,10 +486,11 @@ class _$SuccessImpl<T> implements Success<T> {
 }
 
 abstract class Success<T> implements GetAllBabiesMedicationScheduleState<T> {
-  const factory Success(final List<MedicationData>? medicationData) =
+  const factory Success(
+          final List<BabiesMedicationData>? babiesMedicationData) =
       _$SuccessImpl<T>;
 
-  List<MedicationData>? get medicationData;
+  List<BabiesMedicationData>? get babiesMedicationData;
 
   /// Create a copy of GetAllBabiesMedicationScheduleState
   /// with the given fields replaced by the non-null parameter values.
@@ -560,7 +570,8 @@ class _$ErrorImpl<T> implements Error<T> {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<MedicationData>? medicationData) success,
+    required TResult Function(List<BabiesMedicationData>? babiesMedicationData)
+        success,
     required TResult Function(ApiErrorModel apiErrorModel) error,
   }) {
     return error(apiErrorModel);
@@ -571,7 +582,8 @@ class _$ErrorImpl<T> implements Error<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<MedicationData>? medicationData)? success,
+    TResult? Function(List<BabiesMedicationData>? babiesMedicationData)?
+        success,
     TResult? Function(ApiErrorModel apiErrorModel)? error,
   }) {
     return error?.call(apiErrorModel);
@@ -582,7 +594,7 @@ class _$ErrorImpl<T> implements Error<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<MedicationData>? medicationData)? success,
+    TResult Function(List<BabiesMedicationData>? babiesMedicationData)? success,
     TResult Function(ApiErrorModel apiErrorModel)? error,
     required TResult orElse(),
   }) {

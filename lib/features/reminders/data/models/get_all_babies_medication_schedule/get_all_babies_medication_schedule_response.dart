@@ -3,22 +3,23 @@ import 'package:json_annotation/json_annotation.dart';
 part 'get_all_babies_medication_schedule_response.g.dart';
 
 @JsonSerializable()
-class GetAllBabieslMedicationScheduleResponse {
+class GetAllBabiesMedicationScheduleResponse {
   int? results;
-  List<MedicationData>? data;
+  List<BabiesMedicationData>? data;
 
-  GetAllBabieslMedicationScheduleResponse({
+  GetAllBabiesMedicationScheduleResponse({
     this.results,
     this.data,
   });
 
-  factory GetAllBabieslMedicationScheduleResponse.fromJson(Map<String, dynamic> json) =>
-      _$GetAllBabieslMedicationScheduleResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$GetAllBabieslMedicationScheduleResponseToJson(this);
+  factory GetAllBabiesMedicationScheduleResponse.fromJson(Map<String, dynamic> json) =>
+      _$GetAllBabiesMedicationScheduleResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GetAllBabiesMedicationScheduleResponseToJson(this);
 }
 
 @JsonSerializable()
-class MedicationData {
+class BabiesMedicationData {
   String? medicationName;
   String? time;
   DateTime? begin;
@@ -26,7 +27,7 @@ class MedicationData {
   bool? notificationSent;
   String? id;
 
-  MedicationData({
+  BabiesMedicationData({
     this.medicationName,
     this.time,
     this.begin,
@@ -35,8 +36,8 @@ class MedicationData {
     this.id,
   });
 
-  factory MedicationData.fromJson(Map<String, dynamic> json) =>
-      _$MedicationDataFromJson(json);
+  factory BabiesMedicationData.fromJson(Map<String, dynamic> json) =>
+      _$BabiesMedicationDataFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MedicationDataToJson(this);
+  Map<String, dynamic> toJson() => _$BabiesMedicationDataToJson(this);
 }

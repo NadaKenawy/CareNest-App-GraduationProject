@@ -3,7 +3,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
-import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
 import 'package:care_nest/features/reminders/logic/delete_medication_schedule_cubit/delete_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/logic/delete_medication_schedule_cubit/delete_medication_schedule_state.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,7 @@ class MedicinesListViewItem extends StatefulWidget {
     required this.scheduleId,
   });
 
-  final MedicationData medicinesList;
+  final dynamic medicinesList;
   final String scheduleId;
 
   @override
@@ -68,6 +67,10 @@ class _MedicinesListViewItemState extends State<MedicinesListViewItem> {
 
   @override
   Widget build(BuildContext context) {
+    final medicationName =
+        widget.medicinesList.medicationName ?? 'Medicine Name';
+    final time = widget.medicinesList.time ?? 'Time';
+
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 12.h),
       child: Container(
@@ -93,7 +96,7 @@ class _MedicinesListViewItemState extends State<MedicinesListViewItem> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.medicinesList.medicationName ?? 'Medicine Name',
+                    medicationName,
                     style: TextStyles.font16PrimaryBlackMedium,
                   ),
                   SizedBox(
@@ -108,7 +111,7 @@ class _MedicinesListViewItemState extends State<MedicinesListViewItem> {
                       ),
                       SizedBox(width: 8.w),
                       Text(
-                        widget.medicinesList.time ?? 'Time',
+                        time,
                         style: TextStyle(color: Colors.black.withOpacity(.5)),
                       ),
                     ],

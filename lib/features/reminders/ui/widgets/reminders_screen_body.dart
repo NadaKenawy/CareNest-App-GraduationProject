@@ -5,9 +5,12 @@ import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
+import 'package:care_nest/features/reminders/data/models/get_all_babies_medication_schedule/get_all_babies_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/ui/widgets/get_all_babies_medicines_bloc_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:care_nest/features/reminders/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/ui/widgets/get_all_medicines_bloc_builder.dart';
 import 'package:care_nest/features/reminders/ui/widgets/sidebar.dart';
 import 'package:care_nest/features/reminders/ui/widgets/week_days_widget.dart';
@@ -27,6 +30,9 @@ class _RemindersScreenBodyState extends State<RemindersScreenBody> {
   final SidebarXController _controller = SidebarXController(selectedIndex: -1);
   String? babyId;
   int _selectedIndex = 0;
+
+  List<MedicationData> medicinesList = [];
+  List<BabiesMedicationData> babiesMedicinesList = [];
 
   @override
   void initState() {
@@ -132,7 +138,9 @@ class _RemindersScreenBodyState extends State<RemindersScreenBody> {
                 color: Colors.black,
               ),
             ),
-            const GetAllMedicinesBlocBuilder(),
+            _selectedIndex == 1
+                ? const GetAllBabiesMedicinesBlocBuilder() // Passes babiesMedicinesList internally
+                : const GetAllMedicinesBlocBuilder(), // Passes medicinesList internally
             SizedBox(height: _selectedIndex == 1 ? 24.h : 100.h),
           ],
         ),

@@ -3,7 +3,6 @@
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/routing/app_router.dart';
-import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
 import 'package:care_nest/features/reminders/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +14,8 @@ class MedicinesListView extends StatelessWidget {
     super.key,
     required this.medicinesList,
   });
-  final List<MedicationData> medicinesList;
+
+  final List<dynamic> medicinesList; // Can accept either List<MedicationData> or List<BabiesMedicationData>
 
   @override
   Widget build(BuildContext context) {

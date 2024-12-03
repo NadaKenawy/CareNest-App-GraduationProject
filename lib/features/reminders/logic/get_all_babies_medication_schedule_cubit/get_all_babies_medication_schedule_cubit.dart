@@ -9,7 +9,6 @@ class GetAllBabiesMedicationScheduleCubit
   GetAllBabiesMedicationScheduleCubit(this._getAllBabiesMedicationScheduleRepo)
       : super(const GetAllBabiesMedicationScheduleState.initial());
   final GetAllBabiesMedicationScheduleRepo _getAllBabiesMedicationScheduleRepo;
-
   void getAllBabiesMedicationSchedule() async {
     emit(const GetAllBabiesMedicationScheduleState.loading());
 
@@ -17,6 +16,7 @@ class GetAllBabiesMedicationScheduleCubit
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
     final response = await _getAllBabiesMedicationScheduleRepo
         .getAllBabiesMedicationSchedule(token);
+
     response.when(
       success: (getAllBabiesMedicationScheduleResponse) {
         emit(

@@ -123,7 +123,7 @@ abstract class ApiService {
   );
 
   @GET(ApiConstants.getAllBabiesMedicationSchedule)
-  Future<GetAllBabieslMedicationScheduleResponse>
+  Future<GetAllBabiesMedicationScheduleResponse>
       getAllBabiesMedicationSchedule(
     @Header('Authorization') String token,
   );

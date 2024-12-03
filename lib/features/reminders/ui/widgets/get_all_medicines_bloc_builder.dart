@@ -1,3 +1,4 @@
+import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
 import 'package:care_nest/features/reminders/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_state.dart';
 import 'package:care_nest/features/reminders/ui/widgets/medicines_list_view.dart';
@@ -5,6 +6,7 @@ import 'package:care_nest/features/reminders/ui/widgets/no_medicines_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// GetAllMedicinesBlocBuilder
 class GetAllMedicinesBlocBuilder extends StatelessWidget {
   const GetAllMedicinesBlocBuilder({super.key});
 
@@ -20,7 +22,7 @@ class GetAllMedicinesBlocBuilder extends StatelessWidget {
               return setupLoading();
             },
             success: (medicinesData) {
-              var medicinesList = medicinesData;
+              var medicinesList = List<MedicationData>.from(medicinesData!);
               return setupSuccess(medicinesList);
             },
             error: (error) {
@@ -39,7 +41,7 @@ class GetAllMedicinesBlocBuilder extends StatelessWidget {
     return const Center(child: CircularProgressIndicator());
   }
 
-  Widget setupSuccess(medicinesList) {
+  Widget setupSuccess(List<MedicationData> medicinesList) {
     return MedicinesListView(
       medicinesList: medicinesList,
     );
