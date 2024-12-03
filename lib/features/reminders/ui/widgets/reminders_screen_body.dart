@@ -30,7 +30,7 @@ class _RemindersScreenBodyState extends State<RemindersScreenBody> {
   final SidebarXController _controller = SidebarXController(selectedIndex: -1);
   String? babyId;
   int _selectedIndex = 0;
-
+  String selectedBabyName = ''; 
   List<MedicationData> medicinesList = [];
   List<BabiesMedicationData> babiesMedicinesList = [];
 
@@ -64,7 +64,11 @@ class _RemindersScreenBodyState extends State<RemindersScreenBody> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          'My Reminders',
+          _selectedIndex == 1
+              ? 'All Reminders'
+              : selectedBabyName.isNotEmpty
+                  ? "${selectedBabyName[0].toUpperCase()}${selectedBabyName.substring(1)}'s Reminders"
+                  : 'My Reminders',
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeightHelper.semiBold,
@@ -89,6 +93,11 @@ class _RemindersScreenBodyState extends State<RemindersScreenBody> {
         onItemSelected: (index) {
           setState(() {
             _selectedIndex = index;
+          });
+        },
+        selectedBabyName: (String name) {
+          setState(() {
+            selectedBabyName = name;
           });
         },
       ),
@@ -139,8 +148,8 @@ class _RemindersScreenBodyState extends State<RemindersScreenBody> {
               ),
             ),
             _selectedIndex == 1
-                ? const GetAllBabiesMedicinesBlocBuilder() // Passes babiesMedicinesList internally
-                : const GetAllMedicinesBlocBuilder(), // Passes medicinesList internally
+                ? const GetAllBabiesMedicinesBlocBuilder()
+                : const GetAllMedicinesBlocBuilder(),
             SizedBox(height: _selectedIndex == 1 ? 24.h : 100.h),
           ],
         ),

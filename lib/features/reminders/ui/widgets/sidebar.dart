@@ -20,9 +20,11 @@ class ExampleSidebarX extends StatelessWidget {
     super.key,
     required this.controller,
     required this.onItemSelected,
+    required this.selectedBabyName,
   });
   final SidebarXController controller;
   final Function(int) onItemSelected;
+  final Function(String) selectedBabyName;
 
   @override
   Widget build(BuildContext context) {
@@ -95,13 +97,15 @@ class ExampleSidebarX extends StatelessWidget {
                         : AppImages.girlBabyImage,
                     width: 48.r,
                   ),
-                  label: baby.name ?? 'Unknown',
+                  label: (baby.name?.isNotEmpty ?? false)
+                      ? "${baby.name![0].toUpperCase()}${baby.name!.substring(1)}"
+                      : 'Unknown',
                   onTap: () async {
                     context
                         .read<GetAllMedicationScheduleCubit>()
                         .getAllMedicationSchedule(baby.id!);
-                    log('baby id: ${baby.id}');
                     await saveBabyId(baby.id ?? '');
+                    selectedBabyName(baby.name ?? '');
                     onItemSelected(0);
                   },
                 ),

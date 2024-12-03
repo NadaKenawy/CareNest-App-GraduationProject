@@ -37,23 +37,22 @@ class _MedicinesListViewItemState extends State<MedicinesListViewItem> {
     _checkLastColorChange();
   }
 
-  // التحقق من الوقت الذي تم فيه آخر تغيير للون
   Future<void> _checkLastColorChange() async {
     final prefs = await SharedPreferences.getInstance();
-    final lastChangedTime = prefs.getInt('lastColorChangeTime') ?? 0;
-    final currentTime = DateTime.now().millisecondsSinceEpoch;
+    final scheduleId = widget.scheduleId;
+    final isColorChangedStored =
+        prefs.getBool('isColorChanged_$scheduleId') ?? false;
 
-    // إذا مرّت 24 ساعة (86400000 مللي ثانية)
-    if (currentTime - lastChangedTime > 86400000) {
-      setState(() {
-        buttonColor = Colors.grey;
-        isColorChanged = false;
-      });
-    }
+    setState(() {
+      isColorChanged = isColorChangedStored;
+      buttonColor =
+          isColorChanged ? ColorsManager.secondryBlueColor : Colors.grey;
+    });
   }
 
   Future<void> _updateColor() async {
     final prefs = await SharedPreferences.getInstance();
+    final scheduleId = widget.scheduleId;
     final currentTime = DateTime.now().millisecondsSinceEpoch;
 
     setState(() {
@@ -62,7 +61,8 @@ class _MedicinesListViewItemState extends State<MedicinesListViewItem> {
           isColorChanged ? ColorsManager.secondryBlueColor : Colors.grey;
     });
 
-    prefs.setInt('lastColorChangeTime', currentTime);
+    prefs.setBool('isColorChanged_$scheduleId', isColorChanged);
+    prefs.setInt('lastColorChangeTime_$scheduleId', currentTime);
   }
 
   @override
