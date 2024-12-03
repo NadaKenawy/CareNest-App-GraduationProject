@@ -33,7 +33,7 @@ class GetAllBabiesMedicinesBlocBuilder extends StatelessWidget {
             }
             return setupError();
           },
-          orElse: () => const SizedBox.shrink(),
+          orElse: () => const NoMedicinesText(),
         );
       },
     );

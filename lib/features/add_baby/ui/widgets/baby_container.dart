@@ -46,7 +46,7 @@ class BabyContainer extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
         child: Row(
           children: [
             Image.asset(
@@ -56,7 +56,7 @@ class BabyContainer extends StatelessWidget {
             SizedBox(width: 20.w),
             Expanded(
               child: Text(
-                name,
+                '${name[0].toUpperCase()}${name.substring(1)}',
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,

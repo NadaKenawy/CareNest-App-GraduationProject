@@ -2,7 +2,6 @@
 
 import 'dart:developer';
 
-import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/features/on_boarding_screen.dart/screen1.dart';
@@ -36,10 +35,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Future<void> _checkFirstTimeOpen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? hasOpenedBefore = prefs.getBool('hasOpenedBefore');
-
     if (hasOpenedBefore != null && hasOpenedBefore) {
-      if (isLoggedInUser) {
-        GoRouter.of(context).pushReplacement(AppRouter.kHomeScreen);
+      String? userName = prefs.getString('userName');
+      if (userName != null) {
+        GoRouter.of(context)
+            .pushReplacement(AppRouter.kHomeScreen, extra: userName);
       } else {
         GoRouter.of(context).pushReplacement(AppRouter.kLoginScreen);
       }

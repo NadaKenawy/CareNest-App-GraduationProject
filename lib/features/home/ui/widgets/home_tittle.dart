@@ -19,7 +19,7 @@ class HomeTittle extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hi, $userName',
+              'Hi, ${userName[0].toUpperCase()}${userName.substring(1)}',
               style: TextStyle(
                 fontSize: 24.sp,
                 fontWeight: FontWeightHelper.semiBold,
