@@ -1,0 +1,59 @@
+// ignore_for_file: use_build_context_synchronously
+import 'package:care_nest/core/helpers/constants.dart';
+import 'package:care_nest/core/helpers/shared_pref_helper.dart';
+import 'package:care_nest/core/routing/app_router.dart';
+import 'package:care_nest/features/reminders/medications/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../add_baby/ui/widgets/my_babies_list_view.dart';
+import 'medicines_list_view_item.dart';
+
+class MedicinesListView extends StatelessWidget {
+  const MedicinesListView({
+    super.key,
+    required this.medicinesList,
+  });
+
+  final List<dynamic> medicinesList;
+
+  @override
+  Widget build(BuildContext context) {
+    final reversedList = medicinesList.reversed.toList();
+    if (reversedList.isEmpty) {
+      return const NoBabyText();
+    }
+    return Expanded(
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: reversedList.length,
+        itemBuilder: (context, index) {
+          final medicine = reversedList[index];
+
+          return GestureDetector(
+            onTap: () async {
+              if (medicine is MedicationData) {
+                final babyId = await SharedPrefHelper.getSecuredString(
+                    SharedPrefKeys.babyId);
+                GoRouter.of(context)
+                    .push(AppRouter.kUpdateMedicineScreen, extra: medicine)
+                    .then((value) {
+                  if (value == true) {
+                    context
+                        .read<GetAllMedicationScheduleCubit>()
+                        .getAllMedicationSchedule(babyId);
+                  }
+                });
+              }
+            },
+            child: MedicinesListViewItem(
+              medicinesList: medicine,
+              scheduleId: medicine.id!,
+            ),
+          );
+        },
+      ),
+    );
+  }
+}

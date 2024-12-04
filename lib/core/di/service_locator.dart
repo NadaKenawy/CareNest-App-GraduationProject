@@ -18,15 +18,15 @@ import 'package:care_nest/features/forget_password/logic/forget_password_cubit/f
 import 'package:care_nest/features/forget_password/logic/verify_password_cubit/verify_password_cubit.dart';
 import 'package:care_nest/features/login/data/repos/login_repo.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
-import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
-import 'package:care_nest/features/reminders/data/repos/add_medication_schedule_repo.dart';
-import 'package:care_nest/features/reminders/data/repos/delete_medication_schedule_repo.dart';
-import 'package:care_nest/features/reminders/data/repos/get_all_babies_medication_schedule_repo.dart';
-import 'package:care_nest/features/reminders/data/repos/update_medication_schedule_repo.dart';
-import 'package:care_nest/features/reminders/logic/add_medication_schedule_cubit/add_medication_schedule_cubit.dart';
-import 'package:care_nest/features/reminders/logic/delete_medication_schedule_cubit/delete_medication_schedule_cubit.dart';
-import 'package:care_nest/features/reminders/logic/get_all_babies_medication_schedule_cubit/get_all_babies_medication_schedule_cubit.dart';
-import 'package:care_nest/features/reminders/logic/update_medication_schedule_cubit/update_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/medications/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/medications/data/repos/add_medication_schedule_repo.dart';
+import 'package:care_nest/features/reminders/medications/data/repos/delete_medication_schedule_repo.dart';
+import 'package:care_nest/features/reminders/medications/data/repos/get_all_babies_medication_schedule_repo.dart';
+import 'package:care_nest/features/reminders/medications/data/repos/update_medication_schedule_repo.dart';
+import 'package:care_nest/features/reminders/medications/logic/add_medication_schedule_cubit/add_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/medications/logic/delete_medication_schedule_cubit/delete_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/medications/logic/get_all_babies_medication_schedule_cubit/get_all_babies_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/medications/logic/update_medication_schedule_cubit/update_medication_schedule_cubit.dart';
 import 'package:care_nest/features/sign_up/data/repos/sign_up_repo.dart';
 import 'package:care_nest/features/sign_up/data/repos/verify_account_repo.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
@@ -36,8 +36,8 @@ import 'package:get_it/get_it.dart';
 
 import '../../features/add_baby/data/repos/add_baby_repo.dart';
 import '../../features/add_baby/logic/add_baby_cubit/add_baby_cubit.dart';
-import '../../features/reminders/data/repos/get_all_medication_schedule_repo.dart';
-import '../../features/reminders/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
+import '../../features/reminders/medications/data/repos/get_all_medication_schedule_repo.dart';
+import '../../features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 
 final getIt = GetIt.instance;
 

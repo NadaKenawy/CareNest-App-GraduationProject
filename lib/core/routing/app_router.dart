@@ -17,15 +17,17 @@ import 'package:care_nest/features/home/ui/home_screen.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_cubit.dart';
 import 'package:care_nest/features/login/ui/login_screen.dart';
 import 'package:care_nest/features/on_boarding_screen.dart/on_boarding_screen.dart';
-import 'package:care_nest/features/reminders/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
-import 'package:care_nest/features/reminders/logic/add_medication_schedule_cubit/add_medication_schedule_cubit.dart';
-import 'package:care_nest/features/reminders/logic/delete_medication_schedule_cubit/delete_medication_schedule_cubit.dart';
-import 'package:care_nest/features/reminders/logic/get_all_babies_medication_schedule_cubit/get_all_babies_medication_schedule_cubit.dart';
-import 'package:care_nest/features/reminders/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
-import 'package:care_nest/features/reminders/logic/update_medication_schedule_cubit/update_medication_schedule_cubit.dart';
-import 'package:care_nest/features/reminders/ui/add_medicine_screen.dart';
-import 'package:care_nest/features/reminders/ui/reminders_screen.dart';
-import 'package:care_nest/features/reminders/ui/widgets/update_medicines_screen_body.dart';
+import 'package:care_nest/features/reminders/medications/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/medications/logic/add_medication_schedule_cubit/add_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/medications/logic/delete_medication_schedule_cubit/delete_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/medications/logic/get_all_babies_medication_schedule_cubit/get_all_babies_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/medications/logic/update_medication_schedule_cubit/update_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/medications/ui/add_medicine_screen.dart';
+import 'package:care_nest/features/reminders/medications/ui/medications_screen.dart';
+import 'package:care_nest/features/reminders/reminders_screen.dart';
+import 'package:care_nest/features/reminders/medications/ui/widgets/update_medicines_screen_body.dart';
+import 'package:care_nest/features/reminders/vaccinations/vaccinations_screen.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:care_nest/features/sign_up/logic/verfiy_account_cubit/verify_account_cubit.dart';
 import 'package:care_nest/features/sign_up/ui/sign_up_screen.dart';
@@ -45,9 +47,11 @@ abstract class AppRouter {
   static const kAddBabyScreen = '/addBabyScreen';
   static const kMyBabiesScreen = '/myBabiesScreen';
   static const kBabyDataScreen = '/babyDataScreen';
-  static const kRemindersScreen = '/remindersScreen';
+  static const kMedicationsScreen = '/medicationsScreen';
   static const kAddMedicineScreen = '/addMedicineScreen';
   static const kUpdateMedicineScreen = '/updateMedicineScreen';
+  static const kRemindersScreen = '/remindersScreen';
+  static const kVaccinationsScreen = '/vaccinationsScreen';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -159,7 +163,12 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-        path: kRemindersScreen,
+          path: kRemindersScreen,
+          builder: (context, state) {
+            return const RemindersScreen();
+          }),
+      GoRoute(
+        path: kMedicationsScreen,
         builder: (context, state) {
           return MultiBlocProvider(providers: [
             BlocProvider(
@@ -174,7 +183,7 @@ abstract class AppRouter {
             BlocProvider(
               create: (context) => getIt<GetAllBabiesMedicationScheduleCubit>(),
             ),
-          ], child: const RemindersScreen());
+          ], child: const MedicationsScreen());
         },
       ),
       GoRoute(
@@ -199,6 +208,11 @@ abstract class AppRouter {
           );
         },
       ),
+      GoRoute(
+          path: kVaccinationsScreen,
+          builder: (context, state) {
+            return const VaccinationsScreen();
+          }),
     ],
   );
 }
