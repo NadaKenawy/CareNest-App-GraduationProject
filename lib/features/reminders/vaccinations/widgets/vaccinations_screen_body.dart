@@ -89,7 +89,7 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
           itemBuilder: (BuildContext context, int index) {
             if (index % 4 == 0) {
               return Padding(
-                padding: EdgeInsets.only(top: 28.h),
+                padding: EdgeInsets.only(top: 32.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -145,7 +145,7 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
                           child: Padding(
                             padding: EdgeInsets.all(2.sp),
                             child: Icon(Icons.check,
-                                color: Colors.white, size: 28.sp),
+                                color: Colors.white, size: 26.sp),
                           ),
                         ),
                       ),

@@ -86,7 +86,7 @@ class RemindersScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 40.h,
+                height: 56.h,
               ),
             ],
           )),
