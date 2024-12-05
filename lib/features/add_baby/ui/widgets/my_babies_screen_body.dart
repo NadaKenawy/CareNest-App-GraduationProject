@@ -2,7 +2,6 @@
 import 'dart:developer';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
-import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/my_babies_bloc_builder.dart';
@@ -23,10 +22,7 @@ class MyBabiesScreenBody extends StatelessWidget {
         backgroundColor: Colors.white,
         title: Text(
           'My Babies',
-          style: TextStyle(
-            fontWeight: FontWeightHelper.semiBold,
-            fontSize: 24.sp,
-          ),
+          style: TextStyles.font20BlackSemiBold,
         ),
       ),
       body: Column(

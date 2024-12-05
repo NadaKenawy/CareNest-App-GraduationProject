@@ -1,5 +1,4 @@
 import 'package:care_nest/core/theme/colors_manager.dart';
-import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/utils/app_images.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +16,7 @@ class RemindersScreen extends StatelessWidget {
         appBar: AppBar(
             title: Text(
           'My Reminders',
-          style:
-              TextStyle(fontWeight: FontWeightHelper.semiBold, fontSize: 24.sp),
+          style: TextStyles.font20BlackSemiBold,
         )),
         body: Center(
           child: SingleChildScrollView(

@@ -47,10 +47,7 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
           selectedBabyName?.isNotEmpty == true
               ? "${selectedBabyName![0].toUpperCase()}${selectedBabyName!.substring(1)}'s Vaccinations"
               : 'My Vaccinations',
-          style: const TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeightHelper.semiBold,
-          ),
+          style: TextStyles.font20BlackSemiBold,
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -162,7 +159,6 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
                                 fontSize: 16.sp,
                               ),
                             ),
-                            SizedBox(width: 8.w),
                             Text(
                               "Track your baby's health and development with ease!",
                               style: TextStyle(

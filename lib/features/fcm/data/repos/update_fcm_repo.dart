@@ -1,7 +1,7 @@
 import 'package:care_nest/core/networking/api_result.dart';
 import 'package:care_nest/core/networking/api_service.dart';
-import 'package:care_nest/features/fcm/data/models/update_fcm_response.dart';
-import 'package:care_nest/features/fcm/data/models/update_fcm_token_request_body.dart';
+import 'package:care_nest/features/fcm/data/models/update_fcm/update_fcm_response.dart';
+import 'package:care_nest/features/fcm/data/models/update_fcm/update_fcm_token_request_body.dart';
 
 import '../../../../core/networking/api_error_handler.dart';
 

@@ -5,6 +5,7 @@ import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
+import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/features/reminders/medications/data/models/get_all_babies_medication_schedule/get_all_babies_medication_schedule_response.dart';
 import 'package:care_nest/features/reminders/medications/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
 import 'package:care_nest/features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
@@ -73,11 +74,7 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
               : selectedBabyName != null && selectedBabyName!.isNotEmpty
                   ? "${selectedBabyName![0].toUpperCase()}${selectedBabyName!.substring(1)}'s Medications"
                   : 'My Medications',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeightHelper.semiBold,
-            fontSize: 24.sp,
-          ),
+          style: TextStyles.font20BlackSemiBold,
         ),
         actions: [
           Builder(

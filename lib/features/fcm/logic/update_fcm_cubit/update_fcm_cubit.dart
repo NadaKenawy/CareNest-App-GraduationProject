@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
-import 'package:care_nest/features/fcm/data/models/update_fcm_token_request_body.dart';
+import 'package:care_nest/features/fcm/data/models/update_fcm/update_fcm_token_request_body.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -7,6 +7,7 @@ import 'package:care_nest/features/add_baby/logic/update_baby_cubit/update_baby_
 import 'package:care_nest/features/add_baby/ui/add_baby_screen.dart';
 import 'package:care_nest/features/add_baby/ui/baby_data_screen.dart';
 import 'package:care_nest/features/add_baby/ui/my_babies_screen.dart';
+import 'package:care_nest/features/fcm/ui/notifications_screen.dart';
 import 'package:care_nest/features/forget_password/logic/create_new_password_cubit/create_new_password_cubit.dart';
 import 'package:care_nest/features/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
 import 'package:care_nest/features/forget_password/logic/verify_password_cubit/verify_password_cubit.dart';
@@ -52,6 +53,7 @@ abstract class AppRouter {
   static const kUpdateMedicineScreen = '/updateMedicineScreen';
   static const kRemindersScreen = '/remindersScreen';
   static const kVaccinationsScreen = '/vaccinationsScreen';
+  static const kNotificationsScreen = '/notificationsScreen';
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -212,6 +214,11 @@ abstract class AppRouter {
           path: kVaccinationsScreen,
           builder: (context, state) {
             return const VaccinationsScreen();
+          }),
+      GoRoute(
+          path: kNotificationsScreen,
+          builder: (context, state) {
+            return const NotificationsScreen();
           }),
     ],
   );

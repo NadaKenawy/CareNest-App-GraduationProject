@@ -16,13 +16,14 @@ class ApiConstants {
       'babies/medicationSchedule/{babyId}';
   static const String updateMedicationSchedule =
       'babies/medicationSchedule/{id}/{scheduleId}';
-
   static const String updateFcmToken = "users/updateFcmToken";
-
   static const String deleteMedicationSchedule =
       'babies/medicationSchedule/{id}/{scheduleId}';
   static const String getAllBabiesMedicationSchedule =
       "babies/medicationSchedule/allBabiesMedications";
+  static const String getAllNotifications = "user/notifications/all";
+  static const String deleteAllNotifications = "user/notifications/all";
+  static const String deleteNotification = "user/notifications/{id}";
 }
 
 class ApiErrors {
