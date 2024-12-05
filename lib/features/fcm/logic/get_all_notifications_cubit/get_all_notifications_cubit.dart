@@ -19,8 +19,10 @@ class GetAllNotificationsCubit extends Cubit<GetAllNotificationsState> {
 
     response.when(
       success: (notificationsResponse) {
-        emit(GetAllNotificationsState.success(
-            notificationsResponse.notificationsData));
+        emit(
+          GetAllNotificationsState.success(
+              notificationsResponse.notificationsData),
+        );
       },
       failure: (error) {
         emit(GetAllNotificationsState.error(
