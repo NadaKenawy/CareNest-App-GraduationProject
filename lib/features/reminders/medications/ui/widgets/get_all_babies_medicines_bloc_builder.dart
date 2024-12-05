@@ -6,6 +6,8 @@ import 'package:care_nest/features/reminders/medications/ui/widgets/no_medicines
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'medicines_list_view_skeletonizer.dart';
+
 // GetAllBabiesMedicinesBlocBuilder
 class GetAllBabiesMedicinesBlocBuilder extends StatelessWidget {
   const GetAllBabiesMedicinesBlocBuilder({super.key});
@@ -40,7 +42,7 @@ class GetAllBabiesMedicinesBlocBuilder extends StatelessWidget {
   }
 
   Widget setupLoading() {
-    return const Center(child: CircularProgressIndicator());
+    return const MedicinesListViewSkeletonizer();
   }
 
   Widget setupSuccess(List<BabiesMedicationData> babiesMedicinesList) {

@@ -22,7 +22,7 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
   int? selectedIndex;
   String? babyBirthDate;
   String? babyId;
-  List<bool> isPressedList = List.generate(18, (_) => false);
+  Map<String, List<bool>> isPressedMap = {};
 
   Map<String, List<Map<String, String>>> vaccinationsByAge = {
     "Vaccines At Birth": [
@@ -118,9 +118,17 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
   void initState() {
     super.initState();
     loadBabyData();
+    initializeIsPressedMap();
+  }
+
+  void initializeIsPressedMap() {
+    vaccinationsByAge.forEach((key, value) {
+      isPressedMap[key] = List.generate(value.length, (_) => false);
+    });
   }
 
   Future<void> loadBabyData() async {
+    // Retrieve baby data from shared preferences or from another source
     final babyIdFromStorage =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyId);
     final babyNameFromStorage =
@@ -180,10 +188,13 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
       ),
       endDrawer: VaccinationsSidebarX(
         controller: _controller,
-        onItemSelected: (index) {
+        onItemSelected: (index) async {
           setState(() {
             selectedIndex = index;
           });
+
+          // After changing index, load the selected baby data
+          await loadBabyData();
         },
         selectedBabyName: (String name) {
           setState(() {
@@ -274,14 +285,14 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
                                 InkWell(
                                   onTap: () {
                                     setState(() {
-                                      isPressedList[index] =
-                                          !isPressedList[index];
+                                      isPressedMap[ageGroup]![index] =
+                                          !isPressedMap[ageGroup]![index];
                                     });
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: isPressedList[index]
+                                      color: isPressedMap[ageGroup]![index]
                                           ? ColorsManager.secondryBlueColor
                                           : Colors.grey,
                                     ),

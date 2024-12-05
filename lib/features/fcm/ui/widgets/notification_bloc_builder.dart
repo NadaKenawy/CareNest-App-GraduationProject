@@ -1,6 +1,7 @@
 import 'package:care_nest/features/fcm/logic/get_all_notifications_cubit/get_all_notifications_cubit.dart';
 import 'package:care_nest/features/fcm/logic/get_all_notifications_cubit/get_all_notifications_state.dart';
 import 'package:care_nest/features/fcm/ui/widgets/notifications_list_view.dart';
+import 'package:care_nest/features/fcm/ui/widgets/notifications_list_view_skeletonizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,7 +32,7 @@ class NotificationBlocBuilder extends StatelessWidget {
   }
 
   Widget setupLoading() {
-    return const CircularProgressIndicator();
+    return const NotificationsListViewSkeletonizer();
   }
 
   Widget setupSuccess(notificationsList) {
