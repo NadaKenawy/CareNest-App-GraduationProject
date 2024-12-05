@@ -29,7 +29,7 @@ class NotificationsListViewItemSkeletonizer extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.r),
             border: Border(
               bottom: BorderSide(
-                color: Colors.grey,
+                color: const Color.fromARGB(255, 203, 202, 202),
                 width: 4.w,
               ),
             ),
