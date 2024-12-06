@@ -9,12 +9,12 @@ class VaccinationItem extends StatelessWidget {
   final VoidCallback onPressed;
 
   const VaccinationItem({
-    Key? key,
+    super.key,
     required this.title,
     required this.subtitle,
     required this.isPressed,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

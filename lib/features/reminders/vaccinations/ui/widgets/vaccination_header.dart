@@ -6,10 +6,10 @@ class VaccinationHeader extends StatelessWidget {
   final String date;
 
   const VaccinationHeader({
-    Key? key,
+    super.key,
     required this.title,
     required this.date,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
