@@ -8,6 +8,7 @@ import 'package:care_nest/features/add_baby/ui/add_baby_screen.dart';
 import 'package:care_nest/features/add_baby/ui/baby_data_screen.dart';
 import 'package:care_nest/features/add_baby/ui/my_babies_screen.dart';
 import 'package:care_nest/features/fcm/logic/get_all_notifications_cubit/get_all_notifications_cubit.dart';
+import 'package:care_nest/features/fcm/logic/notification_cubit/notification_cubit.dart';
 import 'package:care_nest/features/fcm/ui/notifications_screen.dart';
 import 'package:care_nest/features/forget_password/logic/create_new_password_cubit/create_new_password_cubit.dart';
 import 'package:care_nest/features/forget_password/logic/forget_password_cubit/forget_password_cubit.dart';
@@ -219,9 +220,16 @@ abstract class AppRouter {
       GoRoute(
           path: kNotificationsScreen,
           builder: (context, state) {
-            return BlocProvider(
-              create: (context) =>
-                  getIt<GetAllNotificationsCubit>()..fetchNotifications(),
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) =>
+                      getIt<GetAllNotificationsCubit>()..fetchNotifications(),
+                ),
+                BlocProvider(
+                  create: (context) => getIt<NotificationsCubit>(),
+                ),
+              ],
               child: const NotificationsScreen(),
             );
           }),

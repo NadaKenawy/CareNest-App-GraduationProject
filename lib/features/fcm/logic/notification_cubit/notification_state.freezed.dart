@@ -20,8 +20,8 @@ mixin _$NotificationsState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) deleteSuccess,
-    required TResult Function(String message) deleteAllSuccess,
+    required TResult Function() deleteSuccess,
+    required TResult Function() deleteAllSuccess,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,8 +29,8 @@ mixin _$NotificationsState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? deleteSuccess,
-    TResult? Function(String message)? deleteAllSuccess,
+    TResult? Function()? deleteSuccess,
+    TResult? Function()? deleteAllSuccess,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -38,8 +38,8 @@ mixin _$NotificationsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? deleteSuccess,
-    TResult Function(String message)? deleteAllSuccess,
+    TResult Function()? deleteSuccess,
+    TResult Function()? deleteAllSuccess,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -138,8 +138,8 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) deleteSuccess,
-    required TResult Function(String message) deleteAllSuccess,
+    required TResult Function() deleteSuccess,
+    required TResult Function() deleteAllSuccess,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -150,8 +150,8 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? deleteSuccess,
-    TResult? Function(String message)? deleteAllSuccess,
+    TResult? Function()? deleteSuccess,
+    TResult? Function()? deleteAllSuccess,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -162,8 +162,8 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? deleteSuccess,
-    TResult Function(String message)? deleteAllSuccess,
+    TResult Function()? deleteSuccess,
+    TResult Function()? deleteAllSuccess,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -261,8 +261,8 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) deleteSuccess,
-    required TResult Function(String message) deleteAllSuccess,
+    required TResult Function() deleteSuccess,
+    required TResult Function() deleteAllSuccess,
     required TResult Function(String error) error,
   }) {
     return loading();
@@ -273,8 +273,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? deleteSuccess,
-    TResult? Function(String message)? deleteAllSuccess,
+    TResult? Function()? deleteSuccess,
+    TResult? Function()? deleteAllSuccess,
     TResult? Function(String error)? error,
   }) {
     return loading?.call();
@@ -285,8 +285,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? deleteSuccess,
-    TResult Function(String message)? deleteAllSuccess,
+    TResult Function()? deleteSuccess,
+    TResult Function()? deleteAllSuccess,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -346,8 +346,6 @@ abstract class _$$DeleteSuccessImplCopyWith<$Res> {
   factory _$$DeleteSuccessImplCopyWith(
           _$DeleteSuccessImpl value, $Res Function(_$DeleteSuccessImpl) then) =
       __$$DeleteSuccessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
 }
 
 /// @nodoc
@@ -360,62 +358,37 @@ class __$$DeleteSuccessImplCopyWithImpl<$Res>
 
   /// Create a copy of NotificationsState
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$DeleteSuccessImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$DeleteSuccessImpl implements _DeleteSuccess {
-  const _$DeleteSuccessImpl({required this.message});
-
-  @override
-  final String message;
+  const _$DeleteSuccessImpl();
 
   @override
   String toString() {
-    return 'NotificationsState.deleteSuccess(message: $message)';
+    return 'NotificationsState.deleteSuccess()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DeleteSuccessImpl &&
-            (identical(other.message, message) || other.message == message));
+        (other.runtimeType == runtimeType && other is _$DeleteSuccessImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  /// Create a copy of NotificationsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DeleteSuccessImplCopyWith<_$DeleteSuccessImpl> get copyWith =>
-      __$$DeleteSuccessImplCopyWithImpl<_$DeleteSuccessImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) deleteSuccess,
-    required TResult Function(String message) deleteAllSuccess,
+    required TResult Function() deleteSuccess,
+    required TResult Function() deleteAllSuccess,
     required TResult Function(String error) error,
   }) {
-    return deleteSuccess(message);
+    return deleteSuccess();
   }
 
   @override
@@ -423,11 +396,11 @@ class _$DeleteSuccessImpl implements _DeleteSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? deleteSuccess,
-    TResult? Function(String message)? deleteAllSuccess,
+    TResult? Function()? deleteSuccess,
+    TResult? Function()? deleteAllSuccess,
     TResult? Function(String error)? error,
   }) {
-    return deleteSuccess?.call(message);
+    return deleteSuccess?.call();
   }
 
   @override
@@ -435,13 +408,13 @@ class _$DeleteSuccessImpl implements _DeleteSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? deleteSuccess,
-    TResult Function(String message)? deleteAllSuccess,
+    TResult Function()? deleteSuccess,
+    TResult Function()? deleteAllSuccess,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (deleteSuccess != null) {
-      return deleteSuccess(message);
+      return deleteSuccess();
     }
     return orElse();
   }
@@ -488,16 +461,7 @@ class _$DeleteSuccessImpl implements _DeleteSuccess {
 }
 
 abstract class _DeleteSuccess implements NotificationsState {
-  const factory _DeleteSuccess({required final String message}) =
-      _$DeleteSuccessImpl;
-
-  String get message;
-
-  /// Create a copy of NotificationsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DeleteSuccessImplCopyWith<_$DeleteSuccessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _DeleteSuccess() = _$DeleteSuccessImpl;
 }
 
 /// @nodoc
@@ -505,8 +469,6 @@ abstract class _$$DeleteAllSuccessImplCopyWith<$Res> {
   factory _$$DeleteAllSuccessImplCopyWith(_$DeleteAllSuccessImpl value,
           $Res Function(_$DeleteAllSuccessImpl) then) =
       __$$DeleteAllSuccessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
 }
 
 /// @nodoc
@@ -519,63 +481,37 @@ class __$$DeleteAllSuccessImplCopyWithImpl<$Res>
 
   /// Create a copy of NotificationsState
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$DeleteAllSuccessImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$DeleteAllSuccessImpl implements _DeleteAllSuccess {
-  const _$DeleteAllSuccessImpl({required this.message});
-
-  @override
-  final String message;
+  const _$DeleteAllSuccessImpl();
 
   @override
   String toString() {
-    return 'NotificationsState.deleteAllSuccess(message: $message)';
+    return 'NotificationsState.deleteAllSuccess()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DeleteAllSuccessImpl &&
-            (identical(other.message, message) || other.message == message));
+        (other.runtimeType == runtimeType && other is _$DeleteAllSuccessImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  /// Create a copy of NotificationsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DeleteAllSuccessImplCopyWith<_$DeleteAllSuccessImpl> get copyWith =>
-      __$$DeleteAllSuccessImplCopyWithImpl<_$DeleteAllSuccessImpl>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) deleteSuccess,
-    required TResult Function(String message) deleteAllSuccess,
+    required TResult Function() deleteSuccess,
+    required TResult Function() deleteAllSuccess,
     required TResult Function(String error) error,
   }) {
-    return deleteAllSuccess(message);
+    return deleteAllSuccess();
   }
 
   @override
@@ -583,11 +519,11 @@ class _$DeleteAllSuccessImpl implements _DeleteAllSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? deleteSuccess,
-    TResult? Function(String message)? deleteAllSuccess,
+    TResult? Function()? deleteSuccess,
+    TResult? Function()? deleteAllSuccess,
     TResult? Function(String error)? error,
   }) {
-    return deleteAllSuccess?.call(message);
+    return deleteAllSuccess?.call();
   }
 
   @override
@@ -595,13 +531,13 @@ class _$DeleteAllSuccessImpl implements _DeleteAllSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? deleteSuccess,
-    TResult Function(String message)? deleteAllSuccess,
+    TResult Function()? deleteSuccess,
+    TResult Function()? deleteAllSuccess,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (deleteAllSuccess != null) {
-      return deleteAllSuccess(message);
+      return deleteAllSuccess();
     }
     return orElse();
   }
@@ -648,16 +584,7 @@ class _$DeleteAllSuccessImpl implements _DeleteAllSuccess {
 }
 
 abstract class _DeleteAllSuccess implements NotificationsState {
-  const factory _DeleteAllSuccess({required final String message}) =
-      _$DeleteAllSuccessImpl;
-
-  String get message;
-
-  /// Create a copy of NotificationsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DeleteAllSuccessImplCopyWith<_$DeleteAllSuccessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _DeleteAllSuccess() = _$DeleteAllSuccessImpl;
 }
 
 /// @nodoc
@@ -730,8 +657,8 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) deleteSuccess,
-    required TResult Function(String message) deleteAllSuccess,
+    required TResult Function() deleteSuccess,
+    required TResult Function() deleteAllSuccess,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -742,8 +669,8 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? deleteSuccess,
-    TResult? Function(String message)? deleteAllSuccess,
+    TResult? Function()? deleteSuccess,
+    TResult? Function()? deleteAllSuccess,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -754,8 +681,8 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? deleteSuccess,
-    TResult Function(String message)? deleteAllSuccess,
+    TResult Function()? deleteSuccess,
+    TResult Function()? deleteAllSuccess,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {

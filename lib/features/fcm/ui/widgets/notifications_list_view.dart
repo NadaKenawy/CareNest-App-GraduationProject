@@ -1,6 +1,9 @@
 import 'package:care_nest/features/fcm/data/models/get_all_notifications/get_all_notifications_response.dart';
+import 'package:care_nest/features/fcm/logic/notification_cubit/notification_cubit.dart';
+import 'package:care_nest/features/fcm/ui/widgets/no_notifications_text.dart';
 import 'package:care_nest/features/fcm/ui/widgets/notification_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class NotificationsListView extends StatelessWidget {
@@ -9,6 +12,9 @@ class NotificationsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (notificationsList.isEmpty) {
+      return const NoNotificationsText();
+    }
     return ListView.builder(
       itemCount: notificationsList.length,
       itemBuilder: (BuildContext context, int index) {
@@ -22,7 +28,9 @@ class NotificationsListView extends StatelessWidget {
           message: notificationsList[index].message ?? "",
           time: formattedTime,
           onDelete: () {
-            // Function to delete specific notification
+            context
+                .read<NotificationsCubit>()
+                .deleteNotification(notificationsList[index].id ?? '', context);
           },
         );
       },

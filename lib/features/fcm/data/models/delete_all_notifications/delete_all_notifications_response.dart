@@ -4,9 +4,7 @@ part 'delete_all_notifications_response.g.dart';
 
 @JsonSerializable()
 class DeleteAllNotificationsResponse {
-  final String message;
-
-  DeleteAllNotificationsResponse({required this.message});
+  DeleteAllNotificationsResponse();
 
   factory DeleteAllNotificationsResponse.fromJson(Map<String, dynamic> json) =>
       _$DeleteAllNotificationsResponseFromJson(json);

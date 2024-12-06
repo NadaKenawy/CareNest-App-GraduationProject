@@ -9,24 +9,22 @@ class NoNotificationsText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Expanded(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
-              AppImages.notificationsIcon,
-              width: 100.w,
-            ),
-            SizedBox(height: 24.h),
-            Text(
-              'There Is No Notification Yet',
-              style: TextStyle(
-                  fontSize: 24.sp, fontWeight: FontWeightHelper.semiBold),
-            ),
-            SizedBox(height: 120.h),
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset(
+            AppImages.notificationsIcon,
+            width: 100.w,
+          ),
+          SizedBox(height: 24.h),
+          Text(
+            'There Is No Notification Yet',
+            style: TextStyle(
+                fontSize: 24.sp, fontWeight: FontWeightHelper.semiBold),
+          ),
+          SizedBox(height: 120.h),
+        ],
       ),
     );
   }

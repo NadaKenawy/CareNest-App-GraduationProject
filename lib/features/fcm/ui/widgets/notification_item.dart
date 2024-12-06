@@ -1,4 +1,7 @@
+import 'package:care_nest/features/fcm/logic/notification_cubit/notification_cubit.dart';
+import 'package:care_nest/features/fcm/logic/notification_cubit/notification_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NotificationItem extends StatelessWidget {
@@ -17,86 +20,90 @@ class NotificationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-      key: UniqueKey(),
-      direction: DismissDirection.endToStart,
-      onDismissed: (direction) {
-        onDelete();
-      },
-      background: Container(
-        alignment: Alignment.centerRight,
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        color: Colors.red,
-        child: Icon(
-          Icons.delete,
-          color: Colors.white,
-          size: 24.sp,
-        ),
-      ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-        child: Container(
-          height: 100.h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.r),
-            border: Border(
-              left: BorderSide(
-                color: Colors.black,
-                width: 4.w,
-              ),
-              bottom: BorderSide(
-                color: Colors.black,
-                width: 4.w,
-              ),
+    return BlocBuilder<NotificationsCubit, NotificationsState>(
+      builder: (context, state) {
+        return Dismissible(
+          key: UniqueKey(),
+          direction: DismissDirection.endToStart,
+          onDismissed: (direction) {
+            onDelete();
+          },
+          background: Container(
+            alignment: Alignment.centerRight,
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            color: Colors.red,
+            child: Icon(
+              Icons.delete,
+              color: Colors.white,
+              size: 24.sp,
             ),
-            color: Colors.white,
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+            child: Container(
+              height: 100.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16.r),
+                border: Border(
+                  left: BorderSide(
+                    color: Colors.black,
+                    width: 4.w,
+                  ),
+                  bottom: BorderSide(
+                    color: Colors.black,
+                    width: 4.w,
+                  ),
+                ),
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            shortenText(title, maxCharacters: 30),
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16.sp,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                shortenText(title, maxCharacters: 30),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16.sp,
+                                ),
+                              ),
+                              Text(
+                                time,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 12.sp,
+                                ),
+                              ),
+                            ],
                           ),
                           Text(
-                            time,
+                            shortenText(message, maxCharacters: 50),
                             style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
+                              color: Colors.black.withOpacity(0.5),
+                              fontWeight: FontWeight.w400,
                               fontSize: 12.sp,
                             ),
                           ),
                         ],
                       ),
-                      Text(
-                        shortenText(message, maxCharacters: 50),
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(0.5),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12.sp,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

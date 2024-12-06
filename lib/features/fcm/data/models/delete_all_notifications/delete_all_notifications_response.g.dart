@@ -8,12 +8,8 @@ part of 'delete_all_notifications_response.dart';
 
 DeleteAllNotificationsResponse _$DeleteAllNotificationsResponseFromJson(
         Map<String, dynamic> json) =>
-    DeleteAllNotificationsResponse(
-      message: json['message'] as String,
-    );
+    DeleteAllNotificationsResponse();
 
 Map<String, dynamic> _$DeleteAllNotificationsResponseToJson(
         DeleteAllNotificationsResponse instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-    };
+    <String, dynamic>{};

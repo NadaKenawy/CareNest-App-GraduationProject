@@ -9,8 +9,10 @@ import 'package:care_nest/features/add_baby/logic/delete_baby_cubit/delete_baby_
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/update_baby_cubit/update_baby_cubit.dart';
 import 'package:care_nest/features/fcm/data/repos/get_all_notifications_repo.dart';
+import 'package:care_nest/features/fcm/data/repos/notification_repo.dart';
 import 'package:care_nest/features/fcm/data/repos/update_fcm_repo.dart';
 import 'package:care_nest/features/fcm/logic/get_all_notifications_cubit/get_all_notifications_cubit.dart';
+import 'package:care_nest/features/fcm/logic/notification_cubit/notification_cubit.dart';
 import 'package:care_nest/features/fcm/logic/update_fcm_cubit/update_fcm_cubit.dart';
 import 'package:care_nest/features/forget_password/data/repos/create_new_password.dart';
 import 'package:care_nest/features/forget_password/data/repos/forget_pass_repo.dart';
@@ -134,4 +136,9 @@ Future<void> setupGetIt() async {
       () => GetAllNotificationsRepo(getIt()));
   getIt.registerFactory<GetAllNotificationsCubit>(
       () => GetAllNotificationsCubit(getIt()));
+
+// delete notifications
+  getIt.registerLazySingleton<NotificationsRepo>(
+      () => NotificationsRepo(getIt()));
+  getIt.registerFactory<NotificationsCubit>(() => NotificationsCubit(getIt()));
 }
