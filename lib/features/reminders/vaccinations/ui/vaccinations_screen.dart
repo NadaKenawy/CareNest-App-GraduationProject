@@ -1,4 +1,4 @@
-import 'package:care_nest/features/reminders/vaccinations/widgets/vaccinations_screen_body.dart';
+import 'package:care_nest/features/reminders/vaccinations/ui/widgets/vaccinations_screen_body.dart';
 import 'package:flutter/material.dart';
 
 class VaccinationsScreen extends StatelessWidget {

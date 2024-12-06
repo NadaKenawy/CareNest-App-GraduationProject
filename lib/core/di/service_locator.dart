@@ -31,6 +31,8 @@ import 'package:care_nest/features/reminders/medications/logic/add_medication_sc
 import 'package:care_nest/features/reminders/medications/logic/delete_medication_schedule_cubit/delete_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/medications/logic/get_all_babies_medication_schedule_cubit/get_all_babies_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/medications/logic/update_medication_schedule_cubit/update_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/vaccinations/data/repo/get_baby_vaccines_respo.dart';
+import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
 import 'package:care_nest/features/sign_up/data/repos/sign_up_repo.dart';
 import 'package:care_nest/features/sign_up/data/repos/verify_account_repo.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
@@ -141,4 +143,10 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<NotificationsRepo>(
       () => NotificationsRepo(getIt()));
   getIt.registerFactory<NotificationsCubit>(() => NotificationsCubit(getIt()));
+
+  //get baby vaccines
+  getIt.registerLazySingleton<GetBabyVaccinesRepo>(
+      () => GetBabyVaccinesRepo(getIt()));
+  getIt.registerFactory<GetBabyVaccinesCubit>(
+      () => GetBabyVaccinesCubit(getIt()));
 }

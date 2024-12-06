@@ -30,7 +30,8 @@ import 'package:care_nest/features/reminders/medications/ui/add_medicine_screen.
 import 'package:care_nest/features/reminders/medications/ui/medications_screen.dart';
 import 'package:care_nest/features/reminders/reminders_screen.dart';
 import 'package:care_nest/features/reminders/medications/ui/widgets/update_medicines_screen_body.dart';
-import 'package:care_nest/features/reminders/vaccinations/vaccinations_screen.dart';
+import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
+import 'package:care_nest/features/reminders/vaccinations/ui/vaccinations_screen.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:care_nest/features/sign_up/logic/verfiy_account_cubit/verify_account_cubit.dart';
 import 'package:care_nest/features/sign_up/ui/sign_up_screen.dart';
@@ -215,7 +216,10 @@ abstract class AppRouter {
       GoRoute(
           path: kVaccinationsScreen,
           builder: (context, state) {
-            return const VaccinationsScreen();
+            return BlocProvider(
+              create: (context) => getIt<GetBabyVaccinesCubit>(),
+              child: const VaccinationsScreen(),
+            );
           }),
       GoRoute(
           path: kNotificationsScreen,

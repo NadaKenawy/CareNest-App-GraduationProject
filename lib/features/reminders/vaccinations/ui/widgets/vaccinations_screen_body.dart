@@ -3,7 +3,7 @@ import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
-import 'package:care_nest/features/reminders/vaccinations/widgets/sidebar.dart';
+import 'package:care_nest/features/reminders/vaccinations/ui/widgets/sidebar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';

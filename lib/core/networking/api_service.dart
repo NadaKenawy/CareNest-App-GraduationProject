@@ -21,6 +21,7 @@ import 'package:care_nest/features/reminders/medications/data/models/add_medicat
 import 'package:care_nest/features/reminders/medications/data/models/add_medication_schedule/add_medication_schedule_response.dart';
 import 'package:care_nest/features/reminders/medications/data/models/update_medication_schedule/update_medication_schedule_request.dart';
 import 'package:care_nest/features/reminders/medications/data/models/update_medication_schedule/update_medication_schedule_response.dart';
+import 'package:care_nest/features/reminders/vaccinations/data/models/get_baby_vaccines_response.dart';
 import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_request_body.dart';
 import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_response.dart';
 import 'package:care_nest/features/sign_up/data/models/verify_account_model/verify_account_request_body.dart';
@@ -142,5 +143,11 @@ abstract class ApiService {
   @DELETE(ApiConstants.deleteAllNotifications)
   Future<DeleteAllNotificationsResponse> deleteAllNotifications(
     @Header('Authorization') String token,
+  );
+
+  @GET(ApiConstants.getBabyVaccines)
+  Future<GetBabyVaccinesResponse> getBabyVaccines(
+    @Header('Authorization') String token,
+    @Path('id') String id,
   );
 }

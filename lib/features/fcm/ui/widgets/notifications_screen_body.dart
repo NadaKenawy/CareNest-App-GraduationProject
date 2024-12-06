@@ -33,7 +33,7 @@ class NotificationsScreenBody extends StatelessWidget {
                   context: context,
                   dialogType: DialogType.warning,
                   animType: AnimType.bottomSlide,
-                  title: 'Delete Baby',
+                  title: 'Delete Notifications',
                   desc: 'Are you sure you want to delete all notifications?',
                   btnCancelOnPress: () {},
                   btnOkOnPress: () {
