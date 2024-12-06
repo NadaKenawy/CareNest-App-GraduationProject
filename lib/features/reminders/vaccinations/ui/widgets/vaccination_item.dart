@@ -1,3 +1,4 @@
+import 'package:care_nest/features/reminders/vaccinations/data/models/get_baby_vaccines_response.dart';
 import 'package:flutter/material.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,14 +7,13 @@ class VaccinationItem extends StatelessWidget {
   final String title;
   final String subtitle;
   final bool isPressed;
-  final VoidCallback onPressed;
 
   const VaccinationItem({
     super.key,
     required this.title,
     required this.subtitle,
     required this.isPressed,
-    required this.onPressed,
+    required List<BabyVaccineData> vaccinesList,
   });
 
   @override
@@ -37,7 +37,6 @@ class VaccinationItem extends StatelessWidget {
           child: Row(
             children: [
               InkWell(
-                onTap: onPressed,
                 child: Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -47,8 +46,7 @@ class VaccinationItem extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(2.sp),
-                    child: Icon(Icons.check,
-                        color: Colors.white, size: 28.sp),
+                    child: Icon(Icons.check, color: Colors.white, size: 28.sp),
                   ),
                 ),
               ),

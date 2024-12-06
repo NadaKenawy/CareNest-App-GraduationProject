@@ -4,10 +4,10 @@ import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/features/reminders/medications/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
 import 'package:care_nest/features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
+import 'package:care_nest/features/reminders/medications/ui/widgets/no_medicines_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../add_baby/ui/widgets/my_babies_list_view.dart';
 import 'medicines_list_view_item.dart';
 
 class MedicinesListView extends StatelessWidget {
@@ -22,7 +22,7 @@ class MedicinesListView extends StatelessWidget {
   Widget build(BuildContext context) {
     final reversedList = medicinesList.reversed.toList();
     if (reversedList.isEmpty) {
-      return const NoBabyText();
+      return const NoMedicinesText();
     }
     return Expanded(
       child: ListView.builder(

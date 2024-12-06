@@ -1,12 +1,10 @@
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
+import 'package:care_nest/features/reminders/vaccinations/ui/widgets/get_baby_vaccines_bloc_builder.dart';
 import 'package:care_nest/features/reminders/vaccinations/ui/widgets/vaccines_sidebar.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sidebarx/sidebarx.dart';
-import 'vaccination_list.dart';
 
 class VaccinationsScreenBody extends StatefulWidget {
   const VaccinationsScreenBody({super.key});
@@ -19,7 +17,8 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
   String? selectedBabyName = '';
   int? selectedIndex;
   String? babyId;
-  List<bool> isPressedList = List.generate(12, (_) => false);
+  List<bool> isPressedList = [];
+
   @override
   void initState() {
     super.initState();
@@ -80,17 +79,7 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
         },
       ),
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: VaccinationList(
-          isPressedList: isPressedList,
-          onItemPressed: (index) {
-            setState(() {
-              isPressedList[index] = !isPressedList[index];
-            });
-          },
-        ),
-      ),
+      body: const GetBabyVaccinesBlocBuilder(),
     );
   }
 }
