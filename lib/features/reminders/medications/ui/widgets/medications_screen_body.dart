@@ -13,7 +13,7 @@ import 'package:care_nest/features/reminders/medications/ui/widgets/get_all_babi
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:care_nest/features/reminders/medications/ui/widgets/get_all_medicines_bloc_builder.dart';
-import 'package:care_nest/features/reminders/medications/ui/widgets/sidebar.dart';
+import 'package:care_nest/features/reminders/medications/ui/widgets/medicines_sidebar.dart';
 import 'package:care_nest/features/reminders/medications/ui/widgets/week_days_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -89,7 +89,7 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
           ),
         ],
       ),
-      endDrawer: ExampleSidebarX(
+      endDrawer: MedicinesSidebarX(
         controller: _controller,
         onItemSelected: (index) {
           setState(() {

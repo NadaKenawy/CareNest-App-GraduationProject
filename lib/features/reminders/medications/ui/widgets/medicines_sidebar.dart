@@ -15,8 +15,8 @@ import '../../../../../core/helpers/constants.dart';
 import '../../../../../core/helpers/shared_pref_helper.dart';
 import '../../../../add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 
-class ExampleSidebarX extends StatelessWidget {
-  const ExampleSidebarX({
+class MedicinesSidebarX extends StatelessWidget {
+  const MedicinesSidebarX({
     super.key,
     required this.controller,
     required this.onItemSelected,

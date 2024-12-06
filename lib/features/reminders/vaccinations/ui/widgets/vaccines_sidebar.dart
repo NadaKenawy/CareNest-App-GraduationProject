@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'dart:developer';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
@@ -9,11 +7,9 @@ import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_b
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 import 'package:sidebarx/sidebarx.dart';
-import '../../../../../../core/helpers/constants.dart';
-import '../../../../../../core/helpers/shared_pref_helper.dart';
-
+import '../../../../../core/helpers/constants.dart';
+import '../../../../../core/helpers/shared_pref_helper.dart';
 class VaccinationsSidebarX extends StatelessWidget {
   const VaccinationsSidebarX({
     super.key,
@@ -24,7 +20,6 @@ class VaccinationsSidebarX extends StatelessWidget {
   final SidebarXController controller;
   final Function(int) onItemSelected;
   final Function(String) selectedBabyName;
-
   @override
   Widget build(BuildContext context) {
     context.read<GetAllBabiesCubit>().getAllBabies();
@@ -89,27 +84,21 @@ class VaccinationsSidebarX extends StatelessWidget {
             ),
             items: [
               ...babiesList.map(
-                (baby) {
-                  return SidebarXItem(
-                    iconWidget: Image.asset(
-                      baby.gender == 'Male'
-                          ? AppImages.boyBabyImage
-                          : AppImages.girlBabyImage,
-                      width: 48.r,
-                    ),
-                    label: (baby.name?.isNotEmpty ?? false)
-                        ? "${baby.name![0].toUpperCase()}${baby.name!.substring(1)}"
-                        : 'Unknown',
-                    onTap: () async {
-                      await saveBabyData(
-                        baby.id ?? '',
-                        baby.name ?? '',
-                        baby.dateOfBirth,
-                      );
-                      selectedBabyName(baby.name ?? '');
-                    },
-                  );
-                },
+                (baby) => SidebarXItem(
+                  iconWidget: Image.asset(
+                    baby.gender == 'Male'
+                        ? AppImages.boyBabyImage
+                        : AppImages.girlBabyImage,
+                    width: 48.r,
+                  ),
+                  label: (baby.name?.isNotEmpty ?? false)
+                      ? "${baby.name![0].toUpperCase()}${baby.name!.substring(1)}"
+                      : 'Unknown',
+                  onTap: () async {
+                    await saveBabyData(baby.id ?? '', baby.name ?? '');
+                    selectedBabyName(baby.name ?? '');
+                  },
+                ),
               ),
             ],
           );
@@ -121,16 +110,9 @@ class VaccinationsSidebarX extends StatelessWidget {
       },
     );
   }
-
-  Future<void> saveBabyData(
-      String id, String name, DateTime? dateOfBirth) async {
-    String formattedDate = dateOfBirth != null
-        ? DateFormat('yyyy-MM-dd').format(dateOfBirth)
-        : 'Unknown';
+  Future<void> saveBabyData(String id, String name) async {
     await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyId, id);
     await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyName, name);
-    await SharedPrefHelper.setSecuredString(
-        SharedPrefKeys.babyDateOfBirth, formattedDate);
-    log("Saved id: $id, name: $name, date of birth: $formattedDate");
+    log("Saved id: $id and name: $name");
   }
 }
