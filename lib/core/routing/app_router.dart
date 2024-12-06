@@ -170,7 +170,10 @@ abstract class AppRouter {
       GoRoute(
           path: kRemindersScreen,
           builder: (context, state) {
-            return const RemindersScreen();
+            return BlocProvider(
+              create: (context) => getIt<GetBabyVaccinesCubit>(),
+              child: const RemindersScreen(),
+            );
           }),
       GoRoute(
         path: kMedicationsScreen,
@@ -217,7 +220,8 @@ abstract class AppRouter {
           path: kVaccinationsScreen,
           builder: (context, state) {
             return BlocProvider(
-              create: (context) => getIt<GetBabyVaccinesCubit>(),
+              create: (context) => getIt<GetBabyVaccinesCubit>()
+                ..getBabyVaccines("6749aea82a6810896bc57833"),
               child: const VaccinationsScreen(),
             );
           }),
