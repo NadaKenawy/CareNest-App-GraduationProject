@@ -1,11 +1,9 @@
 import 'dart:developer';
-
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/features/fcm/data/models/update_fcm/update_fcm_token_request_body.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../data/repos/update_fcm_repo.dart';
 import 'update_fcm_state.dart';
 
@@ -16,7 +14,6 @@ class UpdateFcmCubit extends Cubit<UpdateFcmState> {
 
   String? _deviceToken;
 
-  /// دالة لجلب الـ Device Token
   Future<void> getDeviceToken() async {
     try {
       log('Requesting FCM token...');
@@ -39,7 +36,6 @@ class UpdateFcmCubit extends Cubit<UpdateFcmState> {
     }
   }
 
-  /// دالة لإرسال الـ Device Token إلى الـ backend
   Future<void> emitUpdateFcmState() async {
     if (_deviceToken == null) {
       log('Device Token is null. Please fetch it first.');
@@ -71,7 +67,6 @@ class UpdateFcmCubit extends Cubit<UpdateFcmState> {
     );
   }
 
-  /// دالة لتنسيق جلب وإرسال الـ Token
   Future<void> initializeAndSendToken() async {
     await getDeviceToken();
     if (_deviceToken != null) {

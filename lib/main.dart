@@ -14,5 +14,6 @@ void main() async {
   setupGetIt();
   await ScreenUtil.ensureScreenSize();
   await getIt<UpdateFcmCubit>().initializeAndSendToken();
+
   runApp(const CareNest());
 }
