@@ -23,7 +23,7 @@ class VaccinationItem extends StatelessWidget {
         height: 100.h,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(2.r),
           border: Border(
             left: BorderSide(
               color: ColorsManager.secondryBlueColor,
@@ -42,7 +42,7 @@ class VaccinationItem extends StatelessWidget {
                       color: ColorsManager.secondryBlueColor),
                   child: Padding(
                     padding: EdgeInsets.all(2.sp),
-                    child: Icon(Icons.check, color: Colors.white, size: 24.sp),
+                    child: Icon(Icons.check, color: Colors.white, size: 22.sp),
                   ),
                 ),
               ),

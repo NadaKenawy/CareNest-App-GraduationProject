@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -14,7 +16,7 @@ import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_b
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
 
 class VaccinationsSidebar extends StatelessWidget {
-  final Function(String, String) onBabySelected; 
+  final Function(String, String) onBabySelected;
   final String selectedBabyName;
 
   const VaccinationsSidebar({

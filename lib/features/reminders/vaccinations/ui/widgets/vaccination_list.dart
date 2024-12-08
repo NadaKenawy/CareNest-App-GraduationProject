@@ -39,7 +39,7 @@ class VaccinationList extends StatelessWidget {
 
     final groupedEntries = groupedVaccines.entries.toList();
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.only(left: 16.w, right: 28.w, bottom: 16.h),
       child: ListView.builder(
         itemCount: groupedEntries.length,
         itemBuilder: (context, index) {
@@ -49,7 +49,7 @@ class VaccinationList extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 32.h),
+              index == 0 ? SizedBox(height: 16.h) : SizedBox(height: 32.h),
               Text(
                 title,
                 style: TextStyle(
