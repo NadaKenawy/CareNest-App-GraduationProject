@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:care_nest/features/reminders/medications/ui/widgets/no_medicines_text.dart';
 import 'package:care_nest/features/reminders/vaccinations/data/models/get_baby_vaccines_response.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
@@ -22,7 +21,6 @@ class GetBabyVaccinesBlocBuilder extends StatelessWidget {
           },
           success: (vaccineData) {
             var vaccinesList = List<BabyVaccineData>.from(vaccineData!);
-            log("Vaccines List: $vaccinesList");
             return setupSuccess(vaccinesList);
           },
           error: (error) {
@@ -47,7 +45,6 @@ class GetBabyVaccinesBlocBuilder extends StatelessWidget {
   Widget setupSuccess(List<BabyVaccineData> vaccinesList) {
     return VaccinationList(
       vaccinesList: vaccinesList,
-      isPressedList: List.generate(vaccinesList.length, (_) => false),
     );
   }
 

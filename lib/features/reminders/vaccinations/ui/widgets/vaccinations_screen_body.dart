@@ -1,23 +1,23 @@
+// ignore_for_file: use_build_context_synchronously
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/features/reminders/vaccinations/ui/widgets/get_baby_vaccines_bloc_builder.dart';
 import 'package:care_nest/features/reminders/vaccinations/ui/widgets/vaccines_sidebar.dart';
 import 'package:flutter/material.dart';
-import 'package:sidebarx/sidebarx.dart';
+import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VaccinationsScreenBody extends StatefulWidget {
   const VaccinationsScreenBody({super.key});
+
   @override
   State<VaccinationsScreenBody> createState() => _VaccinationsScreenBodyState();
 }
 
 class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
-  final SidebarXController _controller = SidebarXController(selectedIndex: -1);
   String? selectedBabyName = '';
-  int? selectedIndex;
-  String? babyId;
-  List<bool> isPressedList = [];
+  String? selectedBabyId = '';
 
   @override
   void initState() {
@@ -26,14 +26,30 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
   }
 
   Future<void> loadBabyData() async {
-    final babyIdFromStorage =
-        await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyId);
-    final babyNameFromStorage =
+    final babyName =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyName);
+    final babyId =
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyId);
+
+    if (babyName != selectedBabyName || babyId != selectedBabyId) {
+      setState(() {
+        selectedBabyName = babyName ?? '';
+        selectedBabyId = babyId ?? '';
+      });
+      if (selectedBabyId != null && selectedBabyId!.isNotEmpty) {
+        context.read<GetBabyVaccinesCubit>().getBabyVaccines(selectedBabyId!);
+      }
+    }
+  }
+
+  void onBabySelected(String name, String id) async {
     setState(() {
-      babyId = babyIdFromStorage;
-      selectedBabyName = babyNameFromStorage;
+      selectedBabyName = name;
+      selectedBabyId = id;
     });
+    await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyName, name);
+    await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyId, id);
+    context.read<GetBabyVaccinesCubit>().getBabyVaccines(id);
   }
 
   @override
@@ -49,37 +65,18 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
             fontWeight: FontWeightHelper.semiBold,
           ),
         ),
-        backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
-        actions: [
-          Builder(
-            builder: (context) {
-              return IconButton(
-                icon: const Icon(Icons.menu, size: 24),
-                onPressed: () {
-                  Scaffold.of(context).openEndDrawer();
-                },
-              );
-            },
-          ),
-        ],
       ),
-      endDrawer: VaccinationsSidebarX(
-        controller: _controller,
-        onItemSelected: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
-        selectedBabyName: (String name) {
-          setState(() {
-            selectedBabyName = name;
-          });
+      endDrawer: VaccinationsSidebar(
+        selectedBabyName: selectedBabyName ?? '',
+        onBabySelected: (name, id) {
+          onBabySelected(name, id);
         },
       ),
-      backgroundColor: Colors.white,
-      body: const GetBabyVaccinesBlocBuilder(),
+      body: selectedBabyId != null && selectedBabyId!.isNotEmpty
+          ? const GetBabyVaccinesBlocBuilder()
+          : const Center(child: Text('No baby selected')),
     );
   }
 }

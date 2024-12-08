@@ -1,37 +1,89 @@
-import 'package:care_nest/features/reminders/vaccinations/data/models/get_baby_vaccines_response.dart';
+import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:flutter/material.dart';
-import 'vaccination_header.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'vaccination_item.dart';
+import 'package:care_nest/features/reminders/vaccinations/data/models/get_baby_vaccines_response.dart';
 
 class VaccinationList extends StatelessWidget {
-  final List<bool> isPressedList;
   final List<BabyVaccineData> vaccinesList;
-
   const VaccinationList({
     super.key,
-    required this.isPressedList,
     required this.vaccinesList,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: vaccinesList.length,
-      itemBuilder: (context, index) {
-        final vaccine = vaccinesList[index];
-        if (index % 4 == 0) {
-          return const VaccinationHeader(
-            title: "Vaccinations at birth",
-            date: "16/2/2025",
-          );
+    final Map<String, List<BabyVaccineData>> groupedVaccines = {};
+    for (var vaccine in vaccinesList) {
+      final createdAt = vaccine.date;
+      if (createdAt != null) {
+        final groupKey =
+            DateFormat.yMMM().format(DateTime.parse(createdAt.toString()));
+        if (!groupedVaccines.containsKey(groupKey)) {
+          groupedVaccines[groupKey] = [];
         }
-        return VaccinationItem(
-          vaccinesList: vaccinesList,
-          isPressed: isPressedList[index],
-          title: vaccine.vaccine!.name ?? '',
-          subtitle: vaccine.vaccine!.description ?? '',
-        );
-      },
+        groupedVaccines[groupKey]!.add(vaccine);
+      }
+    }
+
+    final List<String> titles = [
+      "Vaccines At Birth",
+      "Vaccines At 2 Months",
+      "Vaccines At 4 Months",
+      "Vaccines At 6 Months",
+      "Vaccines At 9 Months",
+      "Vaccines At 12 Months",
+      "Vaccines At 18 Months",
+    ];
+
+    final groupedEntries = groupedVaccines.entries.toList();
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: ListView.builder(
+        itemCount: groupedEntries.length,
+        itemBuilder: (context, index) {
+          final groupItems = groupedEntries[index].value;
+          final title =
+              titles.length > index ? titles[index] : "Additional Group";
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 32.h),
+              Text(
+                title,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeightHelper.semiBold,
+                  fontSize: 18.sp,
+                ),
+              ),
+              Text(
+                DateFormat('d MMMM yyyy').format(
+                  DateTime.parse(groupItems[0].date.toString()),
+                ),
+                style: TextStyle(
+                  color: Colors.black.withOpacity(.5),
+                  fontWeight: FontWeightHelper.semiBold,
+                  fontSize: 16.sp,
+                ),
+              ),
+              SizedBox(height: 8.h),
+              ...groupItems.map((vaccine) {
+                final formattedTime = DateFormat('d MMMM yyyy').format(
+                  DateTime.parse(vaccine.date.toString()),
+                );
+                return VaccinationItem(
+                  title: vaccine.vaccine?.name ?? 'Vaccine name',
+                  subtitle: vaccine.vaccine?.description ??
+                      'No description available',
+                  data: formattedTime,
+                );
+              }),
+            ],
+          );
+        },
+      ),
     );
   }
 }

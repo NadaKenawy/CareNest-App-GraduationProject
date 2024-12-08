@@ -17,7 +17,6 @@ import 'package:care_nest/features/reminders/medications/ui/widgets/medicines_si
 import 'package:care_nest/features/reminders/medications/ui/widgets/week_days_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sidebarx/sidebarx.dart';
 
 class MedicationsScreenBody extends StatefulWidget {
   const MedicationsScreenBody({super.key});
@@ -28,7 +27,6 @@ class MedicationsScreenBody extends StatefulWidget {
 
 class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
   final DateTime _currentDate = DateTime.now();
-  final SidebarXController _controller = SidebarXController(selectedIndex: -1);
   String? babyId;
   int _selectedIndex = 0;
   String? selectedBabyName = '';
@@ -89,8 +87,7 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
           ),
         ],
       ),
-      endDrawer: MedicinesSidebarX(
-        controller: _controller,
+      endDrawer: MedicinesDrawer(
         onItemSelected: (index) {
           setState(() {
             _selectedIndex = index;
