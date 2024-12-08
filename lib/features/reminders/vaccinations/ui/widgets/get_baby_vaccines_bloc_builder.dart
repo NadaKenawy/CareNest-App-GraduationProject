@@ -1,8 +1,8 @@
-import 'package:care_nest/features/reminders/medications/ui/widgets/no_medicines_text.dart';
 import 'package:care_nest/features/reminders/vaccinations/data/models/get_baby_vaccines_response.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_state.dart';
 import 'package:care_nest/features/reminders/vaccinations/ui/widgets/vaccination_list.dart';
+import 'package:care_nest/features/reminders/vaccinations/ui/widgets/vaccination_list_skeletonizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,9 +35,7 @@ class GetBabyVaccinesBlocBuilder extends StatelessWidget {
   }
 
   Widget setupLoading() {
-    return const Center(
-      child: CircularProgressIndicator(),
-    );
+    return const VaccinationListSkeletonizer();
   }
 
   Widget setupSuccess(List<BabyVaccineData> vaccinesList) {
