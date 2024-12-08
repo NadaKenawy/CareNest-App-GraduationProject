@@ -7,6 +7,7 @@ import 'package:care_nest/features/reminders/vaccinations/ui/widgets/vaccines_si
 import 'package:flutter/material.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VaccinationsScreenBody extends StatefulWidget {
   const VaccinationsScreenBody({super.key});
@@ -76,7 +77,22 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
       ),
       body: selectedBabyId != null && selectedBabyId!.isNotEmpty
           ? const GetBabyVaccinesBlocBuilder()
-          : const Center(child: Text('No baby selected')),
+          : Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Center(
+                  child: Text(
+                    'Select a baby from the sidebar to view their vaccinations.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeightHelper.semiBold,
+                      fontSize: 28.sp,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+            ),
     );
   }
 }

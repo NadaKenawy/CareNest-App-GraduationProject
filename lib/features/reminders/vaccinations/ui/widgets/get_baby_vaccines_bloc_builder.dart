@@ -25,9 +25,7 @@ class GetBabyVaccinesBlocBuilder extends StatelessWidget {
           },
           error: (error) {
             if (error == "No vaccination data found" ||
-                error == "Invalid id format") {
-              return const NoMedicinesText();
-            }
+                error == "Invalid id format") {}
             return setupError(error);
           },
           orElse: () => const SizedBox.shrink(),
@@ -49,11 +47,6 @@ class GetBabyVaccinesBlocBuilder extends StatelessWidget {
   }
 
   Widget setupError(String error) {
-    return Center(
-      child: Text(
-        'Error: $error',
-        style: const TextStyle(color: Colors.red),
-      ),
-    );
+    return const SizedBox.shrink();
   }
 }
