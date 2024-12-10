@@ -18,6 +18,7 @@ class UpdateFcmCubit extends Cubit<UpdateFcmState> {
 
   Future<void> initializeNotificationService() async {
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    log("initializeNotificationService called");
     await _requestPermission();
     await _setupLocalNotifications();
     await _setupMessageHandlers();
@@ -173,6 +174,7 @@ class UpdateFcmCubit extends Cubit<UpdateFcmState> {
     await getDeviceToken();
     if (_deviceToken != null) {
       await emitUpdateFcmState();
+      await initializeNotificationService();
     } else {
       log('Device Token is null, skipping FCM update.');
     }
