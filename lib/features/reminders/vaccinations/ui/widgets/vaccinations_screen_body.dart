@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VaccinationsScreenBody extends StatefulWidget {
-  const VaccinationsScreenBody({Key? key}) : super(key: key);
+  const VaccinationsScreenBody({super.key});
 
   @override
   _VaccinationsScreenBodyState createState() => _VaccinationsScreenBodyState();

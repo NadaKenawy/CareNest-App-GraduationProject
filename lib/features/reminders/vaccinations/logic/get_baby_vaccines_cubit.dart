@@ -16,7 +16,7 @@ class GetBabyVaccinesCubit extends Cubit<GetBabyVaccinesState> {
     String token =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
     final response = await _getBabyVaccinesRepo.getBabyVaccines(token, babyId);
-
+    if (isClosed) return;
     response.when(
       success: (getBabyVaccinesResponse) {
         emit(GetBabyVaccinesState.success(getBabyVaccinesResponse.vaccineData));

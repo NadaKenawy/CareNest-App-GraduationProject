@@ -16,6 +16,7 @@ class GetAllBabiesMedicationScheduleCubit
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
     final response = await _getAllBabiesMedicationScheduleRepo
         .getAllBabiesMedicationSchedule(token);
+    if (isClosed) return;
 
     response.when(
       success: (getAllBabiesMedicationScheduleResponse) {

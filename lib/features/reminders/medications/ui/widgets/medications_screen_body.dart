@@ -32,6 +32,7 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
   String? selectedBabyName = '';
   List<MedicationData> medicinesList = [];
   List<BabiesMedicationData> babiesMedicinesList = [];
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -47,6 +48,7 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
     setState(() {
       babyId = babyIdFromStorage;
       selectedBabyName = babyNameFromStorage;
+      isLoading = false;
     });
 
     if (babyId != null && babyId!.isNotEmpty) {
@@ -145,23 +147,29 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
                 color: Colors.black,
               ),
             ),
-            selectedBabyName == null || selectedBabyName!.isEmpty
-                ? Expanded(
+            isLoading
+                ? const Expanded(
                     child: Center(
-                      child: Text(
-                        'Select a baby from the sidebar to view their medication.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeightHelper.semiBold,
-                          fontSize: 28.sp,
-                          color: Colors.black,
-                        ),
-                      ),
+                      child: CircularProgressIndicator(),
                     ),
                   )
-                : _selectedIndex == 1
-                    ? const GetAllBabiesMedicinesBlocBuilder()
-                    : const GetAllMedicinesBlocBuilder(),
+                : selectedBabyName == null || selectedBabyName!.isEmpty
+                    ? Expanded(
+                        child: Center(
+                          child: Text(
+                            'Select a baby from the sidebar to view their medication.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeightHelper.semiBold,
+                              fontSize: 28.sp,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      )
+                    : _selectedIndex == 1
+                        ? const GetAllBabiesMedicinesBlocBuilder()
+                        : const GetAllMedicinesBlocBuilder(),
             SizedBox(height: _selectedIndex == 1 ? 24.h : 100.h),
           ],
         ),

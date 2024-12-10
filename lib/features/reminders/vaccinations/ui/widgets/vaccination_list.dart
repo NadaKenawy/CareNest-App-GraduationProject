@@ -78,6 +78,8 @@ class VaccinationList extends StatelessWidget {
                   subtitle: vaccine.vaccine?.description ??
                       'No description available',
                   data: formattedTime,
+                  vaccineId: vaccine.vaccine?.id ?? '',
+                  administered: vaccine.administered ?? false,
                 );
               }),
             ],
