@@ -25,8 +25,8 @@ class MyBabiesListView extends StatelessWidget {
         final babyData = reversedList[index];
         return Padding(
             padding: EdgeInsets.only(bottom: 40.h),
-            child: GestureDetector(
-              onTap: () {
+            child: BabyContainer(
+              onPressed: () {
                 GoRouter.of(context)
                     .push(
                   AppRouter.kBabyDataScreen,
@@ -38,14 +38,12 @@ class MyBabiesListView extends StatelessWidget {
                   }
                 });
               },
-              child: BabyContainer(
-                gender: babyData.gender ?? "Unknown",
-                name: babyData.name ?? "ali",
-                babyId: babyData.id!,
-                dateOfBirth: babyData.dateOfBirth.toString().split(' ')[0],
-                weight: babyData.weight.toString(),
-                height: babyData.height.toString(),
-              ),
+              gender: babyData.gender ?? "Unknown",
+              name: babyData.name ?? "ali",
+              babyId: babyData.id!,
+              dateOfBirth: babyData.dateOfBirth.toString().split(' ')[0],
+              weight: babyData.weight.toString(),
+              height: babyData.height.toString(),
             ));
       },
     );

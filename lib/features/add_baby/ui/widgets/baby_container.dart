@@ -15,6 +15,7 @@ class BabyContainer extends StatelessWidget {
   final String babyId;
   final String weight;
   final String height;
+  final void Function()? onPressed;
 
   const BabyContainer({
     super.key,
@@ -23,7 +24,7 @@ class BabyContainer extends StatelessWidget {
     required this.babyId,
     required this.dateOfBirth,
     required this.weight,
-    required this.height,
+    required this.height, this.onPressed,
   });
 
   @override
@@ -180,7 +181,7 @@ class BabyContainer extends StatelessWidget {
                     width: 56.w,
                     height: 36.h,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: onPressed,
                       style: TextButton.styleFrom(
                         side: BorderSide(color: containerColor, width: 1.5.w),
                         shape: RoundedRectangleBorder(
