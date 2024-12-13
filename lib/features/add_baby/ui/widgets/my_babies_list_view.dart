@@ -1,4 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/features/add_baby/data/models/get_all_babies/get_all_babies_response.dart';
@@ -25,27 +24,29 @@ class MyBabiesListView extends StatelessWidget {
       itemBuilder: (context, index) {
         final babyData = reversedList[index];
         return Padding(
-          padding: EdgeInsets.only(bottom: 40.h),
-          child: GestureDetector(
-            onTap: () {
-              GoRouter.of(context)
-                  .push(
-                AppRouter.kBabyDataScreen,
-                extra: reversedList[index],
-              )
-                  .then((value) {
-                if (value == true) {
-                  context.read<GetAllBabiesCubit>().getAllBabies();
-                }
-              });
-            },
-            child: BabyContainer(
-              gender: babyData.gender ?? "Unknown",
-              name: babyData.name ?? "ali",
-              babyId: babyData.id!,
-            ),
-          ),
-        );
+            padding: EdgeInsets.only(bottom: 40.h),
+            child: GestureDetector(
+              onTap: () {
+                GoRouter.of(context)
+                    .push(
+                  AppRouter.kBabyDataScreen,
+                  extra: reversedList[index],
+                )
+                    .then((value) {
+                  if (value == true) {
+                    context.read<GetAllBabiesCubit>().getAllBabies();
+                  }
+                });
+              },
+              child: BabyContainer(
+                gender: babyData.gender ?? "Unknown",
+                name: babyData.name ?? "ali",
+                babyId: babyData.id!,
+                dateOfBirth: babyData.dateOfBirth.toString().split(' ')[0],
+                weight: babyData.weight.toString(),
+                height: babyData.height.toString(),
+              ),
+            ));
       },
     );
   }

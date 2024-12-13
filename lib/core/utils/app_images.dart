@@ -8,8 +8,8 @@ class AppImages {
   static const String entertainmentImage = 'assets/images/entertainment.png';
   static const String shoppingImage = 'assets/images/shopping.png';
   static const String babyWeightingImage = 'assets/images/baby-weighting.png';
-  static const String boyBabyImage = 'assets/images/baby_boy.png';
-  static const String girlBabyImage = 'assets/images/baby_girl.png';
+  static const String boyBabyImage = 'assets/images/BoyBaby.png';
+  static const String girlBabyImage = 'assets/images/GirlBaby.png';
   static const String gradientGirlImage = 'assets/images/gradientGirl.png';
   static const String gradientBoyImage = 'assets/images/gradientBoy.png';
   static const String gradientBoyAndGirlImage =
