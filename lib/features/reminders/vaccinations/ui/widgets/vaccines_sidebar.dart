@@ -63,9 +63,9 @@ class VaccinationsSidebar extends StatelessWidget {
                         child: ListTile(
                           leading: Image.asset(
                             baby.gender == 'Male'
-                                ? AppImages.boyBabyImage
-                                : AppImages.girlBabyImage,
-                            width: 48.r,
+                                ? "assets/images/baby_boy.png"
+                                : "assets/images/baby_Girl.png",
+                            width: 44.r,
                           ),
                           title: Text(
                             (baby.name?.isNotEmpty ?? false)
