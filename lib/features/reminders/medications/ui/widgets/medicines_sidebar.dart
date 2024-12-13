@@ -70,8 +70,8 @@ class _MedicinesDrawerState extends State<MedicinesDrawer> {
                       babyName: baby.name ?? 'Unknown',
                       babyId: baby.id,
                       image: baby.gender == 'Male'
-                          ? AppImages.boyBabyImage
-                          : AppImages.girlBabyImage,
+                          ? "assets/images/baby_boy.png"
+                          : "assets/images/baby_Girl.png",
                       isSelected: baby.name == _currentSelectedName,
                       onTap: () async {
                         context
@@ -144,7 +144,7 @@ class _MedicinesDrawerState extends State<MedicinesDrawer> {
         child: ListTile(
           leading: Image.asset(
             image,
-            width: 48.r,
+            width: 44.r,
           ),
           title: Text(
             babyName,
