@@ -24,7 +24,8 @@ class BabyContainer extends StatelessWidget {
     required this.babyId,
     required this.dateOfBirth,
     required this.weight,
-    required this.height, this.onPressed,
+    required this.height,
+    this.onPressed,
   });
 
   @override
@@ -41,6 +42,9 @@ class BabyContainer extends StatelessWidget {
     String displayAge;
     if (differenceInDays < 7) {
       displayAge = "$differenceInDays day${differenceInDays > 1 ? 's' : ''}";
+    } else if (differenceInDays < 30) {
+      int weeks = (differenceInDays / 7).floor();
+      displayAge = "$weeks week${weeks > 1 ? 's' : ''}";
     } else if (differenceInDays < 30 * 12) {
       int months = (differenceInDays / 30).floor();
       displayAge = "$months month${months > 1 ? 's' : ''}";
@@ -48,7 +52,6 @@ class BabyContainer extends StatelessWidget {
       int years = (differenceInDays / 365).floor();
       displayAge = "$years year${years > 1 ? 's' : ''}";
     }
-
     return Container(
       height: 120.h,
       decoration: BoxDecoration(

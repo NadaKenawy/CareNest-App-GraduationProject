@@ -1,8 +1,10 @@
+import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/utils/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class BabyCryContainer extends StatelessWidget {
   const BabyCryContainer({
@@ -49,7 +51,9 @@ class BabyCryContainer extends StatelessWidget {
                       ),
                       SizedBox(height: 24.h),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          GoRouter.of(context).push(AppRouter.kRecoderScreen);
+                        },
                         child: Container(
                           width: 120.w,
                           height: 32.h,
