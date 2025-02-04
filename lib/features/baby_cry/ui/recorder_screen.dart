@@ -6,6 +6,6 @@ class RecorderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  const RecorderScreenBody();
+    return const RecorderScreenBody();
   }
 }
