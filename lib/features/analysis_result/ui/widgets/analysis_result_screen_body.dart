@@ -24,11 +24,8 @@ class AnalysisResultScreenBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 280.h,
+            height: 268.h,
             child: const AnalysisResultMessage(),
-          ),
-          SizedBox(
-            height: 23.h,
           ),
           const AnalysisResultPercentage(),
           SizedBox(

@@ -8,7 +8,7 @@ class AnalysisAdvice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -27,19 +27,16 @@ class AnalysisAdvice extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
-            height: 20.h,
-          ),
           Text(
             'Your baby might need help releasing trapped air. Try gently patting their back after feeding.',
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 14.sp,
               color: Colors.black.withOpacity(0.6),
               fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(
-            height: 24.h,
+            height: 12.h,
           ),
           const Row(
             mainAxisAlignment: MainAxisAlignment.end,

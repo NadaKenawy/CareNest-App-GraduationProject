@@ -47,7 +47,7 @@ class AnalysisResultListView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: items
             .map((e) => Padding(
-                  padding: EdgeInsets.only(right: 20.w),
+                  padding: EdgeInsets.only(right: 14.w),
                   child: AnalysisResultListItem(analysisResultModel: e),
                 ))
             .toList(),

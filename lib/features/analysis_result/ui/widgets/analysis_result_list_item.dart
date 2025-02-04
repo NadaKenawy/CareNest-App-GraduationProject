@@ -19,7 +19,7 @@ class AnalysisResultListItem extends StatelessWidget {
           analysisResultModel.icon,
         ),
         SizedBox(
-          height: 10.h,
+          height: 8.h,
         ),
         Text(
           analysisResultModel.title,
@@ -29,7 +29,7 @@ class AnalysisResultListItem extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 12.h,
+          height: 8.h,
         ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -41,7 +41,7 @@ class AnalysisResultListItem extends StatelessWidget {
             analysisResultModel.percentage,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 13,
+              fontSize: 12,
               fontWeight: FontWeight.bold,
             ),
           ),

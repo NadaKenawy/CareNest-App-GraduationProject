@@ -8,9 +8,9 @@ class AnalysisResultMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        top: 50,
-        right: 50,
+      padding: EdgeInsets.only(
+        top: 16.h,
+        right: 40.h,
       ),
       child: SizedBox(
         width: double.infinity,
@@ -22,8 +22,8 @@ class AnalysisResultMessage extends StatelessWidget {
               // width: 200.w,
             ),
             Positioned(
-              top: 20.h,
-              right: 20.w,
+              top: 24.h,
+              right: 18.w,
               child: Text(
                 "I need to burp!",
                 style: TextStyle(
@@ -34,8 +34,8 @@ class AnalysisResultMessage extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 40.h,
-              right: 120.w,
+              top: 44.h,
+              right: 124.w,
               child: Image.asset(
                 'assets/images/analysis_result_baby2.png',
                 width: 200.h,
