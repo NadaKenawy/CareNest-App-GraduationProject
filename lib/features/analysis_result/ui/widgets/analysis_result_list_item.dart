@@ -17,10 +17,9 @@ class AnalysisResultListItem extends StatelessWidget {
       children: [
         SvgPicture.asset(
           analysisResultModel.icon,
-          width: 20,
         ),
         SizedBox(
-          height: 12.h,
+          height: 10.h,
         ),
         Text(
           analysisResultModel.title,
