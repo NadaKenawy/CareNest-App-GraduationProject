@@ -7,6 +7,7 @@ import 'package:care_nest/features/add_baby/logic/update_baby_cubit/update_baby_
 import 'package:care_nest/features/add_baby/ui/add_baby_screen.dart';
 import 'package:care_nest/features/add_baby/ui/baby_data_screen.dart';
 import 'package:care_nest/features/add_baby/ui/my_babies_screen.dart';
+import 'package:care_nest/features/analysis_result/analysis_result_screen.dart';
 import 'package:care_nest/features/baby_cry/ui/recorder_screen.dart';
 import 'package:care_nest/features/fcm/logic/get_all_notifications_cubit/get_all_notifications_cubit.dart';
 import 'package:care_nest/features/fcm/logic/notification_cubit/notification_cubit.dart';
@@ -60,6 +61,7 @@ abstract class AppRouter {
   static const kVaccinationsScreen = '/vaccinationsScreen';
   static const kNotificationsScreen = '/notificationsScreen';
   static const kRecoderScreen = '/recoderScreen';
+  static const kAnalysisResultScreen ='/analysisResultScreen'; 
 
   static final router = GoRouter(
     routes: [
@@ -255,6 +257,11 @@ abstract class AppRouter {
           path: kRecoderScreen,
           builder: (context, state) {
             return const RecorderScreen();
+          }),
+           GoRoute(
+          path: kAnalysisResultScreen,
+          builder: (context, state) {
+            return const AnalysisResultScreen();
           }),
     ],
   );

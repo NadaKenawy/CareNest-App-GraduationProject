@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
+import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
@@ -70,6 +72,7 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
       scale = 1.0;
       progress = 0.0;
     });
+    GoRouter.of(context).push(AppRouter.kAnalysisResultScreen);
   }
 
   // Share the recording
