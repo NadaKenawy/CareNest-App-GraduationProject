@@ -1,6 +1,7 @@
 import 'package:care_nest/features/analysis_result/data/models/analysis_result_model.dart';
 import 'package:care_nest/features/analysis_result/ui/widgets/analysis_result_list_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AnalysisResultListView extends StatelessWidget {
   const AnalysisResultListView({super.key});
@@ -39,17 +40,18 @@ class AnalysisResultListView extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: items.length,
+    return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.only(right: 20),
-          child: AnalysisResultListItem(
-            analysisResultModel: items[index],
-          ),
-        );
-      },
+      physics: const NeverScrollableScrollPhysics(),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: items
+            .map((e) => Padding(
+                  padding: EdgeInsets.only(right: 20.w),
+                  child: AnalysisResultListItem(analysisResultModel: e),
+                ))
+            .toList(),
+      ),
     );
   }
 }

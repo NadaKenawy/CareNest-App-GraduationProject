@@ -1,5 +1,6 @@
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
+import 'package:care_nest/features/analysis_result/ui/widgets/analysis_advice.dart';
 import 'package:care_nest/features/analysis_result/ui/widgets/analysis_result_message.dart';
 import 'package:care_nest/features/analysis_result/ui/widgets/analysis_result_percentage.dart';
 import 'package:flutter/material.dart';
@@ -29,9 +30,11 @@ class AnalysisResultScreenBody extends StatelessWidget {
           SizedBox(
             height: 23.h,
           ),
-          const Expanded(
-            child: AnalysisResultPercentage(),
+          const AnalysisResultPercentage(),
+          SizedBox(
+            height: 20.h,
           ),
+          const AnalysisAdvice(),
         ],
       ),
     );

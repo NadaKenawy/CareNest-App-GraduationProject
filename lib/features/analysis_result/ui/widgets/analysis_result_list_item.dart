@@ -1,5 +1,6 @@
 import 'package:care_nest/features/analysis_result/data/models/analysis_result_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AnalysisResultListItem extends StatelessWidget {
@@ -12,13 +13,14 @@ class AnalysisResultListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         SvgPicture.asset(
           analysisResultModel.icon,
           width: 20,
         ),
-        const SizedBox(
-          height: 12,
+        SizedBox(
+          height: 12.h,
         ),
         Text(
           analysisResultModel.title,
@@ -27,8 +29,8 @@ class AnalysisResultListItem extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        const SizedBox(
-          height: 12,
+        SizedBox(
+          height: 12.h,
         ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

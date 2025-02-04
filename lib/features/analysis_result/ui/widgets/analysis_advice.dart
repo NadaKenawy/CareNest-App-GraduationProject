@@ -1,17 +1,17 @@
-import 'package:care_nest/features/analysis_result/ui/widgets/analysis_result_list_view.dart';
+import 'package:care_nest/features/analysis_result/ui/widgets/did_it_work.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AnalysisResultPercentage extends StatelessWidget {
-  const AnalysisResultPercentage({super.key});
+class AnalysisAdvice extends StatelessWidget {
+  const AnalysisAdvice({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 0.h),
-      padding: const EdgeInsets.all(8),
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        // color: Colors.white,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: Colors.black.withOpacity(0.5),
@@ -20,30 +20,32 @@ class AnalysisResultPercentage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 100.h,
-            child: const AnalysisResultListView(),
+          const Text(
+            'Needs to Burp',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           SizedBox(
             height: 20.h,
           ),
-          const Text(
-            'Cry Reasons',
+          Text(
+            'Your baby might need help releasing trapped air. Try gently patting their back after feeding.',
             style: TextStyle(
-              fontSize: 26,
+              fontSize: 15,
+              color: Colors.black.withOpacity(0.6),
               fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(
-            height: 16.h,
+            height: 24.h,
           ),
-          Text(
-            'These are the most likely reasons your baby is crying, ordered from most to least probable',
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.black.withOpacity(0.6),
-              fontWeight: FontWeight.bold,
-            ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              DidItWork(),
+            ],
           ),
         ],
       ),
