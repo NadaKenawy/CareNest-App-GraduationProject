@@ -10,7 +10,7 @@ class GrowthInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 150.h,
+      top: 168.h,
       left: 0,
       right: 0,
       child: Container(
@@ -43,8 +43,7 @@ class GrowthInfoCard extends StatelessWidget {
                   Text(
                     '  6.4 kg',
                     style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeightHelper.semiBold),
+                        fontSize: 12.sp, fontWeight: FontWeightHelper.semiBold),
                   )
                 ],
               ),
@@ -54,8 +53,7 @@ class GrowthInfoCard extends StatelessWidget {
                   Text(
                     'Your baby’s current weight',
                     style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeightHelper.semiBold),
+                        fontSize: 20.sp, fontWeight: FontWeightHelper.semiBold),
                   ),
                   Text(
                     '  7.1 kg',

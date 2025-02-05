@@ -5,7 +5,6 @@ import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_growth_chart.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/growth_info_card.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/header_section.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
