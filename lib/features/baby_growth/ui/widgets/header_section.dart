@@ -28,17 +28,17 @@ class HeaderSection extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 56),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 56.h),
         child: Row(
           children: [
             IconButton(
               icon: const Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () => GoRouter.of(context).pop(),
             ),
-            const SizedBox(width: 8),
+            SizedBox(width: 8.w),
             Text(
               'Watch $selectedBaby\'s\nAmazing Growth!',
-              style:  TextStyle(
+              style: TextStyle(
                 color: Colors.black,
                 fontSize: 24.sp,
                 fontWeight: FontWeightHelper.semiBold,

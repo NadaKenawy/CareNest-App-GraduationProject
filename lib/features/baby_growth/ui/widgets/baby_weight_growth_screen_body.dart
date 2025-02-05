@@ -5,6 +5,7 @@ import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_growth_chart.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/growth_info_card.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/header_section.dart';
+import 'package:care_nest/features/baby_growth/ui/widgets/update_growth_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -51,7 +52,7 @@ class _BabyWeightGrowthScreenBodyState
                 const GrowthInfoCard(),
               ],
             ),
-            SizedBox(height: 120.h),
+            SizedBox(height: 140.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: const BabyGrowthChart(
@@ -65,7 +66,7 @@ class _BabyWeightGrowthScreenBodyState
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4.w),
+                      borderRadius: BorderRadius.circular(4.r),
                       color: const Color(0xff3F7726),
                     ),
                     height: 28.h,
@@ -101,18 +102,18 @@ class _BabyWeightGrowthScreenBodyState
                     AppTextButton(
                       buttonText: 'Weight per growth',
                       textStyle: TextStyles.font16WhiteBold,
-                      buttonWidth: 168,
+                      buttonWidth: 168.w,
                       buttonColor: ColorsManager.secondryBlueColor,
                       onPressed: () {},
                     ),
                     AppTextButton(
                       buttonText: 'Height for age',
-                      textStyle: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeightHelper.bold),
-                      buttonWidth: 168,
+                      textStyle:  TextStyle(
+                          fontSize: 16.sp, fontWeight: FontWeightHelper.bold),
+                      buttonWidth: 168.w,
                       buttonColor: Colors.transparent,
                       borderColor: ColorsManager.secondryBlueColor,
-                      borderRadius: 16,
+                      borderRadius: 16.r,
                       borderWidth: 2,
                       textColor: Colors.grey,
                       onPressed: () {},
@@ -121,15 +122,14 @@ class _BabyWeightGrowthScreenBodyState
             ),
             SizedBox(height: 4.h),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: AppTextButton(
-                  buttonText: 'Update Growth Data',
-                  textStyle: TextStyles.font16WhiteBold,
-                  onPressed: () {}),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: const UpdateGrowthData(),
             ),
+            SizedBox(height: 32.h),
           ],
         ),
       ),
     );
   }
 }
+

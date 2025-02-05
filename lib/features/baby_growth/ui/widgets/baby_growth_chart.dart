@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BabyGrowthChart extends StatelessWidget {
   final List<double> userHeights;
@@ -41,7 +42,7 @@ class BabyGrowthChart extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: SizedBox(
-        height: 250,
+        height: 250.h,
         width: double.infinity,
         child: LineChart(
           LineChartData(
@@ -133,7 +134,7 @@ class BabyGrowthChart extends StatelessWidget {
                   show: true,
                   getDotPainter: (spot, percent, barData, index) =>
                       FlDotCirclePainter(
-                    radius: 4,
+                    radius: 4.r,
                     color: Colors.green,
                     strokeWidth: 2,
                     strokeColor: Colors.white,

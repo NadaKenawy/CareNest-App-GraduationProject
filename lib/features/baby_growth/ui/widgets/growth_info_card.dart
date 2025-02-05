@@ -10,7 +10,7 @@ class GrowthInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 168.h,
+      top: 180.h,
       left: 0,
       right: 0,
       child: Container(
