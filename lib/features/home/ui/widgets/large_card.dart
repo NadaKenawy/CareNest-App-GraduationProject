@@ -3,20 +3,24 @@ import 'package:care_nest/core/utils/app_images.dart';
 import 'package:care_nest/features/home/ui/widgets/forward_arrow_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class LargeCard extends StatelessWidget {
   final String imagePath;
   final String title;
   final String description;
   final Color backgroundColor;
-    final VoidCallback onPressed; 
+  final VoidCallback onPressed;
+  final String routePath;
 
   const LargeCard({
     super.key,
     required this.imagePath,
     required this.title,
     required this.description,
-    required this.backgroundColor, required this.onPressed,
+    required this.backgroundColor,
+    required this.onPressed,
+    required this.routePath,
   });
 
   @override
@@ -75,7 +79,10 @@ class LargeCard extends StatelessWidget {
             ),
           ),
           ForwardArrowButton(
-            iconColor: backgroundColor, onPressed: () {  },
+            iconColor: backgroundColor,
+            onPressed: () {
+              GoRouter.of(context).push(routePath);
+            },
           ),
         ],
       ),

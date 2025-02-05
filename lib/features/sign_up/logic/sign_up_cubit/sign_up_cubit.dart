@@ -45,23 +45,22 @@ class SignupCubit extends Cubit<SignupState> {
         SharedPrefKeys.userPasswordConfirm);
 
     // تحميل البيانات في الـ controllers
-    if (firstNameController.text.isEmpty && savedFirstName != null) {
+    if (firstNameController.text.isEmpty) {
       firstNameController.text = savedFirstName;
     }
-    if (lastNameController.text.isEmpty && savedLastName != null) {
+    if (lastNameController.text.isEmpty) {
       lastNameController.text = savedLastName;
     }
-    if (emailController.text.isEmpty && savedEmail != null) {
+    if (emailController.text.isEmpty) {
       emailController.text = savedEmail;
     }
-    if (dateOfBirthController.text.isEmpty && savedDateOfBirth != null) {
+    if (dateOfBirthController.text.isEmpty) {
       dateOfBirthController.text = savedDateOfBirth;
     }
-    if (passwordController.text.isEmpty && savedPassword != null) {
+    if (passwordController.text.isEmpty) {
       passwordController.text = savedPassword;
     }
-    if (passwordConfirmController.text.isEmpty &&
-        savedPasswordConfirm != null) {
+    if (passwordConfirmController.text.isEmpty) {
       passwordConfirmController.text = savedPasswordConfirm;
     }
 

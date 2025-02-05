@@ -19,7 +19,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   Future<void> loadSavedEmail() async {
     String? savedEmail =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userEmail);
-    if (emailController.text.isEmpty && savedEmail != null) {
+    if (emailController.text.isEmpty) {
       emailController.text = savedEmail; // تحميل الإيميل المحفوظ
       log("Loaded Email: $savedEmail");
     }

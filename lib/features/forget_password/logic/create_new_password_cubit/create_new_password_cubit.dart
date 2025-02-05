@@ -31,7 +31,7 @@ class CreateNewPasswordCubit extends Cubit<CreatePasswordState> {
         newPassword: newPasswordController.text,
         passwordConfirm: passwordConfirmController.text,
       ),
-      token ?? '',
+      token,
     );
 
     response.when(

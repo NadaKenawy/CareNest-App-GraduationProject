@@ -33,8 +33,8 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyId);
 
     setState(() {
-      selectedBabyName = babyName ?? '';
-      selectedBabyId = babyId ?? '';
+      selectedBabyName = babyName;
+      selectedBabyId = babyId;
       isLoading = false;
     });
 

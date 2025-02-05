@@ -1,3 +1,4 @@
+import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/utils/app_images.dart';
 import 'package:care_nest/features/home/ui/widgets/baby_cry_container.dart';
@@ -38,6 +39,7 @@ class HomeScreenBody extends StatelessWidget {
                         description: "Track every stage of your baby's growth",
                         backgroundColor: ColorsManager.secondryBlueColor,
                         onPressed: () {},
+                        routePath: AppRouter.kBabyWeightGrowthScreen,
                       ),
                       const SizedBox(height: 20),
                       const MamaTipsCard(),
@@ -55,6 +57,7 @@ class HomeScreenBody extends StatelessWidget {
                             "Expert care available for your little one",
                         backgroundColor: const Color(0xffBB87E0),
                         onPressed: () {},
+                        routePath: '',
                       ),
                     ],
                   ),
@@ -72,6 +75,7 @@ class HomeScreenBody extends StatelessWidget {
                         "Stories, videos, and music for a relaxed baby",
                     backgroundColor: ColorsManager.thirdryBlueColor,
                     onPressed: () {},
+                    routePath: '',
                   ),
                   const SizedBox(height: 20),
                   LargeCard(
@@ -80,6 +84,7 @@ class HomeScreenBody extends StatelessWidget {
                     description: "Seamless shopping for every baby moment",
                     backgroundColor: ColorsManager.thirdryPinkColor,
                     onPressed: () {},
+                    routePath: '',
                   ),
                 ],
               ),
