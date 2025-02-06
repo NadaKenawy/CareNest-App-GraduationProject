@@ -13,3 +13,9 @@ ForgetPassResponse _$ForgetPassResponseFromJson(Map<String, dynamic> json) =>
       token: json['token'] as String?,
     );
 
+Map<String, dynamic> _$ForgetPassResponseToJson(ForgetPassResponse instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
+      'token': instance.token,
+    };

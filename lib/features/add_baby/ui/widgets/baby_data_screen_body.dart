@@ -38,6 +38,11 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
       end: Alignment.bottomCenter,
     );
 
+    final latestWeight =
+        getLatestValue(widget.babiesData.weight, isWeight: true);
+    final latestHeight =
+        getLatestValue(widget.babiesData.height, isWeight: false);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -82,12 +87,9 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
                         Expanded(
                           child: BabyDataFields(
                             gender: widget.babiesData.gender,
-                            hintText: widget.babiesData.weight != null
-                                ? widget.babiesData.weight.toString()
-                                : 'Weight',
-                            controller: context
-                                .read<UpdateBabyCubit>()
-                                .weightController,
+                            hintText: latestWeight?.toString() ?? 'Weight',
+                            controller: TextEditingController(
+                                text: latestWeight?.toString() ?? ''),
                             gradient: gradient,
                             prefixIcon: FontAwesomeIcons.weightScale,
                           ),
@@ -96,12 +98,9 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
                         Expanded(
                           child: BabyDataFields(
                             gender: widget.babiesData.gender,
-                            hintText: widget.babiesData.height != null
-                                ? widget.babiesData.height.toString()
-                                : 'Height',
-                            controller: context
-                                .read<UpdateBabyCubit>()
-                                .heightController,
+                            hintText: latestHeight?.toString() ?? 'Height',
+                            controller: TextEditingController(
+                                text: latestHeight?.toString() ?? ''),
                             gradient: gradient,
                             prefixIcon: FontAwesomeIcons.rulerVertical,
                           ),
@@ -168,5 +167,22 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
         },
       );
     }
+  }
+
+  num? getLatestValue(dynamic data, {bool isWeight = true}) {
+    if (data == null || data.isEmpty) return null;
+
+    for (var item in data.reversed) {
+      if (isWeight) {
+        if (item.weight != null) {
+          return item.weight;
+        }
+      } else {
+        if (item.height != null) {
+          return item.height;
+        }
+      }
+    }
+    return null;
   }
 }

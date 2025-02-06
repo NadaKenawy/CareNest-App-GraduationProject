@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'add_baby_response.g.dart';
+
 @JsonSerializable()
 class AddBabyResponse {
   @JsonKey(name: 'data')
@@ -11,7 +13,7 @@ class AddBabyResponse {
 
   factory AddBabyResponse.fromJson(Map<String, dynamic> json) =>
       _$AddBabyResponseFromJson(json);
-  
+  Map<String, dynamic> toJson() => _$AddBabyResponseToJson(this);
 }
 
 @JsonSerializable()
@@ -19,8 +21,9 @@ class BabyData {
   @JsonKey(name: '_id')
   String? id;
   String? name;
-  num? weight;
-  num? height;
+  List<WeightData>? weight;
+  List<HeightData>? height;
+  String? gender;
   @JsonKey(name: 'birthDay')
   DateTime? dateOfBirth;
   String? motherOfBaby;
@@ -30,12 +33,52 @@ class BabyData {
     this.name,
     this.weight,
     this.height,
+    this.gender,
     this.dateOfBirth,
     this.motherOfBaby,
   });
 
   factory BabyData.fromJson(Map<String, dynamic> json) =>
       _$BabyDataFromJson(json);
+  Map<String, dynamic> toJson() => _$BabyDataToJson(this);
+}
 
-  
+@JsonSerializable()
+class WeightData {
+  String? ageCategory;
+  num? weight;
+  @JsonKey(name: '_id')
+  String? id;
+  String? status;
+
+  WeightData({
+    this.ageCategory,
+    this.weight,
+    this.id,
+    this.status,
+  });
+
+  factory WeightData.fromJson(Map<String, dynamic> json) =>
+      _$WeightDataFromJson(json);
+  Map<String, dynamic> toJson() => _$WeightDataToJson(this);
+}
+
+@JsonSerializable()
+class HeightData {
+  String? ageCategory;
+  num? height;
+  @JsonKey(name: '_id')
+  String? id;
+  String? status;
+
+  HeightData({
+    this.ageCategory,
+    this.height,
+    this.id,
+    this.status,
+  });
+
+  factory HeightData.fromJson(Map<String, dynamic> json) =>
+      _$HeightDataFromJson(json);
+  Map<String, dynamic> toJson() => _$HeightDataToJson(this);
 }
