@@ -13,3 +13,9 @@ VerifyPasswordResponse _$VerifyPasswordResponseFromJson(
       token: json['token'] as String?,
     );
 
+Map<String, dynamic> _$VerifyPasswordResponseToJson(
+        VerifyPasswordResponse instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'token': instance.token,
+    };
