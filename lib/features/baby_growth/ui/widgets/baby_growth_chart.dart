@@ -1,11 +1,23 @@
+import 'dart:developer';
+
+import 'package:care_nest/features/baby_growth/data/models/get_baby_growth_response.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BabyGrowthChart extends StatelessWidget {
-  final List<double> userHeights;
+  final List<MeasurementData> userHeights;
 
   const BabyGrowthChart({super.key, required this.userHeights});
+
+  int getIndexFromAgeCategory(String ageCategory) {
+    if (ageCategory.startsWith('month_')) {
+      return int.parse(ageCategory.split('_')[1]) - 1;
+    } else if (ageCategory.startsWith('year_')) {
+      return 12 + int.parse(ageCategory.split('_')[1]) - 1;
+    }
+    return 0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +36,21 @@ class BabyGrowthChart extends StatelessWidget {
       76
     ];
 
-    final List<double> adjustedHeights = List.generate(
-      userHeights.length,
-      (index) {
-        if (index < normalHeights.length) {
-          double difference = userHeights[index] - normalHeights[index];
-          return normalHeights[index] + (difference / 2);
-        }
-        return userHeights[index];
-      },
-    );
+    final List<MeasurementData> validHeights =
+        userHeights.where((e) => e.height != null).toList();
+
+    log('Valid Heights: ${validHeights.map((e) => e.height).toList()}');
+
+    final List<double?> adjustedHeights = List.filled(12, null);
+
+    for (var heightData in validHeights) {
+      int index = getIndexFromAgeCategory(heightData.ageCategory!);
+      if (index >= 0 && index < 12) {
+        adjustedHeights[index] = heightData.height!.toDouble();
+      }
+    }
+
+    log('Adjusted Heights: $adjustedHeights');
 
     return Container(
       padding: const EdgeInsets.all(8),
@@ -78,18 +95,18 @@ class BabyGrowthChart extends StatelessWidget {
                   reservedSize: 20,
                   getTitlesWidget: (value, meta) {
                     List<String> months = [
-                      'Jan',
-                      'Feb',
-                      'Mar',
-                      'Apr',
-                      'May',
-                      'Jun',
-                      'Jul',
-                      'Aug',
-                      'Sep',
-                      'Oct',
-                      'Nov',
-                      'Dec'
+                      'M1',
+                      'M2',
+                      'M3',
+                      'M4',
+                      'M5',
+                      'M6',
+                      'M7',
+                      'M8',
+                      'M9',
+                      'M10',
+                      'M11',
+                      'M12'
                     ];
                     int index = value.toInt();
                     if (index >= 0 && index < months.length) {
@@ -121,10 +138,12 @@ class BabyGrowthChart extends StatelessWidget {
                 dotData: const FlDotData(show: false),
               ),
               LineChartBarData(
-                spots: List.generate(
-                  adjustedHeights.length,
-                  (index) => FlSpot(index.toDouble(), adjustedHeights[index]),
-                ),
+                spots: adjustedHeights
+                    .asMap()
+                    .entries
+                    .where((entry) => entry.value != null)
+                    .map((entry) => FlSpot(entry.key.toDouble(), entry.value!))
+                    .toList(),
                 isCurved: true,
                 color: Colors.blue,
                 barWidth: 2,

@@ -2,7 +2,7 @@ import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
-import 'package:care_nest/features/baby_growth/ui/widgets/baby_growth_chart.dart';
+import 'package:care_nest/features/baby_growth/ui/widgets/get_baby_height_growth_bloc_builder.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/growth_info_card.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/header_section.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/update_growth_data.dart';
@@ -54,11 +54,8 @@ class _BabyWeightGrowthScreenBodyState
             ),
             SizedBox(height: 140.h),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: const BabyGrowthChart(
-                userHeights: [58, 60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80],
-              ),
-            ),
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: const GetBabyHeightGrowthBlocBuilder()),
             SizedBox(height: 28.h),
             Row(
               children: [
@@ -108,7 +105,7 @@ class _BabyWeightGrowthScreenBodyState
                     ),
                     AppTextButton(
                       buttonText: 'Height for age',
-                      textStyle:  TextStyle(
+                      textStyle: TextStyle(
                           fontSize: 16.sp, fontWeight: FontWeightHelper.bold),
                       buttonWidth: 168.w,
                       buttonColor: Colors.transparent,
@@ -132,4 +129,3 @@ class _BabyWeightGrowthScreenBodyState
     );
   }
 }
-

@@ -4,11 +4,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'get_baby_growth_cubit_state.freezed.dart';
 
 @freezed
-class GetBabyGrowthHeightCubitState<T> with _$GetBabyGrowthHeightCubitState<T> {
-  const factory GetBabyGrowthHeightCubitState.initial() = _Initial;
-  const factory GetBabyGrowthHeightCubitState.loading() = Loading;
-  const factory GetBabyGrowthHeightCubitState.success(
+class GetBabyHeightGrowthState<T> with _$GetBabyHeightGrowthState<T> {
+  const factory GetBabyHeightGrowthState.initial() = _Initial;
+  const factory GetBabyHeightGrowthState.loading() = Loading;
+  const factory GetBabyHeightGrowthState.success(
       List<MeasurementData>? measurementData) = Success;
-  const factory GetBabyGrowthHeightCubitState.error(
-      ApiErrorModel apiErrorModel) = Error;
+  const factory GetBabyHeightGrowthState.error(ApiErrorModel apiErrorModel) =
+      Error;
 }
+  
