@@ -8,8 +8,10 @@ import 'package:care_nest/features/add_baby/data/repos/update_baby_repo.dart';
 import 'package:care_nest/features/add_baby/logic/delete_baby_cubit/delete_baby_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/update_baby_cubit/update_baby_cubit.dart';
-import 'package:care_nest/features/baby_growth/data/repos/get_baby_growth_repo.dart';
-import 'package:care_nest/features/baby_growth/logic/cubit/get_baby_growth_cubit_cubit.dart';
+import 'package:care_nest/features/baby_growth/data/repos/get_baby_height_growth_repo.dart';
+import 'package:care_nest/features/baby_growth/data/repos/get_baby_weight_growth_repo.dart';
+import 'package:care_nest/features/baby_growth/logic/get_baby_height_growth_cubit/get_baby_height_growth_cubit.dart';
+import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
 import 'package:care_nest/features/fcm/data/repos/get_all_notifications_repo.dart';
 import 'package:care_nest/features/fcm/data/repos/notification_repo.dart';
 import 'package:care_nest/features/fcm/data/repos/update_fcm_repo.dart';
@@ -163,4 +165,10 @@ Future<void> setupGetIt() async {
       () => GetBabyHeightGrowthRepo(getIt()));
   getIt.registerFactory<GetBabyHeightGrowthCubit>(
       () => GetBabyHeightGrowthCubit(getIt()));
+
+  //get baby weight growth data
+  getIt.registerLazySingleton<GetBabyWeightGrowthRepo>(
+      () => GetBabyWeightGrowthRepo(getIt()));
+  getIt.registerFactory<GetBabyWeightGrowthCubit>(
+      () => GetBabyWeightGrowthCubit(getIt()));
 }

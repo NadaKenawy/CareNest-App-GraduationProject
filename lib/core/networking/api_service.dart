@@ -3,7 +3,8 @@ import 'package:care_nest/features/add_baby/data/models/add_baby/add_baby_respon
 import 'package:care_nest/features/add_baby/data/models/delete_baby/delete_baby_response.dart';
 import 'package:care_nest/features/add_baby/data/models/update_baby/update_baby_request.dart';
 import 'package:care_nest/features/add_baby/data/models/update_baby/update_baby_response.dart';
-import 'package:care_nest/features/baby_growth/data/models/get_baby_growth_response.dart';
+import 'package:care_nest/features/baby_growth/data/models/get_baby_height_growth_response.dart';
+import 'package:care_nest/features/baby_growth/data/models/get_baby_weight_growth_response.dart';
 import 'package:care_nest/features/fcm/data/models/delete_all_notifications/delete_all_notifications_response.dart';
 import 'package:care_nest/features/fcm/data/models/delete_notification/delete_notification_response.dart';
 import 'package:care_nest/features/fcm/data/models/get_all_notifications/get_all_notifications_response.dart';
@@ -162,6 +163,12 @@ abstract class ApiService {
 
   @GET(ApiConstants.getHeightGrowth)
   Future<BabyHeightGrowthResponse> getHeightGrowthData(
+    @Header('Authorization') String token,
+    @Path('babyid') String babyid,
+  );
+
+   @GET(ApiConstants.getWeightGrowth)
+  Future<BabyWeightGrowthResponse> getWeightGrowthData(
     @Header('Authorization') String token,
     @Path('babyid') String babyid,
   );

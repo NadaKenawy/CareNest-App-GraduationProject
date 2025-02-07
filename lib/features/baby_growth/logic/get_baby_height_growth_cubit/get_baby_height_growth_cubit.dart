@@ -1,17 +1,17 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:care_nest/features/baby_growth/data/repos/get_baby_growth_repo.dart';
+import 'package:care_nest/features/baby_growth/data/repos/get_baby_height_growth_repo.dart';
 
 import '../../../../core/helpers/constants.dart';
 import '../../../../core/helpers/shared_pref_helper.dart';
-import 'get_baby_growth_cubit_state.dart';
+import 'get_baby_height_growth_state.dart';
 
 class GetBabyHeightGrowthCubit extends Cubit<GetBabyHeightGrowthState> {
-  GetBabyHeightGrowthCubit(this._getBabyGrowthRepo)
+  GetBabyHeightGrowthCubit(this._getBabyHeightGrowthRepo)
       : super(const GetBabyHeightGrowthState.initial());
 
-  final GetBabyHeightGrowthRepo _getBabyGrowthRepo;
+  final GetBabyHeightGrowthRepo _getBabyHeightGrowthRepo;
 
   void getBabyHeightGrowth(String babyid) async {
     emit(const GetBabyHeightGrowthState.loading());
@@ -19,7 +19,7 @@ class GetBabyHeightGrowthCubit extends Cubit<GetBabyHeightGrowthState> {
     String token =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
     final response =
-        await _getBabyGrowthRepo.getBabyHeightGrowth(token, babyid);
+        await _getBabyHeightGrowthRepo.getBabyHeightGrowth(token, babyid);
     if (isClosed) return;
 
     response.when(

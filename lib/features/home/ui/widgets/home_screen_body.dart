@@ -39,7 +39,7 @@ class HomeScreenBody extends StatelessWidget {
                         description: "Track every stage of your baby's growth",
                         backgroundColor: ColorsManager.secondryBlueColor,
                         onPressed: () {},
-                        routePath: AppRouter.kBabyWeightGrowthScreen,
+                        routePath: AppRouter.kBabyHeightGrowthScreen,
                       ),
                       const SizedBox(height: 20),
                       const MamaTipsCard(),

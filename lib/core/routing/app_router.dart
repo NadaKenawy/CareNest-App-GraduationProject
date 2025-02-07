@@ -9,8 +9,10 @@ import 'package:care_nest/features/add_baby/ui/baby_data_screen.dart';
 import 'package:care_nest/features/add_baby/ui/my_babies_screen.dart';
 import 'package:care_nest/features/analysis_result/analysis_result_screen.dart';
 import 'package:care_nest/features/baby_cry/ui/recorder_screen.dart';
-import 'package:care_nest/features/baby_growth/logic/cubit/get_baby_growth_cubit_cubit.dart';
-import 'package:care_nest/features/baby_growth/ui/baby_weight_growth_screen.dart';
+import 'package:care_nest/features/baby_growth/logic/get_baby_height_growth_cubit/get_baby_height_growth_cubit.dart';
+import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
+import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart';
+import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
 import 'package:care_nest/features/fcm/logic/get_all_notifications_cubit/get_all_notifications_cubit.dart';
 import 'package:care_nest/features/fcm/logic/notification_cubit/notification_cubit.dart';
 import 'package:care_nest/features/fcm/ui/notifications_screen.dart';
@@ -64,6 +66,7 @@ abstract class AppRouter {
   static const kNotificationsScreen = '/notificationsScreen';
   static const kRecoderScreen = '/recoderScreen';
   static const kAnalysisResultScreen = '/analysisResultScreen';
+  static const kBabyHeightGrowthScreen = '/babyHeightGrowthScreen';
   static const kBabyWeightGrowthScreen = '/babyWeightGrowthScreen';
   static final router = GoRouter(
     routes: [
@@ -266,11 +269,19 @@ abstract class AppRouter {
             return const AnalysisResultScreen();
           }),
       GoRoute(
-          path: kBabyWeightGrowthScreen,
+          path: kBabyHeightGrowthScreen,
           builder: (context, state) {
             return BlocProvider(
               create: (context) => getIt<GetBabyHeightGrowthCubit>(),
-              child: const BabyWeightGrowthScreen(),
+              child: const BabyHeightGrowthScreen(),
+            );
+          }),
+      GoRoute(
+          path: kBabyWeightGrowthScreen,
+          builder: (context, state) {
+            return BlocProvider(
+              create: (context) => getIt<GetBabyWeightGrowthCubit>(),
+              child: const BabyWeightGrowthScreenBody(),
             );
           }),
     ],
