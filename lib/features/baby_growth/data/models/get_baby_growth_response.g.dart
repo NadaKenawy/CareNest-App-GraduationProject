@@ -14,11 +14,6 @@ BabyGrowthHeightResponse _$BabyGrowthHeightResponseFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$BabyGrowthHeightResponseToJson(
-        BabyGrowthHeightResponse instance) =>
-    <String, dynamic>{
-      'height': instance.height,
-    };
 
 MeasurementData _$MeasurementDataFromJson(Map<String, dynamic> json) =>
     MeasurementData(
@@ -28,10 +23,3 @@ MeasurementData _$MeasurementDataFromJson(Map<String, dynamic> json) =>
       status: json['status'] as String?,
     );
 
-Map<String, dynamic> _$MeasurementDataToJson(MeasurementData instance) =>
-    <String, dynamic>{
-      'ageCategory': instance.ageCategory,
-      'height': instance.height,
-      'id': instance.id,
-      'status': instance.status,
-    };

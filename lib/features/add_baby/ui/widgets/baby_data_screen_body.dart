@@ -44,6 +44,9 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
         getLatestValue(widget.babiesData.height, isWeight: false);
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+      ),
       backgroundColor: Colors.white,
       body: Column(
         children: [

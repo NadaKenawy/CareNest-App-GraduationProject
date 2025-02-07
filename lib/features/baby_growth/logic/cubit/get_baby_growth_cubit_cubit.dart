@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:bloc/bloc.dart';
 import 'package:care_nest/features/baby_growth/data/repos/get_baby_growth_repo.dart';
 

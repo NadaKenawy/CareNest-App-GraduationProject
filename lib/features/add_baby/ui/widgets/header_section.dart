@@ -1,3 +1,4 @@
+import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:care_nest/core/utils/app_images.dart';
@@ -5,69 +6,99 @@ import 'package:care_nest/core/utils/app_images.dart';
 class HeaderSection extends StatelessWidget {
   final String? babyName;
   final String? gender;
+  final VoidCallback? onEditTap;
 
   const HeaderSection({
     super.key,
     this.babyName,
     this.gender,
+    this.onEditTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    String backgroundImage;
     String boyAndGirlImage;
+    Color iconColor;
+    LinearGradient? iconGradient;
+
     if (gender == 'Male') {
-      backgroundImage = AppImages.gradientBoyImage;
       boyAndGirlImage = AppImages.boyProfileImage;
+      iconColor = ColorsManager.secondryBlueColor;
+      iconGradient = null;
     } else if (gender == 'Female') {
-      backgroundImage = AppImages.gradientGirlImage;
       boyAndGirlImage = AppImages.girlProfileImage;
+      iconColor = ColorsManager.primaryPinkColor;
+      iconGradient = null;
     } else {
-      backgroundImage = AppImages.gradientBoyAndGirlImage;
       boyAndGirlImage = AppImages.boyAndGirlImage;
+      iconColor = Colors.white;
+      iconGradient = const LinearGradient(
+        colors: [
+          ColorsManager.primaryPinkColor,
+          ColorsManager.secondryBlueColor
+        ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ); // Apply gradient for unknown gender
     }
 
-    return Stack(
-      alignment: Alignment.center,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          width: double.infinity,
-          height: 274.h,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(backgroundImage),
-              fit: BoxFit.cover,
+        Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.bottomRight,
+          children: [
+            Image.asset(
+              boyAndGirlImage,
+              height: 150.h,
+              fit: BoxFit.contain,
             ),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Row(
-            children: [
-              Image.asset(
-                boyAndGirlImage,
-                height: 150.h,
-                fit: BoxFit.contain,
-              ),
-              SizedBox(width: 40.w),
-              Expanded(
-                child: Text(
-                  babyName != null
-                      ? '$babyName\'s\nProfile'
-                      : 'Baby\'s\nProfile',
-                  textAlign: TextAlign.left,
-                  softWrap: true,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: TextStyle(
-                    fontSize: 36.sp,
-                    fontWeight: FontWeight.bold,
+            Positioned(
+              right: -2.w,
+              bottom: -2.h,
+              child: GestureDetector(
+                onTap: onEditTap,
+                child: Container(
+                  width: 36.w,
+                  height: 36.h,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
                     color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
                   ),
+                  child: iconGradient != null
+                      ? ShaderMask(
+                          shaderCallback: (bounds) =>
+                              iconGradient!.createShader(bounds),
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.edit,
+                              size: 20.sp,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {},
+                          ),
+                        )
+                      : IconButton(
+                          icon: Icon(
+                            Icons.edit,
+                            size: 20.sp,
+                            color: iconColor,
+                          ),
+                          onPressed: () {},
+                        ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );
