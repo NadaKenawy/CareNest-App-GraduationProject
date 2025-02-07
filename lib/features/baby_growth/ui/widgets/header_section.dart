@@ -5,13 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class HeaderSection extends StatelessWidget {
   final String selectedBaby;
   final String selectedImage;
-  final Function(String, String) onBabySelected;
+  final String babyId;
+  final Function(String, String, String) onBabySelected;
 
   const HeaderSection({
     super.key,
     required this.selectedBaby,
     required this.selectedImage,
-    required this.onBabySelected,
+    required this.onBabySelected, required this.babyId,
   });
 
   @override
@@ -43,7 +44,10 @@ class HeaderSection extends StatelessWidget {
             const Spacer(),
             BabiesDropdown(
               selectedImage: selectedImage,
-              onBabySelected: onBabySelected,
+              onBabySelected: (id, name, image) {
+                onBabySelected(id, name, image); 
+              },
+             
             ),
           ],
         ),

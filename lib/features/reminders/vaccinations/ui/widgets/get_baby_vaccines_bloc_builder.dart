@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:care_nest/features/reminders/vaccinations/data/models/get_baby_vaccines_response.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_state.dart';
@@ -21,6 +23,7 @@ class GetBabyVaccinesBlocBuilder extends StatelessWidget {
           },
           success: (vaccineData) {
             var vaccinesList = List<BabyVaccineData>.from(vaccineData!);
+            log('Vaccines List: ${vaccinesList.length}');
             return setupSuccess(vaccinesList);
           },
           error: (error) {

@@ -269,8 +269,7 @@ abstract class AppRouter {
           path: kBabyWeightGrowthScreen,
           builder: (context, state) {
             return BlocProvider(
-              create: (context) => getIt<GetBabyHeightGrowthCubit>()
-                ..getBabyHeightGrowth('67a51e6d4c715b7f223522a1'),
+              create: (context) => getIt<GetBabyHeightGrowthCubit>(),
               child: const BabyWeightGrowthScreen(),
             );
           }),

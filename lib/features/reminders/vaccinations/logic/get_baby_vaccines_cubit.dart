@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:care_nest/features/reminders/vaccinations/data/repo/get_baby_vaccines_respo.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +21,7 @@ class GetBabyVaccinesCubit extends Cubit<GetBabyVaccinesState> {
     if (isClosed) return;
     response.when(
       success: (getBabyVaccinesResponse) {
+        log('Vaccines List: ${getBabyVaccinesResponse.vaccineData!.length}');
         emit(GetBabyVaccinesState.success(getBabyVaccinesResponse.vaccineData));
       },
       failure: (error) {

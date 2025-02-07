@@ -2,11 +2,13 @@ import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
+import 'package:care_nest/features/baby_growth/logic/cubit/get_baby_growth_cubit_cubit.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/get_baby_height_growth_bloc_builder.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/growth_info_card.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/header_section.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/update_growth_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BabyWeightGrowthScreenBody extends StatefulWidget {
@@ -27,6 +29,7 @@ class _BabyWeightGrowthScreenBodyState
 
   String selectedBaby = "Karma";
   String selectedImage = "assets/images/baby_profile_girl.png";
+   String babyId = "67a5ff8229c3b62a46cef643";
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +42,17 @@ class _BabyWeightGrowthScreenBodyState
               clipBehavior: Clip.none,
               children: [
                 HeaderSection(
+                  babyId: babyId,
                   selectedBaby: selectedBaby,
                   selectedImage: selectedImage,
                   //  babies: babies,
-                  onBabySelected: (name, image) {
+                  onBabySelected: (id,name, image) {
                     setState(() {
                       selectedBaby = name;
                       selectedImage = image;
+                       babyId = id;
                     });
+                     context.read<GetBabyHeightGrowthCubit>().getBabyHeightGrowth(id);
                   },
                 ),
               ],

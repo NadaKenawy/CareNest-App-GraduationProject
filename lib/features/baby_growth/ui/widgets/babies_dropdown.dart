@@ -6,7 +6,7 @@ import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_b
 
 class BabiesDropdown extends StatelessWidget {
   final String selectedImage;
-  final Function(String, String) onBabySelected;
+  final Function(String, String , String) onBabySelected;
 
   const BabiesDropdown({
     super.key,
@@ -26,6 +26,7 @@ class BabiesDropdown extends StatelessWidget {
                   "image": baby.gender == 'Male'
                       ? "assets/images/baby_profile_boy.png"
                       : "assets/images/baby_profile_girl.png",
+                  "id": baby.id ?? "Unknown",
                 };
               }).toList() ??
               [];
@@ -57,7 +58,7 @@ class BabiesDropdown extends StatelessWidget {
                     icon: Icon(Icons.arrow_drop_down, size: 22.sp),
                     padding: EdgeInsets.zero,
                     onSelected: (value) {
-                      onBabySelected(value["name"]!, value["image"]!);
+                      onBabySelected(value["id"]!,value["name"]!, value["image"]!);
                     },
                     itemBuilder: (context) {
                       return babies.map((child) {
