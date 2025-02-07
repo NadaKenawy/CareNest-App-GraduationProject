@@ -6,12 +6,12 @@ import 'package:care_nest/features/add_baby/data/repos/update_baby_repo.dart';
 import 'package:care_nest/features/add_baby/logic/update_baby_cubit/update_baby_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../data/models/get_all_babies/get_all_babies_response.dart';
 
 class UpdateBabyCubit extends Cubit<UpdateBabyState> {
   UpdateBabyCubit(this._updateBabyRepo, this.babiesData)
       : super(const UpdateBabyState.initial());
+
   final UpdateBabyRepo _updateBabyRepo;
   final BabiesData babiesData;
   TextEditingController nameController = TextEditingController();
@@ -32,16 +32,20 @@ class UpdateBabyCubit extends Cubit<UpdateBabyState> {
           await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
       log('Authorization Token Retrieved: $token');
 
+      double? updatedWeight = weightController.text.isNotEmpty
+          ? double.tryParse(weightController.text)
+          : null;
+
+      double? updatedHeight = heightController.text.isNotEmpty
+          ? double.tryParse(heightController.text)
+          : null;
+
       final request = UpdateBabyRequest(
         name: nameController.text.isNotEmpty
             ? nameController.text
             : babiesData.name,
-        weight: weightController.text.isNotEmpty
-            ? num.tryParse(weightController.text)
-            : babiesData.weight,
-        height: heightController.text.isNotEmpty
-            ? num.tryParse(heightController.text)
-            : babiesData.height,
+        weight: updatedWeight ?? babiesData.weight?.last.weight,
+        height: updatedHeight ?? babiesData.height?.last.height,
         dateOfBirthOfBaby: dateOfBirthOfBabyController.text.isNotEmpty
             ? dateOfBirthOfBabyController.text
             : babiesData.dateOfBirth.toString(),

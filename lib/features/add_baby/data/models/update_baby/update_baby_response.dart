@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'update_baby_response.g.dart';
+
 @JsonSerializable()
 class UpdateBabyResponse {
   @JsonKey(name: 'data')
@@ -11,7 +13,6 @@ class UpdateBabyResponse {
 
   factory UpdateBabyResponse.fromJson(Map<String, dynamic> json) =>
       _$UpdateBabyResponseFromJson(json);
-  
 }
 
 @JsonSerializable()
@@ -19,9 +20,9 @@ class BabyData {
   @JsonKey(name: '_id')
   String? id;
   String? name;
-  num? weight;
-  num? height;
-    String? gender;
+  List<WeightHeightData>? weight;  
+  List<WeightHeightData>? height;  
+  String? gender;
   @JsonKey(name: 'birthDay')
   DateTime? dateOfBirth;
   String? motherOfBaby;
@@ -38,6 +39,25 @@ class BabyData {
 
   factory BabyData.fromJson(Map<String, dynamic> json) =>
       _$BabyDataFromJson(json);
+}
 
-  
+@JsonSerializable()
+class WeightHeightData {
+  @JsonKey(name: 'ageCategory')
+  String? ageCategory;
+  num? weight;
+  num? height;
+  String? status; 
+  String? id;
+
+  WeightHeightData({
+    this.ageCategory,
+    this.weight,
+    this.height,
+    this.status,
+    this.id,
+    });
+
+  factory WeightHeightData.fromJson(Map<String, dynamic> json) =>
+      _$WeightHeightDataFromJson(json);
 }

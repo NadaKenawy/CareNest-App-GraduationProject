@@ -11,7 +11,3 @@ UpdateFcmResponse _$UpdateFcmResponseFromJson(Map<String, dynamic> json) =>
       message: json['data'] as String?,
     );
 
-Map<String, dynamic> _$UpdateFcmResponseToJson(UpdateFcmResponse instance) =>
-    <String, dynamic>{
-      'data': instance.message,
-    };

@@ -16,12 +16,6 @@ AddMedicationScheduleResponse _$AddMedicationScheduleResponseFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$AddMedicationScheduleResponseToJson(
-        AddMedicationScheduleResponse instance) =>
-    <String, dynamic>{
-      'msg': instance.msg,
-      'data': instance.data,
-    };
 
 MedicationScheduleData _$MedicationScheduleDataFromJson(
         Map<String, dynamic> json) =>
@@ -34,13 +28,3 @@ MedicationScheduleData _$MedicationScheduleDataFromJson(
       id: json['id'] as String,
     );
 
-Map<String, dynamic> _$MedicationScheduleDataToJson(
-        MedicationScheduleData instance) =>
-    <String, dynamic>{
-      'medicationName': instance.medicationName,
-      'time': instance.time,
-      'begin': instance.begin,
-      'end': instance.end,
-      'notificationSent': instance.notificationSent,
-      'id': instance.id,
-    };

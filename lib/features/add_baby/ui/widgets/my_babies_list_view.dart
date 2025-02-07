@@ -23,30 +23,52 @@ class MyBabiesListView extends StatelessWidget {
       itemCount: reversedList.length,
       itemBuilder: (context, index) {
         final babyData = reversedList[index];
+        final latestWeight = getLatestValue(babyData.weight, isWeight: true);
+        final latestHeight = getLatestValue(babyData.height, isWeight: false);
+
         return Padding(
-            padding: EdgeInsets.only(bottom: 40.h),
-            child: BabyContainer(
-              onPressed: () {
-                GoRouter.of(context)
-                    .push(
-                  AppRouter.kBabyDataScreen,
-                  extra: reversedList[index],
-                )
-                    .then((value) {
-                  if (value == true) {
-                    context.read<GetAllBabiesCubit>().getAllBabies();
-                  }
-                });
-              },
-              gender: babyData.gender ?? "Unknown",
-              name: babyData.name ?? "ali",
-              babyId: babyData.id!,
-              dateOfBirth: babyData.dateOfBirth.toString().split(' ')[0],
-              weight: babyData.weight.toString(),
-              height: babyData.height.toString(),
-            ));
+          padding: EdgeInsets.only(bottom: 40.h),
+          child: BabyContainer(
+            onPressed: () {
+              GoRouter.of(context)
+                  .push(
+                AppRouter.kBabyDataScreen,
+                extra: reversedList[index],
+              )
+                  .then((value) {
+                if (value == true) {
+                  context.read<GetAllBabiesCubit>().getAllBabies();
+                }
+              });
+            },
+            gender: babyData.gender ?? "Unknown",
+            name: babyData.name ?? "ali",
+            babyId: babyData.id!,
+            dateOfBirth: babyData.dateOfBirth.toString().split(' ')[0],
+            weight: latestWeight?.toString() ?? "Not available",
+            height: latestHeight?.toString() ?? "Not available",
+          ),
+        );
       },
     );
+  }
+
+  num? getLatestValue(dynamic data, {bool isWeight = true}) {
+    if (data == null || data.isEmpty) return null;
+
+    for (var item in data.reversed) {
+      if (isWeight) {
+        if (item.weight != null) {
+          return item.weight;
+        }
+      } else {
+        if (item.height != null) {
+          return item.height;
+        }
+      }
+    }
+
+    return null;
   }
 }
 

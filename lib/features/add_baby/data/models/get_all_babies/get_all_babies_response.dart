@@ -22,8 +22,8 @@ class BabiesData {
   @JsonKey(name: '_id')
   String? id;
   String? name;
-  num? weight;
-  num? height;
+  List<WeightData>? weight;
+  List<HeightData>? height;
   @JsonKey(name: 'birthDay')
   DateTime? dateOfBirth;
   String? motherOfBaby;
@@ -36,9 +36,47 @@ class BabiesData {
     this.height,
     this.dateOfBirth,
     this.motherOfBaby,
-    this.gender
+    this.gender,
   });
 
   factory BabiesData.fromJson(Map<String, dynamic> json) =>
       _$BabiesDataFromJson(json);
+}
+
+@JsonSerializable()
+class WeightData {
+  String? ageCategory;
+  num? weight;
+  String? status;
+  @JsonKey(name: '_id')
+  String? id;
+
+  WeightData({
+    this.ageCategory,
+    this.weight,
+    this.status,
+    this.id,
+  });
+
+  factory WeightData.fromJson(Map<String, dynamic> json) =>
+      _$WeightDataFromJson(json);
+}
+
+@JsonSerializable()
+class HeightData {
+  String? ageCategory;
+  num? height;
+  String? status;
+  @JsonKey(name: '_id')
+  String? id;
+
+  HeightData({
+    this.ageCategory,
+    this.height,
+    this.status,
+    this.id,
+  });
+
+  factory HeightData.fromJson(Map<String, dynamic> json) =>
+      _$HeightDataFromJson(json);
 }

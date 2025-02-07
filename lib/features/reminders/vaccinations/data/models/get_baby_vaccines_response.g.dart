@@ -15,12 +15,6 @@ GetBabyVaccinesResponse _$GetBabyVaccinesResponseFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$GetBabyVaccinesResponseToJson(
-        GetBabyVaccinesResponse instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-      'data': instance.vaccineData,
-    };
 
 BabyVaccineData _$BabyVaccineDataFromJson(Map<String, dynamic> json) =>
     BabyVaccineData(
@@ -33,13 +27,6 @@ BabyVaccineData _$BabyVaccineDataFromJson(Map<String, dynamic> json) =>
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
     );
 
-Map<String, dynamic> _$BabyVaccineDataToJson(BabyVaccineData instance) =>
-    <String, dynamic>{
-      'vaccine': instance.vaccine,
-      'administered': instance.administered,
-      'notificationSent': instance.notificationSent,
-      'date': instance.date?.toIso8601String(),
-    };
 
 Vaccine _$VaccineFromJson(Map<String, dynamic> json) => Vaccine(
       id: json['_id'] as String?,
@@ -57,14 +44,3 @@ Vaccine _$VaccineFromJson(Map<String, dynamic> json) => Vaccine(
           : DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$VaccineToJson(Vaccine instance) => <String, dynamic>{
-      '_id': instance.id,
-      'name': instance.name,
-      'ageRequired': instance.ageRequired,
-      'dose': instance.dose,
-      'vaccineType': instance.vaccineType,
-      'description': instance.description,
-      'repeat': instance.repeat,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
-    };

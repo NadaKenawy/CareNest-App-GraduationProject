@@ -45,8 +45,8 @@ class AddBabyCubit extends Cubit<AddBabyState> {
     final response = await _addBabyRepo.addBaby(
       AddBabyRequestBody(
         name: nameController.text,
-        weight: num.tryParse(weightController.text) ?? 0,
-        height: num.tryParse(heightController.text) ?? 0,
+        weightEntry: num.tryParse(weightController.text) ?? 0,
+        heightEntry: num.tryParse(heightController.text) ?? 0,
         dateOfBirthOfBaby: dateOfBirthOfBabyController.text,
         gender: genderController.text,
       ),
