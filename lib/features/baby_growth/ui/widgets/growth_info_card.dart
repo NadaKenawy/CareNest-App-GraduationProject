@@ -5,8 +5,12 @@ import 'package:care_nest/core/theme/font_weight_helper.dart';
 class GrowthInfoCard extends StatelessWidget {
   const GrowthInfoCard({
     super.key,
+    this.lastRecord,
+    this.lastRecordValue,
+    this.current,
+    this.currentValue,
   });
-
+  final String? lastRecord, lastRecordValue, current, currentValue;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,14 +22,14 @@ class GrowthInfoCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                'Last recorded weight',
+                lastRecord ?? 'Last recorded height',
                 style: TextStyle(
                     fontSize: 12.sp,
                     color: Colors.grey,
                     fontWeight: FontWeightHelper.semiBold),
               ),
               Text(
-                '  6.4 kg',
+                lastRecordValue ?? '  6.4 cm',
                 style: TextStyle(
                     fontSize: 12.sp, fontWeight: FontWeightHelper.semiBold),
               )
@@ -35,12 +39,12 @@ class GrowthInfoCard extends StatelessWidget {
           Row(
             children: [
               Text(
-                'Your baby’s current weight',
+                current ?? 'Your baby’s current height',
                 style: TextStyle(
                     fontSize: 20.sp, fontWeight: FontWeightHelper.semiBold),
               ),
               Text(
-                '  7.1 kg',
+                currentValue ?? '  7.1 cm',
                 style: TextStyle(
                     fontSize: 20.sp,
                     color: const Color(0xff3F7726),

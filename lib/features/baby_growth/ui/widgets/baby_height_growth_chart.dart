@@ -1,14 +1,14 @@
 import 'dart:developer';
 
-import 'package:care_nest/features/baby_growth/data/models/get_baby_growth_response.dart';
+import 'package:care_nest/features/baby_growth/data/models/get_baby_height_growth_response.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BabyGrowthChart extends StatelessWidget {
+class BabyHeightGrowthChart extends StatelessWidget {
   final List<MeasurementData> userHeights;
 
-  const BabyGrowthChart({super.key, required this.userHeights});
+  const BabyHeightGrowthChart({super.key, required this.userHeights});
 
   int getIndexFromAgeCategory(String ageCategory) {
     if (ageCategory.startsWith('month_')) {
@@ -22,18 +22,20 @@ class BabyGrowthChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<double> normalHeights = [
-      54,
-      58,
-      61,
-      64,
+      53.75,
+      57.5,
+      60,
+      62.5,
+      64.5,
       66,
-      67,
-      70,
-      72,
-      73,
-      74,
-      75,
-      76
+      68.25,
+      69.25,
+      70.25,
+      72.25,
+      73.75,
+      74.8,
+      85.5,
+      108,
     ];
 
     final List<MeasurementData> validHeights =

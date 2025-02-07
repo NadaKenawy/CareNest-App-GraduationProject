@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'get_baby_growth_response.g.dart';
+part 'get_baby_height_growth_response.g.dart';
 
 @JsonSerializable()
 class BabyHeightGrowthResponse {

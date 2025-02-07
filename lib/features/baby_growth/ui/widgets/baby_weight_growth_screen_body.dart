@@ -2,14 +2,15 @@ import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
-import 'package:care_nest/features/baby_growth/logic/cubit/get_baby_growth_cubit_cubit.dart';
-import 'package:care_nest/features/baby_growth/ui/widgets/get_baby_height_growth_bloc_builder.dart';
+import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
+import 'package:care_nest/features/baby_growth/ui/widgets/get_baby_weight_growth_bloc_builder.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/growth_info_card.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/header_section.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/update_growth_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class BabyWeightGrowthScreenBody extends StatefulWidget {
   const BabyWeightGrowthScreenBody({super.key});
@@ -21,15 +22,15 @@ class BabyWeightGrowthScreenBody extends StatefulWidget {
 
 class _BabyWeightGrowthScreenBodyState
     extends State<BabyWeightGrowthScreenBody> {
-  List<Map<String, String>> babies = [
-    {"name": "Karma", "image": "assets/images/baby_profile_girl.png"},
-    {"name": "Zain", "image": "assets/images/baby_profile_boy.png"},
-    {"name": "Loly", "image": "assets/images/baby_profile_girl.png"},
-  ];
+  // List<Map<String, String>> babies = [
+  //   {"name": "Karma", "image": "assets/images/baby_profile_girl.png"},
+  //   {"name": "Zain", "image": "assets/images/baby_profile_boy.png"},
+  //   {"name": "Loly", "image": "assets/images/baby_profile_girl.png"},
+  // ];
 
   String selectedBaby = "Karma";
   String selectedImage = "assets/images/baby_profile_girl.png";
-   String babyId = "67a5ff8229c3b62a46cef643";
+  String babyId = "67a5ff8229c3b62a46cef643";
 
   @override
   Widget build(BuildContext context) {
@@ -46,22 +47,29 @@ class _BabyWeightGrowthScreenBodyState
                   selectedBaby: selectedBaby,
                   selectedImage: selectedImage,
                   //  babies: babies,
-                  onBabySelected: (id,name, image) {
+                  onBabySelected: (id, name, image) {
                     setState(() {
                       selectedBaby = name;
                       selectedImage = image;
-                       babyId = id;
+                      babyId = id;
                     });
-                     context.read<GetBabyHeightGrowthCubit>().getBabyHeightGrowth(id);
+                    context
+                        .read<GetBabyWeightGrowthCubit>()
+                        .getBabyWeightGrowth(id);
                   },
                 ),
               ],
             ),
-            const GrowthInfoCard(),
+            const GrowthInfoCard(
+              lastRecord: 'Last recorded weight',
+              lastRecordValue: '  1.5 kg',
+              current: 'Your baby’s current weight',
+              currentValue: '  10.1 kg',
+            ),
             SizedBox(height: 28.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: const GetBabyHeightGrowthBlocBuilder(),
+              child: const GetBabyWeightGrowthBlocBuilder(),
             ),
             SizedBox(height: 28.h),
             Row(
@@ -120,7 +128,9 @@ class _BabyWeightGrowthScreenBodyState
                       borderRadius: 16.r,
                       borderWidth: 2,
                       textColor: Colors.grey,
-                      onPressed: () {},
+                      onPressed: () {
+                        GoRouter.of(context).pop();
+                      },
                     ),
                   ]),
             ),
