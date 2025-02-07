@@ -44,8 +44,8 @@ class AnalysisResultScreenBody extends StatelessWidget {
                 child: Stack(alignment: Alignment.center, children: [
                   for (int i = 0; i < 3; i++)
                     Container(
-                      width: 70.h + (i * 20),
-                      height: 70.h + (i * 20),
+                      width: 70.h + (i * 15),
+                      height: 70.h + (i * 15),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: [
