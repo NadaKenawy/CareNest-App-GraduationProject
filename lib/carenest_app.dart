@@ -17,7 +17,7 @@ class CareNest extends StatelessWidget {
       splitScreenMode: true,
       useInheritedMediaQuery: true,
       child: BlocProvider(
-        create: (context) => getIt<GetAllBabiesCubit>(),
+        create: (context) => getIt<GetAllBabiesCubit>()..getAllBabies(),
         child: MaterialApp.router(
           routerConfig: AppRouter.router,
           debugShowCheckedModeBanner: false,
