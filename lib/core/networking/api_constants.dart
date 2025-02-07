@@ -29,6 +29,8 @@ class ApiConstants {
       "babies/vaccines/{babyId}/administered/{id}";
   static const String getHeightGrowth = "dataGrowth/height/{babyid}";
    static const String getWeightGrowth = "dataGrowth/weight/{babyid}";
+  static const String putGrowthData = "dataGrowth/{babyid}";
+
 }
 
 class ApiErrors {
