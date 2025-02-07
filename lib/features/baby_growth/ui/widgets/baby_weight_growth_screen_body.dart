@@ -52,7 +52,7 @@ class _BabyWeightGrowthScreenBodyState
               ],
             ),
             const GrowthInfoCard(),
-            SizedBox(height: 140.h),
+            SizedBox(height: 28.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: const GetBabyHeightGrowthBlocBuilder(),

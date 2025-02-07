@@ -15,6 +15,12 @@ GetAllBabiesResponse _$GetAllBabiesResponseFromJson(
           .toList(),
     );
 
+Map<String, dynamic> _$GetAllBabiesResponseToJson(
+        GetAllBabiesResponse instance) =>
+    <String, dynamic>{
+      'results': instance.results,
+      'data': instance.babiesData,
+    };
 
 BabiesData _$BabiesDataFromJson(Map<String, dynamic> json) => BabiesData(
       id: json['_id'] as String?,
@@ -32,6 +38,16 @@ BabiesData _$BabiesDataFromJson(Map<String, dynamic> json) => BabiesData(
       gender: json['gender'] as String?,
     );
 
+Map<String, dynamic> _$BabiesDataToJson(BabiesData instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'name': instance.name,
+      'weight': instance.weight,
+      'height': instance.height,
+      'birthDay': instance.dateOfBirth?.toIso8601String(),
+      'motherOfBaby': instance.motherOfBaby,
+      'gender': instance.gender,
+    };
 
 WeightData _$WeightDataFromJson(Map<String, dynamic> json) => WeightData(
       ageCategory: json['ageCategory'] as String?,
@@ -40,6 +56,13 @@ WeightData _$WeightDataFromJson(Map<String, dynamic> json) => WeightData(
       id: json['_id'] as String?,
     );
 
+Map<String, dynamic> _$WeightDataToJson(WeightData instance) =>
+    <String, dynamic>{
+      'ageCategory': instance.ageCategory,
+      'weight': instance.weight,
+      'status': instance.status,
+      '_id': instance.id,
+    };
 
 HeightData _$HeightDataFromJson(Map<String, dynamic> json) => HeightData(
       ageCategory: json['ageCategory'] as String?,
@@ -48,3 +71,10 @@ HeightData _$HeightDataFromJson(Map<String, dynamic> json) => HeightData(
       id: json['_id'] as String?,
     );
 
+Map<String, dynamic> _$HeightDataToJson(HeightData instance) =>
+    <String, dynamic>{
+      'ageCategory': instance.ageCategory,
+      'height': instance.height,
+      'status': instance.status,
+      '_id': instance.id,
+    };

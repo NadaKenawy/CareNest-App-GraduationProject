@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/baby_data_fields.dart';
 import 'package:care_nest/features/add_baby/ui/widgets/update_baby_bloc_listener.dart';
@@ -91,8 +93,9 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
                           child: BabyDataFields(
                             gender: widget.babiesData.gender,
                             hintText: latestWeight?.toString() ?? 'Weight',
-                            controller: TextEditingController(
-                                text: latestWeight?.toString() ?? ''),
+                            controller: context
+                                .read<UpdateBabyCubit>()
+                                .weightController,
                             gradient: gradient,
                             prefixIcon: FontAwesomeIcons.weightScale,
                           ),
@@ -102,8 +105,9 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
                           child: BabyDataFields(
                             gender: widget.babiesData.gender,
                             hintText: latestHeight?.toString() ?? 'Height',
-                            controller: TextEditingController(
-                                text: latestHeight?.toString() ?? ''),
+                            controller: context
+                                .read<UpdateBabyCubit>()
+                                .heightController,
                             gradient: gradient,
                             prefixIcon: FontAwesomeIcons.rulerVertical,
                           ),
@@ -142,6 +146,7 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
                           ColorsManager.primaryPinkColor
                         ],
               onPressed: () {
+                log('Save button pressed');
                 context
                     .read<UpdateBabyCubit>()
                     .emitUpdateBabyState(widget.babiesData.id ?? '');
