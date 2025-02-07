@@ -1,22 +1,32 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'get_baby_growth_response.g.dart';
 
 @JsonSerializable()
-class BabyGrowthHeightResponse {
+class BabyHeightGrowthResponse {
+  final GrowthData? data;
+
+  BabyHeightGrowthResponse({this.data});
+
+  factory BabyHeightGrowthResponse.fromJson(Map<String, dynamic> json) =>
+      _$BabyHeightGrowthResponseFromJson(json);
+}
+
+@JsonSerializable()
+class GrowthData {
   final List<MeasurementData>? height;
 
-  BabyGrowthHeightResponse({
-    this.height,
-  });
+  GrowthData({this.height});
 
-  factory BabyGrowthHeightResponse.fromJson(Map<String, dynamic> json) =>
-      _$BabyGrowthHeightResponseFromJson(json);
+  factory GrowthData.fromJson(Map<String, dynamic> json) =>
+      _$GrowthDataFromJson(json);
 }
 
 @JsonSerializable()
 class MeasurementData {
   final String? ageCategory;
   final num? height;
+  @JsonKey(name: "_id")
   final String? id;
   final String? status;
 

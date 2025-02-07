@@ -9,6 +9,7 @@ import 'package:care_nest/features/add_baby/ui/baby_data_screen.dart';
 import 'package:care_nest/features/add_baby/ui/my_babies_screen.dart';
 import 'package:care_nest/features/analysis_result/analysis_result_screen.dart';
 import 'package:care_nest/features/baby_cry/ui/recorder_screen.dart';
+import 'package:care_nest/features/baby_growth/logic/cubit/get_baby_growth_cubit_cubit.dart';
 import 'package:care_nest/features/baby_growth/ui/baby_weight_growth_screen.dart';
 import 'package:care_nest/features/fcm/logic/get_all_notifications_cubit/get_all_notifications_cubit.dart';
 import 'package:care_nest/features/fcm/logic/notification_cubit/notification_cubit.dart';
@@ -267,7 +268,11 @@ abstract class AppRouter {
       GoRoute(
           path: kBabyWeightGrowthScreen,
           builder: (context, state) {
-            return const BabyWeightGrowthScreen();
+            return BlocProvider(
+              create: (context) => getIt<GetBabyHeightGrowthCubit>()
+                ..getBabyHeightGrowth('67a51e6d4c715b7f223522a1'),
+              child: const BabyWeightGrowthScreen(),
+            );
           }),
     ],
   );

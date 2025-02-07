@@ -790,7 +790,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<BabyGrowthHeightResponse> getGrowthData(
+  Future<BabyHeightGrowthResponse> getHeightGrowthData(
     String token,
     String babyid,
   ) async {
@@ -799,7 +799,7 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<BabyGrowthHeightResponse>(Options(
+    final _options = _setStreamType<BabyHeightGrowthResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -816,9 +816,9 @@ class _ApiService implements ApiService {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BabyGrowthHeightResponse _value;
+    late BabyHeightGrowthResponse _value;
     try {
-      _value = BabyGrowthHeightResponse.fromJson(_result.data!);
+      _value = BabyHeightGrowthResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

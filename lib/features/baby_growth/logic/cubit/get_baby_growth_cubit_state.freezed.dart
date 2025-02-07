@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$GetBabyGrowthHeightCubitState<T> {
+mixin _$GetBabyHeightGrowthState<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -69,26 +69,25 @@ mixin _$GetBabyGrowthHeightCubitState<T> {
 }
 
 /// @nodoc
-abstract class $GetBabyGrowthHeightCubitStateCopyWith<T, $Res> {
-  factory $GetBabyGrowthHeightCubitStateCopyWith(
-          GetBabyGrowthHeightCubitState<T> value,
-          $Res Function(GetBabyGrowthHeightCubitState<T>) then) =
-      _$GetBabyGrowthHeightCubitStateCopyWithImpl<T, $Res,
-          GetBabyGrowthHeightCubitState<T>>;
+abstract class $GetBabyHeightGrowthStateCopyWith<T, $Res> {
+  factory $GetBabyHeightGrowthStateCopyWith(GetBabyHeightGrowthState<T> value,
+          $Res Function(GetBabyHeightGrowthState<T>) then) =
+      _$GetBabyHeightGrowthStateCopyWithImpl<T, $Res,
+          GetBabyHeightGrowthState<T>>;
 }
 
 /// @nodoc
-class _$GetBabyGrowthHeightCubitStateCopyWithImpl<T, $Res,
-        $Val extends GetBabyGrowthHeightCubitState<T>>
-    implements $GetBabyGrowthHeightCubitStateCopyWith<T, $Res> {
-  _$GetBabyGrowthHeightCubitStateCopyWithImpl(this._value, this._then);
+class _$GetBabyHeightGrowthStateCopyWithImpl<T, $Res,
+        $Val extends GetBabyHeightGrowthState<T>>
+    implements $GetBabyHeightGrowthStateCopyWith<T, $Res> {
+  _$GetBabyHeightGrowthStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GetBabyGrowthHeightCubitState
+  /// Create a copy of GetBabyHeightGrowthState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -101,13 +100,13 @@ abstract class _$$InitialImplCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<T, $Res>
-    extends _$GetBabyGrowthHeightCubitStateCopyWithImpl<T, $Res,
-        _$InitialImpl<T>> implements _$$InitialImplCopyWith<T, $Res> {
+    extends _$GetBabyHeightGrowthStateCopyWithImpl<T, $Res, _$InitialImpl<T>>
+    implements _$$InitialImplCopyWith<T, $Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl<T> _value, $Res Function(_$InitialImpl<T>) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetBabyGrowthHeightCubitState
+  /// Create a copy of GetBabyHeightGrowthState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -118,7 +117,7 @@ class _$InitialImpl<T> implements _Initial<T> {
 
   @override
   String toString() {
-    return 'GetBabyGrowthHeightCubitState<$T>.initial()';
+    return 'GetBabyHeightGrowthState<$T>.initial()';
   }
 
   @override
@@ -205,7 +204,7 @@ class _$InitialImpl<T> implements _Initial<T> {
   }
 }
 
-abstract class _Initial<T> implements GetBabyGrowthHeightCubitState<T> {
+abstract class _Initial<T> implements GetBabyHeightGrowthState<T> {
   const factory _Initial() = _$InitialImpl<T>;
 }
 
@@ -218,13 +217,13 @@ abstract class _$$LoadingImplCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<T, $Res>
-    extends _$GetBabyGrowthHeightCubitStateCopyWithImpl<T, $Res,
-        _$LoadingImpl<T>> implements _$$LoadingImplCopyWith<T, $Res> {
+    extends _$GetBabyHeightGrowthStateCopyWithImpl<T, $Res, _$LoadingImpl<T>>
+    implements _$$LoadingImplCopyWith<T, $Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl<T> _value, $Res Function(_$LoadingImpl<T>) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetBabyGrowthHeightCubitState
+  /// Create a copy of GetBabyHeightGrowthState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -235,7 +234,7 @@ class _$LoadingImpl<T> implements Loading<T> {
 
   @override
   String toString() {
-    return 'GetBabyGrowthHeightCubitState<$T>.loading()';
+    return 'GetBabyHeightGrowthState<$T>.loading()';
   }
 
   @override
@@ -322,7 +321,7 @@ class _$LoadingImpl<T> implements Loading<T> {
   }
 }
 
-abstract class Loading<T> implements GetBabyGrowthHeightCubitState<T> {
+abstract class Loading<T> implements GetBabyHeightGrowthState<T> {
   const factory Loading() = _$LoadingImpl<T>;
 }
 
@@ -337,13 +336,13 @@ abstract class _$$SuccessImplCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<T, $Res>
-    extends _$GetBabyGrowthHeightCubitStateCopyWithImpl<T, $Res,
-        _$SuccessImpl<T>> implements _$$SuccessImplCopyWith<T, $Res> {
+    extends _$GetBabyHeightGrowthStateCopyWithImpl<T, $Res, _$SuccessImpl<T>>
+    implements _$$SuccessImplCopyWith<T, $Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl<T> _value, $Res Function(_$SuccessImpl<T>) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetBabyGrowthHeightCubitState
+  /// Create a copy of GetBabyHeightGrowthState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -377,7 +376,7 @@ class _$SuccessImpl<T> implements Success<T> {
 
   @override
   String toString() {
-    return 'GetBabyGrowthHeightCubitState<$T>.success(measurementData: $measurementData)';
+    return 'GetBabyHeightGrowthState<$T>.success(measurementData: $measurementData)';
   }
 
   @override
@@ -393,7 +392,7 @@ class _$SuccessImpl<T> implements Success<T> {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_measurementData));
 
-  /// Create a copy of GetBabyGrowthHeightCubitState
+  /// Create a copy of GetBabyHeightGrowthState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -476,13 +475,13 @@ class _$SuccessImpl<T> implements Success<T> {
   }
 }
 
-abstract class Success<T> implements GetBabyGrowthHeightCubitState<T> {
+abstract class Success<T> implements GetBabyHeightGrowthState<T> {
   const factory Success(final List<MeasurementData>? measurementData) =
       _$SuccessImpl<T>;
 
   List<MeasurementData>? get measurementData;
 
-  /// Create a copy of GetBabyGrowthHeightCubitState
+  /// Create a copy of GetBabyHeightGrowthState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<T, _$SuccessImpl<T>> get copyWith =>
@@ -500,13 +499,13 @@ abstract class _$$ErrorImplCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<T, $Res>
-    extends _$GetBabyGrowthHeightCubitStateCopyWithImpl<T, $Res, _$ErrorImpl<T>>
+    extends _$GetBabyHeightGrowthStateCopyWithImpl<T, $Res, _$ErrorImpl<T>>
     implements _$$ErrorImplCopyWith<T, $Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl<T> _value, $Res Function(_$ErrorImpl<T>) _then)
       : super(_value, _then);
 
-  /// Create a copy of GetBabyGrowthHeightCubitState
+  /// Create a copy of GetBabyHeightGrowthState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -532,7 +531,7 @@ class _$ErrorImpl<T> implements Error<T> {
 
   @override
   String toString() {
-    return 'GetBabyGrowthHeightCubitState<$T>.error(apiErrorModel: $apiErrorModel)';
+    return 'GetBabyHeightGrowthState<$T>.error(apiErrorModel: $apiErrorModel)';
   }
 
   @override
@@ -547,7 +546,7 @@ class _$ErrorImpl<T> implements Error<T> {
   @override
   int get hashCode => Object.hash(runtimeType, apiErrorModel);
 
-  /// Create a copy of GetBabyGrowthHeightCubitState
+  /// Create a copy of GetBabyHeightGrowthState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -630,12 +629,12 @@ class _$ErrorImpl<T> implements Error<T> {
   }
 }
 
-abstract class Error<T> implements GetBabyGrowthHeightCubitState<T> {
+abstract class Error<T> implements GetBabyHeightGrowthState<T> {
   const factory Error(final ApiErrorModel apiErrorModel) = _$ErrorImpl<T>;
 
   ApiErrorModel get apiErrorModel;
 
-  /// Create a copy of GetBabyGrowthHeightCubitState
+  /// Create a copy of GetBabyHeightGrowthState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<T, _$ErrorImpl<T>> get copyWith =>

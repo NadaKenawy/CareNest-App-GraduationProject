@@ -160,8 +160,8 @@ abstract class ApiService {
     @Path("id") String vaccineId,
   );
 
-  @GET(ApiConstants.getGrowthHeight)
-  Future<BabyGrowthHeightResponse> getGrowthData(
+  @GET(ApiConstants.getHeightGrowth)
+  Future<BabyHeightGrowthResponse> getHeightGrowthData(
     @Header('Authorization') String token,
     @Path('babyid') String babyid,
   );

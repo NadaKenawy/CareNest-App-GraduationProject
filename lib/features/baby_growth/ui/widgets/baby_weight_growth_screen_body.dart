@@ -2,8 +2,6 @@ import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
-import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
-import 'package:care_nest/features/baby_growth/ui/widgets/baby_growth_chart.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/growth_info_card.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/header_section.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/update_growth_data.dart';
@@ -57,11 +55,8 @@ class _BabyWeightGrowthScreenBodyState
             ),
             SizedBox(height: 32.h),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: const BabyGrowthChart(
-                userHeights: [58, 60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80],
-              ),
-            ),
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: const GetBabyHeightGrowthBlocBuilder()),
             SizedBox(height: 28.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -101,29 +96,7 @@ class _BabyWeightGrowthScreenBodyState
             Padding(
               padding: EdgeInsets.all(16.w),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  AppTextButton(
-                    buttonText: 'Weight per growth',
-                    textStyle: TextStyles.font16WhiteBold,
-                    buttonWidth: 168.w,
-                    buttonColor: ColorsManager.secondryBlueColor,
-                    onPressed: () {},
-                  ),
-                  AppTextButton(
-                    buttonText: 'Height for age',
-                    textStyle: TextStyle(
-                        fontSize: 16.sp, fontWeight: FontWeightHelper.bold),
-                    buttonWidth: 168.w,
-                    buttonColor: Colors.transparent,
-                    borderColor: ColorsManager.secondryBlueColor,
-                    borderRadius: 16.r,
-                    borderWidth: 2,
-                    textColor: Colors.grey,
-                    onPressed: () {},
-                  ),
-                ],
-              ),
+
             ),
             SizedBox(height: 4.h),
             Padding(
