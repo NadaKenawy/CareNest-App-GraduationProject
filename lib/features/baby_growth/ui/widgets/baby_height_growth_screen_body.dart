@@ -134,7 +134,9 @@ class _BabyHeightGrowthScreenBodyState
             SizedBox(height: 4.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: const UpdateGrowthData(),
+              child:  UpdateGrowthData(
+                babyId: babyId,
+              ),
             ),
             SizedBox(height: 32.h),
           ],

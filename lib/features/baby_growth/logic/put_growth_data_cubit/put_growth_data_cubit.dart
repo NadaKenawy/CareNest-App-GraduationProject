@@ -50,6 +50,7 @@ class PutGrowthDataCubit extends Cubit<PutGrowthDataState> {
 
       response.when(
         success: (putGrowthDataResponse) async {
+          log('Final Baby ID Sent: $id');
           log('Update Baby Data Success: $putGrowthDataResponse');
           emit(PutGrowthDataState.putGrowthDataSuccess(putGrowthDataResponse));
         },
