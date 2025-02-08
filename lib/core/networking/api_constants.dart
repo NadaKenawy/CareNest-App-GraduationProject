@@ -28,9 +28,8 @@ class ApiConstants {
   static const String markVaccine =
       "babies/vaccines/{babyId}/administered/{id}";
   static const String getHeightGrowth = "dataGrowth/height/{babyid}";
-   static const String getWeightGrowth = "dataGrowth/weight/{babyid}";
-  static const String putGrowthData = "dataGrowth/{babyid}";
-
+  static const String getWeightGrowth = "dataGrowth/weight/{babyid}";
+  static const String putGrowthData = "dataGrowth/{id}";
 }
 
 class ApiErrors {

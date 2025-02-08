@@ -867,7 +867,7 @@ class _ApiService implements ApiService {
   Future<PutGrowthDataResponse> putGrowthData(
     PutGrowthDataRequest putGrowthDataRequest,
     String token,
-    String babyId,
+    String id,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -882,7 +882,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          'dataGrowth/{babyid}',
+          'dataGrowth/${id}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -932,7 +932,6 @@ class _ApiService implements ApiService {
     return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }
-
 class ParseErrorLogger {
   void logError(
       Object error, StackTrace stackTrace, RequestOptions requestOptions) {

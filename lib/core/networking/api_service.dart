@@ -170,7 +170,7 @@ abstract class ApiService {
     @Path('babyid') String babyid,
   );
 
-   @GET(ApiConstants.getWeightGrowth)
+  @GET(ApiConstants.getWeightGrowth)
   Future<BabyWeightGrowthResponse> getWeightGrowthData(
     @Header('Authorization') String token,
     @Path('babyid') String babyid,
@@ -179,6 +179,6 @@ abstract class ApiService {
   Future<PutGrowthDataResponse> putGrowthData(
     @Body() PutGrowthDataRequest putGrowthDataRequest,
     @Header("Authorization") String token,
-    @Path("babyId") String babyId,
+    @Path('id') String id,
   );
 }
