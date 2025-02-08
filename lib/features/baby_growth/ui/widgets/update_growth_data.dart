@@ -44,6 +44,7 @@ class UpdateGrowthData extends StatelessWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
+                            const PutGrowthDataBlocListener(),
                             Text(
                               "Update Growth Data",
                               style: TextStyle(
@@ -93,7 +94,8 @@ class UpdateGrowthData extends StatelessWidget {
                                     context
                                         .read<PutGrowthDataCubit>()
                                         .emitPutGrowthDataState(
-                                            "67a5a8c411c8ec3946a504f9");
+                                          babyId,
+                                        );
                                   },
                                 ),
                                 AppTextButton(
@@ -113,7 +115,6 @@ class UpdateGrowthData extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const PutGrowthDataBlocListener(),
                             const SizedBox(
                               height: 16,
                             ),

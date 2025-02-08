@@ -23,15 +23,15 @@ class BabyHeightGrowthScreenBody extends StatefulWidget {
 
 class _BabyHeightGrowthScreenBodyState
     extends State<BabyHeightGrowthScreenBody> {
-  List<Map<String, String>> babies = [
-    {"name": "Karma", "image": "assets/images/baby_profile_girl.png"},
-    {"name": "Zain", "image": "assets/images/baby_profile_boy.png"},
-    {"name": "Loly", "image": "assets/images/baby_profile_girl.png"},
-  ];
+  // List<Map<String, String>> babies = [
+  //   {"name": "Karma", "image": "assets/images/baby_profile_girl.png"},
+  //   {"name": "Zain", "image": "assets/images/baby_profile_boy.png"},
+  //   {"name": "Loly", "image": "assets/images/baby_profile_girl.png"},
+  // ];
 
   String selectedBaby = "Karma";
   String selectedImage = "assets/images/baby_profile_girl.png";
-  String babyId = "67a5ff8229c3b62a46cef643";
+  String babyId = "";
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +134,7 @@ class _BabyHeightGrowthScreenBodyState
             SizedBox(height: 4.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child:  UpdateGrowthData(
+              child: UpdateGrowthData(
                 babyId: babyId,
               ),
             ),
