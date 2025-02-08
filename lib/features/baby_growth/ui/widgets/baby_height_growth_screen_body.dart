@@ -4,6 +4,7 @@ import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/features/baby_growth/logic/get_baby_height_growth_cubit/get_baby_height_growth_cubit.dart';
+import 'package:care_nest/features/baby_growth/logic/get_baby_height_growth_cubit/get_baby_height_growth_state.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/get_baby_height_growth_bloc_builder.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/growth_info_card.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/header_section.dart';
@@ -23,15 +24,9 @@ class BabyHeightGrowthScreenBody extends StatefulWidget {
 
 class _BabyHeightGrowthScreenBodyState
     extends State<BabyHeightGrowthScreenBody> {
-  List<Map<String, String>> babies = [
-    {"name": "Karma", "image": "assets/images/baby_profile_girl.png"},
-    {"name": "Zain", "image": "assets/images/baby_profile_boy.png"},
-    {"name": "Loly", "image": "assets/images/baby_profile_girl.png"},
-  ];
-
-  String selectedBaby = "Karma";
+  String selectedBaby = "Your Baby";
   String selectedImage = "assets/images/baby_profile_girl.png";
-  String babyId = "67a5ff8229c3b62a46cef643";
+  String babyId = "67a5a8c411c8ec3946a504f9";
 
   @override
   Widget build(BuildContext context) {
@@ -61,40 +56,77 @@ class _BabyHeightGrowthScreenBodyState
                 ),
               ],
             ),
-            const GrowthInfoCard(),
-            SizedBox(height: 28.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: const GetBabyHeightGrowthBlocBuilder(),
-            ),
-            SizedBox(height: 28.h),
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4.r),
-                      color: const Color(0xff3F7726),
+            BlocBuilder<GetBabyHeightGrowthCubit, GetBabyHeightGrowthState>(
+              builder: (context, state) {
+                String lastHeightValue = "N/A";
+                String previousHeightValue = "N/A";
+
+                if (state is Success && state.measurementData != null) {
+                  var validHeights = state.measurementData!
+                      .map((e) => e.height)
+                      .where((height) => height != null)
+                      .toList();
+
+                  if (validHeights.isNotEmpty) {
+                    lastHeightValue = "${validHeights.last} cm";
+                    if (validHeights.length > 1) {
+                      previousHeightValue =
+                          "${validHeights[validHeights.length - 2]} cm";
+                    }
+                  }
+                }
+
+                return Column(
+                  children: [
+                    GrowthInfoCard(
+                      lastRecord: 'Last recorded height ',
+                      lastRecordValue: previousHeightValue,
+                      current: 'Your baby’s current height ',
+                      currentValue: lastHeightValue,
                     ),
-                    height: 28.h,
-                    width: 28.w,
-                    child: Icon(Icons.check, color: Colors.white, size: 22.sp),
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    "Your baby has gained 1.5 cm in the last month, which is a healthy growth rate.",
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeightHelper.semiBold,
-                      color: Colors.black,
+                    SizedBox(height: 16.h),
+                    const Divider(color: Colors.grey, thickness: 2),
+                    SizedBox(height: 28.h),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: const GetBabyHeightGrowthBlocBuilder(),
                     ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                  ),
-                ),
-              ],
+                    SizedBox(height: 28.h),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.w),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4.r),
+                              color: const Color(0xff3F7726),
+                            ),
+                            height: 28.h,
+                            width: 28.w,
+                            child: Icon(Icons.check,
+                                color: Colors.white, size: 22.sp),
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            (previousHeightValue != "N/A" &&
+                                    lastHeightValue != "N/A")
+                                ? "Your baby has gained ${(double.parse(lastHeightValue.split(' ')[0]) - double.parse(previousHeightValue.split(' ')[0])).toStringAsFixed(1)} cm in the last month, which is a healthy growth rate."
+                                : "Last recorded height is $lastHeightValue. Keep tracking your baby's growth",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeightHelper.semiBold,
+                              color: Colors.black,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              },
             ),
             SizedBox(height: 20.h),
             const Divider(
@@ -134,7 +166,7 @@ class _BabyHeightGrowthScreenBodyState
             SizedBox(height: 4.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child:  UpdateGrowthData(
+              child: UpdateGrowthData(
                 babyId: babyId,
               ),
             ),

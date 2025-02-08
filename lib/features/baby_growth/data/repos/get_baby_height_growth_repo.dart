@@ -4,7 +4,7 @@ import 'package:care_nest/core/networking/api_error_handler.dart';
 import 'package:care_nest/core/networking/api_result.dart';
 import 'package:care_nest/core/networking/api_service.dart';
 
-import '../models/get_baby_height_growth_response.dart';
+import '../models/get_baby_height_growth/get_baby_height_growth_response.dart';
 
 class GetBabyHeightGrowthRepo {
   final ApiService _apiService;

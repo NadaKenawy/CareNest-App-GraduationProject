@@ -11,6 +11,7 @@ import 'package:care_nest/features/analysis_result/analysis_result_screen.dart';
 import 'package:care_nest/features/baby_cry/ui/recorder_screen.dart';
 import 'package:care_nest/features/baby_growth/logic/get_baby_height_growth_cubit/get_baby_height_growth_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
+import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
 import 'package:care_nest/features/fcm/logic/get_all_notifications_cubit/get_all_notifications_cubit.dart';
@@ -271,16 +272,30 @@ abstract class AppRouter {
       GoRoute(
           path: kBabyHeightGrowthScreen,
           builder: (context, state) {
-            return BlocProvider(
-              create: (context) => getIt<GetBabyHeightGrowthCubit>(),
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => getIt<GetBabyHeightGrowthCubit>(),
+                ),
+                BlocProvider(
+                  create: (context) => getIt<LatestGrowthDataCubit>(),
+                ),
+              ],
               child: const BabyHeightGrowthScreen(),
             );
           }),
       GoRoute(
           path: kBabyWeightGrowthScreen,
           builder: (context, state) {
-            return BlocProvider(
-              create: (context) => getIt<GetBabyWeightGrowthCubit>(),
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => getIt<GetBabyWeightGrowthCubit>(),
+                ),
+                BlocProvider(
+                  create: (context) => getIt<LatestGrowthDataCubit>(),
+                ),
+              ],
               child: const BabyWeightGrowthScreenBody(),
             );
           }),

@@ -30,6 +30,7 @@ class ApiConstants {
   static const String getHeightGrowth = "dataGrowth/height/{babyid}";
   static const String getWeightGrowth = "dataGrowth/weight/{babyid}";
   static const String putGrowthData = "dataGrowth/{id}";
+  static const String latestGrowthData = "dataGrowth/LatestGrowthData/{id}";
 }
 
 class ApiErrors {

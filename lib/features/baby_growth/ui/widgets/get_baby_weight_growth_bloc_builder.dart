@@ -1,4 +1,4 @@
-import 'package:care_nest/features/baby_growth/data/models/get_baby_weight_growth_response.dart';
+import 'package:care_nest/features/baby_growth/data/models/get_baby_weight_growth/get_baby_weight_growth_response.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

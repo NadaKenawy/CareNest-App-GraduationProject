@@ -1,5 +1,5 @@
 
-import 'package:care_nest/features/baby_growth/data/models/get_baby_weight_growth_response.dart';
+import 'package:care_nest/features/baby_growth/data/models/get_baby_weight_growth/get_baby_weight_growth_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../../core/networking/api_error_model.dart';
 part 'get_baby_weight_growth_state.freezed.dart';

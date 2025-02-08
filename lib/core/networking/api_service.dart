@@ -5,8 +5,9 @@ import 'package:care_nest/features/add_baby/data/models/add_baby/add_baby_respon
 import 'package:care_nest/features/add_baby/data/models/delete_baby/delete_baby_response.dart';
 import 'package:care_nest/features/add_baby/data/models/update_baby/update_baby_request.dart';
 import 'package:care_nest/features/add_baby/data/models/update_baby/update_baby_response.dart';
-import 'package:care_nest/features/baby_growth/data/models/get_baby_height_growth_response.dart';
-import 'package:care_nest/features/baby_growth/data/models/get_baby_weight_growth_response.dart';
+import 'package:care_nest/features/baby_growth/data/models/get_baby_height_growth/get_baby_height_growth_response.dart';
+import 'package:care_nest/features/baby_growth/data/models/get_baby_weight_growth/get_baby_weight_growth_response.dart';
+import 'package:care_nest/features/baby_growth/data/models/latest_growth_data/latest_growth_data_response.dart';
 import 'package:care_nest/features/baby_growth/data/models/put_growth_data/put_growth_data_request.dart';
 import 'package:care_nest/features/baby_growth/data/models/put_growth_data/put_growth_data_response.dart';
 import 'package:care_nest/features/fcm/data/models/delete_all_notifications/delete_all_notifications_response.dart';
@@ -179,6 +180,12 @@ abstract class ApiService {
   Future<PutGrowthDataResponse> putGrowthData(
     @Body() PutGrowthDataRequest putGrowthDataRequest,
     @Header("Authorization") String token,
+    @Path('id') String id,
+  );
+
+  @GET(ApiConstants.latestGrowthData)
+  Future<LatestGrowthDataResponse> getLatestGrowthData(
+    @Header('Authorization') String token,
     @Path('id') String id,
   );
 }
