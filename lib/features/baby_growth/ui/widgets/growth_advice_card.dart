@@ -24,7 +24,7 @@ class GrowthAdviceCard extends StatelessWidget {
               : (growthData.heightStatus ?? "Unknown");
 
           final Color statusColor;
-          if (status == 'Normal') {
+          if (status == 'Normal' || status == 'Average') {
             statusColor = Colors.green;
           } else if (status == 'Overweight' || status == 'Tall') {
             statusColor = Colors.orange;
@@ -38,7 +38,7 @@ class GrowthAdviceCard extends StatelessWidget {
                 : "Your baby’s height is on track! Keep up the good care. ✅";
           } else if (status == 'Underweight') {
             adviceMessage =
-                "A little extra nutrition will help! Add more proteins and healthy fats. 🍼✨";
+                "A little extra nutrition will help! Add more proteins and healthy fats. ❤️";
           } else if (status == 'Overweight') {
             adviceMessage =
                 "Active playtime and a balanced diet will keep your baby healthy. 🍼✨";
@@ -47,7 +47,7 @@ class GrowthAdviceCard extends StatelessWidget {
                 "Every child grows at their own pace. Keep monitoring with love. ❤️";
           } else if (status == 'Tall') {
             adviceMessage =
-                "Growing strong! Keep up with nutritious meals and happy moments. ❤️";
+                "Growing strong! Keep up with nutritious meals and happy moments. 🍼✨";
           } else {
             adviceMessage =
                 "No data yet, but you’re doing great! Keep tracking. 👶";
@@ -56,6 +56,7 @@ class GrowthAdviceCard extends StatelessWidget {
           return Container(
             padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
+              color: statusColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(16.r),
               border: Border.all(color: statusColor, width: 2.w),
             ),

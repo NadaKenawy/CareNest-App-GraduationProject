@@ -38,6 +38,7 @@ class UpdateGrowthData extends StatelessWidget {
                       padding: EdgeInsets.only(
                         left: 16.w,
                         right: 16.w,
+                        top: 16.h,
                         bottom: MediaQuery.of(context).viewInsets.bottom,
                       ),
                       child: SingleChildScrollView(
