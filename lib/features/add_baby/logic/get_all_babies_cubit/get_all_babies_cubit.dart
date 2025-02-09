@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:care_nest/features/add_baby/data/repos/get_all_babies_repo.dart';
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +20,9 @@ class GetAllBabiesCubit extends Cubit<GetAllBabiesState> {
 
     response.when(
       success: (getAllBabiesResponse) {
+        SharedPrefHelper.setData(
+            SharedPrefKeys.babyId, getAllBabiesResponse.babiesData!.first.id);
+        log('babyId: ${getAllBabiesResponse.babiesData!.first.id}');
         emit(GetAllBabiesState.success(getAllBabiesResponse.babiesData));
       },
       failure: (error) {

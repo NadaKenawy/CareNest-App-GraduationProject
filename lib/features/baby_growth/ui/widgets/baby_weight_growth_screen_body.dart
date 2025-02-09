@@ -1,3 +1,4 @@
+import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
@@ -13,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'update_weight_growth_data.dart';
 
@@ -29,6 +31,29 @@ class _BabyWeightGrowthScreenBodyState
   String selectedBaby = "Your Baby";
   String selectedImage = "assets/images/baby_profile_girl.png";
   String babyId = "67a5a8c411c8ec3946a504f9";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadDefaultBaby(); // نحمل الطفل الافتراضي أول ما الشاشة تفتح
+  }
+
+  Future<void> _loadDefaultBaby() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    final defaultBabyId =
+        sharedPreferences.getString(SharedPrefKeys.babyId) ?? "";
+
+    if (defaultBabyId.isNotEmpty) {
+      setState(() {
+        babyId = defaultBabyId;
+      });
+
+      context
+          .read<GetBabyWeightGrowthCubit>()
+          .getBabyWeightGrowth(defaultBabyId);
+      context.read<LatestGrowthDataCubit>().latestGrowthData(defaultBabyId);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
