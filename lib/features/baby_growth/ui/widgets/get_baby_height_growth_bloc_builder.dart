@@ -2,6 +2,7 @@ import 'package:care_nest/features/baby_growth/data/models/get_baby_height_growt
 import 'package:care_nest/features/baby_growth/logic/get_baby_height_growth_cubit/get_baby_height_growth_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/get_baby_height_growth_cubit/get_baby_height_growth_state.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_height_growth_chart.dart';
+import 'package:care_nest/features/baby_growth/ui/widgets/put_growth_data_skeletonizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +17,7 @@ class GetBabyHeightGrowthBlocBuilder extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
             loading: () {
-              return setupLoading();
+              return const PutGrowthDataSkeletonizer();
             },
             success: (heightData) {
               var heights = List<MeasurementData>.from(heightData!);

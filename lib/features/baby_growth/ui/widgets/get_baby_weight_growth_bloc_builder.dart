@@ -1,5 +1,6 @@
 import 'package:care_nest/features/baby_growth/data/models/get_baby_weight_growth/get_baby_weight_growth_response.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_chart.dart';
+import 'package:care_nest/features/baby_growth/ui/widgets/put_growth_data_skeletonizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
@@ -16,7 +17,7 @@ class GetBabyWeightGrowthBlocBuilder extends StatelessWidget {
       builder: (context, state) {
         return state.maybeWhen(
             loading: () {
-              return setupLoading();
+              return const PutGrowthDataSkeletonizer();
             },
             success: (weightData) {
               var weights = List<MeasurementData>.from(weightData!);
