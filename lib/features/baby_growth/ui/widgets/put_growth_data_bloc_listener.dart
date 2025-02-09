@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/theme/colors_manager.dart';
 
 class PutGrowthDataBlocListener extends StatelessWidget {
-  const PutGrowthDataBlocListener({super.key});
-
+  const PutGrowthDataBlocListener({super.key, required this.babyId});
+  final String babyId;
   @override
   Widget build(BuildContext context) {
     return BlocListener<PutGrowthDataCubit, PutGrowthDataState>(
@@ -16,7 +16,7 @@ class PutGrowthDataBlocListener extends StatelessWidget {
           current is PutGrowthDataLoading ||
           current is PutGrowthDataSuccess ||
           current is PutGrowthDataError,
-  listener: (context, state) {
+      listener: (context, state) {
         state.whenOrNull(
           putGrowthDataLoading: () => showLoadingIndicator(context),
           putGrowthDataSuccess: (putGrowthDataSuccess) {
