@@ -4,7 +4,9 @@ import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_state.dart';
+import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/get_baby_weight_growth_bloc_builder.dart';
+import 'package:care_nest/features/baby_growth/ui/widgets/growth_advice_card.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/growth_info_card.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/header_section.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/update_growth_data.dart';
@@ -50,6 +52,7 @@ class _BabyWeightGrowthScreenBodyState
                     context
                         .read<GetBabyWeightGrowthCubit>()
                         .getBabyWeightGrowth(id);
+                    context.read<LatestGrowthDataCubit>().latestGrowthData(id);
                   },
                 ),
               ],
@@ -77,6 +80,8 @@ class _BabyWeightGrowthScreenBodyState
                 return Column(
                   children: [
                     GrowthInfoCard(
+                      isHeightCard: false,
+                      status: 'Normal',
                       lastRecord: 'Last recorded weight ',
                       lastRecordValue: previousRecordValue,
                       current: 'Your baby’s current weight ',
@@ -90,37 +95,9 @@ class _BabyWeightGrowthScreenBodyState
                       child: const GetBabyWeightGrowthBlocBuilder(),
                     ),
                     SizedBox(height: 28.h),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.w),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4.r),
-                              color: const Color(0xff3F7726),
-                            ),
-                            height: 28.h,
-                            width: 28.w,
-                            child: Icon(Icons.check,
-                                color: Colors.white, size: 22.sp),
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            (previousRecordValue != "N/A" &&
-                                    lastRecordValue != "N/A")
-                                ? "Your baby has gained ${(double.parse(lastRecordValue.split(' ')[0]) - double.parse(previousRecordValue.split(' ')[0])).toStringAsFixed(1)} kg in the last month, which is a healthy growth rate."
-                                : "Last recorded weight is $lastRecordValue. Keep tracking your baby's growth",
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeightHelper.semiBold,
-                              color: Colors.black,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                          ),
-                        ),
-                      ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: const GrowthAdviceCard(measurementType: "weight"),
                     ),
                   ],
                 );

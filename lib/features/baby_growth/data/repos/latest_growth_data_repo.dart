@@ -9,9 +9,9 @@ class LatestGrowthDataRepo {
 
   LatestGrowthDataRepo(this._apiService);
   Future<ApiResult<LatestGrowthDataResponse>> getLatestGrowthData(
-      String token, String babyid) async {
+      String token, String id) async {
     try {
-      final response = await _apiService.getLatestGrowthData(token, babyid);
+      final response = await _apiService.getLatestGrowthData(token, id);
       log('API Response: ${response.data}');
       return ApiResult.success(response);
     } catch (error) {
