@@ -10,7 +10,7 @@ import 'package:care_nest/features/baby_growth/ui/widgets/get_baby_height_growth
 import 'package:care_nest/features/baby_growth/ui/widgets/growth_advice_card.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/growth_info_card.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/header_section.dart';
-import 'package:care_nest/features/baby_growth/ui/widgets/update_growth_data.dart';
+import 'package:care_nest/features/baby_growth/ui/widgets/update_height_growth_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -143,7 +143,7 @@ class _BabyHeightGrowthScreenBodyState
             SizedBox(height: 4.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: UpdateGrowthData(
+              child: UpdateHeightGrowthData(
                 babyId: babyId,
               ),
             ),

@@ -14,10 +14,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
-
-class UpdateGrowthData extends StatelessWidget {
-  const UpdateGrowthData({
+class UpdateHeightGrowthData extends StatelessWidget {
+  const UpdateHeightGrowthData({
     super.key,
     required this.babyId,
   });
@@ -41,9 +39,6 @@ class UpdateGrowthData extends StatelessWidget {
                 ),
                 BlocProvider(
                   create: (context) => getIt<GetBabyHeightGrowthCubit>(),
-                ),
-                BlocProvider(
-                  create: (context) => getIt<GetBabyWeightGrowthCubit>(),
                 ),
               ],
               child: Builder(
@@ -149,9 +144,6 @@ class UpdateGrowthData extends StatelessWidget {
             context
                 .read<GetBabyHeightGrowthCubit>()
                 .getBabyHeightGrowth(babyId);
-            context
-                .read<GetBabyWeightGrowthCubit>()
-                .getBabyWeightGrowth(babyId);
           } else {
             log('update growth not done');
           }
