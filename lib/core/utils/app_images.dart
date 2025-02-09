@@ -10,10 +10,6 @@ class AppImages {
   static const String babyWeightingImage = 'assets/images/baby-weighting.png';
   static const String boyBabyImage = 'assets/images/BoyBaby.png';
   static const String girlBabyImage = 'assets/images/GirlBaby.png';
-  static const String gradientGirlImage = 'assets/images/gradientGirl.png';
-  static const String gradientBoyImage = 'assets/images/gradientBoy.png';
-  static const String gradientBoyAndGirlImage =
-      'assets/images/gradientBoyAndGirl.png';
   static const String boyAndGirlImage = 'assets/images/BoyAndGirl.png';
   static const String boyProfileImage = 'assets/images/baby_profile_boy.png';
   static const String girlProfileImage = 'assets/images/baby_profile_girl.png';

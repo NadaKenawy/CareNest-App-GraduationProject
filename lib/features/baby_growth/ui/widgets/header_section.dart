@@ -12,7 +12,8 @@ class HeaderSection extends StatelessWidget {
     super.key,
     required this.selectedBaby,
     required this.selectedImage,
-    required this.onBabySelected, required this.babyId,
+    required this.onBabySelected,
+    required this.babyId,
   });
 
   @override
@@ -45,9 +46,8 @@ class HeaderSection extends StatelessWidget {
             BabiesDropdown(
               selectedImage: selectedImage,
               onBabySelected: (id, name, image) {
-                onBabySelected(id, name, image); 
+                onBabySelected(id, name, image);
               },
-             
             ),
           ],
         ),

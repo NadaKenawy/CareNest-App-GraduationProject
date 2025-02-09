@@ -1,3 +1,4 @@
+import 'package:care_nest/core/utils/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,8 +25,8 @@ class BabiesDropdown extends StatelessWidget {
                 return {
                   "name": baby.name ?? "Unknown",
                   "image": baby.gender == 'Male'
-                      ? "assets/images/baby_profile_boy.png"
-                      : "assets/images/baby_profile_girl.png",
+                      ? AppImages.boyProfileImage
+                      : AppImages.girlProfileImage,
                   "id": baby.id ?? "Unknown",
                 };
               }).toList() ??

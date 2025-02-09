@@ -1,19 +1,19 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
-import 'package:care_nest/features/reminders/medications/data/models/get_all_babies_medication_schedule/get_all_babies_medication_schedule_response.dart';
-import 'package:care_nest/features/reminders/medications/data/models/get_all_medication_schedule/get_all_medication_schedule_response.dart';
+import 'package:care_nest/core/utils/app_images.dart';
+
+import 'package:care_nest/features/reminders/medications/logic/get_all_babies_medication_schedule_cubit/get_all_babies_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/medications/ui/widgets/get_all_babies_medicines_bloc_builder.dart';
+import 'package:care_nest/features/reminders/medications/ui/widgets/medicines_sidebar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:care_nest/features/reminders/medications/ui/widgets/get_all_medicines_bloc_builder.dart';
-import 'package:care_nest/features/reminders/medications/ui/widgets/medicines_sidebar.dart';
+
 import 'package:care_nest/features/reminders/medications/ui/widgets/week_days_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -30,8 +30,7 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
   String? babyId;
   int _selectedIndex = 0;
   String? selectedBabyName = '';
-  List<MedicationData> medicinesList = [];
-  List<BabiesMedicationData> babiesMedicinesList = [];
+  String selectedBabyImage = AppImages.boyAndGirlImage;
   bool isLoading = true;
 
   @override
@@ -58,6 +57,35 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
     }
   }
 
+  void onDropdownItemSelected(
+      String? id, String name, String image, int index) async {
+    if (index == 0) {
+      setState(() {
+        babyId = id;
+        selectedBabyName = name;
+        selectedBabyImage = image;
+      });
+      await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyId, id!);
+      await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyName, name);
+      context
+          .read<GetAllMedicationScheduleCubit>()
+          .getAllMedicationSchedule(id);
+    } else if (index == 1) {
+      // تم اختيار All Reminders
+      setState(() {
+        babyId = null;
+        selectedBabyName = "All Reminders";
+        selectedBabyImage = AppImages.boyAndGirlImage;
+      });
+      context
+          .read<GetAllBabiesMedicationScheduleCubit>()
+          .getAllBabiesMedicationSchedule();
+    }
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     DateTime startDate =
@@ -67,6 +95,7 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
 
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 80.h,
         backgroundColor: Colors.white,
         title: Text(
           _selectedIndex == 1
@@ -77,29 +106,14 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
           style: TextStyles.font20BlackSemiBold,
         ),
         actions: [
-          Builder(
-            builder: (context) {
-              return IconButton(
-                icon: Icon(Icons.menu, size: 24.sp, color: Colors.black),
-                onPressed: () {
-                  Scaffold.of(context).openEndDrawer();
-                },
-              );
-            },
-          ),
+          Padding(
+            padding: EdgeInsets.only(right: 16.w),
+            child: MedicationsDropdown(
+              selectedImage: selectedBabyImage,
+              onItemSelected: onDropdownItemSelected,
+            ),
+          )
         ],
-      ),
-      endDrawer: MedicinesDrawer(
-        onItemSelected: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        selectedBabyName: (String name) {
-          setState(() {
-            selectedBabyName = name;
-          });
-        },
       ),
       floatingActionButton: _selectedIndex == 1
           ? null
@@ -153,11 +167,11 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
                       child: CircularProgressIndicator(),
                     ),
                   )
-                : selectedBabyName == null || selectedBabyName!.isEmpty
+                : (selectedBabyName == null || selectedBabyName!.isEmpty)
                     ? Expanded(
                         child: Center(
                           child: Text(
-                            'Select a baby from the sidebar to view their medication.',
+                            'Select a baby from the dropdown to view their medication.',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontWeight: FontWeightHelper.semiBold,

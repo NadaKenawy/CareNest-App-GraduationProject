@@ -1,6 +1,7 @@
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
+import 'package:care_nest/core/utils/app_images.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/ui/widgets/get_baby_vaccines_bloc_builder.dart';
 import 'package:care_nest/features/reminders/vaccinations/ui/widgets/vaccines_sidebar.dart';
@@ -18,6 +19,7 @@ class VaccinationsScreenBody extends StatefulWidget {
 class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
   String? selectedBabyName = '';
   String? selectedBabyId = '';
+  String selectedBabyImage = AppImages.boyAndGirlImage;
   bool isLoading = true;
 
   @override
@@ -43,7 +45,7 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
     }
   }
 
-  void onBabySelected(String name, String id) async {
+  void onBabySelected(String id, String name, String image) async {
     setState(() {
       isLoading = true;
     });
@@ -53,6 +55,7 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
     setState(() {
       selectedBabyName = name;
       selectedBabyId = id;
+      selectedBabyImage = image;
       isLoading = false;
     });
 
@@ -63,6 +66,7 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 80.h,
         title: Text(
           selectedBabyName?.isNotEmpty == true
               ? "${selectedBabyName![0].toUpperCase()}${selectedBabyName!.substring(1)}'s Vaccinations"
@@ -74,24 +78,25 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
         ),
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
-      ),
-      endDrawer: VaccinationsSidebar(
-        selectedBabyName: selectedBabyName ?? '',
-        onBabySelected: (name, id) {
-          onBabySelected(name, id);
-        },
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: 16.w),
+            child: VaccinationsSidebar(
+              selectedImage: selectedBabyImage,
+              onBabySelected: onBabySelected,
+            ),
+          )
+        ],
       ),
       body: isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
+          ? const Center(child: CircularProgressIndicator())
           : (selectedBabyId != null && selectedBabyId!.isNotEmpty)
               ? const GetBabyVaccinesBlocBuilder()
               : Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Center(
                     child: Text(
-                      'Select a baby from the sidebar to view their vaccinations.',
+                      'Select a baby from the drop down to view their vaccinations.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeightHelper.semiBold,

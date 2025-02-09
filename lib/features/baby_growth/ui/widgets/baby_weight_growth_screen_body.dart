@@ -1,7 +1,12 @@
+import 'dart:developer';
+import 'package:care_nest/core/helpers/shared_pref_helper.dart';
+import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
+import 'package:care_nest/core/utils/app_images.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
+import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_state.dart';
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
@@ -26,8 +31,46 @@ class BabyWeightGrowthScreenBody extends StatefulWidget {
 class _BabyWeightGrowthScreenBodyState
     extends State<BabyWeightGrowthScreenBody> {
   String selectedBaby = "Your Baby";
-  String selectedImage = "assets/images/baby_profile_girl.png";
-  String babyId = "67a5a8c411c8ec3946a504f9";
+  String selectedImage = AppImages.girlProfileImage;
+  String babyId = "";
+
+  @override
+  void initState() {
+    super.initState();
+    loadBabyData();
+  }
+
+  Future<void> loadBabyData() async {
+    final id = await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyId);
+    final name =
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyName);
+    setState(() {
+      babyId = id;
+      selectedBaby = name;
+    });
+    if (babyId.isNotEmpty) {
+      final state = context.read<GetAllBabiesCubit>().state;
+      if (state is Success) {
+        state.maybeWhen(
+          success: (babiesData) {
+            try {
+              final baby = babiesData!.firstWhere((b) => b.id == babyId);
+              setState(() {
+                selectedImage = baby.gender == 'Male'
+                    ? AppImages.boyProfileImage
+                    : AppImages.girlProfileImage;
+              });
+            } catch (e) {
+              log("Error fetching baby data: $e");
+            }
+          },
+          orElse: () {},
+        );
+      }
+      context.read<GetBabyWeightGrowthCubit>().getBabyWeightGrowth(babyId);
+      context.read<LatestGrowthDataCubit>().latestGrowthData(babyId);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,26 +79,24 @@ class _BabyWeightGrowthScreenBodyState
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                HeaderSection(
-                  babyId: babyId,
-                  selectedBaby: selectedBaby,
-                  selectedImage: selectedImage,
-                  onBabySelected: (id, name, image) {
-                    setState(() {
-                      selectedBaby = name;
-                      selectedImage = image;
-                      babyId = id;
-                    });
-                    context
-                        .read<GetBabyWeightGrowthCubit>()
-                        .getBabyWeightGrowth(id);
-                    context.read<LatestGrowthDataCubit>().latestGrowthData(id);
-                  },
-                ),
-              ],
+            HeaderSection(
+              babyId: babyId,
+              selectedBaby: selectedBaby,
+              selectedImage: selectedImage,
+              onBabySelected: (id, name, image) {
+                setState(() {
+                  selectedBaby = name;
+                  selectedImage = image;
+                  babyId = id;
+                });
+                context
+                    .read<GetBabyWeightGrowthCubit>()
+                    .getBabyWeightGrowth(id);
+                context.read<LatestGrowthDataCubit>().latestGrowthData(id);
+                SharedPrefHelper.setSecuredString(SharedPrefKeys.babyId, id);
+                SharedPrefHelper.setSecuredString(
+                    SharedPrefKeys.babyName, name);
+              },
             ),
             BlocBuilder<GetBabyWeightGrowthCubit, GetBabyWeightGrowthState>(
               builder: (context, state) {
