@@ -128,7 +128,7 @@ class BabyHeightGrowthChart extends StatelessWidget {
             lineBarsData: [
               LineChartBarData(
                 spots: List.generate(
-                  normalHeights.length,
+                  12,
                   (index) => FlSpot(index.toDouble(), normalHeights[index]),
                 ),
                 isCurved: true,

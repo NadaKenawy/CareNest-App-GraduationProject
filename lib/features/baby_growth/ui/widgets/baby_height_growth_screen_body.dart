@@ -117,14 +117,14 @@ class _BabyHeightGrowthScreenBodyState
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     AppTextButton(
-                      buttonText: 'Height per growth',
+                      buttonText: 'Height per age',
                       textStyle: TextStyles.font16WhiteBold,
                       buttonWidth: 168.w,
                       buttonColor: ColorsManager.secondryBlueColor,
                       onPressed: () {},
                     ),
                     AppTextButton(
-                      buttonText: 'Weight for age',
+                      buttonText: 'Weight for growth',
                       textStyle: TextStyle(
                           fontSize: 16.sp, fontWeight: FontWeightHelper.bold),
                       buttonWidth: 168.w,
