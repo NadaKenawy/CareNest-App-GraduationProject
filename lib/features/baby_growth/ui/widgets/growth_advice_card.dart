@@ -32,7 +32,7 @@ class GrowthAdviceCard extends StatelessWidget {
             statusColor = Colors.red;
           }
           String adviceMessage;
-          if (status == 'Normal') {
+          if (status == 'Normal' || status == 'Average') {
             adviceMessage = isWeight
                 ? "Great job, mama! Keep providing a balanced diet to support steady growth. ✅"
                 : "Your baby’s height is on track! Keep up the good care. ✅";

@@ -20,7 +20,7 @@ class LatestGrowthDataCubit extends Cubit<LatestGrowthDataState> {
 
     response.when(
       success: (latestGrowthDataResponse) {
-        log('Decoded Dataaaaaa: ${latestGrowthDataResponse.data}');
+        log('Decoded Data: ${latestGrowthDataResponse.data}');
 
         emit(
           LatestGrowthDataState.success(latestGrowthDataResponse.data!),
