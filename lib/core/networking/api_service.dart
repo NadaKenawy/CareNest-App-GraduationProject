@@ -189,3 +189,10 @@ abstract class ApiService {
     @Path('id') String id,
   );
 }
+
+class ParseErrorLogger {
+  void logError(
+      Object error, StackTrace stackTrace, RequestOptions requestOptions) {
+    log('Error: $error\nStacktrace: $stackTrace\nRequestOptions: $requestOptions');
+  }
+}

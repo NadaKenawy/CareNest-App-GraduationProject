@@ -53,6 +53,12 @@ class MedicationsDropdown extends StatelessWidget {
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
                 ),
                 child: Center(
                   child: PopupMenuButton<Map<String, String>>(

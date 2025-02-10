@@ -15,6 +15,12 @@ LatestGrowthDataResponse _$LatestGrowthDataResponseFromJson(
       success: json['success'] as bool,
     );
 
+Map<String, dynamic> _$LatestGrowthDataResponseToJson(
+        LatestGrowthDataResponse instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+      'success': instance.success,
+    };
 
 LatestGrowthData _$LatestGrowthDataFromJson(Map<String, dynamic> json) =>
     LatestGrowthData(
@@ -24,3 +30,10 @@ LatestGrowthData _$LatestGrowthDataFromJson(Map<String, dynamic> json) =>
       weightStatus: json['weightStatus'] as String?,
     );
 
+Map<String, dynamic> _$LatestGrowthDataToJson(LatestGrowthData instance) =>
+    <String, dynamic>{
+      'latestHeight': instance.latestHeight,
+      'latestWeight': instance.latestWeight,
+      'heightStatus': instance.heightStatus,
+      'weightStatus': instance.weightStatus,
+    };

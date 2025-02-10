@@ -45,6 +45,12 @@ class VaccinationsSidebar extends StatelessWidget {
                 width: 28.w,
                 height: 28.h,
                 decoration: const BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
                   shape: BoxShape.circle,
                   color: Colors.white,
                 ),
