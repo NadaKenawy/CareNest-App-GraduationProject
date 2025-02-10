@@ -22,7 +22,7 @@ class GetBabyVaccinesRepo {
       }
 
       final response = await _apiService.getBabyVaccines(token, babyId);
-      cacheBabyVaccines(babyId, response); // ✅ تخزين البيانات باستخدام الفانكشن الصحيحة
+      cacheBabyVaccines(babyId, response); 
       return ServerResult.success(response);
     } catch (error) {
       return ServerResult.failure(ServerErrorHandler.handle(error));
@@ -34,7 +34,7 @@ class GetBabyVaccinesRepo {
   }
 
   void cacheBabyVaccines(String babyId, GetBabyVaccinesResponse response) {
-    _vaccinesBox.put(babyId, response); // ✅ استخدم نفس الـ Box
+    _vaccinesBox.put(babyId, response); 
     log('💾 Cached vaccines for babyId: $babyId');
   }
 }
