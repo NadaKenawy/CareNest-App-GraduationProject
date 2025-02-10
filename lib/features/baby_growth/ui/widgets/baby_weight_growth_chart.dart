@@ -83,6 +83,7 @@ class BabyWeightGrowthChart extends StatelessWidget {
                 sideTitles: SideTitles(
                   showTitles: true,
                   reservedSize: 40,
+                  interval: 3.4,
                   getTitlesWidget: (value, meta) {
                     return Text(
                       '${value.toInt()} kg',
@@ -95,6 +96,7 @@ class BabyWeightGrowthChart extends StatelessWidget {
                 sideTitles: SideTitles(
                   showTitles: true,
                   reservedSize: 20,
+                  interval: 1.3,
                   getTitlesWidget: (value, meta) {
                     List<String> months = [
                       'M1',
@@ -128,7 +130,7 @@ class BabyWeightGrowthChart extends StatelessWidget {
             lineBarsData: [
               LineChartBarData(
                 spots: List.generate(
-                  12,
+                  normalWeights.length,
                   (index) => FlSpot(index.toDouble(), normalWeights[index]),
                 ),
                 isCurved: true,

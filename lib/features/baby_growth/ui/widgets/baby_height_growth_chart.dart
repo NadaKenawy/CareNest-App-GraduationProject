@@ -95,6 +95,7 @@ class BabyHeightGrowthChart extends StatelessWidget {
                 sideTitles: SideTitles(
                   showTitles: true,
                   reservedSize: 20,
+                  interval: 1.3,
                   getTitlesWidget: (value, meta) {
                     List<String> months = [
                       'M1',
@@ -128,7 +129,7 @@ class BabyHeightGrowthChart extends StatelessWidget {
             lineBarsData: [
               LineChartBarData(
                 spots: List.generate(
-                  12,
+                  normalHeights.length,
                   (index) => FlSpot(index.toDouble(), normalHeights[index]),
                 ),
                 isCurved: true,
