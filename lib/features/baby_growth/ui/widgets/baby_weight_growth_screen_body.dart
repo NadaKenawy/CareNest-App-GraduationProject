@@ -1,3 +1,4 @@
+
 import 'dart:developer';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/helpers/constants.dart';
@@ -14,11 +15,12 @@ import 'package:care_nest/features/baby_growth/ui/widgets/get_baby_weight_growth
 import 'package:care_nest/features/baby_growth/ui/widgets/growth_advice_card.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/growth_info_card.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/header_section.dart';
-import 'package:care_nest/features/baby_growth/ui/widgets/update_growth_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'update_weight_growth_data.dart';
 
 class BabyWeightGrowthScreenBody extends StatefulWidget {
   const BabyWeightGrowthScreenBody({super.key});
@@ -69,6 +71,29 @@ class _BabyWeightGrowthScreenBodyState
       }
       context.read<GetBabyWeightGrowthCubit>().getBabyWeightGrowth(babyId);
       context.read<LatestGrowthDataCubit>().latestGrowthData(babyId);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadDefaultBaby(); // نحمل الطفل الافتراضي أول ما الشاشة تفتح
+  }
+
+  Future<void> _loadDefaultBaby() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    final defaultBabyId =
+        sharedPreferences.getString(SharedPrefKeys.babyId) ?? "";
+
+    if (defaultBabyId.isNotEmpty) {
+      setState(() {
+        babyId = defaultBabyId;
+      });
+
+      context
+          .read<GetBabyWeightGrowthCubit>()
+          .getBabyWeightGrowth(defaultBabyId);
+      context.read<LatestGrowthDataCubit>().latestGrowthData(defaultBabyId);
     }
   }
 
@@ -181,7 +206,7 @@ class _BabyWeightGrowthScreenBodyState
             SizedBox(height: 4.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: UpdateGrowthData(
+              child: UpdateWeightGrowthData(
                 babyId: babyId,
               ),
             ),

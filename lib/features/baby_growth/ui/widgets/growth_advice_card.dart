@@ -5,6 +5,8 @@ import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_state.dart';
 
+import 'put_growth_data_skeletonizer.dart';
+
 class GrowthAdviceCard extends StatelessWidget {
   final String measurementType;
 
@@ -16,6 +18,9 @@ class GrowthAdviceCard extends StatelessWidget {
 
     return BlocBuilder<LatestGrowthDataCubit, LatestGrowthDataState>(
       builder: (context, state) {
+        if (state is Loading) {
+          return const PutGrowthDataSkeletonizer();
+        }
         if (state is Success) {
           final growthData = state.latestGrowthData;
 

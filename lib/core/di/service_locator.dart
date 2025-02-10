@@ -164,7 +164,7 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<MarkVaccineRepo>(() => MarkVaccineRepo(getIt()));
   getIt.registerFactory<MarkVaccineCubit>(() => MarkVaccineCubit(getIt()));
 
-  //get baby growth data
+  //get baby height growth data
   getIt.registerLazySingleton<GetBabyHeightGrowthRepo>(
       () => GetBabyHeightGrowthRepo(getIt()));
   getIt.registerFactory<GetBabyHeightGrowthCubit>(
@@ -182,7 +182,7 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<PutGrowthDataCubit>(
       () => PutGrowthDataCubit(getIt(), BabyData()));
 
-  //put baby growth data
+  //latest growth data
   getIt.registerLazySingleton<LatestGrowthDataRepo>(
       () => LatestGrowthDataRepo(getIt()));
   getIt.registerFactory<LatestGrowthDataCubit>(
