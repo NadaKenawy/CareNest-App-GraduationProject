@@ -124,7 +124,7 @@ class _BabyWeightGrowthScreenBodyState
                     GrowthInfoCard(
                       isHeightCard: false,
                       status: 'Normal',
-                      lastRecord: 'Last recorded weight ',
+                      lastRecord: 'Last month recorded weight ',
                       lastRecordValue: previousRecordValue,
                       current: 'Your baby’s current weight ',
                       currentValue: lastRecordValue,

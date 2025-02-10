@@ -53,6 +53,7 @@ class PutGrowthDataCubit extends Cubit<PutGrowthDataState> {
           log('Final Baby ID Sent: $id');
           log('Update Baby Data Success: $putGrowthDataResponse');
           emit(PutGrowthDataState.putGrowthDataSuccess(putGrowthDataResponse));
+          
         },
         failure: (error) {
           String errorMessage = error.signUpErrorModel.errors?.first.msg ??

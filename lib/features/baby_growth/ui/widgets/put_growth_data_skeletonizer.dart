@@ -17,7 +17,7 @@ class PutGrowthDataSkeletonizer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                'Last recorded height',
+                'Last month recorded height',
                 style: TextStyle(
                     fontSize: 12.sp,
                     color: Colors.grey,

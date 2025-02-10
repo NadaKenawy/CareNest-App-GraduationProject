@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class LatestGrowthDataCubit extends Cubit<LatestGrowthDataState> {
   LatestGrowthDataCubit(this._latestGrowthDataRepo)
       : super(const LatestGrowthDataState.initial());
+
   final LatestGrowthDataRepo _latestGrowthDataRepo;
 
   void latestGrowthData(String id) async {
@@ -21,7 +22,6 @@ class LatestGrowthDataCubit extends Cubit<LatestGrowthDataState> {
     response.when(
       success: (latestGrowthDataResponse) {
         log('Decoded Data: ${latestGrowthDataResponse.data}');
-
         emit(
           LatestGrowthDataState.success(latestGrowthDataResponse.data!),
         );

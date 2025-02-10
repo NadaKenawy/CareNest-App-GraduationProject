@@ -64,7 +64,7 @@ class GrowthInfoCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      lastRecord ?? 'Last recorded data',
+                      lastRecord ?? 'Last month recorded data',
                       style: TextStyle(
                         fontSize: 12.sp,
                         color: Colors.grey,

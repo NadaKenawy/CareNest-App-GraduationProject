@@ -6,6 +6,7 @@ import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
 import 'package:care_nest/features/baby_growth/logic/get_baby_height_growth_cubit/get_baby_height_growth_cubit.dart';
+import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/put_growth_data_cubit/put_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/put_growth_data_bloc_listener.dart';
 import 'package:flutter/material.dart';
@@ -144,6 +145,7 @@ class UpdateHeightGrowthData extends StatelessWidget {
             context
                 .read<GetBabyHeightGrowthCubit>()
                 .getBabyHeightGrowth(babyId);
+            context.read<LatestGrowthDataCubit>().latestGrowthData(babyId);
           } else {
             log('update growth not done');
           }

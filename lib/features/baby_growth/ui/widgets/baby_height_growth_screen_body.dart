@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/helpers/constants.dart';
@@ -75,9 +74,6 @@ class _BabyHeightGrowthScreenBodyState
     });
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,7 +125,7 @@ class _BabyHeightGrowthScreenBodyState
                     GrowthInfoCard(
                       isHeightCard: true,
                       status: 'Average',
-                      lastRecord: 'Last recorded height ',
+                      lastRecord: 'Last month recorded height ',
                       lastRecordValue: previousHeightValue,
                       current: 'Your baby’s current height ',
                       currentValue: lastHeightValue,

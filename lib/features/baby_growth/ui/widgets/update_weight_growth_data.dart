@@ -5,6 +5,7 @@ import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
+import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/put_growth_data_cubit/put_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/put_growth_data_bloc_listener.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
 
 class UpdateWeightGrowthData extends StatelessWidget {
@@ -142,10 +142,10 @@ class UpdateWeightGrowthData extends StatelessWidget {
         ).then((value) {
           if (value == true) {
             log('update growth done');
-
             context
                 .read<GetBabyWeightGrowthCubit>()
                 .getBabyWeightGrowth(babyId);
+            context.read<LatestGrowthDataCubit>().latestGrowthData(babyId);
           } else {
             log('update growth not done');
           }

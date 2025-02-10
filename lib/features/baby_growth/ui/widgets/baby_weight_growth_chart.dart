@@ -83,7 +83,7 @@ class BabyWeightGrowthChart extends StatelessWidget {
                 sideTitles: SideTitles(
                   showTitles: true,
                   reservedSize: 40,
-                  interval: 3.4,
+                  interval: 3.1,
                   getTitlesWidget: (value, meta) {
                     return Text(
                       '${value.toInt()} kg',
