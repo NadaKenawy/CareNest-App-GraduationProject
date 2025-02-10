@@ -13,3 +13,9 @@ CreateNewPasswordResponse _$CreateNewPasswordResponseFromJson(
       message: json['message'] as String?,
     );
 
+Map<String, dynamic> _$CreateNewPasswordResponseToJson(
+        CreateNewPasswordResponse instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
+    };

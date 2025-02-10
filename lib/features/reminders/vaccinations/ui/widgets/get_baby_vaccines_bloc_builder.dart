@@ -15,7 +15,10 @@ class GetBabyVaccinesBlocBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GetBabyVaccinesCubit, GetBabyVaccinesState>(
       buildWhen: (previous, current) =>
-          current is Loading || current is Success || current is Error,
+          current is Loading ||
+          current is Success ||
+          current is Error ||
+          current is CachedData,
       builder: (context, state) {
         return state.maybeWhen(
           loading: () {
@@ -23,7 +26,12 @@ class GetBabyVaccinesBlocBuilder extends StatelessWidget {
           },
           success: (vaccineData) {
             var vaccinesList = List<BabyVaccineData>.from(vaccineData!);
-            log('Vaccines List: ${vaccinesList.length}');
+            // log('Vaccines List: ${vaccinesList.length}');
+            return setupSuccess(vaccinesList);
+          },
+          cachedData: (vaccineData) {
+            var vaccinesList = List<BabyVaccineData>.from(vaccineData!);
+            log('Cached Vaccines List: ${vaccinesList.length}');
             return setupSuccess(vaccinesList);
           },
           error: (error) {

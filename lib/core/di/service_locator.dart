@@ -49,11 +49,13 @@ import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dar
 import 'package:care_nest/features/sign_up/logic/verfiy_account_cubit/verify_account_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
 
 import '../../features/add_baby/data/repos/add_baby_repo.dart';
 import '../../features/add_baby/logic/add_baby_cubit/add_baby_cubit.dart';
 import '../../features/reminders/medications/data/repos/get_all_medication_schedule_repo.dart';
 import '../../features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
+import '../../features/reminders/vaccinations/data/models/get_baby_vaccines_response.dart';
 
 final getIt = GetIt.instance;
 
@@ -155,8 +157,12 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<NotificationsCubit>(() => NotificationsCubit(getIt()));
 
   //get baby vaccines
+  final vaccinesBox =
+      await Hive.openBox<GetBabyVaccinesResponse>('vaccinesBox');
+  getIt.registerLazySingleton<Box<GetBabyVaccinesResponse>>(() => vaccinesBox);
+
   getIt.registerLazySingleton<GetBabyVaccinesRepo>(
-      () => GetBabyVaccinesRepo(getIt()));
+      () => GetBabyVaccinesRepo(getIt(), getIt()));
   getIt.registerFactory<GetBabyVaccinesCubit>(
       () => GetBabyVaccinesCubit(getIt()));
 

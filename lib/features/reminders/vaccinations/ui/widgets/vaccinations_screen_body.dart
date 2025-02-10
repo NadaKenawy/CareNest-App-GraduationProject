@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
@@ -55,11 +57,18 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
     setState(() {
       selectedBabyName = name;
       selectedBabyId = id;
-      selectedBabyImage = image;
+      selectedBabyImage = image;  
       isLoading = false;
     });
+    if (selectedBabyId != null && selectedBabyId!.isNotEmpty) {
+      final cubit = context.read<GetBabyVaccinesCubit>();
 
-    context.read<GetBabyVaccinesCubit>().getBabyVaccines(id);
+      log('🔍 Checking cached data for babyId: $selectedBabyId');
+      cubit.getCachedBabyVaccines(selectedBabyId!);
+
+      log('🌐 Fetching data from API for babyId: $selectedBabyId');
+      cubit.getBabyVaccines(selectedBabyId!);
+    }
   }
 
   @override
