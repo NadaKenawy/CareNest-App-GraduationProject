@@ -192,6 +192,9 @@ abstract class AppRouter {
         builder: (context, state) {
           return MultiBlocProvider(providers: [
             BlocProvider(
+              create: (context) => getIt<GetAllBabiesCubit>()..getAllBabies(),
+            ),
+            BlocProvider(
               create: (context) => getIt<GetAllMedicationScheduleCubit>(),
             ),
             BlocProvider(
@@ -234,6 +237,10 @@ abstract class AppRouter {
             return MultiBlocProvider(
               providers: [
                 BlocProvider(
+                  create: (context) =>
+                      getIt<GetAllBabiesCubit>()..getAllBabies(),
+                ),
+                BlocProvider(
                   create: (context) => getIt<GetBabyVaccinesCubit>(),
                 ),
                 BlocProvider(
@@ -275,6 +282,10 @@ abstract class AppRouter {
             return MultiBlocProvider(
               providers: [
                 BlocProvider(
+                  create: (context) =>
+                      getIt<GetAllBabiesCubit>()..getAllBabies(),
+                ),
+                BlocProvider(
                   create: (context) => getIt<GetBabyHeightGrowthCubit>(),
                 ),
                 BlocProvider(
@@ -289,6 +300,10 @@ abstract class AppRouter {
           builder: (context, state) {
             return MultiBlocProvider(
               providers: [
+                BlocProvider(
+                  create: (context) =>
+                      getIt<GetAllBabiesCubit>()..getAllBabies(),
+                ),
                 BlocProvider(
                   create: (context) => getIt<GetBabyWeightGrowthCubit>(),
                 ),

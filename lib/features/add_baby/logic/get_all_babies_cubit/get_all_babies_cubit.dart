@@ -20,14 +20,16 @@ class GetAllBabiesCubit extends Cubit<GetAllBabiesState> {
 
     response.when(
       success: (getAllBabiesResponse) {
-        SharedPrefHelper.setData(
-            SharedPrefKeys.babyId, getAllBabiesResponse.babiesData!.first.id);
-        log('babyId: ${getAllBabiesResponse.babiesData!.first.id}');
-        emit(GetAllBabiesState.success(getAllBabiesResponse.babiesData));
+        final babies = getAllBabiesResponse.babiesData;
+        if (babies != null && babies.isNotEmpty) {
+          SharedPrefHelper.setData(SharedPrefKeys.babyId, babies.first.id);
+          log('babyId: ${babies.first.id}');
+        }
+        emit(GetAllBabiesState.success(babies));
       },
       failure: (error) {
         emit(GetAllBabiesState.error(
-            error: error.signUpErrorModel.errors!.first.msg ?? ''));
+            error: error.signUpErrorModel.errors?.first.msg ?? ''));
       },
     );
   }

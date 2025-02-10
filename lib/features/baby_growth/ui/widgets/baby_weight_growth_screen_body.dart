@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/helpers/constants.dart';
@@ -19,7 +18,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'update_weight_growth_data.dart';
 
 class BabyWeightGrowthScreenBody extends StatefulWidget {
@@ -74,28 +72,6 @@ class _BabyWeightGrowthScreenBodyState
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _loadDefaultBaby(); // نحمل الطفل الافتراضي أول ما الشاشة تفتح
-  }
-
-  Future<void> _loadDefaultBaby() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final defaultBabyId =
-        sharedPreferences.getString(SharedPrefKeys.babyId) ?? "";
-
-    if (defaultBabyId.isNotEmpty) {
-      setState(() {
-        babyId = defaultBabyId;
-      });
-
-      context
-          .read<GetBabyWeightGrowthCubit>()
-          .getBabyWeightGrowth(defaultBabyId);
-      context.read<LatestGrowthDataCubit>().latestGrowthData(defaultBabyId);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

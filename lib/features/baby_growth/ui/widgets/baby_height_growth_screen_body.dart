@@ -21,7 +21,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class BabyHeightGrowthScreenBody extends StatefulWidget {
   const BabyHeightGrowthScreenBody({super.key});
@@ -76,28 +75,8 @@ class _BabyHeightGrowthScreenBodyState
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _loadDefaultBaby();
-  }
 
-  Future<void> _loadDefaultBaby() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final defaultBabyId =
-        sharedPreferences.getString(SharedPrefKeys.babyId) ?? '';
 
-    if (defaultBabyId.isNotEmpty) {
-      setState(() {
-        babyId = defaultBabyId;
-      });
-
-      context
-          .read<GetBabyHeightGrowthCubit>()
-          .getBabyHeightGrowth(defaultBabyId);
-      context.read<LatestGrowthDataCubit>().latestGrowthData(defaultBabyId);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
