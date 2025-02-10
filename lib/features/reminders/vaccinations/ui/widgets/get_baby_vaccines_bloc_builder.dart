@@ -26,7 +26,7 @@ class GetBabyVaccinesBlocBuilder extends StatelessWidget {
           },
           success: (vaccineData) {
             var vaccinesList = List<BabyVaccineData>.from(vaccineData!);
-            log('Vaccines List: ${vaccinesList.length}');
+            // log('Vaccines List: ${vaccinesList.length}');
             return setupSuccess(vaccinesList);
           },
           cachedData: (vaccineData) {

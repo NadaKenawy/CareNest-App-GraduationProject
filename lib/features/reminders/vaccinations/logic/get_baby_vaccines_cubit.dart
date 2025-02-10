@@ -15,13 +15,21 @@ class GetBabyVaccinesCubit extends Cubit<GetBabyVaccinesState> {
   void getBabyVaccines(String babyId) async {
     emit(const GetBabyVaccinesState.loading());
 
+    final cachedResponse = _getBabyVaccinesRepo.getCachedBabyVaccines(babyId);
+    if (cachedResponse != null) {
+      log('✅ Returning cached data for babyId: $babyId');
+      emit(GetBabyVaccinesState.success(cachedResponse.vaccineData));
+      return;
+    }
+
     String token =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
     final response = await _getBabyVaccinesRepo.getBabyVaccines(token, babyId);
     if (isClosed) return;
     response.when(
       success: (getBabyVaccinesResponse) {
-        log('Vaccines List: ${getBabyVaccinesResponse.vaccineData!.length}');
+        log('📥 Data fetched from API');
+        _getBabyVaccinesRepo.cacheBabyVaccines(babyId, getBabyVaccinesResponse);
         emit(GetBabyVaccinesState.success(getBabyVaccinesResponse.vaccineData));
       },
       failure: (error) {
@@ -32,11 +40,13 @@ class GetBabyVaccinesCubit extends Cubit<GetBabyVaccinesState> {
   }
 
   void getCachedBabyVaccines(String babyId) {
+    log('🔍 Trying to fetch cached data for babyId: $babyId');
     final cachedResponse = _getBabyVaccinesRepo.getCachedBabyVaccines(babyId);
     if (cachedResponse != null) {
+      log('✅ Cached Vaccines List Found: ${cachedResponse.vaccineData!.length}');
       emit(GetBabyVaccinesState.success(cachedResponse.vaccineData));
-      log('Cached Vaccines List: ${cachedResponse.vaccineData!.length}');
     } else {
+      log('❌ No cached data found');
       emit(const GetBabyVaccinesState.error(error: "No cached data found"));
     }
   }
