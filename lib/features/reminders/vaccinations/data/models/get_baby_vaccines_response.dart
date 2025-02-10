@@ -1,20 +1,22 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:hive/hive.dart';
 
 part 'get_baby_vaccines_response.g.dart';
 
-/// دالة مساعدة لتحويل حقل _id
 String? idFromJson(dynamic json) {
   if (json is Map<String, dynamic>) {
-    // إذا كان json كائن يحتوي على مفتاح _id، نعيد القيمة الموجودة فيه
     return json['_id'] as String?;
   }
-  // إذا كانت القيمة نصية مباشرة
   return json as String?;
 }
 
-@JsonSerializable()
+@HiveType(typeId: 2)
+@JsonSerializable(explicitToJson: true) 
 class GetBabyVaccinesResponse {
+  @HiveField(0)
   String? message;
+
+  @HiveField(1)
   @JsonKey(name: 'data')
   List<BabyVaccineData>? vaccineData;
 
@@ -26,11 +28,19 @@ class GetBabyVaccinesResponse {
   Map<String, dynamic> toJson() => _$GetBabyVaccinesResponseToJson(this);
 }
 
-@JsonSerializable()
+@HiveType(typeId: 1)
+@JsonSerializable(explicitToJson: true)
 class BabyVaccineData {
+  @HiveField(0)
   Vaccine? vaccine;
+
+  @HiveField(1)
   bool? administered;
+
+  @HiveField(2)
   bool? notificationSent;
+
+  @HiveField(3)
   DateTime? date;
 
   BabyVaccineData({
@@ -46,17 +56,35 @@ class BabyVaccineData {
   Map<String, dynamic> toJson() => _$BabyVaccineDataToJson(this);
 }
 
+@HiveType(typeId: 0)
 @JsonSerializable()
 class Vaccine {
+  @HiveField(0)
   @JsonKey(name: '_id', fromJson: idFromJson)
   String? id;
+
+  @HiveField(1)
   String? name;
+
+  @HiveField(2)
   int? ageRequired;
+
+  @HiveField(3)
   int? dose;
+
+  @HiveField(4)
   String? vaccineType;
+
+  @HiveField(5)
   String? description;
+
+  @HiveField(6)
   bool? repeat;
+
+  @HiveField(7)
   DateTime? createdAt;
+
+  @HiveField(8)
   DateTime? updatedAt;
 
   Vaccine({

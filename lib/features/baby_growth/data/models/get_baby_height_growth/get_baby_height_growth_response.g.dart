@@ -14,6 +14,11 @@ BabyHeightGrowthResponse _$BabyHeightGrowthResponseFromJson(
           : GrowthData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
+Map<String, dynamic> _$BabyHeightGrowthResponseToJson(
+        BabyHeightGrowthResponse instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };
 
 GrowthData _$GrowthDataFromJson(Map<String, dynamic> json) => GrowthData(
       height: (json['height'] as List<dynamic>?)
@@ -21,6 +26,10 @@ GrowthData _$GrowthDataFromJson(Map<String, dynamic> json) => GrowthData(
           .toList(),
     );
 
+Map<String, dynamic> _$GrowthDataToJson(GrowthData instance) =>
+    <String, dynamic>{
+      'height': instance.height,
+    };
 
 MeasurementData _$MeasurementDataFromJson(Map<String, dynamic> json) =>
     MeasurementData(
@@ -30,3 +39,10 @@ MeasurementData _$MeasurementDataFromJson(Map<String, dynamic> json) =>
       status: json['status'] as String?,
     );
 
+Map<String, dynamic> _$MeasurementDataToJson(MeasurementData instance) =>
+    <String, dynamic>{
+      'ageCategory': instance.ageCategory,
+      'height': instance.height,
+      '_id': instance.id,
+      'status': instance.status,
+    };

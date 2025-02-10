@@ -30,4 +30,14 @@ class GetBabyVaccinesCubit extends Cubit<GetBabyVaccinesState> {
       },
     );
   }
+
+  void getCachedBabyVaccines(String babyId) {
+    final cachedResponse = _getBabyVaccinesRepo.getCachedBabyVaccines(babyId);
+    if (cachedResponse != null) {
+      emit(GetBabyVaccinesState.success(cachedResponse.vaccineData));
+      log('Cached Vaccines List: ${cachedResponse.vaccineData!.length}');
+    } else {
+      emit(const GetBabyVaccinesState.error(error: "No cached data found"));
+    }
+  }
 }
