@@ -40,7 +40,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             color: Colors.white,
           ),
           ImageIcon(
-            AssetImage("assets/icons/baby (1).png"),
+            AssetImage("assets/images/baby (1).png"),
             size: 28,
             color: Colors.white,
           ),

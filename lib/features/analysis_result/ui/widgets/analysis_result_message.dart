@@ -37,7 +37,7 @@ class AnalysisResultMessage extends StatelessWidget {
               top: 44.h,
               right: 124.w,
               child: Image.asset(
-                'assets/images/analysis_result_baby2.png',
+                'assets/images/analysis_result_baby2.webp',
                 width: 200.h,
               ),
             ),

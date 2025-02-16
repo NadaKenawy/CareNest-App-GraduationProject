@@ -10,6 +10,3 @@ DeleteNotificationResponse _$DeleteNotificationResponseFromJson(
         Map<String, dynamic> json) =>
     DeleteNotificationResponse();
 
-Map<String, dynamic> _$DeleteNotificationResponseToJson(
-        DeleteNotificationResponse instance) =>
-    <String, dynamic>{};

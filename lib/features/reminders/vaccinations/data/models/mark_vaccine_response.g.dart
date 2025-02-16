@@ -15,12 +15,6 @@ MarkVaccineResponse _$MarkVaccineResponseFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$MarkVaccineResponseToJson(
-        MarkVaccineResponse instance) =>
-    <String, dynamic>{
-      'msg': instance.msg,
-      'data': instance.vaccineData,
-    };
 
 VaccineAdministeredData _$VaccineAdministeredDataFromJson(
         Map<String, dynamic> json) =>
@@ -31,10 +25,3 @@ VaccineAdministeredData _$VaccineAdministeredDataFromJson(
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
     );
 
-Map<String, dynamic> _$VaccineAdministeredDataToJson(
-        VaccineAdministeredData instance) =>
-    <String, dynamic>{
-      'vaccineId': instance.vaccineId,
-      'administered': instance.administered,
-      'date': instance.date?.toIso8601String(),
-    };

@@ -17,7 +17,7 @@ class Screen3 extends StatelessWidget {
             height: 350.h,
             width: 350.w,
             child: Image.asset(
-              'assets/images/onboarding_third_screen.png',
+              'assets/images/onboarding_third_screen.webp',
             ),
           ),
           SizedBox(height: 20.h),

@@ -15,12 +15,6 @@ GetAllNotificationsResponse _$GetAllNotificationsResponseFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$GetAllNotificationsResponseToJson(
-        GetAllNotificationsResponse instance) =>
-    <String, dynamic>{
-      'results': instance.results,
-      'data': instance.notificationsData,
-    };
 
 NotificationData _$NotificationDataFromJson(Map<String, dynamic> json) =>
     NotificationData(
@@ -33,11 +27,3 @@ NotificationData _$NotificationDataFromJson(Map<String, dynamic> json) =>
       recipient: json['recipient'] as String?,
     );
 
-Map<String, dynamic> _$NotificationDataToJson(NotificationData instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'title': instance.title,
-      'message': instance.message,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'recipient': instance.recipient,
-    };

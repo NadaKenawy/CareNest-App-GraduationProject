@@ -17,7 +17,7 @@ class Screen1 extends StatelessWidget {
             height: 350.h,
             width: 350.w,
             child: Image.asset(
-              'assets/images/onboarding_first_screen.png',
+              'assets/images/onboarding_first_screen.webp',
             ),
           ),
           SizedBox(height: 20.h),

@@ -6,14 +6,6 @@ part of 'add_medication_schedule_request_body.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AddMedicationScheduleRequestBody _$AddMedicationScheduleRequestBodyFromJson(
-        Map<String, dynamic> json) =>
-    AddMedicationScheduleRequestBody(
-      medicationName: json['medicationName'] as String,
-      time: json['time'] as String,
-      begin: json['begin'] as String,
-      end: json['end'] as String,
-    );
 
 Map<String, dynamic> _$AddMedicationScheduleRequestBodyToJson(
         AddMedicationScheduleRequestBody instance) =>
