@@ -68,7 +68,7 @@ class MamaTipsCard extends StatelessWidget {
           ForwardArrowButton(
             iconColor: const Color(0xffFFBB5D),
             onPressed: () {
-              GoRouter.of(context).push(AppRouter.kTipsScreen);
+              GoRouter.of(context).push(AppRouter.kTargetSelectionScreen);
             },
           ),
         ],

@@ -1,6 +1,7 @@
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
+import 'package:care_nest/features/tips/widgets/tips_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -88,59 +89,7 @@ class _BabyTipsScreenBodyState extends State<BabyTipsScreenBody> {
             ),
           ),
           const SizedBox(height: 24),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: .85, // Adjust aspect ratio for better fit
-                ),
-                itemCount: articles.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {},
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        side: const BorderSide(color: Colors.grey, width: 1),
-                      ),
-                      color: Colors.white,
-                      elevation: 2,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.vertical(
-                                top: Radius.circular(16)),
-                            child: Image.asset(
-                              articles[index]["image"]!,
-                              width: double.infinity,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 20.h, horizontal: 16.w),
-                            child: Text(
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              articles[index]["title"]!,
-                              style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeightHelper.semiBold),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
+          TipsGridView(articles: articles),
           const SizedBox(height: 16),
         ],
       ),
