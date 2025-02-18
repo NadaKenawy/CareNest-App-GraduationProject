@@ -44,6 +44,9 @@ import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dar
 import 'package:care_nest/features/sign_up/logic/verfiy_account_cubit/verify_account_cubit.dart';
 import 'package:care_nest/features/sign_up/ui/sign_up_screen.dart';
 import 'package:care_nest/features/sign_up/ui/verfiy_account_screen.dart';
+import 'package:care_nest/features/tips/baby_tips_screen.dart';
+import 'package:care_nest/features/tips/mom_tips_screen.dart';
+import 'package:care_nest/features/tips/target_selection_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -69,6 +72,10 @@ abstract class AppRouter {
   static const kAnalysisResultScreen = '/analysisResultScreen';
   static const kBabyHeightGrowthScreen = '/babyHeightGrowthScreen';
   static const kBabyWeightGrowthScreen = '/babyWeightGrowthScreen';
+  static const kTipsScreen = '/tipsScreen';
+  static const kBabyTipsScreen = '/babyTipsScreen';
+  static const kMomTipsScreen = '/momTipsScreen';
+
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -182,10 +189,7 @@ abstract class AppRouter {
       GoRoute(
           path: kRemindersScreen,
           builder: (context, state) {
-            return BlocProvider(
-              create: (context) => getIt<GetBabyVaccinesCubit>(),
-              child: const RemindersScreen(),
-            );
+            return const RemindersScreen();
           }),
       GoRoute(
         path: kMedicationsScreen,
@@ -313,6 +317,21 @@ abstract class AppRouter {
               ],
               child: const BabyWeightGrowthScreenBody(),
             );
+          }),
+      GoRoute(
+          path: kTipsScreen,
+          builder: (context, state) {
+            return const TargetSelectionScreen();
+          }),
+      GoRoute(
+          path: kBabyTipsScreen,
+          builder: (context, state) {
+            return const BabyTipsScreen();
+          }),
+      GoRoute(
+          path: kMomTipsScreen,
+          builder: (context, state) {
+            return const MomTipsScreen();
           }),
     ],
   );

@@ -39,7 +39,7 @@ import 'package:care_nest/features/reminders/medications/logic/add_medication_sc
 import 'package:care_nest/features/reminders/medications/logic/delete_medication_schedule_cubit/delete_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/medications/logic/get_all_babies_medication_schedule_cubit/get_all_babies_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/medications/logic/update_medication_schedule_cubit/update_medication_schedule_cubit.dart';
-import 'package:care_nest/features/reminders/vaccinations/data/repo/get_baby_vaccines_respo.dart';
+import 'package:care_nest/features/reminders/vaccinations/data/repo/get_baby_vaccines_repo.dart';
 import 'package:care_nest/features/reminders/vaccinations/data/repo/mark_vaccine_repo.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/mark_vaccine_cubit.dart';

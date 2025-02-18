@@ -2,6 +2,9 @@ import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/features/home/ui/widgets/forward_arrow_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../core/routing/app_router.dart';
 
 class MamaTipsCard extends StatelessWidget {
   const MamaTipsCard({
@@ -42,7 +45,7 @@ class MamaTipsCard extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 12.h), 
+                SizedBox(height: 12.h),
                 Flexible(
                   child: FittedBox(
                     fit: BoxFit.scaleDown,
@@ -62,8 +65,11 @@ class MamaTipsCard extends StatelessWidget {
             ),
           ),
           SizedBox(width: 8.w),
-           ForwardArrowButton(
-            iconColor: const Color(0xffFFBB5D), onPressed: () {  },
+          ForwardArrowButton(
+            iconColor: const Color(0xffFFBB5D),
+            onPressed: () {
+              GoRouter.of(context).push(AppRouter.kTipsScreen);
+            },
           ),
         ],
       ),
