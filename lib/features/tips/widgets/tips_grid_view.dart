@@ -33,10 +33,9 @@ class TipsGridView extends StatelessWidget {
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
-                  side: const BorderSide(color: Colors.grey, width: 1),
+                  side: const BorderSide(color: Colors.grey, width: 2),
                 ),
-                color: Colors.white,
-                elevation: 2,
+                elevation: 1,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
