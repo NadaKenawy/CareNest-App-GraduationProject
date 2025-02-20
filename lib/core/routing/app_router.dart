@@ -44,10 +44,11 @@ import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dar
 import 'package:care_nest/features/sign_up/logic/verfiy_account_cubit/verify_account_cubit.dart';
 import 'package:care_nest/features/sign_up/ui/sign_up_screen.dart';
 import 'package:care_nest/features/sign_up/ui/verfiy_account_screen.dart';
-import 'package:care_nest/features/tips/baby_tips_screen.dart';
-import 'package:care_nest/features/tips/mom_tips_screen.dart';
-import 'package:care_nest/features/tips/target_selection_screen.dart';
-import 'package:care_nest/features/tips/widgets/tip_details_screen_body.dart';
+import 'package:care_nest/features/tips/logic/get_all_tips_of_baby_cubit/get_all_tips_of_baby_cubit.dart';
+import 'package:care_nest/features/tips/ui/baby_tips_screen.dart';
+import 'package:care_nest/features/tips/ui/mom_tips_screen.dart';
+import 'package:care_nest/features/tips/ui/target_selection_screen.dart';
+import 'package:care_nest/features/tips/ui/widgets/tip_details_screen_body.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -328,13 +329,16 @@ abstract class AppRouter {
       GoRoute(
           path: kBabyTipsScreen,
           builder: (context, state) {
-            return const BabyTipsScreen();
+            return BlocProvider(
+              create: (context) => getIt<GetAllTipsOfBabyCubit>(),
+              child: const BabyTipsScreen(),
+            );
           }),
-      GoRoute(
-          path: kMomTipsScreen,
-          builder: (context, state) {
-            return const MomTipsScreen();
-          }),
+      // GoRoute(
+      //     path: kMomTipsScreen,
+      //     builder: (context, state) {
+      //       return const MomTipsScreen();
+      //     }),
       GoRoute(
           path: kTipDetailsScreen,
           builder: (context, state) {

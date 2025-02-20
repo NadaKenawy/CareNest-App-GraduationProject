@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:care_nest/core/theme/text_styless.dart';
 
 class CategoryCard extends StatelessWidget {
   final String title;
@@ -28,16 +27,25 @@ class CategoryCard extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Image.asset(
-              imagePath,
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12),
+                topRight: Radius.circular(12),
+              ),
+              child: Image.asset(
+                imagePath,
+                width: 240.w,
+                height: 200.h,
+                fit: BoxFit.cover,
+              ),
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: 16.h),
             Text(
               title,
-              style: TextStyles.font20BlackSemiBold,
+              style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: 16.h),
           ],
         ),
       ),

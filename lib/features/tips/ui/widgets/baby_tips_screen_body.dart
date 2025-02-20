@@ -1,8 +1,11 @@
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
-import 'package:care_nest/features/tips/widgets/tips_grid_view.dart';
+import 'package:care_nest/features/tips/logic/get_all_tips_of_baby_cubit/get_all_tips_of_baby_cubit.dart';
+import 'package:care_nest/features/tips/logic/get_all_tips_of_baby_cubit/get_all_tips_of_baby_state.dart';
+import 'package:care_nest/features/tips/ui/widgets/tips_grid_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BabyTipsScreenBody extends StatefulWidget {
@@ -18,20 +21,11 @@ class _BabyTipsScreenBodyState extends State<BabyTipsScreenBody> {
   final List<String> months =
       List.generate(12, (index) => 'Month ${index + 1}');
 
-  final List<Map<String, String>> articles = [
-    {
-      "image": "assets/images/mother-with-cute-newborn.webp",
-      "title": "Celebrating Milestones"
-    },
-    {
-      "image": "assets/images/mother-with-cute-newborn.webp",
-      "title": "Smooth Transition"
-    },
-    {
-      "image": "assets/images/mother-with-cute-newborn.webp",
-      "title": "Boosting Communication"
-    },
-  ];
+  @override
+  void initState() {
+    super.initState();
+    context.read<GetAllTipsOfBabyCubit>().getAllTipsOfBaby();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +39,7 @@ class _BabyTipsScreenBodyState extends State<BabyTipsScreenBody> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           SizedBox(
             height: 48.h,
             child: Padding(
@@ -64,13 +58,15 @@ class _BabyTipsScreenBodyState extends State<BabyTipsScreenBody> {
                       width: 100,
                       margin: const EdgeInsets.symmetric(horizontal: 8),
                       decoration: BoxDecoration(
-                          color: selectedMonthIndex == index
-                              ? ColorsManager.secondryBlueColor
-                              : Colors.white,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(
-                              width: 2,
-                              color: ColorsManager.secondryBlueColor)),
+                        color: selectedMonthIndex == index
+                            ? ColorsManager.secondryBlueColor
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          width: 2,
+                          color: ColorsManager.secondryBlueColor,
+                        ),
+                      ),
                       child: Center(
                         child: Text(
                           months[index],
@@ -88,9 +84,31 @@ class _BabyTipsScreenBodyState extends State<BabyTipsScreenBody> {
               ),
             ),
           ),
-          const SizedBox(height: 24),
-          TipsGridView(articles: articles),
-          const SizedBox(height: 16),
+          SizedBox(height: 24.h),
+          Expanded(
+            child: BlocBuilder<GetAllTipsOfBabyCubit, GetAllTipsOfBabyState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () => const SizedBox(),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  success: (tipsList) {
+                    final filteredTips = tipsList
+                        ?.where((tip) => tip.month == (selectedMonthIndex + 1))
+                        .toList() ?? [];
+                    return TipsGridView(tips: filteredTips);
+                  },
+                  error: (apiErrorModel) => Center(
+                    child: Text(
+                      'Error: ${apiErrorModel.message}',
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          SizedBox(height: 16.h),
         ],
       ),
     );

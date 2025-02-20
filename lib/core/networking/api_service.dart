@@ -34,6 +34,8 @@ import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_req
 import 'package:care_nest/features/sign_up/data/models/sign_up_model/sign_up_response.dart';
 import 'package:care_nest/features/sign_up/data/models/verify_account_model/verify_account_request_body.dart';
 import 'package:care_nest/features/sign_up/data/models/verify_account_model/verify_account_response.dart';
+import 'package:care_nest/features/tips/data/models/get_all_tips_of_baby_response.dart';
+import 'package:care_nest/features/tips/data/models/get_all_tips_of_mom_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 import '../../features/add_baby/data/models/add_baby/add_baby_request_body.dart';
@@ -187,6 +189,15 @@ abstract class ApiService {
   Future<LatestGrowthDataResponse> getLatestGrowthData(
     @Header('Authorization') String token,
     @Path('id') String id,
+  );
+
+  @GET(ApiConstants.getAllTipsOfBaby)
+  Future<GetAllTipsOfBabyResponse> getAllTipsOfBaby(
+    @Header('Authorization') String token,
+  );
+  @GET(ApiConstants.getAllTipsOfMom)
+  Future<GetAllTipsOfMomResponse> getAllTipsOfMom(
+    @Header('Authorization') String token,
   );
 }
 

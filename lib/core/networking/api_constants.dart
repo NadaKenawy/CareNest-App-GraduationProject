@@ -31,6 +31,8 @@ class ApiConstants {
   static const String getWeightGrowth = "dataGrowth/weight/{babyid}";
   static const String putGrowthData = "dataGrowth/{id}";
   static const String latestGrowthData = "dataGrowth/LatestGrowthData/{id}";
+  static const String getAllTipsOfBaby = "tips/?target=Baby&limit=35";
+  static const String getAllTipsOfMom = "tips/?target=Mama&limit=6";
 }
 
 class ApiErrors {

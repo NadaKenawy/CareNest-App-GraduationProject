@@ -1,4 +1,4 @@
-import 'package:care_nest/features/tips/widgets/target_selection_screen_body.dart';
+import 'package:care_nest/features/tips/ui/widgets/target_selection_screen_body.dart';
 import 'package:flutter/material.dart';
 
 class TargetSelectionScreen extends StatelessWidget {
