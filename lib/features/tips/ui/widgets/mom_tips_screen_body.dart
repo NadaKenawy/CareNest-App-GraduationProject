@@ -1,58 +1,65 @@
-// import 'package:care_nest/core/theme/text_styless.dart';
-// import 'package:care_nest/features/tips/ui/widgets/tips_grid_view.dart';
-// import 'package:flutter/material.dart';
+import 'package:care_nest/core/theme/text_styless.dart';
+import 'package:care_nest/features/tips/data/models/get_all_tips_of_mom_response.dart';
+import 'package:care_nest/features/tips/logic/get_all_tips_of_mom_cubit/get_all_tips_of_mom_cubit.dart';
+import 'package:care_nest/features/tips/logic/get_all_tips_of_mom_cubit/get_all_tips_of_mom_state.dart';
+import 'package:care_nest/features/tips/ui/widgets/tips_grid_view.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-// class MomTipsScreenBody extends StatefulWidget {
-//   const MomTipsScreenBody({super.key});
+class MomTipsScreenBody extends StatefulWidget {
+  const MomTipsScreenBody({super.key});
 
-//   @override
-//   _MomTipsScreenBodyState createState() => _MomTipsScreenBodyState();
-// }
+  @override
+  _MomTipsScreenBodyState createState() => _MomTipsScreenBodyState();
+}
 
-// class _MomTipsScreenBodyState extends State<MomTipsScreenBody> {
-//   int selectedMonthIndex = 0;
+class _MomTipsScreenBodyState extends State<MomTipsScreenBody> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<GetAllTipsOfMomCubit>().getAllTipsOfMom();
+  }
 
-//   final List<String> months =
-//       List.generate(12, (index) => 'Month ${index + 1}');
-
-//   final List<Map<String, String>> articles = [
-//     {
-//       "image": "assets/images/1530.webp",
-//       "title": "Overcoming Postpartum Depression"
-//     },
-//     {
-//       "image": "assets/images/17634.webp",
-//       "title": "Caring for you, Caring for your kids"
-//     },
-//     {
-//       "image": "assets/images/1530.webp",
-//       "title": "Smoother Breastfeeding Experience"
-//     },
-//     {
-//       "image": "assets/images/17634.webp",
-//       "title": "Building a Support Network"
-//     },
-//     {"image": "assets/images/1530.webp", "title": "Embrace Your New Role"},
-//     {"image": "assets/images/17634.webp", "title": "Mindfulness in Motherhood"},
-//   ];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(
-//           'Mom Tips',
-//           style: TextStyles.font20BlackSemiBold,
-//         ),
-//       ),
-//       body: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           const SizedBox(height: 16),
-//           TipsGridView(articles: articles),
-//           const SizedBox(height: 16),
-//         ],
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Mom Tips',
+          style: TextStyles.font20BlackSemiBold,
+        ),
+      ),
+      body: Column(
+        children: [
+          SizedBox(height: 16.h),
+          Expanded(
+            child: BlocBuilder<GetAllTipsOfMomCubit, GetAllTipsOfMomState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () => const SizedBox(),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  success: (tipsList) {
+                    return TipsGridView<MomTipData>(
+                      tips: tipsList ?? [],
+                      imageExtractor: (tip) => tip.image ?? '',
+                      categoryExtractor: (tip) => tip.category,
+                    );
+                  },
+                  error: (apiErrorModel) => Center(
+                    child: Text(
+                      'Error: ${apiErrorModel.message}',
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          SizedBox(height: 16.h),
+        ],
+      ),
+    );
+  }
+}

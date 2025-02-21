@@ -1,6 +1,7 @@
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
+import 'package:care_nest/features/tips/data/models/get_all_tips_of_baby_response.dart';
 import 'package:care_nest/features/tips/logic/get_all_tips_of_baby_cubit/get_all_tips_of_baby_cubit.dart';
 import 'package:care_nest/features/tips/logic/get_all_tips_of_baby_cubit/get_all_tips_of_baby_state.dart';
 import 'package:care_nest/features/tips/ui/widgets/tips_grid_view.dart';
@@ -94,9 +95,15 @@ class _BabyTipsScreenBodyState extends State<BabyTipsScreenBody> {
                       const Center(child: CircularProgressIndicator()),
                   success: (tipsList) {
                     final filteredTips = tipsList
-                        ?.where((tip) => tip.month == (selectedMonthIndex + 1))
-                        .toList() ?? [];
-                    return TipsGridView(tips: filteredTips);
+                            ?.where(
+                                (tip) => tip.month == (selectedMonthIndex + 1))
+                            .toList() ??
+                        [];
+                    return TipsGridView<BabyTipData>(
+                      tips: filteredTips,
+                      imageExtractor: (tip) => tip.image ?? '',
+                      categoryExtractor: (tip) => tip.category,
+                    );
                   },
                   error: (apiErrorModel) => Center(
                     child: Text(

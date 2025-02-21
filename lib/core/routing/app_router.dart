@@ -45,6 +45,7 @@ import 'package:care_nest/features/sign_up/logic/verfiy_account_cubit/verify_acc
 import 'package:care_nest/features/sign_up/ui/sign_up_screen.dart';
 import 'package:care_nest/features/sign_up/ui/verfiy_account_screen.dart';
 import 'package:care_nest/features/tips/logic/get_all_tips_of_baby_cubit/get_all_tips_of_baby_cubit.dart';
+import 'package:care_nest/features/tips/logic/get_all_tips_of_mom_cubit/get_all_tips_of_mom_cubit.dart';
 import 'package:care_nest/features/tips/ui/baby_tips_screen.dart';
 import 'package:care_nest/features/tips/ui/mom_tips_screen.dart';
 import 'package:care_nest/features/tips/ui/target_selection_screen.dart';
@@ -334,11 +335,14 @@ abstract class AppRouter {
               child: const BabyTipsScreen(),
             );
           }),
-      // GoRoute(
-      //     path: kMomTipsScreen,
-      //     builder: (context, state) {
-      //       return const MomTipsScreen();
-      //     }),
+      GoRoute(
+          path: kMomTipsScreen,
+          builder: (context, state) {
+            return BlocProvider(
+              create: (context) => getIt<GetAllTipsOfMomCubit>(),
+              child: const MomTipsScreen(),
+            );
+          }),
       GoRoute(
           path: kTipDetailsScreen,
           builder: (context, state) {

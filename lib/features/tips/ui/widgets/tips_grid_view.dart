@@ -1,17 +1,20 @@
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
-import 'package:care_nest/features/tips/data/models/get_all_tips_of_baby_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class TipsGridView extends StatelessWidget {
+class TipsGridView<T> extends StatelessWidget {
   const TipsGridView({
     super.key,
     required this.tips,
+    required this.imageExtractor,
+    required this.categoryExtractor,
   });
 
-  final List<BabyTipData> tips;
+  final List<T> tips;
+  final String Function(T tip) imageExtractor;
+  final String? Function(T tip) categoryExtractor;
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +26,14 @@ class TipsGridView extends StatelessWidget {
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: 0,
           mainAxisSpacing: 16,
           childAspectRatio: .82,
         ),
         itemCount: tips.length,
         itemBuilder: (context, index) {
           final tip = tips[index];
+          final imageUrl = imageExtractor(tip);
+          final categoryText = categoryExtractor(tip) ?? "";
           return InkWell(
             onTap: () {
               GoRouter.of(context).push(AppRouter.kTipDetailsScreen);
@@ -43,12 +47,12 @@ class TipsGridView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  tip.image != null && tip.image!.isNotEmpty
+                  imageUrl.isNotEmpty
                       ? ClipRRect(
                           borderRadius: const BorderRadius.vertical(
                               top: Radius.circular(12)),
                           child: Image.network(
-                            tip.image!,
+                            imageUrl,
                             width: 200.w,
                             height: 160.h,
                             fit: BoxFit.cover,
@@ -56,14 +60,14 @@ class TipsGridView extends StatelessWidget {
                         )
                       : Container(
                           width: 200.w,
-                          height: 132.h,
+                          height: 160.h,
                           color: Colors.grey,
                           child: const Icon(Icons.image, color: Colors.white),
                         ),
                   Padding(
                     padding: const EdgeInsets.all(12),
                     child: Text(
-                      tip.category ?? "",
+                      categoryText,
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
