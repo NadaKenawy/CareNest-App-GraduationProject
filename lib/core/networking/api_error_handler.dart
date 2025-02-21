@@ -25,9 +25,7 @@ class ApiErrorHandler {
           return ApiErrorModel(
               message:
                   "connection to the server failed due to internet connection");
-        default:
-          return ApiErrorModel(message: "Something went wrong");
-      }
+        }
     } else {
       return ApiErrorModel(message: "Unknown error occurred");
     }

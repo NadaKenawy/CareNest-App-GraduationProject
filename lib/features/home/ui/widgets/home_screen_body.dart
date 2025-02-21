@@ -75,7 +75,7 @@ class HomeScreenBody extends StatelessWidget {
                         "Stories, videos, and music for a relaxed baby",
                     backgroundColor: ColorsManager.thirdryBlueColor,
                     onPressed: () {},
-                    routePath: '',
+                    routePath: AppRouter.kEntertainmentScreen,
                   ),
                   const SizedBox(height: 20),
                   LargeCard(
