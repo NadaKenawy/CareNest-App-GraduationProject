@@ -1,0 +1,2 @@
+E:/projects/CareNest/android/app/.cxx/Debug/5k3q6n92/arm64-v8a/CMakeFiles/edit_cache.dir
+E:/projects/CareNest/android/app/.cxx/Debug/5k3q6n92/arm64-v8a/CMakeFiles/rebuild_cache.dir
