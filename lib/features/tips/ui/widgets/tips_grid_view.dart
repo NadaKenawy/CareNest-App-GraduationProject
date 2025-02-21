@@ -10,11 +10,13 @@ class TipsGridView<T> extends StatelessWidget {
     required this.tips,
     required this.imageExtractor,
     required this.categoryExtractor,
+    required this.idExtractor,
   });
 
   final List<T> tips;
   final String Function(T tip) imageExtractor;
   final String? Function(T tip) categoryExtractor;
+  final String Function(T tip) idExtractor;
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +24,12 @@ class TipsGridView<T> extends StatelessWidget {
       return const Center(child: Text("No tips available"));
     }
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisSpacing: 16,
-          childAspectRatio: .82,
+          childAspectRatio: .75,
         ),
         itemCount: tips.length,
         itemBuilder: (context, index) {
@@ -36,7 +38,9 @@ class TipsGridView<T> extends StatelessWidget {
           final categoryText = categoryExtractor(tip) ?? "";
           return InkWell(
             onTap: () {
-              GoRouter.of(context).push(AppRouter.kTipDetailsScreen);
+              final tipId = idExtractor(tip);
+              GoRouter.of(context)
+                  .push(AppRouter.kTipDetailsScreen, extra: tipId);
             },
             child: Card(
               shape: RoundedRectangleBorder(
@@ -54,13 +58,13 @@ class TipsGridView<T> extends StatelessWidget {
                           child: Image.network(
                             imageUrl,
                             width: 200.w,
-                            height: 160.h,
+                            height: 182.h,
                             fit: BoxFit.cover,
                           ),
                         )
                       : Container(
                           width: 200.w,
-                          height: 160.h,
+                          height: 182.h,
                           color: Colors.grey,
                           child: const Icon(Icons.image, color: Colors.white),
                         ),

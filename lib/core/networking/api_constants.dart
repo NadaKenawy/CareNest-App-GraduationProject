@@ -33,6 +33,7 @@ class ApiConstants {
   static const String latestGrowthData = "dataGrowth/LatestGrowthData/{id}";
   static const String getAllTipsOfBaby = "tips/?target=Baby&limit=35";
   static const String getAllTipsOfMom = "tips/?target=Mama&limit=6";
+  static const String getTipDetails = "tips/{id}";
 }
 
 class ApiErrors {

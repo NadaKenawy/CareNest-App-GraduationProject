@@ -4,6 +4,7 @@ import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/features/tips/data/models/get_all_tips_of_baby_response.dart';
 import 'package:care_nest/features/tips/logic/get_all_tips_of_baby_cubit/get_all_tips_of_baby_cubit.dart';
 import 'package:care_nest/features/tips/logic/get_all_tips_of_baby_cubit/get_all_tips_of_baby_state.dart';
+import 'package:care_nest/features/tips/ui/widgets/baby_tips_skeleton.dart';
 import 'package:care_nest/features/tips/ui/widgets/tips_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -92,7 +93,7 @@ class _BabyTipsScreenBodyState extends State<BabyTipsScreenBody> {
                 return state.when(
                   initial: () => const SizedBox(),
                   loading: () =>
-                      const Center(child: CircularProgressIndicator()),
+                      const BabyTipsSkeleton(),
                   success: (tipsList) {
                     final filteredTips = tipsList
                             ?.where(
@@ -103,6 +104,7 @@ class _BabyTipsScreenBodyState extends State<BabyTipsScreenBody> {
                       tips: filteredTips,
                       imageExtractor: (tip) => tip.image ?? '',
                       categoryExtractor: (tip) => tip.category,
+                      idExtractor: (tip) => tip.id ?? '',
                     );
                   },
                   error: (apiErrorModel) => Center(

@@ -49,8 +49,10 @@ import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dar
 import 'package:care_nest/features/sign_up/logic/verfiy_account_cubit/verify_account_cubit.dart';
 import 'package:care_nest/features/tips/data/repo/get_all_tips_of_baby_repo.dart';
 import 'package:care_nest/features/tips/data/repo/get_all_tips_of_mom_repo.dart';
+import 'package:care_nest/features/tips/data/repo/get_tip_details_repo.dart';
 import 'package:care_nest/features/tips/logic/get_all_tips_of_baby_cubit/get_all_tips_of_baby_cubit.dart';
 import 'package:care_nest/features/tips/logic/get_all_tips_of_mom_cubit/get_all_tips_of_mom_cubit.dart';
+import 'package:care_nest/features/tips/logic/get_tip_details_cubit/get_tip_details_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
@@ -209,4 +211,9 @@ Future<void> setupGetIt() async {
       () => GetAllTipsOfMomRepo(getIt()));
   getIt.registerFactory<GetAllTipsOfMomCubit>(
       () => GetAllTipsOfMomCubit(getIt()));
+
+  //get  tip details
+  getIt.registerLazySingleton<GetTipDetailsRepo>(
+      () => GetTipDetailsRepo(getIt()));
+  getIt.registerFactory<GetTipDetailsCubit>(() => GetTipDetailsCubit(getIt()));
 }

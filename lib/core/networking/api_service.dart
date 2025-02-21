@@ -36,6 +36,7 @@ import 'package:care_nest/features/sign_up/data/models/verify_account_model/veri
 import 'package:care_nest/features/sign_up/data/models/verify_account_model/verify_account_response.dart';
 import 'package:care_nest/features/tips/data/models/get_all_tips_of_baby_response.dart';
 import 'package:care_nest/features/tips/data/models/get_all_tips_of_mom_response.dart';
+import 'package:care_nest/features/tips/data/models/get_tip_details_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 import '../../features/add_baby/data/models/add_baby/add_baby_request_body.dart';
@@ -198,6 +199,12 @@ abstract class ApiService {
   @GET(ApiConstants.getAllTipsOfMom)
   Future<GetAllTipsOfMomResponse> getAllTipsOfMom(
     @Header('Authorization') String token,
+  );
+
+  @GET(ApiConstants.getTipDetails)
+  Future<GetTipDetailsResponse> getTipDetails(
+    @Header('Authorization') String token,
+    @Path('id') String tipId,
   );
 }
 
