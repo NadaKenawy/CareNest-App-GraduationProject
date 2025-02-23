@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:care_nest/core/networking/api_constants.dart';
 import 'package:care_nest/features/add_baby/data/models/add_baby/add_baby_response.dart';
@@ -10,6 +9,7 @@ import 'package:care_nest/features/baby_growth/data/models/get_baby_weight_growt
 import 'package:care_nest/features/baby_growth/data/models/latest_growth_data/latest_growth_data_response.dart';
 import 'package:care_nest/features/baby_growth/data/models/put_growth_data/put_growth_data_request.dart';
 import 'package:care_nest/features/baby_growth/data/models/put_growth_data/put_growth_data_response.dart';
+import 'package:care_nest/features/entertainment/data/models/get_music_response.dart';
 import 'package:care_nest/features/fcm/data/models/delete_all_notifications/delete_all_notifications_response.dart';
 import 'package:care_nest/features/fcm/data/models/delete_notification/delete_notification_response.dart';
 import 'package:care_nest/features/fcm/data/models/get_all_notifications/get_all_notifications_response.dart';
@@ -38,6 +38,7 @@ import 'package:care_nest/features/tips/data/models/get_all_tips_of_baby_respons
 import 'package:care_nest/features/tips/data/models/get_all_tips_of_mom_response.dart';
 import 'package:care_nest/features/tips/data/models/get_tip_details_response.dart';
 import 'package:dio/dio.dart';
+import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import '../../features/add_baby/data/models/add_baby/add_baby_request_body.dart';
 import '../../features/add_baby/data/models/get_all_babies/get_all_babies_response.dart';
@@ -206,11 +207,10 @@ abstract class ApiService {
     @Header('Authorization') String token,
     @Path('id') String tipId,
   );
+
+  @GET(ApiConstants.getMusic)
+  Future<MusicResponse> getMusic(
+    @Header('Authorization') String token,
+  );
 }
 
-class ParseErrorLogger {
-  void logError(
-      Object error, StackTrace stackTrace, RequestOptions requestOptions) {
-    log('Error: $error\nStacktrace: $stackTrace\nRequestOptions: $requestOptions');
-  }
-}
