@@ -19,6 +19,7 @@ import 'package:care_nest/features/entertainment/logic/cubit/get_music_cubit.dar
 import 'package:care_nest/features/entertainment/ui/short_stories_screen.dart';
 import 'package:care_nest/features/entertainment/ui/widgets/entertainment_screen.dart';
 import 'package:care_nest/features/entertainment/ui/widgets/story_details_screen_body.dart';
+import 'package:care_nest/features/entertainment/ui/widgets/sweet_sleep_page_view.dart';
 import 'package:care_nest/features/fcm/logic/get_all_notifications_cubit/get_all_notifications_cubit.dart';
 import 'package:care_nest/features/fcm/logic/notification_cubit/notification_cubit.dart';
 import 'package:care_nest/features/fcm/ui/notifications_screen.dart';
@@ -371,7 +372,7 @@ abstract class AppRouter {
           builder: (context, state) {
             return BlocProvider(
               create: (context) => getIt<GetMusicCubit>()..getMusic(),
-              child: const SweetSleep(),
+              child: const SweetSleepPageView(),
             );
           }),
       GoRoute(

@@ -38,33 +38,6 @@ class EntertainmentAppBar extends StatelessWidget {
             ),
           ),
         ),
-        Positioned(
-          top: 110.h,
-          left: 185.w,
-          child: Row(
-            children: [
-              Container(
-                height: 15.h,
-                width: 15.w,
-                decoration: const BoxDecoration(
-                  color: Colors.yellow,
-                  shape: BoxShape.circle,
-                ),
-              ),
-              SizedBox(
-                width: 10.w,
-              ),
-              Container(
-                height: 15.h,
-                width: 15.w,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ],
-          ),
-        ),
       ],
     );
   }
