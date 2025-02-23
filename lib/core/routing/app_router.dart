@@ -14,6 +14,8 @@ import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubi
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
+import 'package:care_nest/features/entertainment/data/models/get_all_stories/get_all_stories_response.dart';
+import 'package:care_nest/features/entertainment/logic/get_all_stories_cubit/get_all_stories_cubit.dart';
 import 'package:care_nest/features/entertainment/sweet_sleep_screen.dart';
 import 'package:care_nest/features/entertainment/logic/cubit/get_music_cubit.dart';
 import 'package:care_nest/features/entertainment/ui/short_stories_screen.dart';
@@ -375,15 +377,21 @@ abstract class AppRouter {
             );
           }),
       GoRoute(
-          path: kShortStoriesScreen,
-          builder: (context, state) {
-            return const ShortStoriesScreen();
-          }),
+        path: kShortStoriesScreen,
+        builder: (context, state) {
+          return BlocProvider(
+            create: (context) => getIt<GetAllStoriesCubit>(),
+            child: const ShortStoriesScreen(),
+          );
+        },
+      ),
       GoRoute(
-          path: kStoryDetailsScreen,
-          builder: (context, state) {
-            return const StoryDetailsScreenBody();
-          }),
+        path: kStoryDetailsScreen,
+        builder: (context, state) {
+          final story = state.extra as StoryData;
+          return StoryDetailsScreenBody(story: story);
+        },
+      ),
     ],
   );
 }

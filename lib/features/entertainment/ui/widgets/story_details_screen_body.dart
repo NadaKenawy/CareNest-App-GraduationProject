@@ -1,10 +1,12 @@
+import 'package:care_nest/features/entertainment/data/models/get_all_stories/get_all_stories_response.dart';
+import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:care_nest/core/theme/font_weight_helper.dart';
 
 class StoryDetailsScreenBody extends StatelessWidget {
-  const StoryDetailsScreenBody({super.key});
+  final StoryData story;
+  const StoryDetailsScreenBody({super.key, required this.story});
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +25,22 @@ class StoryDetailsScreenBody extends StatelessWidget {
                 children: [
                   Center(
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16.r),
-                      child: Image.asset(
-                        'assets/images/The Teddy Bear’s Secret.jpeg',
-                        fit: BoxFit.cover,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(40.r),
+                        bottomRight: Radius.circular(40.r),
                       ),
+                      child: story.image != null
+                          ? Image.network(
+                              story.image!,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Image.asset(
+                                      'assets/images/The Sleepy Little Kitten.jpeg',
+                                      fit: BoxFit.cover),
+                            )
+                          : Image.asset(
+                              'assets/images/The Sleepy Little Kitten.jpeg',
+                              fit: BoxFit.cover),
                     ),
                   ),
                   Positioned(
@@ -47,7 +60,9 @@ class StoryDetailsScreenBody extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.6),
-                  borderRadius: BorderRadius.circular(60.r),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40.r),
+                      topRight: Radius.circular(52.r)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +70,8 @@ class StoryDetailsScreenBody extends StatelessWidget {
                     SizedBox(height: 24.h),
                     Center(
                       child: Text(
-                        "The Teddy Bear’s Secret",
+                        textAlign: TextAlign.center,
+                        story.title ?? '',
                         style: TextStyle(
                           fontSize: 24.sp,
                           fontWeight: FontWeightHelper.bold,
@@ -65,16 +81,7 @@ class StoryDetailsScreenBody extends StatelessWidget {
                     ),
                     SizedBox(height: 16.h),
                     Text(
-                      "Lily had a very special teddy bear named Bruno. Every night, she hugged him tight before falling asleep.\n"
-                      "One night, after Lily had drifted into dreams, Bruno wiggled his little arms and whispered to the other toys, 'Shh! It’s time for our secret mission. \n"
-                      "All the toys gathered around.\n"
-                      "We have to make sure Lily has the sweetest dreams! whispered Bruno.\n"
-                      "The doll fluffed her pillow. The toy bunny tucked in her blanket. The wooden horse rocked gently, making soft music.\n"
-                      "Bruno smiled. 'Now everything is perfect!\n"
-                      "The toys returned to their spots just as the morning light peeked through the curtains.\n"
-                      "When Lily woke up, she hugged Bruno. I had the best dream ever! she said.\n"
-                      "Bruno smiled his little teddy bear smile, knowing their mission was complete.\n"
-                      "Goodnight, Bruno. Goodnight, little dreamers.",
+                      story.content ?? '',
                       style: TextStyle(
                         fontSize: 16.sp,
                         color: Colors.black,
