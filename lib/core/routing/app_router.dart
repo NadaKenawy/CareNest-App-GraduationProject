@@ -16,6 +16,9 @@ import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
 import 'package:care_nest/features/entertainment/entertainment_screen.dart';
 import 'package:care_nest/features/entertainment/logic/cubit/get_music_cubit.dart';
+import 'package:care_nest/features/entertainment.dart/ui/entertainment_screen.dart';
+import 'package:care_nest/features/entertainment.dart/ui/short_stories_screen.dart';
+import 'package:care_nest/features/entertainment.dart/ui/widgets/story_details_screen_body.dart';
 import 'package:care_nest/features/fcm/logic/get_all_notifications_cubit/get_all_notifications_cubit.dart';
 import 'package:care_nest/features/fcm/logic/notification_cubit/notification_cubit.dart';
 import 'package:care_nest/features/fcm/ui/notifications_screen.dart';
@@ -83,6 +86,8 @@ abstract class AppRouter {
   static const kMomTipsScreen = '/momTipsScreen';
   static const kTipDetailsScreen = '/tipDetailsScreen';
   static const kEntertainmentScreen = '/entertainmentScreen';
+  static const kShortStoriesScreen = '/shortStoriesScreen';
+  static const kStoryDetailsScreen = '/storyDetailsScreen'; 
 
   static final router = GoRouter(
     routes: [
@@ -358,10 +363,24 @@ abstract class AppRouter {
       GoRoute(
           path: kEntertainmentScreen,
           builder: (context, state) {
+ features/entertainment
             return BlocProvider(
               create: (context) => getIt<GetMusicCubit>()..getMusic(),
               child: const EntertainmentScreen(),
             );
+
+            return const EntertainmentScreen();
+          }),
+      GoRoute(
+          path: kShortStoriesScreen,
+          builder: (context, state) {
+            return const ShortStoriesScreen();
+          }),
+      GoRoute(
+          path: kStoryDetailsScreen,
+          builder: (context, state) {
+            return const StoryDetailsScreenBody();
+
           }),
     ],
   );

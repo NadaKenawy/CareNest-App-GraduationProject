@@ -26,10 +26,11 @@ class TipsGridView<T> extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 16,
-          childAspectRatio: .75,
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 250.w,
+          mainAxisSpacing: 16.h,
+          crossAxisSpacing: 16.w,
+          childAspectRatio: 0.75,
         ),
         itemCount: tips.length,
         itemBuilder: (context, index) {
@@ -57,19 +58,19 @@ class TipsGridView<T> extends StatelessWidget {
                               top: Radius.circular(12)),
                           child: Image.network(
                             imageUrl,
-                            width: 200.w,
-                            height: 182.h,
+                            width: double.infinity,
+                            height: 160.h,
                             fit: BoxFit.cover,
                           ),
                         )
                       : Container(
-                          width: 200.w,
-                          height: 182.h,
+                          width: double.infinity,
+                          height: 160.h,
                           color: Colors.grey,
                           child: const Icon(Icons.image, color: Colors.white),
                         ),
                   Padding(
-                    padding: const EdgeInsets.all(12),
+                    padding: EdgeInsets.all(12.w),
                     child: Text(
                       categoryText,
                       textAlign: TextAlign.center,

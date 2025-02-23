@@ -8,7 +8,7 @@ class MomTipsSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: GridView.builder(
           itemCount: 6,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
