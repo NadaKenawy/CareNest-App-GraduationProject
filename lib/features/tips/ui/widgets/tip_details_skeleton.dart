@@ -61,7 +61,7 @@ class TipDetailsSkeleton extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Container(
-              height: 16.h,
+              height: 40.h,
               width: double.infinity,
               color: Colors.grey[300],
             ),
