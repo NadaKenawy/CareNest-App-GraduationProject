@@ -1,4 +1,4 @@
-import 'package:care_nest/features/entertainment.dart/ui/widgets/short_stories_screen_body.dart';
+import 'package:care_nest/features/entertainment/ui/widgets/short_stories_screen_body.dart';
 import 'package:flutter/material.dart';
 
 class ShortStoriesScreen extends StatelessWidget {

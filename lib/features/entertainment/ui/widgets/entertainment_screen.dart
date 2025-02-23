@@ -43,7 +43,7 @@ class EntertainmentScreen extends StatelessWidget {
                         AnimatedCategoryCard(
                           svgPath: "assets/images/lullabyIcon.svg",
                           title: "Sweet Sleep",
-                          route: "",
+                          route: AppRouter.kSweetSleep,
                           cardWidth: cardWidth,
                           cardHeight: cardHeight,
                         ),
