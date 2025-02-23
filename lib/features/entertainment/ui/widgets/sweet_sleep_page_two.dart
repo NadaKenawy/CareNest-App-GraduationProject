@@ -1,5 +1,5 @@
 import 'package:care_nest/features/entertainment/ui/widgets/entertainment_app_bar.dart';
-import 'package:care_nest/features/entertainment/ui/widgets/sweet_sleep_group.dart';
+import 'package:care_nest/features/entertainment/ui/widgets/get_white_noise_bloc_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,7 +15,7 @@ class SweetSleepPageTwo extends StatelessWidget {
           SizedBox(height: 32.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.w),
-            child: const SweetSleepGroup(),
+            child: const GetWhiteNoiseBlocBuilder(),
           ),
         ],
       ),

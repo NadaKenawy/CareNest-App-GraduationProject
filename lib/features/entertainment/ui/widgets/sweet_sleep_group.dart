@@ -2,53 +2,43 @@ import 'package:care_nest/features/entertainment/ui/widgets/sweet_sleep_item.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../data/models/get_white_noise_response.dart';
+
 class SweetSleepGroup extends StatelessWidget {
-  const SweetSleepGroup({super.key});
+  const SweetSleepGroup({super.key, required this.whiteNoiseData});
+  final List<WhiteNoiseData> whiteNoiseData;
+  final List<String> icons = const [
+    'assets/images/wind.png',
+    'assets/images/vaccum_cleaner.png',
+    'assets/images/clock.png',
+    'assets/images/waves.png',
+    'assets/images/lifebuoy.png',
+    'assets/images/lightning_bolt.png',
+    'assets/images/ocean.png',
+    'assets/images/underwater.png',
+    'assets/images/lips-silence.png',
+    'assets/images/heart.png',
+    'assets/images/hair-dryer.png',
+    'assets/images/computer.png',
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            const SweetSleepItem(icon: 'assets/images/wind.png'),
-            SizedBox(width: 32.w),
-            const SweetSleepItem(icon: 'assets/images/vaccum_cleaner.png'),
-            SizedBox(width: 32.w),
-            const SweetSleepItem(icon: 'assets/images/clock.png'),
-          ],
-        ),
-        SizedBox(height: 32.h),
-        Row(
-          children: [
-            const SweetSleepItem(icon: 'assets/images/waves.png'),
-            SizedBox(width: 32.w),
-            const SweetSleepItem(icon: 'assets/images/lifebuoy.png'),
-            SizedBox(width: 32.w),
-            const SweetSleepItem(icon: 'assets/images/lightning_bolt.png'),
-          ],
-        ),
-        SizedBox(height: 32.h),
-        Row(
-          children: [
-            const SweetSleepItem(icon: 'assets/images/ocean.png'),
-            SizedBox(width: 32.w),
-            const SweetSleepItem(icon: 'assets/images/underwater.png'),
-            SizedBox(width: 32.w),
-            const SweetSleepItem(icon: 'assets/images/lips-silence.png'),
-          ],
-        ),
-        SizedBox(height: 32.h),
-        Row(
-          children: [
-            const SweetSleepItem(icon: 'assets/images/heart.png'),
-            SizedBox(width: 32.w),
-            const SweetSleepItem(icon: 'assets/images/hair-dryer.png'),
-            SizedBox(width: 32.w),
-            const SweetSleepItem(icon: 'assets/images/computer.png'),
-          ],
-        ),
-      ],
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: whiteNoiseData.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: 32.w,
+        mainAxisSpacing: 32.h,
+      ),
+      itemBuilder: (context, index) {
+        return SweetSleepItem(
+          icon: icons[index],
+          whiteNoiseData: whiteNoiseData[index],
+        );
+      },
     );
   }
 }
