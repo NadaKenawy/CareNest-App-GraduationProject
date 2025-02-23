@@ -15,6 +15,7 @@ import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/la
 import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
 import 'package:care_nest/features/entertainment/entertainment_screen.dart';
+import 'package:care_nest/features/entertainment/logic/cubit/get_music_cubit.dart';
 import 'package:care_nest/features/fcm/logic/get_all_notifications_cubit/get_all_notifications_cubit.dart';
 import 'package:care_nest/features/fcm/logic/notification_cubit/notification_cubit.dart';
 import 'package:care_nest/features/fcm/ui/notifications_screen.dart';
@@ -357,7 +358,10 @@ abstract class AppRouter {
       GoRoute(
           path: kEntertainmentScreen,
           builder: (context, state) {
-            return const EntertainmentScreen();
+            return BlocProvider(
+              create: (context) => getIt<GetMusicCubit>()..getMusic(),
+              child: const EntertainmentScreen(),
+            );
           }),
     ],
   );

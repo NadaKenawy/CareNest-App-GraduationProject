@@ -34,6 +34,7 @@ class ApiConstants {
   static const String getAllTipsOfBaby = "tips/?target=Baby&limit=35";
   static const String getAllTipsOfMom = "tips/?target=Mama&limit=6";
   static const String getTipDetails = "tips/{id}";
+  static const String getMusic = "relaxSounds/?category=Music";
 }
 
 class ApiErrors {

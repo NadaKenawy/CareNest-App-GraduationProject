@@ -1,5 +1,5 @@
 import 'package:care_nest/features/entertainment/ui/widgets/entertainment_app_bar.dart';
-import 'package:care_nest/features/entertainment/ui/widgets/music_list_view_item.dart';
+import 'package:care_nest/features/entertainment/ui/widgets/get_music_bloc_builder.dart';
 import 'package:flutter/material.dart';
 
 class EntertainmentScreenBody extends StatelessWidget {
@@ -11,7 +11,7 @@ class EntertainmentScreenBody extends StatelessWidget {
       body: Column(
         children: [
           EntertainmentAppBar(),
-          MusicListViewItem(),
+          Expanded(child: GetMusicBlocBuilder()),
         ],
       ),
     );
