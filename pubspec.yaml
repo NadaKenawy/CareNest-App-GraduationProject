@@ -42,6 +42,7 @@ dependencies:
     sdk: flutter
   flutter_audio_waveforms: ^1.2.1+8
   flutter_bloc: ^9.0.0
+  flutter_inappwebview: ^6.1.5
   flutter_local_notifications: ^18.0.1
   flutter_native_splash: ^2.4.1
   flutter_screenutil: ^5.9.3
@@ -71,7 +72,9 @@ dependencies:
   skeletonizer: ^1.4.2
   smooth_page_indicator: ^1.2.0+3
   table_calendar: ^3.1.2
+  url_launcher: ^6.3.1
   weekly_calendar: ^0.1.2
+  youtube_player_flutter: ^9.1.1
 
 dev_dependencies:
   flutter_lints: ^4.0.0

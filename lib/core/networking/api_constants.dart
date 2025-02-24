@@ -35,8 +35,13 @@ class ApiConstants {
   static const String getAllTipsOfMom = "tips/?target=Mama&limit=6";
   static const String getTipDetails = "tips/{id}";
   static const String getMusic = "relaxSounds/?category=Music";
+
   static const String getWhiteNoise =
       "relaxSounds/?category=White Noise&limit=12";
+
+  static const String getAllStories = "stories/?limit=20";
+  static const String getAllChannels = "channels/?limit=20";
+
 }
 
 class ApiErrors {
