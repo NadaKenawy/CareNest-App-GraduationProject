@@ -14,6 +14,16 @@ import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubi
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
+
+import 'package:care_nest/features/entertainment/logic/get_white_noise/get_white_noise_cubit.dart';
+import 'package:care_nest/features/entertainment/sweet_sleep_screen.dart';
+import 'package:care_nest/features/entertainment/logic/get_music_cubit/get_music_cubit.dart';
+import 'package:care_nest/features/entertainment/ui/short_stories_screen.dart';
+import 'package:care_nest/features/entertainment/ui/widgets/entertainment_screen.dart';
+import 'package:care_nest/features/entertainment/ui/widgets/story_details_screen_body.dart';
+import 'package:care_nest/features/entertainment/ui/widgets/sweet_sleep_page_two.dart';
+import 'package:care_nest/features/entertainment/ui/widgets/sweet_sleep_page_view.dart';
+
 import 'package:care_nest/features/entertainment/fun_videos/logic/get_all_channels_cubit.dart';
 import 'package:care_nest/features/entertainment/fun_videos/ui/fun_video_screen.dart';
 import 'package:care_nest/features/entertainment/short_stories/data/models/get_all_stories_response.dart';
@@ -23,6 +33,7 @@ import 'package:care_nest/features/entertainment/logic/cubit/get_music_cubit.dar
 import 'package:care_nest/features/entertainment/short_stories/ui/short_stories_screen.dart';
 import 'package:care_nest/features/entertainment/ui/widgets/entertainment_screen.dart';
 import 'package:care_nest/features/entertainment/short_stories/ui/widgets/story_details_screen_body.dart';
+
 import 'package:care_nest/features/fcm/logic/get_all_notifications_cubit/get_all_notifications_cubit.dart';
 import 'package:care_nest/features/fcm/logic/notification_cubit/notification_cubit.dart';
 import 'package:care_nest/features/fcm/ui/notifications_screen.dart';
@@ -93,7 +104,11 @@ abstract class AppRouter {
   static const kSweetSleep = '/SweetSleep';
   static const kShortStoriesScreen = '/shortStoriesScreen';
   static const kStoryDetailsScreen = '/storyDetailsScreen';
+
+  static const kWhiteNoise = '/whiteNoise';
+
   static const kFunVideosScreen = '/funVideosScreen';
+
 
   static final router = GoRouter(
     routes: [
@@ -374,10 +389,15 @@ abstract class AppRouter {
       GoRoute(
           path: kSweetSleep,
           builder: (context, state) {
-            return BlocProvider(
-              create: (context) => getIt<GetMusicCubit>()..getMusic(),
-              child: const SweetSleep(),
-            );
+            return MultiBlocProvider(providers: [
+              BlocProvider(
+                create: (context) => getIt<GetMusicCubit>()..getMusic(),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    getIt<GetWhiteNoiseCubit>()..getWhiteNoise(),
+              ),
+            ], child: const SweetSleepPageView());
           }),
       GoRoute(
         path: kShortStoriesScreen,
@@ -389,6 +409,17 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
+
+          path: kStoryDetailsScreen,
+          builder: (context, state) {
+            return const StoryDetailsScreenBody();
+          }),
+      GoRoute(
+          path: kWhiteNoise,
+          builder: (context, state) {
+            return const SweetSleepPageTwo();
+          }),
+
         path: kStoryDetailsScreen,
         builder: (context, state) {
           final story = state.extra as StoryData;
@@ -404,6 +435,7 @@ abstract class AppRouter {
           );
         },
       ),
+
     ],
   );
 }

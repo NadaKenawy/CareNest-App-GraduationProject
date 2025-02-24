@@ -1,5 +1,5 @@
 import 'package:care_nest/features/entertainment/data/repos/get_music_repo.dart';
-import 'package:care_nest/features/entertainment/logic/cubit/get_music_state.dart';
+import 'package:care_nest/features/entertainment/logic/get_music_cubit/get_music_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/helpers/constants.dart';

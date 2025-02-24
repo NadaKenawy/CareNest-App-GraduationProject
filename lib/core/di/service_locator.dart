@@ -16,11 +16,15 @@ import 'package:care_nest/features/baby_growth/logic/get_baby_height_growth_cubi
 import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/put_growth_data_cubit/put_growth_data_cubit.dart';
+
+import 'package:care_nest/features/entertainment/logic/get_music_cubit/get_music_cubit.dart';
+
 import 'package:care_nest/features/entertainment/fun_videos/data/repo/get_all_channels_repo.dart';
 import 'package:care_nest/features/entertainment/fun_videos/logic/get_all_channels_cubit.dart';
 import 'package:care_nest/features/entertainment/short_stories/data/repo/get_all_stories_repo.dart';
 import 'package:care_nest/features/entertainment/logic/cubit/get_music_cubit.dart';
 import 'package:care_nest/features/entertainment/short_stories/logic/get_all_stories_cubit.dart';
+
 import 'package:care_nest/features/fcm/data/repos/get_all_notifications_repo.dart';
 import 'package:care_nest/features/fcm/data/repos/notification_repo.dart';
 import 'package:care_nest/features/fcm/data/repos/update_fcm_repo.dart';
@@ -65,6 +69,8 @@ import 'package:hive/hive.dart';
 import '../../features/add_baby/data/repos/add_baby_repo.dart';
 import '../../features/add_baby/logic/add_baby_cubit/add_baby_cubit.dart';
 import '../../features/entertainment/data/repos/get_music_repo.dart';
+import '../../features/entertainment/data/repos/get_white_noise_repo.dart';
+import '../../features/entertainment/logic/get_white_noise/get_white_noise_cubit.dart';
 import '../../features/reminders/medications/data/repos/get_all_medication_schedule_repo.dart';
 import '../../features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 import '../../features/reminders/vaccinations/data/models/get_baby_vaccines_response.dart';
@@ -228,6 +234,12 @@ Future<void> setupGetIt() async {
   // get music cubit
   getIt.registerFactory<GetMusicCubit>(() => GetMusicCubit(getIt()));
 
+
+  // get white noise repo
+  getIt.registerLazySingleton<GetWhiteNoiseRepo>(() => GetWhiteNoiseRepo(getIt()));
+  // get white noise cubit
+  getIt.registerFactory<GetWhiteNoiseCubit>(() => GetWhiteNoiseCubit(getIt()));
+
   //get all stories
   getIt.registerLazySingleton<GetAllStoriesRepo>(
       () => GetAllStoriesRepo(getIt()));
@@ -238,4 +250,5 @@ Future<void> setupGetIt() async {
       () => GetAllChannelsRepo(getIt()));
   getIt
       .registerFactory<GetAllChannelsCubit>(() => GetAllChannelsCubit(getIt()));
+
 }

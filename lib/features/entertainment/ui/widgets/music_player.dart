@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:care_nest/features/entertainment/data/models/get_music_response.dart';
 
+import '../../data/models/get_white_noise_response.dart';
+
 class MusicPlayer {
   final AudioPlayer _audioPlayer = AudioPlayer();
 
@@ -45,6 +47,15 @@ class MusicPlayer {
     try {
       await _audioPlayer.stop(); 
       await _audioPlayer.play(UrlSource(music.audio));
+    } catch (e) {
+      log('Error playing audio: $e');
+    }
+  }
+  
+  Future<void> playAudioWhite(WhiteNoiseData whitenoise) async {
+    try {
+      await _audioPlayer.stop();
+      await _audioPlayer.play(UrlSource(whitenoise.audio));
     } catch (e) {
       log('Error playing audio: $e');
     }
