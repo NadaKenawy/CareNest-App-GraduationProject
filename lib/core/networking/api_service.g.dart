@@ -1092,7 +1092,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          'relaxSounds/?category=White Noise',
+          'relaxSounds/?category=White Noise&limit=12',
           queryParameters: queryParameters,
           data: _data,
         )

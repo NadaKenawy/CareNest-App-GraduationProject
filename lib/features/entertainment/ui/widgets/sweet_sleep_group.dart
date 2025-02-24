@@ -4,9 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../data/models/get_white_noise_response.dart';
 
-class SweetSleepGroup extends StatelessWidget {
+class SweetSleepGroup extends StatefulWidget {
   const SweetSleepGroup({super.key, required this.whiteNoiseData});
   final List<WhiteNoiseData> whiteNoiseData;
+
+  @override
+  State<SweetSleepGroup> createState() => _SweetSleepGroupState();
+}
+
+class _SweetSleepGroupState extends State<SweetSleepGroup> {
   final List<String> icons = const [
     'assets/images/wind.png',
     'assets/images/vaccum_cleaner.png',
@@ -22,12 +28,14 @@ class SweetSleepGroup extends StatelessWidget {
     'assets/images/computer.png',
   ];
 
+  ValueNotifier<String?> activeItemNotifier = ValueNotifier<String?>(null);
+
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: whiteNoiseData.length,
+      itemCount: widget.whiteNoiseData.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         crossAxisSpacing: 32.w,
@@ -36,7 +44,8 @@ class SweetSleepGroup extends StatelessWidget {
       itemBuilder: (context, index) {
         return SweetSleepItem(
           icon: icons[index],
-          whiteNoiseData: whiteNoiseData[index],
+          whiteNoiseData: widget.whiteNoiseData[index],
+          activeItemNotifier: activeItemNotifier,
         );
       },
     );
