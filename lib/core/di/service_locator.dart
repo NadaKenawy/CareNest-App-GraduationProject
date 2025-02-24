@@ -16,9 +16,11 @@ import 'package:care_nest/features/baby_growth/logic/get_baby_height_growth_cubi
 import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/put_growth_data_cubit/put_growth_data_cubit.dart';
-import 'package:care_nest/features/entertainment/data/repos/get_all_stories_repo.dart';
+import 'package:care_nest/features/entertainment/fun_videos/data/repo/get_all_channels_repo.dart';
+import 'package:care_nest/features/entertainment/fun_videos/logic/get_all_channels_cubit.dart';
+import 'package:care_nest/features/entertainment/short_stories/data/repo/get_all_stories_repo.dart';
 import 'package:care_nest/features/entertainment/logic/cubit/get_music_cubit.dart';
-import 'package:care_nest/features/entertainment/logic/get_all_stories_cubit/get_all_stories_cubit.dart';
+import 'package:care_nest/features/entertainment/short_stories/logic/get_all_stories_cubit.dart';
 import 'package:care_nest/features/fcm/data/repos/get_all_notifications_repo.dart';
 import 'package:care_nest/features/fcm/data/repos/notification_repo.dart';
 import 'package:care_nest/features/fcm/data/repos/update_fcm_repo.dart';
@@ -226,10 +228,14 @@ Future<void> setupGetIt() async {
   // get music cubit
   getIt.registerFactory<GetMusicCubit>(() => GetMusicCubit(getIt()));
 
-
-    //get all stories
+  //get all stories
   getIt.registerLazySingleton<GetAllStoriesRepo>(
       () => GetAllStoriesRepo(getIt()));
-  getIt.registerFactory<GetAllStoriesCubit>(
-      () => GetAllStoriesCubit(getIt()));
+  getIt.registerFactory<GetAllStoriesCubit>(() => GetAllStoriesCubit(getIt()));
+
+  // get all channels
+  getIt.registerLazySingleton<GetAllChannelsRepo>(
+      () => GetAllChannelsRepo(getIt()));
+  getIt
+      .registerFactory<GetAllChannelsCubit>(() => GetAllChannelsCubit(getIt()));
 }

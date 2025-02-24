@@ -53,7 +53,7 @@ class EntertainmentScreen extends StatelessWidget {
                     AnimatedCategoryCard(
                       svgPath: "assets/images/Play-VideosIcon.svg",
                       title: "Fun Videos",
-                      route: "",
+                      route: AppRouter.kFunVideosScreen,
                       cardWidth: cardWidth,
                       cardHeight: cardHeight,
                     ),

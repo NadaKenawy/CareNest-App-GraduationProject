@@ -1,5 +1,5 @@
-import 'package:care_nest/features/entertainment/logic/get_all_stories_cubit/get_all_stories_cubit.dart';
-import 'package:care_nest/features/entertainment/ui/widgets/short_stories_screen_body.dart';
+import 'package:care_nest/features/entertainment/short_stories/logic/get_all_stories_cubit.dart';
+import 'package:care_nest/features/entertainment/short_stories/ui/widgets/short_stories_screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

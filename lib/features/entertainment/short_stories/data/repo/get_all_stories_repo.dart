@@ -1,7 +1,7 @@
 import 'package:care_nest/core/networking/api_result.dart';
-import 'package:care_nest/features/entertainment/data/models/get_all_stories/get_all_stories_response.dart';
-import '../../../../core/networking/api_error_handler.dart';
-import '../../../../core/networking/api_service.dart';
+import 'package:care_nest/features/entertainment/short_stories/data/models/get_all_stories_response.dart';
+import '../../../../../core/networking/api_error_handler.dart';
+import '../../../../../core/networking/api_service.dart';
 
 class GetAllStoriesRepo {
   final ApiService _apiService;

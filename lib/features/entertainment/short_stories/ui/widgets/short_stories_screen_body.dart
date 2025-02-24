@@ -1,8 +1,8 @@
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
-import 'package:care_nest/features/entertainment/data/models/get_all_stories/get_all_stories_response.dart';
-import 'package:care_nest/features/entertainment/logic/get_all_stories_cubit/get_all_stories_cubit.dart';
-import 'package:care_nest/features/entertainment/logic/get_all_stories_cubit/get_all_stories_state.dart';
+import 'package:care_nest/features/entertainment/short_stories/data/models/get_all_stories_response.dart';
+import 'package:care_nest/features/entertainment/short_stories/logic/get_all_stories_cubit.dart';
+import 'package:care_nest/features/entertainment/short_stories/logic/get_all_stories_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

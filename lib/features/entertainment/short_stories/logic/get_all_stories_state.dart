@@ -1,5 +1,5 @@
 import 'package:care_nest/core/networking/api_error_model.dart';
-import 'package:care_nest/features/entertainment/data/models/get_all_stories/get_all_stories_response.dart';
+import 'package:care_nest/features/entertainment/short_stories/data/models/get_all_stories_response.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'get_all_stories_state.freezed.dart';
 

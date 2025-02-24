@@ -1,6 +1,6 @@
 import 'dart:developer';
-import 'package:care_nest/features/entertainment/data/repos/get_all_stories_repo.dart';
-import 'package:care_nest/features/entertainment/logic/get_all_stories_cubit/get_all_stories_state.dart';
+import 'package:care_nest/features/entertainment/short_stories/data/repo/get_all_stories_repo.dart';
+import 'package:care_nest/features/entertainment/short_stories/logic/get_all_stories_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/helpers/constants.dart';
 import '../../../../core/helpers/shared_pref_helper.dart';
