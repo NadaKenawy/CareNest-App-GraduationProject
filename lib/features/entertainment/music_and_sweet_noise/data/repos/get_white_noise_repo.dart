@@ -1,8 +1,8 @@
-import 'package:care_nest/features/entertainment/data/models/get_white_noise_response.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/data/models/get_white_noise_response.dart';
 
-import '../../../../core/networking/api_error_handler.dart';
-import '../../../../core/networking/api_result.dart';
-import '../../../../core/networking/api_service.dart';
+import '../../../../../core/networking/api_error_handler.dart';
+import '../../../../../core/networking/api_result.dart';
+import '../../../../../core/networking/api_service.dart';
 
 class GetWhiteNoiseRepo {
   final ApiService _apiService;

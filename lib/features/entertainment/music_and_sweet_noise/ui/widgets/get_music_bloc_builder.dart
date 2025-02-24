@@ -1,7 +1,7 @@
-import 'package:care_nest/features/entertainment/data/models/get_music_response.dart';
-import 'package:care_nest/features/entertainment/logic/get_music_cubit/get_music_state.dart';
-import 'package:care_nest/features/entertainment/ui/widgets/music_list_view.dart';
-import 'package:care_nest/features/entertainment/ui/widgets/music_list_view_skeletonizer.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/data/models/get_music_response.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/logic/get_music_cubit/get_music_state.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/ui/widgets/music_list_view.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/ui/widgets/music_list_view_skeletonizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../logic/get_music_cubit/get_music_cubit.dart';

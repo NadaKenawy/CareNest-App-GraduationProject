@@ -1,4 +1,4 @@
-import 'package:care_nest/features/entertainment/ui/widgets/entertainment_screen_body.dart';
+import 'package:care_nest/features/entertainment/entertainment_screen_body.dart';
 import 'package:flutter/material.dart';
 
 class SweetSleep extends StatelessWidget {

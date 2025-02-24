@@ -1,4 +1,4 @@
-import 'package:care_nest/features/entertainment/ui/widgets/music_list_view_item.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/ui/widgets/music_list_view_item.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/models/get_music_response.dart';

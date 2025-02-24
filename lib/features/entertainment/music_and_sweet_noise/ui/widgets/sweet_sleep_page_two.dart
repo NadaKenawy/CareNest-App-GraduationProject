@@ -1,5 +1,5 @@
-import 'package:care_nest/features/entertainment/ui/widgets/entertainment_app_bar.dart';
-import 'package:care_nest/features/entertainment/ui/widgets/get_white_noise_bloc_builder.dart';
+import 'package:care_nest/features/entertainment/entertainment_app_bar.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/ui/widgets/get_white_noise_bloc_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

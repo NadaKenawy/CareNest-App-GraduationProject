@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:care_nest/features/entertainment/data/models/get_music_response.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/data/models/get_music_response.dart';
 
 import '../../data/models/get_white_noise_response.dart';
 

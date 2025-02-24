@@ -1,6 +1,7 @@
-import 'package:care_nest/features/entertainment/data/models/get_white_noise_response.dart';
-import 'package:care_nest/features/entertainment/logic/get_white_noise/get_white_noise_state.dart';
-import 'package:care_nest/features/entertainment/ui/widgets/sweet_sleep_group.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/data/models/get_white_noise_response.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/logic/get_white_noise/get_white_noise_state.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/ui/widgets/sweet_sleep_group.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/ui/widgets/sweet_sleep_group_skeletonizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,7 +34,7 @@ class GetWhiteNoiseBlocBuilder extends StatelessWidget {
   }
 
   Widget setupLoading() {
-    return const CircularProgressIndicator();
+    return const SweetSleepGroupSkeletonizer();
   }
 
   Widget setupSuccess(List<WhiteNoiseData> whiteList) {

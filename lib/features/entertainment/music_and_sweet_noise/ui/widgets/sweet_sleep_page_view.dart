@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:care_nest/features/entertainment/ui/widgets/sweet_sleep_page_two.dart';
-import 'entertainment_screen_body.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/ui/widgets/sweet_sleep_page_two.dart';
+import '../../../entertainment_screen_body.dart';
 
 class SweetSleepPageView extends StatefulWidget {
   const SweetSleepPageView({super.key});

@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:care_nest/features/entertainment/data/repos/get_white_noise_repo.dart';
-import 'package:care_nest/features/entertainment/logic/get_white_noise/get_white_noise_state.dart';
-import '../../../../core/helpers/constants.dart';
-import '../../../../core/helpers/shared_pref_helper.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/data/repos/get_white_noise_repo.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/logic/get_white_noise/get_white_noise_state.dart';
+import '../../../../../core/helpers/constants.dart';
+import '../../../../../core/helpers/shared_pref_helper.dart';
 
 class GetWhiteNoiseCubit extends Cubit<GetWhiteNoiseState> {
   GetWhiteNoiseCubit(this._getWhiteNoiseRepo)

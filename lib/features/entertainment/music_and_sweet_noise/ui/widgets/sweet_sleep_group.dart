@@ -1,4 +1,4 @@
-import 'package:care_nest/features/entertainment/ui/widgets/sweet_sleep_item.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/ui/widgets/sweet_sleep_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

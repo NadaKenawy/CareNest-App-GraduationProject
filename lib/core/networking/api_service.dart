@@ -10,8 +10,8 @@ import 'package:care_nest/features/baby_growth/data/models/put_growth_data/put_g
 import 'package:care_nest/features/baby_growth/data/models/put_growth_data/put_growth_data_response.dart';
 import 'package:care_nest/features/entertainment/fun_videos/data/model/get_all_channels_response.dart';
 import 'package:care_nest/features/entertainment/short_stories/data/models/get_all_stories_response.dart';
-import 'package:care_nest/features/entertainment/data/models/get_music_response.dart';
-import 'package:care_nest/features/entertainment/data/models/get_white_noise_response.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/data/models/get_music_response.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/data/models/get_white_noise_response.dart';
 import 'package:care_nest/features/fcm/data/models/delete_all_notifications/delete_all_notifications_response.dart';
 import 'package:care_nest/features/fcm/data/models/delete_notification/delete_notification_response.dart';
 import 'package:care_nest/features/fcm/data/models/get_all_notifications/get_all_notifications_response.dart';
@@ -221,15 +221,17 @@ abstract class ApiService {
   Future<WhiteNoiseResponse> getWhiteNoise(
     @Header('Authorization') String token,
   );
-}
+
 
 
   @GET(ApiConstants.getAllStories)
   Future<GetAllStoriesResponse> getAllStories(
     @Header('Authorization') String token,
   );
+
   @GET(ApiConstants.getAllChannels)
   Future<GetAllChannelsResponse> getAllChannels(
     @Header('Authorization') String token,
   );
 }
+

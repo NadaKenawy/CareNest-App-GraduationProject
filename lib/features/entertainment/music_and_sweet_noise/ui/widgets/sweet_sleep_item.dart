@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:care_nest/features/entertainment/data/models/get_white_noise_response.dart';
-import 'package:care_nest/features/entertainment/ui/widgets/music_player.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/data/models/get_white_noise_response.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/ui/widgets/music_player.dart';
 
 class SweetSleepItem extends StatefulWidget {
   const SweetSleepItem({
@@ -13,7 +13,7 @@ class SweetSleepItem extends StatefulWidget {
 
   final String icon;
   final WhiteNoiseData whiteNoiseData;
-  final ValueNotifier<String?> activeItemNotifier; // المراقب للحالة النشطة
+  final ValueNotifier<String?> activeItemNotifier; 
 
   @override
   State<SweetSleepItem> createState() => _SweetSleepItemState();
