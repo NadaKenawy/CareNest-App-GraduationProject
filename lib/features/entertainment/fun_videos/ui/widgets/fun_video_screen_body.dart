@@ -1,8 +1,12 @@
-import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
+import 'package:care_nest/features/entertainment/fun_videos/logic/get_all_channels_cubit.dart';
+import 'package:care_nest/features/entertainment/fun_videos/logic/get_all_channels_state.dart';
+import 'package:care_nest/features/entertainment/fun_videos/ui/video_player_screen.dart';
+import 'package:care_nest/features/entertainment/fun_videos/ui/widgets/channels_list.dart';
+import 'package:care_nest/features/entertainment/fun_videos/ui/widgets/videos_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class FunVideoScreenBody extends StatefulWidget {
   const FunVideoScreenBody({super.key});
@@ -14,96 +18,25 @@ class FunVideoScreenBody extends StatefulWidget {
 class _FunVideoScreenBodyState extends State<FunVideoScreenBody> {
   int selectedIndex = 0;
 
-  final List<Map<String, dynamic>> categories = [
-    {
-      'channal': 'assets/images/channels4_profile (1).jpg',
-      'videos': [
-        {
-          'image': 'assets/images/hq720 (1).jpg',
-          'title': 'Wheels on the Bus | @CoComelon Nursery Rhymes & Kids Songs'
-        },
-        {
-          'image': 'assets/images/hq720 (1).jpg',
-          'title': 'Bath Song | @CoComelon Nursery Rhymes & Kids Songs'
-        },
-        {
-          'image': 'assets/images/hq720 (1).jpg',
-          'title': 'Wheels on the Bus | @CoComelon Nursery Rhymes & Kids Songs'
-        },
-        {
-          'image': 'assets/images/hq720 (1).jpg',
-          'title': 'Bath Song | @CoComelon Nursery Rhymes & Kids Songs'
-        },
-        {
-          'image': 'assets/images/hq720 (1).jpg',
-          'title': 'Wheels on the Bus | @CoComelon Nursery Rhymes & Kids Songs'
-        },
-        {
-          'image': 'assets/images/hq720 (1).jpg',
-          'title': 'Bath Song | @CoComelon Nursery Rhymes & Kids Songs'
-        },
-      ],
-    },
-    {
-      'channal': 'assets/images/channels4_profile (2).jpg',
-      'videos': [
-        {
-          'image': 'assets/images/hq720 (2).jpg',
-          'title': 'Twinkle Twinkle Little Star | @CoComelon'
-        },
-        {
-          'image': 'assets/images/hq720 (2).jpg',
-          'title': 'Wheels on the Bus | @CoComelon Nursery Rhymes & Kids Songs'
-        },
-      ],
-    },
-    {
-      'channal': 'assets/images/channels4_profile (3).jpg',
-      'videos': [
-        {'image': 'assets/images/hq720 (3).jpg', 'title': 'Some Song #1'},
-        {'image': 'assets/images/hq720 (3).jpg', 'title': 'Some Song #2'},
-      ],
-    },
-    {
-      'channal': 'assets/images/channels4_profile (4).jpg',
-      'videos': [
-        {
-          'image': 'assets/images/hq720.jpg',
-          'title': 'Wheels on the Bus | @CoComelon Nursery Rhymes & Kids Songs'
-        },
-        {
-          'image': 'assets/images/hq720.jpg',
-          'title': 'Bath Song | @CoComelon Nursery Rhymes & Kids Songs'
-        },
-      ],
-    },
-    {
-      'channal': 'assets/images/Cocomelon.webp',
-      'videos': [
-        {
-          'image': 'assets/images/maxresdefault (1).jpg',
-          'title': 'Twinkle Twinkle Little Star | @CoComelon'
-        },
-        {
-          'image': 'assets/images/maxresdefault (1).jpg',
-          'title': 'Wheels on the Bus | @CoComelon Nursery Rhymes & Kids Songs'
-        },
-      ],
-    },
-    {
-      'channal': 'assets/images/channels4_profile.jpg',
-      'videos': [
-        {
-          'image': 'assets/images/maxresdefault.jpg',
-          'title': 'Twinkle Twinkle Little Star | @CoComelon'
-        },
-        {
-          'image': 'assets/images/maxresdefault.jpg',
-          'title': 'Wheels on the Bus | @CoComelon Nursery Rhymes & Kids Songs'
-        },
-      ],
-    },
-  ];
+  @override
+  void initState() {
+    super.initState();
+    context.read<GetAllChannelsCubit>().getAllChannels();
+  }
+
+  String? extractYouTubeId(String url) {
+    try {
+      final uri = Uri.parse(url);
+      if (uri.host.contains('youtube.com')) {
+        return uri.queryParameters['v'];
+      } else if (uri.host.contains('youtu.be')) {
+        return uri.pathSegments.isNotEmpty ? uri.pathSegments[0] : null;
+      }
+    } catch (e) {
+      return null;
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -118,91 +51,82 @@ class _FunVideoScreenBodyState extends State<FunVideoScreenBody> {
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        GoRouter.of(context).pop();
-                      },
-                      icon: const Icon(Icons.arrow_back),
-                    ),
-                    SizedBox(width: 8.w),
-                    Text(
-                      'Short Stories',
-                      style: TextStyles.font20BlackSemiBold,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 8.h),
-                SizedBox(
-                  height: 85.h,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: categories.length,
-                    itemBuilder: (context, index) {
-                      final isSelected = selectedIndex == index;
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedIndex = index;
-                          });
-                        },
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          margin: EdgeInsets.only(right: 12.w),
-                          width: isSelected ? 85.w : 70.w,
-                          height: isSelected ? 85.h : 70.h,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: isSelected
-                                  ? ColorsManager.secondryBlueColor
-                                  : Colors.white,
-                              width: 4.w,
-                            ),
-                            image: DecorationImage(
-                              image: AssetImage(categories[index]['channal']),
-                              fit: BoxFit.contain,
-                            ),
-                          ),
+            child: BlocBuilder<GetAllChannelsCubit, GetAllChannelsState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () => const SizedBox(),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  success: (channelsData) {
+                    if (channelsData == null || channelsData.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'No channels available',
+                          style: TextStyles.font20BlackSemiBold,
                         ),
                       );
-                    },
-                  ),
-                ),
-                SizedBox(height: 12.h),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: categories[selectedIndex]['videos'].length,
-                    itemBuilder: (context, index) {
-                      final video = categories[selectedIndex]['videos'][index];
-                      return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 16.h),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    }
+                    if (selectedIndex >= channelsData.length) {
+                      selectedIndex = 0;
+                    }
+                    final selectedChannel = channelsData[selectedIndex];
+                    return Column(
+                      children: [
+                        Row(
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20.r),
-                              child: Image.asset(
-                                video['image'],
-                                width: double.infinity,
-                                fit: BoxFit.cover,
-                              ),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(Icons.arrow_back),
                             ),
-                            SizedBox(height: 8.h),
+                            SizedBox(width: 8.w),
                             Text(
-                              video['title'],
+                              'Fun Videos',
                               style: TextStyles.font20BlackSemiBold,
                             ),
                           ],
                         ),
-                      );
-                    },
+                        SizedBox(height: 8.h),
+                        ChannelsList(
+                          channels: channelsData,
+                          selectedIndex: selectedIndex,
+                          onChannelSelected: (index) {
+                            setState(() {
+                              selectedIndex = index;
+                            });
+                          },
+                        ),
+                        SizedBox(height: 12.h),
+                        Expanded(
+                          child: VideosList(
+                            videos: selectedChannel.videos,
+                            onVideoTap: (video) {
+                              final videoId = extractYouTubeId(video.url ?? '');
+                              if (videoId != null) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        VideoPlayerScreen(videoId: videoId),
+                                    fullscreenDialog: true,
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                  error: (apiErrorModel) => Center(
+                    child: Text(
+                      apiErrorModel.message ?? 'Error occurred',
+                      style: TextStyles.font20BlackSemiBold,
+                    ),
                   ),
-                ),
-              ],
+                );
+              },
             ),
           ),
         ),
