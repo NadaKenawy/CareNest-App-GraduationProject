@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:care_nest/features/entertainment/short_stories/data/models/get_all_stories_response.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:flutter/material.dart';

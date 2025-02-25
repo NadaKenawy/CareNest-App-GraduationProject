@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:care_nest/features/analysis_result/ui/widgets/analysis_result_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

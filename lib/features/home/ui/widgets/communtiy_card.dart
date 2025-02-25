@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/features/home/ui/widgets/forward_arrow_button.dart';
 import 'package:flutter/material.dart';

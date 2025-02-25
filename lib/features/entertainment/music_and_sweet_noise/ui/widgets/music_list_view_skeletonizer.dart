@@ -10,6 +10,7 @@ class MusicListViewSkeletonizer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      padding: EdgeInsets.zero,
       itemCount: 6,
       itemBuilder: (context, index) {
         return Skeletonizer(
@@ -25,18 +26,23 @@ class MusicListViewSkeletonizer extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left: 8.w, top: 8.h),
+                        padding: EdgeInsets.only(left: 16.w),
                         child: Row(
                           children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.play_arrow,
+                            Container(
+                              height: 24,
+                              width: 24,
+                              decoration: const BoxDecoration(
                                 color: Color.fromARGB(255, 223, 223, 231),
+                                shape: BoxShape.circle,
                               ),
-                              iconSize: 40,
+                            ),
+                            SizedBox(
+                              width: 12.w,
                             ),
                             Container(
                               height: 20,
@@ -50,18 +56,15 @@ class MusicListViewSkeletonizer extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 10.h,
+                        height: 8.w,
                       ),
                       Padding(
-                        padding: EdgeInsets.only(
-                          left: 25.w,
-                          right: 8.w,
-                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 20.w),
                         child: Row(
                           children: [
                             Container(
                               width: 280.w,
-                              height: 6.h,
+                              height: 8.h,
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 223, 223, 231),
                                 borderRadius: BorderRadius.circular(10),

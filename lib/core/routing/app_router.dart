@@ -14,13 +14,13 @@ import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubi
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
+import 'package:care_nest/features/entertainment/entertainment_screen.dart';
 
 import 'package:care_nest/features/entertainment/music_and_sweet_noise/logic/get_white_noise/get_white_noise_cubit.dart';
 import 'package:care_nest/features/entertainment/music_and_sweet_noise/logic/get_music_cubit/get_music_cubit.dart';
 
-import 'package:care_nest/features/entertainment/music_and_sweet_noise/ui/widgets/entertainment_screen.dart';
-import 'package:care_nest/features/entertainment/music_and_sweet_noise/ui/widgets/sweet_sleep_page_two.dart';
-import 'package:care_nest/features/entertainment/music_and_sweet_noise/ui/widgets/sweet_sleep_page_view.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/ui/sweet_sleep_page_two.dart';
+import 'package:care_nest/features/entertainment/music_and_sweet_noise/ui/sweet_sleep_page_view.dart';
 import 'package:care_nest/features/entertainment/fun_videos/logic/get_all_channels_cubit.dart';
 import 'package:care_nest/features/entertainment/fun_videos/ui/fun_video_screen.dart';
 import 'package:care_nest/features/entertainment/short_stories/data/models/get_all_stories_response.dart';

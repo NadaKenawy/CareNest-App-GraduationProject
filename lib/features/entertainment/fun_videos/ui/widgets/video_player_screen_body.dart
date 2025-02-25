@@ -47,7 +47,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreenBody> {
           ),
           Positioned(
             top: 40,
-            right: 20,
+            left: 16,
             child: IconButton(
               icon: const Icon(
                 Icons.close,

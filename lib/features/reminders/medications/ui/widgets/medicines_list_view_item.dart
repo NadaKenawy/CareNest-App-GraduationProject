@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, deprecated_member_use
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:care_nest/core/helpers/constants.dart';

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';

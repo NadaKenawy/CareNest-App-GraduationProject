@@ -33,13 +33,14 @@ class _SweetSleepGroupState extends State<SweetSleepGroup> {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      padding: EdgeInsets.zero,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: widget.whiteNoiseData.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        crossAxisSpacing: 32.w,
-        mainAxisSpacing: 32.h,
+        crossAxisSpacing: 24.w,
+        mainAxisSpacing: 24.h,
       ),
       itemBuilder: (context, index) {
         return SweetSleepItem(

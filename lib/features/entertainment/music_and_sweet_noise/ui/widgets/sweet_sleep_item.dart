@@ -1,3 +1,4 @@
+import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:care_nest/features/entertainment/music_and_sweet_noise/data/models/get_white_noise_response.dart';
@@ -13,7 +14,7 @@ class SweetSleepItem extends StatefulWidget {
 
   final String icon;
   final WhiteNoiseData whiteNoiseData;
-  final ValueNotifier<String?> activeItemNotifier; 
+  final ValueNotifier<String?> activeItemNotifier;
 
   @override
   State<SweetSleepItem> createState() => _SweetSleepItemState();
@@ -53,7 +54,9 @@ class _SweetSleepItemState extends State<SweetSleepItem> {
             width: 100.w,
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
-              color: isPlaying ? Colors.green : const Color(0xff011836),
+              color: isPlaying
+                  ? ColorsManager.secondryBlueColor
+                  : const Color(0xff011836),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Center(

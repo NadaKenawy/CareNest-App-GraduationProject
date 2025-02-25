@@ -1,8 +1,11 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/features/entertainment/short_stories/data/models/get_all_stories_response.dart';
 import 'package:care_nest/features/entertainment/short_stories/logic/get_all_stories_cubit.dart';
 import 'package:care_nest/features/entertainment/short_stories/logic/get_all_stories_state.dart';
+import 'package:care_nest/features/entertainment/short_stories/ui/widgets/short_stories_grid_skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -49,7 +52,7 @@ class ShortStoriesScreenBody extends StatelessWidget {
                       return state.when(
                         initial: () => const SizedBox.shrink(),
                         loading: () =>
-                            const Center(child: CircularProgressIndicator()),
+                            const Center(child: ShortStoriesGridSkeleton()),
                         success: (stories) {
                           if (stories!.isEmpty) {
                             return const Center(

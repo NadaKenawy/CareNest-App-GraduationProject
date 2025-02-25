@@ -2,6 +2,7 @@ import 'package:care_nest/features/entertainment/music_and_sweet_noise/data/mode
 import 'package:care_nest/features/entertainment/music_and_sweet_noise/ui/widgets/music_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart' show SvgPicture;
 
 import '../../../../../core/theme/text_styless.dart';
 
@@ -70,7 +71,7 @@ class _MusicListViewItemState extends State<MusicListViewItem> {
 
   @override
   void dispose() {
-    _musicPlayer.dispose(); 
+    _musicPlayer.dispose();
     super.dispose();
   }
 
@@ -79,16 +80,18 @@ class _MusicListViewItemState extends State<MusicListViewItem> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Container(
-        height: 115.h,
+        height: 100.h,
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           color: const Color(0xff011836),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 8.w, top: 8.h),
+              padding: EdgeInsets.only(left: 8.w),
               child: Row(
                 children: [
                   ValueListenableBuilder<String?>(
@@ -98,10 +101,10 @@ class _MusicListViewItemState extends State<MusicListViewItem> {
                       return IconButton(
                         onPressed: _togglePlayPause,
                         icon: Icon(
-                          isPlaying ? Icons.stop : Icons.play_arrow,
+                          isPlaying ? Icons.pause : Icons.play_arrow,
                           color: Colors.white,
                         ),
-                        iconSize: 30,
+                        iconSize: 32,
                       );
                     },
                   ),
@@ -114,27 +117,36 @@ class _MusicListViewItemState extends State<MusicListViewItem> {
                 ],
               ),
             ),
-            SizedBox(height: 10.h),
             Padding(
-              padding: EdgeInsets.only(left: 25.w, right: 8.w),
-              child: Stack(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: 280.w,
-                    height: 6.h,
-                    decoration: BoxDecoration(
-                      color: const Color(0xff1a2f4a),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                  Stack(
+                    children: [
+                      Container(
+                        width: 280.w,
+                        height: 6.h,
+                        decoration: BoxDecoration(
+                          color: const Color(0xff1a2f4a),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        width: 280.w * progress,
+                        height: 6.h,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ],
                   ),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    width: 280.w * progress,
-                    height: 6.h,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                  SizedBox(width: 8.w),
+                  SvgPicture.asset(
+                    'assets/images/mdi_sleep.svg',
+                    // width: 200.w,
                   ),
                 ],
               ),

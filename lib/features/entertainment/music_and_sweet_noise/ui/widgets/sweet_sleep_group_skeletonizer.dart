@@ -9,13 +9,15 @@ class SweetSleepGroupSkeletonizer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Skeletonizer(
       child: GridView.builder(
+              padding: EdgeInsets.zero,
+
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: 12,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
-          crossAxisSpacing: 32.w,
-          mainAxisSpacing: 32.h,
+          crossAxisSpacing: 24.w,
+          mainAxisSpacing: 24.h,
         ),
         itemBuilder: (context, index) {
           return Container(

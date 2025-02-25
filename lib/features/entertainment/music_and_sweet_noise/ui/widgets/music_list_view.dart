@@ -19,6 +19,7 @@ class _MusicListViewState extends State<MusicListView> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        padding: EdgeInsets.zero,
         itemCount: widget.musicList.length,
         itemBuilder: (context, index) {
           return Padding(

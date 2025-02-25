@@ -3,6 +3,7 @@ import 'package:care_nest/features/entertainment/fun_videos/logic/get_all_channe
 import 'package:care_nest/features/entertainment/fun_videos/logic/get_all_channels_state.dart';
 import 'package:care_nest/features/entertainment/fun_videos/ui/video_player_screen.dart';
 import 'package:care_nest/features/entertainment/fun_videos/ui/widgets/channels_list.dart';
+import 'package:care_nest/features/entertainment/fun_videos/ui/widgets/fun_video_screen_skeleton.dart';
 import 'package:care_nest/features/entertainment/fun_videos/ui/widgets/videos_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,9 +55,8 @@ class _FunVideoScreenBodyState extends State<FunVideoScreenBody> {
             child: BlocBuilder<GetAllChannelsCubit, GetAllChannelsState>(
               builder: (context, state) {
                 return state.when(
-                  initial: () => const SizedBox(),
-                  loading: () =>
-                      const Center(child: CircularProgressIndicator()),
+                  initial: () => const FunVideoScreenSkeleton(),
+                  loading: () => const Center(child: FunVideoScreenSkeleton()),
                   success: (channelsData) {
                     if (channelsData == null || channelsData.isEmpty) {
                       return Center(
