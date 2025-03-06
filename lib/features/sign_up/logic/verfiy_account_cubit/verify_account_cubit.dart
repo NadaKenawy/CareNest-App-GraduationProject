@@ -13,32 +13,18 @@ class VerifyAccountCubit extends Cubit<VerifyAccountState> {
       : super(const VerifyAccountState.initial());
   final VerifyAccountRepo _verifyAccountRepo;
 
-  TextEditingController otpField1Controller = TextEditingController();
-  TextEditingController otpField2Controller = TextEditingController();
-  TextEditingController otpField3Controller = TextEditingController();
-  TextEditingController otpField4Controller = TextEditingController();
-  TextEditingController otpField5Controller = TextEditingController();
-  TextEditingController otpField6Controller = TextEditingController();
-
   final formKey = GlobalKey<FormState>();
+  TextEditingController otpField = TextEditingController();
 
   void emitVerifyAccountStates() async {
     emit(const VerifyAccountState.loading());
 
-    String completeCode = otpField1Controller.text +
-        otpField2Controller.text +
-        otpField3Controller.text +
-        otpField4Controller.text +
-        otpField5Controller.text +
-        otpField6Controller.text;
-
-    String token =
-        await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
+    String token = await SharedPrefHelper.getSecuredString(
+      SharedPrefKeys.userToken,
+    );
     log("JWT Token: $token");
     final response = await _verifyAccountRepo.verify(
-      VerifyAccountRequestBody(
-        code: completeCode,
-      ),
+      VerifyAccountRequestBody(code: otpField.text),
       token,
     );
     response.when(

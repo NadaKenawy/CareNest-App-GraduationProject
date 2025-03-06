@@ -35,7 +35,16 @@ class VerifyPassBlocListner extends StatelessWidget {
             GoRouter.of(context).push(AppRouter.kCreateNewPasswordScreen);
           },
           error: (apiErrorModel) {
-            setupErrorState(context, apiErrorModel);
+            if (Navigator.canPop(context)) {
+              Navigator.of(
+                context,
+                rootNavigator: true,
+              ).pop(); // Close loading dialog
+            }
+            setupErrorState(
+              context,
+              apiErrorModel,
+            ); // Show error using AwesomeDialog
           },
         );
       },
@@ -44,8 +53,6 @@ class VerifyPassBlocListner extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, ApiErrorModel apiErrorModel) {
-    Navigator.of(context).pop();
-
     AwesomeDialog(
       context: context,
       dialogType: DialogType.error,
@@ -53,9 +60,7 @@ class VerifyPassBlocListner extends StatelessWidget {
       title: 'Error',
       desc: apiErrorModel.message,
       btnOkText: 'Got it',
-      btnOkOnPress: () {
-        GoRouter.of(context).push(AppRouter.kVerifyPasswordScreen);
-      },
+      btnOkOnPress: () {},
       btnOkColor: ColorsManager.primaryBlueColor,
     ).show();
   }

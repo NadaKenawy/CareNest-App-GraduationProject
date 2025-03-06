@@ -35,7 +35,16 @@ class VerifyAccountBlocListner extends StatelessWidget {
             GoRouter.of(context).push(AppRouter.kLoginScreen);
           },
           error: (apiErrorModel) {
-            setupErrorState(context, apiErrorModel);
+            if (Navigator.canPop(context)) {
+              Navigator.of(
+                context,
+                rootNavigator: true,
+              ).pop(); // Close loading dialog
+            }
+            setupErrorState(
+              context,
+              apiErrorModel,
+            ); // Show error using AwesomeDialog
           },
         );
       },
@@ -44,7 +53,6 @@ class VerifyAccountBlocListner extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, ApiErrorModel apiErrorModel) {
-    context.pop();
     AwesomeDialog(
       context: context,
       dialogType: DialogType.error,
@@ -52,9 +60,7 @@ class VerifyAccountBlocListner extends StatelessWidget {
       title: 'Error',
       desc: apiErrorModel.message,
       btnOkText: 'Got it',
-      btnOkOnPress: () {
-        GoRouter.of(context).push(AppRouter.kVerifyAccountScreen);
-      },
+      btnOkOnPress: () {},
       btnOkColor: ColorsManager.primaryBlueColor,
     ).show();
   }
