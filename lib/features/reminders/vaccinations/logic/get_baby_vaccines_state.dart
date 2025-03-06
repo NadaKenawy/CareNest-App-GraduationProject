@@ -9,8 +9,5 @@
     const factory GetBabyVaccinesState.loading() = Loading;
     const factory GetBabyVaccinesState.success(
         List<BabyVaccineData>? vaccineData) = Success;
-    const factory GetBabyVaccinesState.cachedData(
-        List<BabyVaccineData>? vaccineData) = CachedData;
-
     const factory GetBabyVaccinesState.error({required String error}) = Error;
   }
