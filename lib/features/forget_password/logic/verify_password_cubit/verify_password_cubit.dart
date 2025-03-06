@@ -11,30 +11,18 @@ class VerifyPasswordCubit extends Cubit<VerifyPasswordState> {
       : super(const VerifyPasswordState.initial());
   final VerifyPasswordRepo _verifyPasswordRepo;
 
-  TextEditingController otpField1Controller = TextEditingController();
-  TextEditingController otpField2Controller = TextEditingController();
-  TextEditingController otpField3Controller = TextEditingController();
-  TextEditingController otpField4Controller = TextEditingController();
-  TextEditingController otpField5Controller = TextEditingController();
-  TextEditingController otpField6Controller = TextEditingController();
+  TextEditingController otpField = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
 
   void emitVerifyPasswordStates() async {
     emit(const VerifyPasswordState.loading());
 
-    String completeCode = otpField1Controller.text +
-        otpField2Controller.text +
-        otpField3Controller.text +
-        otpField4Controller.text +
-        otpField5Controller.text +
-        otpField6Controller.text;
-
     String token =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
     final response = await _verifyPasswordRepo.forget(
       VerifyPasswordRequestBody(
-        resetCode: completeCode,
+        resetCode: otpField.text,
       ),
       token,
     );
