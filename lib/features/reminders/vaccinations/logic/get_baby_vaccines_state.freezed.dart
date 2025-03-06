@@ -21,7 +21,6 @@ mixin _$GetBabyVaccinesState<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<BabyVaccineData>? vaccineData) success,
-    required TResult Function(List<BabyVaccineData>? vaccineData) cachedData,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,7 +29,6 @@ mixin _$GetBabyVaccinesState<T> {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<BabyVaccineData>? vaccineData)? success,
-    TResult? Function(List<BabyVaccineData>? vaccineData)? cachedData,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -39,7 +37,6 @@ mixin _$GetBabyVaccinesState<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<BabyVaccineData>? vaccineData)? success,
-    TResult Function(List<BabyVaccineData>? vaccineData)? cachedData,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -49,7 +46,6 @@ mixin _$GetBabyVaccinesState<T> {
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(Loading<T> value) loading,
     required TResult Function(Success<T> value) success,
-    required TResult Function(CachedData<T> value) cachedData,
     required TResult Function(Error<T> value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -58,7 +54,6 @@ mixin _$GetBabyVaccinesState<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(Loading<T> value)? loading,
     TResult? Function(Success<T> value)? success,
-    TResult? Function(CachedData<T> value)? cachedData,
     TResult? Function(Error<T> value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -67,7 +62,6 @@ mixin _$GetBabyVaccinesState<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(Loading<T> value)? loading,
     TResult Function(Success<T> value)? success,
-    TResult Function(CachedData<T> value)? cachedData,
     TResult Function(Error<T> value)? error,
     required TResult orElse(),
   }) =>
@@ -140,7 +134,6 @@ class _$InitialImpl<T> implements _Initial<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<BabyVaccineData>? vaccineData) success,
-    required TResult Function(List<BabyVaccineData>? vaccineData) cachedData,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -152,7 +145,6 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<BabyVaccineData>? vaccineData)? success,
-    TResult? Function(List<BabyVaccineData>? vaccineData)? cachedData,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -164,7 +156,6 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<BabyVaccineData>? vaccineData)? success,
-    TResult Function(List<BabyVaccineData>? vaccineData)? cachedData,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -180,7 +171,6 @@ class _$InitialImpl<T> implements _Initial<T> {
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(Loading<T> value) loading,
     required TResult Function(Success<T> value) success,
-    required TResult Function(CachedData<T> value) cachedData,
     required TResult Function(Error<T> value) error,
   }) {
     return initial(this);
@@ -192,7 +182,6 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(Loading<T> value)? loading,
     TResult? Function(Success<T> value)? success,
-    TResult? Function(CachedData<T> value)? cachedData,
     TResult? Function(Error<T> value)? error,
   }) {
     return initial?.call(this);
@@ -204,7 +193,6 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(Loading<T> value)? loading,
     TResult Function(Success<T> value)? success,
-    TResult Function(CachedData<T> value)? cachedData,
     TResult Function(Error<T> value)? error,
     required TResult orElse(),
   }) {
@@ -263,7 +251,6 @@ class _$LoadingImpl<T> implements Loading<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<BabyVaccineData>? vaccineData) success,
-    required TResult Function(List<BabyVaccineData>? vaccineData) cachedData,
     required TResult Function(String error) error,
   }) {
     return loading();
@@ -275,7 +262,6 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<BabyVaccineData>? vaccineData)? success,
-    TResult? Function(List<BabyVaccineData>? vaccineData)? cachedData,
     TResult? Function(String error)? error,
   }) {
     return loading?.call();
@@ -287,7 +273,6 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<BabyVaccineData>? vaccineData)? success,
-    TResult Function(List<BabyVaccineData>? vaccineData)? cachedData,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -303,7 +288,6 @@ class _$LoadingImpl<T> implements Loading<T> {
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(Loading<T> value) loading,
     required TResult Function(Success<T> value) success,
-    required TResult Function(CachedData<T> value) cachedData,
     required TResult Function(Error<T> value) error,
   }) {
     return loading(this);
@@ -315,7 +299,6 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(Loading<T> value)? loading,
     TResult? Function(Success<T> value)? success,
-    TResult? Function(CachedData<T> value)? cachedData,
     TResult? Function(Error<T> value)? error,
   }) {
     return loading?.call(this);
@@ -327,7 +310,6 @@ class _$LoadingImpl<T> implements Loading<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(Loading<T> value)? loading,
     TResult Function(Success<T> value)? success,
-    TResult Function(CachedData<T> value)? cachedData,
     TResult Function(Error<T> value)? error,
     required TResult orElse(),
   }) {
@@ -423,7 +405,6 @@ class _$SuccessImpl<T> implements Success<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<BabyVaccineData>? vaccineData) success,
-    required TResult Function(List<BabyVaccineData>? vaccineData) cachedData,
     required TResult Function(String error) error,
   }) {
     return success(vaccineData);
@@ -435,7 +416,6 @@ class _$SuccessImpl<T> implements Success<T> {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<BabyVaccineData>? vaccineData)? success,
-    TResult? Function(List<BabyVaccineData>? vaccineData)? cachedData,
     TResult? Function(String error)? error,
   }) {
     return success?.call(vaccineData);
@@ -447,7 +427,6 @@ class _$SuccessImpl<T> implements Success<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<BabyVaccineData>? vaccineData)? success,
-    TResult Function(List<BabyVaccineData>? vaccineData)? cachedData,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -463,7 +442,6 @@ class _$SuccessImpl<T> implements Success<T> {
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(Loading<T> value) loading,
     required TResult Function(Success<T> value) success,
-    required TResult Function(CachedData<T> value) cachedData,
     required TResult Function(Error<T> value) error,
   }) {
     return success(this);
@@ -475,7 +453,6 @@ class _$SuccessImpl<T> implements Success<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(Loading<T> value)? loading,
     TResult? Function(Success<T> value)? success,
-    TResult? Function(CachedData<T> value)? cachedData,
     TResult? Function(Error<T> value)? error,
   }) {
     return success?.call(this);
@@ -487,7 +464,6 @@ class _$SuccessImpl<T> implements Success<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(Loading<T> value)? loading,
     TResult Function(Success<T> value)? success,
-    TResult Function(CachedData<T> value)? cachedData,
     TResult Function(Error<T> value)? error,
     required TResult orElse(),
   }) {
@@ -508,175 +484,6 @@ abstract class Success<T> implements GetBabyVaccinesState<T> {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<T, _$SuccessImpl<T>> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$CachedDataImplCopyWith<T, $Res> {
-  factory _$$CachedDataImplCopyWith(
-          _$CachedDataImpl<T> value, $Res Function(_$CachedDataImpl<T>) then) =
-      __$$CachedDataImplCopyWithImpl<T, $Res>;
-  @useResult
-  $Res call({List<BabyVaccineData>? vaccineData});
-}
-
-/// @nodoc
-class __$$CachedDataImplCopyWithImpl<T, $Res>
-    extends _$GetBabyVaccinesStateCopyWithImpl<T, $Res, _$CachedDataImpl<T>>
-    implements _$$CachedDataImplCopyWith<T, $Res> {
-  __$$CachedDataImplCopyWithImpl(
-      _$CachedDataImpl<T> _value, $Res Function(_$CachedDataImpl<T>) _then)
-      : super(_value, _then);
-
-  /// Create a copy of GetBabyVaccinesState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? vaccineData = freezed,
-  }) {
-    return _then(_$CachedDataImpl<T>(
-      freezed == vaccineData
-          ? _value._vaccineData
-          : vaccineData // ignore: cast_nullable_to_non_nullable
-              as List<BabyVaccineData>?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$CachedDataImpl<T> implements CachedData<T> {
-  const _$CachedDataImpl(final List<BabyVaccineData>? vaccineData)
-      : _vaccineData = vaccineData;
-
-  final List<BabyVaccineData>? _vaccineData;
-  @override
-  List<BabyVaccineData>? get vaccineData {
-    final value = _vaccineData;
-    if (value == null) return null;
-    if (_vaccineData is EqualUnmodifiableListView) return _vaccineData;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  @override
-  String toString() {
-    return 'GetBabyVaccinesState<$T>.cachedData(vaccineData: $vaccineData)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CachedDataImpl<T> &&
-            const DeepCollectionEquality()
-                .equals(other._vaccineData, _vaccineData));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_vaccineData));
-
-  /// Create a copy of GetBabyVaccinesState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CachedDataImplCopyWith<T, _$CachedDataImpl<T>> get copyWith =>
-      __$$CachedDataImplCopyWithImpl<T, _$CachedDataImpl<T>>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<BabyVaccineData>? vaccineData) success,
-    required TResult Function(List<BabyVaccineData>? vaccineData) cachedData,
-    required TResult Function(String error) error,
-  }) {
-    return cachedData(vaccineData);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(List<BabyVaccineData>? vaccineData)? success,
-    TResult? Function(List<BabyVaccineData>? vaccineData)? cachedData,
-    TResult? Function(String error)? error,
-  }) {
-    return cachedData?.call(vaccineData);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<BabyVaccineData>? vaccineData)? success,
-    TResult Function(List<BabyVaccineData>? vaccineData)? cachedData,
-    TResult Function(String error)? error,
-    required TResult orElse(),
-  }) {
-    if (cachedData != null) {
-      return cachedData(vaccineData);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial<T> value) initial,
-    required TResult Function(Loading<T> value) loading,
-    required TResult Function(Success<T> value) success,
-    required TResult Function(CachedData<T> value) cachedData,
-    required TResult Function(Error<T> value) error,
-  }) {
-    return cachedData(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(Loading<T> value)? loading,
-    TResult? Function(Success<T> value)? success,
-    TResult? Function(CachedData<T> value)? cachedData,
-    TResult? Function(Error<T> value)? error,
-  }) {
-    return cachedData?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial<T> value)? initial,
-    TResult Function(Loading<T> value)? loading,
-    TResult Function(Success<T> value)? success,
-    TResult Function(CachedData<T> value)? cachedData,
-    TResult Function(Error<T> value)? error,
-    required TResult orElse(),
-  }) {
-    if (cachedData != null) {
-      return cachedData(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class CachedData<T> implements GetBabyVaccinesState<T> {
-  const factory CachedData(final List<BabyVaccineData>? vaccineData) =
-      _$CachedDataImpl<T>;
-
-  List<BabyVaccineData>? get vaccineData;
-
-  /// Create a copy of GetBabyVaccinesState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CachedDataImplCopyWith<T, _$CachedDataImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -751,7 +558,6 @@ class _$ErrorImpl<T> implements Error<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<BabyVaccineData>? vaccineData) success,
-    required TResult Function(List<BabyVaccineData>? vaccineData) cachedData,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -763,7 +569,6 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<BabyVaccineData>? vaccineData)? success,
-    TResult? Function(List<BabyVaccineData>? vaccineData)? cachedData,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -775,7 +580,6 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<BabyVaccineData>? vaccineData)? success,
-    TResult Function(List<BabyVaccineData>? vaccineData)? cachedData,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -791,7 +595,6 @@ class _$ErrorImpl<T> implements Error<T> {
     required TResult Function(_Initial<T> value) initial,
     required TResult Function(Loading<T> value) loading,
     required TResult Function(Success<T> value) success,
-    required TResult Function(CachedData<T> value) cachedData,
     required TResult Function(Error<T> value) error,
   }) {
     return error(this);
@@ -803,7 +606,6 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(Loading<T> value)? loading,
     TResult? Function(Success<T> value)? success,
-    TResult? Function(CachedData<T> value)? cachedData,
     TResult? Function(Error<T> value)? error,
   }) {
     return error?.call(this);
@@ -815,7 +617,6 @@ class _$ErrorImpl<T> implements Error<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(Loading<T> value)? loading,
     TResult Function(Success<T> value)? success,
-    TResult Function(CachedData<T> value)? cachedData,
     TResult Function(Error<T> value)? error,
     required TResult orElse(),
   }) {

@@ -60,7 +60,6 @@ import 'package:care_nest/features/tips/logic/get_all_tips_of_mom_cubit/get_all_
 import 'package:care_nest/features/tips/logic/get_tip_details_cubit/get_tip_details_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hive/hive.dart';
 import '../../features/add_baby/data/repos/add_baby_repo.dart';
 import '../../features/add_baby/logic/add_baby_cubit/add_baby_cubit.dart';
 import '../../features/entertainment/music_and_sweet_noise/data/repos/get_music_repo.dart';
@@ -68,7 +67,6 @@ import '../../features/entertainment/music_and_sweet_noise/data/repos/get_white_
 import '../../features/entertainment/music_and_sweet_noise/logic/get_white_noise/get_white_noise_cubit.dart';
 import '../../features/reminders/medications/data/repos/get_all_medication_schedule_repo.dart';
 import '../../features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
-import '../../features/reminders/vaccinations/data/models/get_baby_vaccines_response.dart';
 
 final getIt = GetIt.instance;
 
@@ -170,12 +168,9 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<NotificationsCubit>(() => NotificationsCubit(getIt()));
 
   //get baby vaccines
-  final vaccinesBox =
-      await Hive.openBox<GetBabyVaccinesResponse>('vaccinesBox');
-  getIt.registerLazySingleton<Box<GetBabyVaccinesResponse>>(() => vaccinesBox);
 
   getIt.registerLazySingleton<GetBabyVaccinesRepo>(
-      () => GetBabyVaccinesRepo(getIt(), getIt()));
+      () => GetBabyVaccinesRepo(getIt()));
   getIt.registerFactory<GetBabyVaccinesCubit>(
       () => GetBabyVaccinesCubit(getIt()));
 
@@ -229,9 +224,9 @@ Future<void> setupGetIt() async {
   // get music cubit
   getIt.registerFactory<GetMusicCubit>(() => GetMusicCubit(getIt()));
 
-
   // get white noise repo
-  getIt.registerLazySingleton<GetWhiteNoiseRepo>(() => GetWhiteNoiseRepo(getIt()));
+  getIt.registerLazySingleton<GetWhiteNoiseRepo>(
+      () => GetWhiteNoiseRepo(getIt()));
   // get white noise cubit
   getIt.registerFactory<GetWhiteNoiseCubit>(() => GetWhiteNoiseCubit(getIt()));
 
@@ -245,5 +240,4 @@ Future<void> setupGetIt() async {
       () => GetAllChannelsRepo(getIt()));
   getIt
       .registerFactory<GetAllChannelsCubit>(() => GetAllChannelsCubit(getIt()));
-
 }

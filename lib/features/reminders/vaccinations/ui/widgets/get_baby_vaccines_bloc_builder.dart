@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:care_nest/features/reminders/vaccinations/data/models/get_baby_vaccines_response.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
@@ -15,10 +14,7 @@ class GetBabyVaccinesBlocBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GetBabyVaccinesCubit, GetBabyVaccinesState>(
       buildWhen: (previous, current) =>
-          current is Loading ||
-          current is Success ||
-          current is Error ||
-          current is CachedData,
+          current is Loading || current is Success || current is Error,
       builder: (context, state) {
         return state.maybeWhen(
           loading: () {
@@ -27,11 +23,6 @@ class GetBabyVaccinesBlocBuilder extends StatelessWidget {
           success: (vaccineData) {
             var vaccinesList = List<BabyVaccineData>.from(vaccineData!);
             // log('Vaccines List: ${vaccinesList.length}');
-            return setupSuccess(vaccinesList);
-          },
-          cachedData: (vaccineData) {
-            var vaccinesList = List<BabyVaccineData>.from(vaccineData!);
-            log('Cached Vaccines List: ${vaccinesList.length}');
             return setupSuccess(vaccinesList);
           },
           error: (error) {
