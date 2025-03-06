@@ -2,6 +2,7 @@ import 'package:care_nest/core/helpers/app_regex.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/widgets/custom_text_form_field.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
+import 'package:care_nest/features/sign_up/ui/widgets/date_of_birth_field%20.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -197,6 +198,13 @@ class _SignupFormState extends State<SignupForm> {
               setState(() {});
               return null;
             },
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+
+          DateOfBirthField(
+            controller: context.read<SignupCubit>().dateOfBirthController,
           ),
         ],
       ),

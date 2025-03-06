@@ -52,8 +52,8 @@ class AppTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color textColor = hasError ? Colors.red : ColorsManager.secondryBlueColor;
-    Color hintColor = hasError ? Colors.red : ColorsManager.secondryBlueColor;
+    Color textColor = ColorsManager.secondryBlueColor;
+    Color hintColor = Colors.grey;
 
     return SizedBox(
       width: width ?? double.infinity,
@@ -69,7 +69,7 @@ class AppTextFormField extends StatelessWidget {
           constraints: const BoxConstraints(minHeight: 48),
           focusedBorder: focusedBorder ??
               OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.r),
+                borderRadius: BorderRadius.circular(16.r),
                 borderSide: BorderSide(
                     color:
                         hasError ? Colors.red : ColorsManager.secondryBlueColor,
@@ -77,18 +77,18 @@ class AppTextFormField extends StatelessWidget {
               ),
           enabledBorder: enabledBorder ??
               OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.r),
+                borderRadius: BorderRadius.circular(16.r),
                 borderSide: BorderSide(
                     color:
                         hasError ? Colors.red : ColorsManager.secondryBlueColor,
                     width: 2.w),
               ),
           errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red, width: 1.3.w),
+            borderSide: BorderSide(color: Colors.red, width: 2.w),
             borderRadius: const BorderRadius.all(Radius.circular(16)),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red, width: 1.3.w),
+            borderSide: BorderSide(color: Colors.red, width: 2.w),
             borderRadius: const BorderRadius.all(Radius.circular(16)),
           ),
           hintText: hintText,

@@ -29,7 +29,6 @@ class SignupCubit extends Cubit<SignupState> {
     }
   }
 
-  // تحميل البيانات المحفوظة من الـ SharedPreferences
   Future<void> loadSavedUserData() async {
     String? savedFirstName =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userFirstName);
@@ -44,7 +43,6 @@ class SignupCubit extends Cubit<SignupState> {
     String? savedPasswordConfirm = await SharedPrefHelper.getSecuredString(
         SharedPrefKeys.userPasswordConfirm);
 
-    // تحميل البيانات في الـ controllers
     if (firstNameController.text.isEmpty) {
       firstNameController.text = savedFirstName;
     }
@@ -67,9 +65,9 @@ class SignupCubit extends Cubit<SignupState> {
     log("Loaded Data: FirstName: $savedFirstName, LastName: $savedLastName, Email: $savedEmail, Password: $savedPassword, PasswordConfirm: $savedPasswordConfirm, Date of Birth: $savedDateOfBirth");
   }
 
-  // دالة لاستدعاء sign up مع تحميل البيانات المحفوظة قبل التنفيذ
+ 
   void emitSignupStates() async {
-    await loadSavedUserData(); // تحميل البيانات المحفوظة قبل تنفيذ أي شيء
+    await loadSavedUserData();
 
     emit(const SignupState.loading());
 
