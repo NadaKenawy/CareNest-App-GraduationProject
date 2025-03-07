@@ -14,6 +14,7 @@ import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubi
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
+import 'package:care_nest/features/doctors/ui/doctors_screen.dart';
 import 'package:care_nest/features/entertainment/entertainment_screen.dart';
 
 import 'package:care_nest/features/entertainment/music_and_sweet_noise/logic/get_white_noise/get_white_noise_cubit.dart';
@@ -97,11 +98,9 @@ abstract class AppRouter {
   static const kSweetSleep = '/SweetSleep';
   static const kShortStoriesScreen = '/shortStoriesScreen';
   static const kStoryDetailsScreen = '/storyDetailsScreen';
-
   static const kWhiteNoise = '/whiteNoise';
-
   static const kFunVideosScreen = '/funVideosScreen';
-
+  static const kDoctorsScreen = '/doctorsScreen';
 
   static final router = GoRouter(
     routes: [
@@ -429,7 +428,12 @@ abstract class AppRouter {
           );
         },
       ),
-
+      GoRoute(
+        path: kDoctorsScreen,
+        builder: (context, state) {
+          return const DoctorsScreen();
+        },
+      ),
     ],
   );
 }

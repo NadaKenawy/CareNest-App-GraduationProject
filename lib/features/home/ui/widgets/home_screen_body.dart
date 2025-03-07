@@ -57,7 +57,7 @@ class HomeScreenBody extends StatelessWidget {
                             "Expert care available for your little one",
                         backgroundColor: const Color(0xffBB87E0),
                         onPressed: () {},
-                        routePath: '',
+                        routePath: AppRouter.kDoctorsScreen,
                       ),
                     ],
                   ),
