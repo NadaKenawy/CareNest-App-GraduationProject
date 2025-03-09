@@ -83,7 +83,7 @@ class StoryDetailsScreenBody extends StatelessWidget {
                     ),
                     SizedBox(height: 16.h),
                     Text(
-                      story.content ?? '',
+                      story.content?.replaceAll('\\n', '\n') ?? '',
                       style: TextStyle(
                         fontSize: 16.sp,
                         color: Colors.black,

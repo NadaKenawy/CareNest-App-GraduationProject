@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DoctorsToggleButton extends StatefulWidget {
-  const DoctorsToggleButton({super.key});
+  final ValueChanged<int> onToggle;
+  const DoctorsToggleButton({super.key, required this.onToggle});
 
   @override
   State<DoctorsToggleButton> createState() => _DoctorsToggleButtonState();
@@ -22,7 +23,6 @@ class _DoctorsToggleButtonState extends State<DoctorsToggleButton> {
           borderRadius: BorderRadius.circular(30),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _buildSegment("List View", 0),
             _buildSegment("Map View", 1),
@@ -34,13 +34,13 @@ class _DoctorsToggleButtonState extends State<DoctorsToggleButton> {
 
   Widget _buildSegment(String text, int index) {
     bool isSelected = selectedIndex == index;
-
     return Expanded(
       child: GestureDetector(
         onTap: () {
           setState(() {
             selectedIndex = index;
           });
+          widget.onToggle(selectedIndex);
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),

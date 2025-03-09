@@ -24,7 +24,7 @@ class DoctorDetailsScreenBody extends StatelessWidget {
               children: [
                 const DoctorDetailsAppBar(),
                 SizedBox(
-                  height: 20.h,
+                  height: 8.h,
                 ),
                 const DoctorDetailsHeader(),
                 SizedBox(
@@ -44,7 +44,7 @@ class DoctorDetailsScreenBody extends StatelessWidget {
                 ),
                 const DoctorDetailsWorkingHours(),
                 SizedBox(
-                  height: 44.h,
+                  height: 28.h,
                 ),
                 const BookAnAppointmentButton(),
                 SizedBox(

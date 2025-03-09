@@ -1,3 +1,4 @@
+import 'package:care_nest/features/doctors/ui/widgets/map_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/doctors_list_view.dart';
@@ -13,6 +14,7 @@ class DoctorsScreenBody extends StatefulWidget {
 
 class _DoctorsScreenBodyState extends State<DoctorsScreenBody> {
   String selectedOption = 'Pediatricians';
+  bool isMapView = false;
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +23,22 @@ class _DoctorsScreenBodyState extends State<DoctorsScreenBody> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 14.w),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                DoctorsAppBar(onOptionSelected: (option) {
-                  setState(() {
-                    selectedOption = option;
-                  });
-                }),
-                SizedBox(height: 24.h),
-                const DoctorsToggleButton(),
-                SizedBox(height: 24.h),
-                _buildContent(selectedOption),
-              ],
-            ),
+          child: Column(
+            children: [
+              DoctorsAppBar(onOptionSelected: (option) {
+                setState(() {
+                  selectedOption = option;
+                });
+              }),
+              SizedBox(height: 24.h),
+              DoctorsToggleButton(onToggle: (index) {
+                setState(() {
+                  isMapView = index == 1;
+                });
+              }),
+              SizedBox(height: 24.h),
+              Expanded(child: _buildContent(selectedOption))
+            ],
           ),
         ),
       ),
@@ -42,6 +46,9 @@ class _DoctorsScreenBodyState extends State<DoctorsScreenBody> {
   }
 
   Widget _buildContent(String selectedOption) {
+    if (isMapView) {
+      return const MapView();
+    }
     switch (selectedOption) {
       case 'Pediatricians':
         return const DoctorsListView();
