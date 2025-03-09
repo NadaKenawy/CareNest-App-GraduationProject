@@ -29,18 +29,27 @@ class _DoctorsScreenBodyState extends State<DoctorsScreenBody> {
                 DoctorsAppBar(onOptionSelected: (option) {
                   setState(() {
                     selectedOption = option;
+                    if (selectedOption == 'Hospitals & Pharmacies') {
+                      isMapView = true;
+                    } else {
+                      isMapView = false;
+                    }
                   });
                 }),
                 SizedBox(height: 16.h),
-                DoctorsToggleButton(
-                  onToggle: (index) {
-                    setState(() {
-                      isMapView = index == 1;
-                    });
-                  },
-                ),
-                SizedBox(height: 24.h),
-                _buildContent(selectedOption),
+                if (selectedOption != 'Hospitals & Pharmacies')
+                  DoctorsToggleButton(
+                    onToggle: (index) {
+                      setState(() {
+                        isMapView = index == 1;
+                      });
+                    },
+                  ),
+                SizedBox(
+                    height: selectedOption == 'Hospitals & Pharmacies'
+                        ? 0.h
+                        : 24.h),
+                _buildContent(),
               ],
             ),
           ),
@@ -49,8 +58,8 @@ class _DoctorsScreenBodyState extends State<DoctorsScreenBody> {
     );
   }
 
-  Widget _buildContent(String selectedOption) {
-    if (isMapView) {
+  Widget _buildContent() {
+    if (selectedOption == 'Hospitals & Pharmacies' || isMapView) {
       return const MapView();
     }
     switch (selectedOption) {
@@ -58,8 +67,6 @@ class _DoctorsScreenBodyState extends State<DoctorsScreenBody> {
         return const DoctorsListView();
       case 'Gynecologists':
         return const Center(child: Text('Gynecologists'));
-      case 'Hospitals & Pharmacies':
-        return const Center(child: Text('Hospitals & Pharmacies'));
       default:
         return const Center(child: Text('No data found'));
     }

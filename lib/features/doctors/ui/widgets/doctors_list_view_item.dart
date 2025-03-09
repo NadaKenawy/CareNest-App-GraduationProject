@@ -27,19 +27,17 @@ class DoctorsListViewItem extends StatelessWidget {
               flex: 2,
               child: Image.asset(
                 'assets/images/doctors_test_img.png',
-                width: 90.w,
-                height: 120.h,
                 fit: BoxFit.cover,
               ),
             ),
             SizedBox(width: 16.w),
             Expanded(
-              flex: 5,
+              flex: 4,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Dr. Mona Hassan –',
+                    'Dr. Mona Hassan',
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,

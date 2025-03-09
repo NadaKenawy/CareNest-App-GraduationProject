@@ -28,7 +28,7 @@ class DoctorDetailsAbout extends StatelessWidget {
           Text(
             'Dr. Yasmin Mostafa is a dedicated and experienced pediatrician committed to providing high-quality care and personalized treatment to patients, ensuring their well-being and comfort.',
             style: TextStyle(
-              fontSize: 16.sp,
+              fontSize: 14.sp,
               fontWeight: FontWeight.w500,
             ),
           ),

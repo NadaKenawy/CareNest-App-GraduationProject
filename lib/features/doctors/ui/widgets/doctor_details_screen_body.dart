@@ -23,7 +23,7 @@ class DoctorDetailsScreenBody extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -45,7 +45,7 @@ class DoctorDetailsScreenBody extends StatelessWidget {
                 ),
                 const DoctorDetailsWorkingHours(),
                 SizedBox(
-                  height: 28.h,
+                  height: 24.h,
                 ),
                 AppTextButton(
                   buttonText: 'Book An Appointment',
@@ -54,7 +54,7 @@ class DoctorDetailsScreenBody extends StatelessWidget {
                   onPressed: () {},
                 ),
                 SizedBox(
-                  height: 20.h,
+                  height: 16.h,
                 ),
               ],
             ),

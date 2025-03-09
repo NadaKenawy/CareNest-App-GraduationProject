@@ -27,7 +27,7 @@ class DoctorDetailsHeader extends StatelessWidget {
           ),
           SizedBox(width: 16.w),
           Expanded(
-            flex: 5,
+            flex: 4,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

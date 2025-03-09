@@ -16,6 +16,7 @@ import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
 import 'package:care_nest/features/doctors/ui/doctors_screen.dart';
 import 'package:care_nest/features/doctors/ui/widgets/doctor_details_screen_body.dart';
+import 'package:care_nest/features/doctors/ui/widgets/my_appointment_screen_body.dart';
 import 'package:care_nest/features/entertainment/entertainment_screen.dart';
 
 import 'package:care_nest/features/entertainment/music_and_sweet_noise/logic/get_white_noise/get_white_noise_cubit.dart';
@@ -102,7 +103,9 @@ abstract class AppRouter {
   static const kWhiteNoise = '/whiteNoise';
   static const kFunVideosScreen = '/funVideosScreen';
   static const kDoctorsScreen = '/doctorsScreen';
-static const kDoctorDetailsScreen = '/doctorDetailsScreen';
+  static const kDoctorDetailsScreen = '/doctorDetailsScreen';
+  static const kMyAppointmentsScreen = '/myAppointmentsScreen';
+
   static final router = GoRouter(
     routes: [
       GoRoute(
@@ -435,10 +438,16 @@ static const kDoctorDetailsScreen = '/doctorDetailsScreen';
           return const DoctorsScreen();
         },
       ),
-       GoRoute(
+      GoRoute(
         path: kDoctorDetailsScreen,
         builder: (context, state) {
           return const DoctorDetailsScreenBody();
+        },
+      ),
+      GoRoute(
+        path: kMyAppointmentsScreen,
+        builder: (context, state) {
+          return const MyAppointmentScreenBody();
         },
       ),
     ],

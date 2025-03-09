@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../core/routing/app_router.dart';
 
 class DoctorsAppBar extends StatefulWidget {
   final Function(String) onOptionSelected;
@@ -41,7 +44,9 @@ class _DoctorsAppBarState extends State<DoctorsAppBar> {
         ),
         const Spacer(),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            GoRouter.of(context).push(AppRouter.kMyAppointmentsScreen);
+          },
           icon: Icon(Icons.calendar_month, size: 24.sp),
         ),
       ],
