@@ -101,11 +101,11 @@ class DateOfBirthFieldState extends State<DateOfBirthField> {
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
-              borderSide: const BorderSide(color: Colors.red),
+              borderSide: const BorderSide(color: Colors.red, width: 2),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
-              borderSide: const BorderSide(color: Colors.red),
+              borderSide: const BorderSide(color: Colors.red, width: 2),
             ),
             contentPadding: EdgeInsets.symmetric(
               horizontal: 16.w,

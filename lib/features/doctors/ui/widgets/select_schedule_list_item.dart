@@ -7,7 +7,7 @@ class SelectScheduleListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 11.w, vertical: 10.h),
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         color: Colors.white,
@@ -15,12 +15,13 @@ class SelectScheduleListItem extends StatelessWidget {
         border: Border.all(color: Colors.black, width: 1.5.w),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             '9',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 24.sp,
+              fontSize: 20.sp,
               fontWeight: FontWeight.bold,
             ),
           ),

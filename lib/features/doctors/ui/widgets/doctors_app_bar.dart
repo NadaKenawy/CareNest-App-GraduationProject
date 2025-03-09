@@ -29,15 +29,20 @@ class _DoctorsAppBarState extends State<DoctorsAppBar> {
               Text(
                 selectedOption,
                 style: TextStyle(
-                  fontSize: 18.sp,
+                  fontSize: 20.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),
-              SizedBox(width: 5.w),
+              SizedBox(width: 4.w),
               Icon(Icons.arrow_drop_down, size: 24.sp),
             ],
           ),
+        ),
+        const Spacer(),
+        IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.calendar_month, size: 24.sp),
         ),
       ],
     );
@@ -61,7 +66,6 @@ class _DoctorsAppBarState extends State<DoctorsAppBar> {
         selectedOption = result;
       });
 
-      // تحديث `DoctorsScreenBody`
       widget.onOptionSelected(result);
     }
   }

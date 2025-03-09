@@ -22,23 +22,27 @@ class _DoctorsScreenBodyState extends State<DoctorsScreenBody> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 14.w),
-          child: Column(
-            children: [
-              DoctorsAppBar(onOptionSelected: (option) {
-                setState(() {
-                  selectedOption = option;
-                });
-              }),
-              SizedBox(height: 24.h),
-              DoctorsToggleButton(onToggle: (index) {
-                setState(() {
-                  isMapView = index == 1;
-                });
-              }),
-              SizedBox(height: 24.h),
-              Expanded(child: _buildContent(selectedOption))
-            ],
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                DoctorsAppBar(onOptionSelected: (option) {
+                  setState(() {
+                    selectedOption = option;
+                  });
+                }),
+                SizedBox(height: 16.h),
+                DoctorsToggleButton(
+                  onToggle: (index) {
+                    setState(() {
+                      isMapView = index == 1;
+                    });
+                  },
+                ),
+                SizedBox(height: 24.h),
+                _buildContent(selectedOption),
+              ],
+            ),
           ),
         ),
       ),

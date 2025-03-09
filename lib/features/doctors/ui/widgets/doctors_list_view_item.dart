@@ -1,4 +1,5 @@
 import 'package:care_nest/core/routing/app_router.dart';
+import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -16,8 +17,8 @@ class DoctorsListViewItem extends StatelessWidget {
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(16.r),
           border: Border.all(
-            color: const Color(0xff0c8ce9),
-            width: 1.7.w,
+            color: ColorsManager.secondryBlueColor,
+            width: 2.w,
           ),
         ),
         child: Row(
@@ -47,21 +48,20 @@ class DoctorsListViewItem extends StatelessWidget {
                   Text(
                     'Pediatrician',
                     style: TextStyle(
-                      fontSize: 20.sp,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
                     ),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
-                  SizedBox(height: 8.h),
+                  SizedBox(height: 4.h),
                   Text(
                     '5 Al-Maadi Corniche, Maadi, Cairo',
                     style: TextStyle(
                       fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
                     ),
                   ),
-                  SizedBox(height: 8.h),
+                  SizedBox(height: 4.h),
                   Row(
                     children: [
                       Icon(

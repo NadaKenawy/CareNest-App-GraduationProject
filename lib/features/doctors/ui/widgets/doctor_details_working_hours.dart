@@ -15,23 +15,19 @@ class DoctorDetailsWorkingHours extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(color: Colors.transparent),
       ),
-      child: Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Working Hours',
-              style: TextStyle(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.bold,
-              ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Working Hours',
+            style: TextStyle(
+              fontSize: 20.sp,
+              fontWeight: FontWeight.bold,
             ),
-            SizedBox(
-              height: 16.h,
-            ),
-            const WorkingHoursListView(),
-          ],
-        ),
+          ),
+          SizedBox(height: 16.h),
+          const WorkingHoursListView(),
+        ],
       ),
     );
   }

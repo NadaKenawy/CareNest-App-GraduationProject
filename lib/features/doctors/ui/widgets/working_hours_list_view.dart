@@ -8,7 +8,7 @@ class WorkingHoursListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 55.h,
+      height: 48.h,
       child: ListView.builder(
           physics: const BouncingScrollPhysics(),
           itemCount: 7,

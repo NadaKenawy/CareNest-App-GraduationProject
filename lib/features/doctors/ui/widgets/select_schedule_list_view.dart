@@ -8,7 +8,7 @@ class SelectScheduleListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 90.h,
+      height: 80.h,
       child: ListView.builder(
           physics: const BouncingScrollPhysics(),
           itemCount: 7,

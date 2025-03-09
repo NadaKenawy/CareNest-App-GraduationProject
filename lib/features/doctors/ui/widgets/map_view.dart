@@ -47,7 +47,9 @@ class _MapViewState extends State<MapView> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.expand(
+    return SizedBox(
+      height:
+          MediaQuery.sizeOf(context).height * 0.75, // حدد ارتفاع مناسب للخرائط
       child: GoogleMap(
         initialCameraPosition: CameraPosition(
           target: _initialPosition,
