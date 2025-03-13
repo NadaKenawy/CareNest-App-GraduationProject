@@ -16,6 +16,7 @@ import 'package:care_nest/features/baby_growth/logic/get_baby_height_growth_cubi
 import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/put_growth_data_cubit/put_growth_data_cubit.dart';
+import 'package:care_nest/features/doctors/data/repos/get_doctors_repo.dart';
 import 'package:care_nest/features/entertainment/music_and_sweet_noise/logic/get_music_cubit/get_music_cubit.dart';
 import 'package:care_nest/features/entertainment/fun_videos/data/repo/get_all_channels_repo.dart';
 import 'package:care_nest/features/entertainment/fun_videos/logic/get_all_channels_cubit.dart';
@@ -62,6 +63,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import '../../features/add_baby/data/repos/add_baby_repo.dart';
 import '../../features/add_baby/logic/add_baby_cubit/add_baby_cubit.dart';
+import '../../features/doctors/logic/get_all_doctors_cubit/get_all_doctors_cubit.dart';
 import '../../features/entertainment/music_and_sweet_noise/data/repos/get_music_repo.dart';
 import '../../features/entertainment/music_and_sweet_noise/data/repos/get_white_noise_repo.dart';
 import '../../features/entertainment/music_and_sweet_noise/logic/get_white_noise/get_white_noise_cubit.dart';
@@ -240,4 +242,8 @@ Future<void> setupGetIt() async {
       () => GetAllChannelsRepo(getIt()));
   getIt
       .registerFactory<GetAllChannelsCubit>(() => GetAllChannelsCubit(getIt()));
+
+  // get all doctors
+  getIt.registerLazySingleton<GetDoctorsRepo>(() => GetDoctorsRepo(getIt()));
+  getIt.registerFactory<GetAllDoctorsCubit>(() => GetAllDoctorsCubit(getIt()));
 }

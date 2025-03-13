@@ -8,6 +8,8 @@ import 'package:care_nest/features/baby_growth/data/models/get_baby_weight_growt
 import 'package:care_nest/features/baby_growth/data/models/latest_growth_data/latest_growth_data_response.dart';
 import 'package:care_nest/features/baby_growth/data/models/put_growth_data/put_growth_data_request.dart';
 import 'package:care_nest/features/baby_growth/data/models/put_growth_data/put_growth_data_response.dart';
+import 'package:care_nest/features/doctors/data/models/get_doctors_request_body.dart';
+import 'package:care_nest/features/doctors/data/models/get_doctors_response.dart';
 import 'package:care_nest/features/entertainment/fun_videos/data/model/get_all_channels_response.dart';
 import 'package:care_nest/features/entertainment/short_stories/data/models/get_all_stories_response.dart';
 import 'package:care_nest/features/entertainment/music_and_sweet_noise/data/models/get_music_response.dart';
@@ -215,14 +217,10 @@ abstract class ApiService {
     @Header('Authorization') String token,
   );
 
-
-  
   @GET(ApiConstants.getWhiteNoise)
   Future<WhiteNoiseResponse> getWhiteNoise(
     @Header('Authorization') String token,
   );
-
-
 
   @GET(ApiConstants.getAllStories)
   Future<GetAllStoriesResponse> getAllStories(
@@ -233,5 +231,10 @@ abstract class ApiService {
   Future<GetAllChannelsResponse> getAllChannels(
     @Header('Authorization') String token,
   );
-}
 
+  @GET(ApiConstants.getAllDoctors)
+  Future<GetDoctorsResponse> getAllDoctors(
+    @Body() GetDoctorsRequestBody getDoctorsRequestBody,
+    @Header('Authorization') String token,
+  );
+}
