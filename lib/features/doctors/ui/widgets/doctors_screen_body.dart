@@ -1,7 +1,7 @@
+import 'package:care_nest/features/doctors/ui/widgets/get_all_doctors_bloc_builder.dart';
 import 'package:care_nest/features/doctors/ui/widgets/map_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../widgets/doctors_list_view.dart';
 import '../widgets/doctors_app_bar.dart';
 import 'doctors_toggle_button.dart';
 
@@ -64,9 +64,8 @@ class _DoctorsScreenBodyState extends State<DoctorsScreenBody> {
     }
     switch (selectedOption) {
       case 'Pediatricians':
-        return const DoctorsListView();
       case 'Gynecologists':
-        return const Center(child: Text('Gynecologists'));
+        return GetAllDoctorsBlocBuilder(selectedSpecialty: selectedOption);
       default:
         return const Center(child: Text('No data found'));
     }

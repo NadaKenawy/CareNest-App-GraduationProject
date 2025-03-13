@@ -1,11 +1,14 @@
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
+import 'package:care_nest/features/doctors/data/models/get_doctors_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class DoctorsListViewItem extends StatelessWidget {
-  const DoctorsListViewItem({super.key});
+  const DoctorsListViewItem({super.key, required this.doctorData});
+
+  final DoctorData doctorData;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class DoctorsListViewItem extends StatelessWidget {
             Flexible(
               flex: 2,
               child: Image.asset(
-                'assets/images/doctors_test_img.png',
+                doctorData.image ?? 'assets/images/doctors_test_img.png',
                 fit: BoxFit.cover,
               ),
             ),
@@ -36,15 +39,27 @@ class DoctorsListViewItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Dr. Mona Hassan',
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        doctorData.user!.firstName!,
+                        style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(width: 4.w),
+                      Text(
+                        doctorData.user!.lastName!,
+                        style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                   Text(
-                    'Pediatrician',
+                    doctorData.specialty!,
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
@@ -54,7 +69,7 @@ class DoctorsListViewItem extends StatelessWidget {
                   ),
                   SizedBox(height: 4.h),
                   Text(
-                    '5 Al-Maadi Corniche, Maadi, Cairo',
+                    doctorData.location!.address!,
                     style: TextStyle(
                       fontSize: 14.sp,
                     ),

@@ -14,6 +14,7 @@ import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubi
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
+import 'package:care_nest/features/doctors/logic/get_all_doctors_cubit/get_all_doctors_cubit.dart';
 import 'package:care_nest/features/doctors/ui/doctors_screen.dart';
 import 'package:care_nest/features/doctors/ui/widgets/doctor_details_screen_body.dart';
 import 'package:care_nest/features/doctors/ui/widgets/my_appointment_screen_body.dart';
@@ -435,7 +436,10 @@ abstract class AppRouter {
       GoRoute(
         path: kDoctorsScreen,
         builder: (context, state) {
-          return const DoctorsScreen();
+          return BlocProvider(
+            create: (context) => getIt<GetAllDoctorsCubit>()..getAllDoctors(),
+            child: const DoctorsScreen(),
+          );
         },
       ),
       GoRoute(
