@@ -11,11 +11,11 @@ class MapView extends StatefulWidget {
 
 class _MapViewState extends State<MapView> {
   late GoogleMapController mapController;
-  final LatLng _initialPosition = const LatLng(30.0444, 31.2357);
+  final LatLng _initialPosition = const LatLng(30.6266014, 32.2764824);
   final Set<Marker> _markers = {
     Marker(
       markerId: const MarkerId('hospital1'),
-      position: const LatLng(30.0500, 31.2333),
+      position: const LatLng(30.6266014, 32.2764824),
       icon: BitmapDescriptor.defaultMarkerWithHue(
           HSVColor.fromColor(ColorsManager.secondryBlueColor).hue),
       infoWindow: const InfoWindow(

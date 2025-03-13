@@ -29,7 +29,7 @@ class DoctorsListViewItem extends StatelessWidget {
             Flexible(
               flex: 2,
               child: Image.asset(
-                doctorData.image ?? 'assets/images/doctors_test_img.png',
+                doctorData.image ?? 'assets/images/doctors_test_img2.png',
                 fit: BoxFit.cover,
               ),
             ),
@@ -42,7 +42,7 @@ class DoctorsListViewItem extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        doctorData.user!.firstName!,
+                        'Dr ${doctorData.user!.firstName!}',
                         style: TextStyle(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.bold,

@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:care_nest/features/doctors/data/models/get_doctors_request_body.dart';
 import '../../../../core/helpers/constants.dart';
 import '../../../../core/helpers/shared_pref_helper.dart';
 import '../../data/repos/get_doctors_repo.dart';
+import '../../service/location_service.dart';
 import 'get_all_doctors_state.dart';
 
 class GetAllDoctorsCubit extends Cubit<GetAllDoctorsState> {
@@ -12,12 +15,18 @@ class GetAllDoctorsCubit extends Cubit<GetAllDoctorsState> {
 
   void getAllDoctors() async {
     emit(const GetAllDoctorsState.loading());
+
+    await LocationService.getCurrentLocation();
+    if (LocationService.currentPosition == null) {
+      log('Location service is disabled');
+      return;
+    }
     String token =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
     final response = await _getDoctorsRepo.getDoctors(
         GetDoctorsRequestBody(
-          longitude: 32.2937089,
-          latitude: 30.6140389,
+          longitude: LocationService.currentPosition!.longitude,
+          latitude: LocationService.currentPosition!.latitude,
         ),
         token);
     response.when(

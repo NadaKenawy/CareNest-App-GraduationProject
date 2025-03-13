@@ -1,0 +1,115 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+
+
+class DoctorsListSkeletonizer extends StatelessWidget {
+  const DoctorsListSkeletonizer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Skeletonizer(
+      child: ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: 5,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: EdgeInsets.only(bottom: 16.w),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(16.r),
+                  border: Border.all(
+                    color: const Color.fromARGB(255, 207, 207, 207),
+                    width: 2.w,
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Flexible(
+                      flex: 2,
+                      child: Image.asset(
+                        'assets/images/doctors_test_img2.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    SizedBox(width: 16.w),
+                    Expanded(
+                      flex: 4,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                'Dr Mahmoud',
+                                style: TextStyle(
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(width: 4.w),
+                              Text(
+                                'Aladwy',
+                                style: TextStyle(
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            'Pediatrician',
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                          SizedBox(height: 4.h),
+                          Text(
+                            '15 El-Tahrir St., Nasr City, Cairo',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                            ),
+                          ),
+                          SizedBox(height: 4.h),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.star,
+                                size: 20.sp,
+                                color: Colors.amber,
+                              ),
+                              SizedBox(width: 4.w),
+                              Text(
+                                '4.8',
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                ' (128 Reviews)',
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          }),
+    );
+  }
+}

@@ -5,6 +5,8 @@ import 'package:care_nest/features/doctors/ui/widgets/doctors_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'doctors_list_skeletonizer.dart';
+
 class GetAllDoctorsBlocBuilder extends StatelessWidget {
   const GetAllDoctorsBlocBuilder({super.key, required this.selectedSpecialty});
   final String selectedSpecialty;
@@ -36,9 +38,7 @@ class GetAllDoctorsBlocBuilder extends StatelessWidget {
   }
 
   Widget setupLoading() {
-    return const Center(
-      child: CircularProgressIndicator(),
-    );
+    return const DoctorsListSkeletonizer();
   }
 
   Widget setupSuccess(List<DoctorData> doctorsList) {
