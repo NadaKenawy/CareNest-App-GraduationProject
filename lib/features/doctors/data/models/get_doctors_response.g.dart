@@ -29,9 +29,24 @@ DoctorData _$DoctorDataFromJson(Map<String, dynamic> json) => DoctorData(
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),
       specialty: json['Specialty'] as String?,
+      masterOf: json['masterOf'] as String?,
+      phones:
+          (json['phones'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      bookingPrice: (json['bookingPrice'] as num?)?.toInt(),
       image: json['image'] as String?,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      paymentMethodType: json['paymentMethodType'] as String?,
+      about: json['about'] as String?,
+      promocode: (json['promocode'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      day: (json['day'] as List<dynamic>?)
+          ?.map((e) => DaySchedule.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      ratingsQuantity: (json['ratingsQuantity'] as num?)?.toInt(),
+      createdAt: json['createdAt'] as String?,
+      updatedAt: json['updatedAt'] as String?,
     );
 
 Map<String, dynamic> _$DoctorDataToJson(DoctorData instance) =>
@@ -40,8 +55,18 @@ Map<String, dynamic> _$DoctorDataToJson(DoctorData instance) =>
       '_id': instance.id,
       'user': instance.user,
       'Specialty': instance.specialty,
+      'masterOf': instance.masterOf,
+      'phones': instance.phones,
+      'bookingPrice': instance.bookingPrice,
       'image': instance.image,
       'images': instance.images,
+      'paymentMethodType': instance.paymentMethodType,
+      'about': instance.about,
+      'promocode': instance.promocode,
+      'day': instance.day,
+      'ratingsQuantity': instance.ratingsQuantity,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
     };
 
 LocationDetails _$LocationDetailsFromJson(Map<String, dynamic> json) =>
@@ -72,4 +97,29 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       '_id': instance.id,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
+    };
+
+DaySchedule _$DayScheduleFromJson(Map<String, dynamic> json) => DaySchedule(
+      type: json['type'] as String?,
+      slots: (json['slots'] as List<dynamic>?)
+          ?.map((e) => Slot.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$DayScheduleToJson(DaySchedule instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+      'slots': instance.slots,
+    };
+
+Slot _$SlotFromJson(Map<String, dynamic> json) => Slot(
+      startTime: json['startTime'] as String?,
+      endTime: json['endTime'] as String?,
+      id: json['_id'] as String?,
+    );
+
+Map<String, dynamic> _$SlotToJson(Slot instance) => <String, dynamic>{
+      'startTime': instance.startTime,
+      'endTime': instance.endTime,
+      '_id': instance.id,
     };
