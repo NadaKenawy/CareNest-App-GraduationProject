@@ -32,7 +32,7 @@ class LocationService {
       desiredAccuracy: LocationAccuracy.high,
     );
 
-    log('Current location: ${currentPosition?.latitude}, ${currentPosition?.longitude}');
+    log('Current location: ${currentPosition?.longitude}, ${currentPosition?.latitude}');
     return currentPosition;
   }
 }
