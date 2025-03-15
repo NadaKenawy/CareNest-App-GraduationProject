@@ -1182,15 +1182,18 @@ class _ApiService implements ApiService {
 
   @override
   Future<GetDoctorsResponse> getAllDoctors(
-    GetDoctorsRequestBody getDoctorsRequestBody,
     String token,
+    double longitude,
+    double latitude,
   ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'lng': longitude,
+      r'lat': latitude,
+    };
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
-    _data.addAll(getDoctorsRequestBody.toJson());
+    const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<GetDoctorsResponse>(Options(
       method: 'GET',
       headers: _headers,

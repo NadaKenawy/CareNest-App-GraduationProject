@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:care_nest/features/doctors/data/models/get_doctors_request_body.dart';
 import '../../../../core/helpers/constants.dart';
 import '../../../../core/helpers/shared_pref_helper.dart';
 import '../../data/repos/get_doctors_repo.dart';
@@ -24,11 +23,10 @@ class GetAllDoctorsCubit extends Cubit<GetAllDoctorsState> {
     String token =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
     final response = await _getDoctorsRepo.getDoctors(
-        GetDoctorsRequestBody(
-          longitude: LocationService.currentPosition!.longitude,
-          latitude: LocationService.currentPosition!.latitude,
-        ),
-        token);
+      LocationService.currentPosition!.longitude,
+      LocationService.currentPosition!.latitude,
+      token,
+    );
     response.when(
       success: (getDoctorsResponse) {
         emit(GetAllDoctorsState.success(getDoctorsResponse.data));
