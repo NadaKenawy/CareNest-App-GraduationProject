@@ -1,5 +1,5 @@
 import 'package:care_nest/core/networking/api_service.dart';
-import 'package:care_nest/features/doctors/data/models/get_doctors_response.dart';
+import 'package:care_nest/features/doctors/data/models/get_doctors/get_doctors_response.dart';
 
 import '../../../../core/networking/api_error_handler.dart';
 import '../../../../core/networking/api_result.dart';

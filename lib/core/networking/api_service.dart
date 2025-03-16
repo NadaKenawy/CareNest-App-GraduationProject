@@ -8,7 +8,8 @@ import 'package:care_nest/features/baby_growth/data/models/get_baby_weight_growt
 import 'package:care_nest/features/baby_growth/data/models/latest_growth_data/latest_growth_data_response.dart';
 import 'package:care_nest/features/baby_growth/data/models/put_growth_data/put_growth_data_request.dart';
 import 'package:care_nest/features/baby_growth/data/models/put_growth_data/put_growth_data_response.dart';
-import 'package:care_nest/features/doctors/data/models/get_doctors_response.dart';
+import 'package:care_nest/features/doctors/data/models/get_doctors/get_doctors_response.dart';
+import 'package:care_nest/features/doctors/data/models/get_hospitals/get_hospitals_response.dart';
 import 'package:care_nest/features/entertainment/fun_videos/data/model/get_all_channels_response.dart';
 import 'package:care_nest/features/entertainment/short_stories/data/models/get_all_stories_response.dart';
 import 'package:care_nest/features/entertainment/music_and_sweet_noise/data/models/get_music_response.dart';
@@ -236,5 +237,11 @@ abstract class ApiService {
     @Header('Authorization') String token,
      @Query('lng') double longitude,
       @Query('lat') double latitude,
+  );
+  @GET(ApiConstants.getAllHospitals)
+  Future<GetHospitalsResponse> getAllHospitals(
+    @Header('Authorization') String token,
+    @Query('lng') double longitude,
+    @Query('lat') double latitude,
   );
 }

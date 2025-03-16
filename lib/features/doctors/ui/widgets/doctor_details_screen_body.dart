@@ -6,7 +6,7 @@ import 'package:care_nest/features/doctors/ui/widgets/doctor_details_working_hou
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/colors_manager.dart';
-import '../../data/models/get_doctors_response.dart';
+import '../../data/models/get_doctors/get_doctors_response.dart';
 import 'doctor_details_about.dart';
 import 'doctor_details_contact.dart';
 

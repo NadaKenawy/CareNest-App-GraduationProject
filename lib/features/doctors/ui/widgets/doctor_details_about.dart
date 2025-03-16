@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../data/models/get_doctors_response.dart';
+import '../../data/models/get_doctors/get_doctors_response.dart';
 
 class DoctorDetailsAbout extends StatelessWidget {
   const DoctorDetailsAbout({super.key, required this.doctorData});

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../../core/routing/app_router.dart';
-import '../../data/models/get_doctors_response.dart';
+import '../../data/models/get_doctors/get_doctors_response.dart';
 import 'doctors_list_view_item.dart';
 
 class DoctorsListView extends StatelessWidget {

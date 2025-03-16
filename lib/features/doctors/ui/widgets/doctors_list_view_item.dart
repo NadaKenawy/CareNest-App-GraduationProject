@@ -1,5 +1,5 @@
 import 'package:care_nest/core/theme/colors_manager.dart';
-import 'package:care_nest/features/doctors/data/models/get_doctors_response.dart';
+import 'package:care_nest/features/doctors/data/models/get_doctors/get_doctors_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

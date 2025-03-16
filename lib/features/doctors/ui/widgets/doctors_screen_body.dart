@@ -60,7 +60,10 @@ class _DoctorsScreenBodyState extends State<DoctorsScreenBody> {
 
   Widget _buildContent() {
     if (selectedOption == 'Hospitals & Pharmacies' || isMapView) {
-    return MapView(selectedSpecialty: selectedOption);
+      return MapView(
+        selectedSpecialty: selectedOption,
+        isHospitalView: selectedOption == 'Hospitals & Pharmacies',
+      );
     }
     switch (selectedOption) {
       case 'Pediatricians':

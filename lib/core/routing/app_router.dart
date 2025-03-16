@@ -15,6 +15,7 @@ import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/la
 import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
 import 'package:care_nest/features/doctors/logic/get_all_doctors_cubit/get_all_doctors_cubit.dart';
+import 'package:care_nest/features/doctors/logic/get_hospitals_cubit/get_all_hospitals_cubit.dart';
 import 'package:care_nest/features/doctors/ui/doctors_screen.dart';
 import 'package:care_nest/features/doctors/ui/widgets/doctor_details_screen_body.dart';
 import 'package:care_nest/features/doctors/ui/widgets/my_appointment_screen_body.dart';
@@ -71,7 +72,7 @@ import 'package:care_nest/features/tips/ui/widgets/tip_details_screen_body.dart'
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/doctors/data/models/get_doctors_response.dart';
+import '../../features/doctors/data/models/get_doctors/get_doctors_response.dart';
 
 abstract class AppRouter {
   static const kSignUpScreen = '/signUpScreen';
@@ -438,8 +439,17 @@ abstract class AppRouter {
       GoRoute(
         path: kDoctorsScreen,
         builder: (context, state) {
-          return BlocProvider(
-            create: (context) => getIt<GetAllDoctorsCubit>()..getAllDoctors(),
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) =>
+                    getIt<GetAllDoctorsCubit>()..getAllDoctors(),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    getIt<GetAllHospitalsCubit>()..getAllHospitals(),
+              ),
+            ],
             child: const DoctorsScreen(),
           );
         },

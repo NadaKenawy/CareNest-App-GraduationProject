@@ -1,10 +1,9 @@
-import 'package:care_nest/features/doctors/data/models/get_doctors_response.dart';
+import 'package:care_nest/features/doctors/data/models/get_doctors/get_doctors_response.dart';
 import 'package:care_nest/features/doctors/logic/get_all_doctors_cubit/get_all_doctors_cubit.dart';
 import 'package:care_nest/features/doctors/logic/get_all_doctors_cubit/get_all_doctors_state.dart';
 import 'package:care_nest/features/doctors/ui/widgets/doctors_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'doctors_list_skeletonizer.dart';
 
 class GetAllDoctorsBlocBuilder extends StatelessWidget {

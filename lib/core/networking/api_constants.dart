@@ -42,6 +42,7 @@ class ApiConstants {
   static const String getAllStories = "stories/?limit=20";
   static const String getAllChannels = "channels/?limit=20";
   static const String getAllDoctors = "doctor/near";
+  static const String getAllHospitals = "doctor/hospital";
 }
 
 class ApiErrors {
