@@ -19,7 +19,7 @@ class _DoctorsScreenBodyState extends State<DoctorsScreenBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xfff9f9f9),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),

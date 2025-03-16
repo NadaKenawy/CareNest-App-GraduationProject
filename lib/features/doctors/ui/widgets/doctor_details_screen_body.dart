@@ -6,16 +6,20 @@ import 'package:care_nest/features/doctors/ui/widgets/doctor_details_working_hou
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/colors_manager.dart';
+import '../../data/models/get_doctors_response.dart';
 import 'doctor_details_about.dart';
 import 'doctor_details_contact.dart';
 
 class DoctorDetailsScreenBody extends StatelessWidget {
-  const DoctorDetailsScreenBody({super.key});
-
+  const DoctorDetailsScreenBody({super.key, required this.doctorData});
+  
+  final DoctorData doctorData;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xfff9f9f9),
       appBar: AppBar(
+        backgroundColor: const Color(0xfff9f9f9),
         title: Text(
           'Doctor Details',
           style: TextStyles.font20BlackSemiBold,
@@ -27,15 +31,21 @@ class DoctorDetailsScreenBody extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const DoctorDetailsHeader(),
+                 DoctorDetailsHeader(
+                  doctorData: doctorData,
+                ),
                 SizedBox(
                   height: 20.h,
                 ),
-                const DoctorDetailsAbout(),
+                 DoctorDetailsAbout(
+                  doctorData: doctorData,
+                 ),
                 SizedBox(
                   height: 20.h,
                 ),
-                const DoctorDetailsContact(),
+                 DoctorDetailsContact(
+                  doctorData: doctorData,
+                ),
                 SizedBox(
                   height: 20.h,
                 ),

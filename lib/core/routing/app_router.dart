@@ -71,6 +71,8 @@ import 'package:care_nest/features/tips/ui/widgets/tip_details_screen_body.dart'
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/doctors/data/models/get_doctors_response.dart';
+
 abstract class AppRouter {
   static const kSignUpScreen = '/signUpScreen';
   static const kLoginScreen = '/loginScreen';
@@ -445,7 +447,10 @@ abstract class AppRouter {
       GoRoute(
         path: kDoctorDetailsScreen,
         builder: (context, state) {
-          return const DoctorDetailsScreenBody();
+          final doctorData = state.extra as DoctorData;
+          return DoctorDetailsScreenBody(
+            doctorData: doctorData,
+          );
         },
       ),
       GoRoute(

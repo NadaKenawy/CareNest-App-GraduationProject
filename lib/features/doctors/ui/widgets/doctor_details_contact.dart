@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DoctorDetailsContact extends StatelessWidget {
-  const DoctorDetailsContact({super.key});
+import '../../data/models/get_doctors_response.dart';
 
+class DoctorDetailsContact extends StatelessWidget {
+  const DoctorDetailsContact({super.key, required this.doctorData});
+  final DoctorData doctorData;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +36,7 @@ class DoctorDetailsContact extends StatelessWidget {
               ),
               SizedBox(width: 8.w),
               Text(
-                '5 Al-Maadi Corniche, Maadi, Cairo',
+                doctorData.location!.address!,
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w400,
@@ -52,7 +54,7 @@ class DoctorDetailsContact extends StatelessWidget {
               ),
               SizedBox(width: 8.w),
               Text(
-                '01234567890',
+                '01096032855',
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w400,

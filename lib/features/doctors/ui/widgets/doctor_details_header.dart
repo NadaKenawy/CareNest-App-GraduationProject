@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DoctorDetailsHeader extends StatelessWidget {
-  const DoctorDetailsHeader({super.key});
+import '../../data/models/get_doctors_response.dart';
 
+class DoctorDetailsHeader extends StatelessWidget {
+  const DoctorDetailsHeader({super.key, required this.doctorData});
+  final DoctorData doctorData;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +21,7 @@ class DoctorDetailsHeader extends StatelessWidget {
           Flexible(
             flex: 2,
             child: Image.asset(
-              'assets/images/doctors_test_img.png',
+              doctorData.image ?? 'assets/images/doctors_test_img.png',
               width: 90.w,
               height: 120.h,
               fit: BoxFit.cover,
@@ -32,14 +34,14 @@ class DoctorDetailsHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Dr. Mona Hassan',
+                  'Dr. ${doctorData.user!.firstName!} ${doctorData.user!.lastName!}',
                   style: TextStyle(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  'Pediatrician',
+                  doctorData.specialty!,
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,

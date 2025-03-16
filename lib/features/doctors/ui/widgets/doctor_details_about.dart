@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DoctorDetailsAbout extends StatelessWidget {
-  const DoctorDetailsAbout({super.key});
+import '../../data/models/get_doctors_response.dart';
 
+class DoctorDetailsAbout extends StatelessWidget {
+  const DoctorDetailsAbout({super.key, required this.doctorData});
+  final DoctorData doctorData;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +28,8 @@ class DoctorDetailsAbout extends StatelessWidget {
           ),
           SizedBox(height: 4.h),
           Text(
-            'Dr. Yasmin Mostafa is a dedicated and experienced pediatrician committed to providing high-quality care and personalized treatment to patients, ensuring their well-being and comfort.',
+            doctorData.about ??
+                'Dr. ${doctorData.user!.firstName!} ${doctorData.user!.lastName!} is a dedicated and experienced pediatrician committed to providing high-quality care and personalized treatment to patients, ensuring their well-being and comfort.',
             style: TextStyle(
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,
