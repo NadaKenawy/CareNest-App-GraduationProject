@@ -6,6 +6,7 @@ import '../../data/models/get_doctors_response.dart';
 class DoctorDetailsContact extends StatelessWidget {
   const DoctorDetailsContact({super.key, required this.doctorData});
   final DoctorData doctorData;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,41 +28,47 @@ class DoctorDetailsContact extends StatelessWidget {
             ),
           ),
           SizedBox(height: 8.h),
-          Row(
-            children: [
-              Icon(
-                Icons.location_on,
-                size: 20.sp,
-                color: const Color(0xff418fbf),
-              ),
-              SizedBox(width: 8.w),
-              Text(
-                doctorData.location!.address!,
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
+          if (doctorData.location != null &&
+              doctorData.location!.address != null)
+            Row(
+              children: [
+                Icon(
+                  Icons.location_on,
+                  size: 20.sp,
+                  color: const Color(0xff418fbf),
                 ),
-              ),
-            ],
-          ),
+                SizedBox(width: 8.w),
+                Text(
+                  doctorData.location?.address ?? 'No address available',
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
+
           SizedBox(height: 8.h),
-          Row(
-            children: [
-              Icon(
-                Icons.phone,
-                size: 20.sp,
-                color: const Color(0xff418fbf),
-              ),
-              SizedBox(width: 8.w),
-              Text(
-                doctorData.phones!.first,
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
+          if (doctorData.phones != null && doctorData.phones!.isNotEmpty)
+            Row(
+              children: [
+                Icon(
+                  Icons.phone,
+                  size: 20.sp,
+                  color: const Color(0xff418fbf),
                 ),
-              ),
-            ],
-          ),
+                SizedBox(width: 8.w),
+                Text(
+                  doctorData.phones!.isNotEmpty
+                      ? doctorData.phones!.first
+                      : '01212688610',
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
         ],
       ),
     );
