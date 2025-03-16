@@ -36,17 +36,11 @@ DoctorData _$DoctorDataFromJson(Map<String, dynamic> json) => DoctorData(
       image: json['image'] as String?,
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      paymentMethodType: json['paymentMethodType'] as String?,
-      about: json['about'] as String?,
-      promocode: (json['promocode'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
+      about: json['About'] as String?,
       day: (json['day'] as List<dynamic>?)
           ?.map((e) => DaySchedule.fromJson(e as Map<String, dynamic>))
           .toList(),
       ratingsQuantity: (json['ratingsQuantity'] as num?)?.toInt(),
-      createdAt: json['createdAt'] as String?,
-      updatedAt: json['updatedAt'] as String?,
     );
 
 Map<String, dynamic> _$DoctorDataToJson(DoctorData instance) =>
@@ -60,13 +54,9 @@ Map<String, dynamic> _$DoctorDataToJson(DoctorData instance) =>
       'bookingPrice': instance.bookingPrice,
       'image': instance.image,
       'images': instance.images,
-      'paymentMethodType': instance.paymentMethodType,
-      'about': instance.about,
-      'promocode': instance.promocode,
+      'About': instance.about,
       'day': instance.day,
       'ratingsQuantity': instance.ratingsQuantity,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
     };
 
 LocationDetails _$LocationDetailsFromJson(Map<String, dynamic> json) =>

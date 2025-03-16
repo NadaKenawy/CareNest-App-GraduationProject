@@ -66,7 +66,7 @@ class DoctorDetailsHeader extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      ' (128 Reviews)',
+                      ' (${doctorData.ratingsQuantity.toString()} Reviews)',
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.bold,

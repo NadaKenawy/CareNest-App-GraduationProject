@@ -28,8 +28,7 @@ class DoctorDetailsAbout extends StatelessWidget {
           ),
           SizedBox(height: 4.h),
           Text(
-            doctorData.about ??
-                'Dr. ${doctorData.user!.firstName!} ${doctorData.user!.lastName!} is a dedicated and experienced pediatrician committed to providing high-quality care and personalized treatment to patients, ensuring their well-being and comfort.',
+            doctorData.about!,
             style: TextStyle(
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,

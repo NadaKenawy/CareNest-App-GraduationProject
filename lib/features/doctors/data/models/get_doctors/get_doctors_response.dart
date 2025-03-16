@@ -32,13 +32,11 @@ class DoctorData {
   int? bookingPrice;
   String? image;
   List<String>? images;
-  String? paymentMethodType;
+   @JsonKey(name: 'About')
   String? about;
-  List<String>? promocode;
   List<DaySchedule>? day;
   int? ratingsQuantity;
-  String? createdAt;
-  String? updatedAt;
+ 
 
   DoctorData({
     this.location,
@@ -50,13 +48,9 @@ class DoctorData {
     this.bookingPrice,
     this.image,
     this.images,
-    this.paymentMethodType,
     this.about,
-    this.promocode,
     this.day,
     this.ratingsQuantity,
-    this.createdAt,
-    this.updatedAt,
   });
 
   factory DoctorData.fromJson(Map<String, dynamic> json) =>
