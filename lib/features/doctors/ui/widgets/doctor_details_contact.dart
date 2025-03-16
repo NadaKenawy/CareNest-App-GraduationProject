@@ -54,7 +54,7 @@ class DoctorDetailsContact extends StatelessWidget {
               ),
               SizedBox(width: 8.w),
               Text(
-                '01096032855',
+                doctorData.phones!.first,
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w400,

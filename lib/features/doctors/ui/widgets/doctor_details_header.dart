@@ -87,7 +87,7 @@ class DoctorDetailsHeader extends StatelessWidget {
                     ),
                     SizedBox(width: 8.w),
                     Text(
-                      r'7$',
+                      doctorData.bookingPrice.toString(),
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
