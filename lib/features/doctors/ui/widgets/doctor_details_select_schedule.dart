@@ -1,9 +1,20 @@
-import 'package:care_nest/features/doctors/ui/widgets/select_schedule_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../data/models/get_doctors/get_doctors_response.dart';
+import 'select_schedule_list_view.dart';
+
 class DoctorDetailsSelectSchedule extends StatelessWidget {
-  const DoctorDetailsSelectSchedule({super.key});
+  const DoctorDetailsSelectSchedule({
+    super.key,
+    required this.doctorData,
+    required this.onDaySelected,
+    required this.selectedDay,
+  });
+
+  final DoctorData doctorData;
+  final Function(DaySchedule) onDaySelected;
+  final DaySchedule selectedDay;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +37,11 @@ class DoctorDetailsSelectSchedule extends StatelessWidget {
             ),
           ),
           SizedBox(height: 16.h),
-          const SelectScheduleListView(),
+          SelectScheduleListView(
+            daySchedule: doctorData.day!,
+            onDaySelected: onDaySelected,
+            selectedDay: selectedDay,
+          ),
         ],
       ),
     );

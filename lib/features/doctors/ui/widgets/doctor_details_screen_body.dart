@@ -10,10 +10,39 @@ import '../../data/models/get_doctors/get_doctors_response.dart';
 import 'doctor_details_about.dart';
 import 'doctor_details_contact.dart';
 
-class DoctorDetailsScreenBody extends StatelessWidget {
+class DoctorDetailsScreenBody extends StatefulWidget {
   const DoctorDetailsScreenBody({super.key, required this.doctorData});
-  
+
   final DoctorData doctorData;
+
+  @override
+  State<DoctorDetailsScreenBody> createState() =>
+      _DoctorDetailsScreenBodyState();
+}
+
+class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
+  late DaySchedule selectedDay;
+  String? selectedHour;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedDay = widget.doctorData.day!.first;
+  }
+
+  void updateSelectedDay(DaySchedule newDay) {
+    setState(() {
+      selectedDay = newDay;
+      selectedHour = null;
+    });
+  }
+
+   void updateSelectedHour(String hour) {
+    setState(() {
+      selectedHour = hour;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,29 +60,38 @@ class DoctorDetailsScreenBody extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                 DoctorDetailsHeader(
-                  doctorData: doctorData,
+                DoctorDetailsHeader(
+                  doctorData: widget.doctorData,
                 ),
                 SizedBox(
                   height: 20.h,
                 ),
-                 DoctorDetailsAbout(
-                  doctorData: doctorData,
-                 ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                 DoctorDetailsContact(
-                  doctorData: doctorData,
+                DoctorDetailsAbout(
+                  doctorData: widget.doctorData,
                 ),
                 SizedBox(
                   height: 20.h,
                 ),
-                const DoctorDetailsSelectSchedule(),
+                DoctorDetailsContact(
+                  doctorData: widget.doctorData,
+                ),
                 SizedBox(
                   height: 20.h,
                 ),
-                const DoctorDetailsWorkingHours(),
+                DoctorDetailsSelectSchedule(
+                  selectedDay: selectedDay,
+                  doctorData: widget.doctorData,
+                  onDaySelected: updateSelectedDay,
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                DoctorDetailsWorkingHours(
+                  doctorData: widget.doctorData,
+                  selectedDay: selectedDay,
+                   selectedHour: selectedHour,
+                  onHourSelected: updateSelectedHour,
+                ),
                 SizedBox(
                   height: 24.h,
                 ),
