@@ -7,6 +7,8 @@ import 'package:care_nest/features/add_baby/data/repos/update_baby_repo.dart';
 import 'package:care_nest/features/add_baby/logic/delete_baby_cubit/delete_baby_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/update_baby_cubit/update_baby_cubit.dart';
+import 'package:care_nest/features/baby_cry/data/repos/prediction_repo.dart';
+import 'package:care_nest/features/baby_cry/logic/cubit/prediction_cubit.dart';
 import 'package:care_nest/features/baby_growth/data/models/put_growth_data/put_growth_data_response.dart';
 import 'package:care_nest/features/baby_growth/data/repos/get_baby_height_growth_repo.dart';
 import 'package:care_nest/features/baby_growth/data/repos/get_baby_weight_growth_repo.dart';
@@ -248,7 +250,18 @@ Future<void> setupGetIt() async {
   // get all doctors
   getIt.registerLazySingleton<GetDoctorsRepo>(() => GetDoctorsRepo(getIt()));
   getIt.registerFactory<GetAllDoctorsCubit>(() => GetAllDoctorsCubit(getIt()));
-    // get all doctors
-  getIt.registerLazySingleton<GetHospitalsRepo>(() => GetHospitalsRepo(getIt()));
-  getIt.registerFactory<GetAllHospitalsCubit>(() => GetAllHospitalsCubit(getIt()));
+  // get all doctors
+  getIt
+      .registerLazySingleton<GetHospitalsRepo>(() => GetHospitalsRepo(getIt()));
+  getIt.registerFactory<GetAllHospitalsCubit>(
+      () => GetAllHospitalsCubit(getIt()));
+
+  //prediction
+  getIt.registerLazySingleton<Dio>(() => Dio());
+
+  getIt.registerLazySingleton<PredictionRepo>(
+      () => PredictionRepo(getIt<Dio>()));
+
+  getIt.registerFactory<PredictionCubit>(
+      () => PredictionCubit(getIt<PredictionRepo>()));
 }

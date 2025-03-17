@@ -43,6 +43,8 @@ class ApiConstants {
   static const String getAllChannels = "channels/?limit=20";
   static const String getAllDoctors = "doctor/near";
   static const String getAllHospitals = "doctor/hospital";
+  static const String postPrediction =
+      "https://pythonai.codepeak.software/predict";
 }
 
 class ApiErrors {
