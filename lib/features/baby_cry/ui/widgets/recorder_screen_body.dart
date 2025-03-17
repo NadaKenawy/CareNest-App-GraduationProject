@@ -2,17 +2,20 @@
 
 import 'dart:async';
 import 'dart:developer';
-import 'package:care_nest/core/routing/app_router.dart';
+import 'dart:io';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
+import 'package:care_nest/features/baby_cry/ui/widgets/prediction_bloc_listener.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:share_plus/share_plus.dart';
+
+import '../../logic/cubit/prediction_cubit.dart';
 
 class RecorderScreenBody extends StatefulWidget {
   const RecorderScreenBody({super.key});
@@ -41,14 +44,16 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
   Future<void> startRecording() async {
     if (await audioRecorder.hasPermission()) {
       final directory = await getApplicationDocumentsDirectory();
-      filePath = '${directory.path}/myRecording.m4a';
+      filePath = '${directory.path}/myRecording.wav';
+      log("Recording saved at: $filePath");
 
       setState(() {
         isRecording = true;
         progress = 0.0;
       });
 
-      await audioRecorder.start(const RecordConfig(), path: filePath!);
+      await audioRecorder.start(const RecordConfig(encoder: AudioEncoder.wav),
+          path: filePath!);
 
       timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         setState(() {
@@ -74,7 +79,11 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
       scale = 1.0;
       progress = 0.0;
     });
-    GoRouter.of(context).push(AppRouter.kAnalysisResultScreen);
+
+    if (filePath != null) {
+      context.read<PredictionCubit>().uploadAudio(File(filePath!));
+    }
+    // GoRouter.of(context).push(AppRouter.kAnalysisResultScreen);
   }
 
   // Share the recording
@@ -107,6 +116,7 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
             SizedBox(height: 28.h),
             isRecording ? recordingProgress() : shareButton(),
             SizedBox(height: 100.h),
+            const PredictionBlocListener(),
           ],
         ),
       ),

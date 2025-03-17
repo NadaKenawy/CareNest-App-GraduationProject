@@ -8,6 +8,7 @@ import 'package:care_nest/features/add_baby/ui/add_baby_screen.dart';
 import 'package:care_nest/features/add_baby/ui/baby_data_screen.dart';
 import 'package:care_nest/features/add_baby/ui/my_babies_screen.dart';
 import 'package:care_nest/features/analysis_result/analysis_result_screen.dart';
+import 'package:care_nest/features/baby_cry/logic/cubit/prediction_cubit.dart';
 import 'package:care_nest/features/baby_cry/ui/recorder_screen.dart';
 import 'package:care_nest/features/baby_growth/logic/get_baby_height_growth_cubit/get_baby_height_growth_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
@@ -307,7 +308,10 @@ abstract class AppRouter {
       GoRoute(
           path: kRecoderScreen,
           builder: (context, state) {
-            return const RecorderScreen();
+            return BlocProvider(
+              create: (context) => getIt<PredictionCubit>(),
+              child: const RecorderScreen(),
+            );
           }),
       GoRoute(
           path: kAnalysisResultScreen,
