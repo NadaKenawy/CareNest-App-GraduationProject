@@ -41,6 +41,12 @@ DoctorData _$DoctorDataFromJson(Map<String, dynamic> json) => DoctorData(
           ?.map((e) => DaySchedule.fromJson(e as Map<String, dynamic>))
           .toList(),
       ratingsQuantity: (json['ratingsQuantity'] as num?)?.toInt(),
+      promocode: (json['promocode'] as List<dynamic>?)
+          ?.map((e) => PromoCode.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      orders: (json['orders'] as List<dynamic>?)
+          ?.map((e) => Order.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$DoctorDataToJson(DoctorData instance) =>
@@ -57,6 +63,8 @@ Map<String, dynamic> _$DoctorDataToJson(DoctorData instance) =>
       'About': instance.about,
       'day': instance.day,
       'ratingsQuantity': instance.ratingsQuantity,
+      'promocode': instance.promocode,
+      'orders': instance.orders,
     };
 
 LocationDetails _$LocationDetailsFromJson(Map<String, dynamic> json) =>
@@ -112,4 +120,55 @@ Map<String, dynamic> _$SlotToJson(Slot instance) => <String, dynamic>{
       'startTime': instance.startTime,
       'endTime': instance.endTime,
       '_id': instance.id,
+    };
+
+PromoCode _$PromoCodeFromJson(Map<String, dynamic> json) => PromoCode(
+      code: json['code'] as String,
+      expireAt: json['expireAt'] == null
+          ? null
+          : DateTime.parse(json['expireAt'] as String),
+      value: json['value'] as num?,
+    );
+
+Map<String, dynamic> _$PromoCodeToJson(PromoCode instance) => <String, dynamic>{
+      'code': instance.code,
+      'expireAt': instance.expireAt?.toIso8601String(),
+      'value': instance.value,
+    };
+
+Order _$OrderFromJson(Map<String, dynamic> json) => Order(
+      id: json['_id'] as String?,
+      doctor: json['doctor'] as String?,
+      day: json['day'] == null
+          ? null
+          : OrderDay.fromJson(json['day'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
+      '_id': instance.id,
+      'doctor': instance.doctor,
+      'day': instance.day,
+    };
+
+OrderDay _$OrderDayFromJson(Map<String, dynamic> json) => OrderDay(
+      type: json['type'] as String?,
+      time: json['time'] == null
+          ? null
+          : OrderTime.fromJson(json['time'] as Map<String, dynamic>),
+      date:
+          json['date'] == null ? null : DateTime.parse(json['date'] as String),
+    );
+
+Map<String, dynamic> _$OrderDayToJson(OrderDay instance) => <String, dynamic>{
+      'type': instance.type,
+      'time': instance.time,
+      'date': instance.date?.toIso8601String(),
+    };
+
+OrderTime _$OrderTimeFromJson(Map<String, dynamic> json) => OrderTime(
+      startTime: json['startTime'] as String?,
+    );
+
+Map<String, dynamic> _$OrderTimeToJson(OrderTime instance) => <String, dynamic>{
+      'startTime': instance.startTime,
     };

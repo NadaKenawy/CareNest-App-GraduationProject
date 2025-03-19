@@ -18,8 +18,14 @@ import 'package:care_nest/features/baby_growth/logic/get_baby_height_growth_cubi
 import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/put_growth_data_cubit/put_growth_data_cubit.dart';
+import 'package:care_nest/features/doctors/data/repos/cancel_booked_appointment_repo.dart';
+import 'package:care_nest/features/doctors/data/repos/doctor_booking_repo.dart';
+import 'package:care_nest/features/doctors/data/repos/get_booked_appointments_repo.dart';
 import 'package:care_nest/features/doctors/data/repos/get_doctors_repo.dart';
 import 'package:care_nest/features/doctors/data/repos/get_hospitals_repo.dart';
+import 'package:care_nest/features/doctors/logic/book_doctor_cubit/doctor_booking_cubit.dart';
+import 'package:care_nest/features/doctors/logic/cancel_booked_appointment_cubit/cancel_booked_appointment_cubit.dart';
+import 'package:care_nest/features/doctors/logic/get_booked_appointments_cubit/get_booked_appointments_cubit.dart';
 import 'package:care_nest/features/doctors/logic/get_hospitals_cubit/get_all_hospitals_cubit.dart';
 import 'package:care_nest/features/entertainment/music_and_sweet_noise/logic/get_music_cubit/get_music_cubit.dart';
 import 'package:care_nest/features/entertainment/fun_videos/data/repo/get_all_channels_repo.dart';
@@ -264,4 +270,20 @@ Future<void> setupGetIt() async {
 
   getIt.registerFactory<PredictionCubit>(
       () => PredictionCubit(getIt<PredictionRepo>()));
+
+  //doctor booking
+  getIt.registerLazySingleton<DoctorBookingRepo>(
+      () => DoctorBookingRepo(getIt()));
+  getIt.registerFactory<DoctorBookingCubit>(() => DoctorBookingCubit(getIt()));
+
+  // get all booked appointments
+  getIt.registerLazySingleton<GetBookedAppointmentsRepo>(
+      () => GetBookedAppointmentsRepo(getIt()));
+  getIt.registerFactory<GetBookedAppointmentsCubit>(
+      () => GetBookedAppointmentsCubit(getIt()));
+  // cancel booked appointments
+  getIt.registerLazySingleton<CancelBookedAppointmentRepo>(
+      () => CancelBookedAppointmentRepo(getIt()));
+  getIt.registerFactory<CancelBookedAppointmentCubit>(
+      () => CancelBookedAppointmentCubit(getIt()));
 }

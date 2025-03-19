@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:care_nest/core/networking/api_constants.dart';
 import 'package:care_nest/features/add_baby/data/models/add_baby/add_baby_response.dart';
 import 'package:care_nest/features/add_baby/data/models/delete_baby/delete_baby_response.dart';
@@ -10,6 +8,10 @@ import 'package:care_nest/features/baby_growth/data/models/get_baby_weight_growt
 import 'package:care_nest/features/baby_growth/data/models/latest_growth_data/latest_growth_data_response.dart';
 import 'package:care_nest/features/baby_growth/data/models/put_growth_data/put_growth_data_request.dart';
 import 'package:care_nest/features/baby_growth/data/models/put_growth_data/put_growth_data_response.dart';
+import 'package:care_nest/features/doctors/data/models/book_doctor/book_doctor_request_body.dart';
+import 'package:care_nest/features/doctors/data/models/book_doctor/book_doctor_response.dart';
+import 'package:care_nest/features/doctors/data/models/booked_appointments/get_booked_appointments_response.dart';
+import 'package:care_nest/features/doctors/data/models/cancel_booked_appointment/cancel_booked_appointment_response.dart';
 import 'package:care_nest/features/doctors/data/models/get_doctors/get_doctors_response.dart';
 import 'package:care_nest/features/doctors/data/models/get_hospitals/get_hospitals_response.dart';
 import 'package:care_nest/features/entertainment/fun_videos/data/model/get_all_channels_response.dart';
@@ -48,7 +50,6 @@ import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import '../../features/add_baby/data/models/add_baby/add_baby_request_body.dart';
 import '../../features/add_baby/data/models/get_all_babies/get_all_babies_response.dart';
-import '../../features/baby_cry/data/model/prediction_response_model.dart';
 import '../../features/fcm/data/models/update_fcm/update_fcm_token_request_body.dart';
 part 'api_service.g.dart';
 
@@ -247,5 +248,19 @@ abstract class ApiService {
     @Query('lng') double longitude,
     @Query('lat') double latitude,
   );
+  @POST(ApiConstants.bookDoctor)
+  Future<BookDoctorResponse> bookDoctor(
+    @Body() BookDoctorRequestBody bookDoctorRequestBody,
+    @Header('Authorization') String token,
+  );
+  @GET(ApiConstants.bookedAppointments)
+  Future<GetBookedAppointmentsResponse> getBookedAppointments(
+    @Header('Authorization') String token,
+  );
 
+  @PATCH(ApiConstants.cancelbookedAppointment)
+  Future<CancelBookedAppointmentResponse> cancelBookedAppointment(
+    @Header('Authorization') String token,
+    @Path('id') String id,
+  );
 }

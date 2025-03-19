@@ -1,7 +1,6 @@
 import 'package:care_nest/features/doctors/ui/widgets/working_hours_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../data/models/get_doctors/get_doctors_response.dart';
 
 class DoctorDetailsWorkingHours extends StatelessWidget {
@@ -11,14 +10,14 @@ class DoctorDetailsWorkingHours extends StatelessWidget {
     required this.selectedDay,
     this.selectedHour,
     required this.onHourSelected,
+    required this.bookingDate,
   });
-
 
   final DoctorData doctorData;
   final DaySchedule selectedDay;
   final String? selectedHour;
   final Function(String) onHourSelected;
-
+  final String bookingDate;
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +43,10 @@ class DoctorDetailsWorkingHours extends StatelessWidget {
           WorkingHoursListView(
             daySchedule: doctorData.day!,
             selectedDay: selectedDay,
-             selectedHour: selectedHour,
+            selectedHour: selectedHour,
             onHourSelected: onHourSelected,
+            bookingDate: bookingDate,
+            orders: doctorData.orders,
           ),
         ],
       ),

@@ -32,11 +32,12 @@ class DoctorData {
   int? bookingPrice;
   String? image;
   List<String>? images;
-   @JsonKey(name: 'About')
+  @JsonKey(name: 'About')
   String? about;
   List<DaySchedule>? day;
   int? ratingsQuantity;
- 
+  List<PromoCode>? promocode;
+  List<Order>? orders; // Added orders field
 
   DoctorData({
     this.location,
@@ -51,6 +52,8 @@ class DoctorData {
     this.about,
     this.day,
     this.ratingsQuantity,
+    this.promocode,
+    this.orders,
   });
 
   factory DoctorData.fromJson(Map<String, dynamic> json) =>
@@ -129,4 +132,71 @@ class Slot {
   factory Slot.fromJson(Map<String, dynamic> json) => _$SlotFromJson(json);
 
   Map<String, dynamic> toJson() => _$SlotToJson(this);
+}
+
+@JsonSerializable()
+class PromoCode {
+  final String code;
+  final DateTime? expireAt;
+  final num? value;
+
+  PromoCode({
+    required this.code,
+    this.expireAt,
+    this.value,
+  });
+
+  factory PromoCode.fromJson(Map<String, dynamic> json) =>
+      _$PromoCodeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PromoCodeToJson(this);
+}
+
+@JsonSerializable()
+class Order {
+  @JsonKey(name: '_id')
+  String? id;
+  String? doctor;
+  OrderDay? day;
+
+  Order({
+    this.id,
+    this.doctor,
+    this.day,
+  });
+
+  factory Order.fromJson(Map<String, dynamic> json) =>
+      _$OrderFromJson(json);
+
+  Map<String, dynamic> toJson() => _$OrderToJson(this);
+}
+
+@JsonSerializable()
+class OrderDay {
+  String? type;
+  OrderTime? time;
+  DateTime? date;
+
+  OrderDay({
+    this.type,
+    this.time,
+    this.date,
+  });
+
+  factory OrderDay.fromJson(Map<String, dynamic> json) =>
+      _$OrderDayFromJson(json);
+
+  Map<String, dynamic> toJson() => _$OrderDayToJson(this);
+}
+
+@JsonSerializable()
+class OrderTime {
+  String? startTime;
+
+  OrderTime({this.startTime});
+
+  factory OrderTime.fromJson(Map<String, dynamic> json) =>
+      _$OrderTimeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$OrderTimeToJson(this);
 }

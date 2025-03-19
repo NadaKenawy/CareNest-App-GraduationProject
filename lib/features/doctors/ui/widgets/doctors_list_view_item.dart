@@ -39,7 +39,7 @@ class DoctorsListViewItem extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Dr ${doctorData.user!.firstName!}',
+                      'Dr ${doctorData.user?.firstName ?? ''}',
                       style: TextStyle(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
@@ -47,7 +47,7 @@ class DoctorsListViewItem extends StatelessWidget {
                     ),
                     SizedBox(width: 4.w),
                     Text(
-                      doctorData.user!.lastName!,
+                      doctorData.user?.lastName ?? '',
                       style: TextStyle(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
@@ -56,7 +56,7 @@ class DoctorsListViewItem extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  doctorData.specialty!,
+                  doctorData.specialty ?? 'N/A',
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
@@ -66,7 +66,7 @@ class DoctorsListViewItem extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  doctorData.location!.address!,
+                  doctorData.location?.address ?? 'No address provided',
                   style: TextStyle(
                     fontSize: 14.sp,
                   ),
@@ -88,7 +88,7 @@ class DoctorsListViewItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      ' (128 Reviews)',
+                      ' (${doctorData.ratingsQuantity})',
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.bold,

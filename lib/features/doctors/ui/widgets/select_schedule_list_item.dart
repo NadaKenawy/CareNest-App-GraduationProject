@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -24,7 +22,9 @@ class SelectScheduleListItem extends StatelessWidget {
         color: isSelected ? const Color(0xff418fbf) : Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(25.r)),
         border: Border.all(
-          color: isSelected ? Colors.transparent : Colors.black,
+          color: isSelected
+              ? Colors.transparent
+              : Colors.grey.withValues(alpha: .5),
           width: 1.5.w,
         ),
       ),

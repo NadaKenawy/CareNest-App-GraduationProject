@@ -45,6 +45,9 @@ class ApiConstants {
   static const String getAllHospitals = "doctor/hospital";
   static const String postPrediction =
       "https://pythonai.codepeak.software/predict";
+  static const String bookDoctor = "order";
+  static const String bookedAppointments = "order/orders";
+  static const String cancelbookedAppointment = "order/canceled/{id}";
 }
 
 class ApiErrors {

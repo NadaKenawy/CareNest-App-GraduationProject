@@ -15,7 +15,10 @@ import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubi
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
+import 'package:care_nest/features/doctors/logic/book_doctor_cubit/doctor_booking_cubit.dart';
+import 'package:care_nest/features/doctors/logic/cancel_booked_appointment_cubit/cancel_booked_appointment_cubit.dart';
 import 'package:care_nest/features/doctors/logic/get_all_doctors_cubit/get_all_doctors_cubit.dart';
+import 'package:care_nest/features/doctors/logic/get_booked_appointments_cubit/get_booked_appointments_cubit.dart';
 import 'package:care_nest/features/doctors/logic/get_hospitals_cubit/get_all_hospitals_cubit.dart';
 import 'package:care_nest/features/doctors/ui/doctors_screen.dart';
 import 'package:care_nest/features/doctors/ui/widgets/doctor_details_screen_body.dart';
@@ -462,15 +465,32 @@ abstract class AppRouter {
         path: kDoctorDetailsScreen,
         builder: (context, state) {
           final doctorData = state.extra as DoctorData;
-          return DoctorDetailsScreenBody(
-            doctorData: doctorData,
+          return BlocProvider(
+            create: (context) => getIt<DoctorBookingCubit>(),
+            child: DoctorDetailsScreenBody(
+              doctorData: doctorData,
+            ),
           );
         },
       ),
       GoRoute(
         path: kMyAppointmentsScreen,
         builder: (context, state) {
-          return const MyAppointmentScreenBody();
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt<GetBookedAppointmentsCubit>(),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    getIt<GetAllDoctorsCubit>()..getAllDoctors(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<CancelBookedAppointmentCubit>(),
+              ),
+            ],
+            child: const MyAppointmentScreenBody(),
+          );
         },
       ),
     ],
