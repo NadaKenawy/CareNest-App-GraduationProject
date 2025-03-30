@@ -76,6 +76,7 @@ import 'package:care_nest/features/tips/ui/widgets/tip_details_screen_body.dart'
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/baby_cry/data/model/prediction_response_model.dart';
 import '../../features/doctors/data/models/get_doctors/get_doctors_response.dart';
 
 abstract class AppRouter {
@@ -319,7 +320,10 @@ abstract class AppRouter {
       GoRoute(
           path: kAnalysisResultScreen,
           builder: (context, state) {
-            return const AnalysisResultScreen();
+            final predictionResponse = state.extra as PredictionResponse;
+            return AnalysisResultScreen(
+              predictionResponse: predictionResponse,
+            );
           }),
       GoRoute(
           path: kBabyHeightGrowthScreen,

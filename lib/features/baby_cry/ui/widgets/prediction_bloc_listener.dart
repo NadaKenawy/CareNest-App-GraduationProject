@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../core/routing/app_router.dart';
 import '../../logic/cubit/prediction_cubit.dart';
 import '../../logic/cubit/prediction_state.dart';
 
@@ -23,7 +25,8 @@ class PredictionBlocListener extends StatelessWidget {
                   content:
                       Text('Prediction: ${predictionResponse.prediction}')),
             );
-            //  GoRouter.of(context).push(AppRouter.kAnalysisResultScreen);
+            GoRouter.of(context).push(AppRouter.kAnalysisResultScreen,
+                extra: predictionResponse);
           },
           error: (error) {
             ScaffoldMessenger.of(context).showSnackBar(
