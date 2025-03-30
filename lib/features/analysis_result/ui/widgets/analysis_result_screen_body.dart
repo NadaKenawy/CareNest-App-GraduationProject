@@ -9,9 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class AnalysisResultScreenBody extends StatelessWidget {
-  const AnalysisResultScreenBody({super.key});
+import '../../../baby_cry/data/model/prediction_response_model.dart';
 
+class AnalysisResultScreenBody extends StatelessWidget {
+  const AnalysisResultScreenBody({super.key, required this.predictionResponse});
+  final PredictionResponse predictionResponse;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +33,9 @@ class AnalysisResultScreenBody extends StatelessWidget {
               height: 268.h,
               child: const AnalysisResultMessage(),
             ),
-            const AnalysisResultPercentage(),
+             AnalysisResultPercentage(
+              predictionResponse: predictionResponse,
+             ),
             SizedBox(
               height: 20.h,
             ),

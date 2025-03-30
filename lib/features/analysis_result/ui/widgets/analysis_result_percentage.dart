@@ -4,9 +4,11 @@ import 'package:care_nest/features/analysis_result/ui/widgets/analysis_result_li
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AnalysisResultPercentage extends StatelessWidget {
-  const AnalysisResultPercentage({super.key});
+import '../../../baby_cry/data/model/prediction_response_model.dart';
 
+class AnalysisResultPercentage extends StatelessWidget {
+  const AnalysisResultPercentage({super.key, required this.predictionResponse});
+  final PredictionResponse predictionResponse;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,7 +27,9 @@ class AnalysisResultPercentage extends StatelessWidget {
           Center(
             child: SizedBox(
               height: 100.h,
-              child: const AnalysisResultListView(),
+              child:  AnalysisResultListView(
+                predictionResponse: predictionResponse,
+              ),
             ),
           ),
           SizedBox(
