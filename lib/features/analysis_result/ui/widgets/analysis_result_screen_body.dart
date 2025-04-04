@@ -14,8 +14,11 @@ import '../../../baby_cry/data/model/prediction_response_model.dart';
 class AnalysisResultScreenBody extends StatelessWidget {
   const AnalysisResultScreenBody({super.key, required this.predictionResponse});
   final PredictionResponse predictionResponse;
+
   @override
   Widget build(BuildContext context) {
+    final prediction = predictionResponse.prediction;
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
@@ -31,52 +34,53 @@ class AnalysisResultScreenBody extends StatelessWidget {
           children: [
             SizedBox(
               height: 268.h,
-              child: const AnalysisResultMessage(),
+              child: AnalysisResultMessage(
+                prediction: prediction ?? 'hungry',
+              ),
             ),
-             AnalysisResultPercentage(
+            AnalysisResultPercentage(
               predictionResponse: predictionResponse,
-             ),
-            SizedBox(
-              height: 20.h,
             ),
-            const AnalysisAdvice(),
-            SizedBox(
-              height: 20.h,
+            SizedBox(height: 20.h),
+            AnalysisAdvice(
+              prediction: prediction ?? 'hungry',
             ),
+            SizedBox(height: 20.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Align(
                 alignment: Alignment.centerRight,
-                child: Stack(alignment: Alignment.center, children: [
-                  for (int i = 0; i < 3; i++)
-                    Container(
-                      width: 70.h + (i * 15),
-                      height: 70.h + (i * 15),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: [
-                          ColorsManager.primaryPinkColor,
-                          ColorsManager.primaryPinkColor.withOpacity(0.6),
-                          ColorsManager.primaryPinkColor.withOpacity(0.2),
-                        ][i],
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    for (int i = 0; i < 3; i++)
+                      Container(
+                        width: 70.h + (i * 15),
+                        height: 70.h + (i * 15),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: [
+                            ColorsManager.primaryPinkColor,
+                            ColorsManager.primaryPinkColor.withOpacity(0.6),
+                            ColorsManager.primaryPinkColor.withOpacity(0.2),
+                          ][i],
+                        ),
+                      ),
+                    GestureDetector(
+                      onTap: () {
+                        GoRouter.of(context).pop();
+                      },
+                      child: const Icon(
+                        Icons.mic,
+                        color: Colors.white,
+                        size: 50,
                       ),
                     ),
-                  GestureDetector(
-                    onTap: () {
-                      GoRouter.of(context).pop();
-                    },
-                    child: const Icon(
-                      Icons.mic,
-                      color: Colors.white,
-                      size: 50,
-                    ),
-                  ),
-                ]),
+                  ],
+                ),
               ),
             ),
-            SizedBox(
-              height: 20.h,
-            ),
+            SizedBox(height: 20.h),
           ],
         ),
       ),

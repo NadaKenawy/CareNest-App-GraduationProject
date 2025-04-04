@@ -5,10 +5,46 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AnalysisAdvice extends StatelessWidget {
-  const AnalysisAdvice({super.key});
+  final String prediction;
+
+  const AnalysisAdvice({super.key, required this.prediction});
+
+  static const Map<String, Map<String, String>> adviceContent = {
+    "burping": {
+      "title": "Needs to Burp",
+      "description":
+          "It looks like your baby needs help releasing trapped air. Try holding them upright and gently patting or rubbing their back after feeding.",
+    },
+    "hungry": {
+      "title": "Feeling Hungry",
+      "description":
+          "Your baby might be feeling hungry. Offering a gentle feed could help calm and comfort them.",
+    },
+    "tired": {
+      "title": "Feeling Tired",
+      "description":
+          "Your baby may be sleepy. Try swaddling, rocking, or creating a calm, quiet space to help them drift off.",
+    },
+    "belly_pain": {
+      "title": "Belly Discomfort",
+      "description":
+          "Your little one may have some tummy troubles. A gentle massage in circular motions or warm compress can ease the discomfort.",
+    },
+    "discomfort": {
+      "title": "General Discomfort",
+      "description":
+          "Something might be bothering your baby. Check their diaper, clothes, room temperature, or position to ensure they’re comfortable.",
+    },
+  };
 
   @override
   Widget build(BuildContext context) {
+    final content = adviceContent[prediction] ??
+        {
+          "title": "Unknown",
+          "description": "No advice available.",
+        };
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
       padding: const EdgeInsets.all(16),
@@ -22,24 +58,22 @@ class AnalysisAdvice extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Needs to Burp',
-            style: TextStyle(
+          Text(
+            content["title"]!,
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
-            'Your baby might need help releasing trapped air. Try gently patting their back after feeding.',
+            content["description"]!,
             style: TextStyle(
               fontSize: 14.sp,
               color: Colors.black.withOpacity(0.6),
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
-            height: 12.h,
-          ),
+          SizedBox(height: 12.h),
           const Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

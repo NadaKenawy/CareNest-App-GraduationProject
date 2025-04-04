@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:care_nest/features/analysis_result/data/models/analysis_result_model.dart';
 import 'package:care_nest/features/analysis_result/ui/widgets/analysis_result_list_item.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,7 @@ class AnalysisResultListView extends StatefulWidget {
 
 class _AnalysisResultListViewState extends State<AnalysisResultListView> {
   List<AnalysisResultModel> items = [];
+  int? maxIndex;
 
   @override
   void initState() {
@@ -60,20 +60,22 @@ class _AnalysisResultListViewState extends State<AnalysisResultListView> {
 
     for (var item in data) {
       String? rawValue = item['value']?.toString();
-
-      // ✅ إزالة علامة `%` وتحويل النص لرقم
       String cleanValue = rawValue?.replaceAll('%', '').trim() ?? '0';
       double parsedValue = double.tryParse(cleanValue) ?? 0;
-
-      log('${item['title']}: ${parsedValue.toStringAsFixed(2)}%');
 
       items.add(AnalysisResultModel(
         icon: item['icon']! as String,
         title: item['title']! as String,
-        percentage: '${parsedValue.toStringAsFixed(2)}%', // ✅ القيم صح هنا
+        percentage: '${parsedValue.toStringAsFixed(2)}%',
         color: item['color']! as Color,
       ));
     }
+
+    items.sort((a, b) {
+      double aVal = double.tryParse(a.percentage.replaceAll('%', '')) ?? 0;
+      double bVal = double.tryParse(b.percentage.replaceAll('%', '')) ?? 0;
+      return bVal.compareTo(aVal);
+    });
 
     setState(() {});
   }
@@ -82,15 +84,18 @@ class _AnalysisResultListViewState extends State<AnalysisResultListView> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      physics: const NeverScrollableScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: items
-            .map((e) => Padding(
-                  padding: EdgeInsets.only(right: 8.5.w),
-                  child: AnalysisResultListItem(analysisResultModel: e),
-                ))
-            .toList(),
+        children: List.generate(items.length, (index) {
+          final item = items[index];
+          return Padding(
+            padding: EdgeInsets.only(right: 8.5.w),
+            child: AnalysisResultListItem(
+              analysisResultModel: item,
+            ),
+          );
+        }),
       ),
     );
   }
