@@ -31,8 +31,9 @@ BookedAppointmentData _$BookedAppointmentDataFromJson(
       id: json['_id'] as String,
       appointmentPrice: (json['orderPrice'] as num).toInt(),
       status: json['status'] as String,
-      doctor:
-          AppointmentDoctor.fromJson(json['doctor'] as Map<String, dynamic>),
+      doctor: json['doctor'] == null
+          ? null
+          : AppointmentDoctor.fromJson(json['doctor'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$BookedAppointmentDataToJson(
@@ -72,11 +73,11 @@ Map<String, dynamic> _$AppointmentTimeToJson(AppointmentTime instance) =>
 AppointmentDoctor _$AppointmentDoctorFromJson(Map<String, dynamic> json) =>
     AppointmentDoctor(
       id: json['_id'] as String,
-      id2: json['id2'] as String?,
+      doctorId: json['id'] as String,
     );
 
 Map<String, dynamic> _$AppointmentDoctorToJson(AppointmentDoctor instance) =>
     <String, dynamic>{
       '_id': instance.id,
-      'id2': instance.id2,
+      'id': instance.doctorId,
     };

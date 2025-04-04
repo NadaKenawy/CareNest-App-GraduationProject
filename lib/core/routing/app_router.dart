@@ -17,6 +17,7 @@ import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
 import 'package:care_nest/features/doctors/logic/book_doctor_cubit/doctor_booking_cubit.dart';
 import 'package:care_nest/features/doctors/logic/cancel_booked_appointment_cubit/cancel_booked_appointment_cubit.dart';
+import 'package:care_nest/features/doctors/logic/create_review/doctor_review_cubit.dart';
 import 'package:care_nest/features/doctors/logic/get_all_doctors_cubit/get_all_doctors_cubit.dart';
 import 'package:care_nest/features/doctors/logic/get_booked_appointments_cubit/get_booked_appointments_cubit.dart';
 import 'package:care_nest/features/doctors/logic/get_hospitals_cubit/get_all_hospitals_cubit.dart';
@@ -469,8 +470,15 @@ abstract class AppRouter {
         path: kDoctorDetailsScreen,
         builder: (context, state) {
           final doctorData = state.extra as DoctorData;
-          return BlocProvider(
-            create: (context) => getIt<DoctorBookingCubit>(),
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt<DoctorBookingCubit>(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<DoctorReviewCubit>(),
+              ),
+            ],
             child: DoctorDetailsScreenBody(
               doctorData: doctorData,
             ),

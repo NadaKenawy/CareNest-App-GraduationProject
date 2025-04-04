@@ -36,8 +36,11 @@ class DoctorData {
   String? about;
   List<DaySchedule>? day;
   int? ratingsQuantity;
-  List<PromoCode>? promocode;
-  List<Order>? orders; // Added orders field
+  PromoCode? promocode;
+  List<Order>? orders;
+
+  String? gender;
+  double? ratingsAverage;
 
   DoctorData({
     this.location,
@@ -54,6 +57,8 @@ class DoctorData {
     this.ratingsQuantity,
     this.promocode,
     this.orders,
+    this.gender,
+    this.ratingsAverage,
   });
 
   factory DoctorData.fromJson(Map<String, dynamic> json) =>
@@ -104,10 +109,12 @@ class User {
 class DaySchedule {
   String? type;
   List<Slot>? slots;
+  String? id;
 
   DaySchedule({
     this.type,
     this.slots,
+    this.id,
   });
 
   factory DaySchedule.fromJson(Map<String, dynamic> json) =>
@@ -158,11 +165,13 @@ class Order {
   String? id;
   String? doctor;
   OrderDay? day;
+  String? status;  
 
   Order({
     this.id,
     this.doctor,
     this.day,
+    this.status,  
   });
 
   factory Order.fromJson(Map<String, dynamic> json) =>

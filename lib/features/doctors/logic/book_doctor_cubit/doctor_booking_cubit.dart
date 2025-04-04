@@ -13,11 +13,11 @@ class DoctorBookingCubit extends Cubit<DoctorBookingState> {
   final DoctorBookingRepo _doctorBookingRepo;
 
   Future<void> bookDoctorAppointment({
-    required List<PromoCode> promoCodes,
     required String doctorId,
     required String day,
     required String startTime,
     required String date,
+    String? promoCode,
   }) async {
     emit(const DoctorBookingState.bookingLoading());
 
@@ -26,7 +26,7 @@ class DoctorBookingCubit extends Cubit<DoctorBookingState> {
 
     final response = await _doctorBookingRepo.bookDoctorAppointment(
       BookDoctorRequestBody(
-        promocodes: promoCodes.isNotEmpty ? promoCodes : null,
+        promocode: promoCode,
         doctor: doctorId,
         day: day,
         startTime: startTime,

@@ -29,14 +29,14 @@ class BookedAppointmentData {
   @JsonKey(name: 'orderPrice')
   final int appointmentPrice;
   final String status;
-  final AppointmentDoctor doctor;
+  final AppointmentDoctor? doctor; // يصبح اختياري لأن بعض الريسبونس تكون null
 
   BookedAppointmentData({
     required this.day,
     required this.id,
     required this.appointmentPrice,
     required this.status,
-    required this.doctor,
+    this.doctor,
   });
 
   factory BookedAppointmentData.fromJson(Map<String, dynamic> json) =>
@@ -81,11 +81,12 @@ class AppointmentTime {
 class AppointmentDoctor {
   @JsonKey(name: '_id')
   final String id;
-  final String? id2;
+  @JsonKey(name: 'id')
+  final String doctorId; // يتم التقاط الحقل "id" من الريسبونس هنا
 
   AppointmentDoctor({
     required this.id,
-    this.id2,
+    required this.doctorId,
   });
 
   factory AppointmentDoctor.fromJson(Map<String, dynamic> json) =>

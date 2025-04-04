@@ -12,6 +12,8 @@ import 'package:care_nest/features/doctors/data/models/book_doctor/book_doctor_r
 import 'package:care_nest/features/doctors/data/models/book_doctor/book_doctor_response.dart';
 import 'package:care_nest/features/doctors/data/models/booked_appointments/get_booked_appointments_response.dart';
 import 'package:care_nest/features/doctors/data/models/cancel_booked_appointment/cancel_booked_appointment_response.dart';
+import 'package:care_nest/features/doctors/data/models/create_review/review_request_body.dart';
+import 'package:care_nest/features/doctors/data/models/create_review/review_response.dart';
 import 'package:care_nest/features/doctors/data/models/get_doctors/get_doctors_response.dart';
 import 'package:care_nest/features/doctors/data/models/get_hospitals/get_hospitals_response.dart';
 import 'package:care_nest/features/entertainment/fun_videos/data/model/get_all_channels_response.dart';
@@ -262,5 +264,11 @@ abstract class ApiService {
   Future<CancelBookedAppointmentResponse> cancelBookedAppointment(
     @Header('Authorization') String token,
     @Path('id') String id,
+  );
+
+  @POST(ApiConstants.createReview)
+  Future<ReviewResponse> submitReview(
+    @Body() ReviewRequestBody reviewRequestBody,
+    @Header('Authorization') String token,
   );
 }

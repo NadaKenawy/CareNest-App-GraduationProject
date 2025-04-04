@@ -44,10 +44,13 @@ class AppointmentCard extends StatelessWidget {
             children: [
               Flexible(
                 flex: 2,
-                child: Image.asset(
-                  doctorImage,
-                  height: 120.h,
-                  fit: BoxFit.cover,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.0),
+                  child: Image.network(
+                    doctorData.image ?? 'assets/images/doctors_test_img.png',
+                    height: 120.h,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               SizedBox(width: 16.w),

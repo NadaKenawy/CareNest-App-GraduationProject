@@ -25,9 +25,13 @@ class DoctorsListViewItem extends StatelessWidget {
         children: [
           Flexible(
             flex: 2,
-            child: Image.asset(
-              doctorData.image ?? 'assets/images/doctors_test_img2.png',
-              fit: BoxFit.cover,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16.0),
+              child: Image.network(
+                doctorData.image ?? 'assets/images/doctors_test_img.png',
+                height: 120.h,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           SizedBox(width: 16.w),
@@ -81,7 +85,7 @@ class DoctorsListViewItem extends StatelessWidget {
                     ),
                     SizedBox(width: 4.w),
                     Text(
-                      '4.8',
+                      '${doctorData.ratingsAverage}',
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.bold,

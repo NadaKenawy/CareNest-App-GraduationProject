@@ -48,6 +48,7 @@ class ApiConstants {
   static const String bookDoctor = "order";
   static const String bookedAppointments = "order/orders";
   static const String cancelbookedAppointment = "order/canceled/{id}";
+  static const String createReview = "doctor/{doctorId}/reviews";
 }
 
 class ApiErrors {

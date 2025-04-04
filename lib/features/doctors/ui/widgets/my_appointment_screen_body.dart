@@ -76,7 +76,7 @@ class _MyAppointmentScreenBodyState extends State<MyAppointmentScreenBody> {
                               SizedBox(height: 16.h),
                           itemBuilder: (context, index) {
                             final appointment = visibleAppointments[index];
-                            final String doctorId = appointment.doctor.id;
+                            final String doctorId = appointment.doctor!.id;
                             final DoctorData doctor = doctorsList!.firstWhere(
                               (doc) => doc.id == doctorId,
                               orElse: () => DoctorData(

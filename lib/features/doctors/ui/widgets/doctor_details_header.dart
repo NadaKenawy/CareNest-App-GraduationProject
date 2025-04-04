@@ -9,98 +9,103 @@ class DoctorDetailsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 12.h),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: Colors.transparent),
-      ),
-      child: Row(
-        children: [
-          Flexible(
-            flex: 2,
-            child: Image.asset(
-              doctorData.image ?? 'assets/images/doctors_test_img.png',
-              width: 90.w,
-              height: 120.h,
-              fit: BoxFit.cover,
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 12.h),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(16.r),
+          border: Border.all(color: Colors.transparent),
+        ),
+        child: Row(
+          children: [
+            Flexible(
+              flex: 2,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16.0),
+                child: Image.network(
+                  doctorData.image ?? 'assets/images/doctors_test_img.png',
+                  height: 120.h,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-          ),
-          SizedBox(width: 16.w),
-          Expanded(
-            flex: 4,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Dr. ${doctorData.user!.firstName!} ${doctorData.user!.lastName!}',
-                  style: TextStyle(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,
+            SizedBox(width: 16.w),
+            Expanded(
+              // Wrapping this section to prevent overflow
+              flex: 4,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Dr. ${doctorData.user!.firstName!} ${doctorData.user!.lastName!}',
+                    style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow:
+                        TextOverflow.ellipsis, // This will handle long names
                   ),
-                ),
-                Text(
-                  doctorData.specialty!,
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
+                  Text(
+                    doctorData.specialty!,
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow
+                        .ellipsis, // This will handle long specialty names
+                    maxLines: 1,
                   ),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
-                SizedBox(height: 8.h),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.star,
-                      size: 20.sp,
-                      color: Colors.amber,
-                    ),
-                    SizedBox(width: 4.w),
-                    Text(
-                      '4.8',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
+                  SizedBox(height: 8.h),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.star,
+                        size: 20.sp,
+                        color: Colors.amber,
                       ),
-                    ),
-                    Text(
-                      ' (${doctorData.ratingsQuantity.toString()} Reviews)',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
+                      SizedBox(width: 4.w),
+                      Text(
+                        doctorData.ratingsAverage.toString(),
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 11.h),
-                Row(
-                  children: [
-                    Text(
-                      'Payment',
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold,
+                      Text(
+                        ' (${doctorData.ratingsQuantity.toString()} Reviews)',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 8.w),
-                    Text(
-                      doctorData.bookingPrice.toString(),
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green,
+                    ],
+                  ),
+                  SizedBox(height: 11.h),
+                  Row(
+                    children: [
+                      Text(
+                        'Payment',
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
-                )
-              ],
+                      SizedBox(width: 8.w),
+                      Text(
+                        doctorData.bookingPrice.toString(),
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
-          )
-        ],
-      ),
-    );
+          ],
+        ));
   }
 }

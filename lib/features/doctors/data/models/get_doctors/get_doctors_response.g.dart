@@ -41,12 +41,14 @@ DoctorData _$DoctorDataFromJson(Map<String, dynamic> json) => DoctorData(
           ?.map((e) => DaySchedule.fromJson(e as Map<String, dynamic>))
           .toList(),
       ratingsQuantity: (json['ratingsQuantity'] as num?)?.toInt(),
-      promocode: (json['promocode'] as List<dynamic>?)
-          ?.map((e) => PromoCode.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      promocode: json['promocode'] == null
+          ? null
+          : PromoCode.fromJson(json['promocode'] as Map<String, dynamic>),
       orders: (json['orders'] as List<dynamic>?)
           ?.map((e) => Order.fromJson(e as Map<String, dynamic>))
           .toList(),
+      gender: json['gender'] as String?,
+      ratingsAverage: (json['ratingsAverage'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$DoctorDataToJson(DoctorData instance) =>
@@ -65,6 +67,8 @@ Map<String, dynamic> _$DoctorDataToJson(DoctorData instance) =>
       'ratingsQuantity': instance.ratingsQuantity,
       'promocode': instance.promocode,
       'orders': instance.orders,
+      'gender': instance.gender,
+      'ratingsAverage': instance.ratingsAverage,
     };
 
 LocationDetails _$LocationDetailsFromJson(Map<String, dynamic> json) =>
@@ -102,12 +106,14 @@ DaySchedule _$DayScheduleFromJson(Map<String, dynamic> json) => DaySchedule(
       slots: (json['slots'] as List<dynamic>?)
           ?.map((e) => Slot.fromJson(e as Map<String, dynamic>))
           .toList(),
+      id: json['id'] as String?,
     );
 
 Map<String, dynamic> _$DayScheduleToJson(DaySchedule instance) =>
     <String, dynamic>{
       'type': instance.type,
       'slots': instance.slots,
+      'id': instance.id,
     };
 
 Slot _$SlotFromJson(Map<String, dynamic> json) => Slot(
@@ -142,12 +148,14 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       day: json['day'] == null
           ? null
           : OrderDay.fromJson(json['day'] as Map<String, dynamic>),
+      status: json['status'] as String?,
     );
 
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       '_id': instance.id,
       'doctor': instance.doctor,
       'day': instance.day,
+      'status': instance.status,
     };
 
 OrderDay _$OrderDayFromJson(Map<String, dynamic> json) => OrderDay(

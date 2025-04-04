@@ -19,7 +19,7 @@ class WorkingHoursListView extends StatelessWidget {
   final String? selectedHour;
   final Function(String) onHourSelected;
   final List<Order>? orders;
-  final String bookingDate; 
+  final String bookingDate;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,9 @@ class WorkingHoursListView extends StatelessWidget {
           bool isBooked = orders?.any((order) {
                 String orderDate =
                     order.day?.date?.toIso8601String().split("T").first ?? "";
-                return order.day?.type == selectedDay.type &&
+                return order.status ==
+                        "Booking" && 
+                    order.day?.type == selectedDay.type &&
                     order.day?.time?.startTime == hour &&
                     orderDate == bookingDate;
               }) ??

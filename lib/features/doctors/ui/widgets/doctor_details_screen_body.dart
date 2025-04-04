@@ -3,9 +3,8 @@ import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/features/doctors/data/models/get_doctors/get_doctors_response.dart';
-import 'package:care_nest/features/doctors/data/models/book_doctor/book_doctor_request_body.dart'
-    as book_request;
 import 'package:care_nest/features/doctors/logic/book_doctor_cubit/doctor_booking_cubit.dart';
+import 'package:care_nest/features/doctors/logic/create_review/doctor_review_cubit.dart';
 import 'package:care_nest/features/doctors/ui/widgets/doctor_details_about.dart';
 import 'package:care_nest/features/doctors/ui/widgets/doctor_details_contact.dart';
 import 'package:care_nest/features/doctors/ui/widgets/doctor_details_header.dart';
@@ -19,6 +18,7 @@ import 'package:go_router/go_router.dart';
 class DoctorDetailsScreenBody extends StatefulWidget {
   const DoctorDetailsScreenBody({super.key, required this.doctorData});
   final DoctorData doctorData;
+
   @override
   State<DoctorDetailsScreenBody> createState() =>
       _DoctorDetailsScreenBodyState();
@@ -34,7 +34,7 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
   @override
   void initState() {
     super.initState();
-    selectedDay = widget.doctorData.day!.isNotEmpty
+    selectedDay = (widget.doctorData.day ?? []).isNotEmpty
         ? widget.doctorData.day!.first
         : DaySchedule();
   }
@@ -52,9 +52,30 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
     });
   }
 
+  String calculateDateForDay(String dayName) {
+    Map<String, int> days = {
+      'Monday': DateTime.monday,
+      'Tuesday': DateTime.tuesday,
+      'Wednesday': DateTime.wednesday,
+      'Thursday': DateTime.thursday,
+      'Friday': DateTime.friday,
+      'Saturday': DateTime.saturday,
+      'Sunday': DateTime.sunday,
+    };
+
+    final now = DateTime.now();
+    int todayWeekday = now.weekday;
+    int targetWeekday = days[dayName] ?? todayWeekday;
+    int daysUntilTarget = (targetWeekday - todayWeekday + 7) % 7;
+    final targetDate = now.add(Duration(days: daysUntilTarget));
+    return targetDate.toIso8601String().split('T').first;
+  }
+
   Future<void> showRatingDialog() async {
+    final parentContext = context;
+
     await AwesomeDialog(
-      context: context,
+      context: parentContext,
       dialogType: DialogType.noHeader,
       animType: AnimType.bottomSlide,
       body: StatefulBuilder(
@@ -66,15 +87,24 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
               children: [
                 Text('Rate the Doctor!', style: TextStyles.font20BlackSemiBold),
                 SizedBox(height: 8.h),
-                Text('Rate your doctor to help us improve your experience',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 14.sp)),
+                Text(
+                  'Rate your doctor to help us improve your experience',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 14.sp),
+                ),
                 SizedBox(height: 16.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(5, (index) {
                     return IconButton(
-                      onPressed: () => setStateDialog(() => rating = index + 1),
+                      onPressed: () {
+                        setStateDialog(() => rating = index + 1);
+                        parentContext.read<DoctorReviewCubit>().submitReview(
+                              doctorId: widget.doctorData.id ?? "",
+                              ratings: rating,
+                            );
+                        Navigator.pop(parentContext);
+                      },
                       icon: Icon(
                         rating >= index + 1 ? Icons.star : Icons.star_border,
                         color: Colors.amber,
@@ -85,7 +115,7 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
                 ),
                 SizedBox(height: 16.h),
                 GestureDetector(
-                  onTap: () => Navigator.pop(context),
+                  onTap: () => Navigator.pop(parentContext),
                   child: Text('No Thanks!',
                       style: TextStyle(fontSize: 14.sp, color: Colors.black)),
                 ),
@@ -99,6 +129,7 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
   }
 
   Future<void> bookAppointment() async {
+    //await showRatingDialog();
     if (selectedHour == null) {
       AwesomeDialog(
         context: context,
@@ -109,22 +140,20 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
       ).show();
       return;
     }
+
     String enteredPromo = promoCodeController.text.trim();
     bool promoValid = true;
+
     if (isPromoApplied) {
-      if (enteredPromo.isEmpty ||
-          widget.doctorData.promocode == null ||
-          widget.doctorData.promocode!.isEmpty) {
+      if (enteredPromo.isEmpty || widget.doctorData.promocode == null) {
         promoValid = false;
       } else {
-        final foundPromos = widget.doctorData.promocode!
-            .where((promo) => promo.code == enteredPromo)
-            .toList();
-        if (foundPromos.isEmpty) {
+        if (widget.doctorData.promocode!.code != enteredPromo) {
           promoValid = false;
-        } else {}
+        }
       }
     }
+
     if (!promoValid) {
       AwesomeDialog(
         context: context,
@@ -135,22 +164,23 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
       ).show();
       return;
     }
-    String today = DateTime.now().toIso8601String().split("T").first;
-    if (isPromoApplied) {}
+
+    String selectedDate = calculateDateForDay(selectedDay.type ?? "");
+
     await context.read<DoctorBookingCubit>().bookDoctorAppointment(
           doctorId: widget.doctorData.id ?? "",
           day: selectedDay.type ?? "",
           startTime: selectedHour!,
-          date: today,
-          promoCodes: isPromoApplied
-              ? [book_request.PromoCode(code: enteredPromo)]
-              : [],
+          date: selectedDate,
+          promoCode: isPromoApplied ? enteredPromo : null,
         );
+
     setState(() {
       selectedHour = null;
       promoCodeController.clear();
       isPromoApplied = false;
     });
+
     AwesomeDialog(
       context: context,
       dialogType: DialogType.success,
@@ -199,14 +229,12 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
                   bookingDate: today,
                 ),
                 SizedBox(height: 24.h),
-                (isPromoApplied &&
-                        widget.doctorData.promocode != null &&
-                        widget.doctorData.promocode!.isNotEmpty)
+                (isPromoApplied && widget.doctorData.promocode != null)
                     ? Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: 12.w, vertical: 8.h),
                         decoration: BoxDecoration(
-                          color: Colors.green.withValues(alpha: 0.15),
+                          color: Colors.green.withAlpha(40),
                           borderRadius: BorderRadius.circular(16.r),
                           border: Border.all(color: Colors.green),
                         ),
@@ -218,13 +246,13 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(widget.doctorData.promocode!.first.code,
+                                Text(widget.doctorData.promocode!.code,
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.bold)),
                                 Text(
-                                    "${widget.doctorData.promocode!.first.value} Discount\nFinal Price: ${widget.doctorData.bookingPrice != null ? (widget.doctorData.bookingPrice! - widget.doctorData.promocode!.first.value!.toInt()) : 'N/A'}",
+                                    "${widget.doctorData.promocode!.value?.toDouble()} Discount\nFinal Price: ${widget.doctorData.bookingPrice != null ? (widget.doctorData.bookingPrice! - widget.doctorData.promocode!.value!.toInt()) : 'N/A'}",
                                     style: TextStyle(
                                         color: Colors.grey, fontSize: 12.sp)),
                               ],
@@ -277,11 +305,9 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
                               if (promoCodeController.text.trim().isNotEmpty) {
                                 String enteredPromo =
                                     promoCodeController.text.trim();
-                                final foundPromos = widget.doctorData.promocode!
-                                    .where(
-                                        (promo) => promo.code == enteredPromo)
-                                    .toList();
-                                if (foundPromos.isEmpty) {
+                                if (widget.doctorData.promocode == null ||
+                                    widget.doctorData.promocode!.code !=
+                                        enteredPromo) {
                                   AwesomeDialog(
                                     context: context,
                                     dialogType: DialogType.error,
@@ -315,7 +341,7 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
                   buttonColor: ColorsManager.secondryBlueColor,
                   onPressed: bookAppointment,
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 8.h),
               ],
             ),
           ),

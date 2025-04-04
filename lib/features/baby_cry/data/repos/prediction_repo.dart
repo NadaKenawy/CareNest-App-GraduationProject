@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -45,9 +46,8 @@ class PredictionRepo {
           },
         ),
       );
-
-      print("Status Code: ${response.statusCode}");
-      print("Response Data: ${response.data}");
+      log("Status Code: ${response.statusCode}");
+      log("Response Data: ${response.data}");
 
       PredictionResponse predictionResponse =
           PredictionResponse.fromJson(response.data);
