@@ -35,7 +35,9 @@ class HeaderSection extends StatelessWidget {
             ),
             SizedBox(width: 8.w),
             Text(
-              'Watch ${selectedBaby[0].toUpperCase()}${selectedBaby.substring(1)}\'s\nAmazing Growth!',
+              selectedBaby.isNotEmpty
+                  ? 'Watch ${selectedBaby[0].toUpperCase()}${selectedBaby.substring(1)}\'s\nAmazing Growth!'
+                  : 'Watch Your Baby\'s\nAmazing Growth!',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 24.sp,

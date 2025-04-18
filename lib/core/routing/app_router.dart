@@ -140,8 +140,7 @@ abstract class AppRouter {
       GoRoute(
           path: kHomeScreen,
           builder: (context, state) {
-            final userName = state.extra as String? ?? 'User';
-            return HomeScreen(userName: userName);
+            return const HomeScreen();
           }),
       GoRoute(
         path: kForgetPassScreen,
@@ -198,20 +197,7 @@ abstract class AppRouter {
       GoRoute(
         path: kMyBabiesScreen,
         builder: (context, state) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => getIt<GetAllBabiesCubit>()..getAllBabies(),
-              ),
-              BlocProvider(
-                create: (context) => getIt<DeleteBabyCubit>(),
-              ),
-              BlocProvider(
-                create: (context) => getIt<UpdateBabyCubit>(),
-              ),
-            ],
-            child: const MyBabiesScreen(),
-          );
+          return const MyBabiesScreen();
         },
       ),
       GoRoute(

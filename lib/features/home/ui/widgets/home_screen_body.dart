@@ -11,8 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreenBody extends StatelessWidget {
-  const HomeScreenBody({super.key, required this.userName});
-  final String userName;
+  const HomeScreenBody({super.key,});
+ 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,7 +23,7 @@ class HomeScreenBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HomeTittle(
-                userName: userName,
+                userName: 'userName',
               ),
               SizedBox(height: 32.h),
               const BabyCryContainer(),

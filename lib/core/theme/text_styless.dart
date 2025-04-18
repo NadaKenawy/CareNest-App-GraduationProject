@@ -8,83 +8,97 @@ class TextStyles {
     fontSize: 16.sp,
     fontWeight: FontWeightHelper.regular,
     color: ColorsManager.primaryBlueColor,
+    fontFamily: 'Fredoka',
   );
 
   static TextStyle font14PrimaryBlueRegular = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.regular,
     color: ColorsManager.primaryBlueColor,
+    fontFamily: 'Fredoka',
   );
 
   static TextStyle font24PrimaryBlueSemiBold = TextStyle(
     fontSize: 24.sp,
     fontWeight: FontWeightHelper.semiBold,
     color: ColorsManager.primaryBlueColor,
+    fontFamily: 'Fredoka',
   );
 
   static TextStyle font24PrimaryBlueBold = TextStyle(
     fontSize: 24.sp,
     fontWeight: FontWeightHelper.bold,
     color: ColorsManager.primaryBlueColor,
+    fontFamily: 'Fredoka',
   );
 
   static TextStyle font36PrimaryBlueBold = TextStyle(
     fontSize: 36.sp,
     fontWeight: FontWeightHelper.bold,
     color: ColorsManager.primaryBlueColor,
+    fontFamily: 'Fredoka',
   );
 
   static TextStyle font16SecondaryBlueBold = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeightHelper.bold,
     color: ColorsManager.secondryBlueColor,
+    fontFamily: 'Fredoka',
   );
 
   static TextStyle font20SecondaryBlueMedium = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeightHelper.medium,
     color: ColorsManager.secondryBlueColor,
+    fontFamily: 'Fredoka',
   );
 
   static TextStyle font16WhiteBold = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeightHelper.bold,
     color: ColorsManager.white,
+    fontFamily: 'Fredoka',
   );
 
   static TextStyle font16PrimaryPinkSemiBold = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeightHelper.semiBold,
     color: ColorsManager.primaryPinkColor,
+    fontFamily: 'Fredoka',
   );
 
   static TextStyle font24PrimaryPinkBold = TextStyle(
     fontSize: 24.sp,
     fontWeight: FontWeightHelper.bold,
     color: ColorsManager.primaryPinkColor,
+    fontFamily: 'Fredoka',
   );
 
   static TextStyle font20BlackSemiBold = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeightHelper.semiBold,
     color: Colors.black,
+    fontFamily: 'Fredoka',
   );
 
   static TextStyle font16PrimaryBlackMedium = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeightHelper.medium,
     color: Colors.black,
+    fontFamily: 'Fredoka',
   );
 
   static TextStyle font24WhiteMedium = TextStyle(
     fontSize: 24.sp,
     fontWeight: FontWeightHelper.medium,
     color: ColorsManager.white,
+    fontFamily: 'Fredoka',
   );
 
   static TextStyle font12BlackMedium = TextStyle(
     fontSize: 12.sp,
     fontWeight: FontWeightHelper.medium,
     color: Colors.black,
+    fontFamily: 'Fredoka',
   );
 }
