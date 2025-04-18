@@ -6,8 +6,6 @@ import 'package:care_nest/features/login/logic/login_cubit/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../core/networking/api_error_model.dart';
 
 class LoginBlocListener extends StatelessWidget {
@@ -35,11 +33,10 @@ class LoginBlocListener extends StatelessWidget {
             if (Navigator.canPop(context)) {
               Navigator.of(context, rootNavigator: true).pop();
             }
-            final userName = loginResponse.userData?.firstName ?? 'User';
-            SharedPreferences.getInstance().then((prefs) {
-              prefs.setString('userName', userName);
-            });
-            GoRouter.of(context).go(AppRouter.kHomeScreen, extra: userName);
+
+            GoRouter.of(context).go(
+              AppRouter.kHomeScreen,
+            );
           },
           error: (apiErrorModel) {
             if (Navigator.canPop(context)) {

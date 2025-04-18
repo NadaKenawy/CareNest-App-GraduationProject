@@ -16,4 +16,7 @@ class AppImages {
   static const String medicineIcon = 'assets/images/babymedicine.png';
   static const String vaccinesIcon = 'assets/images/babyVaccinations.png';
   static const String notificationsIcon = 'assets/images/mail.png';
+  static const String profileClouds = 'assets/images/profile_clouds.png';
+  static const String changeProfileIcon =
+      'assets/images/Change Profile Icon.png';
 }
