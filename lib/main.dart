@@ -16,5 +16,5 @@ void main() async {
   await ScreenUtil.ensureScreenSize();
   await getIt<UpdateFcmCubit>().initializeAndSendToken();
 
-  runApp(DevicePreview(enabled: false, builder: (context) => const CareNest()));
+  runApp(DevicePreview(enabled: true, builder: (context) => const CareNest()));
 }

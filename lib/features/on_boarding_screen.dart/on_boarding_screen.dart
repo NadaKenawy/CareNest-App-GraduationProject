@@ -12,6 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../../core/helpers/constants.dart';
+import '../../core/helpers/shared_pref_helper.dart';
 import '../../core/theme/text_styless.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -35,11 +37,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Future<void> _checkFirstTimeOpen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? hasOpenedBefore = prefs.getBool('hasOpenedBefore');
+
     if (hasOpenedBefore != null && hasOpenedBefore) {
-      String? userName = prefs.getString('userName');
-      if (userName != null) {
+      String? token =
+          await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
+
+      if (token != null && token.isNotEmpty) {
         GoRouter.of(context)
-            .pushReplacement(AppRouter.kHomeScreen, extra: userName);
+            .pushReplacement(AppRouter.kHomeScreen, extra: token);
       } else {
         GoRouter.of(context).pushReplacement(AppRouter.kLoginScreen);
       }
