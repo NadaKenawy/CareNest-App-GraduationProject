@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/utils/app_images.dart';
@@ -8,13 +10,23 @@ import 'package:care_nest/features/home/ui/widgets/home_tittle.dart';
 import 'package:care_nest/features/home/ui/widgets/mama_tips_card.dart';
 import 'package:care_nest/features/home/ui/widgets/reminders_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/logic/user_cubit/user_cubit.dart';
+
 class HomeScreenBody extends StatelessWidget {
-  const HomeScreenBody({super.key,});
- 
+  const HomeScreenBody({
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<UserCubit>().state.user;
+    log('Profile screen got user: ${user?.firstname}');
+    if (user == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -23,7 +35,7 @@ class HomeScreenBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HomeTittle(
-                userName: 'userName',
+                userName: user.firstname,
               ),
               SizedBox(height: 32.h),
               const BabyCryContainer(),

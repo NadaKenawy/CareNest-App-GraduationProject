@@ -5,8 +5,8 @@ part 'login_response.g.dart';
 @JsonSerializable()
 class LoginResponse {
   @JsonKey(name: 'data')
-  UserData? userData;
-  String? token;
+  final UserData? userData;
+  final String? token;
 
   LoginResponse({
     this.userData,
@@ -22,30 +22,24 @@ class LoginResponse {
 @JsonSerializable()
 class UserData {
   @JsonKey(name: '_id')
-  String? id;
+  final String? id;
   @JsonKey(name: 'Email')
-  String? email;
-  String? firstName;
-  String? lastName;
-  String? role;
-  bool? active;
-  @JsonKey(name: 'dateOfBirthOfMam')
-  DateTime? dateOfBirth;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  int? ageMam;
+  final String? email;
+  final String? firstName;
+  final String? lastName;
+  @JsonKey(name: 'image')
+  final String? profileImg;
+
+  @JsonKey(name: 'BirthDay')
+  final DateTime? dateOfBirth;
 
   UserData({
     this.id,
     this.email,
     this.firstName,
     this.lastName,
-    this.role,
-    this.active,
     this.dateOfBirth,
-    this.createdAt,
-    this.updatedAt,
-    this.ageMam,
+    this.profileImg,
   });
 
   factory UserData.fromJson(Map<String, dynamic> json) =>

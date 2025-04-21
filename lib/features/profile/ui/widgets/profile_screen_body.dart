@@ -3,7 +3,10 @@ import 'package:care_nest/features/profile/ui/widgets/profile_data_fields.dart';
 import 'package:care_nest/features/profile/ui/widgets/profile_image.dart';
 import 'package:care_nest/features/profile/ui/widgets/profile_name_and_bio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/logic/user_cubit/user_cubit.dart';
 
 
 class ProfileScreenBody extends StatelessWidget {
@@ -11,6 +14,11 @@ class ProfileScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+     final user = context.watch<UserCubit>().state.user;
+    if (user == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -22,7 +30,8 @@ class ProfileScreenBody extends StatelessWidget {
             SizedBox(height: 12.h),
             const ProfileNameAndBio(),
             SizedBox(height: 32.h),
-            const ProfileDataFields(),
+             ProfileDataFields( 
+              user: user,),
           ],
         ),
       ),
