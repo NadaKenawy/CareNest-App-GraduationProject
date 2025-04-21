@@ -10,9 +10,14 @@ import 'package:care_nest/features/login/data/repos/login_repo.dart';
 import 'package:care_nest/features/login/logic/login_cubit/login_state.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/logic/user_cubit/user_cubit.dart';
+import '../../../../core/models/user_model.dart';
+
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit(this._loginRepo) : super(const LoginState.initial());
+  LoginCubit(this._loginRepo, this.userCubit)
+      : super(const LoginState.initial());
   final LoginRepo _loginRepo;
+  final UserCubit userCubit;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -29,6 +34,10 @@ class LoginCubit extends Cubit<LoginState> {
     response.when(
       success: (loginResponse) async {
         await saveUserToken(loginResponse.token ?? '');
+        final userModel = UserModel.fromJson(loginResponse.userData!.toJson());
+        log("👤 Login data: ${loginResponse.userData!.toJson()}");
+        userCubit.setUser(userModel);
+        await saveUserDataLocally(userModel);
         emit(LoginState.success(loginResponse));
       },
       failure: (apiErrorModel) {

@@ -1,13 +1,15 @@
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
+import '../../../../core/models/user_model.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 
 class ProfileDataFields extends StatelessWidget {
-  const ProfileDataFields({super.key});
-
+  const ProfileDataFields({super.key, required this.user});
+  final UserModel user;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,7 +21,7 @@ class ProfileDataFields extends StatelessWidget {
               Expanded(
                 child: AppTextFormField(
                   width: 170.w,
-                  hintText: 'First Name',
+                  hintText: user.firstname,
                 ),
               ),
               SizedBox(
@@ -28,7 +30,7 @@ class ProfileDataFields extends StatelessWidget {
               Expanded(
                 child: AppTextFormField(
                   width: 170.w,
-                  hintText: 'Last Name',
+                  hintText: user.lastname,
                 ),
               ),
             ],
@@ -36,20 +38,16 @@ class ProfileDataFields extends StatelessWidget {
           SizedBox(
             height: 16.h,
           ),
-          const AppTextFormField(
-            hintText: 'Email',
+          AppTextFormField(
+            hintText: user.email,
           ),
           SizedBox(
             height: 16.h,
           ),
-          const AppTextFormField(
-            hintText: '22/7/2003',
-          ),
-          SizedBox(
-            height: 16.h,
-          ),
-          const AppTextFormField(
-            hintText: '22/7/2003',
+          AppTextFormField(
+            hintText: user.dateOfBirth != null
+                ? DateFormat('d/M/yyyy').format(user.dateOfBirth!)
+                : 'Date not available',
           ),
           SizedBox(
             height: 32.h,

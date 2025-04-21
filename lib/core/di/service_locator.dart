@@ -81,6 +81,7 @@ import '../../features/entertainment/music_and_sweet_noise/data/repos/get_white_
 import '../../features/entertainment/music_and_sweet_noise/logic/get_white_noise/get_white_noise_cubit.dart';
 import '../../features/reminders/medications/data/repos/get_all_medication_schedule_repo.dart';
 import '../../features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
+import '../logic/user_cubit/user_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -91,7 +92,8 @@ Future<void> setupGetIt() async {
 
   // login
   getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt()));
-  getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt()));
+   getIt.registerLazySingleton<UserCubit>(() => UserCubit());
+  getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt(), getIt<UserCubit>()));
 
   // signup
   getIt.registerLazySingleton<SignupRepo>(() => SignupRepo(getIt()));
