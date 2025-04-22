@@ -26,6 +26,7 @@ class AppTextFormField extends StatelessWidget {
     this.onChanged,
     this.onTap,
     this.readOnly = false,
+    this.enabled,
   });
 
   final EdgeInsetsGeometry? contentPadding;
@@ -49,6 +50,7 @@ class AppTextFormField extends StatelessWidget {
   final Function(String)? onChanged;
   final VoidCallback? onTap;
   final bool readOnly;
+  final bool? enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +60,7 @@ class AppTextFormField extends StatelessWidget {
     return SizedBox(
       width: width ?? double.infinity,
       child: TextFormField(
+        enabled: enabled,
         controller: controller,
         style: inputTextStyle ?? TextStyle(color: textColor),
         maxLength: maxLength,
@@ -67,6 +70,12 @@ class AppTextFormField extends StatelessWidget {
           contentPadding: contentPadding ??
               EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
           constraints: const BoxConstraints(minHeight: 48),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16.r),
+            borderSide: BorderSide(
+                color: hasError ? Colors.red : ColorsManager.secondryBlueColor,
+                width: 2.w),
+          ),
           focusedBorder: focusedBorder ??
               OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16.r),
@@ -92,7 +101,7 @@ class AppTextFormField extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(16)),
           ),
           hintText: hintText,
-          hintStyle: TextStyle(color: hintColor),
+          hintStyle: hintStyle ?? TextStyle(color: hintColor),
           suffixIcon: suffixIcon,
           prefixIcon: prefixIcon,
           filled: true,

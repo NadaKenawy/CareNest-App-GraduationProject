@@ -28,7 +28,9 @@ class ProfileScreenBody extends StatelessWidget {
             SizedBox(height: 20.h),
             const ProfileImage(),
             SizedBox(height: 12.h),
-            const ProfileNameAndBio(),
+             ProfileNameAndBio(
+              user: user,
+             ),
             SizedBox(height: 32.h),
              ProfileDataFields( 
               user: user,),

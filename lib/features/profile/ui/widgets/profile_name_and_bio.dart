@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/models/user_model.dart';
 import '../../../../core/theme/text_styless.dart';
 
 class ProfileNameAndBio extends StatelessWidget {
-  const ProfileNameAndBio({super.key});
-
+  const ProfileNameAndBio({super.key, required this.user});
+  final UserModel user;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Text(
-          'Mahmoud Aladwy',
+          '${user.firstname} ${user.lastname}',
           style: TextStyles.font24PrimaryBlueBold.copyWith(
             color: Colors.black,
             fontSize: 22.sp,

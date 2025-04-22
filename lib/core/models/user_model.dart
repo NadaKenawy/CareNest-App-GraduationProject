@@ -36,16 +36,17 @@ class UserModel {
   }
 
   UserModel copyWith({
-    String? name,
+    String? firstname,
+    String? lastname,
     String? email,
     DateTime? dateOfBirth,
     String? profileImg,
   }) {
     return UserModel(
-      firstname: name ?? firstname,
-      lastname: lastname,
+      firstname: firstname ?? this.firstname,
+      lastname: lastname ?? this.lastname,
       email: email ?? this.email,
-      dateOfBirth: dateOfBirth,
+      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       profileImg: profileImg ?? this.profileImg,
     );
   }

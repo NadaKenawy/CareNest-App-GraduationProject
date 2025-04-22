@@ -53,6 +53,8 @@ import 'package:retrofit/http.dart';
 import '../../features/add_baby/data/models/add_baby/add_baby_request_body.dart';
 import '../../features/add_baby/data/models/get_all_babies/get_all_babies_response.dart';
 import '../../features/fcm/data/models/update_fcm/update_fcm_token_request_body.dart';
+import '../../features/profile/data/models/update_user_request_body.dart';
+import '../../features/profile/data/models/update_user_response.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.apiBaseUrl)
@@ -270,5 +272,11 @@ abstract class ApiService {
   Future<ReviewResponse> submitReview(
     @Body() ReviewRequestBody reviewRequestBody,
     @Header('Authorization') String token,
+  );
+
+   @PUT(ApiConstants.updateUser)
+  Future<UpdateUserResponse> updateUser(
+    @Header('Authorization') String token,
+    @Body() UpdateUserRequestBody updateUserRequestBody,
   );
 }
