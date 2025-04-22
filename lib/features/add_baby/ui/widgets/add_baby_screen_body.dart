@@ -137,7 +137,7 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
             padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 32.h),
             child: AppTextButton(
               buttonText: 'Save',
-              textStyle: TextStyles.font16WhiteBold,
+              textStyle: TextStyles.font16WhiteMedium,
               gradientColors: gender == 'Male'
                   ? [
                       ColorsManager.secondryBlueColor,

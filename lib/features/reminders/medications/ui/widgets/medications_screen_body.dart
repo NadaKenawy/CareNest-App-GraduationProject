@@ -103,7 +103,7 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
               : selectedBabyName != null && selectedBabyName!.isNotEmpty
                   ? "${selectedBabyName![0].toUpperCase()}${selectedBabyName!.substring(1)}'s Medications"
                   : 'My Medications',
-          style: TextStyles.font20BlackSemiBold,
+          style: TextStyles.font20BlackSemiMedium,
         ),
         actions: [
           Padding(

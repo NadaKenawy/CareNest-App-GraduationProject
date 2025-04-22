@@ -37,7 +37,7 @@ class _BabyTipsScreenBodyState extends State<BabyTipsScreenBody> {
       appBar: AppBar(
         title: Text(
           'Baby Tips',
-          style: TextStyles.font20BlackSemiBold,
+          style: TextStyles.font20BlackSemiMedium,
         ),
       ),
       body: Column(

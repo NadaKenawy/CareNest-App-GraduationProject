@@ -18,7 +18,7 @@ class EntertainmentScreenBody extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Entertainment",
-          style: TextStyles.font20BlackSemiBold,
+          style: TextStyles.font20BlackSemiMedium,
         ),
       ),
       body: LayoutBuilder(

@@ -18,7 +18,7 @@ class RemindersScreen extends StatelessWidget {
         appBar: AppBar(
             title: Text(
           'My Reminders',
-          style: TextStyles.font20BlackSemiBold,
+          style: TextStyles.font20BlackSemiMedium,
         )),
         body: Center(
           child: SingleChildScrollView(
@@ -46,7 +46,7 @@ class RemindersScreen extends StatelessWidget {
                         ),
                         Text(
                           'Medications\nSchedule',
-                          style: TextStyles.font20BlackSemiBold,
+                          style: TextStyles.font20BlackSemiMedium,
                           textAlign: TextAlign.center,
                         )
                       ],
@@ -77,7 +77,7 @@ class RemindersScreen extends StatelessWidget {
                         ),
                         Text(
                           'Vaccinations\nSchedule',
-                          style: TextStyles.font20BlackSemiBold,
+                          style: TextStyles.font20BlackSemiMedium,
                           textAlign: TextAlign.center,
                         )
                       ],

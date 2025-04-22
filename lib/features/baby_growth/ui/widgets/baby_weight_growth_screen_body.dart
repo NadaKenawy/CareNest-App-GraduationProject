@@ -72,7 +72,6 @@ class _BabyWeightGrowthScreenBodyState
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -159,7 +158,8 @@ class _BabyWeightGrowthScreenBodyState
                     AppTextButton(
                       buttonText: 'Height for age',
                       textStyle: TextStyle(
-                          fontSize: 16.sp, fontWeight: FontWeightHelper.bold),
+                          fontSize: 16.sp,
+                          fontWeight: FontWeightHelper.semiBold),
                       buttonWidth: 168.w,
                       buttonColor: Colors.transparent,
                       borderColor: ColorsManager.secondryBlueColor,
@@ -172,7 +172,7 @@ class _BabyWeightGrowthScreenBodyState
                     ),
                     AppTextButton(
                       buttonText: 'Weight per growth',
-                      textStyle: TextStyles.font16WhiteBold,
+                      textStyle: TextStyles.font16WhiteMedium,
                       buttonWidth: 168.w,
                       buttonColor: ColorsManager.secondryBlueColor,
                       onPressed: () {},

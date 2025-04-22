@@ -12,42 +12,39 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 12),
-      child: CurvedNavigationBar(
-        index: currentIndex,
-        animationDuration: const Duration(milliseconds: 400),
-        backgroundColor: Colors.white,
-        color: ColorsManager.primaryPinkColor,
-        items: const <Widget>[
-          FaIcon(
-            Icons.home,
-            size: 28,
-            color: Colors.white,
-          ),
-          FaIcon(
-            Icons.chat,
-            size: 28,
-            color: Colors.white,
-          ),
-          ImageIcon(
-            AssetImage("assets/images/baby (1).png"),
-            size: 28,
-            color: Colors.white,
-          ),
-          FaIcon(
-            Icons.settings,
-            size: 28,
-            color: Colors.white,
-          ),
-          FaIcon(
-            Icons.person,
-            size: 28,
-            color: Colors.white,
-          ),
-        ],
-        onTap: onTap,
-      ),
+    return CurvedNavigationBar(
+      index: currentIndex,
+      animationDuration: const Duration(milliseconds: 400),
+      backgroundColor: Colors.white,
+      color: ColorsManager.primaryPinkColor,
+      items: const <Widget>[
+        FaIcon(
+          Icons.home,
+          size: 28,
+          color: Colors.white,
+        ),
+        FaIcon(
+          Icons.chat,
+          size: 28,
+          color: Colors.white,
+        ),
+        ImageIcon(
+          AssetImage("assets/images/baby (1).png"),
+          size: 28,
+          color: Colors.white,
+        ),
+        FaIcon(
+          Icons.person,
+          size: 28,
+          color: Colors.white,
+        ),
+        FaIcon(
+          Icons.settings,
+          size: 28,
+          color: Colors.white,
+        ),
+      ],
+      onTap: onTap,
     );
   }
 }

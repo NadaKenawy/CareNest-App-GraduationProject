@@ -25,7 +25,7 @@ class UpdateHeightGrowthData extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppTextButton(
       buttonText: 'Update Growth Data',
-      textStyle: TextStyles.font16WhiteBold,
+      textStyle: TextStyles.font16WhiteMedium,
       onPressed: () {
         showModalBottomSheet(
           context: context,
@@ -62,7 +62,7 @@ class UpdateHeightGrowthData extends StatelessWidget {
                             "Update Growth Data",
                             style: TextStyle(
                                 fontSize: 28.sp,
-                                fontWeight: FontWeightHelper.bold),
+                                fontWeight: FontWeightHelper.semiBold),
                           ),
                           SizedBox(height: 24.h),
                           Row(
@@ -101,7 +101,7 @@ class UpdateHeightGrowthData extends StatelessWidget {
                             children: [
                               AppTextButton(
                                 buttonText: 'Save',
-                                textStyle: TextStyles.font16WhiteBold,
+                                textStyle: TextStyles.font16WhiteMedium,
                                 buttonWidth: 168.w,
                                 onPressed: () async {
                                   context
@@ -115,7 +115,7 @@ class UpdateHeightGrowthData extends StatelessWidget {
                                 buttonText: 'Cancel',
                                 textStyle: TextStyle(
                                     fontSize: 16.sp,
-                                    fontWeight: FontWeightHelper.bold),
+                                    fontWeight: FontWeightHelper.semiBold),
                                 buttonWidth: 168.w,
                                 buttonColor: Colors.transparent,
                                 borderColor: Colors.black,

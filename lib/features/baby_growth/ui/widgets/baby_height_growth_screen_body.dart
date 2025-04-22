@@ -159,7 +159,7 @@ class _BabyHeightGrowthScreenBodyState
                   children: [
                     AppTextButton(
                       buttonText: 'Height per age',
-                      textStyle: TextStyles.font16WhiteBold,
+                      textStyle: TextStyles.font16WhiteMedium,
                       buttonWidth: 168.w,
                       buttonColor: ColorsManager.secondryBlueColor,
                       onPressed: () {},
@@ -167,7 +167,8 @@ class _BabyHeightGrowthScreenBodyState
                     AppTextButton(
                       buttonText: 'Weight for growth',
                       textStyle: TextStyle(
-                          fontSize: 16.sp, fontWeight: FontWeightHelper.bold),
+                          fontSize: 16.sp,
+                          fontWeight: FontWeightHelper.semiBold),
                       buttonWidth: 168.w,
                       buttonColor: Colors.transparent,
                       borderColor: ColorsManager.secondryBlueColor,

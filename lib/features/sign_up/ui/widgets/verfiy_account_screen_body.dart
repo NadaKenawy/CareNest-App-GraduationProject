@@ -42,14 +42,14 @@ class VerifyAccountScreenBody extends StatelessWidget {
         children: [
           Text(
             "Verify Your Account",
-            style: TextStyles.font36PrimaryBlueBold,
+            style: TextStyles.font32PrimaryBlueBold,
           ),
           SizedBox(
             height: 12.h,
           ),
           Text(
             "Enter the 6-digit verification code we sent to your email address.",
-            style: TextStyles.font16SecondaryBlueBold,
+            style: TextStyles.font16SecondaryBlueSemiBold,
           ),
           SizedBox(
             height: 36.h,
@@ -75,7 +75,7 @@ class VerifyAccountScreenBody extends StatelessWidget {
           ),
           AppTextButton(
             buttonText: 'Send Code',
-            textStyle: TextStyles.font16WhiteBold,
+            textStyle: TextStyles.font16WhiteMedium,
             onPressed: () {
               validateThenVerify(context);
             },

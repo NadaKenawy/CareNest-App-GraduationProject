@@ -46,6 +46,7 @@ class _FunVideoScreenBodyState extends State<FunVideoScreenBody> {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/background.jpg'),
+            opacity: 0.5,
             fit: BoxFit.cover,
           ),
         ),
@@ -83,7 +84,7 @@ class _FunVideoScreenBodyState extends State<FunVideoScreenBody> {
                             SizedBox(width: 8.w),
                             Text(
                               'Fun Videos',
-                              style: TextStyles.font20BlackSemiBold,
+                              style: TextStyles.font20BlackSemiMedium,
                             ),
                           ],
                         ),

@@ -63,9 +63,12 @@ class VideosList extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 8.h),
-              Text(
-                video.name ?? '',
-                style: TextStyles.font20BlackSemiBold,
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: Text(
+                  video.name ?? '',
+                  style: TextStyles.font20BlackSemiMedium,
+                ),
               ),
             ],
           ),

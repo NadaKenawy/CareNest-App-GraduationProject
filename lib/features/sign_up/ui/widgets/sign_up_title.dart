@@ -13,11 +13,11 @@ class SignUpTitle extends StatelessWidget {
       children: [
         Text(
           "Welcome to Care",
-          style: TextStyles.font24PrimaryBlueBold,
+          style: TextStyles.font24PrimaryBlueSemiBold,
         ),
         Text(
           "Nest",
-          style: TextStyles.font24PrimaryPinkBold,
+          style: TextStyles.font24PrimaryPinkSemiBold,
         ),
       ],
     );

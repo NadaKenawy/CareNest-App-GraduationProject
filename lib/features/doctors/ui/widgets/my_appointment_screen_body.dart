@@ -32,7 +32,7 @@ class _MyAppointmentScreenBodyState extends State<MyAppointmentScreenBody> {
       appBar: AppBar(
         title: Text(
           'My Appointment',
-          style: TextStyles.font20BlackSemiBold,
+          style: TextStyles.font20BlackSemiMedium,
         ),
       ),
       body: BlocBuilder<GetAllDoctorsCubit, GetAllDoctorsState>(

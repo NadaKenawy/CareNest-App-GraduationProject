@@ -33,7 +33,7 @@ class _ForgetPassScreenBodyState extends State<ForgetPassScreenBody> {
         children: [
           Text(
             "Forget Password?",
-            style: TextStyles.font36PrimaryBlueBold,
+            style: TextStyles.font32PrimaryBlueBold,
           ),
           SizedBox(
             height: 12.h,
@@ -42,7 +42,7 @@ class _ForgetPassScreenBodyState extends State<ForgetPassScreenBody> {
             padding: EdgeInsets.only(right: 40.w),
             child: Text(
               "Don't worry!. Please enter the email address linked with your account.",
-              style: TextStyles.font16SecondaryBlueBold,
+              style: TextStyles.font16SecondaryBlueSemiBold,
             ),
           ),
           SizedBox(
@@ -82,7 +82,7 @@ class _ForgetPassScreenBodyState extends State<ForgetPassScreenBody> {
           ),
           AppTextButton(
             buttonText: 'Send Code',
-            textStyle: TextStyles.font16WhiteBold,
+            textStyle: TextStyles.font16WhiteMedium,
             onPressed: () {
               validateThenSendCode(context);
             },

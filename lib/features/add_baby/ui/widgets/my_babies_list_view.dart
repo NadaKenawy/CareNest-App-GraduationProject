@@ -27,7 +27,7 @@ class MyBabiesListView extends StatelessWidget {
         final latestHeight = getLatestValue(babyData.height, isWeight: false);
 
         return Padding(
-          padding: EdgeInsets.only(bottom: 40.h),
+          padding: EdgeInsets.only(bottom: 20.h),
           child: BabyContainer(
             onPressed: () {
               GoRouter.of(context)

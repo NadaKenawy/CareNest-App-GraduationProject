@@ -127,7 +127,7 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
   Widget headerText() {
     return const Text(
       "Ready to listen",
-      style: TextStyle(fontSize: 28, fontWeight: FontWeightHelper.bold),
+      style: TextStyle(fontSize: 28, fontWeight: FontWeightHelper.semiBold),
     );
   }
 
@@ -201,7 +201,7 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
                 child: AppTextButton(
                   onPressed: shareRecording,
                   buttonText: 'Share Recording',
-                  textStyle: TextStyles.font16WhiteBold,
+                  textStyle: TextStyles.font16WhiteMedium,
                 ),
               ),
             ],

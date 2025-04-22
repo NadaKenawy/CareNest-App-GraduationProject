@@ -1,3 +1,4 @@
+import 'package:care_nest/features/profile/ui/widgets/profile_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -9,39 +10,37 @@ class CustomProfileAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: 180.h,
-          width: double.infinity,
-          color: ColorsManager.primaryPinkColor,
-        ),
-        Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          child: Image.asset(
-            AppImages.profileClouds,
-            fit: BoxFit.cover,
+    return SizedBox(
+      width: double.infinity,
+      height: 240.h,
+      child: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 140.h,
+              color: ColorsManager.primaryPinkColor,
+            ),
           ),
-        ),
-        Positioned(
-          top: 60.h,
-          left: 16.w,
-          child: Row(
-            children: [
-              const Icon(Icons.arrow_back, color: Colors.white, size: 30),
-              SizedBox(width: 8.w),
-              Text("Profile",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22.sp,
-                      fontWeight: FontWeight.bold)),
-            ],
+          Positioned(
+            bottom: 80.h,
+            left: 0,
+            right: 0,
+            child: Image.asset(
+              AppImages.profileClouds,
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        
-      ],
+          Positioned(
+            bottom: 8.h,
+            child: const ProfileImage(),
+          ),
+        ],
+      ),
     );
   }
 }

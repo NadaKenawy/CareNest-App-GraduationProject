@@ -17,6 +17,7 @@ class StoryDetailsScreenBody extends StatelessWidget {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/background.jpg'),
+            opacity: 0.5,
             fit: BoxFit.cover,
           ),
         ),
@@ -76,7 +77,7 @@ class StoryDetailsScreenBody extends StatelessWidget {
                         story.title ?? '',
                         style: TextStyle(
                           fontSize: 24.sp,
-                          fontWeight: FontWeightHelper.bold,
+                          fontWeight: FontWeightHelper.semiBold,
                           color: Colors.black87,
                         ),
                       ),

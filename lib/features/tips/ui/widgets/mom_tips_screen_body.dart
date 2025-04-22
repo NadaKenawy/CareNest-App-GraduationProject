@@ -28,7 +28,7 @@ class _MomTipsScreenBodyState extends State<MomTipsScreenBody> {
       appBar: AppBar(
         title: Text(
           'Mom Tips',
-          style: TextStyles.font20BlackSemiBold,
+          style: TextStyles.font20BlackSemiMedium,
         ),
       ),
       body: Column(

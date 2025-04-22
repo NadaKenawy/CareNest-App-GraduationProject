@@ -67,7 +67,7 @@ class LoginScreenBody extends StatelessWidget {
                       onPressed: () {
                         validateThenDoLogin(context);
                       },
-                      textStyle: TextStyles.font16WhiteBold,
+                      textStyle: TextStyles.font16WhiteMedium,
                     ),
                     SizedBox(
                       height: 12.h,

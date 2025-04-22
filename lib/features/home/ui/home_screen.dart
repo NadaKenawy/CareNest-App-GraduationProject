@@ -20,8 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
     const HomeScreenBody(),
     const Text('Chat Screen'),
     const MyBabiesScreen(),
-    const Text('Settings Screen'),
     const ProfileScreen(),
+    const Text('Settings Screen'),
   ];
 
   @override

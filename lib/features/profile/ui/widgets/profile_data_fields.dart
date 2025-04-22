@@ -1,4 +1,6 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
+import 'package:care_nest/features/profile/logic/update_user_cubit/update_user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +11,6 @@ import '../../../../core/models/user_model.dart';
 import '../../../../core/theme/colors_manager.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
-import '../../logic/update_user_cubit/update_user_cubit.dart';
 
 class ProfileDataFields extends StatelessWidget {
   const ProfileDataFields({super.key, required this.user});
@@ -22,7 +23,7 @@ class ProfileDataFields extends StatelessWidget {
     cubit.lastNameController.text = user.lastname;
     cubit.dateOfBirth.text = user.dateOfBirth != null
         ? DateFormat('d/M/yyyy').format(user.dateOfBirth!)
-        : 'Date not available';
+        : '';
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -51,9 +52,7 @@ class ProfileDataFields extends StatelessWidget {
                     hintText: user.firstname,
                   ),
                 ),
-                SizedBox(
-                  width: 16.w,
-                ),
+                SizedBox(width: 16.w),
                 Expanded(
                   child: AppTextFormField(
                     controller: cubit.lastNameController,
@@ -75,19 +74,32 @@ class ProfileDataFields extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: 16.h,
-            ),
+            SizedBox(height: 16.h),
             AppTextFormField(
-                enabled: false,
-                hintText: user.email,
-                hintStyle:
-                    const TextStyle(color: ColorsManager.primaryBlueColor)),
-            SizedBox(
-              height: 16.h,
+              enabled: false,
+              hintText: user.email,
+              hintStyle: const TextStyle(color: ColorsManager.primaryBlueColor),
             ),
+            SizedBox(height: 16.h),
+
+            // حقل تاريخ الميلاد مع DatePicker
             AppTextFormField(
               controller: cubit.dateOfBirth,
+              readOnly: true,
+              onTap: () async {
+                final initial = user.dateOfBirth ?? DateTime.now();
+                final picked = await showDatePicker(
+                  context: context,
+                  initialDate: initial,
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime.now(),
+                  helpText: 'Select date of birth',
+                );
+                if (picked != null) {
+                  cubit.dateOfBirth.text =
+                      DateFormat('d/M/yyyy').format(picked);
+                }
+              },
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Date of Birth is required';
@@ -101,21 +113,15 @@ class ProfileDataFields extends StatelessWidget {
                   ? DateFormat('d/M/yyyy').format(user.dateOfBirth!)
                   : 'Date not available',
             ),
-            SizedBox(
-              height: 32.h,
-            ),
+
+            SizedBox(height: 32.h),
             AppTextButton(
-              buttonText: "Save Changes",
-              onPressed: () {
-                validateThenUpdate(context, user);
-              },
-              textStyle: TextStyles.font16WhiteBold.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            SizedBox(
-              height: 45.h,
-            ),
+                buttonText: "Save Changes",
+                onPressed: () {
+                  validateThenUpdate(context, user);
+                },
+                textStyle: TextStyles.font16WhiteMedium),
+            SizedBox(height: 45.h),
           ],
         ),
       ),
@@ -125,25 +131,28 @@ class ProfileDataFields extends StatelessWidget {
   void validateThenUpdate(BuildContext context, UserModel user) async {
     final cubit = context.read<UpdateUserCubit>();
     if (cubit.formKey.currentState!.validate()) {
+      // تحديث البيانات
       context.read<UpdateUserCubit>().emitUpdateUserStates(
             oldFirstName: user.firstname,
             oldLastName: user.lastname,
             oldDateOfBirth: user.dateOfBirth != null
                 ? DateFormat('d/M/yyyy').format(user.dateOfBirth!)
-                : 'Date not available',
+                : '',
           );
 
+      // Parsing date
       DateTime? parsedDate;
       if (cubit.dateOfBirth.text.isNotEmpty) {
         try {
           parsedDate = DateFormat('d/M/yyyy').parse(cubit.dateOfBirth.text);
-        } catch (e) {
+        } catch (_) {
           parsedDate = user.dateOfBirth;
         }
       } else {
         parsedDate = user.dateOfBirth;
       }
 
+      // Apply update to UserCubit
       final updatedUser = user.copyWith(
         firstname: cubit.firstNameController.text.isNotEmpty
             ? cubit.firstNameController.text
@@ -153,9 +162,19 @@ class ProfileDataFields extends StatelessWidget {
             : user.lastname,
         dateOfBirth: parsedDate,
       );
-
       context.read<UserCubit>().setUser(updatedUser);
-      saveUserDataLocally(updatedUser);
+      await saveUserDataLocally(updatedUser);
+
+      // عرض الـ AwesomeDialog
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.success,
+        animType: AnimType.scale,
+        title: 'Success!',
+        desc: 'Changes have been saved successfully.',
+        btnOkText: 'OK',
+        btnOkOnPress: () {},
+      ).show();
     }
   }
 }

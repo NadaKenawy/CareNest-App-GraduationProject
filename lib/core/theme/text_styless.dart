@@ -25,23 +25,16 @@ class TextStyles {
     fontFamily: 'Fredoka',
   );
 
-  static TextStyle font24PrimaryBlueBold = TextStyle(
-    fontSize: 24.sp,
-    fontWeight: FontWeightHelper.bold,
+  static TextStyle font32PrimaryBlueBold = TextStyle(
+    fontSize: 32.sp,
+    fontWeight: FontWeightHelper.semiBold,
     color: ColorsManager.primaryBlueColor,
     fontFamily: 'Fredoka',
   );
 
-  static TextStyle font36PrimaryBlueBold = TextStyle(
-    fontSize: 36.sp,
-    fontWeight: FontWeightHelper.bold,
-    color: ColorsManager.primaryBlueColor,
-    fontFamily: 'Fredoka',
-  );
-
-  static TextStyle font16SecondaryBlueBold = TextStyle(
+  static TextStyle font16SecondaryBlueSemiBold = TextStyle(
     fontSize: 16.sp,
-    fontWeight: FontWeightHelper.bold,
+    fontWeight: FontWeightHelper.semiBold,
     color: ColorsManager.secondryBlueColor,
     fontFamily: 'Fredoka',
   );
@@ -53,9 +46,9 @@ class TextStyles {
     fontFamily: 'Fredoka',
   );
 
-  static TextStyle font16WhiteBold = TextStyle(
+  static TextStyle font16WhiteMedium = TextStyle(
     fontSize: 16.sp,
-    fontWeight: FontWeightHelper.bold,
+    fontWeight: FontWeightHelper.medium,
     color: ColorsManager.white,
     fontFamily: 'Fredoka',
   );
@@ -67,9 +60,9 @@ class TextStyles {
     fontFamily: 'Fredoka',
   );
 
-  static TextStyle font24PrimaryPinkBold = TextStyle(
+  static TextStyle font24PrimaryPinkSemiBold = TextStyle(
     fontSize: 24.sp,
-    fontWeight: FontWeightHelper.bold,
+    fontWeight: FontWeightHelper.semiBold,
     color: ColorsManager.primaryPinkColor,
     fontFamily: 'Fredoka',
   );
@@ -77,6 +70,12 @@ class TextStyles {
   static TextStyle font20BlackSemiBold = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeightHelper.semiBold,
+    color: Colors.black,
+    fontFamily: 'Fredoka',
+  );
+    static TextStyle font20BlackSemiMedium = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeightHelper.medium,
     color: Colors.black,
     fontFamily: 'Fredoka',
   );

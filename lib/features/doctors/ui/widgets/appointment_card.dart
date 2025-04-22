@@ -92,7 +92,7 @@ class AppointmentCard extends StatelessWidget {
             children: [
               AppTextButton(
                 buttonText: 'Reschedule',
-                textStyle: TextStyles.font16WhiteBold,
+                textStyle: TextStyles.font16WhiteMedium,
                 buttonColor: ColorsManager.secondryBlueColor,
                 buttonWidth: 140.w,
                 buttonHeight: 44.h,
@@ -106,7 +106,7 @@ class AppointmentCard extends StatelessWidget {
               SizedBox(width: 16.w),
               AppTextButton(
                 buttonText: 'Cancel',
-                textStyle: TextStyles.font16SecondaryBlueBold,
+                textStyle: TextStyles.font16SecondaryBlueSemiBold,
                 borderColor: ColorsManager.secondryBlueColor,
                 buttonColor: Colors.white,
                 textColor: ColorsManager.secondryBlueColor,

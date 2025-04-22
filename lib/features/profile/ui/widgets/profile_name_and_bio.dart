@@ -13,13 +13,12 @@ class ProfileNameAndBio extends StatelessWidget {
       children: [
         Text(
           '${user.firstname} ${user.lastname}',
-          style: TextStyles.font24PrimaryBlueBold.copyWith(
+          style: TextStyles.font24PrimaryBlueSemiBold.copyWith(
             color: Colors.black,
             fontSize: 22.sp,
             fontWeight: FontWeight.w500,
           ),
         ),
-        SizedBox(height: 4.h),
         Text(
           'Keep going, you’re doing great! ❤️',
           style: TextStyles.font16PrimaryBlueRegular.copyWith(

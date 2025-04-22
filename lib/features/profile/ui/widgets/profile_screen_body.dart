@@ -8,14 +8,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/logic/user_cubit/user_cubit.dart';
 
-
 class ProfileScreenBody extends StatelessWidget {
   const ProfileScreenBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-
-     final user = context.watch<UserCubit>().state.user;
+    final user = context.watch<UserCubit>().state.user;
     if (user == null) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -25,15 +23,13 @@ class ProfileScreenBody extends StatelessWidget {
         child: Column(
           children: [
             const CustomProfileAppBar(),
-            SizedBox(height: 20.h),
-            const ProfileImage(),
-            SizedBox(height: 12.h),
-             ProfileNameAndBio(
+            ProfileNameAndBio(
               user: user,
-             ),
+            ),
             SizedBox(height: 32.h),
-             ProfileDataFields( 
-              user: user,),
+            ProfileDataFields(
+              user: user,
+            ),
           ],
         ),
       ),

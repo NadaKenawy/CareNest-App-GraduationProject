@@ -22,6 +22,7 @@ class ShortStoriesScreenBody extends StatelessWidget {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/background.jpg'),
+            opacity: 0.5,
             fit: BoxFit.cover,
           ),
         ),
@@ -39,7 +40,7 @@ class ShortStoriesScreenBody extends StatelessWidget {
                   SizedBox(width: 8.w),
                   Text(
                     'Short Stories',
-                    style: TextStyles.font20BlackSemiBold,
+                    style: TextStyles.font20BlackSemiMedium,
                   ),
                 ],
               ),

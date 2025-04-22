@@ -27,7 +27,7 @@ class _AddMedicineScreenBodyState extends State<AddMedicineScreenBody> {
   final TextEditingController _timeController = TextEditingController();
   final TextEditingController _startDayController = TextEditingController();
   final TextEditingController _finishDayController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();  // Global key for the form validation
+  final _formKey = GlobalKey<FormState>(); // Global key for the form validation
 
   @override
   void dispose() {
@@ -44,7 +44,7 @@ class _AddMedicineScreenBodyState extends State<AddMedicineScreenBody> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Form(
-          key: _formKey,  
+          key: _formKey,
           child: Column(
             children: [
               Expanded(
@@ -92,7 +92,7 @@ class _AddMedicineScreenBodyState extends State<AddMedicineScreenBody> {
                       log("Form is not valid");
                     }
                   },
-                  textStyle: TextStyles.font16WhiteBold,
+                  textStyle: TextStyles.font16WhiteMedium,
                 ),
               ),
               const AddMedicineBlocListner(),

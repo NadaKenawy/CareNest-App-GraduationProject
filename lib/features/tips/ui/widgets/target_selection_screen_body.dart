@@ -13,7 +13,7 @@ class TargetSelectionScreenBody extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Select Category',
-          style: TextStyles.font20BlackSemiBold,
+          style: TextStyles.font20BlackSemiMedium,
         ),
       ),
       body: Center(

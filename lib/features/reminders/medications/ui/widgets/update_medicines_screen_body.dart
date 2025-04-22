@@ -95,7 +95,7 @@ class _AddMedicineScreenBodyState extends State<UpdateMedicinesScreenBody> {
                       .emitUpdateMedicationScheduleState(
                           babyId, widget.medicinesList.id ?? '');
                 },
-                textStyle: TextStyles.font16WhiteBold,
+                textStyle: TextStyles.font16WhiteMedium,
               ),
             ),
             UpdateMedicineBlocListener(

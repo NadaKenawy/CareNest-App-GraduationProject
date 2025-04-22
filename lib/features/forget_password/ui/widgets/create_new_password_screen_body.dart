@@ -43,7 +43,7 @@ class _CreateNewPasswordScreenBodyState
             children: [
               Text(
                 "Create New Password",
-                style: TextStyles.font36PrimaryBlueBold,
+                style: TextStyles.font32PrimaryBlueBold,
               ),
               SizedBox(
                 height: 12.h,
@@ -52,7 +52,7 @@ class _CreateNewPasswordScreenBodyState
                 padding: EdgeInsets.only(right: 40.w),
                 child: Text(
                   "Your new password must be unique from those previously used",
-                  style: TextStyles.font16SecondaryBlueBold,
+                  style: TextStyles.font16SecondaryBlueSemiBold,
                 ),
               ),
               SizedBox(
@@ -148,7 +148,7 @@ class _CreateNewPasswordScreenBodyState
               ),
               AppTextButton(
                 buttonText: 'Reset Password',
-                textStyle: TextStyles.font16WhiteBold,
+                textStyle: TextStyles.font16WhiteMedium,
                 onPressed: () {
                   validateThenSendCode(context);
                 },

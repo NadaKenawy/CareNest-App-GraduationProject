@@ -20,50 +20,42 @@ class ProfileImage extends StatefulWidget {
 
 class _ProfileImageState extends State<ProfileImage> {
   final ImagePicker _picker = ImagePicker();
-  File? _imageFile;
-
+  File? _localImageFile;
+  String? _uploadedImageUrl;
   Future<void> _pickCropAndUploadImage(ImageSource source) async {
     final permissionStatus = source == ImageSource.camera
         ? await Permission.camera.request()
         : await Permission.photos.request();
-
     if (!permissionStatus.isGranted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-              "Permission required to access ${source == ImageSource.camera ? 'camera' : 'photos'}"),
-        ),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Permission required to access camera/photos"),
+      ));
       return;
     }
 
-    final pickedFile = await _picker.pickImage(source: source);
-    if (pickedFile == null) return;
+    final picked = await _picker.pickImage(source: source);
+    if (picked == null) return;
 
-    final croppedFile = await ImageCropper().cropImage(
-      sourcePath: pickedFile.path,
+    final cropped = await ImageCropper().cropImage(
+      sourcePath: picked.path,
       aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
       uiSettings: [
         AndroidUiSettings(
-          toolbarTitle: 'Image Cropper',
+          toolbarTitle: 'Crop Image',
           toolbarColor: Colors.blue,
           toolbarWidgetColor: Colors.white,
-          lockAspectRatio: false,
+          lockAspectRatio: true,
         ),
-        IOSUiSettings(title: 'Image Cropper'),
+        IOSUiSettings(title: 'Crop Image'),
       ],
     );
+    if (cropped == null) return;
 
-    if (croppedFile == null) return;
-
-    setState(() {
-      _imageFile = File(croppedFile.path);
-    });
-
-    context.read<UpdateUserImageCubit>().uploadImage(_imageFile!);
+    setState(() => _localImageFile = File(cropped.path));
+    context.read<UpdateUserImageCubit>().uploadImage(File(cropped.path));
   }
-
   void _showImageSourceOptions() {
+    if (!mounted) return;
     showModalBottomSheet(
       context: context,
       builder: (_) => Column(
@@ -89,71 +81,93 @@ class _ProfileImageState extends State<ProfileImage> {
       ),
     );
   }
+  Future<void> _handleImageUpdate(String newUrl) async {
+    await NetworkImage(newUrl).evict();
+    setState(() {
+      _localImageFile = null;
+      _uploadedImageUrl = newUrl;
+    });
 
-  Future<void> _handleImageUpdate(String newImageUrl) async {
     final userCubit = context.read<UserCubit>();
-    final updatedUser = userCubit.state.user?.copyWith(profileImg: newImageUrl);
-    if (updatedUser != null) {
-      userCubit.setUser(updatedUser);
-      await saveUserDataLocally(updatedUser);
+    final old = userCubit.state.user;
+    if (old != null) {
+      final updated = old.copyWith(profileImg: newUrl);
+      userCubit.setUser(updated);
+      await saveUserDataLocally(updated);
     }
+  }
+  @override
+  void initState() {
+    super.initState();
+    context.read<UpdateUserImageCubit>().stream.listen((state) {
+      state.whenOrNull(success: (data) {
+        _handleImageUpdate(data.data.image);
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserCubit>().state.user;
+    final isLoading = context.watch<UpdateUserImageCubit>().state is Loading;
 
-    return BlocListener<UpdateUserImageCubit, UpdateUserImageState>(
-      listener: (context, state) {
-        state.whenOrNull(
-          success: (data) async {
-           
-            await _handleImageUpdate(data.data.image);
-          },
-        );
-      },
-      child: BlocBuilder<UpdateUserImageCubit, UpdateUserImageState>(
-        builder: (context, state) {
-          final isLoading = state is Loading;
+    ImageProvider provider;
+    if (_localImageFile != null) {
+      provider = FileImage(_localImageFile!);
+    } else if (_uploadedImageUrl != null) {
+      provider = NetworkImage(_uploadedImageUrl!);
+    } else if (user?.profileImg != null && user!.profileImg!.isNotEmpty) {
+      provider = NetworkImage(user.profileImg!);
+    } else {
+      provider = const AssetImage(AppImages.boyProfileImage);
+    }
 
-          return Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                width: 130.w,
-                height: 130.h,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.grey[300],
-                  image: DecorationImage(
-                    image:
-                        user?.profileImg != null && user!.profileImg!.isNotEmpty
-                            ? NetworkImage(user.profileImg!) as ImageProvider
-                            : const AssetImage(AppImages.boyProfileImage),
-                    fit: BoxFit.cover,
-                  ),
+    return SizedBox(
+      width: 160.w,
+      height: 160.h,
+      child: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.center,
+        children: [
+          Container(
+            width: 160.w,
+            height: 160.h,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.grey[300],
+              border: Border.all(color: Colors.white, width: 4),
+              image: DecorationImage(image: provider, fit: BoxFit.cover),
+            ),
+          ),
+          if (isLoading)
+            Container(
+              width: 160.w,
+              height: 160.h,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.black.withOpacity(0.4),
+              ),
+              child: const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                  strokeWidth: 3,
                 ),
               ),
-              if (isLoading)
-                Container(
-                  width: 130.w,
-                  height: 130.h,
-                  decoration: BoxDecoration(
+            ),
+          Positioned(
+            bottom: 8,
+            right: 8,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(30),
+                onTap: _showImageSourceOptions,
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.black.withOpacity(0.4),
+                    color: Colors.white,
                   ),
-                  child: const Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.white,
-                      strokeWidth: 3,
-                    ),
-                  ),
-                ),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                child: GestureDetector(
-                  onTap: _showImageSourceOptions,
                   child: Image.asset(
                     AppImages.changeProfileIcon,
                     width: 36.w,
@@ -161,9 +175,9 @@ class _ProfileImageState extends State<ProfileImage> {
                   ),
                 ),
               ),
-            ],
-          );
-        },
+            ),
+          ),
+        ],
       ),
     );
   }

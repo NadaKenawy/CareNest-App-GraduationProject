@@ -43,14 +43,14 @@ class VerifyPasswordScreenBody extends StatelessWidget {
         children: [
           Text(
             "OTP Verification",
-            style: TextStyles.font36PrimaryBlueBold,
+            style: TextStyles.font32PrimaryBlueBold,
           ),
           SizedBox(
             height: 12.h,
           ),
           Text(
             "Enter the verification code we just sent on your email address.",
-            style: TextStyles.font16SecondaryBlueBold,
+            style: TextStyles.font16SecondaryBlueSemiBold,
           ),
           SizedBox(
             height: 36.h,
@@ -76,7 +76,7 @@ class VerifyPasswordScreenBody extends StatelessWidget {
           ),
           AppTextButton(
             buttonText: 'Send Code',
-            textStyle: TextStyles.font16WhiteBold,
+            textStyle: TextStyles.font16WhiteMedium,
             onPressed: () {
               validateThenVerify(context);
             },

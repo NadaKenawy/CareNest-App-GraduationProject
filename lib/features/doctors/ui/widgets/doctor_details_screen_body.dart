@@ -201,7 +201,7 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
       backgroundColor: const Color(0xfff9f9f9),
       appBar: AppBar(
         backgroundColor: const Color(0xfff9f9f9),
-        title: Text('Doctor Details', style: TextStyles.font20BlackSemiBold),
+        title: Text('Doctor Details', style: TextStyles.font20BlackSemiMedium),
       ),
       body: SafeArea(
         child: Padding(
@@ -298,7 +298,7 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
                           SizedBox(width: 8.w),
                           AppTextButton(
                             buttonText: 'Apply',
-                            textStyle: TextStyles.font16WhiteBold,
+                            textStyle: TextStyles.font16WhiteMedium,
                             buttonColor: ColorsManager.secondryBlueColor,
                             buttonWidth: 80.w,
                             onPressed: () {
@@ -337,7 +337,7 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
                 SizedBox(height: 24.h),
                 AppTextButton(
                   buttonText: 'Book An Appointment',
-                  textStyle: TextStyles.font16WhiteBold,
+                  textStyle: TextStyles.font16WhiteMedium,
                   buttonColor: ColorsManager.secondryBlueColor,
                   onPressed: bookAppointment,
                 ),

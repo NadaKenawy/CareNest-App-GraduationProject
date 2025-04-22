@@ -22,14 +22,11 @@ class MyBabiesScreenBody extends StatelessWidget {
         backgroundColor: Colors.white,
         title: Text(
           'My Babies',
-          style: TextStyles.font20BlackSemiBold,
+          style: TextStyles.font20BlackSemiMedium,
         ),
       ),
       body: Column(
         children: [
-          SizedBox(
-            height: 32.h,
-          ),
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(
@@ -40,10 +37,11 @@ class MyBabiesScreenBody extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 32.h),
+            padding: EdgeInsets.only(
+                top: 12.w, bottom: 32.h, left: 16.w, right: 16.h),
             child: AppTextButton(
               buttonText: 'Add New Baby',
-              textStyle: TextStyles.font16WhiteBold,
+              textStyle: TextStyles.font16WhiteMedium,
               gradientColors: const [
                 ColorsManager.secondryBlueColor,
                 ColorsManager.primaryPinkColor,

@@ -110,7 +110,7 @@ class _MusicListViewItemState extends State<MusicListViewItem> {
                   ),
                   Text(
                     widget.musicData.name,
-                    style: TextStyles.font16WhiteBold.copyWith(
+                    style: TextStyles.font16WhiteMedium.copyWith(
                       fontSize: 20,
                     ),
                   ),
