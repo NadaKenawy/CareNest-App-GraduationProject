@@ -1,3 +1,5 @@
+import 'package:care_nest/core/theme/font_weight_helper.dart';
+import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/features/doctors/data/models/get_doctors/get_doctors_response.dart';
 import 'package:care_nest/features/doctors/logic/get_all_doctors_cubit/get_all_doctors_cubit.dart';
 import 'package:care_nest/features/doctors/logic/get_all_doctors_cubit/get_all_doctors_state.dart';
@@ -43,7 +45,10 @@ class GetAllDoctorsBlocBuilder extends StatelessWidget {
   Widget setupSuccess(List<DoctorData> doctorsList) {
     return doctorsList.isNotEmpty
         ? DoctorsListView(doctorsList: doctorsList)
-        : const Center(child: Text('No doctors found for this specialty'));
+        : Center(
+            child: Text('No doctors found for this specialty',
+                style: TextStyles.font20BlackSemiBold
+                    .copyWith(fontWeight: FontWeightHelper.medium)));
   }
 
   Widget setupError() {

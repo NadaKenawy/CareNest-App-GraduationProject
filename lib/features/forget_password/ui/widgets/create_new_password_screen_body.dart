@@ -49,10 +49,10 @@ class _CreateNewPasswordScreenBodyState
                 height: 12.h,
               ),
               Padding(
-                padding: EdgeInsets.only(right: 40.w),
+                padding: EdgeInsets.only(right: 16.w),
                 child: Text(
                   "Your new password must be unique from those previously used",
-                  style: TextStyles.font16SecondaryBlueSemiBold,
+                  style: TextStyles.font16PrimaryBlueMedium,
                 ),
               ),
               SizedBox(

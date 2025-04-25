@@ -20,7 +20,7 @@ class VerifyPasswordScreenBody extends StatelessWidget {
     final defaultPinTheme = PinTheme(
       width: 55.w,
       height: 55.h,
-      textStyle: TextStyles.font16PrimaryBlackMedium,
+      textStyle: TextStyles.font16BlackMedium,
       decoration: BoxDecoration(
         color: const Color(0xffe5e9ef),
         borderRadius: BorderRadius.circular(10.r),
@@ -50,7 +50,7 @@ class VerifyPasswordScreenBody extends StatelessWidget {
           ),
           Text(
             "Enter the verification code we just sent on your email address.",
-            style: TextStyles.font16SecondaryBlueSemiBold,
+            style: TextStyles.font16PrimaryBlueMedium,
           ),
           SizedBox(
             height: 36.h,

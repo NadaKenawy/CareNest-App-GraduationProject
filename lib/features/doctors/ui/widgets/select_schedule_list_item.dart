@@ -43,7 +43,7 @@ class SelectScheduleListItem extends StatelessWidget {
     }
 
     DateTime targetDate = today.add(Duration(days: dayOffset));
-    return DateFormat('d/M').format(targetDate);
+    return DateFormat('d').format(targetDate);
   }
 
   @override
@@ -68,16 +68,16 @@ class SelectScheduleListItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            day.type!.substring(0, 3),
+            formattedDate,
             style: TextStyle(
               color: isSelected ? Colors.white : Colors.black,
-              fontSize: 15.sp,
+              fontSize: 16.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(height: 4.h),
           Text(
-            formattedDate,
+            day.type!.substring(0, 3),
             style: TextStyle(
               color: isSelected ? Colors.white : Colors.black,
               fontSize: 12.sp,

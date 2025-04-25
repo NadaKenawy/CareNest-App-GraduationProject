@@ -6,16 +6,12 @@ part 'book_doctor_request_body.g.dart';
 class BookDoctorRequestBody {
   final String? promocode;
   final String doctor;
-  final String day;
-  final String startTime;
-  final String date;
+  final String appointmentDateTime;
 
   BookDoctorRequestBody({
     this.promocode,
     required this.doctor,
-    required this.day,
-    required this.startTime,
-    required this.date,
+    required this.appointmentDateTime,
   });
 
   factory BookDoctorRequestBody.fromJson(Map<String, dynamic> json) =>

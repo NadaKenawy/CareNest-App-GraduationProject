@@ -33,7 +33,7 @@ class RemindersCard extends StatelessWidget {
               BoxShadow(
                 color: ColorsManager.secondryPinkColor.withOpacity(0.5),
                 offset: const Offset(0, 5),
-                blurRadius: 10,
+                blurRadius: 4,
                 spreadRadius: 1,
               ),
             ],

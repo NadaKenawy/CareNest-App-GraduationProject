@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -57,49 +55,50 @@ class HeaderSection extends StatelessWidget {
               fit: BoxFit.contain,
             ),
             Positioned(
-              right: -2.w,
-              bottom: -2.h,
-              child: GestureDetector(
-                onTap: onEditTap,
-                child: Container(
-                  width: 36.w,
-                  height: 36.h,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 4,
-                        offset: const Offset(0, 2),
+                bottom: 6,
+                child: Material(
+                  color: Colors.transparent,
+                  child: GestureDetector(
+                    onTap: onEditTap,
+                    child: Container(
+                      width: 40.w,
+                      height: 40.h,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withValues(alpha: 0.5),
+                            spreadRadius: 2,
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: iconGradient != null
-                      ? ShaderMask(
-                          shaderCallback: (bounds) =>
-                              iconGradient!.createShader(bounds),
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.edit,
-                              size: 20.sp,
-                              color: Colors.white,
+                      child: iconGradient != null
+                          ? ShaderMask(
+                              shaderCallback: (bounds) =>
+                                  iconGradient!.createShader(bounds),
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.edit,
+                                  size: 20.sp,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {},
+                              ),
+                            )
+                          : IconButton(
+                              icon: Icon(
+                                Icons.edit,
+                                size: 20.sp,
+                                color: iconColor,
+                              ),
+                              onPressed: () {},
                             ),
-                            onPressed: () {},
-                          ),
-                        )
-                      : IconButton(
-                          icon: Icon(
-                            Icons.edit,
-                            size: 20.sp,
-                            color: iconColor,
-                          ),
-                          onPressed: () {},
-                        ),
-                ),
-              ),
-            ),
+                    ),
+                  ),
+                ))
           ],
         ),
       ],

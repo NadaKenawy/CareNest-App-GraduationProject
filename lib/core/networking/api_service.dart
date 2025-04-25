@@ -262,7 +262,7 @@ abstract class ApiService {
     @Header('Authorization') String token,
   );
 
-  @PATCH(ApiConstants.cancelbookedAppointment)
+  @DELETE(ApiConstants.cancelbookedAppointment)
   Future<CancelBookedAppointmentResponse> cancelBookedAppointment(
     @Header('Authorization') String token,
     @Path('id') String id,
@@ -274,7 +274,7 @@ abstract class ApiService {
     @Header('Authorization') String token,
   );
 
-   @PUT(ApiConstants.updateUser)
+  @PUT(ApiConstants.updateUser)
   Future<UpdateUserResponse> updateUser(
     @Header('Authorization') String token,
     @Body() UpdateUserRequestBody updateUserRequestBody,

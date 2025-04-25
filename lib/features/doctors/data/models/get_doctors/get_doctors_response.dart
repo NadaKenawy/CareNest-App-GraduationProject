@@ -143,12 +143,12 @@ class Slot {
 
 @JsonSerializable()
 class PromoCode {
-  final String code;
+  final String? code;
   final DateTime? expireAt;
   final num? value;
 
   PromoCode({
-    required this.code,
+    this.code,
     this.expireAt,
     this.value,
   });

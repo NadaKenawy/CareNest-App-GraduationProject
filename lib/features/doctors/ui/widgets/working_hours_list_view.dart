@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../data/models/get_doctors/get_doctors_response.dart';
@@ -27,28 +28,32 @@ class WorkingHoursListView extends StatelessWidget {
         .where((day) => day.type == selectedDay.type)
         .expand((day) => day.slots ?? [])
         .toList();
+
     if (slots.isEmpty) return const Text("No available slots");
+
     List<String> availableHours = [];
     for (var slot in slots) {
       availableHours.addAll(getAvailableHours(slot.startTime!, slot.endTime!));
     }
-    final allHours = availableHours;
+
     return SizedBox(
       height: 48.h,
       child: ListView(
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
-        children: allHours.map((hour) {
+        children: availableHours.map((hour) {
           bool isBooked = orders?.any((order) {
-                String orderDate =
-                    order.day?.date?.toIso8601String().split("T").first ?? "";
-                return order.status ==
-                        "Booking" && 
-                    order.day?.type == selectedDay.type &&
-                    order.day?.time?.startTime == hour &&
-                    orderDate == bookingDate;
+                String? orderDate =
+                    order.day?.date?.toIso8601String().split("T").first;
+                String? orderTime = order.day?.time?.startTime;
+                String? orderDayType = order.day?.type;
+                return order.status == "Pending" &&
+                    orderDate == bookingDate &&
+                    orderTime == hour &&
+                    orderDayType == selectedDay.type;
               }) ??
               false;
+
           return Padding(
             padding: EdgeInsets.only(right: 12.w),
             child: GestureDetector(
@@ -67,11 +72,16 @@ class WorkingHoursListView extends StatelessWidget {
 
   List<String> getAvailableHours(String startTime, String endTime) {
     DateTime start = parseTime(startTime);
-    DateTime end = parseTime(endTime).subtract(const Duration(hours: 1));
-    int totalHours = end.hour - start.hour;
-    return List.generate(totalHours + 1, (index) {
-      return "${start.hour + index}:00";
-    });
+    DateTime end = parseTime(endTime);
+    List<String> hours = [];
+
+    while (start.isBefore(end)) {
+      String hourStr = "${start.hour.toString().padLeft(2, '0')}:00";
+      hours.add(hourStr);
+      start = start.add(const Duration(hours: 1));
+    }
+
+    return hours;
   }
 
   DateTime parseTime(String time) {

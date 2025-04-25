@@ -11,9 +11,7 @@ BookDoctorRequestBody _$BookDoctorRequestBodyFromJson(
     BookDoctorRequestBody(
       promocode: json['promocode'] as String?,
       doctor: json['doctor'] as String,
-      day: json['day'] as String,
-      startTime: json['startTime'] as String,
-      date: json['date'] as String,
+      appointmentDateTime: json['appointmentDateTime'] as String,
     );
 
 Map<String, dynamic> _$BookDoctorRequestBodyToJson(
@@ -21,7 +19,5 @@ Map<String, dynamic> _$BookDoctorRequestBodyToJson(
     <String, dynamic>{
       'promocode': instance.promocode,
       'doctor': instance.doctor,
-      'day': instance.day,
-      'startTime': instance.startTime,
-      'date': instance.date,
+      'appointmentDateTime': instance.appointmentDateTime,
     };

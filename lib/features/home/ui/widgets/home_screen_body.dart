@@ -1,10 +1,8 @@
 import 'dart:developer';
-
 import 'package:care_nest/core/routing/app_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/utils/app_images.dart';
 import 'package:care_nest/features/home/ui/widgets/baby_cry_container.dart';
-import 'package:care_nest/features/home/ui/widgets/communtiy_card.dart';
 import 'package:care_nest/features/home/ui/widgets/large_card.dart';
 import 'package:care_nest/features/home/ui/widgets/home_tittle.dart';
 import 'package:care_nest/features/home/ui/widgets/mama_tips_card.dart';
@@ -91,20 +89,17 @@ class HomeScreenBody extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   LargeCard(
-                    imagePath: AppImages.shoppingImage,
-                    title: 'Shopping',
-                    description: "Seamless shopping for every baby moment",
+                    imagePath: AppImages.communityImage,
+                    title: 'Community',
+                    description:
+                        "Connect with moms, share support, and grow together on your parenting journey.",
                     backgroundColor: ColorsManager.thirdryPinkColor,
                     onPressed: () {},
-                    routePath: '',
+                    routePath: AppRouter.kCommunityScreen,
                   ),
                 ],
               ),
               const SizedBox(height: 20),
-              const CommuntiyCard(),
-              SizedBox(
-                height: 20.h,
-              )
             ],
           ),
         ),

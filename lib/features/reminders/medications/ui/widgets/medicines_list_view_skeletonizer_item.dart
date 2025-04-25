@@ -39,7 +39,7 @@ class MedicinesListViewSkeletonizerItem extends StatelessWidget {
                 children: [
                   Text(
                     "medicationName",
-                    style: TextStyles.font16PrimaryBlackMedium,
+                    style: TextStyles.font16BlackMedium,
                   ),
                   SizedBox(
                     height: 4.h,

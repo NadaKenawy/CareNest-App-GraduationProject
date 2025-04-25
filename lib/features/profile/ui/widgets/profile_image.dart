@@ -54,6 +54,7 @@ class _ProfileImageState extends State<ProfileImage> {
     setState(() => _localImageFile = File(cropped.path));
     context.read<UpdateUserImageCubit>().uploadImage(File(cropped.path));
   }
+
   void _showImageSourceOptions() {
     if (!mounted) return;
     showModalBottomSheet(
@@ -81,6 +82,7 @@ class _ProfileImageState extends State<ProfileImage> {
       ),
     );
   }
+
   Future<void> _handleImageUpdate(String newUrl) async {
     await NetworkImage(newUrl).evict();
     setState(() {
@@ -96,6 +98,7 @@ class _ProfileImageState extends State<ProfileImage> {
       await saveUserDataLocally(updated);
     }
   }
+
   @override
   void initState() {
     super.initState();
@@ -145,7 +148,7 @@ class _ProfileImageState extends State<ProfileImage> {
               height: 160.h,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.black.withOpacity(0.4),
+                color: Colors.black.withValues(alpha: 0.4),
               ),
               child: const Center(
                 child: CircularProgressIndicator(

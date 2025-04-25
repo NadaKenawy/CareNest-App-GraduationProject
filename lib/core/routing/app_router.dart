@@ -1,7 +1,6 @@
 import 'package:care_nest/core/di/service_locator.dart';
 import 'package:care_nest/features/add_baby/data/models/get_all_babies/get_all_babies_response.dart';
 import 'package:care_nest/features/add_baby/logic/add_baby_cubit/add_baby_cubit.dart';
-import 'package:care_nest/features/add_baby/logic/delete_baby_cubit/delete_baby_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/update_baby_cubit/update_baby_cubit.dart';
 import 'package:care_nest/features/add_baby/ui/add_baby_screen.dart';
@@ -15,6 +14,7 @@ import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubi
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
+import 'package:care_nest/features/community/ui/community_screen.dart';
 import 'package:care_nest/features/doctors/logic/book_doctor_cubit/doctor_booking_cubit.dart';
 import 'package:care_nest/features/doctors/logic/cancel_booked_appointment_cubit/cancel_booked_appointment_cubit.dart';
 import 'package:care_nest/features/doctors/logic/create_review/doctor_review_cubit.dart';
@@ -115,6 +115,7 @@ abstract class AppRouter {
   static const kDoctorsScreen = '/doctorsScreen';
   static const kDoctorDetailsScreen = '/doctorDetailsScreen';
   static const kMyAppointmentsScreen = '/myAppointmentsScreen';
+  static const kCommunityScreen = '/communityScreen';
 
   static final router = GoRouter(
     routes: [
@@ -491,6 +492,11 @@ abstract class AppRouter {
           );
         },
       ),
+      GoRoute(
+          path: kCommunityScreen,
+          builder: (context, state) {
+            return const CommunityScreen();
+          }),
     ],
   );
 }

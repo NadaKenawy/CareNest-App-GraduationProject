@@ -1,32 +1,43 @@
-import 'package:care_nest/core/networking/api_error_model.dart';
-import 'package:care_nest/features/doctors/data/repos/cancel_booked_appointment_repo.dart';
-import 'package:care_nest/features/doctors/logic/cancel_booked_appointment_cubit/cancel_booked_appointment_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:care_nest/core/helpers/shared_pref_helper.dart';
-import 'package:care_nest/core/helpers/constants.dart';
+import '../../../../core/helpers/shared_pref_helper.dart';
+import '../../../../core/helpers/constants.dart';
+import '../../../../core/networking/api_error_model.dart';
+import '../../data/repos/cancel_booked_appointment_repo.dart';
+import 'cancel_booked_appointment_state.dart';
 
 class CancelBookedAppointmentCubit extends Cubit<CancelBookedAppointmentState> {
-  final CancelBookedAppointmentRepo _cancelBookedAppointmentRepo;
+  final CancelBookedAppointmentRepo _repo;
 
-  CancelBookedAppointmentCubit(this._cancelBookedAppointmentRepo)
+  CancelBookedAppointmentCubit(this._repo)
       : super(const CancelBookedAppointmentState.initial());
 
-  Future<void> cancelBookedAppointment(String id) async {
+  Future<void> cancelBookedAppointment(String appointmentId) async {
     emit(const CancelBookedAppointmentState.loading());
-    String token =
-        await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
-    final response = await _cancelBookedAppointmentRepo.cancelBookedAppointment(
-      token,
-      id,
-    );
-    response.when(
-      success: (cancelResponse) {
-        emit(CancelBookedAppointmentState.success(cancelResponse.data));
-      },
-      failure: (apiErrorModel) {
-        emit(
-            CancelBookedAppointmentState.error(apiErrorModel as ApiErrorModel));
-      },
-    );
+    try {
+      final token =
+          await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
+      final response =
+          await _repo.cancelBookedAppointment(token, appointmentId);
+
+      response.when(
+        success: (_) {
+          emit(const CancelBookedAppointmentState.success());
+        },
+        failure: (error) {
+          if (error is ApiErrorModel) {
+            emit(CancelBookedAppointmentState.error(error as ApiErrorModel));
+          } else {
+            emit(CancelBookedAppointmentState.error(
+              ApiErrorModel(
+                  message: 'An unexpected error occurred, please try again.'),
+            ));
+          }
+        },
+      );
+    } catch (e) {
+      emit(CancelBookedAppointmentState.error(
+        ApiErrorModel(message: e.toString()),
+      ));
+    }
   }
 }

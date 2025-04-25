@@ -38,6 +38,12 @@ class TextStyles {
     color: ColorsManager.secondryBlueColor,
     fontFamily: 'Fredoka',
   );
+  static TextStyle font16PrimaryBlueMedium = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeightHelper.medium,
+    color: ColorsManager.primaryBlueColor,
+    fontFamily: 'Fredoka',
+  );
 
   static TextStyle font20SecondaryBlueMedium = TextStyle(
     fontSize: 20.sp,
@@ -73,14 +79,14 @@ class TextStyles {
     color: Colors.black,
     fontFamily: 'Fredoka',
   );
-    static TextStyle font20BlackSemiMedium = TextStyle(
+  static TextStyle font20BlackSemiMedium = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeightHelper.medium,
     color: Colors.black,
     fontFamily: 'Fredoka',
   );
 
-  static TextStyle font16PrimaryBlackMedium = TextStyle(
+  static TextStyle font16BlackMedium = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeightHelper.medium,
     color: Colors.black,

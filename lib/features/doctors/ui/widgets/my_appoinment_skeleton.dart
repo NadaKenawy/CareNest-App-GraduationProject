@@ -8,86 +8,91 @@ class AppointmentCardSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
-        child: ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: 5,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(bottom: 16.h, left: 16.w, right: 16.w),
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
+      child: ListView.builder(
+        padding:
+            EdgeInsets.symmetric(vertical: 8.h), // padding بس علشان التنسيق
+        physics:
+            const BouncingScrollPhysics(), // أو ScrollPhysics() حسب احتياجك
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+            child: Container(
+              padding: EdgeInsets.all(8.h),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withAlpha(25),
+                    blurRadius: 6.r,
+                    offset: Offset(0, 3.h),
+                  ),
+                ],
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ClipRRect(
                     borderRadius: BorderRadius.circular(16.r),
+                    child: Container(
+                      width: 80.w,
+                      height: 80.h,
+                      color: Colors.grey[300],
+                    ),
                   ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: 100.w,
-                            height: 100.h,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.grey[300],
+                  SizedBox(width: 12.w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    height: 20.h,
+                                    width: double.infinity,
+                                    color: Colors.grey[300],
+                                  ),
+                                  SizedBox(height: 8.h),
+                                  Container(
+                                    height: 16.h,
+                                    width: 120.w,
+                                    color: Colors.grey[300],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          SizedBox(width: 16.w),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  height: 20.h,
-                                  width: 150.w,
-                                  color: Colors.grey[300],
-                                ),
-                                SizedBox(height: 8.h),
-                                Container(
-                                  height: 16.h,
-                                  width: 120.w,
-                                  color: Colors.grey[300],
-                                ),
-                                SizedBox(height: 8.h),
-                                Container(
-                                  height: 14.h,
-                                  width: 100.w,
-                                  color: Colors.grey[300],
-                                ),
-                              ],
+                            SizedBox(width: 8.w),
+                            Container(
+                              width: 24.sp,
+                              height: 24.sp,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                shape: BoxShape.circle,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 16.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 44.h,
-                            width: 140.w,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(8.r),
-                            ),
-                          ),
-                          SizedBox(width: 16.w),
-                          Container(
-                            height: 44.h,
-                            width: 140.w,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(8.r),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                        SizedBox(height: 8.h),
+                        Container(
+                          height: 14.h,
+                          width: 100.w,
+                          color: Colors.grey[300],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              );
-            }));
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

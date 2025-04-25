@@ -129,7 +129,7 @@ Map<String, dynamic> _$SlotToJson(Slot instance) => <String, dynamic>{
     };
 
 PromoCode _$PromoCodeFromJson(Map<String, dynamic> json) => PromoCode(
-      code: json['code'] as String,
+      code: json['code'] as String?,
       expireAt: json['expireAt'] == null
           ? null
           : DateTime.parse(json['expireAt'] as String),

@@ -53,7 +53,7 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
   }
 
   String calculateDateForDay(String dayName) {
-    Map<String, int> days = {
+    final days = {
       'Monday': DateTime.monday,
       'Tuesday': DateTime.tuesday,
       'Wednesday': DateTime.wednesday,
@@ -64,22 +64,22 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
     };
 
     final now = DateTime.now();
-    int todayWeekday = now.weekday;
-    int targetWeekday = days[dayName] ?? todayWeekday;
-    int daysUntilTarget = (targetWeekday - todayWeekday + 7) % 7;
+    final todayWeekday = now.weekday;
+    final targetWeekday = days[dayName] ?? todayWeekday;
+    final daysUntilTarget = (targetWeekday - todayWeekday + 7) % 7;
     final targetDate = now.add(Duration(days: daysUntilTarget));
     return targetDate.toIso8601String().split('T').first;
   }
 
   Future<void> showRatingDialog() async {
-    final parentContext = context;
+    final reviewCubit = context.read<DoctorReviewCubit>();
 
     await AwesomeDialog(
-      context: parentContext,
+      context: context,
       dialogType: DialogType.noHeader,
       animType: AnimType.bottomSlide,
       body: StatefulBuilder(
-        builder: (context, setStateDialog) {
+        builder: (dialogContext, setStateDialog) {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
             child: Column(
@@ -98,12 +98,13 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
                   children: List.generate(5, (index) {
                     return IconButton(
                       onPressed: () {
-                        setStateDialog(() => rating = index + 1);
-                        parentContext.read<DoctorReviewCubit>().submitReview(
-                              doctorId: widget.doctorData.id ?? "",
-                              ratings: rating,
-                            );
-                        Navigator.pop(parentContext);
+                        final newRating = index + 1;
+                        setStateDialog(() => rating = newRating);
+                        reviewCubit.submitReview(
+                          doctorId: widget.doctorData.id ?? "",
+                          ratings: newRating,
+                        );
+                        Navigator.pop(dialogContext);
                       },
                       icon: Icon(
                         rating >= index + 1 ? Icons.star : Icons.star_border,
@@ -115,7 +116,7 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
                 ),
                 SizedBox(height: 16.h),
                 GestureDetector(
-                  onTap: () => Navigator.pop(parentContext),
+                  onTap: () => Navigator.pop(dialogContext),
                   child: Text('No Thanks!',
                       style: TextStyle(fontSize: 14.sp, color: Colors.black)),
                 ),
@@ -129,7 +130,6 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
   }
 
   Future<void> bookAppointment() async {
-    //await showRatingDialog();
     if (selectedHour == null) {
       AwesomeDialog(
         context: context,
@@ -148,9 +148,7 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
       if (enteredPromo.isEmpty || widget.doctorData.promocode == null) {
         promoValid = false;
       } else {
-        if (widget.doctorData.promocode!.code != enteredPromo) {
-          promoValid = false;
-        }
+        promoValid = widget.doctorData.promocode!.code == enteredPromo;
       }
     }
 
@@ -166,20 +164,17 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
     }
 
     String selectedDate = calculateDateForDay(selectedDay.type ?? "");
+    final timeParts = selectedHour!.split(':');
+    final formattedTime =
+        "${timeParts[0].padLeft(2, '0')}:${timeParts[1].padLeft(2, '0')}:00";
+    final dateTimeString = "$selectedDate $formattedTime";
 
     await context.read<DoctorBookingCubit>().bookDoctorAppointment(
           doctorId: widget.doctorData.id ?? "",
-          day: selectedDay.type ?? "",
-          startTime: selectedHour!,
-          date: selectedDate,
+          appointmentDateTime:
+              DateTime.parse(dateTimeString).toUtc().toIso8601String(),
           promoCode: isPromoApplied ? enteredPromo : null,
         );
-
-    setState(() {
-      selectedHour = null;
-      promoCodeController.clear();
-      isPromoApplied = false;
-    });
 
     AwesomeDialog(
       context: context,
@@ -188,15 +183,15 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
       desc: 'Your appointment has been booked successfully.',
       btnOkOnPress: () async {
         await Future.delayed(const Duration(milliseconds: 300));
-        context.pop();
         await showRatingDialog();
+        context.pop();
       },
     ).show();
   }
 
   @override
   Widget build(BuildContext context) {
-    String today = DateTime.now().toIso8601String().split("T").first;
+    String today = DateTime.now().toIso8601String().split('T').first;
     return Scaffold(
       backgroundColor: const Color(0xfff9f9f9),
       appBar: AppBar(
@@ -229,111 +224,103 @@ class _DoctorDetailsScreenBodyState extends State<DoctorDetailsScreenBody> {
                   bookingDate: today,
                 ),
                 SizedBox(height: 24.h),
-                (isPromoApplied && widget.doctorData.promocode != null)
-                    ? Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 12.w, vertical: 8.h),
-                        decoration: BoxDecoration(
-                          color: Colors.green.withAlpha(40),
-                          borderRadius: BorderRadius.circular(16.r),
-                          border: Border.all(color: Colors.green),
-                        ),
-                        child: Row(
+                if (isPromoApplied && widget.doctorData.promocode != null)
+                  Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                    decoration: BoxDecoration(
+                      color: Colors.green.withAlpha(40),
+                      borderRadius: BorderRadius.circular(16.r),
+                      border: Border.all(color: Colors.green),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.check_circle,
+                            color: Colors.green, size: 28.sp),
+                        SizedBox(width: 8.w),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(Icons.check_circle,
-                                color: Colors.green, size: 28.sp),
-                            SizedBox(width: 8.w),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(widget.doctorData.promocode!.code,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.bold)),
-                                Text(
-                                    "${widget.doctorData.promocode!.value?.toDouble()} Discount\nFinal Price: ${widget.doctorData.bookingPrice != null ? (widget.doctorData.bookingPrice! - widget.doctorData.promocode!.value!.toInt()) : 'N/A'}",
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 12.sp)),
-                              ],
-                            ),
-                            const Spacer(),
-                            IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  isPromoApplied = false;
-                                  promoCodeController.clear();
-                                });
-                              },
-                              icon: const Icon(Icons.close, color: Colors.grey),
-                            ),
+                            Text(widget.doctorData.promocode!.code.toString(),
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.bold)),
+                            Text(
+                                "${widget.doctorData.promocode!.value?.toDouble()}% Discount\nFinal Price: ${widget.doctorData.bookingPrice != null ? (widget.doctorData.bookingPrice! * widget.doctorData.promocode!.value!.toInt() / 100) : 'N/A'}",
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 12.sp)),
                           ],
                         ),
-                      )
-                    : Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              cursorColor: ColorsManager.secondryBlueColor,
-                              controller: promoCodeController,
-                              decoration: InputDecoration(
-                                constraints:
-                                    const BoxConstraints(minHeight: 48),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(16.r),
-                                  borderSide: BorderSide(
-                                      color: ColorsManager.secondryBlueColor,
-                                      width: 2.w),
-                                ),
-                                hintText: 'Promo code',
-                                hintStyle: const TextStyle(color: Colors.grey),
-                                border: OutlineInputBorder(
-                                  borderSide:
-                                      const BorderSide(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(16.r),
-                                ),
-                              ),
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isPromoApplied = false;
+                              promoCodeController.clear();
+                            });
+                          },
+                          icon: const Icon(Icons.close, color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                  )
+                else
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          cursorColor: ColorsManager.secondryBlueColor,
+                          controller: promoCodeController,
+                          decoration: InputDecoration(
+                            constraints: const BoxConstraints(minHeight: 48),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16.r),
+                              borderSide: BorderSide(
+                                  color: ColorsManager.secondryBlueColor,
+                                  width: 2.w),
+                            ),
+                            hintText: 'Promo code',
+                            hintStyle: const TextStyle(color: Colors.grey),
+                            border: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(16.r),
                             ),
                           ),
-                          SizedBox(width: 8.w),
-                          AppTextButton(
-                            buttonText: 'Apply',
-                            textStyle: TextStyles.font16WhiteMedium,
-                            buttonColor: ColorsManager.secondryBlueColor,
-                            buttonWidth: 80.w,
-                            onPressed: () {
-                              if (promoCodeController.text.trim().isNotEmpty) {
-                                String enteredPromo =
-                                    promoCodeController.text.trim();
-                                if (widget.doctorData.promocode == null ||
-                                    widget.doctorData.promocode!.code !=
-                                        enteredPromo) {
-                                  AwesomeDialog(
-                                    context: context,
-                                    dialogType: DialogType.error,
-                                    title: 'Error',
-                                    desc: 'Invalid Promo Code',
-                                    btnOkOnPress: () {},
-                                  ).show();
-                                  return;
-                                } else {
-                                  setState(() {
-                                    isPromoApplied = true;
-                                  });
-                                }
-                              } else {
-                                AwesomeDialog(
-                                  context: context,
-                                  dialogType: DialogType.error,
-                                  title: 'Error',
-                                  desc: 'Please enter a promo code',
-                                  btnOkOnPress: () {},
-                                ).show();
-                              }
-                            },
-                          ),
-                        ],
+                        ),
                       ),
+                      SizedBox(width: 8.w),
+                      AppTextButton(
+                        buttonText: 'Apply',
+                        textStyle: TextStyles.font16WhiteMedium,
+                        buttonColor: ColorsManager.secondryBlueColor,
+                        buttonWidth: 80.w,
+                        onPressed: () {
+                          final entered = promoCodeController.text.trim();
+                          if (entered.isEmpty) {
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.error,
+                              title: 'Error',
+                              desc: 'Please enter a promo code',
+                              btnOkOnPress: () {},
+                            ).show();
+                          } else if (widget.doctorData.promocode == null ||
+                              widget.doctorData.promocode!.code != entered) {
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.error,
+                              title: 'Error',
+                              desc: 'Invalid Promo Code',
+                              btnOkOnPress: () {},
+                            ).show();
+                          } else {
+                            setState(() => isPromoApplied = true);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 SizedBox(height: 24.h),
                 AppTextButton(
                   buttonText: 'Book An Appointment',

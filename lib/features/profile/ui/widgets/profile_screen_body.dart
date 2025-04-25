@@ -1,6 +1,5 @@
 import 'package:care_nest/features/profile/ui/widgets/custom_profile_app_bar.dart';
 import 'package:care_nest/features/profile/ui/widgets/profile_data_fields.dart';
-import 'package:care_nest/features/profile/ui/widgets/profile_image.dart';
 import 'package:care_nest/features/profile/ui/widgets/profile_name_and_bio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

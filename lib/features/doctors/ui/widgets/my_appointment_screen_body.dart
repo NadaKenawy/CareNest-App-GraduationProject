@@ -1,3 +1,4 @@
+import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/features/doctors/data/models/get_doctors/get_doctors_response.dart';
 import 'package:care_nest/features/doctors/logic/get_all_doctors_cubit/get_all_doctors_cubit.dart';
@@ -54,18 +55,19 @@ class _MyAppointmentScreenBodyState extends State<MyAppointmentScreenBody> {
                         const Center(child: Text("Error loading appointments")),
                     success: (appointments) {
                       if (appointments == null || appointments.isEmpty) {
-                        return const Center(
-                            child: Text('No appointments found'));
+                        return Center(
+                            child: Text('No appointments found',
+                                style: TextStyles.font20BlackSemiBold.copyWith(
+                                    fontWeight: FontWeightHelper.medium)));
                       }
                       final visibleAppointments = appointments
                           .where((a) => a.status != "Canceled")
                           .toList();
                       if (visibleAppointments.isEmpty) {
                         return Center(
-                            child: Text(
-                          'No appointments found',
-                          style: TextStyles.font20BlackSemiBold,
-                        ));
+                            child: Text('No appointments found',
+                                style: TextStyles.font20BlackSemiBold.copyWith(
+                                    fontWeight: FontWeightHelper.medium)));
                       }
                       return Padding(
                         padding: EdgeInsets.symmetric(
@@ -91,8 +93,6 @@ class _MyAppointmentScreenBodyState extends State<MyAppointmentScreenBody> {
                                 : 'Dr. $doctorId';
                             final String specialization =
                                 doctor.specialty ?? 'Specialization';
-                            final String doctorImage = doctor.image ??
-                                'assets/images/doctors_test_img.png';
                             final String dayType = appointment.day.type;
                             final String startTime =
                                 appointment.day.time.startTime;
@@ -107,7 +107,6 @@ class _MyAppointmentScreenBodyState extends State<MyAppointmentScreenBody> {
                               doctorName: doctorName,
                               specialization: specialization,
                               dateTime: dateTime,
-                              doctorImage: doctorImage,
                               doctorData: doctor,
                             );
                           },

@@ -39,10 +39,10 @@ class _ForgetPassScreenBodyState extends State<ForgetPassScreenBody> {
             height: 12.h,
           ),
           Padding(
-            padding: EdgeInsets.only(right: 40.w),
+            padding: EdgeInsets.only(right: 16.w),
             child: Text(
               "Don't worry!. Please enter the email address linked with your account.",
-              style: TextStyles.font16SecondaryBlueSemiBold,
+              style: TextStyles.font16PrimaryBlueMedium,
             ),
           ),
           SizedBox(

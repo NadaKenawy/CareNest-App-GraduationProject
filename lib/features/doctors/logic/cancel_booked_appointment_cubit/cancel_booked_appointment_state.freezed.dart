@@ -20,24 +20,24 @@ mixin _$CancelBookedAppointmentState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CancelBookedAppointmentData data) success,
-    required TResult Function(ApiErrorModel apiErrorModel) error,
+    required TResult Function() success,
+    required TResult Function(ApiErrorModel error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CancelBookedAppointmentData data)? success,
-    TResult? Function(ApiErrorModel apiErrorModel)? error,
+    TResult? Function()? success,
+    TResult? Function(ApiErrorModel error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CancelBookedAppointmentData data)? success,
-    TResult Function(ApiErrorModel apiErrorModel)? error,
+    TResult Function()? success,
+    TResult Function(ApiErrorModel error)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -135,8 +135,8 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CancelBookedAppointmentData data) success,
-    required TResult Function(ApiErrorModel apiErrorModel) error,
+    required TResult Function() success,
+    required TResult Function(ApiErrorModel error) error,
   }) {
     return initial();
   }
@@ -146,8 +146,8 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CancelBookedAppointmentData data)? success,
-    TResult? Function(ApiErrorModel apiErrorModel)? error,
+    TResult? Function()? success,
+    TResult? Function(ApiErrorModel error)? error,
   }) {
     return initial?.call();
   }
@@ -157,8 +157,8 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CancelBookedAppointmentData data)? success,
-    TResult Function(ApiErrorModel apiErrorModel)? error,
+    TResult Function()? success,
+    TResult Function(ApiErrorModel error)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -252,8 +252,8 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CancelBookedAppointmentData data) success,
-    required TResult Function(ApiErrorModel apiErrorModel) error,
+    required TResult Function() success,
+    required TResult Function(ApiErrorModel error) error,
   }) {
     return loading();
   }
@@ -263,8 +263,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CancelBookedAppointmentData data)? success,
-    TResult? Function(ApiErrorModel apiErrorModel)? error,
+    TResult? Function()? success,
+    TResult? Function(ApiErrorModel error)? error,
   }) {
     return loading?.call();
   }
@@ -274,8 +274,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CancelBookedAppointmentData data)? success,
-    TResult Function(ApiErrorModel apiErrorModel)? error,
+    TResult Function()? success,
+    TResult Function(ApiErrorModel error)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -331,8 +331,6 @@ abstract class _$$SuccessImplCopyWith<$Res> {
   factory _$$SuccessImplCopyWith(
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({CancelBookedAppointmentData data});
 }
 
 /// @nodoc
@@ -345,61 +343,36 @@ class __$$SuccessImplCopyWithImpl<$Res>
 
   /// Create a copy of CancelBookedAppointmentState
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? data = null,
-  }) {
-    return _then(_$SuccessImpl(
-      null == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as CancelBookedAppointmentData,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(this.data);
-
-  @override
-  final CancelBookedAppointmentData data;
+  const _$SuccessImpl();
 
   @override
   String toString() {
-    return 'CancelBookedAppointmentState.success(data: $data)';
+    return 'CancelBookedAppointmentState.success()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SuccessImpl &&
-            (identical(other.data, data) || other.data == data));
+        (other.runtimeType == runtimeType && other is _$SuccessImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, data);
-
-  /// Create a copy of CancelBookedAppointmentState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
-      __$$SuccessImplCopyWithImpl<_$SuccessImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CancelBookedAppointmentData data) success,
-    required TResult Function(ApiErrorModel apiErrorModel) error,
+    required TResult Function() success,
+    required TResult Function(ApiErrorModel error) error,
   }) {
-    return success(data);
+    return success();
   }
 
   @override
@@ -407,10 +380,10 @@ class _$SuccessImpl implements _Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CancelBookedAppointmentData data)? success,
-    TResult? Function(ApiErrorModel apiErrorModel)? error,
+    TResult? Function()? success,
+    TResult? Function(ApiErrorModel error)? error,
   }) {
-    return success?.call(data);
+    return success?.call();
   }
 
   @override
@@ -418,12 +391,12 @@ class _$SuccessImpl implements _Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CancelBookedAppointmentData data)? success,
-    TResult Function(ApiErrorModel apiErrorModel)? error,
+    TResult Function()? success,
+    TResult Function(ApiErrorModel error)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(data);
+      return success();
     }
     return orElse();
   }
@@ -467,16 +440,7 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements CancelBookedAppointmentState {
-  const factory _Success(final CancelBookedAppointmentData data) =
-      _$SuccessImpl;
-
-  CancelBookedAppointmentData get data;
-
-  /// Create a copy of CancelBookedAppointmentState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _Success() = _$SuccessImpl;
 }
 
 /// @nodoc
@@ -485,7 +449,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
           _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
       __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ApiErrorModel apiErrorModel});
+  $Res call({ApiErrorModel error});
 }
 
 /// @nodoc
@@ -501,12 +465,12 @@ class __$$ErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? apiErrorModel = null,
+    Object? error = null,
   }) {
     return _then(_$ErrorImpl(
-      null == apiErrorModel
-          ? _value.apiErrorModel
-          : apiErrorModel // ignore: cast_nullable_to_non_nullable
+      null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
               as ApiErrorModel,
     ));
   }
@@ -515,14 +479,14 @@ class __$$ErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ErrorImpl implements _Error {
-  const _$ErrorImpl(this.apiErrorModel);
+  const _$ErrorImpl(this.error);
 
   @override
-  final ApiErrorModel apiErrorModel;
+  final ApiErrorModel error;
 
   @override
   String toString() {
-    return 'CancelBookedAppointmentState.error(apiErrorModel: $apiErrorModel)';
+    return 'CancelBookedAppointmentState.error(error: $error)';
   }
 
   @override
@@ -530,12 +494,11 @@ class _$ErrorImpl implements _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorImpl &&
-            (identical(other.apiErrorModel, apiErrorModel) ||
-                other.apiErrorModel == apiErrorModel));
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, apiErrorModel);
+  int get hashCode => Object.hash(runtimeType, error);
 
   /// Create a copy of CancelBookedAppointmentState
   /// with the given fields replaced by the non-null parameter values.
@@ -550,10 +513,10 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CancelBookedAppointmentData data) success,
-    required TResult Function(ApiErrorModel apiErrorModel) error,
+    required TResult Function() success,
+    required TResult Function(ApiErrorModel error) error,
   }) {
-    return error(apiErrorModel);
+    return error(this.error);
   }
 
   @override
@@ -561,10 +524,10 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(CancelBookedAppointmentData data)? success,
-    TResult? Function(ApiErrorModel apiErrorModel)? error,
+    TResult? Function()? success,
+    TResult? Function(ApiErrorModel error)? error,
   }) {
-    return error?.call(apiErrorModel);
+    return error?.call(this.error);
   }
 
   @override
@@ -572,12 +535,12 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CancelBookedAppointmentData data)? success,
-    TResult Function(ApiErrorModel apiErrorModel)? error,
+    TResult Function()? success,
+    TResult Function(ApiErrorModel error)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(apiErrorModel);
+      return error(this.error);
     }
     return orElse();
   }
@@ -621,9 +584,9 @@ class _$ErrorImpl implements _Error {
 }
 
 abstract class _Error implements CancelBookedAppointmentState {
-  const factory _Error(final ApiErrorModel apiErrorModel) = _$ErrorImpl;
+  const factory _Error(final ApiErrorModel error) = _$ErrorImpl;
 
-  ApiErrorModel get apiErrorModel;
+  ApiErrorModel get error;
 
   /// Create a copy of CancelBookedAppointmentState
   /// with the given fields replaced by the non-null parameter values.

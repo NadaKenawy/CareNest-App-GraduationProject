@@ -65,7 +65,7 @@ class DoctorDetailsHeader extends StatelessWidget {
                       ),
                       SizedBox(width: 4.w),
                       Text(
-                        doctorData.ratingsAverage.toString(),
+                        doctorData.ratingsAverage?.toStringAsFixed(2) ?? '0.00',
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,

@@ -19,16 +19,16 @@ class WorkingHoursListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color backgroundColor = isBooked
-        ? Colors.red.withValues(alpha: .1)
+        ? Colors.red.withValues(alpha: 0.1)
         : isSelected
             ? ColorsManager.secondryBlueColor
             : Colors.white;
 
     final Color borderColor = isBooked
-        ? Colors.red.withValues(alpha: .3)
+        ? Colors.red.withValues(alpha: 0.3)
         : isSelected
             ? Colors.transparent
-            : Colors.grey.withValues(alpha: .5);
+            : Colors.grey.withValues(alpha: 0.5);
 
     final Color textColor = isBooked
         ? Colors.red

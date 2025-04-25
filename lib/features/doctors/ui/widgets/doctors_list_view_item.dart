@@ -74,6 +74,8 @@ class DoctorsListViewItem extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14.sp,
                   ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 4.h),
                 Row(
@@ -85,7 +87,7 @@ class DoctorsListViewItem extends StatelessWidget {
                     ),
                     SizedBox(width: 4.w),
                     Text(
-                      '${doctorData.ratingsAverage}',
+                      doctorData.ratingsAverage?.toStringAsFixed(2) ?? '0.00',
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.bold,

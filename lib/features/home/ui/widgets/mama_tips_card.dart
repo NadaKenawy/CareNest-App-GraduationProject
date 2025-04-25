@@ -24,7 +24,7 @@ class MamaTipsCard extends StatelessWidget {
           BoxShadow(
             color: const Color(0xffFFBB5D).withOpacity(0.5),
             offset: const Offset(0, 5),
-            blurRadius: 10,
+            blurRadius: 4,
             spreadRadius: 1,
           ),
         ],

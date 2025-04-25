@@ -11,8 +11,7 @@ class CancelBookedAppointmentRepo {
   Future<ServerResult<CancelBookedAppointmentResponse>> cancelBookedAppointment(
       String token, String id) async {
     try {
-      final response =
-          await _apiService.cancelBookedAppointment(token, id);
+      final response = await _apiService.cancelBookedAppointment(token, id);
       return ServerResult.success(response);
     } catch (error) {
       return ServerResult.failure(ServerErrorHandler.handle(error));

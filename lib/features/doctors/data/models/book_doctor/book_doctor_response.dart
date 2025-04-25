@@ -5,10 +5,12 @@ part 'book_doctor_response.g.dart';
 @JsonSerializable()
 class BookDoctorResponse {
   final String? status;
+  final String? message;
   final DoctorBookingData? data;
 
   BookDoctorResponse({
     this.status,
+    this.message,
     this.data,
   });
 
@@ -19,28 +21,21 @@ class BookDoctorResponse {
 
 @JsonSerializable()
 class DoctorBookingData {
-  final String? user;
-  final num? orderPrice;
-  final String? status;
-  final String? doctor;
-  final BookingDayData? day;
-  @JsonKey(name: '_id')
+  @JsonKey(name: 'id')
   final String? id;
-  final String? createdAt;
-  final String? updatedAt;
-  @JsonKey(name: '__v')
-  final int? v;
+  final String? appointmentDateTime;
+  final BookingDayData? day;
+  final String? status;
+  final bool? isExpired;
+  final num? orderPrice;
 
   DoctorBookingData({
-    this.user,
-    this.orderPrice,
-    this.status,
-    this.doctor,
-    this.day,
     this.id,
-    this.createdAt,
-    this.updatedAt,
-    this.v,
+    this.appointmentDateTime,
+    this.day,
+    this.status,
+    this.isExpired,
+    this.orderPrice,
   });
 
   factory DoctorBookingData.fromJson(Map<String, dynamic> json) =>

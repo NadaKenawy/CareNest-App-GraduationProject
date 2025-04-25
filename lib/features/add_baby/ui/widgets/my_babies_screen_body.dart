@@ -22,11 +22,13 @@ class MyBabiesScreenBody extends StatelessWidget {
         backgroundColor: Colors.white,
         title: Text(
           'My Babies',
-          style: TextStyles.font20BlackSemiMedium,
+          style: TextStyles.font20BlackSemiMedium.copyWith(fontSize: 24.sp),
         ),
       ),
       body: Column(
+        
         children: [
+          SizedBox(height: 16.h),
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(

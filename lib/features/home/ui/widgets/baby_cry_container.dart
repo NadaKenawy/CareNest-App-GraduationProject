@@ -27,7 +27,7 @@ class BabyCryContainer extends StatelessWidget {
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),
                 offset: const Offset(0, 5),
-                blurRadius: 10,
+                blurRadius: 4,
                 spreadRadius: 1,
               ),
             ],

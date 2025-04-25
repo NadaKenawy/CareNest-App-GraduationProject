@@ -42,7 +42,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       String? token =
           await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
 
-      if (token != null && token.isNotEmpty) {
+      if (token.isNotEmpty) {
         GoRouter.of(context)
             .pushReplacement(AppRouter.kHomeScreen, extra: token);
       } else {

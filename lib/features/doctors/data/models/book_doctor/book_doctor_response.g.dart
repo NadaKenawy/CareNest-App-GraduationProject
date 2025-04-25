@@ -9,6 +9,7 @@ part of 'book_doctor_response.dart';
 BookDoctorResponse _$BookDoctorResponseFromJson(Map<String, dynamic> json) =>
     BookDoctorResponse(
       status: json['status'] as String?,
+      message: json['message'] as String?,
       data: json['data'] == null
           ? null
           : DoctorBookingData.fromJson(json['data'] as Map<String, dynamic>),
@@ -17,35 +18,30 @@ BookDoctorResponse _$BookDoctorResponseFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$BookDoctorResponseToJson(BookDoctorResponse instance) =>
     <String, dynamic>{
       'status': instance.status,
+      'message': instance.message,
       'data': instance.data,
     };
 
 DoctorBookingData _$DoctorBookingDataFromJson(Map<String, dynamic> json) =>
     DoctorBookingData(
-      user: json['user'] as String?,
-      orderPrice: json['orderPrice'] as num?,
-      status: json['status'] as String?,
-      doctor: json['doctor'] as String?,
+      id: json['id'] as String?,
+      appointmentDateTime: json['appointmentDateTime'] as String?,
       day: json['day'] == null
           ? null
           : BookingDayData.fromJson(json['day'] as Map<String, dynamic>),
-      id: json['_id'] as String?,
-      createdAt: json['createdAt'] as String?,
-      updatedAt: json['updatedAt'] as String?,
-      v: (json['__v'] as num?)?.toInt(),
+      status: json['status'] as String?,
+      isExpired: json['isExpired'] as bool?,
+      orderPrice: json['orderPrice'] as num?,
     );
 
 Map<String, dynamic> _$DoctorBookingDataToJson(DoctorBookingData instance) =>
     <String, dynamic>{
-      'user': instance.user,
-      'orderPrice': instance.orderPrice,
-      'status': instance.status,
-      'doctor': instance.doctor,
+      'id': instance.id,
+      'appointmentDateTime': instance.appointmentDateTime,
       'day': instance.day,
-      '_id': instance.id,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
-      '__v': instance.v,
+      'status': instance.status,
+      'isExpired': instance.isExpired,
+      'orderPrice': instance.orderPrice,
     };
 
 BookingDayData _$BookingDayDataFromJson(Map<String, dynamic> json) =>

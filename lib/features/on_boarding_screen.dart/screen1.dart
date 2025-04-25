@@ -28,7 +28,7 @@ class Screen1 extends StatelessWidget {
           SizedBox(height: 20.h),
           Text(
             'Listen to your baby\'s cries, and let us help\nyou understand the reason! With cry analysis,\nwe\'ll provide you with the right tips to meet\nyour baby\'s needs.',
-            style: TextStyles.font16PrimaryBlackMedium,
+            style: TextStyles.font16BlackMedium,
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 20.h),

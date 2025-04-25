@@ -1280,7 +1280,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          'order',
+          'appointments',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1315,7 +1315,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          'order/orders',
+          'appointments/orders',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1346,13 +1346,13 @@ class _ApiService implements ApiService {
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<CancelBookedAppointmentResponse>(Options(
-      method: 'PATCH',
+      method: 'DELETE',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'order/canceled/${id}',
+          'appointments/${id}',
           queryParameters: queryParameters,
           data: _data,
         )
