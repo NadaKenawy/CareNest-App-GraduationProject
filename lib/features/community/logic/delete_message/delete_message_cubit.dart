@@ -15,7 +15,7 @@ class DeleteMessageCubit extends Cubit<DeleteMessageState> {
       final token =
           await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
       final DeleteMessageResponse res =
-          await repo.deleteMessage(token!, messageId);
+          await repo.deleteMessage(token, messageId);
       if (res.success) {
         emit(DeleteMessageState.success(messageId));
       } else {
