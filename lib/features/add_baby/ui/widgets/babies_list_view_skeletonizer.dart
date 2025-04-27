@@ -13,7 +13,7 @@ class BabiesListViewSkeletonizer extends StatelessWidget {
         itemCount: 6,
         itemBuilder: (context, index) {
           return Padding(
-              padding: EdgeInsets.only(bottom: 40.h),
+              padding: EdgeInsets.only(bottom: 16.h),
               child: const BabiesListViewSkeletonizerItem(
                 gender: 'boy',
                 name: 'Karma',

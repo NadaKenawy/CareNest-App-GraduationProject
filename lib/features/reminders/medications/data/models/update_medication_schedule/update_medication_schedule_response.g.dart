@@ -29,23 +29,11 @@ Map<String, dynamic> _$UpdateMedicationScheduleResponseToJson(
 BabyData _$BabyDataFromJson(Map<String, dynamic> json) => BabyData(
       id: json['_id'] as String?,
       name: json['name'] as String?,
-      weight: json['weight'] as num?,
-      height: json['height'] as num?,
-      gender: json['gender'] as String?,
-      birthDay: json['birthDay'] == null
-          ? null
-          : DateTime.parse(json['birthDay'] as String),
-      motherOfBaby: json['motherOfBaby'] as String?,
     );
 
 Map<String, dynamic> _$BabyDataToJson(BabyData instance) => <String, dynamic>{
       '_id': instance.id,
       'name': instance.name,
-      'weight': instance.weight,
-      'height': instance.height,
-      'gender': instance.gender,
-      'birthDay': instance.birthDay?.toIso8601String(),
-      'motherOfBaby': instance.motherOfBaby,
     };
 
 MedicationData _$MedicationDataFromJson(Map<String, dynamic> json) =>

@@ -953,7 +953,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          'tips/?target=Baby&limit=35',
+          'tips/?target=Baby&limit=40',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -987,7 +987,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          'tips/?target=Mama&limit=6',
+          'tips/?target=Mama&limit=10',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1092,7 +1092,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          'relaxSounds/?category=White Noise&limit=12',
+          'relaxSounds/?category=White Noise&limit=15',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1126,7 +1126,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          'stories/?limit=20',
+          'stories/?limit=26',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1160,7 +1160,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          'channels/?limit=20',
+          'channels/?limit=26',
           queryParameters: queryParameters,
           data: _data,
         )

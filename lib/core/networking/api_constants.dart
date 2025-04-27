@@ -31,16 +31,16 @@ class ApiConstants {
   static const String getWeightGrowth = "dataGrowth/weight/{babyid}";
   static const String putGrowthData = "dataGrowth/{id}";
   static const String latestGrowthData = "dataGrowth/LatestGrowthData/{id}";
-  static const String getAllTipsOfBaby = "tips/?target=Baby&limit=35";
-  static const String getAllTipsOfMom = "tips/?target=Mama&limit=6";
+  static const String getAllTipsOfBaby = "tips/?target=Baby&limit=40";
+  static const String getAllTipsOfMom = "tips/?target=Mama&limit=10";
   static const String getTipDetails = "tips/{id}";
   static const String getMusic = "relaxSounds/?category=Music";
 
   static const String getWhiteNoise =
-      "relaxSounds/?category=White Noise&limit=12";
+      "relaxSounds/?category=White Noise&limit=15";
 
-  static const String getAllStories = "stories/?limit=20";
-  static const String getAllChannels = "channels/?limit=20";
+  static const String getAllStories = "stories/?limit=26";
+  static const String getAllChannels = "channels/?limit=26";
   static const String getAllDoctors = "doctor/near";
   static const String getAllHospitals = "doctor/hospital";
   static const String postPrediction =

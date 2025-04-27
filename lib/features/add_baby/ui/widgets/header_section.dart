@@ -61,8 +61,8 @@ class HeaderSection extends StatelessWidget {
                   child: GestureDetector(
                     onTap: onEditTap,
                     child: Container(
-                      width: 40.w,
-                      height: 40.h,
+                      width: 32.w,
+                      height: 32.h,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white,
@@ -82,7 +82,7 @@ class HeaderSection extends StatelessWidget {
                               child: IconButton(
                                 icon: Icon(
                                   Icons.edit,
-                                  size: 20.sp,
+                                  size: 16.sp,
                                   color: Colors.white,
                                 ),
                                 onPressed: () {},
@@ -91,7 +91,7 @@ class HeaderSection extends StatelessWidget {
                           : IconButton(
                               icon: Icon(
                                 Icons.edit,
-                                size: 20.sp,
+                                size: 16.sp,
                                 color: iconColor,
                               ),
                               onPressed: () {},

@@ -19,7 +19,7 @@ class AnalysisResultListItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           SvgPicture.asset(analysisResultModel.icon),
-          SizedBox(height: 8.h),
+          SizedBox(height: 6.h),
           Text(
             analysisResultModel.title,
             style: const TextStyle(
@@ -27,7 +27,7 @@ class AnalysisResultListItem extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: 6.h),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
             decoration: BoxDecoration(

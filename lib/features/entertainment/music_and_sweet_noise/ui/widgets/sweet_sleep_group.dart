@@ -35,7 +35,6 @@ class _SweetSleepGroupState extends State<SweetSleepGroup> {
     return GridView.builder(
       padding: EdgeInsets.zero,
       shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
       itemCount: widget.whiteNoiseData.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
