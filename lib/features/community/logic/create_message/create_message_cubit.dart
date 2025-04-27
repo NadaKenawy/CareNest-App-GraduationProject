@@ -23,6 +23,8 @@ class CreateMessageCubit extends Cubit<CreateMessageState> {
 
     final token =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
+    final userId =
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.userId);
 
     final formData = FormData();
 
@@ -48,8 +50,8 @@ class CreateMessageCubit extends Cubit<CreateMessageState> {
           // Create a new message object from the response
           final newMessage = CommunityMessage(
             id: response.data['id'] as String?,
-            senderId: response.data['senderId'] as String?,
-            message: response.data['message'] as String? ?? '',
+            senderId: userId,
+            message: message ?? response.data['message'] as String? ?? '',
             timestamp: DateTime.now(),
             userImage: response.data['userImage'] as String?,
             images: response.data['images'] as List<String>?,

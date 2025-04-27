@@ -30,15 +30,17 @@ class _CommunityScreenBodyState extends State<CommunityScreenBody> {
   String? _currentUserId;
   final ScrollController _scrollController = ScrollController();
   late final AudioRecorder _recorder;
-  String? _lastSentMessage;
-  List<String>? _lastSentImagePaths;
-  String? _lastSentAudioPath;
 
   @override
   void initState() {
     super.initState();
     _recorder = AudioRecorder();
     _loadSessionAndFetch();
+    Future.delayed(const Duration(milliseconds: 100), () {
+      if (mounted) {
+        _scrollToBottom();
+      }
+    });
   }
 
   @override
@@ -249,27 +251,9 @@ class _CommunityScreenBodyState extends State<CommunityScreenBody> {
               state.maybeWhen(
                 success: (response) {
                   if (response.success) {
-                    final newMessage = CommunityMessage(
-                      id: response.data['id'] as String?,
-                      senderId: _currentUserId,
-                      message: _lastSentMessage ?? '',
-                      timestamp: DateTime.now(),
-                      userImage: response.data['userImage'] as String?,
-                      images: _lastSentImagePaths ??
-                          (response.data['images'] as List<String>?),
-                      mediaUrl: _lastSentAudioPath ??
-                          response.data['mediaUrl'] as String?,
-                      mediaType: response.data['mediaType'] as String?,
-                    );
-                    context
-                        .read<GetCommunityMessagesCubit>()
-                        .addNewMessage(newMessage);
-                    _scrollToBottom();
                     setState(() {
-                      _lastSentMessage = null;
-                      _lastSentImagePaths = null;
-                      _lastSentAudioPath = null;
                     });
+                    _scrollToBottom();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(response.message)),
@@ -287,31 +271,30 @@ class _CommunityScreenBodyState extends State<CommunityScreenBody> {
             child: MessageInputField(
               recorder: _recorder,
               onSend: (text) {
-                setState(() {
-                  _lastSentMessage = text;
-                  _lastSentImagePaths = null;
-                  _lastSentAudioPath = null;
-                });
-                context.read<CreateMessageCubit>().createMessage(message: text);
+                if (text.trim().isNotEmpty) {
+                  setState(() {
+                  });
+                  context
+                      .read<CreateMessageCubit>()
+                      .createMessage(message: text);
+                }
               },
               onSendImage: (images, localPaths) {
-                setState(() {
-                  _lastSentImagePaths = localPaths;
-                  _lastSentMessage = null;
-                  _lastSentAudioPath = null;
-                });
-                context
-                    .read<CreateMessageCubit>()
-                    .createMessage(images: images);
+                if (images.isNotEmpty) {
+                  setState(() {
+                  });
+                  context
+                      .read<CreateMessageCubit>()
+                      .createMessage(images: images);
+                }
               },
               onSendAudio: (audio, localPath) {
                 setState(() {
-                  _lastSentAudioPath = localPath;
-                  _lastSentMessage = null;
-                  _lastSentImagePaths = null;
                 });
-                context.read<CreateMessageCubit>().createMessage(audio: audio);
-              },
+                context
+                    .read<CreateMessageCubit>()
+                    .createMessage(audio: audio);
+                            },
             ),
           ),
         ],
