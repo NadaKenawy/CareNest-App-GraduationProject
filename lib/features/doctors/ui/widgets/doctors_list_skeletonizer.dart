@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-
 class DoctorsListSkeletonizer extends StatelessWidget {
   const DoctorsListSkeletonizer({super.key});
 
@@ -31,7 +30,7 @@ class DoctorsListSkeletonizer extends StatelessWidget {
                     Flexible(
                       flex: 2,
                       child: Image.asset(
-                        'assets/images/doctors_test_img2.png',
+                        'assets/images/download.jpg',
                         fit: BoxFit.cover,
                       ),
                     ),
