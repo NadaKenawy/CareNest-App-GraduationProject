@@ -36,7 +36,7 @@ class _CommunityScreenBodyState extends State<CommunityScreenBody> {
     super.initState();
     _recorder = AudioRecorder();
     _loadSessionAndFetch();
-    Future.delayed(const Duration(milliseconds: 100), () {
+    Future.delayed(const Duration(milliseconds: 500), () {
       if (mounted) {
         _scrollToBottom();
       }
@@ -68,7 +68,7 @@ class _CommunityScreenBodyState extends State<CommunityScreenBody> {
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
           _scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 200),
           curve: Curves.easeOut,
         );
       }
@@ -251,8 +251,7 @@ class _CommunityScreenBodyState extends State<CommunityScreenBody> {
               state.maybeWhen(
                 success: (response) {
                   if (response.success) {
-                    setState(() {
-                    });
+                    setState(() {});
                     _scrollToBottom();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -272,8 +271,7 @@ class _CommunityScreenBodyState extends State<CommunityScreenBody> {
               recorder: _recorder,
               onSend: (text) {
                 if (text.trim().isNotEmpty) {
-                  setState(() {
-                  });
+                  setState(() {});
                   context
                       .read<CreateMessageCubit>()
                       .createMessage(message: text);
@@ -281,20 +279,16 @@ class _CommunityScreenBodyState extends State<CommunityScreenBody> {
               },
               onSendImage: (images, localPaths) {
                 if (images.isNotEmpty) {
-                  setState(() {
-                  });
+                  setState(() {});
                   context
                       .read<CreateMessageCubit>()
                       .createMessage(images: images);
                 }
               },
               onSendAudio: (audio, localPath) {
-                setState(() {
-                });
-                context
-                    .read<CreateMessageCubit>()
-                    .createMessage(audio: audio);
-                            },
+                setState(() {});
+                context.read<CreateMessageCubit>().createMessage(audio: audio);
+              },
             ),
           ),
         ],
