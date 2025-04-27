@@ -23,7 +23,7 @@ class DoctorDetailsHeader extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16.0),
                 child: Image.network(
-                  doctorData.image ?? 'assets/images/doctors_test_img.png',
+                  doctorData.image ?? 'assets/images/download.jpg',
                   height: 120.h,
                   fit: BoxFit.cover,
                 ),

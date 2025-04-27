@@ -12,7 +12,7 @@ enum DataSource {
   INTERNAL_SERVER_ERROR,
   CONNECT_TIMEOUT,
   CANCEL,
-  RECIEVE_TIMEOUT,
+  RECIEIVE_TIMEOUT,
   SEND_TIMEOUT,
   CACHE_ERROR,
   NO_INTERNET_CONNECTION,
@@ -32,7 +32,7 @@ class ResponseCode {
   // local status code
   static const int CONNECT_TIMEOUT = -1;
   static const int CANCEL = -2;
-  static const int RECIEVE_TIMEOUT = -3;
+  static const int RECIEIVE_TIMEOUT = -3;
   static const int SEND_TIMEOUT = -4;
   static const int CACHE_ERROR = -5;
   static const int NO_INTERNET_CONNECTION = -6;
@@ -50,7 +50,7 @@ class ResponseMessage {
   // local status code
   static String CONNECT_TIMEOUT = ApiErrors.timeoutError;
   static String CANCEL = ApiErrors.defaultError;
-  static String RECIEVE_TIMEOUT = ApiErrors.timeoutError;
+  static String RECIEIVE_TIMEOUT = ApiErrors.timeoutError;
   static String SEND_TIMEOUT = ApiErrors.timeoutError;
   static String CACHE_ERROR = ApiErrors.cacheError;
   static String NO_INTERNET_CONNECTION = ApiErrors.noInternetError;
@@ -90,8 +90,8 @@ extension DataSourceExtension on DataSource {
         return ResponseMessage.CONNECT_TIMEOUT;
       case DataSource.CANCEL:
         return ResponseMessage.CANCEL;
-      case DataSource.RECIEVE_TIMEOUT:
-        return ResponseMessage.RECIEVE_TIMEOUT;
+      case DataSource.RECIEIVE_TIMEOUT:
+        return ResponseMessage.RECIEIVE_TIMEOUT;
       case DataSource.SEND_TIMEOUT:
         return ResponseMessage.SEND_TIMEOUT;
       case DataSource.CACHE_ERROR:
@@ -123,7 +123,7 @@ SignUpErrorModel _handleError(DioException error) {
     case DioExceptionType.sendTimeout:
       return DataSource.SEND_TIMEOUT.getFailure();
     case DioExceptionType.receiveTimeout:
-      return DataSource.RECIEVE_TIMEOUT.getFailure();
+      return DataSource.RECIEIVE_TIMEOUT.getFailure();
     case DioExceptionType.badResponse:
     case DioExceptionType.unknown:
       if (error.response != null &&
@@ -145,4 +145,18 @@ SignUpErrorModel _handleError(DioException error) {
 class ApiInternalStatus {
   static const int SUCCESS = 0;
   static const int FAILURE = 1;
+}
+
+String handle(dynamic error) {
+  if (error is DioException) {
+    if (error.response?.data is String) {
+      return error.response?.data as String;
+    }
+    if (error.response?.data is Map<String, dynamic>) {
+      final data = error.response?.data as Map<String, dynamic>;
+      return data['message'] as String? ?? 'An error occurred';
+    }
+    return error.message ?? 'An error occurred';
+  }
+  return error.toString();
 }

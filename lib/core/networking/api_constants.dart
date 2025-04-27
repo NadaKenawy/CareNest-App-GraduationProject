@@ -50,6 +50,9 @@ class ApiConstants {
   static const String cancelbookedAppointment = "appointments/{id}";
   static const String createReview = "doctor/{doctorId}/reviews";
   static const String updateUser = "users/updateMe";
+  static const String getCommunityMessages = "community";
+  static const String createMessage = "community";
+  static const String deleteCommunityMessage = 'community/{id}';
 }
 
 class ApiErrors {

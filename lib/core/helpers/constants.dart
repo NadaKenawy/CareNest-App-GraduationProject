@@ -10,4 +10,5 @@ class SharedPrefKeys {
   static const String babyName = 'babyName';
   static const String babyDateOfBirth = 'userDateOfBirth';
   static const num userLocation = 0;
+  static const String userId = 'userId';
 }

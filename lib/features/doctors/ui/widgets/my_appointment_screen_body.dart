@@ -85,7 +85,7 @@ class _MyAppointmentScreenBodyState extends State<MyAppointmentScreenBody> {
                                 id: doctorId,
                                 user: null,
                                 specialty: 'Specialization',
-                                image: 'assets/images/doctors_test_img.png',
+                                image: 'assets/images/download.jpg',
                               ),
                             );
                             final String doctorName = doctor.user != null

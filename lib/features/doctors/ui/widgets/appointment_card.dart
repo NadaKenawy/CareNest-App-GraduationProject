@@ -28,6 +28,8 @@ class AppointmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final imageUrl = doctorData.image ?? '';
+
     return Container(
       padding: EdgeInsets.all(8.h),
       decoration: BoxDecoration(
@@ -46,12 +48,26 @@ class AppointmentCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(16.r),
-            child: Image.network(
-              doctorData.image ?? 'assets/images/doctors_test_img.png',
-              width: 80.w,
-              height: 80.h,
-              fit: BoxFit.cover,
-            ),
+            child: (imageUrl.startsWith('http://') ||
+                    imageUrl.startsWith('https://'))
+                ? Image.network(
+                    imageUrl,
+                    width: 80.w,
+                    height: 80.h,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) => Image.asset(
+                      'assets/images/download.jpg',
+                      width: 80.w,
+                      height: 80.h,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : Image.asset(
+                    'assets/images/download.jpg',
+                    width: 80.w,
+                    height: 80.h,
+                    fit: BoxFit.cover,
+                  ),
           ),
           SizedBox(width: 12.w),
           Expanded(
@@ -69,10 +85,10 @@ class AppointmentCard extends StatelessWidget {
                               .copyWith(fontWeight: FontWeightHelper.medium),
                           children: [
                             TextSpan(
-                                text: specialization,
-                                style: TextStyles.font16BlackMedium.copyWith(
-                                  height: 1.5,
-                                )),
+                              text: specialization,
+                              style: TextStyles.font16BlackMedium
+                                  .copyWith(height: 1.5),
+                            ),
                           ],
                         ),
                         maxLines: 2,

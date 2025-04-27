@@ -45,8 +45,7 @@ class DoctorBookingCubit extends Cubit<DoctorBookingState> {
     } catch (e) {
       log("Unexpected error: $e");
       emit(DoctorBookingState.bookingError(
-        ApiErrorModel(
-            message: 'an unexpected error occurred, please try again.'),
+        ApiErrorModel(message: 'Booking failed, please try again.'),
       ));
     }
   }

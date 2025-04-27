@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
-
+import 'package:care_nest/core/helpers/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../helpers/shared_pref_helper.dart';
 import '../../models/user_model.dart';
 
@@ -32,8 +31,12 @@ class UserCubit extends Cubit<UserState> {
         emit(state.copyWith(user: savedUser, isLoading: false));
         log('User loaded from cache: ${savedUser.firstname}');
         log('User birthdate: ${savedUser.dateOfBirth}');
+        log('User ID: ${savedUser.id}');
+        await SharedPrefHelper.setSecuredString(SharedPrefKeys.userId, savedUser.id);
+        log('User ID saved to secure storage: ${savedUser.id}');
       } else {
         emit(state.copyWith(isLoading: false));
+        log('No saved user data found.');
       }
     } catch (e) {
       emit(state.copyWith(isLoading: false));
@@ -44,22 +47,51 @@ class UserCubit extends Cubit<UserState> {
   void setUser(UserModel user) {
     emit(state.copyWith(user: user));
     log('User set: ${user.firstname}');
+    log('User ID: ${user.id}');
+    saveUserDataLocally(user);
   }
 
   void clearUser() {
     emit(UserState());
+    log('User cleared');
+    SharedPrefHelper.removeSecuredData('user_data');
+    SharedPrefHelper.removeSecuredData('user_id');
   }
 }
 
 Future<void> saveUserDataLocally(UserModel user) async {
-  await SharedPrefHelper.setSecuredString(
-    'user_data',
-    jsonEncode(user.toJson()),
-  );
+  try {
+    await SharedPrefHelper.setSecuredString(
+      'user_data',
+      jsonEncode(user.toJson()),
+    );
+    log('User data saved locally: ${user.firstname}');
+
+    await SharedPrefHelper.setSecuredString(
+      SharedPrefKeys.userId,
+      user.id,
+    );
+    log('User ID saved locally: ${user.id}');
+  } catch (e) {
+    log('Error saving user data: $e');
+  }
 }
 
 Future<UserModel?> getSavedUserData() async {
-  final jsonString = await SharedPrefHelper.getSecuredString('user_data');
-  log("✅ Found saved user data: $jsonString");
-  return UserModel.fromJson(jsonDecode(jsonString));
+  try {
+    final jsonString = await SharedPrefHelper.getSecuredString('user_data');
+    if (jsonString.isNotEmpty) {
+      log('✅ Found saved user data: $jsonString');
+      final Map<String, dynamic> map = jsonDecode(jsonString);
+      return UserModel.fromJson(map);
+    } else {
+      log('No saved user data found.');
+      return null;
+    }
+  } catch (e) {
+    log('Error retrieving saved user data: $e');
+    await SharedPrefHelper.removeSecuredData('user_data');
+    await SharedPrefHelper.removeSecuredData(SharedPrefKeys.userId);
+    return null;
+  }
 }

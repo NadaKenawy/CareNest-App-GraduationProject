@@ -14,7 +14,11 @@ import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubi
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
+import 'package:care_nest/features/community/logic/create_message/create_message_cubit.dart';
+import 'package:care_nest/features/community/logic/delete_message/delete_message_cubit.dart';
+import 'package:care_nest/features/community/logic/get_community_messages/get_community_messages_cubit.dart';
 import 'package:care_nest/features/community/ui/community_screen.dart';
+import 'package:care_nest/features/community/ui/widgets/community_members_screen.dart';
 import 'package:care_nest/features/doctors/logic/book_doctor_cubit/doctor_booking_cubit.dart';
 import 'package:care_nest/features/doctors/logic/cancel_booked_appointment_cubit/cancel_booked_appointment_cubit.dart';
 import 'package:care_nest/features/doctors/logic/create_review/doctor_review_cubit.dart';
@@ -116,6 +120,7 @@ abstract class AppRouter {
   static const kDoctorDetailsScreen = '/doctorDetailsScreen';
   static const kMyAppointmentsScreen = '/myAppointmentsScreen';
   static const kCommunityScreen = '/communityScreen';
+  static const kCommunityMembersScreen = '/communityMembersScreen';
 
   static final router = GoRouter(
     routes: [
@@ -493,9 +498,28 @@ abstract class AppRouter {
         },
       ),
       GoRoute(
-          path: kCommunityScreen,
+        path: kCommunityScreen,
+        builder: (context, state) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => getIt<GetCommunityMessagesCubit>(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<CreateMessageCubit>(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<DeleteMessageCubit>(),
+              ),
+            ],
+            child: const CommunityScreen(),
+          );
+        },
+      ),
+      GoRoute(
+          path: kCommunityMembersScreen,
           builder: (context, state) {
-            return const CommunityScreen();
+            return const CommunityMembersScreen();
           }),
     ],
   );

@@ -18,6 +18,10 @@ import 'package:care_nest/features/baby_growth/logic/get_baby_height_growth_cubi
 import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/put_growth_data_cubit/put_growth_data_cubit.dart';
+import 'package:care_nest/features/community/data/repos/create_message_repo.dart';
+import 'package:care_nest/features/community/data/repos/get_community_messages_repo.dart';
+import 'package:care_nest/features/community/logic/create_message/create_message_cubit.dart';
+import 'package:care_nest/features/community/logic/get_community_messages/get_community_messages_cubit.dart';
 import 'package:care_nest/features/doctors/data/repos/cancel_booked_appointment_repo.dart';
 import 'package:care_nest/features/doctors/data/repos/doctor_booking_repo.dart';
 import 'package:care_nest/features/doctors/data/repos/doctor_review_repo.dart';
@@ -86,6 +90,8 @@ import '../../features/profile/logic/update_user_image_cubit/update_user_image_c
 import '../../features/reminders/medications/data/repos/get_all_medication_schedule_repo.dart';
 import '../../features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 import '../logic/user_cubit/user_cubit.dart';
+import 'package:care_nest/features/community/data/repos/delete_message_repo.dart';
+import 'package:care_nest/features/community/logic/delete_message/delete_message_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -314,4 +320,21 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<UpdateUserImageCubit>(
     () => UpdateUserImageCubit(getIt<UpdateUserImageRepo>()),
   );
+
+  //get community messages
+  getIt.registerLazySingleton<GetCommunityMessagesRepo>(
+      () => GetCommunityMessagesRepo(getIt()));
+  getIt.registerFactory<GetCommunityMessagesCubit>(
+      () => GetCommunityMessagesCubit(getIt()));
+
+  //create messages
+  getIt.registerLazySingleton<CreateMessageRepo>(
+      () => CreateMessageRepo(getIt()));
+  getIt.registerFactory<CreateMessageCubit>(
+      () => CreateMessageCubit(getIt(), getIt<GetCommunityMessagesCubit>()));
+
+  // delete message
+  getIt.registerLazySingleton<DeleteMessageRepo>(
+      () => DeleteMessageRepo(getIt()));
+  getIt.registerFactory<DeleteMessageCubit>(() => DeleteMessageCubit(getIt()));
 }

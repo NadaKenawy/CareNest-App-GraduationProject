@@ -1,4 +1,5 @@
 class UserModel {
+  final String id; // Ensure this field is used
   final String firstname;
   final String lastname;
   final String email;
@@ -6,6 +7,7 @@ class UserModel {
   final String? profileImg;
 
   UserModel({
+    required this.id, // Add required id parameter
     required this.firstname,
     required this.lastname,
     required this.email,
@@ -15,6 +17,7 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
+      id: json['_id'] as String, // Adjusted the key to '_id' from 'id'
       firstname: json['firstName'] as String,
       lastname: json['lastName'] as String,
       email: json['Email'] as String,
@@ -27,6 +30,8 @@ class UserModel {
 
   Map<String, dynamic> toJson() {
     return {
+      '_id':
+          id, // Ensure this key is used in the output JSON (changed 'id' to '_id')
       'firstName': firstname,
       'lastName': lastname,
       'Email': email,
@@ -36,6 +41,7 @@ class UserModel {
   }
 
   UserModel copyWith({
+    String? id, // Allow changing the id through copyWith
     String? firstname,
     String? lastname,
     String? email,
@@ -43,6 +49,7 @@ class UserModel {
     String? profileImg,
   }) {
     return UserModel(
+      id: id ?? this.id, // Copy the id if it's not passed
       firstname: firstname ?? this.firstname,
       lastname: lastname ?? this.lastname,
       email: email ?? this.email,

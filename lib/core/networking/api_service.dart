@@ -8,6 +8,7 @@ import 'package:care_nest/features/baby_growth/data/models/get_baby_weight_growt
 import 'package:care_nest/features/baby_growth/data/models/latest_growth_data/latest_growth_data_response.dart';
 import 'package:care_nest/features/baby_growth/data/models/put_growth_data/put_growth_data_request.dart';
 import 'package:care_nest/features/baby_growth/data/models/put_growth_data/put_growth_data_response.dart';
+import 'package:care_nest/features/community/data/models/create_message/create_message_response.dart';
 import 'package:care_nest/features/doctors/data/models/book_doctor/book_doctor_request_body.dart';
 import 'package:care_nest/features/doctors/data/models/book_doctor/book_doctor_response.dart';
 import 'package:care_nest/features/doctors/data/models/booked_appointments/get_booked_appointments_response.dart';
@@ -55,6 +56,7 @@ import '../../features/add_baby/data/models/get_all_babies/get_all_babies_respon
 import '../../features/fcm/data/models/update_fcm/update_fcm_token_request_body.dart';
 import '../../features/profile/data/models/update_user_request_body.dart';
 import '../../features/profile/data/models/update_user_response.dart';
+import 'package:care_nest/features/community/data/models/delete_message/delete_message_response.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.apiBaseUrl)
@@ -278,5 +280,22 @@ abstract class ApiService {
   Future<UpdateUserResponse> updateUser(
     @Header('Authorization') String token,
     @Body() UpdateUserRequestBody updateUserRequestBody,
+  );
+
+  @GET(ApiConstants.getCommunityMessages)
+  Future<List<Map<String, dynamic>>> getCommunityMessages(
+    @Header('Authorization') String token,
+  );
+
+  @POST(ApiConstants.createMessage)
+  Future<CreateMessageResponse> createMessage(
+    @Header('Authorization') String token,
+    @Body() FormData formData,
+  );
+
+  @DELETE(ApiConstants.deleteCommunityMessage)
+  Future<DeleteMessageResponse> deleteCommunityMessage(
+    @Header('Authorization') String token,
+    @Path('id') String messageId,
   );
 }

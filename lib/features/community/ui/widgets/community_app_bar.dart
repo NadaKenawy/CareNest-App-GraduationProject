@@ -1,3 +1,4 @@
+import 'package:care_nest/core/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -5,8 +6,11 @@ import '../../../../core/theme/colors_manager.dart';
 import '../../../../core/utils/app_images.dart';
 
 class CommunityAppBar extends StatelessWidget {
-  const CommunityAppBar({super.key});
-
+  const CommunityAppBar({
+    super.key,
+    this.showGroupIcon = true,
+  });
+  final bool showGroupIcon;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -52,10 +56,16 @@ class CommunityAppBar extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.group, color: Colors.white),
-                ),
+                if (showGroupIcon)
+                  IconButton(
+                    onPressed: () {
+                      GoRouter.of(context)
+                          .push(AppRouter.kCommunityMembersScreen);
+                    },
+                    icon: const Icon(Icons.group, color: Colors.white),
+                  )
+                else
+                  const SizedBox(width: 48),
               ],
             ),
           ),
