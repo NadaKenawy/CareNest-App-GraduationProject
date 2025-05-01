@@ -79,6 +79,8 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import '../../features/add_baby/data/repos/add_baby_repo.dart';
 import '../../features/add_baby/logic/add_baby_cubit/add_baby_cubit.dart';
+import '../../features/community/data/repos/get_online_users_repo.dart';
+import '../../features/community/logic/get_online_users/get_online_users_cubit.dart';
 import '../../features/doctors/logic/get_all_doctors_cubit/get_all_doctors_cubit.dart';
 import '../../features/entertainment/music_and_sweet_noise/data/repos/get_music_repo.dart';
 import '../../features/entertainment/music_and_sweet_noise/data/repos/get_white_noise_repo.dart';
@@ -337,4 +339,10 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<DeleteMessageRepo>(
       () => DeleteMessageRepo(getIt()));
   getIt.registerFactory<DeleteMessageCubit>(() => DeleteMessageCubit(getIt()));
+
+  //get online users
+  getIt.registerLazySingleton<GetOnlineUsersRepo>(
+      () => GetOnlineUsersRepo(getIt()));
+  getIt
+      .registerFactory<GetOnlineUsersCubit>(() => GetOnlineUsersCubit(getIt()));
 }

@@ -60,7 +60,7 @@ class _CommunityScreenBodyState extends State<CommunityScreenBody> {
     }
     setState(() => _currentUserId = userId);
     log('Set current user ID: $_currentUserId');
-    context.read<GetCommunityMessagesCubit>().getCommunityMessages();
+    // context.read<GetCommunityMessagesCubit>().getCommunityMessages();
   }
 
   void _scrollToBottom() {

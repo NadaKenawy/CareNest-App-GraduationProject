@@ -1474,8 +1474,10 @@ class _ApiService implements ApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<Map<String, dynamic>> _value;
     try {
-      _value =
-          _result.data!.map((dynamic i) => i as Map<String, dynamic>).toList();
+      _value = _result.data!
+          .map((dynamic i) =>
+              Map<String, dynamic>.from(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -1550,6 +1552,40 @@ class _ApiService implements ApiService {
     late DeleteMessageResponse _value;
     try {
       _value = DeleteMessageResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<GetOnlineUsersResponse> getCommunityOnlineUsers(String token) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<GetOnlineUsersResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'community/online',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetOnlineUsersResponse _value;
+    try {
+      _value = GetOnlineUsersResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

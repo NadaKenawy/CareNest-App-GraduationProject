@@ -17,6 +17,7 @@ import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_scr
 import 'package:care_nest/features/community/logic/create_message/create_message_cubit.dart';
 import 'package:care_nest/features/community/logic/delete_message/delete_message_cubit.dart';
 import 'package:care_nest/features/community/logic/get_community_messages/get_community_messages_cubit.dart';
+import 'package:care_nest/features/community/logic/get_online_users/get_online_users_cubit.dart';
 import 'package:care_nest/features/community/ui/community_screen.dart';
 import 'package:care_nest/features/community/ui/widgets/community_members_screen.dart';
 import 'package:care_nest/features/doctors/logic/book_doctor_cubit/doctor_booking_cubit.dart';
@@ -519,7 +520,11 @@ abstract class AppRouter {
       GoRoute(
           path: kCommunityMembersScreen,
           builder: (context, state) {
-            return const CommunityMembersScreen();
+            return BlocProvider(
+              create: (context) =>
+                  getIt<GetOnlineUsersCubit>()..getOnlineUsers(),
+              child: const CommunityMembersScreen(),
+            );
           }),
     ],
   );

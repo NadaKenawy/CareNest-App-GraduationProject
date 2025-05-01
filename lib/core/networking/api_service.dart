@@ -53,6 +53,7 @@ import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import '../../features/add_baby/data/models/add_baby/add_baby_request_body.dart';
 import '../../features/add_baby/data/models/get_all_babies/get_all_babies_response.dart';
+import '../../features/community/data/models/get_online_users/get_online_users_response.dart';
 import '../../features/fcm/data/models/update_fcm/update_fcm_token_request_body.dart';
 import '../../features/profile/data/models/update_user_request_body.dart';
 import '../../features/profile/data/models/update_user_response.dart';
@@ -297,5 +298,10 @@ abstract class ApiService {
   Future<DeleteMessageResponse> deleteCommunityMessage(
     @Header('Authorization') String token,
     @Path('id') String messageId,
+  );
+
+  @GET(ApiConstants.getCommunityOnlineUsers)
+  Future<GetOnlineUsersResponse> getCommunityOnlineUsers(
+    @Header('Authorization') String token,
   );
 }
