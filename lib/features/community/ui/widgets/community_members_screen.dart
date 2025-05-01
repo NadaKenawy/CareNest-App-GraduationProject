@@ -1,8 +1,8 @@
 import 'package:care_nest/core/theme/text_styless.dart';
+import 'package:care_nest/features/community/ui/widgets/comminty_online_users_bloc_builder.dart';
 import 'package:care_nest/features/community/ui/widgets/community_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'community_members_search_field.dart';
-import 'community_members_list.dart';
 
 class CommunityMembersScreen extends StatelessWidget {
   const CommunityMembersScreen({super.key});
@@ -27,7 +27,7 @@ class CommunityMembersScreen extends StatelessWidget {
                 Text("Community Members", style: TextStyles.font16BlackMedium),
           ),
           const Expanded(
-            child: CommunityMembersList(),
+            child: CommintyOnlineUsersBlocBuilder(),
           ),
         ],
       ),
