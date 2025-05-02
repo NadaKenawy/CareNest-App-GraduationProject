@@ -21,14 +21,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider(
-        create: (context) => CreateMessageCubit(
-          GetIt.instance<CreateMessageRepo>(),
-          context.read<GetCommunityMessagesCubit>(),
-        ),
-        child: const CommunityScreenBody(),
-      ),
+    return const Scaffold(
+      body: CommunityScreenBody(),
     );
   }
 }

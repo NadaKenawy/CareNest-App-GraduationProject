@@ -14,6 +14,7 @@ import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubi
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
+import 'package:care_nest/features/community/logic/chat_cubit/chat_cubit.dart';
 import 'package:care_nest/features/community/logic/create_message/create_message_cubit.dart';
 import 'package:care_nest/features/community/logic/delete_message/delete_message_cubit.dart';
 import 'package:care_nest/features/community/logic/get_community_messages/get_community_messages_cubit.dart';
@@ -501,18 +502,8 @@ abstract class AppRouter {
       GoRoute(
         path: kCommunityScreen,
         builder: (context, state) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => getIt<GetCommunityMessagesCubit>(),
-              ),
-              BlocProvider(
-                create: (context) => getIt<CreateMessageCubit>(),
-              ),
-              BlocProvider(
-                create: (context) => getIt<DeleteMessageCubit>(),
-              ),
-            ],
+          return BlocProvider(
+            create: (context) => ChatCubit()..getMessage(),
             child: const CommunityScreen(),
           );
         },
