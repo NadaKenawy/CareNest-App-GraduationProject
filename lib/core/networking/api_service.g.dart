@@ -1573,7 +1573,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          'community/online',
+          'community/chat-users',
           queryParameters: queryParameters,
           data: _data,
         )
