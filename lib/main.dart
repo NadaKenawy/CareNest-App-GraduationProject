@@ -14,6 +14,7 @@ void main() async {
   Bloc.observer = SimpleBlocObserver();
   setupGetIt();
   await ScreenUtil.ensureScreenSize();
+  
   await getIt<UpdateFcmCubit>().initializeAndSendToken();
 
   runApp(DevicePreview(enabled: true, builder: (context) => const CareNest()));

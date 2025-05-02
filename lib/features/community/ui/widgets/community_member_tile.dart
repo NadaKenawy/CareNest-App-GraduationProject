@@ -28,20 +28,20 @@ class CommunityMemberTile extends StatelessWidget {
                       radius: 24,
                       backgroundImage: NetworkImage(user.image!),
                     ),
-              // if (isOnline)
-              //   Positioned(
-              //     bottom: 2,
-              //     right: 2,
-              //     child: Container(
-              //       width: 10,
-              //       height: 10,
-              //       decoration: BoxDecoration(
-              //         color: Colors.green,
-              //         shape: BoxShape.circle,
-              //         border: Border.all(color: Colors.white, width: 2),
-              //       ),
-              //     ),
-              //   ),
+              if (user.isOnline)
+                Positioned(
+                  bottom: 2,
+                  right: 2,
+                  child: Container(
+                    width: 10,
+                    height: 10,
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 2),
+                    ),
+                  ),
+                ),
             ],
           ),
           const SizedBox(width: 16),

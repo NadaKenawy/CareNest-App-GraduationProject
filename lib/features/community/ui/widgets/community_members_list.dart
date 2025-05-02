@@ -46,14 +46,18 @@ class CommunityMembersList extends StatelessWidget {
   final List<User> usersList;
   @override
   Widget build(BuildContext context) {
+    if (usersList.isEmpty) {
+      return const Center(
+        child: Text("No members found"),
+      );
+    }
     return ListView.separated(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      itemCount: usersList .length,
+      itemCount: usersList.length,
       separatorBuilder: (_, __) => const SizedBox(height: 16),
       itemBuilder: (context, index) {
-      
         return CommunityMemberTile(
-        user: usersList[index],
+          user: usersList[index],
         );
       },
     );

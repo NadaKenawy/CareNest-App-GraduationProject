@@ -1,5 +1,6 @@
 import 'package:care_nest/features/community/data/models/get_online_users/get_online_users_response.dart';
 import 'package:care_nest/features/community/logic/get_online_users/get_online_users_cubit.dart';
+import 'package:care_nest/features/community/ui/widgets/commuinty_members_list_skel.dart';
 import 'package:care_nest/features/community/ui/widgets/community_members_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,9 +36,7 @@ class CommintyOnlineUsersBlocBuilder extends StatelessWidget {
 
   Widget setupLoading() {
     // return const DoctorsListSkeletonizer();
-    return const Center(
-      child: CircularProgressIndicator(),
-    );
+    return const CommuintyMembersListSkel();
   }
 
   Widget setupSuccess(List<User> usersList) {

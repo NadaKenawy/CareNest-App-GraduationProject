@@ -31,6 +31,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       lastName: json['lastName'] as String,
       image: json['image'] as String?,
       lastSeen: json['lastSeen'] as String,
+      isOnline: json['isOnline'] as bool,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -40,4 +41,5 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'lastName': instance.lastName,
       'image': instance.image,
       'lastSeen': instance.lastSeen,
+      'isOnline': instance.isOnline,
     };

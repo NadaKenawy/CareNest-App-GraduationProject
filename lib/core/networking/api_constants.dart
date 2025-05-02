@@ -53,7 +53,7 @@ class ApiConstants {
   static const String getCommunityMessages = "community";
   static const String createMessage = "community";
   static const String deleteCommunityMessage = 'community/{id}';
-  static const String getCommunityOnlineUsers = "community/online";
+  static const String getCommunityOnlineUsers = "community/chat-users";
 }
 
 class ApiErrors {

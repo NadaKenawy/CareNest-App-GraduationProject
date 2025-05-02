@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'get_online_users_response.g.dart';
+
 @JsonSerializable()
 class GetOnlineUsersResponse {
   final String status;
@@ -26,19 +27,20 @@ class User {
   final String email;
   final String firstName;
   final String lastName;
-  final String ? image;
+  final String? image;
   final String lastSeen;
+  final bool isOnline;
 
   User({
     required this.id,
     required this.email,
     required this.firstName,
     required this.lastName,
-     this.image,
+    this.image,
     required this.lastSeen,
+    required this.isOnline,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
 }
-
