@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
 class SharedPrefHelper {
   SharedPrefHelper._();
@@ -116,6 +117,19 @@ class SharedPrefHelper {
     } catch (e) {
       debugPrint('Error clearing secure storage: $e');
     }
+  }
+
+
+   static Future<String> getOrCreateUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? userId = prefs.getString('user_id');
+
+    if (userId == null) {
+      userId = const Uuid().v4(); 
+      await prefs.setString('user_id', userId);
+    }
+
+    return userId;
   }
 
   
