@@ -4,6 +4,7 @@ import 'package:care_nest/features/community/ui/widgets/message_input_field.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/helpers/constants.dart';
 import '../../../../core/helpers/shared_pref_helper.dart';
 import '../../logic/chat_cubit/chat_cubit.dart';
 import '../../logic/chat_cubit/chat_state.dart';
@@ -17,14 +18,22 @@ class CommunityScreenBody extends StatefulWidget {
 
 class _CommunityScreenBodyState extends State<CommunityScreenBody> {
   final _controller = ScrollController();
+  final TextEditingController controller = TextEditingController();
 
-  TextEditingController controller = TextEditingController();
+  String? currentUserId;
 
   @override
   void initState() {
     super.initState();
-
+    _loadUserId();
     BlocProvider.of<ChatCubit>(context).getMessage();
+  }
+
+  Future<void> _loadUserId() async {
+    final id = await SharedPrefHelper.getSecuredString(SharedPrefKeys.userId);
+    setState(() {
+      currentUserId = id;
+    });
   }
 
   @override
@@ -41,6 +50,11 @@ class _CommunityScreenBodyState extends State<CommunityScreenBody> {
               builder: (context, state) {
                 var messagesList =
                     BlocProvider.of<ChatCubit>(context).messagesList;
+
+                if (currentUserId == null) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
                 return ListView.builder(
                   padding: EdgeInsets.only(top: 12.h, bottom: 4.h),
                   reverse: true,
@@ -48,19 +62,11 @@ class _CommunityScreenBodyState extends State<CommunityScreenBody> {
                   itemCount: messagesList.length,
                   itemBuilder: (context, index) {
                     final message = messagesList[index];
-                    return FutureBuilder<String>(
-                      future: SharedPrefHelper.getOrCreateUserId(),
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData) return const SizedBox();
+                    final isMine = message.userId == currentUserId;
 
-                        final currentUserId = snapshot.data!;
-                        final isMine = message.userId == currentUserId;
-
-                        return isMine
-                            ? SentMessageBubble(message: message)
-                            : ReceivedMessageBubble(message: message);
-                      },
-                    );
+                    return isMine
+                        ? SentMessageBubble(message: message)
+                        : ReceivedMessageBubble(message: message);
                   },
                 );
               },

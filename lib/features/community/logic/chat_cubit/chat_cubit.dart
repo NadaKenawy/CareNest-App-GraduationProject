@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/helpers/constants.dart';
 import '../../../../core/helpers/shared_pref_helper.dart';
 import '../../data/models/message_model.dart';
 import 'chat_state.dart';
@@ -15,7 +16,8 @@ class ChatCubit extends Cubit<ChatState> {
   StreamSubscription? _messagesSubscription; // Add this
 
   void sendMessage({required String msg}) async {
-    String userId = await SharedPrefHelper.getOrCreateUserId();
+    final userId =
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.userId);
     messages.add({
       'message': msg,
       'userId': userId,
