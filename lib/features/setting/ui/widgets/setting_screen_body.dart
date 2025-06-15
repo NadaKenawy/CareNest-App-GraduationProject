@@ -47,7 +47,9 @@ class SettingScreenBody extends StatelessWidget {
                   context,
                   icon: Icons.lock_outline,
                   title: 'Change Password',
-                  onTap: () {},
+                  onTap: () {
+                    GoRouter.of(context).push(AppRouter.kChangePasswordScreen);
+                  },
                 ),
                 _buildDivider(),
                 _buildSettingItem(

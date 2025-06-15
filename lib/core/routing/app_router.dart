@@ -66,6 +66,7 @@ import 'package:care_nest/features/reminders/medications/ui/widgets/update_medic
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/mark_vaccine_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/ui/vaccinations_screen.dart';
+import 'package:care_nest/features/setting/ui/change_password/ui/change_password_screen.dart';
 import 'package:care_nest/features/setting/ui/faq_screen.dart';
 import 'package:care_nest/features/setting/ui/setting_screen.dart';
 import 'package:care_nest/features/setting/ui/support_contact_screen.dart';
@@ -126,6 +127,7 @@ abstract class AppRouter {
   static const kSettingScreen = '/settingScreen';
   static const kFaqScreen = '/faqScreen';
   static const kSupportContactScreen = '/supportContactScreen';
+  static const kChangePasswordScreen = '/changePasswordScreen';
 
   static final router = GoRouter(
     routes: [
@@ -535,7 +537,10 @@ abstract class AppRouter {
           builder: (context, state) {
             return const SupportContactScreen();
           }),
-// ... existing c
-    ],
+      GoRoute(
+          path: kChangePasswordScreen,
+          builder: (context, state) {
+            return const ChangePasswordScreen();
+          }),],
   );
 }
