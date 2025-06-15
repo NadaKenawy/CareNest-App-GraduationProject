@@ -10,9 +10,9 @@ class AppointmentCardSkeleton extends StatelessWidget {
     return Skeletonizer(
       child: ListView.builder(
         padding:
-            EdgeInsets.symmetric(vertical: 8.h), // padding بس علشان التنسيق
+            EdgeInsets.symmetric(vertical: 8.h), 
         physics:
-            const BouncingScrollPhysics(), // أو ScrollPhysics() حسب احتياجك
+            const BouncingScrollPhysics(), 
         itemCount: 5,
         itemBuilder: (context, index) {
           return Padding(

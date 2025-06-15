@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import '../logic/create_message/create_message_cubit.dart';
-import '../logic/get_community_messages/get_community_messages_cubit.dart';
-import '../data/repos/create_message_repo.dart';
 import 'widgets/community_screen_body.dart';
 
 class CommunityScreen extends StatefulWidget {

@@ -61,7 +61,7 @@ class _MessageInputFieldState extends State<MessageInputField> {
             color: Colors.grey[50],
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.4),
+                color: Colors.grey.withValues(alpha: 0.4),
                 blurRadius: 4.r,
                 offset: const Offset(0, -2),
               ),

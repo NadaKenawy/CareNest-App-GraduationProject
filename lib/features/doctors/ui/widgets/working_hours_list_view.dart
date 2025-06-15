@@ -42,12 +42,9 @@ class WorkingHoursListView extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         children: availableHours.map((hour) {
           bool isBooked = orders?.any((order) {
-                String? orderDate =
-                    order.day?.date?.toIso8601String().split("T").first;
                 String? orderTime = order.day?.time?.startTime;
                 String? orderDayType = order.day?.type;
                 return order.status == "Pending" &&
-                    orderDate == bookingDate &&
                     orderTime == hour &&
                     orderDayType == selectedDay.type;
               }) ??

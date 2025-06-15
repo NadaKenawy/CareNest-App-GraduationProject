@@ -15,9 +15,6 @@ import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/la
 import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
 import 'package:care_nest/features/community/logic/chat_cubit/chat_cubit.dart';
-import 'package:care_nest/features/community/logic/create_message/create_message_cubit.dart';
-import 'package:care_nest/features/community/logic/delete_message/delete_message_cubit.dart';
-import 'package:care_nest/features/community/logic/get_community_messages/get_community_messages_cubit.dart';
 import 'package:care_nest/features/community/logic/get_online_users/get_online_users_cubit.dart';
 import 'package:care_nest/features/community/ui/community_screen.dart';
 import 'package:care_nest/features/community/ui/widgets/community_members_screen.dart';
@@ -69,6 +66,9 @@ import 'package:care_nest/features/reminders/medications/ui/widgets/update_medic
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/mark_vaccine_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/ui/vaccinations_screen.dart';
+import 'package:care_nest/features/setting/ui/faq_screen.dart';
+import 'package:care_nest/features/setting/ui/setting_screen.dart';
+import 'package:care_nest/features/setting/ui/support_contact_screen.dart';
 import 'package:care_nest/features/sign_up/logic/sign_up_cubit/sign_up_cubit.dart';
 import 'package:care_nest/features/sign_up/logic/verfiy_account_cubit/verify_account_cubit.dart';
 import 'package:care_nest/features/sign_up/ui/sign_up_screen.dart';
@@ -123,6 +123,9 @@ abstract class AppRouter {
   static const kMyAppointmentsScreen = '/myAppointmentsScreen';
   static const kCommunityScreen = '/communityScreen';
   static const kCommunityMembersScreen = '/communityMembersScreen';
+  static const kSettingScreen = '/settingScreen';
+  static const kFaqScreen = '/faqScreen';
+  static const kSupportContactScreen = '/supportContactScreen';
 
   static final router = GoRouter(
     routes: [
@@ -517,6 +520,22 @@ abstract class AppRouter {
               child: const CommunityMembersScreen(),
             );
           }),
+      GoRoute(
+          path: kSettingScreen,
+          builder: (context, state) {
+            return const SettingScreen();
+          }),
+      GoRoute(
+          path: kFaqScreen,
+          builder: (context, state) {
+            return const FAQScreen();
+          }),
+      GoRoute(
+          path: kSupportContactScreen,
+          builder: (context, state) {
+            return const SupportContactScreen();
+          }),
+// ... existing c
     ],
   );
 }
