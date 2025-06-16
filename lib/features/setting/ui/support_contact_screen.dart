@@ -2,6 +2,7 @@ import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:care_nest/features/setting/ui/widgets/setting_app_bar.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SupportContactScreen extends StatelessWidget {
   const SupportContactScreen({super.key});
@@ -26,9 +27,9 @@ class SupportContactScreen extends StatelessWidget {
                           .copyWith(fontSize: 18),
                     ),
                     const SizedBox(height: 24),
-                    _buildSupportCard(),
+                    buildSupportCard(),
                     const SizedBox(height: 24),
-                    _buildSocialMediaCard(),
+                    buildSocialMediaCard(),
                   ],
                 ),
               ),
@@ -39,7 +40,7 @@ class SupportContactScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSupportCard() {
+  Widget buildSupportCard() {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -92,7 +93,7 @@ class SupportContactScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSocialMediaCard() {
+  Widget buildSocialMediaCard() {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -114,8 +115,10 @@ class SupportContactScreen extends StatelessWidget {
           const SizedBox(height: 12),
           Row(
             children: [
-              const Icon(Icons.alternate_email,
-                  color: ColorsManager.primaryBlueColor),
+              const Icon(
+                FontAwesomeIcons.twitter,
+                color: ColorsManager.thirdryBlueColor,
+              ),
               const SizedBox(width: 8),
               Text('Twitter',
                   style: TextStyles.font16BlackMedium
@@ -141,13 +144,14 @@ class SupportContactScreen extends StatelessWidget {
           const SizedBox(height: 8),
           Row(
             children: [
-              const Icon(Icons.email_outlined, color: Color(0xFFE1306C)),
+              const Icon(FontAwesomeIcons.instagram,
+                  color: ColorsManager.secondryPinkColor),
               const SizedBox(width: 8),
-              Text('Email Address',
+              Text('Instagram',
                   style: TextStyles.font16BlackMedium
                       .copyWith(fontSize: 14, color: Colors.grey[600])),
               const SizedBox(width: 8),
-              Text('email@yourapp.com',
+              Text('instagram@yourapp.com',
                   style: TextStyles.font16BlackMedium.copyWith(fontSize: 14)),
             ],
           ),

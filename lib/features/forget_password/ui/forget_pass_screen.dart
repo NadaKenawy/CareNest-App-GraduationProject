@@ -4,7 +4,9 @@ import 'package:care_nest/features/forget_password/ui/widgets/forget_pass_screen
 import 'package:flutter/material.dart';
 
 class ForgetPassScreen extends StatelessWidget {
-  const ForgetPassScreen({super.key});
+  final bool fromSettings;
+
+  const ForgetPassScreen({super.key, this.fromSettings = false});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class ForgetPassScreen extends StatelessWidget {
         ),
         title: const AppBarTittle(),
       ),
-      body: const ForgetPassScreenBody(),
+      body: ForgetPassScreenBody(fromSettings: fromSettings),
     );
   }
 }

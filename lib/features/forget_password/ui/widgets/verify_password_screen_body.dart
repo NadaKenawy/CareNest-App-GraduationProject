@@ -36,73 +36,75 @@ class VerifyPasswordScreenBody extends StatelessWidget {
       ),
     );
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "OTP Verification",
-            style: TextStyles.font32PrimaryBlueBold,
-          ),
-          SizedBox(
-            height: 12.h,
-          ),
-          Text(
-            "Enter the verification code we just sent on your email address.",
-            style: TextStyles.font16PrimaryBlueMedium,
-          ),
-          SizedBox(
-            height: 36.h,
-          ),
-          Form(
-            key: context.read<VerifyPasswordCubit>().formKey,
-            child: Pinput(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Verification code is required';
-                }
-                return null;
-              },
-              controller: context.read<VerifyPasswordCubit>().otpField,
-              length: 6,
-              showCursor: true,
-              defaultPinTheme: defaultPinTheme,
-              focusedPinTheme: focusedPinTheme,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "OTP Verification",
+              style: TextStyles.font32PrimaryBlueBold,
             ),
-          ),
-          SizedBox(
-            height: 36.h,
-          ),
-          AppTextButton(
-            buttonText: 'Send Code',
-            textStyle: TextStyles.font16WhiteMedium,
-            onPressed: () {
-              validateThenVerify(context);
-            },
-          ),
-          SizedBox(
-            height: 48.h,
-          ),
-          DontHaveAnAccount(
-            onTap: () {
-              AwesomeDialog(
-                context: context,
-                dialogType: DialogType.success,
-                animType: AnimType.scale,
-                title: 'Code Sent Successfully',
-                desc:
-                    'The verification code has been successfully resent to your email.',
-                btnOkOnPress: () {},
-                btnOkColor: ColorsManager.primaryBlueColor,
-              ).show();
-              context.read<ForgetPasswordCubit>().emitForgetPasswordStates();
-            },
-            textLabel: "Didn’t receive code?",
-            textButtonLabel: "Resend code",
-          ),
-          const VerifyPassBlocListner(),
-        ],
+            SizedBox(
+              height: 12.h,
+            ),
+            Text(
+              "Enter the verification code we just sent on your email address.",
+              style: TextStyles.font16PrimaryBlueMedium,
+            ),
+            SizedBox(
+              height: 36.h,
+            ),
+            Form(
+              key: context.read<VerifyPasswordCubit>().formKey,
+              child: Pinput(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Verification code is required';
+                  }
+                  return null;
+                },
+                controller: context.read<VerifyPasswordCubit>().otpField,
+                length: 6,
+                showCursor: true,
+                defaultPinTheme: defaultPinTheme,
+                focusedPinTheme: focusedPinTheme,
+              ),
+            ),
+            SizedBox(
+              height: 36.h,
+            ),
+            AppTextButton(
+              buttonText: 'Send Code',
+              textStyle: TextStyles.font16WhiteMedium,
+              onPressed: () {
+                validateThenVerify(context);
+              },
+            ),
+            SizedBox(
+              height: 48.h,
+            ),
+            DontHaveAnAccount(
+              onTap: () {
+                AwesomeDialog(
+                  context: context,
+                  dialogType: DialogType.success,
+                  animType: AnimType.scale,
+                  title: 'Code Sent Successfully',
+                  desc:
+                      'The verification code has been successfully resent to your email.',
+                  btnOkOnPress: () {},
+                  btnOkColor: ColorsManager.primaryBlueColor,
+                ).show();
+                context.read<ForgetPasswordCubit>().emitForgetPasswordStates();
+              },
+              textLabel: "Didn’t receive code?",
+              textButtonLabel: "Resend code",
+            ),
+            const VerifyPassBlocListner(),
+          ],
+        ),
       ),
     );
   }

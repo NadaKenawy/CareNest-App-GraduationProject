@@ -1,6 +1,7 @@
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/features/doctors/data/models/get_doctors/get_doctors_response.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DoctorsListViewItem extends StatelessWidget {
@@ -80,10 +81,14 @@ class DoctorsListViewItem extends StatelessWidget {
                 SizedBox(height: 4.h),
                 Row(
                   children: [
-                    Icon(
-                      Icons.star,
-                      size: 20.sp,
-                      color: Colors.amber,
+                    RatingBarIndicator(
+                      rating: doctorData.ratingsAverage ?? 0.0,
+                      itemBuilder: (_, __) =>
+                          const Icon(Icons.star, color: Colors.amber),
+                      itemCount: 5,
+                      itemSize: 18.sp,
+                      unratedColor: Colors.grey[300],
+                      itemPadding: EdgeInsets.zero,
                     ),
                     SizedBox(width: 4.w),
                     Text(
@@ -94,7 +99,7 @@ class DoctorsListViewItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      ' (${doctorData.ratingsQuantity})',
+                      ' (${doctorData.ratingsQuantity ?? 0})',
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.bold,

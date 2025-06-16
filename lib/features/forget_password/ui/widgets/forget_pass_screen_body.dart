@@ -12,7 +12,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class ForgetPassScreenBody extends StatefulWidget {
-  const ForgetPassScreenBody({super.key});
+  final bool fromSettings;
+
+  const ForgetPassScreenBody({super.key, this.fromSettings = false});
 
   @override
   State<ForgetPassScreenBody> createState() => _ForgetPassScreenBodyState();
@@ -22,81 +24,90 @@ class _ForgetPassScreenBodyState extends State<ForgetPassScreenBody> {
   bool emailHasError = false;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        vertical: 30.h,
-        horizontal: 16.w,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Forget Password?",
-            style: TextStyles.font32PrimaryBlueBold,
-          ),
-          SizedBox(
-            height: 12.h,
-          ),
-          Padding(
-            padding: EdgeInsets.only(right: 16.w),
-            child: Text(
-              "Don't worry!. Please enter the email address linked with your account.",
-              style: TextStyles.font16PrimaryBlueMedium,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: 30.h,
+          horizontal: 16.w,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Forget Password?",
+              style: TextStyles.font32PrimaryBlueBold,
             ),
-          ),
-          SizedBox(
-            height: 36.h,
-          ),
-          Form(
-            key: context.read<ForgetPasswordCubit>().formKey,
-            child: AppTextFormField(
-              hintText: 'Email',
-              hasError: emailHasError, // Pass the error state here
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  emailHasError = true;
+            SizedBox(
+              height: 12.h,
+            ),
+            Padding(
+              padding: EdgeInsets.only(right: 16.w),
+              child: Text(
+                "Don't worry!. Please enter the email address linked with your account.",
+                style: TextStyles.font16PrimaryBlueMedium,
+              ),
+            ),
+            SizedBox(
+              height: 36.h,
+            ),
+            Form(
+              key: context.read<ForgetPasswordCubit>().formKey,
+              child: AppTextFormField(
+                hintText: 'Email',
+                hasError: emailHasError, // Pass the error state here
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    emailHasError = true;
+                    setState(() {});
+                    return 'Email required';
+                  }
+                  if (!AppRegex.isEmailValid(value)) {
+                    emailHasError = true;
+                    setState(() {});
+                    return 'Invalid email';
+                  }
+                  if (!value.startsWith(RegExp(r'^[a-zA-Z]')) ||
+                      !value.endsWith('@gmail.com')) {
+                    emailHasError = true;
+                    setState(() {});
+                    return 'Email must start with a character and end with \'gmail.com\'';
+                  }
+                  emailHasError = false;
                   setState(() {});
-                  return 'Email required';
-                }
-                if (!AppRegex.isEmailValid(value)) {
-                  emailHasError = true;
-                  setState(() {});
-                  return 'Invalid email';
-                }
-                if (!value.startsWith(RegExp(r'^[a-zA-Z]')) ||
-                    !value.endsWith('@gmail.com')) {
-                  emailHasError = true;
-                  setState(() {});
-                  return 'Email must start with a character and end with \'gmail.com\'';
-                }
-                emailHasError = false;
-                setState(() {});
-                return null;
+                  return null;
+                },
+                controller: context.read<ForgetPasswordCubit>().emailController,
+              ),
+            ),
+            SizedBox(
+              height: 36.h,
+            ),
+            AppTextButton(
+              buttonText: 'Send Code',
+              textStyle: TextStyles.font16WhiteMedium,
+              onPressed: () {
+                validateThenSendCode(context);
               },
-              controller: context.read<ForgetPasswordCubit>().emailController,
             ),
-          ),
-          SizedBox(
-            height: 36.h,
-          ),
-          AppTextButton(
-            buttonText: 'Send Code',
-            textStyle: TextStyles.font16WhiteMedium,
-            onPressed: () {
-              validateThenSendCode(context);
-            },
-          ),
-          SizedBox(height: 48.h),
-          DontHaveAnAccount(
-            onTap: () {
-              GoRouter.of(context).push(AppRouter.kLoginScreen);
-            },
-            textLabel: "Remember Password?",
-            textButtonLabel: "Log in",
-          ),
-          const ForgetPassBlocListner(),
-        ],
+            SizedBox(height: 48.h),
+            DontHaveAnAccount(
+              onTap: () {
+                if (widget.fromSettings) {
+                  GoRouter.of(context).pop();
+                } else {
+                  GoRouter.of(context).push(AppRouter.kLoginScreen);
+                }
+              },
+              textLabel: widget.fromSettings
+                  ? "Remember it now?"
+                  : "Remember Password?",
+              textButtonLabel:
+                  widget.fromSettings ? "Back to Settings" : "Log in",
+            ),
+            const ForgetPassBlocListner(),
+          ],
+        ),
       ),
     );
   }

@@ -66,7 +66,8 @@ import 'package:care_nest/features/reminders/medications/ui/widgets/update_medic
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/mark_vaccine_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/ui/vaccinations_screen.dart';
-import 'package:care_nest/features/setting/ui/change_password/ui/change_password_screen.dart';
+import 'package:care_nest/features/setting/change_password/ui/change_password_screen.dart';
+import 'package:care_nest/features/setting/feedback/ui/feedback_screen.dart';
 import 'package:care_nest/features/setting/ui/faq_screen.dart';
 import 'package:care_nest/features/setting/ui/setting_screen.dart';
 import 'package:care_nest/features/setting/ui/support_contact_screen.dart';
@@ -128,6 +129,7 @@ abstract class AppRouter {
   static const kFaqScreen = '/faqScreen';
   static const kSupportContactScreen = '/supportContactScreen';
   static const kChangePasswordScreen = '/changePasswordScreen';
+  static const kFeedbackScreen = '/feedbackScreen';
 
   static final router = GoRouter(
     routes: [
@@ -156,11 +158,15 @@ abstract class AppRouter {
             return const HomeScreen();
           }),
       GoRoute(
-        path: kForgetPassScreen,
-        builder: (context, state) => BlocProvider(
-          create: (context) => getIt<ForgetPasswordCubit>(),
-          child: const ForgetPassScreen(),
-        ),
+        path: AppRouter.kForgetPassScreen,
+        builder: (context, state) {
+          final fromSettings = state.extra as bool? ?? false;
+
+          return BlocProvider(
+            create: (context) => getIt<ForgetPasswordCubit>(),
+            child: ForgetPassScreen(fromSettings: fromSettings),
+          );
+        },
       ),
       GoRoute(
         path: kVerifyPasswordScreen,
@@ -541,6 +547,12 @@ abstract class AppRouter {
           path: kChangePasswordScreen,
           builder: (context, state) {
             return const ChangePasswordScreen();
-          }),],
+          }),
+      GoRoute(
+          path: kFeedbackScreen,
+          builder: (context, state) {
+            return const FeedbackScreen();
+          }),
+    ],
   );
 }

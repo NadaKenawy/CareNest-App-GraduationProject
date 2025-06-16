@@ -198,8 +198,10 @@ class _ChangePasswordScreenBodyState extends State<ChangePasswordScreenBody> {
                   SizedBox(height: 36.h),
                   DontHaveAnAccount(
                     onTap: () {
-                      GoRouter.of(context)
-                          .push(AppRouter.kVerifyPasswordScreen);
+                      GoRouter.of(context).push(
+                        AppRouter.kForgetPassScreen,
+                        extra: true,
+                      );
                     },
                     textLabel: "Forgot your password?",
                     textButtonLabel: "Reset it",

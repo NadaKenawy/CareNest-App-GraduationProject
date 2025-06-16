@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../data/models/get_doctors/get_doctors_response.dart';
@@ -58,12 +59,16 @@ class DoctorDetailsHeader extends StatelessWidget {
                   SizedBox(height: 8.h),
                   Row(
                     children: [
-                      Icon(
-                        Icons.star,
-                        size: 20.sp,
-                        color: Colors.amber,
+                      RatingBarIndicator(
+                        rating: doctorData.ratingsAverage ?? 0.0,
+                        itemBuilder: (_, __) =>
+                            const Icon(Icons.star, color: Colors.amber),
+                        itemCount: 5,
+                        itemSize: 18.sp,
+                        unratedColor: Colors.grey[300],
+                        itemPadding: EdgeInsets.only(right: 2.w),
                       ),
-                      SizedBox(width: 4.w),
+                      SizedBox(width: 6.w),
                       Text(
                         doctorData.ratingsAverage?.toStringAsFixed(2) ?? '0.00',
                         style: TextStyle(
@@ -72,7 +77,7 @@ class DoctorDetailsHeader extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        ' (${doctorData.ratingsQuantity.toString()} Reviews)',
+                        ' (${doctorData.ratingsQuantity ?? 0} Reviews)',
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
