@@ -91,6 +91,10 @@ import '../../features/profile/logic/update_user_cubit/update_user_cubit.dart';
 import '../../features/profile/logic/update_user_image_cubit/update_user_image_cubit.dart';
 import '../../features/reminders/medications/data/repos/get_all_medication_schedule_repo.dart';
 import '../../features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
+import '../../features/setting/data/repos/create_report_repo.dart';
+import '../../features/setting/data/repos/update_report_repo.dart';
+import '../../features/setting/logic/create_report_cubit/create_report_cubit.dart';
+import '../../features/setting/logic/update_report_cubit/update_report_cubit.dart';
 import '../logic/user_cubit/user_cubit.dart';
 import 'package:care_nest/features/community/data/repos/delete_message_repo.dart';
 import 'package:care_nest/features/community/logic/delete_message/delete_message_cubit.dart';
@@ -345,4 +349,16 @@ Future<void> setupGetIt() async {
       () => GetOnlineUsersRepo(getIt()));
   getIt
       .registerFactory<GetOnlineUsersCubit>(() => GetOnlineUsersCubit(getIt()));
+
+  //CreateReport
+  getIt.registerLazySingleton<CreateReportRepo>(
+    () => CreateReportRepo(getIt()),
+  );
+  getIt.registerFactory<CreateReportCubit>(() => CreateReportCubit(getIt()));
+
+  //updateReport
+  getIt.registerLazySingleton<UpdateReportRepo>(
+    () => UpdateReportRepo(getIt()),
+  );
+  getIt.registerFactory<UpdateReportCubit>(() => UpdateReportCubit(getIt()));
 }

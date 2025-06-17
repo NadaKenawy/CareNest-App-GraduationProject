@@ -66,8 +66,8 @@ import 'package:care_nest/features/reminders/medications/ui/widgets/update_medic
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/mark_vaccine_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/ui/vaccinations_screen.dart';
-import 'package:care_nest/features/setting/change_password/ui/change_password_screen.dart';
-import 'package:care_nest/features/setting/feedback/ui/feedback_screen.dart';
+import 'package:care_nest/features/setting/ui/change_password/ui/change_password_screen.dart';
+import 'package:care_nest/features/setting/ui/feedback/ui/feedback_screen.dart';
 import 'package:care_nest/features/setting/ui/faq_screen.dart';
 import 'package:care_nest/features/setting/ui/setting_screen.dart';
 import 'package:care_nest/features/setting/ui/support_contact_screen.dart';

@@ -19,7 +19,7 @@ class VerifyPasswordCubit extends Cubit<VerifyPasswordState> {
     emit(const VerifyPasswordState.loading());
 
     String token =
-        await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.resetToken);
     final response = await _verifyPasswordRepo.forget(
       VerifyPasswordRequestBody(
         resetCode: otpField.text,

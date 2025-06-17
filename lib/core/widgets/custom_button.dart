@@ -10,7 +10,7 @@ class AppTextButton extends StatelessWidget {
   final double? buttonWidth;
   final String buttonText;
   final TextStyle textStyle;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Color? buttonColor;
   final double? borderWidth;
   final Color? borderColor;
@@ -26,7 +26,7 @@ class AppTextButton extends StatelessWidget {
     this.buttonWidth,
     required this.buttonText,
     required this.textStyle,
-    required this.onPressed,
+    this.onPressed,
     this.buttonColor,
     this.borderWidth,
     this.borderColor,

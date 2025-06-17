@@ -3,6 +3,10 @@ import 'package:go_router/go_router.dart';
 import 'package:care_nest/features/setting/ui/widgets/setting_app_bar.dart';
 import 'package:care_nest/features/setting/ui/widgets/setting_item.dart';
 import 'package:care_nest/core/routing/app_router.dart';
+import '../../../../core/helpers/constants.dart';
+import '../../../../core/helpers/shared_pref_helper.dart';
+import '../../../../core/networking/dio_factory.dart';
+import 'show_logout_confirmation_dialog.dart';
 
 class SettingScreenBody extends StatelessWidget {
   const SettingScreenBody({super.key});
@@ -55,8 +59,12 @@ class SettingScreenBody extends StatelessWidget {
                   title: 'Logout',
                   iconColor: Colors.red,
                   textColor: Colors.red,
-                  onTap: () {
-                    // Handle logout
+                  onTap: () async {
+                    final shouldLogout =
+                        await showLogoutConfirmationDialog(context);
+                    if (shouldLogout == true) {
+                      await logout(context);
+                    }
                   },
                 ),
                 const Divider(color: Colors.red, thickness: 1),
@@ -66,5 +74,11 @@ class SettingScreenBody extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Future<void> logout(BuildContext context) async {
+    await SharedPrefHelper.removeSecuredData(SharedPrefKeys.userToken);
+    DioFactory.removeTokenFromHeader();
+    GoRouter.of(context).go(AppRouter.kLoginScreen);
   }
 }

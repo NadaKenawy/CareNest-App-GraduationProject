@@ -37,6 +37,9 @@ class DioFactory {
       'Authorization': 'Bearer $token',
     };
   }
+   static void removeTokenFromHeader() {
+    dio?.options.headers.remove('Authorization');
+  }
 
   static void addDioInterceptor() {
     dio?.interceptors.add(

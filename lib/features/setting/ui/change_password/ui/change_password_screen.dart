@@ -1,4 +1,4 @@
-import 'package:care_nest/features/setting/change_password/ui/widgets/change_password_screen_body.dart';
+import 'package:care_nest/features/setting/ui/change_password/ui/widgets/change_password_screen_body.dart';
 import 'package:flutter/material.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
