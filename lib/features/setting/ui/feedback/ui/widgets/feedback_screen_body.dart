@@ -2,6 +2,10 @@ import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/features/setting/ui/widgets/setting_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../../core/logic/user_cubit/user_cubit.dart';
+import '../../../../logic/create_report_cubit/create_report_cubit.dart';
+import '../../../../logic/update_report_cubit/update_report_cubit.dart';
 import 'feedback_header.dart';
 import 'review_card.dart';
 import 'write_review_dialog.dart';
@@ -53,9 +57,16 @@ class _FeedbackScreenBodyState extends State<FeedbackScreenBody> {
   int totalReviews = 23;
 
   void showReviewDialog() async {
+    final userCubit = context.read<UserCubit>().state.user;
+    final createReportCubit = context.read<CreateReportCubit>();
+    final updateReportCubit = context.read<UpdateReportCubit>();
     await showDialog(
       context: context,
-      builder: (context) => const WriteReviewDialog(),
+      builder: (context) => WriteReviewDialog(
+        user: userCubit!,
+         createReportCubit: createReportCubit,
+        updateReportCubit: updateReportCubit,
+      ),
     );
   }
 

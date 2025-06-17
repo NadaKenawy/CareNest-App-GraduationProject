@@ -20,7 +20,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     String? savedEmail =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userEmail);
     if (emailController.text.isEmpty) {
-      emailController.text = savedEmail; // تحميل الإيميل المحفوظ
+      emailController.text = savedEmail; 
       log("Loaded Email: $savedEmail");
     }
   }
@@ -47,9 +47,9 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   }
 
   Future<void> saveUserToken(String token) async {
-    await SharedPrefHelper.setSecuredString(SharedPrefKeys.userToken, token);
+    await SharedPrefHelper.setSecuredString(SharedPrefKeys.resetToken, token);
     DioFactory.setTokenIntoHeaderAfterSignUp(token);
-    log("Saved Token: ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken)}");
+    log("Saved Token: ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.resetToken)}");
   }
 
   Future<void> saveEmail() async {

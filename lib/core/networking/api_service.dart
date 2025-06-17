@@ -58,6 +58,11 @@ import '../../features/fcm/data/models/update_fcm/update_fcm_token_request_body.
 import '../../features/profile/data/models/update_user_request_body.dart';
 import '../../features/profile/data/models/update_user_response.dart';
 import 'package:care_nest/features/community/data/models/delete_message/delete_message_response.dart';
+
+import '../../features/setting/data/models/create_report/create_report_request_body.dart';
+import '../../features/setting/data/models/create_report/create_report_response.dart';
+import '../../features/setting/data/models/update_report/update_report_request_body.dart';
+import '../../features/setting/data/models/update_report/update_report_response.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.apiBaseUrl)
@@ -303,5 +308,18 @@ abstract class ApiService {
   @GET(ApiConstants.getCommunityOnlineUsers)
   Future<GetOnlineUsersResponse> getCommunityOnlineUsers(
     @Header('Authorization') String token,
+  );
+
+    @POST(ApiConstants.createReport)
+  Future<CreateReportResponse> createReport(
+    @Header('Authorization') String token,
+    @Body() CreateReportRequestBody createReportRequestBody,
+  );
+
+  @PUT(ApiConstants.updateReport)
+  Future<UpdateReportResponse> updateReport(
+    @Header('Authorization') String token,
+    @Path('id') String id,
+    @Body() UpdateReportRequestBody updateReportRequestBody,
   );
 }
