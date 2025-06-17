@@ -49,10 +49,22 @@ class HeaderSection extends StatelessWidget {
           clipBehavior: Clip.none,
           alignment: Alignment.bottomRight,
           children: [
-            Image.asset(
-              boyAndGirlImage,
-              height: 150.h,
-              fit: BoxFit.contain,
+            Container(
+              width: 140.w,
+              height: 140.w,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Colors.grey[300]!,
+                  width: 4,
+                ),
+              ),
+              child: ClipOval(
+                child: Image.asset(
+                  boyAndGirlImage,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             Positioned(
                 bottom: 6,
