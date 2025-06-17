@@ -18,6 +18,8 @@ import 'package:care_nest/features/baby_growth/logic/get_baby_height_growth_cubi
 import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/put_growth_data_cubit/put_growth_data_cubit.dart';
+import 'package:care_nest/features/chat_bot/data/repo/chat_bot_repo.dart';
+import 'package:care_nest/features/chat_bot/logic/chat_bot_cubit.dart';
 import 'package:care_nest/features/community/data/repos/create_message_repo.dart';
 import 'package:care_nest/features/community/data/repos/get_community_messages_repo.dart';
 import 'package:care_nest/features/community/logic/create_message/create_message_cubit.dart';
@@ -350,6 +352,7 @@ Future<void> setupGetIt() async {
   getIt
       .registerFactory<GetOnlineUsersCubit>(() => GetOnlineUsersCubit(getIt()));
 
+
   //CreateReport
   getIt.registerLazySingleton<CreateReportRepo>(
     () => CreateReportRepo(getIt()),
@@ -361,4 +364,11 @@ Future<void> setupGetIt() async {
     () => UpdateReportRepo(getIt()),
   );
   getIt.registerFactory<UpdateReportCubit>(() => UpdateReportCubit(getIt()));
+
+//chat bot
+  getIt.registerLazySingleton<ChatBotRepo>(
+      () => ChatBotRepo(getIt()));
+  getIt
+      .registerFactory<ChatBotCubit>(() => ChatBotCubit(getIt()));
+
 }

@@ -14,6 +14,8 @@ import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubi
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
 import 'package:care_nest/features/baby_growth/ui/baby_height_growth_screen.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_screen_body.dart';
+import 'package:care_nest/features/chat_bot/logic/chat_bot_cubit.dart';
+import 'package:care_nest/features/chat_bot/ui/chat_bot_screen.dart';
 import 'package:care_nest/features/community/logic/chat_cubit/chat_cubit.dart';
 import 'package:care_nest/features/community/logic/get_online_users/get_online_users_cubit.dart';
 import 'package:care_nest/features/community/ui/community_screen.dart';
@@ -130,6 +132,7 @@ abstract class AppRouter {
   static const kSupportContactScreen = '/supportContactScreen';
   static const kChangePasswordScreen = '/changePasswordScreen';
   static const kFeedbackScreen = '/feedbackScreen';
+  static const kChatBotScreen = '/chatBotScreen';
 
   static final router = GoRouter(
     routes: [
@@ -552,6 +555,14 @@ abstract class AppRouter {
           path: kFeedbackScreen,
           builder: (context, state) {
             return const FeedbackScreen();
+          }),
+      GoRoute(
+          path: kChatBotScreen,
+          builder: (context, state) {
+            return BlocProvider(
+              create: (context) => getIt<ChatBotCubit>(),
+              child: const ChatBotScreen(),
+            );
           }),
     ],
   );

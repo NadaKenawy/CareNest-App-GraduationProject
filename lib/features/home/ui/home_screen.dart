@@ -1,4 +1,5 @@
 import 'package:care_nest/features/add_baby/ui/my_babies_screen.dart';
+import 'package:care_nest/features/chat_bot/ui/chat_bot_screen.dart';
 import 'package:care_nest/features/profile/ui/profile_screen.dart';
 import 'package:care_nest/features/setting/ui/setting_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> _screens = [
     const HomeScreenBody(),
-    const Text('Chat Screen'),
+    const ChatBotScreen(),
     const MyBabiesScreen(),
     const ProfileScreen(),
     const SettingScreen(),

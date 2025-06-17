@@ -1,3 +1,4 @@
+import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -79,8 +80,11 @@ class _MessageInputFieldState extends State<MessageInputField> {
                   cursorColor: ColorsManager.primaryPinkColor,
                   controller: widget.controller,
                   focusNode: _focusNode,
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     hintText: 'Type your message...',
+                    hintStyle: TextStyles.font16BlackMedium.copyWith(
+                      color: Colors.grey[500],
+                    ),
                     border: InputBorder.none,
                   ),
                   minLines: 1,
