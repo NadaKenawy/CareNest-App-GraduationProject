@@ -15,23 +15,13 @@ class PredictionBlocListener extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Uploading audio...')),
-            );
+            log('Loading...');
           },
           success: (predictionResponse) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                  content:
-                      Text('Prediction: ${predictionResponse.prediction}')),
-            );
             GoRouter.of(context).push(AppRouter.kAnalysisResultScreen,
                 extra: predictionResponse);
           },
           error: (error) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Error: ${error.message}')),
-            );
             log('Error: ${error.message}');
           },
         );

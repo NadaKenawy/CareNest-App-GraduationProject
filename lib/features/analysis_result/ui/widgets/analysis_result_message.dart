@@ -1,5 +1,4 @@
-// ignore_for_file: deprecated_member_use
-
+import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,11 +9,11 @@ class AnalysisResultMessage extends StatelessWidget {
   const AnalysisResultMessage({super.key, required this.prediction});
 
   static const Map<String, String> messages = {
-    "burping": "Burp time!",
-    "hungry": "Feed me!",
-    "tired": "Sleepy now!",
-    "belly_pain": "Tummy hurt!",
-    "discomfort": "Not comfy!",
+    "burping": "Need to burp",
+    "hungry": "I'm hungry..",
+    "tired": "I'm sleepy..",
+    "belly_pain": "Tummy hurts.",
+    "discomfort": "Not comfy...",
   };
 
   @override
@@ -30,16 +29,11 @@ class AnalysisResultMessage extends StatelessWidget {
           children: [
             SvgPicture.asset('assets/images/analysis_result_vector.svg'),
             Positioned(
-              top: 24.h,
-              right: 38.w,
-              child: Text(
-                message,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  backgroundColor: Colors.white.withOpacity(0.7),
-                ),
-              ),
+              top: 22.h,
+              right: 30.w,
+              child: Text(message,
+                  style: TextStyles.font20BlackSemiMedium
+                      .copyWith(fontSize: 24.sp)),
             ),
             Positioned(
               top: 44.h,

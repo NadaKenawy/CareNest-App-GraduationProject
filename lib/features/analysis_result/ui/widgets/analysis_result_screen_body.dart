@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/features/analysis_result/ui/widgets/analysis_advice.dart';
@@ -61,8 +59,10 @@ class AnalysisResultScreenBody extends StatelessWidget {
                           shape: BoxShape.circle,
                           color: [
                             ColorsManager.primaryPinkColor,
-                            ColorsManager.primaryPinkColor.withOpacity(0.6),
-                            ColorsManager.primaryPinkColor.withOpacity(0.2),
+                            ColorsManager.primaryPinkColor
+                                .withValues(alpha: 0.6),
+                            ColorsManager.primaryPinkColor
+                                .withValues(alpha: 0.2),
                           ][i],
                         ),
                       ),

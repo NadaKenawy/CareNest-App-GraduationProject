@@ -86,19 +86,6 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
     // GoRouter.of(context).push(AppRouter.kAnalysisResultScreen);
   }
 
-  // Share the recording
-  Future<void> shareRecording() async {
-    if (filePath != null) {
-      final result = await Share.shareXFiles(
-        [XFile(filePath!)],
-      );
-
-      if (result.status == ShareResultStatus.success) {
-        log('Sharing the recording');
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,7 +101,7 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
             SizedBox(height: 48.h),
             recordingCircle(),
             SizedBox(height: 28.h),
-            isRecording ? recordingProgress() : shareButton(),
+            isRecording ? recordingProgress() : const SizedBox(),
             SizedBox(height: 100.h),
             const PredictionBlocListener(),
           ],
@@ -188,24 +175,5 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
         ),
       ],
     );
-  }
-
-  // Share button after recording stops
-  Widget shareButton() {
-    return filePath != null
-        ? Column(
-            children: [
-              SizedBox(height: 16.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 60.w),
-                child: AppTextButton(
-                  onPressed: shareRecording,
-                  buttonText: 'Share Recording',
-                  textStyle: TextStyles.font16WhiteMedium,
-                ),
-              ),
-            ],
-          )
-        : const SizedBox.shrink();
   }
 }
