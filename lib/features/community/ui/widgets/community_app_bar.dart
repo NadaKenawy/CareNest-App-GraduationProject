@@ -42,7 +42,7 @@ class CommunityAppBar extends StatelessWidget {
             left: 16.w,
             right: 16.w,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
                   onPressed: () => GoRouter.of(context).pop(),
@@ -56,16 +56,16 @@ class CommunityAppBar extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                if (showGroupIcon)
-                  IconButton(
-                    onPressed: () {
-                      GoRouter.of(context)
-                          .push(AppRouter.kCommunityMembersScreen);
-                    },
-                    icon: const Icon(Icons.group, color: Colors.white),
-                  )
-                else
-                  const SizedBox(width: 48),
+                // if (showGroupIcon)
+                //   IconButton(
+                //     onPressed: () {
+                //       GoRouter.of(context)
+                //           .push(AppRouter.kCommunityMembersScreen);
+                //     },
+                //     icon: const Icon(Icons.group, color: Colors.white),
+                //   )
+                // else
+                //   const SizedBox(width: 48),
               ],
             ),
           ),

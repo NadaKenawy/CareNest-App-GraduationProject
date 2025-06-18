@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/colors_manager.dart';
 import '../../data/models/message_model.dart';
+import 'package:intl/intl.dart';
 
 class ReceivedMessageBubble extends StatelessWidget {
   final Message message;
@@ -19,12 +20,15 @@ class ReceivedMessageBubble extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // CircleAvatar(
-          //   radius: 20.r,
-          //   backgroundImage:
-          //       const AssetImage('assets/images/doctors_test_img.png'),
-          // ),
-          // SizedBox(width: 8.w),
+          CircleAvatar(
+            radius: 20.r,
+            backgroundImage: message.userImage != null &&
+                    message.userImage!.startsWith('http')
+                ? NetworkImage(message.userImage!)
+                : const AssetImage('assets/images/download.jpg')
+                    as ImageProvider,
+          ),
+          SizedBox(width: 8.w),
           Flexible(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +52,7 @@ class ReceivedMessageBubble extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  'time',
+                  DateFormat('hh:mm a').format(message.timestamp),
                   style: TextStyle(
                       fontSize: 12.sp,
                       color: Colors.grey,
@@ -77,6 +81,7 @@ class SentMessageBubble extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Flexible(
             child: Column(
@@ -101,7 +106,7 @@ class SentMessageBubble extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  'time',
+                  DateFormat('hh:mm a').format(message.timestamp),
                   style: TextStyle(
                       fontSize: 12.sp,
                       color: Colors.grey,

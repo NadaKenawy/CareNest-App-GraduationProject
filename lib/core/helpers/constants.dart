@@ -11,9 +11,10 @@ class SharedPrefKeys {
   static const String babyDateOfBirth = 'userDateOfBirth';
   static const num userLocation = 0;
   static const String userId = 'userId';
- static const kMessagesCollection = 'messages';
- static const kMessage = 'message';
- static const kCreatedAt = 'createdAt';
+  static const String userImage = 'userImage';
+  static const kMessagesCollection = 'messages';
+  static const kMessage = 'message';
+  static const kCreatedAt = 'createdAt';
   static const resetToken = 'resetToken';
   static const String reportId = 'reportId';
 }

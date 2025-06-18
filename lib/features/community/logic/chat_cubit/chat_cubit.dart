@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../core/helpers/constants.dart';
 import '../../../../core/helpers/shared_pref_helper.dart';
 import '../../data/models/message_model.dart';
@@ -13,22 +12,25 @@ class ChatCubit extends Cubit<ChatState> {
   List<Message> messagesList = [];
   CollectionReference messages =
       FirebaseFirestore.instance.collection('messages');
-  StreamSubscription? _messagesSubscription; // Add this
+  StreamSubscription? _messagesSubscription;
 
   void sendMessage({required String msg}) async {
     final userId =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.userId);
+    final userImage =
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.userImage);
     messages.add({
       'message': msg,
       'userId': userId,
-      'createdAt': DateTime.now(),
+      'userImage': userImage,
+      'timestamp': DateTime.now(),
     });
   }
 
   void getMessage() {
-    _messagesSubscription?.cancel(); // Cancel any existing subscription
+    _messagesSubscription?.cancel(); 
     _messagesSubscription = messages
-        .orderBy('createdAt', descending: true)
+        .orderBy('timestamp', descending: true)
         .snapshots()
         .listen((event) {
       messagesList.clear();
@@ -41,7 +43,7 @@ class ChatCubit extends Cubit<ChatState> {
 
   @override
   Future<void> close() {
-    _messagesSubscription?.cancel(); // Cancel when Cubit closes
+    _messagesSubscription?.cancel(); 
     return super.close();
   }
 }
