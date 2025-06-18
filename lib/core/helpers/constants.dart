@@ -14,4 +14,6 @@ class SharedPrefKeys {
  static const kMessagesCollection = 'messages';
  static const kMessage = 'message';
  static const kCreatedAt = 'createdAt';
+  static const resetToken = 'resetToken';
+  static const String reportId = 'reportId';
 }

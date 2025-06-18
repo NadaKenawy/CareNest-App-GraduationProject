@@ -1,11 +1,25 @@
+import 'package:care_nest/core/models/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
-import 'package:go_router/go_router.dart';
+import '../../../../../../core/logic/user_cubit/user_cubit.dart';
+import '../../../../logic/create_report_cubit/create_report_cubit.dart';
+import '../../../../logic/update_report_cubit/update_report_cubit.dart';
+
 
 class WriteReviewDialog extends StatefulWidget {
-  const WriteReviewDialog({super.key});
+  const WriteReviewDialog({
+    super.key,
+    required this.user,
+    required this.createReportCubit,
+    required this.updateReportCubit,
+  });
+
+  final UserModel user;
+  final CreateReportCubit createReportCubit;
+  final UpdateReportCubit updateReportCubit;
 
   @override
   State<WriteReviewDialog> createState() => _WriteReviewDialogState();
@@ -13,10 +27,15 @@ class WriteReviewDialog extends StatefulWidget {
 
 class _WriteReviewDialogState extends State<WriteReviewDialog> {
   double rating = 0;
-  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final createReportCubit = widget.createReportCubit;
+    final updateReportCubit = widget.updateReportCubit;
+    final controller = widget.user.createReport
+        ? updateReportCubit.review
+        : createReportCubit.review;
+
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
@@ -37,8 +56,10 @@ class _WriteReviewDialogState extends State<WriteReviewDialog> {
             ),
             const SizedBox(height: 8),
             Center(
-              child: Text('How would you rate your experience?',
-                  style: TextStyles.font16BlackMedium),
+              child: Text(
+                'How would you rate your experience?',
+                style: TextStyles.font16BlackMedium,
+              ),
             ),
             const SizedBox(height: 8),
             Center(
@@ -60,12 +81,15 @@ class _WriteReviewDialogState extends State<WriteReviewDialog> {
               ),
             ),
             const SizedBox(height: 12),
-            Text('Comments (optional)',
-                style: TextStyles.font16BlackMedium.copyWith(fontSize: 14)),
+            Text(
+              'Comments (optional)',
+              style: TextStyles.font16BlackMedium.copyWith(fontSize: 14),
+            ),
             const SizedBox(height: 8),
             TextField(
               controller: controller,
               maxLines: 4,
+              onChanged: (_) => setState(() {}),
               cursorColor: Colors.black,
               decoration: InputDecoration(
                 hintText: 'Enter your message',
@@ -88,9 +112,26 @@ class _WriteReviewDialogState extends State<WriteReviewDialog> {
               child: AppTextButton(
                 buttonText: 'Submit',
                 textStyle: TextStyles.font16WhiteMedium,
-                onPressed: () {
-                  GoRouter.of(context).pop();
-                },
+                onPressed: (rating == 0 || controller.text.isEmpty)
+                    ? null
+                    : () async {
+                        if (widget.user.createReport) {
+                          //  Use UpdateReportCubit
+                          updateReportCubit.emitUpdateReportStates(rating);
+                        } else {
+                          // Use CreateReportCubit
+                          createReportCubit.emitCreateReportStates(
+                            rating,
+                            widget.user.id,
+                          );
+                          final updatedUser = widget.user.copyWith(
+                            createReport: true,
+                          );
+                          context.read<UserCubit>().setUser(updatedUser);
+                          await saveUserDataLocally(updatedUser);
+                        }
+                        Navigator.of(context).pop();
+                      },
               ),
             ),
           ],
