@@ -1,11 +1,7 @@
-// ignore_for_file: deprecated_member_use
-
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
-import 'package:care_nest/core/theme/text_styless.dart';
-import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/features/baby_cry/ui/widgets/prediction_bloc_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +9,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
-import 'package:share_plus/share_plus.dart';
 
 import '../../logic/cubit/prediction_cubit.dart';
 
@@ -132,8 +127,8 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
               shape: BoxShape.circle,
               color: [
                 ColorsManager.primaryPinkColor,
-                ColorsManager.primaryPinkColor.withOpacity(0.6),
-                ColorsManager.primaryPinkColor.withOpacity(0.2),
+                ColorsManager.primaryPinkColor.withValues(alpha: 0.6),
+                ColorsManager.primaryPinkColor.withValues(alpha: 0.2),
               ][i],
             ),
           ),

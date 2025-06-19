@@ -1,3 +1,4 @@
+import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +32,8 @@ class MessageBubble extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 14.w),
               decoration: BoxDecoration(
-                color: isBot ? Colors.grey[200] : const Color(0xFFE388C4),
+                color:
+                    isBot ? Colors.grey[200] : ColorsManager.primaryPinkColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(16.r),
                   topRight: Radius.circular(16.r),

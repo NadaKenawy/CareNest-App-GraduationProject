@@ -44,7 +44,7 @@ class UserCubit extends Cubit<UserState> {
       }
     } catch (e) {
       emit(state.copyWith(isLoading: false));
-      log('Error loading user data: \\${e}');
+      log('Error loading user data: \\$e');
     }
   }
 
@@ -82,7 +82,7 @@ Future<void> saveUserDataLocally(UserModel user) async {
       log('User image saved locally: \\${user.profileImg}');
     }
   } catch (e) {
-    log('Error saving user data: \\${e}');
+    log('Error saving user data: \\$e');
   }
 }
 

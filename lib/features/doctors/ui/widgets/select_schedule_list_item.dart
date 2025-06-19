@@ -1,3 +1,4 @@
+import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -54,7 +55,7 @@ class SelectScheduleListItem extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
-        color: isSelected ? const Color(0xff418fbf) : Colors.white,
+        color: isSelected ? ColorsManager.secondryBlueColor : Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(25.r)),
         border: Border.all(
           color: isSelected

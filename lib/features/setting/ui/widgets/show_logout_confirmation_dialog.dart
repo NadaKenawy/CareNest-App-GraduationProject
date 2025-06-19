@@ -10,41 +10,30 @@ Future<bool?> showLogoutConfirmationDialog(BuildContext context) {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
-      title: Row(
-        children: [
-          const Icon(Icons.logout, color: Colors.red, size: 28),
-          const SizedBox(width: 8),
-          Text(
-            "Log Out",
-            style: TextStyles.font24PrimaryBlueSemiBold.copyWith(
-              color: ColorsManager.darkBlue,
-            ),
-          ),
-        ],
+      title: Text(
+        "Log Out",
+        style: TextStyles.font24PrimaryBlueSemiBold.copyWith(
+          color: ColorsManager.darkBlue,
+        ),
       ),
-      content: const Text(
+      content: Text(
         "Are you sure you want to log out?",
-        style: TextStyle(fontSize: 16),
+        style:
+            TextStyles.font16BlackMedium.copyWith(fontWeight: FontWeight.w300),
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context, false),
-          child: const Text(
+          child: Text(
             "Cancel",
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 17,
-              color: ColorsManager.darkBlue,
-            ),
+            style: TextStyles.font16BlackMedium,
           ),
         ),
         TextButton(
           onPressed: () => Navigator.pop(context, true),
-          child: const Text(
+          child: Text(
             "Log Out",
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 17,
+            style: TextStyles.font16BlackMedium.copyWith(
               color: Colors.red,
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -45,7 +46,9 @@ class _DoctorsToggleButtonState extends State<DoctorsToggleButton> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           decoration: BoxDecoration(
-            color: isSelected ? const Color(0xff418FBF) : Colors.transparent,
+            color: isSelected
+                ? ColorsManager.secondryBlueColor
+                : Colors.transparent,
             borderRadius: BorderRadius.circular(30),
           ),
           alignment: Alignment.center,
@@ -54,7 +57,8 @@ class _DoctorsToggleButtonState extends State<DoctorsToggleButton> {
             text,
             style: TextStyle(
               fontSize: 16.sp,
-              color: isSelected ? Colors.white : const Color(0xff418FBF),
+              color:
+                  isSelected ? Colors.white : ColorsManager.secondryBlueColor,
               fontWeight: FontWeight.bold,
             ),
           ),
