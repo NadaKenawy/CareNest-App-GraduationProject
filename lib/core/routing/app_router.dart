@@ -68,6 +68,7 @@ import 'package:care_nest/features/reminders/medications/ui/widgets/update_medic
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/mark_vaccine_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/ui/vaccinations_screen.dart';
+import 'package:care_nest/features/setting/logic/update_pass_cubit/update_pass_cubit.dart';
 import 'package:care_nest/features/setting/ui/change_password/ui/change_password_screen.dart';
 import 'package:care_nest/features/setting/ui/feedback/ui/feedback_screen.dart';
 import 'package:care_nest/features/setting/ui/faq_screen.dart';
@@ -89,6 +90,9 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/baby_cry/data/model/prediction_response_model.dart';
 import '../../features/doctors/data/models/get_doctors/get_doctors_response.dart';
+import '../../features/setting/logic/create_report_cubit/create_report_cubit.dart';
+import '../../features/setting/logic/get_feedbacks_cubit/get_feedbacks_cubit.dart';
+import '../../features/setting/logic/update_report_cubit/update_report_cubit.dart';
 
 abstract class AppRouter {
   static const kSignUpScreen = '/signUpScreen';
@@ -549,12 +553,21 @@ abstract class AppRouter {
       GoRoute(
           path: kChangePasswordScreen,
           builder: (context, state) {
-            return const ChangePasswordScreen();
+            return BlocProvider(
+              create: (context) => getIt<UpdatePassCubit>(),
+              child: const ChangePasswordScreen(),
+            );
           }),
       GoRoute(
           path: kFeedbackScreen,
           builder: (context, state) {
-            return const FeedbackScreen();
+            return MultiBlocProvider(providers: [
+              BlocProvider(create: (context) => getIt<CreateReportCubit>()),
+              BlocProvider(create: (context) => getIt<UpdateReportCubit>()),
+              BlocProvider(
+                create: (context) => getIt<GetFeedbacksCubit>()..getFeedbacks(),
+              ),
+            ], child: const FeedbackScreen());
           }),
       GoRoute(
           path: kChatBotScreen,

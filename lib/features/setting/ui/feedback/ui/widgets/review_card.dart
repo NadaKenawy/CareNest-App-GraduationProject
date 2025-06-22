@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../data/models/get_feedbacks/get_feedbacks_response.dart';
 
 class ReviewCard extends StatelessWidget {
-  final Map<String, dynamic> review;
+  final FeedbackModel feedbackModel;
 
-  const ReviewCard({super.key, required this.review});
+  const ReviewCard({
+    super.key,
+    required this.feedbackModel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +21,7 @@ class ReviewCard extends StatelessWidget {
         Row(
           children: [
             CircleAvatar(
-              backgroundImage: NetworkImage(review['avatar']),
+              backgroundImage: NetworkImage(feedbackModel.user.image),
               radius: 22,
             ),
             const SizedBox(width: 12),
@@ -23,19 +29,22 @@ class ReviewCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(review['name'], style: TextStyles.font16BlackMedium),
+                  Text(
+                      '${feedbackModel.user.firstName} ${feedbackModel.user.lastName}',
+                      style: TextStyles.font16BlackMedium),
                   Row(
                     children: [
                       RatingBarIndicator(
-                        rating: review['rating'],
-                        itemBuilder: (_, __) => const Icon(Icons.star, color: Colors.amber),
+                        rating: feedbackModel.ratings,
+                        itemBuilder: (_, __) =>
+                            const Icon(Icons.star, color: Colors.amber),
                         itemCount: 5,
                         itemSize: 18,
                         unratedColor: Colors.grey[300],
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        review['rating'].toStringAsFixed(1),
+                        feedbackModel.ratings.toStringAsFixed(1),
                         style: TextStyles.font16BlackMedium,
                       ),
                     ],
@@ -44,7 +53,7 @@ class ReviewCard extends StatelessWidget {
               ),
             ),
             Text(
-              review['date'],
+              feedbackModel.createdAt.split('T')[0],
               style: TextStyles.font12BlackMedium.copyWith(
                 color: Colors.grey[600],
                 fontSize: 14,
@@ -52,10 +61,10 @@ class ReviewCard extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 4),
+        SizedBox(height: 20.h),
         Text(
-          review['review'],
-          style: TextStyles.font12BlackMedium.copyWith(color: Colors.grey[700]),
+          feedbackModel.title,
+          style: TextStyles.font16BlackMedium.copyWith(color: Colors.grey[700]),
         ),
       ],
     );

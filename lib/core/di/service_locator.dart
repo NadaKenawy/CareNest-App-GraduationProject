@@ -94,8 +94,12 @@ import '../../features/profile/logic/update_user_image_cubit/update_user_image_c
 import '../../features/reminders/medications/data/repos/get_all_medication_schedule_repo.dart';
 import '../../features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 import '../../features/setting/data/repos/create_report_repo.dart';
+import '../../features/setting/data/repos/get_feedbacks_repo.dart';
+import '../../features/setting/data/repos/update_pass_repo.dart';
 import '../../features/setting/data/repos/update_report_repo.dart';
 import '../../features/setting/logic/create_report_cubit/create_report_cubit.dart';
+import '../../features/setting/logic/get_feedbacks_cubit/get_feedbacks_cubit.dart';
+import '../../features/setting/logic/update_pass_cubit/update_pass_cubit.dart';
 import '../../features/setting/logic/update_report_cubit/update_report_cubit.dart';
 import '../logic/user_cubit/user_cubit.dart';
 import 'package:care_nest/features/community/data/repos/delete_message_repo.dart';
@@ -370,5 +374,21 @@ Future<void> setupGetIt() async {
       () => ChatBotRepo(getIt()));
   getIt
       .registerFactory<ChatBotCubit>(() => ChatBotCubit(getIt()));
+
+  //update password
+  getIt.registerLazySingleton<UpdatePassRepo>(
+    () => UpdatePassRepo(getIt()),
+  );
+  getIt.registerFactory<UpdatePassCubit>(
+    () => UpdatePassCubit(getIt()),
+  );
+
+  //get feedbacks
+  getIt.registerLazySingleton<GetFeedbacksRepo>(
+    () => GetFeedbacksRepo(getIt()),
+  );
+  getIt.registerFactory<GetFeedbacksCubit>(
+    () => GetFeedbacksCubit(getIt()),
+  );
 
 }

@@ -56,6 +56,9 @@ class ApiConstants {
   static const String getCommunityOnlineUsers = "community/chat-users";
    static const String createReport = "feedback";
   static const String updateReport = "feedback/{id}";
+  static const String updatePassword = "users/updateUserPassword";
+  static const String getFeedbacks = "feedback";
+  
 }
 
 class ApiErrors {

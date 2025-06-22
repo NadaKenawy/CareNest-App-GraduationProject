@@ -3,7 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 
 class FeedbackHeader extends StatelessWidget {
-  final double avgRating;
+  final String avgRating;
   final int totalReviews;
 
   const FeedbackHeader({
@@ -17,12 +17,12 @@ class FeedbackHeader extends StatelessWidget {
     return Column(
       children: [
         Text(
-          avgRating.toStringAsFixed(1),
+          avgRating,
           style: TextStyles.font24PrimaryPinkSemiBold.copyWith(fontSize: 40),
         ),
         const SizedBox(height: 4),
         RatingBarIndicator(
-          rating: avgRating,
+          rating: avgRating.isNotEmpty ? double.parse(avgRating) : 0.0,
           itemBuilder: (_, __) => const Icon(Icons.star, color: Colors.amber),
           itemCount: 5,
           itemSize: 28.0,
