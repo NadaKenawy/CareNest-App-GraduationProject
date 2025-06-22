@@ -13,7 +13,7 @@ class SupportContactScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          const SettingAppBar(title: 'Support Contact'),
+          const SettingAppBar(title: 'Contact support'),
           Expanded(
             child: SingleChildScrollView(
               child: Padding(

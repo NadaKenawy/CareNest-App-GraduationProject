@@ -61,6 +61,9 @@ import 'package:care_nest/features/community/data/models/delete_message/delete_m
 
 import '../../features/setting/data/models/create_report/create_report_request_body.dart';
 import '../../features/setting/data/models/create_report/create_report_response.dart';
+import '../../features/setting/data/models/get_feedbacks/get_feedbacks_response.dart';
+import '../../features/setting/data/models/update_pass/update_pass_request_body.dart';
+import '../../features/setting/data/models/update_pass/update_pass_response.dart';
 import '../../features/setting/data/models/update_report/update_report_request_body.dart';
 import '../../features/setting/data/models/update_report/update_report_response.dart';
 part 'api_service.g.dart';
@@ -321,5 +324,16 @@ abstract class ApiService {
     @Header('Authorization') String token,
     @Path('id') String id,
     @Body() UpdateReportRequestBody updateReportRequestBody,
+  );
+
+    @PUT(ApiConstants.updatePassword)
+  Future<UpdatePassResponse> updatePassword(
+    @Header('Authorization') String token,
+    @Body() UpdatePassRequestBody updatePassRequestBody,
+  );
+
+  @GET(ApiConstants.getFeedbacks)
+  Future<GetFeedbacksResponse> getFeedbacks(
+    @Header('Authorization') String token,
   );
 }

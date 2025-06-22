@@ -32,7 +32,7 @@ class SettingScreenBody extends StatelessWidget {
                 Divider(color: Colors.grey[200], thickness: 1),
                 SettingItem(
                   icon: Icons.support_agent,
-                  title: 'Support Contact',
+                  title: 'Contact support',
                   onTap: () {
                     GoRouter.of(context).push(AppRouter.kSupportContactScreen);
                   },

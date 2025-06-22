@@ -1,4 +1,5 @@
 import 'package:care_nest/core/models/user_model.dart';
+import 'package:care_nest/features/setting/logic/get_feedbacks_cubit/get_feedbacks_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -8,18 +9,19 @@ import '../../../../../../core/logic/user_cubit/user_cubit.dart';
 import '../../../../logic/create_report_cubit/create_report_cubit.dart';
 import '../../../../logic/update_report_cubit/update_report_cubit.dart';
 
-
 class WriteReviewDialog extends StatefulWidget {
   const WriteReviewDialog({
     super.key,
     required this.user,
     required this.createReportCubit,
     required this.updateReportCubit,
+    required this.getFeedbacksCubit,
   });
 
   final UserModel user;
   final CreateReportCubit createReportCubit;
   final UpdateReportCubit updateReportCubit;
+  final GetFeedbacksCubit getFeedbacksCubit;
 
   @override
   State<WriteReviewDialog> createState() => _WriteReviewDialogState();
@@ -67,7 +69,7 @@ class _WriteReviewDialogState extends State<WriteReviewDialog> {
                 initialRating: rating,
                 minRating: 1,
                 direction: Axis.horizontal,
-                allowHalfRating: false,
+                allowHalfRating: true,
                 itemCount: 5,
                 itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                 itemBuilder: (_, __) =>
@@ -130,7 +132,11 @@ class _WriteReviewDialogState extends State<WriteReviewDialog> {
                           context.read<UserCubit>().setUser(updatedUser);
                           await saveUserDataLocally(updatedUser);
                         }
-                        Navigator.of(context).pop();
+                        await Future.delayed(const Duration(milliseconds: 500));
+
+                        widget.getFeedbacksCubit.getFeedbacks();
+
+                        if (context.mounted) Navigator.of(context).pop();
                       },
               ),
             ),
