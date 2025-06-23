@@ -1634,7 +1634,6 @@ class _ApiService implements ApiService {
   @override
   Future<UpdateReportResponse> updateReport(
     String token,
-    String id,
     UpdateReportRequestBody updateReportRequestBody,
   ) async {
     final _extra = <String, dynamic>{};
@@ -1650,7 +1649,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          'feedback/${id}',
+          'feedback',
           queryParameters: queryParameters,
           data: _data,
         )

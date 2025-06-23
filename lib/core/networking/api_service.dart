@@ -322,7 +322,6 @@ abstract class ApiService {
   @PUT(ApiConstants.updateReport)
   Future<UpdateReportResponse> updateReport(
     @Header('Authorization') String token,
-    @Path('id') String id,
     @Body() UpdateReportRequestBody updateReportRequestBody,
   );
 

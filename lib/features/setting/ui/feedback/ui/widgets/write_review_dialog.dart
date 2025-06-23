@@ -124,7 +124,7 @@ class _WriteReviewDialogState extends State<WriteReviewDialog> {
                           // Use CreateReportCubit
                           createReportCubit.emitCreateReportStates(
                             rating,
-                            widget.user.id,
+                           
                           );
                           final updatedUser = widget.user.copyWith(
                             createReport: true,

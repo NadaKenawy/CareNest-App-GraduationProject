@@ -17,7 +17,7 @@ class CreateReportCubit extends Cubit<CreateReportState> {
 
   TextEditingController review = TextEditingController();
 
-  void emitCreateReportStates(dynamic ratings, String userId) async {
+  void emitCreateReportStates(dynamic ratings) async {
     emit(const CreateReportState.loading());
 
     String token = await SharedPrefHelper.getSecuredString(
@@ -28,19 +28,13 @@ class CreateReportCubit extends Cubit<CreateReportState> {
       CreateReportRequestBody(
         title: review.text,
         ratings: ratings,
-        userId: userId,
       ),
       token,
     );
     response.when(
       success: (createReportResponse) async {
-        await SharedPrefHelper.setSecuredString(
-          SharedPrefKeys.reportId,
-          createReportResponse.data.id,
-        );
-        log(
-          "Saved ReportId: ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.reportId)}",
-        );
+       
+      
         emit(CreateReportState.success(createReportResponse));
       },
       failure: (apiErrorModel) {

@@ -55,7 +55,7 @@ class ApiConstants {
   static const String deleteCommunityMessage = 'community/{id}';
   static const String getCommunityOnlineUsers = "community/chat-users";
    static const String createReport = "feedback";
-  static const String updateReport = "feedback/{id}";
+  static const String updateReport = "feedback";
   static const String updatePassword = "users/updateUserPassword";
   static const String getFeedbacks = "feedback";
   

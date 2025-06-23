@@ -11,7 +11,6 @@ CreateReportRequestBody _$CreateReportRequestBodyFromJson(
     CreateReportRequestBody(
       title: json['title'] as String,
       ratings: json['ratings'],
-      userId: json['user'] as String,
     );
 
 Map<String, dynamic> _$CreateReportRequestBodyToJson(
@@ -19,5 +18,4 @@ Map<String, dynamic> _$CreateReportRequestBodyToJson(
     <String, dynamic>{
       'title': instance.title,
       'ratings': instance.ratings,
-      'user': instance.userId,
     };

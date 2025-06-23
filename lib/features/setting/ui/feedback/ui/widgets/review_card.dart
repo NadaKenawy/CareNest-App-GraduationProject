@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../core/widgets/default_user_image.dart';
 import '../../../../data/models/get_feedbacks/get_feedbacks_response.dart';
 
 class ReviewCard extends StatelessWidget {
@@ -20,10 +21,12 @@ class ReviewCard extends StatelessWidget {
       children: [
         Row(
           children: [
-            CircleAvatar(
-              backgroundImage: NetworkImage(feedbackModel.user.image),
-              radius: 22,
-            ),
+            feedbackModel.user.image == null
+                ? const DefaultUserImg()
+                : CircleAvatar(
+                    backgroundImage: NetworkImage(feedbackModel.user.image!),
+                    radius: 22,
+                  ),
             const SizedBox(width: 12),
             Expanded(
               child: Column(

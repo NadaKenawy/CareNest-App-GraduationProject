@@ -22,14 +22,10 @@ class UpdateReportCubit extends Cubit<UpdateReportState> {
     String token = await SharedPrefHelper.getSecuredString(
       SharedPrefKeys.userToken,
     );
-    String reportId = await SharedPrefHelper.getSecuredString(
-      SharedPrefKeys.reportId,
-    );
-    log('reportId: $reportId');
+   
     final response = await _updateReportRepo.updateReport(
       UpdateReportRequestBody(title: review.text, ratings: ratings),
       token,
-      reportId,
     );
     response.when(
       success: (updateReportResponse) {
