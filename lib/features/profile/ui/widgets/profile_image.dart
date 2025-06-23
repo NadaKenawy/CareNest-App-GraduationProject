@@ -5,11 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../../../../core/logic/user_cubit/user_cubit.dart';
-import '../../../../core/models/user_model.dart';
-import '../../../../core/theme/colors_manager.dart';
+
 import '../../../../core/utils/app_images.dart';
-import '../../../../core/widgets/default_user_image.dart';
+import '../../../../core/logic/user_cubit/user_cubit.dart';
 import '../../logic/update_user_image_cubit/update_user_image_cubit.dart';
 import '../../logic/update_user_image_cubit/update_user_image_state.dart';
 
@@ -21,53 +19,44 @@ class ProfileImage extends StatefulWidget {
 }
 
 class _ProfileImageState extends State<ProfileImage> {
-  File? _imageFile;
   final ImagePicker _picker = ImagePicker();
-
-  Future<void> pickCropAndSetImage(ImageSource source) async {
+  File? _localImageFile;
+  String? _uploadedImageUrl;
+  Future<void> _pickCropAndUploadImage(ImageSource source) async {
     final permissionStatus = source == ImageSource.camera
         ? await Permission.camera.request()
         : await Permission.photos.request();
-
     if (!permissionStatus.isGranted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            "We need permission to access your ${source == ImageSource.camera ? 'camera' : 'photos'}",
-          ),
-        ),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Permission required to access camera/photos"),
+      ));
       return;
     }
 
-    final pickedFile = await _picker.pickImage(source: source);
-    if (pickedFile == null) return;
+    final picked = await _picker.pickImage(source: source);
+    if (picked == null) return;
 
-    final croppedFile = await ImageCropper().cropImage(
-      sourcePath: pickedFile.path,
+    final cropped = await ImageCropper().cropImage(
+      sourcePath: picked.path,
       aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
       uiSettings: [
         AndroidUiSettings(
-          toolbarTitle: 'Image Cropper',
+          toolbarTitle: 'Crop Image',
           toolbarColor: Colors.blue,
           toolbarWidgetColor: Colors.white,
-          initAspectRatio: CropAspectRatioPreset.original,
-          lockAspectRatio: false,
+          lockAspectRatio: true,
         ),
-        IOSUiSettings(title: 'Image Cropper'),
+        IOSUiSettings(title: 'Crop Image'),
       ],
     );
+    if (cropped == null) return;
 
-    if (croppedFile == null) return;
-
-    setState(() {
-      _imageFile = File(croppedFile.path);
-    });
-
-    context.read<UpdateUserImageCubit>().uploadImage(_imageFile!);
+    setState(() => _localImageFile = File(cropped.path));
+    context.read<UpdateUserImageCubit>().uploadImage(File(cropped.path));
   }
 
-  void _showImageSourceDialog() {
+  void _showImageSourceOptions() {
+    if (!mounted) return;
     showModalBottomSheet(
       context: context,
       builder: (_) => Column(
@@ -78,7 +67,7 @@ class _ProfileImageState extends State<ProfileImage> {
             title: const Text("Take a photo"),
             onTap: () {
               Navigator.pop(context);
-              pickCropAndSetImage(ImageSource.camera);
+              _pickCropAndUploadImage(ImageSource.camera);
             },
           ),
           ListTile(
@@ -86,7 +75,7 @@ class _ProfileImageState extends State<ProfileImage> {
             title: const Text("Choose from gallery"),
             onTap: () {
               Navigator.pop(context);
-              pickCropAndSetImage(ImageSource.gallery);
+              _pickCropAndUploadImage(ImageSource.gallery);
             },
           ),
         ],
@@ -94,137 +83,104 @@ class _ProfileImageState extends State<ProfileImage> {
     );
   }
 
-  void _showImagePreviewDialog(UserModel user) {
-    showDialog(
-      context: context,
-      builder: (_) => Dialog(
-        backgroundColor: Colors.transparent,
-        insetPadding: const EdgeInsets.all(16),
-        child: Stack(
-          children: [
-            InteractiveViewer(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.network(user.profileImg!),
-              ),
-            ),
-            Positioned(
-              top: 8,
-              right: 8,
-              child: GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.black54,
-                    shape: BoxShape.circle,
-                  ),
-                  padding: const EdgeInsets.all(8),
-                  child: const Icon(Icons.close, color: Colors.white),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+  Future<void> _handleImageUpdate(String newUrl) async {
+    await NetworkImage(newUrl).evict();
+    setState(() {
+      _localImageFile = null;
+      _uploadedImageUrl = newUrl;
+    });
+
+    final userCubit = context.read<UserCubit>();
+    final old = userCubit.state.user;
+    if (old != null) {
+      final updated = old.copyWith(profileImg: newUrl);
+      userCubit.setUser(updated);
+      await saveUserDataLocally(updated);
+    }
   }
 
-  Future<void> _handleImageUpdate(String newImageUrl) async {
-    final userCubit = context.read<UserCubit>();
-    final updatedUser = userCubit.state.user?.copyWith(profileImg: newImageUrl);
-    if (updatedUser != null) {
-      userCubit.setUser(updatedUser);
-      await saveUserDataLocally(updatedUser);
-    }
+  @override
+  void initState() {
+    super.initState();
+    context.read<UpdateUserImageCubit>().stream.listen((state) {
+      state.whenOrNull(success: (data) {
+        _handleImageUpdate(data.data.image);
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserCubit>().state.user;
+    final isLoading = context.watch<UpdateUserImageCubit>().state is Loading;
 
-    return BlocListener<UpdateUserImageCubit, UpdateUserImageState>(
-      listener: (context, state) {
-        state.whenOrNull(
-          success: (data) async {
-            await _handleImageUpdate(data.data.image);
-          },
-        );
-      },
-      child: BlocBuilder<UpdateUserImageCubit, UpdateUserImageState>(
-        builder: (context, state) {
-          final isLoading = state is Loading;
+    ImageProvider provider;
+    if (_localImageFile != null) {
+      provider = FileImage(_localImageFile!);
+    } else if (_uploadedImageUrl != null) {
+      provider = NetworkImage(_uploadedImageUrl!);
+    } else if (user?.profileImg != null && user!.profileImg!.isNotEmpty) {
+      provider = NetworkImage(user.profileImg!);
+    } else {
+      provider = const AssetImage(AppImages.boyProfileImage);
+    }
 
-          return SizedBox(
-            width: 400.w,
-            height: 290.h,
-            child: Stack(
-              children: [
-                Positioned(
-                  top: 150.h,
-                  left: 135.w,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      (user?.profileImg != null &&
-                              user!.profileImg!.trim().isNotEmpty)
-                          ? GestureDetector(
-                              onLongPress: () => _showImagePreviewDialog(user),
-                              child: Container(
-                                width: 120.w,
-                                height: 120.h,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.grey[300],
-                                  image: DecorationImage(
-                                    image: NetworkImage(user.profileImg!),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            )
-                          : DefaultUserImg(
-                              iconSize: 120.sp,
-                              containerWidth: 140.w,
-                              containerHeight: 140.h,
-                            ),
-                      if (isLoading)
-                        Container(
-                          width: 120.w,
-                          height: 120.h,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.black.withOpacity(0.4),
-                          ),
-                          child: Center(
-                            child: SizedBox(
-                              width: 28.w,
-                              height: 28.h,
-                              child: const CircularProgressIndicator(
-                                color: ColorsManager.primaryBlueColor,
-                                strokeWidth: 3,
-                              ),
-                            ),
-                          ),
-                        ),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: GestureDetector(
-                          onTap: _showImageSourceDialog,
-                          child: Image.asset(
-                            AppImages.changeProfileIcon,
-                            width: 32.w,
-                            height: 32.h,
-                          ),
-                        ),
-                      ),
-                    ],
+    return SizedBox(
+      width: 160.w,
+      height: 160.h,
+      child: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.center,
+        children: [
+          Container(
+            width: 160.w,
+            height: 160.h,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.grey[300],
+              border: Border.all(color: Colors.white, width: 4),
+              image: DecorationImage(image: provider, fit: BoxFit.cover),
+            ),
+          ),
+          if (isLoading)
+            Container(
+              width: 160.w,
+              height: 160.h,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.black.withValues(alpha: 0.4),
+              ),
+              child: const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                  strokeWidth: 3,
+                ),
+              ),
+            ),
+          Positioned(
+            bottom: 8,
+            right: 8,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(30),
+                onTap: _showImageSourceOptions,
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
+                  child: Image.asset(
+                    AppImages.changeProfileIcon,
+                    width: 36.w,
+                    height: 36.h,
                   ),
                 ),
-              ],
+              ),
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }
