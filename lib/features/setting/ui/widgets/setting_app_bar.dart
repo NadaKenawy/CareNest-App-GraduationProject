@@ -19,7 +19,7 @@ class SettingAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 160.h,
+      height: 164.h,
       child: Stack(
         clipBehavior: Clip.none,
         children: [

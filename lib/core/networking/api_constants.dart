@@ -58,7 +58,7 @@ class ApiConstants {
   static const String updateReport = "feedback";
   static const String updatePassword = "users/updateUserPassword";
   static const String getFeedbacks = "feedback";
-  
+  static const String createCry = "cry";
 }
 
 class ApiErrors {

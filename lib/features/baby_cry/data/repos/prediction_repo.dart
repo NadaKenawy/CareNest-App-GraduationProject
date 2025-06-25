@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:care_nest/core/networking/api_result.dart';
 import '../../../../core/networking/api_error_handler.dart';
-import '../model/prediction_response_model.dart';
+import '../model/prediction/prediction_response_model.dart';
 
 class PredictionRepo {
   final Dio _dio;

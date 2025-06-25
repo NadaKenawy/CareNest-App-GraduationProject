@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
+import 'package:care_nest/core/helpers/shared_pref_helper.dart';
+import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/features/baby_cry/ui/widgets/prediction_bloc_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +12,9 @@ import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 
-import '../../logic/cubit/prediction_cubit.dart';
+import '../../logic/predicition_cubit/prediction_cubit.dart';
+import '../../logic/create_cry_cubit/create_cry_cubit.dart';
+import 'create_cry_bloc_listener.dart';
 
 class RecorderScreenBody extends StatefulWidget {
   const RecorderScreenBody({super.key});
@@ -81,6 +85,21 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
     // GoRouter.of(context).push(AppRouter.kAnalysisResultScreen);
   }
 
+  // Send to create cry API after successful prediction
+  Future<void> sendToCreateCry(String prediction) async {
+    try {
+      final token =
+          await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
+      if (filePath != null) {
+        context
+            .read<CreateCryCubit>()
+            .createCry(token, File(filePath!), prediction);
+      }
+    } catch (e) {
+      log('Error sending to create cry: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,6 +118,7 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
             isRecording ? recordingProgress() : const SizedBox(),
             SizedBox(height: 100.h),
             const PredictionBlocListener(),
+            const CreateCryBlocListener(),
           ],
         ),
       ),

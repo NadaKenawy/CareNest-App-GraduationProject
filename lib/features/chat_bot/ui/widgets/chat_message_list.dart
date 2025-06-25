@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:care_nest/features/chat_bot/ui/widgets/message_bubble.dart';
+import 'package:care_nest/features/chat_bot/ui/widgets/bot_typing_indicator.dart';
 
 class ChatMessageList extends StatefulWidget {
   final List<Map<String, dynamic>> messages;
@@ -55,6 +56,9 @@ class _ChatMessageListState extends State<ChatMessageList> {
       itemCount: widget.messages.length,
       itemBuilder: (context, index) {
         final msg = widget.messages[index];
+        if (msg['isTyping'] == true) {
+          return const BotTypingIndicator();
+        }
         return MessageBubble(text: msg['text'], isBot: msg['isBot']);
       },
     );

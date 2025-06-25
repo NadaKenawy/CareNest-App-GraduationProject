@@ -59,13 +59,14 @@ import '../../features/profile/data/models/update_user_request_body.dart';
 import '../../features/profile/data/models/update_user_response.dart';
 import 'package:care_nest/features/community/data/models/delete_message/delete_message_response.dart';
 
-import '../../features/setting/data/models/create_report/create_report_request_body.dart';
-import '../../features/setting/data/models/create_report/create_report_response.dart';
-import '../../features/setting/data/models/get_feedbacks/get_feedbacks_response.dart';
-import '../../features/setting/data/models/update_pass/update_pass_request_body.dart';
-import '../../features/setting/data/models/update_pass/update_pass_response.dart';
-import '../../features/setting/data/models/update_report/update_report_request_body.dart';
-import '../../features/setting/data/models/update_report/update_report_response.dart';
+import '../../features/setting/feedback/data/models/create_report/create_report_request_body.dart';
+import '../../features/setting/feedback/data/models/create_report/create_report_response.dart';
+import '../../features/setting/feedback/data/models/get_feedback/get_feedbacks_response.dart';
+import '../../features/setting/change_password/data/models/update_pass_request_body.dart';
+import '../../features/setting/change_password/data/models/update_pass_response.dart';
+import '../../features/setting/feedback/data/models/update_report/update_report_request_body.dart';
+import '../../features/setting/feedback/data/models/update_report/update_report_response.dart';
+import 'package:care_nest/features/baby_cry/data/model/create_cry/create_cry_response_model.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.apiBaseUrl)
@@ -313,7 +314,7 @@ abstract class ApiService {
     @Header('Authorization') String token,
   );
 
-    @POST(ApiConstants.createReport)
+  @POST(ApiConstants.createReport)
   Future<CreateReportResponse> createReport(
     @Header('Authorization') String token,
     @Body() CreateReportRequestBody createReportRequestBody,
@@ -325,7 +326,7 @@ abstract class ApiService {
     @Body() UpdateReportRequestBody updateReportRequestBody,
   );
 
-    @PUT(ApiConstants.updatePassword)
+  @PUT(ApiConstants.updatePassword)
   Future<UpdatePassResponse> updatePassword(
     @Header('Authorization') String token,
     @Body() UpdatePassRequestBody updatePassRequestBody,
@@ -334,5 +335,11 @@ abstract class ApiService {
   @GET(ApiConstants.getFeedbacks)
   Future<GetFeedbacksResponse> getFeedbacks(
     @Header('Authorization') String token,
+  );
+
+  @POST(ApiConstants.createCry)
+  Future<CreateCryResponse> createCry(
+    @Header('Authorization') String token,
+    @Body() FormData formData,
   );
 }

@@ -24,7 +24,7 @@ class NotificationData {
   String? title;
   String? message;
   DateTime? createdAt;
-  String? recipient;
+  Recipient? recipient;
 
   NotificationData({
     this.id,
@@ -36,4 +36,24 @@ class NotificationData {
 
   factory NotificationData.fromJson(Map<String, dynamic> json) =>
       _$NotificationDataFromJson(json);
+}
+
+@JsonSerializable()
+class Recipient {
+  @JsonKey(name: '_id')
+  String? id;
+  @JsonKey(name: 'Email')
+  String? email;
+  String? firstName;
+  String? lastName;
+
+  Recipient({
+    this.id,
+    this.email,
+    this.firstName,
+    this.lastName,
+  });
+
+  factory Recipient.fromJson(Map<String, dynamic> json) =>
+      _$RecipientFromJson(json);
 }

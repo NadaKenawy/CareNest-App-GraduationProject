@@ -6,8 +6,9 @@ import 'package:care_nest/features/add_baby/logic/update_baby_cubit/update_baby_
 import 'package:care_nest/features/add_baby/ui/add_baby_screen.dart';
 import 'package:care_nest/features/add_baby/ui/baby_data_screen.dart';
 import 'package:care_nest/features/add_baby/ui/my_babies_screen.dart';
-import 'package:care_nest/features/analysis_result/analysis_result_screen.dart';
-import 'package:care_nest/features/baby_cry/logic/cubit/prediction_cubit.dart';
+import 'package:care_nest/features/baby_cry/logic/create_cry_cubit/create_cry_cubit.dart';
+import 'package:care_nest/features/baby_cry/ui/analysis_result_screen.dart';
+import 'package:care_nest/features/baby_cry/logic/predicition_cubit/prediction_cubit.dart';
 import 'package:care_nest/features/baby_cry/ui/recorder_screen.dart';
 import 'package:care_nest/features/baby_growth/logic/get_baby_height_growth_cubit/get_baby_height_growth_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
@@ -68,9 +69,9 @@ import 'package:care_nest/features/reminders/medications/ui/widgets/update_medic
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/mark_vaccine_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/ui/vaccinations_screen.dart';
-import 'package:care_nest/features/setting/logic/update_pass_cubit/update_pass_cubit.dart';
-import 'package:care_nest/features/setting/ui/change_password/ui/change_password_screen.dart';
-import 'package:care_nest/features/setting/ui/feedback/ui/feedback_screen.dart';
+import 'package:care_nest/features/setting/change_password/logic/update_pass_cubit.dart';
+import 'package:care_nest/features/setting/change_password/ui/change_password_screen.dart';
+import 'package:care_nest/features/setting/feedback/ui/feedback_screen.dart';
 import 'package:care_nest/features/setting/ui/faq_screen.dart';
 import 'package:care_nest/features/setting/ui/setting_screen.dart';
 import 'package:care_nest/features/setting/ui/support_contact_screen.dart';
@@ -88,11 +89,11 @@ import 'package:care_nest/features/tips/ui/widgets/tip_details_screen_body.dart'
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/baby_cry/data/model/prediction_response_model.dart';
+import '../../features/baby_cry/data/model/prediction/prediction_response_model.dart';
 import '../../features/doctors/data/models/get_doctors/get_doctors_response.dart';
-import '../../features/setting/logic/create_report_cubit/create_report_cubit.dart';
-import '../../features/setting/logic/get_feedbacks_cubit/get_feedbacks_cubit.dart';
-import '../../features/setting/logic/update_report_cubit/update_report_cubit.dart';
+import '../../features/setting/feedback/logic/create_report_cubit/create_report_cubit.dart';
+import '../../features/setting/feedback/logic/get_feedback_cubit/get_feedbacks_cubit.dart';
+import '../../features/setting/feedback/logic/update_report_cubit/update_report_cubit.dart';
 
 abstract class AppRouter {
   static const kSignUpScreen = '/signUpScreen';
@@ -325,8 +326,15 @@ abstract class AppRouter {
       GoRoute(
           path: kRecoderScreen,
           builder: (context, state) {
-            return BlocProvider(
-              create: (context) => getIt<PredictionCubit>(),
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => getIt<PredictionCubit>(),
+                ),
+                BlocProvider(
+                  create: (context) => getIt<CreateCryCubit>(),
+                ),
+              ],
               child: const RecorderScreen(),
             );
           }),

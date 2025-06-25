@@ -55,7 +55,7 @@ class _ChatBotScreenBodyState extends State<ChatBotScreenBody> {
         }
       }
     } catch (e) {
-     log('Error loading saved messages: $e');
+      log('Error loading saved messages: $e');
     }
   }
 
@@ -83,7 +83,7 @@ class _ChatBotScreenBodyState extends State<ChatBotScreenBody> {
             .addPostFrameCallback((_) => _showAgeLanguageDialog());
       }
     } catch (e) {
-     log('Error loading user preferences: $e');
+      log('Error loading user preferences: $e');
       WidgetsBinding.instance
           .addPostFrameCallback((_) => _showAgeLanguageDialog());
     }
@@ -93,7 +93,7 @@ class _ChatBotScreenBodyState extends State<ChatBotScreenBody> {
     try {
       await ChatStorageService.saveMessageFromMap(message);
     } catch (e) {
-     log('Error saving message: $e');
+      log('Error saving message: $e');
     }
   }
 
@@ -266,7 +266,20 @@ class _ChatBotScreenBodyState extends State<ChatBotScreenBody> {
                   messages.add(adviceMessage);
                 });
                 await _saveMessage(adviceMessage);
-                await Future.delayed(const Duration(milliseconds: 100));
+
+                // Add delay and typing indicator before next question
+                if ((response.question != null &&
+                        response.question!.isNotEmpty) ||
+                    (response.nextQuestion != null &&
+                        response.nextQuestion!.isNotEmpty)) {
+                  setState(() {
+                    messages.add({'isBot': true, 'isTyping': true});
+                  });
+                  await Future.delayed(const Duration(seconds: 2));
+                  setState(() {
+                    messages.removeWhere((msg) => msg['isTyping'] == true);
+                  });
+                }
               }
 
               // Save question/nextQuestion after advice

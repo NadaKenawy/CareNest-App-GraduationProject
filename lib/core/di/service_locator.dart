@@ -7,8 +7,10 @@ import 'package:care_nest/features/add_baby/data/repos/update_baby_repo.dart';
 import 'package:care_nest/features/add_baby/logic/delete_baby_cubit/delete_baby_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/update_baby_cubit/update_baby_cubit.dart';
+import 'package:care_nest/features/baby_cry/data/repos/create_cry_repo.dart';
 import 'package:care_nest/features/baby_cry/data/repos/prediction_repo.dart';
-import 'package:care_nest/features/baby_cry/logic/cubit/prediction_cubit.dart';
+import 'package:care_nest/features/baby_cry/logic/create_cry_cubit/create_cry_cubit.dart';
+import 'package:care_nest/features/baby_cry/logic/predicition_cubit/prediction_cubit.dart';
 import 'package:care_nest/features/baby_growth/data/models/put_growth_data/put_growth_data_response.dart';
 import 'package:care_nest/features/baby_growth/data/repos/get_baby_height_growth_repo.dart';
 import 'package:care_nest/features/baby_growth/data/repos/get_baby_weight_growth_repo.dart';
@@ -93,14 +95,14 @@ import '../../features/profile/logic/update_user_cubit/update_user_cubit.dart';
 import '../../features/profile/logic/update_user_image_cubit/update_user_image_cubit.dart';
 import '../../features/reminders/medications/data/repos/get_all_medication_schedule_repo.dart';
 import '../../features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
-import '../../features/setting/data/repos/create_report_repo.dart';
-import '../../features/setting/data/repos/get_feedbacks_repo.dart';
-import '../../features/setting/data/repos/update_pass_repo.dart';
-import '../../features/setting/data/repos/update_report_repo.dart';
-import '../../features/setting/logic/create_report_cubit/create_report_cubit.dart';
-import '../../features/setting/logic/get_feedbacks_cubit/get_feedbacks_cubit.dart';
-import '../../features/setting/logic/update_pass_cubit/update_pass_cubit.dart';
-import '../../features/setting/logic/update_report_cubit/update_report_cubit.dart';
+import '../../features/setting/feedback/data/repo/create_report_repo.dart';
+import '../../features/setting/feedback/data/repo/get_feedbacks_repo.dart';
+import '../../features/setting/change_password/data/repo/update_pass_repo.dart';
+import '../../features/setting/feedback/data/repo/update_report_repo.dart';
+import '../../features/setting/feedback/logic/create_report_cubit/create_report_cubit.dart';
+import '../../features/setting/feedback/logic/get_feedback_cubit/get_feedbacks_cubit.dart';
+import '../../features/setting/change_password/logic/update_pass_cubit.dart';
+import '../../features/setting/feedback/logic/update_report_cubit/update_report_cubit.dart';
 import '../logic/user_cubit/user_cubit.dart';
 import 'package:care_nest/features/community/data/repos/delete_message_repo.dart';
 import 'package:care_nest/features/community/logic/delete_message/delete_message_cubit.dart';
@@ -356,7 +358,6 @@ Future<void> setupGetIt() async {
   getIt
       .registerFactory<GetOnlineUsersCubit>(() => GetOnlineUsersCubit(getIt()));
 
-
   //CreateReport
   getIt.registerLazySingleton<CreateReportRepo>(
     () => CreateReportRepo(getIt()),
@@ -370,10 +371,8 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<UpdateReportCubit>(() => UpdateReportCubit(getIt()));
 
 //chat bot
-  getIt.registerLazySingleton<ChatBotRepo>(
-      () => ChatBotRepo(getIt()));
-  getIt
-      .registerFactory<ChatBotCubit>(() => ChatBotCubit(getIt()));
+  getIt.registerLazySingleton<ChatBotRepo>(() => ChatBotRepo(getIt()));
+  getIt.registerFactory<ChatBotCubit>(() => ChatBotCubit(getIt()));
 
   //update password
   getIt.registerLazySingleton<UpdatePassRepo>(
@@ -390,5 +389,11 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<GetFeedbacksCubit>(
     () => GetFeedbacksCubit(getIt()),
   );
-
+  //create cry
+  getIt.registerLazySingleton<CreateCryRepo>(
+    () => CreateCryRepo(getIt()),
+  );
+  getIt.registerFactory<CreateCryCubit>(
+    () => CreateCryCubit(getIt()),
+  );
 }

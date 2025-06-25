@@ -30,7 +30,9 @@ NotificationData _$NotificationDataFromJson(Map<String, dynamic> json) =>
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
-      recipient: json['recipient'] as String?,
+      recipient: json['recipient'] == null
+          ? null
+          : Recipient.fromJson(json['recipient'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$NotificationDataToJson(NotificationData instance) =>
@@ -40,4 +42,18 @@ Map<String, dynamic> _$NotificationDataToJson(NotificationData instance) =>
       'message': instance.message,
       'createdAt': instance.createdAt?.toIso8601String(),
       'recipient': instance.recipient,
+    };
+
+Recipient _$RecipientFromJson(Map<String, dynamic> json) => Recipient(
+      id: json['_id'] as String?,
+      email: json['Email'] as String?,
+      firstName: json['firstName'] as String?,
+      lastName: json['lastName'] as String?,
+    );
+
+Map<String, dynamic> _$RecipientToJson(Recipient instance) => <String, dynamic>{
+      '_id': instance.id,
+      'Email': instance.email,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
     };
