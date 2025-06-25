@@ -29,6 +29,7 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
           ? null
           : DateTime.parse(json['BirthDay'] as String),
       profileImg: json['image'] as String?,
+      createFeedback: json['createFeedback'] as bool?,
     );
 
 Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
@@ -38,4 +39,5 @@ Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'lastName': instance.lastName,
       'image': instance.profileImg,
       'BirthDay': instance.dateOfBirth?.toIso8601String(),
+      'createFeedback': instance.createFeedback,
     };

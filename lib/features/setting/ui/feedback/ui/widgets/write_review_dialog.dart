@@ -34,7 +34,7 @@ class _WriteReviewDialogState extends State<WriteReviewDialog> {
   Widget build(BuildContext context) {
     final createReportCubit = widget.createReportCubit;
     final updateReportCubit = widget.updateReportCubit;
-    final controller = widget.user.createReport
+    final controller = widget.user.createFeedback
         ? updateReportCubit.review
         : createReportCubit.review;
 
@@ -117,17 +117,16 @@ class _WriteReviewDialogState extends State<WriteReviewDialog> {
                 onPressed: (rating == 0 || controller.text.isEmpty)
                     ? null
                     : () async {
-                        if (widget.user.createReport) {
+                        if (widget.user.createFeedback) {
                           //  Use UpdateReportCubit
                           updateReportCubit.emitUpdateReportStates(rating);
                         } else {
                           // Use CreateReportCubit
                           createReportCubit.emitCreateReportStates(
                             rating,
-                           
                           );
                           final updatedUser = widget.user.copyWith(
-                            createReport: true,
+                            createFeedback: true,
                           );
                           context.read<UserCubit>().setUser(updatedUser);
                           await saveUserDataLocally(updatedUser);

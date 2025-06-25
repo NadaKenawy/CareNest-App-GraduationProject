@@ -32,7 +32,7 @@ class UserData {
 
   @JsonKey(name: 'BirthDay')
   final DateTime? dateOfBirth;
-
+  final bool? createFeedback;
   UserData({
     this.id,
     this.email,
@@ -40,6 +40,7 @@ class UserData {
     this.lastName,
     this.dateOfBirth,
     this.profileImg,
+    this.createFeedback,
   });
 
   factory UserData.fromJson(Map<String, dynamic> json) =>

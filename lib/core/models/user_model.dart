@@ -5,7 +5,7 @@ class UserModel {
   final String email;
   final DateTime? dateOfBirth;
   final String? profileImg;
-  final bool createReport;
+  final bool createFeedback;
 
   UserModel({
     required this.id, 
@@ -14,7 +14,7 @@ class UserModel {
     required this.email,
     required this.dateOfBirth,
     this.profileImg,
-    required this.createReport,
+    required this.createFeedback,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -27,7 +27,7 @@ class UserModel {
           ? DateTime.tryParse(json['BirthDay'] as String)
           : null,
       profileImg: json['image'] as String?,
-      createReport: json['createReport'] ?? false,
+      createFeedback: json['createFeedback'] ?? false,
     );
   }
 
@@ -40,7 +40,7 @@ class UserModel {
       'Email': email,
       'BirthDay': dateOfBirth?.toIso8601String(),
       'image': profileImg,
-      'createReport': createReport,
+      'createFeedback': createFeedback,
     };
   }
 
@@ -51,7 +51,7 @@ class UserModel {
     String? email,
     DateTime? dateOfBirth,
     String? profileImg,
-    bool? createReport,
+    bool? createFeedback,
   }) {
     return UserModel(
       id: id ?? this.id, 
@@ -60,7 +60,7 @@ class UserModel {
       email: email ?? this.email,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       profileImg: profileImg ?? this.profileImg,
-      createReport: createReport ?? this.createReport,
+      createFeedback: createFeedback ?? this.createFeedback,
     );
   }
 }
