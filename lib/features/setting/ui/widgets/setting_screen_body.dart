@@ -78,6 +78,8 @@ class SettingScreenBody extends StatelessWidget {
 
   Future<void> logout(BuildContext context) async {
     await SharedPrefHelper.removeSecuredData(SharedPrefKeys.userToken);
+    await SharedPrefHelper.removeSecuredData(SharedPrefKeys.babyId);
+    await SharedPrefHelper.removeSecuredData(SharedPrefKeys.babyName);
     DioFactory.removeTokenFromHeader();
     GoRouter.of(context).go(AppRouter.kLoginScreen);
   }

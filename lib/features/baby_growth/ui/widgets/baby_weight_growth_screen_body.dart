@@ -10,7 +10,6 @@ import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_b
 import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_cubit.dart';
 import 'package:care_nest/features/baby_growth/logic/get_baby_weight_growth_cubit/get_baby_weight_growth_state.dart';
 import 'package:care_nest/features/baby_growth/logic/latest_growth_data_cubit/latest_growth_data_cubit.dart';
-import 'package:care_nest/features/baby_growth/ui/widgets/get_baby_weight_growth_bloc_builder.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/growth_advice_card.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/growth_info_card.dart';
 import 'package:care_nest/features/baby_growth/ui/widgets/header_section.dart';
@@ -19,6 +18,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'update_weight_growth_data.dart';
+import 'package:care_nest/core/routing/app_router.dart';
+import 'package:care_nest/features/baby_growth/ui/widgets/baby_weight_growth_chart.dart';
 
 class BabyWeightGrowthScreenBody extends StatefulWidget {
   const BabyWeightGrowthScreenBody({super.key});
@@ -69,7 +70,84 @@ class _BabyWeightGrowthScreenBodyState
       }
       context.read<GetBabyWeightGrowthCubit>().getBabyWeightGrowth(babyId);
       context.read<LatestGrowthDataCubit>().latestGrowthData(babyId);
+    } else {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showAddBabyDialog(context);
+      });
     }
+  }
+
+  void _showAddBabyDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.child_care,
+                  size: 48, color: ColorsManager.primaryPinkColor),
+              const SizedBox(height: 16),
+              Text(
+                "Let's get started!",
+                style: TextStyles.font16BlackMedium,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 12),
+              Text(
+                'Add your baby to begin tracking their growth journey. You can add more anytime.',
+                textAlign: TextAlign.center,
+                style: TextStyles.font16BlackMedium
+                    .copyWith(color: Colors.grey[600], fontSize: 14),
+              ),
+              const SizedBox(height: 24),
+              AppTextButton(
+                buttonText: 'Add Baby',
+                textStyle: TextStyles.font16WhiteMedium,
+                buttonColor: ColorsManager.primaryPinkColor,
+                borderRadius: 16,
+                buttonHeight: 48,
+                buttonWidth: double.infinity,
+                onPressed: () {
+                  GoRouter.of(context)
+                      .pushReplacement(AppRouter.kAddBabyScreen);
+                },
+              ),
+              const SizedBox(height: 24),
+              Divider(color: Colors.grey[300]),
+              const SizedBox(height: 16),
+              Text(
+                'Already have a baby?',
+                style: TextStyles.font16BlackMedium,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Select from the dropdown to view their growth history.',
+                textAlign: TextAlign.center,
+                style: TextStyles.font16BlackMedium
+                    .copyWith(color: Colors.grey[600], fontSize: 14),
+              ),
+              const SizedBox(height: 24),
+              AppTextButton(
+                buttonText: 'OK',
+                textStyle: TextStyles.font16WhiteMedium,
+                buttonColor: ColorsManager.primaryPinkColor,
+                borderRadius: 16,
+                buttonHeight: 48,
+                buttonWidth: double.infinity,
+                onPressed: () {
+                  GoRouter.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -102,13 +180,16 @@ class _BabyWeightGrowthScreenBodyState
               builder: (context, state) {
                 String lastRecordValue = "N/A";
                 String previousRecordValue = "N/A";
+                List<dynamic> chartData = [];
 
-                if (state is Success && state.measurementData != null) {
+                if (babyId.isNotEmpty &&
+                    state is Success &&
+                    state.measurementData != null) {
                   var validWeights = state.measurementData!
                       .map((e) => e.weight)
                       .where((weight) => weight != null)
                       .toList();
-
+                  chartData = state.measurementData!;
                   if (validWeights.isNotEmpty) {
                     lastRecordValue = "${validWeights.last} kg";
                     if (validWeights.length > 1) {
@@ -125,7 +206,7 @@ class _BabyWeightGrowthScreenBodyState
                       status: 'Normal',
                       lastRecord: 'Last month recorded weight ',
                       lastRecordValue: previousRecordValue,
-                      current: 'Your baby’s current weight ',
+                      current: 'Your baby\'s current weight ',
                       currentValue: lastRecordValue,
                     ),
                     SizedBox(height: 16.h),
@@ -133,7 +214,9 @@ class _BabyWeightGrowthScreenBodyState
                     SizedBox(height: 28.h),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: const GetBabyWeightGrowthBlocBuilder(),
+                      child: BabyWeightGrowthChart(
+                          userWeights:
+                              babyId.isEmpty ? [] : List.from(chartData)),
                     ),
                     SizedBox(height: 28.h),
                     Padding(
@@ -180,12 +263,13 @@ class _BabyWeightGrowthScreenBodyState
                   ]),
             ),
             SizedBox(height: 4.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: UpdateWeightGrowthData(
-                babyId: babyId,
+            if (babyId.isNotEmpty)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: UpdateWeightGrowthData(
+                  babyId: babyId,
+                ),
               ),
-            ),
             SizedBox(height: 32.h),
           ],
         ),

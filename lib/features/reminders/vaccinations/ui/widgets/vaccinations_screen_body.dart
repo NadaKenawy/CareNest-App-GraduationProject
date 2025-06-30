@@ -1,13 +1,19 @@
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
+import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/utils/app_images.dart';
+import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/ui/widgets/get_baby_vaccines_bloc_builder.dart';
+import 'package:care_nest/features/reminders/vaccinations/ui/widgets/vaccination_list_skeletonizer.dart';
 import 'package:care_nest/features/reminders/vaccinations/ui/widgets/vaccines_sidebar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:care_nest/core/theme/colors_manager.dart';
+import 'package:care_nest/core/routing/app_router.dart';
 
 class VaccinationsScreenBody extends StatefulWidget {
   const VaccinationsScreenBody({super.key});
@@ -42,6 +48,10 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
 
     if (selectedBabyId != null && selectedBabyId!.isNotEmpty) {
       context.read<GetBabyVaccinesCubit>().getBabyVaccines(selectedBabyId!);
+    } else {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showAddBabyDialog(context);
+      });
     }
   }
 
@@ -59,6 +69,79 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
       isLoading = false;
     });
     context.read<GetBabyVaccinesCubit>().getBabyVaccines(id);
+  }
+
+  void _showAddBabyDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.child_care,
+                  size: 48, color: ColorsManager.primaryPinkColor),
+              const SizedBox(height: 16),
+              Text(
+                "Let's get started!",
+                style: TextStyles.font16BlackMedium,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 12),
+              Text(
+                'Add your baby to begin tracking their health and vaccinations. You can add more anytime.',
+                textAlign: TextAlign.center,
+                style: TextStyles.font16BlackMedium
+                    .copyWith(color: Colors.grey[600], fontSize: 14),
+              ),
+              const SizedBox(height: 24),
+              AppTextButton(
+                buttonText: 'Add Baby',
+                textStyle: TextStyles.font16WhiteMedium,
+                buttonColor: ColorsManager.primaryPinkColor,
+                borderRadius: 16,
+                buttonHeight: 48,
+                buttonWidth: double.infinity,
+                onPressed: () {
+                  GoRouter.of(context)
+                      .pushReplacement(AppRouter.kAddBabyScreen);
+                },
+              ),
+              const SizedBox(height: 24),
+              Divider(color: Colors.grey[300]),
+              const SizedBox(height: 16),
+              Text(
+                'Already have a baby?',
+                style: TextStyles.font16BlackMedium,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Select from the dropdown to view their vaccination history.',
+                textAlign: TextAlign.center,
+                style: TextStyles.font16BlackMedium
+                    .copyWith(color: Colors.grey[600], fontSize: 14),
+              ),
+              const SizedBox(height: 24),
+              AppTextButton(
+                buttonText: 'OK',
+                textStyle: TextStyles.font16WhiteMedium,
+                buttonColor: ColorsManager.primaryPinkColor,
+                borderRadius: 16,
+                buttonHeight: 48,
+                buttonWidth: double.infinity,
+                onPressed: () {
+                  GoRouter.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -88,23 +171,10 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
         ],
       ),
       body: isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(child: VaccinationListSkeletonizer())
           : (selectedBabyId != null && selectedBabyId!.isNotEmpty)
               ? const GetBabyVaccinesBlocBuilder()
-              : Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: Center(
-                    child: Text(
-                      'Select a baby from the drop down to view their vaccinations.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeightHelper.semiBold,
-                        fontSize: 28.sp,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
+              : const SizedBox.shrink(),
     );
   }
 }

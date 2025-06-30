@@ -5,10 +5,12 @@ import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/core/utils/app_images.dart';
+import 'package:care_nest/core/widgets/custom_button.dart';
 
 import 'package:care_nest/features/reminders/medications/logic/get_all_babies_medication_schedule_cubit/get_all_babies_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/medications/ui/widgets/get_all_babies_medicines_bloc_builder.dart';
+import 'package:care_nest/features/reminders/medications/ui/widgets/medicines_list_view_skeletonizer.dart';
 import 'package:care_nest/features/reminders/medications/ui/widgets/medicines_sidebar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,6 +56,10 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
       context
           .read<GetAllMedicationScheduleCubit>()
           .getAllMedicationSchedule(babyId!);
+    } else {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showAddBabyDialog(context);
+      });
     }
   }
 
@@ -71,7 +77,6 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
           .read<GetAllMedicationScheduleCubit>()
           .getAllMedicationSchedule(id);
     } else if (index == 1) {
-      // تم اختيار All Reminders
       setState(() {
         babyId = null;
         selectedBabyName = "All Reminders";
@@ -84,6 +89,79 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  void _showAddBabyDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.child_care,
+                  size: 48, color: ColorsManager.primaryPinkColor),
+              const SizedBox(height: 16),
+              Text(
+                "Let's get started!",
+                style: TextStyles.font16BlackMedium,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 12),
+              Text(
+                'Add your baby to begin tracking their health and medications. You can add more anytime.',
+                textAlign: TextAlign.center,
+                style: TextStyles.font16BlackMedium
+                    .copyWith(color: Colors.grey[600], fontSize: 14),
+              ),
+              const SizedBox(height: 24),
+              AppTextButton(
+                buttonText: 'Add Baby',
+                textStyle: TextStyles.font16WhiteMedium,
+                buttonColor: ColorsManager.primaryPinkColor,
+                borderRadius: 16,
+                buttonHeight: 48,
+                buttonWidth: double.infinity,
+                onPressed: () {
+                  GoRouter.of(context)
+                      .pushReplacement(AppRouter.kAddBabyScreen);
+                },
+              ),
+              const SizedBox(height: 24),
+              Divider(color: Colors.grey[300]),
+              const SizedBox(height: 16),
+              Text(
+                'Already have a baby?',
+                style: TextStyles.font16BlackMedium,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Select from the dropdown to view their medications history.',
+                textAlign: TextAlign.center,
+                style: TextStyles.font16BlackMedium
+                    .copyWith(color: Colors.grey[600], fontSize: 14),
+              ),
+              const SizedBox(height: 24),
+              AppTextButton(
+                buttonText: 'OK',
+                textStyle: TextStyles.font16WhiteMedium,
+                buttonColor: ColorsManager.primaryPinkColor,
+                borderRadius: 16,
+                buttonHeight: 48,
+                buttonWidth: double.infinity,
+                onPressed: () {
+                  GoRouter.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -115,35 +193,36 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
           )
         ],
       ),
-      floatingActionButton: _selectedIndex == 1
-          ? null
-          : FloatingActionButton(
-              onPressed: () {
-                GoRouter.of(context)
-                    .push(AppRouter.kAddMedicineScreen)
-                    .then((value) async {
-                  if (value == true) {
-                    final babyId = await SharedPrefHelper.getSecuredString(
-                        SharedPrefKeys.babyId);
-                    context
-                        .read<GetAllMedicationScheduleCubit>()
-                        .getAllMedicationSchedule(babyId);
-                  }
-                });
-              },
-              backgroundColor: Colors.white,
-              shape: const CircleBorder(
-                side: BorderSide(
-                  color: ColorsManager.primaryPinkColor,
-                  width: 3,
-                ),
-              ),
-              child: Icon(
-                Icons.add,
-                size: 32.sp,
-                color: ColorsManager.primaryPinkColor,
-              ),
-            ),
+      floatingActionButton:
+          (babyId != null && babyId!.isNotEmpty && _selectedIndex != 1)
+              ? FloatingActionButton(
+                  onPressed: () {
+                    GoRouter.of(context)
+                        .push(AppRouter.kAddMedicineScreen)
+                        .then((value) async {
+                      if (value == true) {
+                        final babyId = await SharedPrefHelper.getSecuredString(
+                            SharedPrefKeys.babyId);
+                        context
+                            .read<GetAllMedicationScheduleCubit>()
+                            .getAllMedicationSchedule(babyId);
+                      }
+                    });
+                  },
+                  backgroundColor: Colors.white,
+                  shape: const CircleBorder(
+                    side: BorderSide(
+                      color: ColorsManager.primaryPinkColor,
+                      width: 3,
+                    ),
+                  ),
+                  child: Icon(
+                    Icons.add,
+                    size: 32.sp,
+                    color: ColorsManager.primaryPinkColor,
+                  ),
+                )
+              : null,
       backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -164,23 +243,11 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
             isLoading
                 ? const Expanded(
                     child: Center(
-                      child: CircularProgressIndicator(),
+                      child: MedicinesListViewSkeletonizer(),
                     ),
                   )
                 : (selectedBabyName == null || selectedBabyName!.isEmpty)
-                    ? Expanded(
-                        child: Center(
-                          child: Text(
-                            'Select a baby from the dropdown to view their medication.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontWeight: FontWeightHelper.semiBold,
-                              fontSize: 28.sp,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      )
+                    ? const SizedBox.shrink()
                     : _selectedIndex == 1
                         ? const GetAllBabiesMedicinesBlocBuilder()
                         : const GetAllMedicinesBlocBuilder(),

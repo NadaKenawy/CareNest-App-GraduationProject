@@ -7,6 +7,8 @@ import 'package:care_nest/features/add_baby/logic/delete_baby_cubit/delete_baby_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:care_nest/core/helpers/shared_pref_helper.dart';
+import 'package:care_nest/core/helpers/constants.dart';
 
 class BabyContainer extends StatelessWidget {
   final String gender;
@@ -152,10 +154,15 @@ class BabyContainer extends StatelessWidget {
                               desc:
                                   'Are you sure you want to delete this baby?',
                               btnCancelOnPress: () {},
-                              btnOkOnPress: () {
+                              btnOkOnPress: () async {
                                 context
                                     .read<DeleteBabyCubit>()
                                     .deleteBaby(babyId, context);
+                                final storedId = await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyId);
+                                if (storedId == babyId) {
+                                  await SharedPrefHelper.removeSecuredData(SharedPrefKeys.babyId);
+                                  await SharedPrefHelper.removeSecuredData(SharedPrefKeys.babyName);
+                                }
                               },
                             ).show();
                           },
