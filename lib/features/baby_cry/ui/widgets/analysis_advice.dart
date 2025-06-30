@@ -1,13 +1,12 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:care_nest/features/baby_cry/ui/widgets/did_it_work.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AnalysisAdvice extends StatelessWidget {
   final String prediction;
+  final String? cryId;
 
-  const AnalysisAdvice({super.key, required this.prediction});
+  const AnalysisAdvice({super.key, required this.prediction, this.cryId});
 
   static const Map<String, Map<String, String>> adviceContent = {
     "burping": {
@@ -33,7 +32,7 @@ class AnalysisAdvice extends StatelessWidget {
     "discomfort": {
       "title": "General Discomfort",
       "description":
-          "Something might be bothering your baby. Check their diaper, clothes, room temperature, or position to ensure they’re comfortable.",
+          "Something might be bothering your baby. Check their diaper, clothes, room temperature, or position to ensure they're comfortable.",
     },
   };
 
@@ -41,8 +40,8 @@ class AnalysisAdvice extends StatelessWidget {
   Widget build(BuildContext context) {
     final content = adviceContent[prediction] ??
         {
-          "title": "Unknown",
-          "description": "No advice available.",
+          'title': 'No advice',
+          'body': 'No advice available for this prediction.'
         };
 
     return Container(
@@ -51,7 +50,7 @@ class AnalysisAdvice extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: Colors.black.withOpacity(0.5),
+          color: Colors.black.withValues(alpha: 0.5),
         ),
       ),
       child: Column(
@@ -68,15 +67,16 @@ class AnalysisAdvice extends StatelessWidget {
             content["description"]!,
             style: TextStyle(
               fontSize: 14.sp,
-              color: Colors.black.withOpacity(0.6),
+              color: Colors.black.withValues(alpha: 0.6),
               fontWeight: FontWeight.bold,
             ),
           ),
           SizedBox(height: 12.h),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              DidItWork(),
+              DidItWork(cryId: cryId),
+              
             ],
           ),
         ],

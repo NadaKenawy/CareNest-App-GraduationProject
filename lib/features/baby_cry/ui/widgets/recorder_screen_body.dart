@@ -11,10 +11,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../core/routing/app_router.dart';
 
 import '../../logic/predicition_cubit/prediction_cubit.dart';
 import '../../logic/create_cry_cubit/create_cry_cubit.dart';
 import 'create_cry_bloc_listener.dart';
+import '../../data/model/prediction/prediction_response_model.dart';
 
 class RecorderScreenBody extends StatefulWidget {
   const RecorderScreenBody({super.key});
@@ -31,6 +34,8 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
   Timer? timer;
   double progress = 0.0;
   String? filePath;
+  String? cryId;
+  PredictionResponse? predictionResponse;
 
   @override
   void dispose() {
@@ -117,8 +122,27 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
             SizedBox(height: 28.h),
             isRecording ? recordingProgress() : const SizedBox(),
             SizedBox(height: 100.h),
-            const PredictionBlocListener(),
-            const CreateCryBlocListener(),
+            PredictionBlocListener(
+              onPredictionSuccess: (response) {
+                setState(() {
+                  predictionResponse = response;
+                });
+                if (response.prediction != null) {
+                  sendToCreateCry(response.prediction!);
+                }
+              },
+            ),
+            CreateCryBlocListener(
+              onSuccess: (id) {
+                if (predictionResponse != null && id != null) {
+                  GoRouter.of(context)
+                      .push(AppRouter.kAnalysisResultScreen, extra: {
+                    'predictionResponse': predictionResponse!,
+                    'cryId': id,
+                  });
+                }
+              },
+            ),
           ],
         ),
       ),

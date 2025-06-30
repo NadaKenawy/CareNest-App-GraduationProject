@@ -67,6 +67,8 @@ import '../../features/setting/change_password/data/models/update_pass_response.
 import '../../features/setting/feedback/data/models/update_report/update_report_request_body.dart';
 import '../../features/setting/feedback/data/models/update_report/update_report_response.dart';
 import 'package:care_nest/features/baby_cry/data/model/create_cry/create_cry_response_model.dart';
+import 'package:care_nest/features/baby_cry/data/model/user_satisfaction/user_satisfaction_request_body.dart';
+import 'package:care_nest/features/baby_cry/data/model/user_satisfaction/user_satisfaction_response_model.dart';
 part 'api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.apiBaseUrl)
@@ -341,5 +343,12 @@ abstract class ApiService {
   Future<CreateCryResponse> createCry(
     @Header('Authorization') String token,
     @Body() FormData formData,
+  );
+
+  @POST(ApiConstants.setCryUserSatisfaction)
+  Future<UserSatisfactionResponseModel> setCryUserSatisfaction(
+    @Path('id') String id,
+    @Body() UserSatisfactionRequestBody requestBody,
+    @Header('Authorization') String token,
   );
 }

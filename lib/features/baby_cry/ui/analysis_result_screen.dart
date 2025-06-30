@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import '../data/model/prediction/prediction_response_model.dart';
 
 class AnalysisResultScreen extends StatelessWidget {
-  const AnalysisResultScreen({super.key,required this.predictionResponse});
+  const AnalysisResultScreen(
+      {super.key, required this.predictionResponse, this.cryId});
   final PredictionResponse predictionResponse;
+  final String? cryId;
   @override
   Widget build(BuildContext context) {
-    return  AnalysisResultScreenBody(
+    return AnalysisResultScreenBody(
       predictionResponse: predictionResponse,
+      cryId: cryId,
     );
   }
 }

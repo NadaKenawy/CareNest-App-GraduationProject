@@ -94,6 +94,7 @@ import '../../features/doctors/data/models/get_doctors/get_doctors_response.dart
 import '../../features/setting/feedback/logic/create_report_cubit/create_report_cubit.dart';
 import '../../features/setting/feedback/logic/get_feedback_cubit/get_feedbacks_cubit.dart';
 import '../../features/setting/feedback/logic/update_report_cubit/update_report_cubit.dart';
+import 'package:care_nest/features/baby_cry/logic/user_satisfaction_cubit/user_satisfaction_cubit.dart';
 
 abstract class AppRouter {
   static const kSignUpScreen = '/signUpScreen';
@@ -341,9 +342,16 @@ abstract class AppRouter {
       GoRoute(
           path: kAnalysisResultScreen,
           builder: (context, state) {
-            final predictionResponse = state.extra as PredictionResponse;
-            return AnalysisResultScreen(
-              predictionResponse: predictionResponse,
+            final extra = state.extra as Map<String, dynamic>?;
+            final predictionResponse =
+                extra?['predictionResponse'] as PredictionResponse;
+            final cryId = extra?['cryId'] as String?;
+            return BlocProvider(
+              create: (context) => getIt<UserSatisfactionCubit>(),
+              child: AnalysisResultScreen(
+                predictionResponse: predictionResponse,
+                cryId: cryId,
+              ),
             );
           }),
       GoRoute(

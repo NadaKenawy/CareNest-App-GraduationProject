@@ -5,7 +5,8 @@ import '../../logic/create_cry_cubit/create_cry_cubit.dart';
 import '../../logic/create_cry_cubit/create_cry_state.dart';
 
 class CreateCryBlocListener extends StatelessWidget {
-  const CreateCryBlocListener({super.key});
+  final void Function(String? cryId)? onSuccess;
+  const CreateCryBlocListener({super.key, this.onSuccess});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,11 @@ class CreateCryBlocListener extends StatelessWidget {
             log('Create Cry Loading...');
           },
           success: (createCryResponse) {
-            log('Create Cry Success: ${createCryResponse.toJson()}');
+            log('Create Cry Success: [32m${createCryResponse.toJson()}[0m');
+            final cryId = createCryResponse.data?.id;
+            if (onSuccess != null) {
+              onSuccess!(cryId);
+            }
           },
           error: (error) {
             log('Create Cry Error: ${error.message}');

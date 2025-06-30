@@ -54,11 +54,12 @@ class ApiConstants {
   static const String createMessage = "community";
   static const String deleteCommunityMessage = 'community/{id}';
   static const String getCommunityOnlineUsers = "community/chat-users";
-   static const String createReport = "feedback";
+  static const String createReport = "feedback";
   static const String updateReport = "feedback";
   static const String updatePassword = "users/updateUserPassword";
   static const String getFeedbacks = "feedback";
   static const String createCry = "cry";
+  static const String setCryUserSatisfaction = "cry/{id}/userSatisfaction";
 }
 
 class ApiErrors {

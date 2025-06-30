@@ -17,6 +17,7 @@ class CreateCryResponse {
 
 @JsonSerializable()
 class CreateCryData {
+  @JsonKey(name: '_id')
   final String? id;
   @JsonKey(name: 'class')
   final String? classType;

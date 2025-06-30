@@ -106,6 +106,8 @@ import '../../features/setting/feedback/logic/update_report_cubit/update_report_
 import '../logic/user_cubit/user_cubit.dart';
 import 'package:care_nest/features/community/data/repos/delete_message_repo.dart';
 import 'package:care_nest/features/community/logic/delete_message/delete_message_cubit.dart';
+import 'package:care_nest/features/baby_cry/data/repos/user_satisfaction_repo.dart';
+import 'package:care_nest/features/baby_cry/logic/user_satisfaction_cubit/user_satisfaction_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -395,5 +397,12 @@ Future<void> setupGetIt() async {
   );
   getIt.registerFactory<CreateCryCubit>(
     () => CreateCryCubit(getIt()),
+  );
+  // user satisfaction
+  getIt.registerLazySingleton<UserSatisfactionRepo>(
+    () => UserSatisfactionRepo(getIt()),
+  );
+  getIt.registerFactory<UserSatisfactionCubit>(
+    () => UserSatisfactionCubit(getIt()),
   );
 }

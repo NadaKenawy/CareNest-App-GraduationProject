@@ -22,7 +22,7 @@ Map<String, dynamic> _$CreateCryResponseToJson(CreateCryResponse instance) =>
 
 CreateCryData _$CreateCryDataFromJson(Map<String, dynamic> json) =>
     CreateCryData(
-      id: json['id'] as String?,
+      id: json['_id'] as String?,
       classType: json['class'] as String?,
       audio: json['audio'] as String?,
       mother: json['mother'] as String?,
@@ -34,7 +34,7 @@ CreateCryData _$CreateCryDataFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$CreateCryDataToJson(CreateCryData instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'class': instance.classType,
       'audio': instance.audio,
       'mother': instance.mother,

@@ -1475,7 +1475,7 @@ class _ApiService implements ApiService {
     late List<Map<String, dynamic>> _value;
     try {
       _value = _result.data!
-        .map((dynamic i) =>
+          .map((dynamic i) =>
               Map<String, dynamic>.from(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
@@ -1771,6 +1771,45 @@ class _ApiService implements ApiService {
     late CreateCryResponse _value;
     try {
       _value = CreateCryResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<UserSatisfactionResponseModel> setCryUserSatisfaction(
+    String id,
+    UserSatisfactionRequestBody requestBody,
+    String token,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(requestBody.toJson());
+    final _options = _setStreamType<UserSatisfactionResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'cry/${id}/userSatisfaction',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late UserSatisfactionResponseModel _value;
+    try {
+      _value = UserSatisfactionResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

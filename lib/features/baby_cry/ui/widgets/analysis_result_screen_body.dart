@@ -10,8 +10,10 @@ import 'package:go_router/go_router.dart';
 import '../../data/model/prediction/prediction_response_model.dart';
 
 class AnalysisResultScreenBody extends StatelessWidget {
-  const AnalysisResultScreenBody({super.key, required this.predictionResponse});
+  const AnalysisResultScreenBody(
+      {super.key, required this.predictionResponse, this.cryId});
   final PredictionResponse predictionResponse;
+  final String? cryId;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,7 @@ class AnalysisResultScreenBody extends StatelessWidget {
             SizedBox(height: 20.h),
             AnalysisAdvice(
               prediction: prediction ?? 'hungry',
+              cryId: cryId,
             ),
             SizedBox(height: 20.h),
             Padding(
