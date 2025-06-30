@@ -88,14 +88,7 @@ class _DidItWorkState extends State<DidItWork> {
 
   @override
   Widget build(BuildContext context) {
-    print('DidItWork build, cryId: ${widget.cryId}');
-    if (token == null) {
-      return const Center(child: CircularProgressIndicator());
-    }
-    if (widget.cryId == null) {
-      return const Text('No cryId in DidItWork!',
-          style: TextStyle(color: Colors.red));
-    }
+    if (token == null || widget.cryId == null) return const SizedBox.shrink();
     return BlocConsumer<UserSatisfactionCubit, UserSatisfactionState>(
       listener: (context, state) {
         state.whenOrNull(
