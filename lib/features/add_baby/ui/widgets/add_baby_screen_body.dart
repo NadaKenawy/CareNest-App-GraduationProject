@@ -9,8 +9,8 @@ import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 
 import '../../logic/add_baby_cubit/add_baby_cubit.dart';
-import 'header_section.dart';
 import 'gender_selection.dart';
+import 'header_section.dart';
 
 class AddBabyScreenBody extends StatefulWidget {
   const AddBabyScreenBody({super.key});
@@ -22,7 +22,7 @@ class AddBabyScreenBody extends StatefulWidget {
 class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
   final TextEditingController _dobController = TextEditingController();
   String gender = '';
-
+ 
   Gradient getGradient() {
     if (gender == 'Male') {
       return const LinearGradient(
@@ -56,6 +56,7 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -63,9 +64,9 @@ class _AddBabyScreenBodyState extends State<AddBabyScreenBody> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          HeaderSection(
-            gender: gender,
-          ),
+          // HeaderSection(
+          //   gender: gender,
+          // ),
           SizedBox(height: 40.h),
           Expanded(
             child: SingleChildScrollView(

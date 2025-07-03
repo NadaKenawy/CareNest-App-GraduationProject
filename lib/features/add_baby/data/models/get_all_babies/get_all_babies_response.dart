@@ -28,6 +28,7 @@ class BabiesData {
   DateTime? dateOfBirth;
   String? motherOfBaby;
   String? gender;
+  String? babyImage;
 
   BabiesData({
     this.id,
@@ -37,6 +38,7 @@ class BabiesData {
     this.dateOfBirth,
     this.motherOfBaby,
     this.gender,
+    this.babyImage,
   });
 
   factory BabiesData.fromJson(Map<String, dynamic> json) =>

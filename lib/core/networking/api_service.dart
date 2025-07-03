@@ -53,6 +53,7 @@ import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import '../../features/add_baby/data/models/add_baby/add_baby_request_body.dart';
 import '../../features/add_baby/data/models/get_all_babies/get_all_babies_response.dart';
+import '../../features/add_baby/data/models/update_baby_image/update_baby_image_response.dart';
 import '../../features/community/data/models/get_online_users/get_online_users_response.dart';
 import '../../features/fcm/data/models/update_fcm/update_fcm_token_request_body.dart';
 import '../../features/profile/data/models/update_user_request_body.dart';
@@ -350,5 +351,12 @@ abstract class ApiService {
     @Path('id') String id,
     @Body() UserSatisfactionRequestBody requestBody,
     @Header('Authorization') String token,
+  );
+
+  @PUT(ApiConstants.updateBabyImage)
+  Future<UpdateBabyImageResponse> updateBabyImage(
+    @Header('Authorization') String token,
+    @Path('id') String id,
+    @Body() FormData formData,
   );
 }

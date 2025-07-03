@@ -82,7 +82,9 @@ import 'package:care_nest/features/tips/logic/get_tip_details_cubit/get_tip_deta
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import '../../features/add_baby/data/repos/add_baby_repo.dart';
+import '../../features/add_baby/data/repos/update_baby_image_repo.dart';
 import '../../features/add_baby/logic/add_baby_cubit/add_baby_cubit.dart';
+import '../../features/add_baby/logic/update_baby_image_cubit/update_baby_image_cubit.dart';
 import '../../features/community/data/repos/get_online_users_repo.dart';
 import '../../features/community/logic/get_online_users/get_online_users_cubit.dart';
 import '../../features/doctors/logic/get_all_doctors_cubit/get_all_doctors_cubit.dart';
@@ -404,5 +406,15 @@ Future<void> setupGetIt() async {
   );
   getIt.registerFactory<UserSatisfactionCubit>(
     () => UserSatisfactionCubit(getIt()),
+  );
+
+  //update baby image
+
+  getIt.registerLazySingleton<UpdateBabyImageRepo>(
+    () => UpdateBabyImageRepo(getIt<Dio>()),
+  );
+  getIt.registerFactory<UpdateBabyImageCubit>(
+    () =>
+        UpdateBabyImageCubit(getIt<UpdateBabyImageRepo>(), getIt<UserCubit>()),
   );
 }

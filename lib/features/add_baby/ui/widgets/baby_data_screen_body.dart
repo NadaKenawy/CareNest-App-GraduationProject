@@ -55,6 +55,7 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
           HeaderSection(
             gender: widget.babiesData.gender,
             babyName: widget.babiesData.name,
+            babyId: widget.babiesData.id,
           ),
           SizedBox(height: 40.h),
           Expanded(

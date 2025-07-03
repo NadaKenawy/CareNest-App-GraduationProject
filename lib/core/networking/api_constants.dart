@@ -60,6 +60,7 @@ class ApiConstants {
   static const String getFeedbacks = "feedback";
   static const String createCry = "cry";
   static const String setCryUserSatisfaction = "cry/{id}/userSatisfaction";
+  static const String updateBabyImage = "babies/updateBabyImage/{id}";
 }
 
 class ApiErrors {

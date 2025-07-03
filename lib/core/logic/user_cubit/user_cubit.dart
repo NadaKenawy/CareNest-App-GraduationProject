@@ -38,6 +38,14 @@ class UserCubit extends Cubit<UserState> {
           await SharedPrefHelper.setSecuredString(SharedPrefKeys.userImage, savedUser.profileImg!);
           log('User image saved to secure storage: \\${savedUser.profileImg}');
         }
+        
+        // Load baby image from SharedPreferences
+        final babyImage = await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyImage);
+        if (babyImage.isNotEmpty && savedUser.babyImage != babyImage) {
+          final updatedUser = savedUser.copyWith(babyImage: babyImage);
+          emit(state.copyWith(user: updatedUser, isLoading: false));
+          log('Baby image loaded from SharedPreferences: \\$babyImage');
+        }
       } else {
         emit(state.copyWith(isLoading: false));
         log('No saved user data found.');
@@ -60,6 +68,8 @@ class UserCubit extends Cubit<UserState> {
     log('User cleared');
     SharedPrefHelper.removeSecuredData('user_data');
     SharedPrefHelper.removeSecuredData('user_id');
+    SharedPrefHelper.removeSecuredData(SharedPrefKeys.userImage);
+    SharedPrefHelper.removeSecuredData(SharedPrefKeys.babyImage);
   }
 }
 
@@ -81,6 +91,11 @@ Future<void> saveUserDataLocally(UserModel user) async {
       await SharedPrefHelper.setSecuredString(SharedPrefKeys.userImage, user.profileImg!);
       log('User image saved locally: \\${user.profileImg}');
     }
+    
+    if (user.babyImage != null && user.babyImage!.isNotEmpty) {
+      await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyImage, user.babyImage!);
+      log('Baby image saved locally: \\${user.babyImage}');
+    }
   } catch (e) {
     log('Error saving user data: \\$e');
   }
@@ -101,6 +116,8 @@ Future<UserModel?> getSavedUserData() async {
     log('Error retrieving saved user data: $e');
     await SharedPrefHelper.removeSecuredData('user_data');
     await SharedPrefHelper.removeSecuredData(SharedPrefKeys.userId);
+    await SharedPrefHelper.removeSecuredData(SharedPrefKeys.userImage);
+    await SharedPrefHelper.removeSecuredData(SharedPrefKeys.babyImage);
     return null;
   }
 }
