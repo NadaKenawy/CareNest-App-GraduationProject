@@ -9,6 +9,7 @@ class SharedPrefKeys {
   static const String babyId = 'babyId';
   static const String babyName = 'babyName';
   static const String babyDateOfBirth = 'userDateOfBirth';
+  static const String babyImage = 'babyImage';
   static const num userLocation = 0;
   static const String userId = 'userId';
   static const String userImage = 'userImage';

@@ -36,6 +36,7 @@ BabiesData _$BabiesDataFromJson(Map<String, dynamic> json) => BabiesData(
           : DateTime.parse(json['birthDay'] as String),
       motherOfBaby: json['motherOfBaby'] as String?,
       gender: json['gender'] as String?,
+      babyImage: json['babyImage'] as String?,
     );
 
 Map<String, dynamic> _$BabiesDataToJson(BabiesData instance) =>
@@ -47,6 +48,7 @@ Map<String, dynamic> _$BabiesDataToJson(BabiesData instance) =>
       'birthDay': instance.dateOfBirth?.toIso8601String(),
       'motherOfBaby': instance.motherOfBaby,
       'gender': instance.gender,
+      'babyImage': instance.babyImage,
     };
 
 WeightData _$WeightDataFromJson(Map<String, dynamic> json) => WeightData(

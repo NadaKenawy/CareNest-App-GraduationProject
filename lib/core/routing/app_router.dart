@@ -89,6 +89,7 @@ import 'package:care_nest/features/tips/ui/widgets/tip_details_screen_body.dart'
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/add_baby/logic/update_baby_image_cubit/update_baby_image_cubit.dart';
 import '../../features/baby_cry/data/model/prediction/prediction_response_model.dart';
 import '../../features/doctors/data/models/get_doctors/get_doctors_response.dart';
 import '../../features/setting/feedback/logic/create_report_cubit/create_report_cubit.dart';
@@ -232,8 +233,15 @@ abstract class AppRouter {
         path: kBabyDataScreen,
         builder: (context, state) {
           final babyData = state.extra as BabiesData;
-          return BlocProvider(
-            create: (context) => UpdateBabyCubit(getIt(), babyData),
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => UpdateBabyCubit(getIt(), babyData),
+              ),
+              BlocProvider(
+                create: (context) => getIt<UpdateBabyImageCubit>(),
+              ),
+            ],
             child: BabyDataScreen(
               babiesData: babyData,
             ),
