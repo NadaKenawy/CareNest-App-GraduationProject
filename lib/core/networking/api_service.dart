@@ -51,7 +51,6 @@ import 'package:care_nest/features/tips/data/models/get_tip_details_response.dar
 import 'package:dio/dio.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
-import '../../features/add_baby/data/models/add_baby/add_baby_request_body.dart';
 import '../../features/add_baby/data/models/get_all_babies/get_all_babies_response.dart';
 import '../../features/add_baby/data/models/update_baby_image/update_baby_image_response.dart';
 import '../../features/community/data/models/get_online_users/get_online_users_response.dart';
@@ -109,7 +108,7 @@ abstract class ApiService {
 
   @POST(ApiConstants.addNewBaby)
   Future<AddBabyResponse> addNewBaby(
-    @Body() AddBabyRequestBody addBabyRequestBody,
+    @Body() FormData formData,
     @Header('Authorization') String token,
   );
 
