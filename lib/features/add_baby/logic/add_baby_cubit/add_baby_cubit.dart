@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/features/add_baby/data/models/add_baby/add_baby_request_body.dart';
@@ -17,6 +18,33 @@ class AddBabyCubit extends Cubit<AddBabyState> {
   TextEditingController genderController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
+  
+  // Image related variables
+  File? selectedImage;
+  
+  // Method to select image
+  void selectImage(File image) {
+    selectedImage = image;
+    emit(const AddBabyState.initial());
+  }
+  
+  // Method to clear selected image
+  void clearSelectedImage() {
+    selectedImage = null;
+    emit(const AddBabyState.initial());
+  }
+  
+  // Method to clear all form data
+  void clearFormData() {
+    nameController.clear();
+    weightController.clear();
+    heightController.clear();
+    dateOfBirthOfBabyController.clear();
+    genderController.clear();
+    selectedImage = null;
+    emit(const AddBabyState.initial());
+  }
+  
   void emitAddBabyStates() async {
     // if (nameController.text.isEmpty ||
     //     weightController.text.isEmpty ||
@@ -49,6 +77,7 @@ class AddBabyCubit extends Cubit<AddBabyState> {
         heightEntry: num.tryParse(heightController.text) ?? 0,
         dateOfBirthOfBaby: dateOfBirthOfBabyController.text,
         gender: genderController.text,
+        image: selectedImage,
       ),
       token,
     );

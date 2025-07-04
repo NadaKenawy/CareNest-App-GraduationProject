@@ -234,15 +234,14 @@ class _ApiService implements ApiService {
 
   @override
   Future<AddBabyResponse> addNewBaby(
-    AddBabyRequestBody addBabyRequestBody,
+    FormData formData,
     String token,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
-    _data.addAll(addBabyRequestBody.toJson());
+    final _data = formData;
     final _options = _setStreamType<AddBabyResponse>(Options(
       method: 'POST',
       headers: _headers,

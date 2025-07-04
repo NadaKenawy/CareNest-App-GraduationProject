@@ -32,15 +32,18 @@ class UserCubit extends Cubit<UserState> {
         log('User loaded from cache: \\${savedUser.firstname}');
         log('User birthdate: \\${savedUser.dateOfBirth}');
         log('User ID: \\${savedUser.id}');
-        await SharedPrefHelper.setSecuredString(SharedPrefKeys.userId, savedUser.id);
+        await SharedPrefHelper.setSecuredString(
+            SharedPrefKeys.userId, savedUser.id);
         log('User ID saved to secure storage: \\${savedUser.id}');
         if (savedUser.profileImg != null && savedUser.profileImg!.isNotEmpty) {
-          await SharedPrefHelper.setSecuredString(SharedPrefKeys.userImage, savedUser.profileImg!);
+          await SharedPrefHelper.setSecuredString(
+              SharedPrefKeys.userImage, savedUser.profileImg!);
           log('User image saved to secure storage: \\${savedUser.profileImg}');
         }
-        
+
         // Load baby image from SharedPreferences
-        final babyImage = await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyImage);
+        final babyImage =
+            await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyImage);
         if (babyImage.isNotEmpty && savedUser.babyImage != babyImage) {
           final updatedUser = savedUser.copyWith(babyImage: babyImage);
           emit(state.copyWith(user: updatedUser, isLoading: false));
@@ -61,6 +64,16 @@ class UserCubit extends Cubit<UserState> {
     log('User set: ${user.firstname}');
     log('User ID: ${user.id}');
     saveUserDataLocally(user);
+  }
+
+  void updateBabyImage(String imageUrl) {
+    final currentUser = state.user;
+    if (currentUser != null) {
+      final updatedUser = currentUser.copyWith(babyImage: imageUrl);
+      emit(state.copyWith(user: updatedUser));
+      saveUserDataLocally(updatedUser);
+      log('✅ Baby image updated in UserCubit: $imageUrl');
+    }
   }
 
   void clearUser() {
@@ -88,12 +101,14 @@ Future<void> saveUserDataLocally(UserModel user) async {
     log('User ID saved locally: \\${user.id}');
 
     if (user.profileImg != null && user.profileImg!.isNotEmpty) {
-      await SharedPrefHelper.setSecuredString(SharedPrefKeys.userImage, user.profileImg!);
+      await SharedPrefHelper.setSecuredString(
+          SharedPrefKeys.userImage, user.profileImg!);
       log('User image saved locally: \\${user.profileImg}');
     }
-    
+
     if (user.babyImage != null && user.babyImage!.isNotEmpty) {
-      await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyImage, user.babyImage!);
+      await SharedPrefHelper.setSecuredString(
+          SharedPrefKeys.babyImage, user.babyImage!);
       log('Baby image saved locally: \\${user.babyImage}');
     }
   } catch (e) {
