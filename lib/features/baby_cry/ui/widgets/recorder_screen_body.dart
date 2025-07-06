@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/helpers/constants.dart';
+import 'package:care_nest/features/baby_cry/logic/predicition_cubit/prediction_state.dart';
 import 'package:care_nest/features/baby_cry/ui/widgets/prediction_bloc_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -107,43 +108,81 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return BlocListener<PredictionCubit, PredictionState>(
+      listener: (context, state) {
+        state.whenOrNull(
+          loading: () {
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) => Dialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
+                backgroundColor: Colors.white,
+                child: const Padding(
+                  padding: EdgeInsets.all(24.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 24),
+                      Text(
+                        'Crying is being analyzed...',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+          success: (_) {
+            Navigator.of(context, rootNavigator: true).maybePop();
+          },
+          error: (_) {
+            Navigator.of(context, rootNavigator: true).maybePop();
+          },
+        );
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+        ),
         backgroundColor: Colors.white,
-      ),
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            headerText(),
-            SizedBox(height: 48.h),
-            recordingCircle(),
-            SizedBox(height: 28.h),
-            isRecording ? recordingProgress() : const SizedBox(),
-            SizedBox(height: 100.h),
-            PredictionBlocListener(
-              onPredictionSuccess: (response) {
-                setState(() {
-                  predictionResponse = response;
-                });
-                if (response.prediction != null) {
-                  sendToCreateCry(response.prediction!);
-                }
-              },
-            ),
-            CreateCryBlocListener(
-              onSuccess: (id) {
-                if (predictionResponse != null && id != null) {
-                  GoRouter.of(context)
-                      .push(AppRouter.kAnalysisResultScreen, extra: {
-                    'predictionResponse': predictionResponse!,
-                    'cryId': id,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              headerText(),
+              SizedBox(height: 48.h),
+              recordingCircle(),
+              SizedBox(height: 28.h),
+              isRecording ? recordingProgress() : const SizedBox(),
+              SizedBox(height: 100.h),
+              PredictionBlocListener(
+                onPredictionSuccess: (response) {
+                  setState(() {
+                    predictionResponse = response;
                   });
-                }
-              },
-            ),
-          ],
+                  if (response.prediction != null) {
+                    sendToCreateCry(response.prediction!);
+                  }
+                },
+              ),
+              CreateCryBlocListener(
+                onSuccess: (id) {
+                  if (predictionResponse != null && id != null) {
+                    GoRouter.of(context)
+                        .push(AppRouter.kAnalysisResultScreen, extra: {
+                      'predictionResponse': predictionResponse!,
+                      'cryId': id,
+                    });
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
