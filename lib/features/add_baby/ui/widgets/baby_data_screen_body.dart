@@ -10,6 +10,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/widgets/custom_button.dart';
 import '../../data/models/get_all_babies/get_all_babies_response.dart';
+import '../../logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 import '../../logic/update_baby_cubit/update_baby_cubit.dart';
 import 'gender_selection.dart';
 import 'header_section.dart';
@@ -48,6 +49,13 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            context.read<GetAllBabiesCubit>().getAllBabies();
+           Navigator.of(context).pop(true);
+          },
+        ),
       ),
       backgroundColor: Colors.white,
       body: Column(

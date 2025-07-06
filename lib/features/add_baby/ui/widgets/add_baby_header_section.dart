@@ -108,7 +108,6 @@ class _AddBabyHeaderSectionState extends State<AddBabyHeaderSection> {
         final babyImage = data.babyData?.babyImage;
         if (babyImage == null || babyImage.isEmpty) {
           context.read<UserCubit>().updateBabyImage(null);
-          context.read<UserCubit>().clearUser();
         } else {
           _handleImageUpdate(babyImage);
         }

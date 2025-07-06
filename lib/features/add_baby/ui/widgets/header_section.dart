@@ -8,9 +8,9 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../../../../core/logic/user_cubit/user_cubit.dart';
 import '../../../../features/add_baby/logic/update_baby_image_cubit/update_baby_image_cubit.dart';
 import '../../../../features/add_baby/logic/update_baby_image_cubit/update_baby_image_state.dart';
+import '../../../../features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 
 class HeaderSection extends StatefulWidget {
   final String? babyName;
@@ -33,6 +33,32 @@ class HeaderSection extends StatefulWidget {
 class _HeaderSectionState extends State<HeaderSection> {
   final ImagePicker _picker = ImagePicker();
   File? _localImageFile;
+  String? _babyImageFromBabiesData;
+
+  @override
+  void initState() {
+    super.initState();
+
+    context.read<UpdateBabyImageCubit>().stream.listen((state) {
+      state.whenOrNull(success: (data) {
+        _handleImageUpdate(data.babyData!.babyImage!);
+      });
+    });
+
+    final babiesState = context.read<GetAllBabiesCubit>().state;
+    babiesState.maybeWhen(
+      success: (babiesData) {
+        final baby = babiesData?.firstWhere(
+          (b) => b.id == widget.babyId,
+          orElse: () => throw Exception('Baby not found'),
+        );
+        if (baby != null) {
+          setState(() => _babyImageFromBabiesData = baby.babyImage);
+        }
+      },
+      orElse: () {},
+    );
+  }
 
   Future<void> _pickCropAndUploadImage(ImageSource source) async {
     final permissionStatus = source == ImageSource.camera
@@ -101,24 +127,9 @@ class _HeaderSectionState extends State<HeaderSection> {
 
   Future<void> _handleImageUpdate(String newUrl) async {
     await NetworkImage(newUrl).evict();
-    final userCubit = context.read<UserCubit>();
-    final old = userCubit.state.user;
-    if (old != null) {
-      final updated = old.copyWith(babyImage: newUrl);
-      userCubit.setUser(updated);
-      await saveUserDataLocally(updated);
-    }
-
-    setState(() => _localImageFile = null);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    context.read<UpdateBabyImageCubit>().stream.listen((state) {
-      state.whenOrNull(success: (data) {
-        _handleImageUpdate(data.babyData!.babyImage!);
-      });
+    setState(() {
+      _babyImageFromBabiesData = newUrl;
+      _localImageFile = null;
     });
   }
 
@@ -132,9 +143,9 @@ class _HeaderSectionState extends State<HeaderSection> {
   @override
   Widget build(BuildContext context) {
     final isLoading = context.watch<UpdateBabyImageCubit>().state is Loading;
-    final user = context.watch<UserCubit>().state.user;
 
-    String selectedImage = getBabyImage(user?.babyImage, widget.gender);
+    final String selectedImage =
+        getBabyImage(_babyImageFromBabiesData, widget.gender);
 
     Color iconColor;
     LinearGradient? iconGradient;
