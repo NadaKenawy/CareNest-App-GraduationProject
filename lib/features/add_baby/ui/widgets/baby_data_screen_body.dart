@@ -53,7 +53,7 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             context.read<GetAllBabiesCubit>().getAllBabies();
-           Navigator.of(context).pop(true);
+            Navigator.of(context).pop(true);
           },
         ),
       ),
@@ -64,6 +64,7 @@ class _BabyDataScreenBodyState extends State<BabyDataScreenBody> {
             gender: widget.babiesData.gender,
             babyName: widget.babiesData.name,
             babyId: widget.babiesData.id,
+            babyImage: widget.babiesData.babyImage,
           ),
           SizedBox(height: 40.h),
           Expanded(

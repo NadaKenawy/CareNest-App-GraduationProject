@@ -8,6 +8,7 @@ class SharedPrefKeys {
   static const String userPasswordConfirm = 'userPasswordConfirm';
   static const String babyId = 'babyId';
   static const String babyName = 'babyName';
+  static const String babyGender = 'babyGender';
   static const String babyDateOfBirth = 'userDateOfBirth';
   static const String babyImage = 'babyImage';
   static const num userLocation = 0;

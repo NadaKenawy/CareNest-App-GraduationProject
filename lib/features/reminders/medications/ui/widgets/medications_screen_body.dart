@@ -14,7 +14,7 @@ import 'package:care_nest/features/reminders/medications/ui/widgets/medicines_li
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:care_nest/features/reminders/medications/ui/widgets/get_all_medicines_bloc_builder.dart';
-
+import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 import 'package:care_nest/features/reminders/medications/ui/widgets/week_days_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -33,7 +33,7 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
   String? babyId;
   int _selectedIndex = 0;
   String? selectedBabyName = '';
-  String selectedBabyImage = AppImages.boyAndGirlImage;
+  String selectedBabyImage = AppImages.girlProfileImage;
   bool isLoading = true;
 
   @override
@@ -47,13 +47,46 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyId);
     final babyNameFromStorage =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyName);
+    final gender = await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyGender);
+    final savedImage = await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyImage);
+    
     setState(() {
       babyId = babyIdFromStorage;
       selectedBabyName = babyNameFromStorage;
+      if (savedImage.isNotEmpty) {
+        selectedBabyImage = savedImage;
+      } else if (gender.isNotEmpty) {
+        selectedBabyImage = gender == 'Male' 
+            ? AppImages.boyProfileImage 
+            : AppImages.girlProfileImage;
+      }
       isLoading = false;
     });
 
     if (babyId != null && babyId!.isNotEmpty) {
+      context.read<GetAllBabiesCubit>().state.maybeWhen(
+        success: (babiesData) {
+          try {
+            final matchingBabies = babiesData!.where((b) => b.id == babyId);
+            if (matchingBabies.isNotEmpty) {
+              final baby = matchingBabies.first;
+              final newImage = baby.babyImage?.isNotEmpty == true 
+                  ? baby.babyImage! 
+                  : (baby.gender == 'Male' 
+                      ? AppImages.boyProfileImage 
+                      : AppImages.girlProfileImage);
+              setState(() {
+                selectedBabyImage = newImage;
+              });
+              SharedPrefHelper.setSecuredString(SharedPrefKeys.babyImage, newImage);
+              SharedPrefHelper.setSecuredString(SharedPrefKeys.babyGender, baby.gender ?? 'Male');
+            }
+          } catch (e) {
+            // If baby not found, keep default image
+          }
+        },
+        orElse: () {},
+      );
       context
           .read<GetAllMedicationScheduleCubit>()
           .getAllMedicationSchedule(babyId!);
@@ -74,6 +107,7 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
       });
       await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyId, id!);
       await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyName, name);
+      await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyImage, image);
       context
           .read<GetAllMedicationScheduleCubit>()
           .getAllMedicationSchedule(id);

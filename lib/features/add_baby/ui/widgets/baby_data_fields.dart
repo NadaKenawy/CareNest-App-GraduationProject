@@ -99,7 +99,9 @@ class _BabyDataFieldsState extends State<BabyDataFields> {
         inputFormatters: widget.hintText == 'Weight' ||
                 widget.hintText == 'Height' ||
                 RegExp(r'\d').hasMatch(widget.hintText)
-            ? [FilteringTextInputFormatter.digitsOnly]
+            ? <TextInputFormatter>[
+                FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+              ]
             : null,
         decoration: InputDecoration(
           hintText: widget.hintText,

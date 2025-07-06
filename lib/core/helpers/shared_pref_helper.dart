@@ -1,5 +1,3 @@
-// ignore_for_file: type_literal_in_constant_pattern
-
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,16 +30,16 @@ class SharedPrefHelper {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     debugPrint("SharedPrefHelper : setData with key : $key and value : $value");
     switch (value.runtimeType) {
-      case String:
+      case const (String):
         await sharedPreferences.setString(key, value);
         break;
-      case int:
+      case const (int):
         await sharedPreferences.setInt(key, value);
         break;
-      case bool:
+      case const (bool):
         await sharedPreferences.setBool(key, value);
         break;
-      case double:
+      case const (double):
         await sharedPreferences.setDouble(key, value);
         break;
       default:

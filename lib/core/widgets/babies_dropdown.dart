@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:care_nest/core/helpers/constants.dart';
+import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/utils/app_images.dart';
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_state.dart';
@@ -81,7 +83,7 @@ class BabyDropdown extends StatelessWidget {
               radius: 28.w,
               backgroundImage: getImageProvider(selectedImage),
             ),
-            if (items.length > 1)
+            if (items.isNotEmpty)
               Positioned(
                 right: -6,
                 bottom: -6,
@@ -106,7 +108,7 @@ class BabyDropdown extends StatelessWidget {
                       offset: const Offset(0, 32),
                       icon: Icon(Icons.arrow_drop_down, size: 22.sp),
                       padding: EdgeInsets.zero,
-                      onSelected: (value) {
+                      onSelected: (value) async {
                         final name = value["name"] ?? "";
                         final id = value["id"] ?? "";
                         final gender = value["gender"] ?? "Male";
@@ -115,6 +117,16 @@ class BabyDropdown extends StatelessWidget {
                           gender: gender,
                           name: name,
                         );
+                        if (name != "All Reminders") {
+                          await SharedPrefHelper.setSecuredString(
+                              SharedPrefKeys.babyId, id);
+                          await SharedPrefHelper.setSecuredString(
+                              SharedPrefKeys.babyName, name);
+                          await SharedPrefHelper.setSecuredString(
+                              SharedPrefKeys.babyGender, gender);
+                          await SharedPrefHelper.setSecuredString(
+                              SharedPrefKeys.babyImage, image);
+                        }
 
                         if (mode == BabyDropdownMode.withAllReminders) {
                           final index = name == "All Reminders" ? 1 : 0;

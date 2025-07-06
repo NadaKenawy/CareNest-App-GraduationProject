@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:json_annotation/json_annotation.dart';
 part 'add_baby_request_body.g.dart';
+
 @JsonSerializable()
 class AddBabyRequestBody {
   final String name;
@@ -8,7 +9,7 @@ class AddBabyRequestBody {
   final num heightEntry;
   final String dateOfBirthOfBaby;
   final String gender;
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   final File? image;
 
   AddBabyRequestBody({

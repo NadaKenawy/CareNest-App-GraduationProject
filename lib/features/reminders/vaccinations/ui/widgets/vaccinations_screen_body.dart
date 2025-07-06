@@ -13,7 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/routing/app_router.dart';
-
+import 'package:care_nest/features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
 import '../../../../../core/widgets/babies_dropdown.dart';
 
 class VaccinationsScreenBody extends StatefulWidget {
@@ -26,7 +26,7 @@ class VaccinationsScreenBody extends StatefulWidget {
 class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
   String? selectedBabyName = '';
   String? selectedBabyId = '';
-  String selectedBabyImage = AppImages.boyAndGirlImage;
+  String selectedBabyImage = AppImages.girlProfileImage;
   bool isLoading = true;
 
   @override
@@ -40,14 +40,50 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyName);
     final babyId =
         await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyId);
+    final gender =
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyGender);
+    final savedImage =
+        await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyImage);
 
     setState(() {
       selectedBabyName = babyName;
       selectedBabyId = babyId;
+      if (savedImage.isNotEmpty) {
+        selectedBabyImage = savedImage;
+      } else if (gender.isNotEmpty) {
+        selectedBabyImage = gender == 'Male'
+            ? AppImages.boyProfileImage
+            : AppImages.girlProfileImage;
+      }
       isLoading = false;
     });
 
     if (selectedBabyId != null && selectedBabyId!.isNotEmpty) {
+      context.read<GetAllBabiesCubit>().state.maybeWhen(
+            success: (babiesData) {
+              try {
+                final matchingBabies = babiesData!.where((b) => b.id == selectedBabyId);
+                if (matchingBabies.isNotEmpty) {
+                  final baby = matchingBabies.first;
+                  final newImage = baby.babyImage?.isNotEmpty == true 
+                      ? baby.babyImage! 
+                      : (baby.gender == 'Male' 
+                          ? AppImages.boyProfileImage 
+                          : AppImages.girlProfileImage);
+                  setState(() {
+                    selectedBabyImage = newImage;
+                  });
+                  SharedPrefHelper.setSecuredString(
+                      SharedPrefKeys.babyImage, newImage);
+                  SharedPrefHelper.setSecuredString(
+                      SharedPrefKeys.babyGender, baby.gender ?? 'Male');
+                }
+              } catch (e) {
+                // If baby not found, keep default image
+              }
+            },
+            orElse: () {},
+          );
       context.read<GetBabyVaccinesCubit>().getBabyVaccines(selectedBabyId!);
     } else {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -62,6 +98,7 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
     });
     await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyName, name);
     await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyId, id);
+    await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyImage, image);
 
     setState(() {
       selectedBabyName = name;

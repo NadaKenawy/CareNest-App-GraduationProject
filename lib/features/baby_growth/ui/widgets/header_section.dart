@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:care_nest/core/helpers/constants.dart';
+import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import '../../../../core/widgets/babies_dropdown.dart';
 
 class HeaderSection extends StatelessWidget {
@@ -49,7 +50,10 @@ class HeaderSection extends StatelessWidget {
             BabyDropdown(
               selectedImage: selectedImage,
               mode: BabyDropdownMode.precomputedImage,
-              onSelected: (id, name, image, [index]) {
+              onSelected: (id, name, image, [index]) async {
+                await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyId, id);
+                await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyName, name);
+                await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyImage, image);
                 onBabySelected(id, name, image);
               },
             ),

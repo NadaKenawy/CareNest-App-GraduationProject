@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
+import 'package:care_nest/core/helpers/constants.dart';
 import 'package:care_nest/features/chat_bot/data/model/chat_message.dart';
 
 class ChatStorageService {
@@ -10,8 +11,28 @@ class ChatStorageService {
   static const String _lastQuestionKey = 'last_question';
   static const int _maxMessages = 20;
 
+  static Future<String> _getUserSpecificKey(String baseKey) async {
+    try {
+      String userId = await SharedPrefHelper.getSecuredString(SharedPrefKeys.userId);
+      if (userId.isNotEmpty) {
+        return '${baseKey}_$userId';
+      }
+      
+      String token = await SharedPrefHelper.getSecuredString(SharedPrefKeys.userToken);
+      if (token.isNotEmpty) {
+        String tokenHash = token.hashCode.toString();
+        return '${baseKey}_$tokenHash';
+      }
+            return baseKey;
+    } catch (e) {
+      log('Error getting user-specific key: $e');
+      return baseKey;
+    }
+  }
+
   static Future<void> saveMessage(ChatMessage message) async {
     try {
+      String userSpecificKey = await _getUserSpecificKey(_chatMessagesKey);
       List<ChatMessage> messages = await getMessages();
       messages.add(message);
 
@@ -23,7 +44,7 @@ class ChatStorageService {
           messages.map((msg) => msg.toJson()).toList();
 
       await SharedPrefHelper.setData(
-          _chatMessagesKey, jsonEncode(messagesJson));
+          userSpecificKey, jsonEncode(messagesJson));
     } catch (e) {
      log('Error saving message: $e');
     }
@@ -31,7 +52,8 @@ class ChatStorageService {
 
   static Future<List<ChatMessage>> getMessages() async {
     try {
-      String messagesJson = await SharedPrefHelper.getString(_chatMessagesKey);
+      String userSpecificKey = await _getUserSpecificKey(_chatMessagesKey);
+      String messagesJson = await SharedPrefHelper.getString(userSpecificKey);
 
       if (messagesJson.isEmpty) {
         return [];
@@ -51,8 +73,10 @@ class ChatStorageService {
 
   static Future<void> clearMessages() async {
     try {
-      await SharedPrefHelper.removeData(_chatMessagesKey);
-      await SharedPrefHelper.removeData(_lastQuestionKey);
+      String userSpecificKey = await _getUserSpecificKey(_chatMessagesKey);
+      String lastQuestionKey = await _getUserSpecificKey(_lastQuestionKey);
+      await SharedPrefHelper.removeData(userSpecificKey);
+      await SharedPrefHelper.removeData(lastQuestionKey);
     } catch (e) {
      log('Error clearing messages: $e');
     }
@@ -84,8 +108,10 @@ class ChatStorageService {
 
   static Future<void> saveUserPreferences(int age, String language) async {
     try {
-      await SharedPrefHelper.setData(_userAgeKey, age);
-      await SharedPrefHelper.setData(_userLanguageKey, language);
+      String userAgeKey = await _getUserSpecificKey(_userAgeKey);
+      String userLanguageKey = await _getUserSpecificKey(_userLanguageKey);
+      await SharedPrefHelper.setData(userAgeKey, age);
+      await SharedPrefHelper.setData(userLanguageKey, language);
     } catch (e) {
       log('Error saving user preferences: $e');
     }
@@ -93,7 +119,8 @@ class ChatStorageService {
 
   static Future<int?> getUserAge() async {
     try {
-      return await SharedPrefHelper.getInt(_userAgeKey);
+      String userAgeKey = await _getUserSpecificKey(_userAgeKey);
+      return await SharedPrefHelper.getInt(userAgeKey);
     } catch (e) {
       log('Error getting user age: $e');
       return null;
@@ -102,7 +129,8 @@ class ChatStorageService {
 
   static Future<String?> getUserLanguage() async {
     try {
-      String language = await SharedPrefHelper.getString(_userLanguageKey);
+      String userLanguageKey = await _getUserSpecificKey(_userLanguageKey);
+      String language = await SharedPrefHelper.getString(userLanguageKey);
       return language.isEmpty ? null : language;
     } catch (e) {
      log('Error getting user language: $e');
@@ -118,7 +146,8 @@ class ChatStorageService {
 
   static Future<void> saveLastQuestion(String question) async {
     try {
-      await SharedPrefHelper.setData(_lastQuestionKey, question);
+      String lastQuestionKey = await _getUserSpecificKey(_lastQuestionKey);
+      await SharedPrefHelper.setData(lastQuestionKey, question);
     } catch (e) {
      log('Error saving last question: $e');
     }
@@ -126,10 +155,11 @@ class ChatStorageService {
 
   static Future<String?> getLastQuestion() async {
     try {
-      String question = await SharedPrefHelper.getString(_lastQuestionKey);
+      String lastQuestionKey = await _getUserSpecificKey(_lastQuestionKey);
+      String question = await SharedPrefHelper.getString(lastQuestionKey);
       return question.isEmpty ? null : question;
     } catch (e) {
-     log('Error getting last question: $e');
+      log('Error getting last question: $e');
       return null;
     }
   }

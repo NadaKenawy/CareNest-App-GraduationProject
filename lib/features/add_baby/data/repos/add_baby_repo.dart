@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:developer';
 import 'package:care_nest/core/networking/server_result.dart';
 import 'package:care_nest/features/add_baby/data/models/add_baby/add_baby_request_body.dart';
 import 'package:care_nest/features/add_baby/data/models/add_baby/add_baby_response.dart';
@@ -25,7 +25,7 @@ class AddBabyRepo {
 
       
       if (addBabyRequestBody.image != null) {
-        print('Processing image: ${addBabyRequestBody.image!.path}'); // Debug print
+        log('Processing image: ${addBabyRequestBody.image!.path}'); // Debug print
         
         // Check if file exists
         if (!await addBabyRequestBody.image!.exists()) {
@@ -68,7 +68,7 @@ class AddBabyRepo {
           throw Exception('Image file is too large. Maximum size is 5MB');
         }
         
-        print('Adding image to FormData: $fileName, contentType: $contentType'); // Debug print
+        log('Adding image to FormData: $fileName, contentType: $contentType'); // Debug print
         
         formData.files.add(MapEntry(
           'image',

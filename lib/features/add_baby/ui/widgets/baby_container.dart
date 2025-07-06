@@ -158,10 +158,18 @@ class BabyContainer extends StatelessWidget {
                                 context
                                     .read<DeleteBabyCubit>()
                                     .deleteBaby(babyId, context);
-                                final storedId = await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyId);
+                                final storedId =
+                                    await SharedPrefHelper.getSecuredString(
+                                        SharedPrefKeys.babyId);
                                 if (storedId == babyId) {
-                                  await SharedPrefHelper.removeSecuredData(SharedPrefKeys.babyId);
-                                  await SharedPrefHelper.removeSecuredData(SharedPrefKeys.babyName);
+                                  await SharedPrefHelper.removeSecuredData(
+                                      SharedPrefKeys.babyId);
+                                  await SharedPrefHelper.removeSecuredData(
+                                      SharedPrefKeys.babyName);
+                                  await SharedPrefHelper.removeSecuredData(
+                                      SharedPrefKeys.babyGender);
+                                  await SharedPrefHelper.removeSecuredData(
+                                      SharedPrefKeys.babyImage);
                                 }
                               },
                             ).show();

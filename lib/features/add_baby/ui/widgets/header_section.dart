@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-
 import '../../../../features/add_baby/logic/update_baby_image_cubit/update_baby_image_cubit.dart';
 import '../../../../features/add_baby/logic/update_baby_image_cubit/update_baby_image_state.dart';
 import '../../../../features/add_baby/logic/get_all_babies_cubit/get_all_babies_cubit.dart';
@@ -17,6 +16,7 @@ class HeaderSection extends StatefulWidget {
   final String? gender;
   final VoidCallback? onEditTap;
   final String? babyId;
+  final String? babyImage;
 
   const HeaderSection({
     super.key,
@@ -24,6 +24,7 @@ class HeaderSection extends StatefulWidget {
     this.gender,
     this.onEditTap,
     this.babyId,
+    this.babyImage,
   });
 
   @override
@@ -38,26 +39,33 @@ class _HeaderSectionState extends State<HeaderSection> {
   @override
   void initState() {
     super.initState();
+    if (widget.babyImage != null && widget.babyImage!.isNotEmpty) {
+      _babyImageFromBabiesData = widget.babyImage;
+    }
 
     context.read<UpdateBabyImageCubit>().stream.listen((state) {
       state.whenOrNull(success: (data) {
         _handleImageUpdate(data.babyData!.babyImage!);
       });
     });
-
-    final babiesState = context.read<GetAllBabiesCubit>().state;
-    babiesState.maybeWhen(
-      success: (babiesData) {
-        final baby = babiesData?.firstWhere(
-          (b) => b.id == widget.babyId,
-          orElse: () => throw Exception('Baby not found'),
-        );
-        if (baby != null) {
-          setState(() => _babyImageFromBabiesData = baby.babyImage);
-        }
-      },
-      orElse: () {},
-    );
+    if (widget.babyId != null && widget.babyId!.isNotEmpty) {
+      final babiesState = context.read<GetAllBabiesCubit>().state;
+      babiesState.maybeWhen(
+        success: (babiesData) {
+          try {
+            final matchingBabies =
+                babiesData?.where((b) => b.id == widget.babyId);
+            if (matchingBabies != null && matchingBabies.isNotEmpty) {
+              final baby = matchingBabies.first;
+              setState(() => _babyImageFromBabiesData = baby.babyImage);
+            }
+          } catch (e) {
+            // Baby not found, ignore the error
+          }
+        },
+        orElse: () {},
+      );
+    }
   }
 
   Future<void> _pickCropAndUploadImage(ImageSource source) async {
@@ -134,6 +142,9 @@ class _HeaderSectionState extends State<HeaderSection> {
   }
 
   String getBabyImage(String? babyImage, String? gender) {
+    if (widget.babyImage != null && widget.babyImage!.isNotEmpty) {
+      return widget.babyImage!;
+    }
     if (babyImage != null && babyImage.isNotEmpty) return babyImage;
     if (gender == 'Male') return AppImages.boyProfileImage;
     if (gender == 'Female') return AppImages.girlProfileImage;
@@ -199,7 +210,7 @@ class _HeaderSectionState extends State<HeaderSection> {
                 height: 140.w,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.black.withOpacity(0.4),
+                  color: Colors.black.withValues(alpha: 0.4),
                 ),
                 child: const Center(
                   child: CircularProgressIndicator(
@@ -222,7 +233,7 @@ class _HeaderSectionState extends State<HeaderSection> {
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
+                          color: Colors.grey.withValues(alpha: 0.5),
                           spreadRadius: 2,
                           blurRadius: 4,
                           offset: const Offset(0, 2),

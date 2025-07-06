@@ -44,22 +44,40 @@ class _BabyHeightGrowthScreenBodyState
 
   Future<void> loadBabyData() async {
     final id = await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyId);
-    final name =
-        await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyName);
+    final name = await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyName);
+    final gender = await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyGender);
+    final savedImage = await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyImage);
+    
     setState(() {
       babyId = id;
       selectedBaby = name;
+      if (savedImage.isNotEmpty) {
+        selectedImage = savedImage;
+      } else if (gender.isNotEmpty) {
+        selectedImage = gender == 'Male' 
+            ? AppImages.boyProfileImage 
+            : AppImages.girlProfileImage;
+      }
     });
+    
     if (babyId.isNotEmpty) {
       context.read<GetAllBabiesCubit>().state.maybeWhen(
             success: (babiesData) {
               try {
-                final baby = babiesData!.firstWhere((b) => b.id == babyId);
-                setState(() {
-                  selectedImage = baby.gender == 'Male'
-                      ? AppImages.boyProfileImage
-                      : AppImages.girlProfileImage;
-                });
+                final matchingBabies = babiesData!.where((b) => b.id == babyId);
+                if (matchingBabies.isNotEmpty) {
+                  final baby = matchingBabies.first;
+                  final newImage = baby.babyImage?.isNotEmpty == true 
+                      ? baby.babyImage! 
+                      : (baby.gender == 'Male' 
+                          ? AppImages.boyProfileImage 
+                          : AppImages.girlProfileImage);
+                  setState(() {
+                    selectedImage = newImage;
+                  });
+                  SharedPrefHelper.setSecuredString(SharedPrefKeys.babyImage, newImage);
+                  SharedPrefHelper.setSecuredString(SharedPrefKeys.babyGender, baby.gender ?? 'Male');
+                }
               } catch (e) {
                 log("Error fetching baby data: $e");
               }
@@ -162,7 +180,7 @@ class _BabyHeightGrowthScreenBodyState
               babyId: babyId,
               selectedBaby: selectedBaby,
               selectedImage: selectedImage,
-              onBabySelected: (id, name, image) {
+              onBabySelected: (id, name, image) async {
                 setState(() {
                   selectedBaby = name;
                   selectedImage = image;
@@ -172,9 +190,9 @@ class _BabyHeightGrowthScreenBodyState
                     .read<GetBabyHeightGrowthCubit>()
                     .getBabyHeightGrowth(id);
                 context.read<LatestGrowthDataCubit>().latestGrowthData(id);
-                SharedPrefHelper.setSecuredString(SharedPrefKeys.babyId, id);
-                SharedPrefHelper.setSecuredString(
-                    SharedPrefKeys.babyName, name);
+                await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyId, id);
+                await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyName, name);
+                await SharedPrefHelper.setSecuredString(SharedPrefKeys.babyImage, image);
               },
             ),
             BlocBuilder<GetBabyHeightGrowthCubit, GetBabyHeightGrowthState>(

@@ -70,9 +70,7 @@ class _ChatBotScreenBodyState extends State<ChatBotScreenBody> {
           language = savedLanguage;
         });
 
-        if (messages.isEmpty) {
-          _startNewConversation();
-        } else {
+        if (messages.isNotEmpty) {
           final savedLastQuestion = await ChatStorageService.getLastQuestion();
           if (savedLastQuestion != null) {
             lastQuestion = savedLastQuestion;
@@ -138,15 +136,28 @@ class _ChatBotScreenBodyState extends State<ChatBotScreenBody> {
   }
 
   void _handleSend(String text) {
-    if (lastQuestion != null && age != null && language != null) {
-      context.read<ChatBotCubit>().sendMessage(
-            ChatBotRequestBody(
-              age: age!,
-              language: language!,
-              currentQuestion: lastQuestion,
-              answer: text,
-            ),
-          );
+    if (age != null && language != null) {
+      // If this is the first message, start a new conversation
+      if (lastQuestion == null) {
+        context.read<ChatBotCubit>().sendMessage(
+              ChatBotRequestBody(
+                age: age!,
+                language: language!,
+                currentQuestion: "",
+                answer: "",
+              ),
+            );
+      } else {
+        // Continue existing conversation
+        context.read<ChatBotCubit>().sendMessage(
+              ChatBotRequestBody(
+                age: age!,
+                language: language!,
+                currentQuestion: lastQuestion,
+                answer: text,
+              ),
+            );
+      }
 
       final userMessage = {'isBot': false, 'text': text};
       setState(() {
