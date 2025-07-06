@@ -29,25 +29,25 @@ class UserCubit extends Cubit<UserState> {
       final savedUser = await getSavedUserData();
       if (savedUser != null) {
         emit(state.copyWith(user: savedUser, isLoading: false));
-        log('User loaded from cache: \\${savedUser.firstname}');
-        log('User birthdate: \\${savedUser.dateOfBirth}');
-        log('User ID: \\${savedUser.id}');
+        log('User loaded from cache: ${savedUser.firstname}');
+        log('User birthdate: ${savedUser.dateOfBirth}');
+        log('User ID: ${savedUser.id}');
         await SharedPrefHelper.setSecuredString(
             SharedPrefKeys.userId, savedUser.id);
-        log('User ID saved to secure storage: \\${savedUser.id}');
+        log('User ID saved to secure storage: ${savedUser.id}');
         if (savedUser.profileImg != null && savedUser.profileImg!.isNotEmpty) {
           await SharedPrefHelper.setSecuredString(
               SharedPrefKeys.userImage, savedUser.profileImg!);
-          log('User image saved to secure storage: \\${savedUser.profileImg}');
+          log('User image saved to secure storage: ${savedUser.profileImg}');
         }
 
-        // Load baby image from SharedPreferences
         final babyImage =
             await SharedPrefHelper.getSecuredString(SharedPrefKeys.babyImage);
-        if (babyImage.isNotEmpty && savedUser.babyImage != babyImage) {
+        if (babyImage.isNotEmpty &&
+            (savedUser.babyImage == null || savedUser.babyImage != babyImage)) {
           final updatedUser = savedUser.copyWith(babyImage: babyImage);
           emit(state.copyWith(user: updatedUser, isLoading: false));
-          log('Baby image loaded from SharedPreferences: \\$babyImage');
+          log('Baby image loaded from SharedPreferences: $babyImage');
         }
       } else {
         emit(state.copyWith(isLoading: false));
@@ -55,7 +55,7 @@ class UserCubit extends Cubit<UserState> {
       }
     } catch (e) {
       emit(state.copyWith(isLoading: false));
-      log('Error loading user data: \\$e');
+      log('Error loading user data: $e');
     }
   }
 
@@ -66,13 +66,18 @@ class UserCubit extends Cubit<UserState> {
     saveUserDataLocally(user);
   }
 
-  void updateBabyImage(String imageUrl) {
+  void updateBabyImage(String? imageUrl) async {
     final currentUser = state.user;
     if (currentUser != null) {
       final updatedUser = currentUser.copyWith(babyImage: imageUrl);
       emit(state.copyWith(user: updatedUser));
-      saveUserDataLocally(updatedUser);
-      log('✅ Baby image updated in UserCubit: $imageUrl');
+      await saveUserDataLocally(updatedUser);
+      if (imageUrl == null || imageUrl.isEmpty) {
+        await SharedPrefHelper.removeSecuredData(SharedPrefKeys.babyImage);
+        log('🗑️ Baby image removed from secure storage');
+      } else {
+        log('✅ Baby image updated in UserCubit: $imageUrl');
+      }
     }
   }
 
@@ -92,27 +97,30 @@ Future<void> saveUserDataLocally(UserModel user) async {
       'user_data',
       jsonEncode(user.toJson()),
     );
-    log('User data saved locally: \\${user.firstname}');
+    log('User data saved locally: ${user.firstname}');
 
     await SharedPrefHelper.setSecuredString(
       SharedPrefKeys.userId,
       user.id,
     );
-    log('User ID saved locally: \\${user.id}');
+    log('User ID saved locally: ${user.id}');
 
     if (user.profileImg != null && user.profileImg!.isNotEmpty) {
       await SharedPrefHelper.setSecuredString(
           SharedPrefKeys.userImage, user.profileImg!);
-      log('User image saved locally: \\${user.profileImg}');
+      log('User image saved locally: ${user.profileImg}');
     }
 
     if (user.babyImage != null && user.babyImage!.isNotEmpty) {
       await SharedPrefHelper.setSecuredString(
           SharedPrefKeys.babyImage, user.babyImage!);
-      log('Baby image saved locally: \\${user.babyImage}');
+      log('Baby image saved locally: ${user.babyImage}');
+    } else {
+      await SharedPrefHelper.removeSecuredData(SharedPrefKeys.babyImage);
+      log('🗑️ Baby image removed from secure storage (via saveUserDataLocally)');
     }
   } catch (e) {
-    log('Error saving user data: \\$e');
+    log('Error saving user data: $e');
   }
 }
 

@@ -122,28 +122,33 @@ class _HeaderSectionState extends State<HeaderSection> {
     });
   }
 
+  String getBabyImage(String? babyImage, String? gender) {
+    if (babyImage != null && babyImage.isNotEmpty) return babyImage;
+    if (gender == 'Male') return AppImages.boyProfileImage;
+    if (gender == 'Female') return AppImages.girlProfileImage;
+    return AppImages.boyAndGirlImage;
+  }
+
   @override
   Widget build(BuildContext context) {
     final isLoading = context.watch<UpdateBabyImageCubit>().state is Loading;
     final user = context.watch<UserCubit>().state.user;
 
-    String defaultImage;
+    String selectedImage = getBabyImage(user?.babyImage, widget.gender);
+
     Color iconColor;
     LinearGradient? iconGradient;
 
     if (widget.gender == 'Male') {
-      defaultImage = AppImages.boyProfileImage;
       iconColor = ColorsManager.secondryBlueColor;
     } else if (widget.gender == 'Female') {
-      defaultImage = AppImages.girlProfileImage;
       iconColor = ColorsManager.primaryPinkColor;
     } else {
-      defaultImage = AppImages.boyAndGirlImage;
       iconColor = Colors.white;
       iconGradient = const LinearGradient(
         colors: [
           ColorsManager.primaryPinkColor,
-          ColorsManager.secondryBlueColor
+          ColorsManager.secondryBlueColor,
         ],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
@@ -153,10 +158,10 @@ class _HeaderSectionState extends State<HeaderSection> {
     ImageProvider imageProvider;
     if (_localImageFile != null) {
       imageProvider = FileImage(_localImageFile!);
-    } else if (user?.babyImage != null && user!.babyImage!.isNotEmpty) {
-      imageProvider = NetworkImage(user.babyImage!);
+    } else if (selectedImage.startsWith("http")) {
+      imageProvider = NetworkImage(selectedImage);
     } else {
-      imageProvider = AssetImage(defaultImage);
+      imageProvider = AssetImage(selectedImage);
     }
 
     return Column(

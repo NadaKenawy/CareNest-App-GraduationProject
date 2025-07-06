@@ -7,13 +7,14 @@ import 'package:care_nest/core/widgets/custom_button.dart';
 import 'package:care_nest/features/reminders/vaccinations/logic/get_baby_vaccines_cubit.dart';
 import 'package:care_nest/features/reminders/vaccinations/ui/widgets/get_baby_vaccines_bloc_builder.dart';
 import 'package:care_nest/features/reminders/vaccinations/ui/widgets/vaccination_list_skeletonizer.dart';
-import 'package:care_nest/features/reminders/vaccinations/ui/widgets/vaccines_sidebar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:care_nest/core/routing/app_router.dart';
+
+import '../../../../../core/widgets/babies_dropdown.dart';
 
 class VaccinationsScreenBody extends StatefulWidget {
   const VaccinationsScreenBody({super.key});
@@ -163,9 +164,12 @@ class _VaccinationsScreenBodyState extends State<VaccinationsScreenBody> {
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 16.w),
-            child: VaccinationsSidebar(
+            child: BabyDropdown(
               selectedImage: selectedBabyImage,
-              onBabySelected: onBabySelected,
+              mode: BabyDropdownMode.basicWithGender,
+              onSelected: (id, name, image, [index]) {
+                onBabySelected(id, name, image);
+              },
             ),
           )
         ],

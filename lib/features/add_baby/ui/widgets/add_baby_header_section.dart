@@ -105,7 +105,13 @@ class _AddBabyHeaderSectionState extends State<AddBabyHeaderSection> {
     super.initState();
     context.read<AddBabyCubit>().stream.listen((state) {
       state.whenOrNull(addBabysuccess: (data) {
-        _handleImageUpdate(data.babyData!.babyImage!);
+        final babyImage = data.babyData?.babyImage;
+        if (babyImage == null || babyImage.isEmpty) {
+          context.read<UserCubit>().updateBabyImage(null);
+          context.read<UserCubit>().clearUser();
+        } else {
+          _handleImageUpdate(babyImage);
+        }
       });
     });
   }

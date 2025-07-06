@@ -1,6 +1,7 @@
-import 'package:care_nest/features/baby_growth/ui/widgets/babies_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/widgets/babies_dropdown.dart';
 
 class HeaderSection extends StatelessWidget {
   final String selectedBaby;
@@ -45,9 +46,10 @@ class HeaderSection extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            BabiesDropdown(
+            BabyDropdown(
               selectedImage: selectedImage,
-              onBabySelected: (id, name, image) {
+              mode: BabyDropdownMode.precomputedImage,
+              onSelected: (id, name, image, [index]) {
                 onBabySelected(id, name, image);
               },
             ),

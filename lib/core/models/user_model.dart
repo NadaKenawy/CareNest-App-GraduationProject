@@ -55,7 +55,6 @@ class UserModel {
     DateTime? dateOfBirth,
     String? profileImg,
     bool? createFeedback,
-    String? image,
     String? babyImage,
   }) {
     return UserModel(

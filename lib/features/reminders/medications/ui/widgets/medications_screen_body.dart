@@ -11,7 +11,6 @@ import 'package:care_nest/features/reminders/medications/logic/get_all_babies_me
 import 'package:care_nest/features/reminders/medications/logic/get_all_medication_schedule_cubit/get_all_medication_schedule_cubit.dart';
 import 'package:care_nest/features/reminders/medications/ui/widgets/get_all_babies_medicines_bloc_builder.dart';
 import 'package:care_nest/features/reminders/medications/ui/widgets/medicines_list_view_skeletonizer.dart';
-import 'package:care_nest/features/reminders/medications/ui/widgets/medicines_sidebar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:care_nest/features/reminders/medications/ui/widgets/get_all_medicines_bloc_builder.dart';
@@ -19,6 +18,8 @@ import 'package:care_nest/features/reminders/medications/ui/widgets/get_all_medi
 import 'package:care_nest/features/reminders/medications/ui/widgets/week_days_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../../core/widgets/babies_dropdown.dart';
 
 class MedicationsScreenBody extends StatefulWidget {
   const MedicationsScreenBody({super.key});
@@ -186,9 +187,12 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 16.w),
-            child: MedicationsDropdown(
+            child: BabyDropdown(
               selectedImage: selectedBabyImage,
-              onItemSelected: onDropdownItemSelected,
+              mode: BabyDropdownMode.withAllReminders,
+              onSelected: (id, name, image, [index]) {
+                onDropdownItemSelected(id, name, image, index ?? 0);
+              },
             ),
           )
         ],
