@@ -28,11 +28,17 @@ class DoctorsListViewItem extends StatelessWidget {
             flex: 2,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16.0),
-              child: Image.network(
-                doctorData.image ?? 'assets/images/download.jpg',
-                height: 120.h,
-                fit: BoxFit.cover,
-              ),
+              child: doctorData.image == null
+                  ? Image.asset(
+                      'assets/images/download.jpg',
+                      height: 120.h,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.network(
+                      doctorData.image!,
+                      height: 120.h,
+                      fit: BoxFit.cover,
+                    ),
             ),
           ),
           SizedBox(width: 16.w),

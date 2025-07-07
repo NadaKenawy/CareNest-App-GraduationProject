@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../logic/get_hospitals_cubit/get_all_hospitals_cubit.dart';
+import '../../service/location_service.dart';
 
 class MapView extends StatefulWidget {
   final String selectedSpecialty;
@@ -112,8 +113,11 @@ class _MapViewState extends State<MapView> {
                   markers: _markers,
                   zoomGesturesEnabled: true,
                   scrollGesturesEnabled: true,
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: true,
                   onMapCreated: (GoogleMapController controller) {
                     mapController = controller;
+                    LocationService.moveToUserLocation(context, mapController);
                     if (_markers.isNotEmpty) {
                       mapController.animateCamera(
                         CameraUpdate.newLatLngZoom(_markers.first.position, 16),
