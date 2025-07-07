@@ -15,7 +15,6 @@ import '../../service/location_service.dart';
 
 class MapView extends StatefulWidget {
   final String selectedSpecialty;
-
   final bool isHospitalView;
 
   const MapView({
@@ -32,6 +31,21 @@ class _MapViewState extends State<MapView> {
   late GoogleMapController mapController;
   final Set<Marker> _markers = {};
   LatLng _initialPosition = const LatLng(31.2685013, 32.2658171);
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserLocation();
+  }
+
+  Future<void> _getUserLocation() async {
+    final position = await LocationService.getCurrentLocation();
+    if (position != null && mounted) {
+      setState(() {
+        _initialPosition = LatLng(position.latitude, position.longitude);
+      });
+    }
+  }
 
   void _updateDoctorMarkers(List<DoctorData> doctors) {
     final newMarkers = <Marker>{};
@@ -117,12 +131,6 @@ class _MapViewState extends State<MapView> {
                   myLocationButtonEnabled: true,
                   onMapCreated: (GoogleMapController controller) {
                     mapController = controller;
-                    LocationService.moveToUserLocation(context, mapController);
-                    if (_markers.isNotEmpty) {
-                      mapController.animateCamera(
-                        CameraUpdate.newLatLngZoom(_markers.first.position, 16),
-                      );
-                    }
                   },
                 ),
               );
@@ -151,13 +159,10 @@ class _MapViewState extends State<MapView> {
                   markers: _markers,
                   zoomGesturesEnabled: true,
                   scrollGesturesEnabled: true,
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: true,
                   onMapCreated: (GoogleMapController controller) {
                     mapController = controller;
-                    if (_markers.isNotEmpty) {
-                      mapController.animateCamera(
-                        CameraUpdate.newLatLngZoom(_markers.first.position, 16),
-                      );
-                    }
                   },
                 ),
               );
