@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:care_nest/core/theme/font_weight_helper.dart';
 import 'package:care_nest/core/helpers/shared_pref_helper.dart';
 import 'package:care_nest/core/helpers/constants.dart';
+import 'package:care_nest/core/theme/text_styless.dart';
 import 'package:care_nest/features/baby_cry/logic/predicition_cubit/prediction_state.dart';
 import 'package:care_nest/features/baby_cry/ui/widgets/prediction_bloc_listener.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +14,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:care_nest/core/theme/colors_manager.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../core/routing/app_router.dart';
 
+import '../../../../core/routing/app_router.dart';
 import '../../logic/predicition_cubit/prediction_cubit.dart';
 import '../../logic/create_cry_cubit/create_cry_cubit.dart';
 import 'create_cry_bloc_listener.dart';
@@ -38,14 +39,34 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
   String? cryId;
   PredictionResponse? predictionResponse;
 
+  // Loading animation variables
+  int _dotCount = 1;
+  Timer? _dotTimer;
+  bool _showLoading = false;
+
   @override
   void dispose() {
     audioRecorder.dispose();
     timer?.cancel();
+    _dotTimer?.cancel();
     super.dispose();
   }
 
-  // Start recording
+  void _startDotAnimation() {
+    _dotTimer?.cancel();
+    _dotCount = 1;
+    _dotTimer = Timer.periodic(const Duration(milliseconds: 500), (timer) {
+      setState(() {
+        _dotCount = (_dotCount % 3) + 1;
+      });
+    });
+  }
+
+  void _stopDotAnimation() {
+    _dotTimer?.cancel();
+    _dotCount = 1;
+  }
+
   Future<void> startRecording() async {
     if (await audioRecorder.hasPermission()) {
       final directory = await getApplicationDocumentsDirectory();
@@ -72,7 +93,6 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
     }
   }
 
-  // Stop recording
   Future<void> stopRecording() async {
     if (!isRecording) return;
 
@@ -88,10 +108,8 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
     if (filePath != null) {
       context.read<PredictionCubit>().uploadAudio(File(filePath!));
     }
-    // GoRouter.of(context).push(AppRouter.kAnalysisResultScreen);
   }
 
-  // Send to create cry API after successful prediction
   Future<void> sendToCreateCry(String prediction) async {
     try {
       final token =
@@ -112,43 +130,21 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
       listener: (context, state) {
         state.whenOrNull(
           loading: () {
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) => Dialog(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16)),
-                backgroundColor: Colors.white,
-                child: const Padding(
-                  padding: EdgeInsets.all(24.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CircularProgressIndicator(),
-                      SizedBox(height: 24),
-                      Text(
-                        'Crying is being analyzed...',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w600),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
+            setState(() => _showLoading = true);
+            _startDotAnimation();
           },
           success: (_) {
-            Navigator.of(context, rootNavigator: true).maybePop();
+            setState(() => _showLoading = false);
+            _stopDotAnimation();
           },
           error: (_) {
-            Navigator.of(context, rootNavigator: true).maybePop();
+            setState(() => _showLoading = false);
+            _stopDotAnimation();
           },
         );
       },
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-        ),
+        appBar: AppBar(backgroundColor: Colors.white),
         backgroundColor: Colors.white,
         body: Center(
           child: Column(
@@ -158,7 +154,17 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
               SizedBox(height: 48.h),
               recordingCircle(),
               SizedBox(height: 28.h),
-              isRecording ? recordingProgress() : const SizedBox(),
+              if (_showLoading)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(width: 12),
+                    Text('Analyzing baby\'s cry${'.' * _dotCount}',
+                        style: TextStyles.font16BlackMedium),
+                  ],
+                ),
+              SizedBox(height: 28.h),
+              if (isRecording) recordingProgress(),
               SizedBox(height: 100.h),
               PredictionBlocListener(
                 onPredictionSuccess: (response) {
@@ -188,7 +194,6 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
     );
   }
 
-  // Header text
   Widget headerText() {
     return const Text(
       "Ready to listen",
@@ -196,7 +201,6 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
     );
   }
 
-  // Animated circle for recording
   Widget recordingCircle() {
     return Stack(
       alignment: Alignment.center,
@@ -222,18 +226,17 @@ class RecorderScreenBodyState extends State<RecorderScreenBody>
             curve: Curves.easeInOut,
             width: 100 * scale,
             height: 100 * scale,
-            child: const Icon(
-              Icons.mic,
-              color: Colors.white,
-              size: 60,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: ColorsManager.primaryPinkColor,
             ),
+            child: const Icon(Icons.mic, color: Colors.white, size: 60),
           ),
         ),
       ],
     );
   }
 
-  // Progress indicator while recording
   Widget recordingProgress() {
     return Column(
       children: [
