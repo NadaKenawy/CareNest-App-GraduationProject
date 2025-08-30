@@ -1,0 +1,2 @@
+E:/Graduation project/care_nest/android/app/.cxx/RelWithDebInfo/444h126y/arm64-v8a/CMakeFiles/edit_cache.dir
+E:/Graduation project/care_nest/android/app/.cxx/RelWithDebInfo/444h126y/arm64-v8a/CMakeFiles/rebuild_cache.dir
