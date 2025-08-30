@@ -10,15 +10,13 @@ class MedicinesListViewSkeletonizer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Skeletonizer(
-        child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            return const MedicinesListViewSkeletonizerItem();
-          },
-        ),
+    return Skeletonizer(
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return const MedicinesListViewSkeletonizerItem();
+        },
       ),
     );
   }

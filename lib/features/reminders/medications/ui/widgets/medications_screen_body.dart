@@ -280,9 +280,7 @@ class _MedicationsScreenBodyState extends State<MedicationsScreenBody> {
             ),
             isLoading
                 ? const Expanded(
-                    child: Center(
-                      child: MedicinesListViewSkeletonizer(),
-                    ),
+                    child: MedicinesListViewSkeletonizer(),
                   )
                 : (selectedBabyName == null || selectedBabyName!.isEmpty)
                     ? const SizedBox.shrink()

@@ -39,7 +39,9 @@ class GetAllMedicinesBlocBuilder extends StatelessWidget {
   }
 
   Widget setupLoading() {
-    return const MedicinesListViewSkeletonizer();
+    return const Expanded(
+      child: MedicinesListViewSkeletonizer(),
+    );
   }
 
   Widget setupSuccess(List<MedicationData> medicinesList) {
